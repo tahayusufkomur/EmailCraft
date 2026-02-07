@@ -1,5 +1,6 @@
 import type { SocialBlock, SocialPlatform } from '../../../types/blocks';
 import { useEditorStore } from '../../../store/editorStore';
+import { Button } from '../../ui/button';
 import { AlignmentPicker } from './AlignmentPicker';
 
 interface Props {
@@ -46,11 +47,15 @@ export function SocialSettings({ block }: Props) {
               <label>{p.type}</label>
               <input type="url" value={p.url} placeholder="URL" onChange={(e) => updatePlatform(i, { url: e.target.value })} />
             </div>
-            <button className="btn" style={{ padding: '6px 8px', marginBottom: 0 }} onClick={() => removePlatform(i)}>&times;</button>
+            <Button size="sm" variant="outline" onClick={() => removePlatform(i)}>
+              &times;
+            </Button>
           </div>
         ))}
         {block.data.platforms.length < AVAILABLE_PLATFORMS.length && (
-          <button className="btn" style={{ width: '100%', marginTop: 4 }} onClick={addPlatform}>+ Add Platform</button>
+          <Button variant="secondary" onClick={addPlatform}>
+            + Add Platform
+          </Button>
         )}
       </div>
 

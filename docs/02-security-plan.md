@@ -70,18 +70,18 @@ class OriginWhitelistMiddleware:
     def __call__(self, request):
         origin = request.META.get('HTTP_ORIGIN', '')
         api_key = request.META.get('HTTP_X_API_KEY', '')
-        
+
         org = Organization.objects.filter(
             api_keys__key_hash=hash(api_key),
             api_keys__is_active=True
         ).first()
-        
+
         if not org:
             return JsonResponse({"error": "Invalid API key"}, status=401)
-        
+
         if origin not in org.allowed_origins:
             return JsonResponse({"error": "Unauthorized origin"}, status=403)
-        
+
         request.org = org  # inject tenant context
         return self.get_response(request)
 ```
@@ -129,7 +129,7 @@ function sendToParent(type, payload) {
 window.addEventListener("message", (event) => {
   if (event.origin !== "https://app.mailcraft.io") return;
   if (event.data?.source !== "mailcraft") return;
-  
+
   switch (event.data.type) {
     case "MAILCRAFT_READY":
       // Editor loaded
@@ -248,7 +248,7 @@ class TenantManager(models.Manager):
 class TemplateViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Template.objects.for_org(self.request.org)
-    
+
     def perform_create(self, serializer):
         serializer.save(org=self.request.org)
 ```

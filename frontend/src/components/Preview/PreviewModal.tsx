@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { Button } from '../ui/button';
 import { useEditorStore } from '../../store/editorStore';
 import { exportToHtml } from '../../lib/htmlExporter';
 
@@ -35,20 +36,24 @@ export function PreviewModal({ onClose }: Props) {
           padding: '12px 16px', borderBottom: '1px solid #e2e8f0',
         }}>
           <div style={{ display: 'flex', gap: 8 }}>
-            <button
-              className={`btn ${viewMode === 'desktop' ? 'btn-primary' : ''}`}
+            <Button
+              size="sm"
+              variant={viewMode === 'desktop' ? 'default' : 'outline'}
               onClick={() => setViewMode('desktop')}
             >
               Desktop
-            </button>
-            <button
-              className={`btn ${viewMode === 'mobile' ? 'btn-primary' : ''}`}
+            </Button>
+            <Button
+              size="sm"
+              variant={viewMode === 'mobile' ? 'default' : 'outline'}
               onClick={() => setViewMode('mobile')}
             >
               Mobile
-            </button>
+            </Button>
           </div>
-          <button className="btn" onClick={onClose}>&times; Close</button>
+          <Button size="sm" variant="ghost" onClick={onClose}>
+            &times; Close
+          </Button>
         </div>
 
         {/* Preview */}

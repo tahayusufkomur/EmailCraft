@@ -2,7 +2,7 @@
        dev dev-backend dev-frontend \
        build migrate makemigrations \
        test test-backend lint-frontend \
-       seed create-key shell dbshell clean
+       seed create-key shell dbshell clean reset setup
 
 COMPOSE := docker compose
 BACKEND := backend
@@ -20,8 +20,8 @@ install: install-backend install-frontend ## Build all containers
 install-backend: ## Build backend container
 	@$(COMPOSE) build backend
 
-install-frontend: ## Build frontend container
-	@$(COMPOSE) build frontend
+install-frontend: ## Install frontend deps in container
+	@$(COMPOSE) run --rm frontend npm install
 
 # ─── Development ──────────────────────────────────────────
 
@@ -61,7 +61,7 @@ lint-frontend: ## Type-check frontend
 
 seed: ## Create a demo org + test API key
 	@$(MANAGE) create_api_key --org-name "Demo" --org-email "demo@mailcraft.io" --env test
-  
+
 create-key: ## Create API key (usage: make create-key ORG="Name" EMAIL="a@b.com" ENV=live)
 	@$(MANAGE) create_api_key --org-name "$(ORG)" --org-email "$(EMAIL)" --env $(or $(ENV),test)
 
@@ -76,3 +76,15 @@ superuser: ## Create Django superuser
 
 clean: ## Stop containers and remove volumes
 	@$(COMPOSE) down -v --remove-orphans
+
+reset: ## Reset containers, images, volumes, and local caches
+	@$(COMPOSE) down -v --remove-orphans --rmi local
+	@find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
+	@rm -rf $(FRONTEND)/dist $(FRONTEND)/node_modules/.vite $(FRONTEND)/node_modules
+	@rm -rf venv
+
+setup: ## Build, start containers, and run migrations
+	@$(COMPOSE) up -d --build
+	@$(MANAGE) migrate
+	@$(COMPOSE) exec -e DJANGO_SUPERUSER_USERNAME=t -e DJANGO_SUPERUSER_EMAIL=t@example.com -e DJANGO_SUPERUSER_PASSWORD=t \
+		backend python manage.py createsuperuser --noinput || true

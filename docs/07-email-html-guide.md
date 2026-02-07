@@ -54,7 +54,7 @@ Email HTML is fundamentally different from web HTML. Most email clients (especia
 
 ```html
 <!-- ✅ CORRECT — inline styles -->
-<td style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; 
+<td style="font-family: Arial, Helvetica, sans-serif; font-size: 16px;
            line-height: 24px; color: #333333; padding: 10px 20px;">
   Hello World
 </td>
@@ -111,7 +111,7 @@ Custom web fonts (Google Fonts etc.) work only in Apple Mail, iOS Mail, and some
 ```html
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr>
-    <td style="padding: 10px 20px; font-family: Arial, Helvetica, sans-serif; 
+    <td style="padding: 10px 20px; font-family: Arial, Helvetica, sans-serif;
                font-size: 14px; line-height: 22px; color: #333333;">
       <p style="margin: 0 0 10px 0;">Hello <strong>{{first_name}}</strong>,</p>
       <p style="margin: 0;">Welcome to our newsletter.</p>
@@ -177,7 +177,7 @@ Buttons in email are notoriously tricky. Two approaches:
   <tr>
     <td align="center">
       <!--[if mso]>
-      <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
+      <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml"
                    xmlns:w="urn:schemas-microsoft-com:office:word"
                    href="https://example.com"
                    style="height:44px;v-text-anchor:middle;width:200px;"
@@ -335,7 +335,7 @@ Buttons in email are notoriously tricky. Two approaches:
     table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
     img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
     body { margin: 0; padding: 0; width: 100% !important; height: 100% !important; }
-    
+
     /* Responsive — only works in clients that support <style> */
     @media only screen and (max-width: 620px) {
       .email-container { width: 100% !important; max-width: 100% !important; }
@@ -345,35 +345,35 @@ Buttons in email are notoriously tricky. Two approaches:
   </style>
 </head>
 <body style="margin: 0; padding: 0; background-color: #f4f4f4;">
-  
+
   <!-- Preheader text (hidden, shows in inbox preview) -->
   <div style="display: none; max-height: 0; overflow: hidden;">
     {{preheader_text}}&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;...
   </div>
-  
+
   <!-- Full-width background wrapper -->
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
          style="background-color: #f4f4f4;">
     <tr>
       <td align="center" style="padding: 20px 0;">
-        
+
         <!-- Constrained content area -->
-        <table role="presentation" class="email-container" width="600" cellpadding="0" 
+        <table role="presentation" class="email-container" width="600" cellpadding="0"
                cellspacing="0" border="0" align="center"
                style="margin: 0 auto; background-color: #ffffff;">
-          
+
           <!-- HEADER BLOCKS GO HERE -->
-          
+
           <!-- BODY BLOCKS GO HERE -->
-          
+
           <!-- FOOTER BLOCKS GO HERE -->
-          
+
         </table>
-        
+
       </td>
     </tr>
   </table>
-  
+
 </body>
 </html>
 ```

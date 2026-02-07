@@ -171,7 +171,7 @@ Template CRUD fully working. Gallery shows prebuilt templates, user can load, ed
   ```javascript
   // Developer includes this on their page:
   // <script src="https://cdn.mailcraft.io/loader.js"></script>
-  
+
   MailCraft.init({
     apiKey: "mc_live_xxx",
     container: "#email-builder",

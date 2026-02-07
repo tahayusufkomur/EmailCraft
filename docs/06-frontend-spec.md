@@ -195,7 +195,7 @@ interface SocialPlatform {
   url: string;
 }
 
-type Block = TextBlock | ImageBlock | ButtonBlock | DividerBlock 
+type Block = TextBlock | ImageBlock | ButtonBlock | DividerBlock
            | ColumnsBlock | SocialBlock;
 
 // --- Template ---
@@ -228,7 +228,7 @@ interface EditorState {
   template: Template;
   selectedBlockId: string | null;
   isDirty: boolean;
-  
+
   // Actions
   addBlock: (block: Block, index?: number, columnId?: string) => void;
   updateBlock: (id: string, updates: Partial<Block>) => void;
@@ -239,7 +239,7 @@ interface EditorState {
   updateSettings: (settings: Partial<TemplateSettings>) => void;
   loadTemplate: (template: Template) => void;
   resetTemplate: () => void;
-  
+
   // Computed
   getSelectedBlock: () => Block | null;
   getBlockById: (id: string) => Block | null;
@@ -353,16 +353,16 @@ Dropdown component embedded in the text editor toolbar. Lists available variable
 // hooks/useAutoSave.ts
 function useAutoSave() {
   const { template, isDirty } = useEditorStore();
-  
+
   useEffect(() => {
     if (!isDirty) return;
-    
+
     const timer = setTimeout(async () => {
       await api.saveTemplate(template);
       sendToParent("MAILCRAFT_AUTO_SAVE", { json: template });
       markClean();
     }, 30_000); // 30 second debounce
-    
+
     return () => clearTimeout(timer);
   }, [template, isDirty]);
 }
@@ -378,21 +378,21 @@ async function uploadImage(file: File): Promise<string> {
   // 1. Client-side validation
   if (!ALLOWED_TYPES.includes(file.type)) throw new Error("Invalid file type");
   if (file.size > config.maxUploadSize) throw new Error("File too large");
-  
+
   // 2. Get presigned URL
   const { upload_url, file_url } = await api.getPresignedUrl({
     filename: file.name,
     content_type: file.type,
     file_size: file.size,
   });
-  
+
   // 3. Upload to S3
   await fetch(upload_url, {
     method: "PUT",
     headers: { "Content-Type": file.type },
     body: file,
   });
-  
+
   // 4. Return the CDN URL for use in the template
   return file_url;
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from '../ui/button';
 import { useConfigStore } from '../../store/configStore';
 
 interface Props {
@@ -13,13 +14,13 @@ export function VariableInserter({ onInsert }: Props) {
 
   return (
     <div style={{ position: 'relative', display: 'inline-block' }}>
-      <button
-        className="btn"
-        style={{ fontSize: 12, padding: '4px 8px' }}
+      <Button
+        size="sm"
+        variant="outline"
         onClick={() => setIsOpen(!isOpen)}
       >
         {'{{ }}'} Variables
-      </button>
+      </Button>
       {isOpen && (
         <div style={{
           position: 'absolute', top: '100%', left: 0, background: 'white',

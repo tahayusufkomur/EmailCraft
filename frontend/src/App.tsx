@@ -5,10 +5,19 @@ import { BlockPalette } from './components/Panels/BlockPalette';
 import { StylePanel } from './components/Panels/StylePanel';
 import { PreviewModal } from './components/Preview/PreviewModal';
 import { TemplateGallery } from './components/Gallery/TemplateGallery';
+import { Badge } from './components/ui/badge';
+import { Button } from './components/ui/button';
 import { useEditorStore } from './store/editorStore';
 import { exportToHtml } from './lib/htmlExporter';
 import { useAutoSave, loadDraft } from './hooks/useAutoSave';
 import { sendReadyEvent, sendSaveEvent } from './lib/postMessage';
+import type { EmailTemplate } from './types/blocks';
+
+const isEmailTemplate = (value: unknown): value is EmailTemplate => {
+  if (!value || typeof value !== 'object') return false;
+  const maybe = value as EmailTemplate;
+  return Boolean(maybe.version && maybe.settings && maybe.body && Array.isArray(maybe.body.blocks));
+};
 
 function App() {
   const isDirty = useEditorStore((s) => s.isDirty);
@@ -17,28 +26,22 @@ function App() {
   const [showPreview, setShowPreview] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
 
-  // Auto-save
   useAutoSave();
 
-  // Restore draft on load + notify parent iframe
   useEffect(() => {
     const draft = loadDraft();
-    if (draft) {
+    if (draft && isEmailTemplate(draft)) {
       loadTemplate(draft);
     }
     sendReadyEvent();
   }, [loadTemplate]);
 
   const handleSave = () => {
-    // Save to localStorage
     localStorage.setItem('mailcraft_draft', JSON.stringify(template));
     useEditorStore.getState().markClean();
 
-    // Send to parent iframe
     const html = exportToHtml(template, 'placeholders');
     sendSaveEvent(html, template);
-
-    console.log('Template saved.');
   };
 
   const handleExport = () => {
@@ -53,22 +56,26 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="app-shell">
       <div className="top-toolbar">
-        <div style={{ fontWeight: 600, fontSize: 15 }}>MailCraft Editor</div>
-        <div className="top-toolbar-actions">
-          <button className="btn" onClick={() => setShowGallery(true)}>
+        <div className="brand">
+          <div className="brand-title">MailCraft</div>
+          <div className="brand-subtitle">Email Builder</div>
+        </div>
+        <div className="toolbar-actions">
+          <Button variant="secondary" onClick={() => setShowGallery(true)}>
             Gallery
-          </button>
-          <button className="btn" onClick={() => setShowPreview(true)}>
+          </Button>
+          <Button variant="outline" onClick={() => setShowPreview(true)}>
             Preview
-          </button>
-          <button className="btn" onClick={handleSave}>
-            Save {isDirty ? '*' : ''}
-          </button>
-          <button className="btn btn-primary" onClick={handleExport}>
+          </Button>
+          <Button onClick={handleSave}>
+            Save
+          </Button>
+          <Button variant="default" onClick={handleExport}>
             Export HTML
-          </button>
+          </Button>
+          {isDirty && <Badge variant="secondary">Unsaved</Badge>}
         </div>
       </div>
       <div className="editor-layout">

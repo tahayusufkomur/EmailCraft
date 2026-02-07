@@ -1,6 +1,6 @@
 import type { ExportResponse, PresignResponse, SessionResponse, TemplateListItem } from '../types/api';
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
+const BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const apiKey = localStorage.getItem('mailcraft_api_key') || '';
