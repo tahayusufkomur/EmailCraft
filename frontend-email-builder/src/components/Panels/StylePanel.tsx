@@ -6,6 +6,9 @@ import { ButtonSettings } from './settings/ButtonSettings';
 import { DividerSettings } from './settings/DividerSettings';
 import { ColumnsSettings } from './settings/ColumnsSettings';
 import { SocialSettings } from './settings/SocialSettings';
+import { HeadingSettings } from './settings/HeadingSettings';
+import { SpacerSettings } from './settings/SpacerSettings';
+import { HtmlSettings } from './settings/HtmlSettings';
 
 export function StylePanel() {
   const selectedBlock = useEditorStore((s) => s.getSelectedBlock());
@@ -25,6 +28,9 @@ export function StylePanel() {
           {selectedBlock.type === 'divider' && <DividerSettings block={selectedBlock} />}
           {selectedBlock.type === 'columns' && <ColumnsSettings block={selectedBlock} />}
           {selectedBlock.type === 'social' && <SocialSettings block={selectedBlock} />}
+          {selectedBlock.type === 'heading' && <HeadingSettings block={selectedBlock} />}
+          {selectedBlock.type === 'spacer' && <SpacerSettings block={selectedBlock} />}
+          {selectedBlock.type === 'html' && <HtmlSettings block={selectedBlock} />}
         </>
       )}
     </div>

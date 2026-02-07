@@ -1,10 +1,14 @@
 import {
+  type CollisionDetection,
   DndContext,
   type DragEndEvent,
   DragOverlay,
   type DragStartEvent,
   PointerSensor,
   closestCenter,
+  pointerWithin,
+  rectIntersection,
+  useDroppable,
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
@@ -19,9 +23,14 @@ import { BlockRenderer } from './BlockRenderer';
 export function Canvas() {
   const blocks = useEditorStore((s) => s.template.body.blocks);
   const addBlock = useEditorStore((s) => s.addBlock);
+  const addBlockToColumn = useEditorStore((s) => s.addBlockToColumn);
   const moveBlock = useEditorStore((s) => s.moveBlock);
   const selectBlock = useEditorStore((s) => s.selectBlock);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const { isOver: isCanvasOver, setNodeRef: setCanvasDropRef } = useDroppable({
+    id: 'canvas-drop',
+    data: { dropType: 'canvas' },
+  });
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -31,6 +40,30 @@ export function Canvas() {
 
   const handleDragStart = (event: DragStartEvent) => {
     setActiveId(event.active.id as string);
+  };
+
+  const collisionDetection: CollisionDetection = (args) => {
+    if (args.active.data.current?.fromPalette) {
+      const pointerCollisions = pointerWithin(args);
+      const columnPointerCollision = pointerCollisions.find((collision) => {
+        const container = args.droppableContainers.find((droppable) => droppable.id === collision.id);
+        return container?.data.current?.dropType === 'column';
+      });
+      if (columnPointerCollision) {
+        return [columnPointerCollision];
+      }
+
+      const rectCollisions = rectIntersection(args);
+      const columnRectCollision = rectCollisions.find((collision) => {
+        const container = args.droppableContainers.find((droppable) => droppable.id === collision.id);
+        return container?.data.current?.dropType === 'column';
+      });
+      if (columnRectCollision) {
+        return [columnRectCollision];
+      }
+    }
+
+    return closestCenter(args);
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -43,10 +76,26 @@ export function Canvas() {
     if (active.data.current?.fromPalette) {
       const blockType = active.data.current.blockType as BlockType;
       const newBlock = createBlock(blockType);
+      const overData = over.data.current;
+
+      if (overData?.dropType === 'column') {
+        const parentBlockId = overData.parentBlockId as string;
+        const columnId = overData.columnId as string;
+        addBlockToColumn(parentBlockId, columnId, newBlock);
+        return;
+      }
+
+      if (overData?.dropType === 'canvas') {
+        addBlock(newBlock);
+        return;
+      }
+
       const overIndex = blocks.findIndex((b) => b.id === over.id);
       addBlock(newBlock, overIndex >= 0 ? overIndex : undefined);
       return;
     }
+
+    if (over.data.current?.dropType === 'column') return;
 
     // Reordering existing blocks
     if (active.id !== over.id) {
@@ -68,11 +117,11 @@ export function Canvas() {
     <div className="canvas-area" onClick={handleCanvasClick}>
       <DndContext
         sensors={sensors}
-        collisionDetection={closestCenter}
+        collisionDetection={collisionDetection}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
-        <div className="canvas-container">
+        <div ref={setCanvasDropRef} className={`canvas-container ${isCanvasOver ? 'canvas-drop-over' : ''}`}>
           {blocks.length === 0 ? (
             <div className="canvas-empty">
               Drag blocks here to start building your email

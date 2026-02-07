@@ -1,4 +1,4 @@
-export type BlockType = 'text' | 'image' | 'button' | 'divider' | 'columns' | 'social';
+export type BlockType = 'text' | 'image' | 'button' | 'divider' | 'columns' | 'social' | 'heading' | 'spacer' | 'html';
 
 export interface Spacing {
   top: number;
@@ -52,6 +52,14 @@ export interface ButtonBlock extends BaseBlock {
     fullWidth: boolean;
     fontSize: number;
     fontFamily: string;
+    borderStyle?: 'solid' | 'dashed' | 'dotted';
+    borderColor?: string;
+    borderWidth?: number;
+    fontWeight?: number;
+    letterSpacing?: number;
+    textTransform?: 'none' | 'uppercase' | 'lowercase' | 'capitalize';
+    paddingX?: number;
+    paddingY?: number;
   };
 }
 
@@ -102,7 +110,45 @@ export interface SocialBlock extends BaseBlock {
   };
 }
 
-export type Block = TextBlock | ImageBlock | ButtonBlock | DividerBlock | ColumnsBlock | SocialBlock;
+export interface HeadingBlock extends BaseBlock {
+  type: 'heading';
+  data: {
+    text: string;
+    level: 1 | 2 | 3 | 4;
+  };
+  style: BlockStyle & {
+    color: string;
+    fontSize: number;
+    fontFamily: string;
+    fontWeight: number;
+  };
+}
+
+export interface SpacerBlock extends BaseBlock {
+  type: 'spacer';
+  data: Record<string, never>;
+  style: BlockStyle & {
+    height: number;
+  };
+}
+
+export interface HtmlBlock extends BaseBlock {
+  type: 'html';
+  data: {
+    html: string;
+  };
+}
+
+export type Block =
+  | TextBlock
+  | ImageBlock
+  | ButtonBlock
+  | DividerBlock
+  | ColumnsBlock
+  | SocialBlock
+  | HeadingBlock
+  | SpacerBlock
+  | HtmlBlock;
 
 export interface TemplateSettings {
   backgroundColor: string;

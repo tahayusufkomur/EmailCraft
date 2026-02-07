@@ -66,9 +66,10 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
     case 'text': {
       const padding = paddingStr(block.style.padding);
       const align = block.style.alignment || 'left';
+      const background = block.style.backgroundColor;
       return `<tr>
   <td style="padding: ${padding}; font-family: ${font}; font-size: ${fontSize}px;
-             line-height: ${Math.round(fontSize * 1.6)}px; color: ${color}; text-align: ${align};">
+             line-height: ${Math.round(fontSize * 1.6)}px; color: ${color}; text-align: ${align};${background ? ` background-color: ${background};` : ''}">
     ${block.data.html}
   </td>
 </tr>`;
@@ -105,16 +106,29 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const borderRadius = block.style.borderRadius || 4;
       const btnFontSize = block.style.fontSize || 16;
       const btnFont = block.style.fontFamily || font;
+      const borderStyle = block.style.borderStyle || 'solid';
+      const borderColor = block.style.borderColor || bgColor;
+      const borderWidth = block.style.borderWidth || 0;
+      const fontWeight = block.style.fontWeight || 600;
+      const letterSpacing = block.style.letterSpacing || 0;
+      const textTransform = block.style.textTransform || 'none';
+      const paddingX = block.style.paddingX || 24;
+      const paddingY = block.style.paddingY || 12;
+      const fullWidth = block.style.fullWidth || false;
+      const btnWidth = fullWidth ? '100%' : 'auto';
+      const btnDisplay = fullWidth ? 'block' : 'inline-block';
+      const widthAttr = fullWidth ? ' width="100%"' : '';
 
       return `<tr>
   <td style="padding: ${padding};" align="${align}">
-    <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="${align}">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="${align}"${widthAttr} style="${fullWidth ? 'width: 100%;' : ''}">
       <tr>
-        <td style="border-radius: ${borderRadius}px; background-color: ${bgColor};" align="center">
+        <td style="border-radius: ${borderRadius}px; background-color: ${bgColor}; border: ${borderWidth}px ${borderStyle} ${borderColor};" align="center">
           <a href="${url}" target="_blank"
-             style="display: inline-block; padding: 12px 24px; background-color: ${bgColor};
+             style="display: ${btnDisplay}; width: ${btnWidth}; box-sizing: border-box; padding: ${paddingY}px ${paddingX}px; background-color: ${bgColor};
                     color: ${textColor}; font-family: ${btnFont}; font-size: ${btnFontSize}px;
-                    text-decoration: none; border-radius: ${borderRadius}px;">
+                    font-weight: ${fontWeight}; letter-spacing: ${letterSpacing}px; text-transform: ${textTransform};
+                    text-decoration: none; border-radius: ${borderRadius}px; border: ${borderWidth}px ${borderStyle} ${borderColor};">
             ${text}
           </a>
         </td>
@@ -147,13 +161,19 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const colCount = block.data.columnCount || 2;
       const gap = block.style.gap || 10;
       const contentWidth = settings.contentWidth || 600;
-      const colWidth = Math.floor((contentWidth - gap * (colCount - 1)) / colCount);
+      const defaultRatio = Math.floor(100 / colCount);
+      const ratios = block.data.columnRatio.length === colCount
+        ? block.data.columnRatio
+        : Array.from({ length: colCount }, () => defaultRatio);
 
-      const colsHtml = block.data.columns.map((col) => {
+      const colsHtml = block.data.columns.map((col, index) => {
+        const ratio = ratios[index] || defaultRatio;
+        const colWidth = Math.floor((contentWidth - gap * (colCount - 1)) * (ratio / 100));
         const colContent = renderBlocks(col.blocks, settings);
         const inner = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${colContent}</table>`;
+        const stackClass = block.style.stackOnMobile === false ? '' : 'stack-column';
 
-        return `<div style="display: inline-block; width: 100%; max-width: ${colWidth}px; vertical-align: top;">
+        return `<div class="${stackClass}" style="display: inline-block; width: 100%; max-width: ${colWidth}px; vertical-align: top;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr><td style="padding: 0 ${gap / 2}px;">${inner}</td></tr>
         </table>
@@ -183,6 +203,46 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="${align}">
       <tr>${iconsHtml}</tr>
     </table>
+  </td>
+</tr>`;
+    }
+
+    case 'heading': {
+      const padding = paddingStr(block.style.padding);
+      const align = block.style.alignment || 'left';
+      const headingTag = `h${block.data.level || 2}`;
+      const headingText = escapeHtml(block.data.text);
+      const headingSize = block.style.fontSize || 28;
+      const headingWeight = block.style.fontWeight || 700;
+      const headingColor = block.style.color || color;
+      const headingFont = block.style.fontFamily || font;
+      const background = block.style.backgroundColor;
+      return `<tr>
+  <td style="padding: ${padding}; text-align: ${align};${background ? ` background-color: ${background};` : ''}">
+    <${headingTag} style="margin: 0; font-family: ${headingFont}; font-size: ${headingSize}px; line-height: ${Math.round(headingSize * 1.2)}px; color: ${headingColor}; font-weight: ${headingWeight};">
+      ${headingText}
+    </${headingTag}>
+  </td>
+</tr>`;
+    }
+
+    case 'spacer': {
+      const height = Math.max(0, block.style.height || 0);
+      const background = block.style.backgroundColor;
+      return `<tr>
+  <td style="line-height: 0; font-size: 0; height: ${height}px;${background ? ` background-color: ${background};` : ''}">
+    &nbsp;
+  </td>
+</tr>`;
+    }
+
+    case 'html': {
+      const padding = paddingStr(block.style.padding);
+      const align = block.style.alignment || 'left';
+      const background = block.style.backgroundColor;
+      return `<tr>
+  <td style="padding: ${padding}; text-align: ${align};${background ? ` background-color: ${background};` : ''}">
+    ${block.data.html}
   </td>
 </tr>`;
     }

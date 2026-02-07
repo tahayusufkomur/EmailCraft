@@ -29,7 +29,8 @@ ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').sp
 
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    'admin_2fa.admin_config.TwoFactorAdminConfig',
+    'admin_2fa',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -219,3 +220,21 @@ STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
 STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET', '')
 STRIPE_SUCCESS_URL = os.environ.get('STRIPE_SUCCESS_URL', 'http://localhost/pricing?status=success')
 STRIPE_CANCEL_URL = os.environ.get('STRIPE_CANCEL_URL', 'http://localhost/pricing?status=cancelled')
+
+
+# --- Email ---
+EMAIL_BACKEND = os.environ.get(
+    'EMAIL_BACKEND',
+    'django.core.mail.backends.console.EmailBackend',
+)
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '587'))
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() in ('true', '1')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@mailcraft.dev')
+
+# --- Admin 2FA ---
+ADMIN_OTP_EXPIRY_SECONDS = 300  # 5 minutes
+ADMIN_LOGIN_MAX_ATTEMPTS = 5
+ADMIN_LOGIN_RATE_WINDOW_MINUTES = 15

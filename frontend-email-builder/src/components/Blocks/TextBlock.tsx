@@ -29,7 +29,14 @@ export function TextBlock({ block }: Props) {
   });
 
   return (
-    <div className="text-block-content">
+    <div
+      className="text-block-content"
+      style={{
+        padding: `${block.style.padding?.top ?? 10}px ${block.style.padding?.right ?? 20}px ${block.style.padding?.bottom ?? 10}px ${block.style.padding?.left ?? 20}px`,
+        textAlign: block.style.alignment || 'left',
+        backgroundColor: block.style.backgroundColor ?? 'transparent',
+      }}
+    >
       <EditorContent editor={editor} />
     </div>
   );

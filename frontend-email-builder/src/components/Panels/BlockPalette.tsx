@@ -10,12 +10,15 @@ interface PaletteItemConfig {
 }
 
 const BLOCK_TYPES: PaletteItemConfig[] = [
+  { type: 'heading', label: 'Heading', icon: 'H' },
   { type: 'text', label: 'Text', icon: 'T' },
   { type: 'image', label: 'Image', icon: '\u{1F5BC}' },
   { type: 'button', label: 'Button', icon: '\u{25A3}' },
+  { type: 'spacer', label: 'Spacer', icon: '\u21F5' },
   { type: 'divider', label: 'Divider', icon: '\u2500' },
   { type: 'columns', label: 'Columns', icon: '\u{25EB}' },
   { type: 'social', label: 'Social', icon: '\u{1F310}' },
+  { type: 'html', label: 'HTML', icon: '</>' },
 ];
 
 function DraggablePaletteItem({ config }: { config: PaletteItemConfig }) {

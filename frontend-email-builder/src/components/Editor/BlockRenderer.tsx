@@ -5,6 +5,9 @@ import { ButtonBlock } from '../Blocks/ButtonBlock';
 import { DividerBlock } from '../Blocks/DividerBlock';
 import { ColumnsBlock } from '../Blocks/ColumnsBlock';
 import { SocialBlock } from '../Blocks/SocialBlock';
+import { HeadingBlock } from '../Blocks/HeadingBlock';
+import { SpacerBlock } from '../Blocks/SpacerBlock';
+import { HtmlBlock } from '../Blocks/HtmlBlock';
 
 interface Props {
   block: Block;
@@ -24,6 +27,12 @@ export function BlockRenderer({ block }: Props) {
       return <ColumnsBlock block={block} />;
     case 'social':
       return <SocialBlock block={block} />;
+    case 'heading':
+      return <HeadingBlock block={block} />;
+    case 'spacer':
+      return <SpacerBlock block={block} />;
+    case 'html':
+      return <HtmlBlock block={block} />;
     default:
       return <div>Unknown block type</div>;
   }

@@ -36,6 +36,14 @@ export function createBlock(type: BlockType): Block {
           fullWidth: false,
           fontSize: 16,
           fontFamily: 'Arial, Helvetica, sans-serif',
+          borderStyle: 'solid',
+          borderColor: '#007bff',
+          borderWidth: 0,
+          fontWeight: 600,
+          letterSpacing: 0,
+          textTransform: 'none',
+          paddingX: 24,
+          paddingY: 12,
         },
       };
 
@@ -90,6 +98,47 @@ export function createBlock(type: BlockType): Block {
           iconStyle: 'colored',
           layout: 'horizontal',
           spacing: 10,
+        },
+      };
+
+    case 'heading':
+      return {
+        id,
+        type: 'heading',
+        data: { text: 'Your heading goes here', level: 2 },
+        style: {
+          padding: DEFAULT_PADDING,
+          alignment: 'left',
+          color: '#0f172a',
+          fontSize: 28,
+          fontFamily: 'Arial, Helvetica, sans-serif',
+          fontWeight: 700,
+        },
+      };
+
+    case 'spacer':
+      return {
+        id,
+        type: 'spacer',
+        data: {},
+        style: {
+          padding: { top: 0, right: 0, bottom: 0, left: 0 },
+          height: 32,
+          backgroundColor: null,
+        },
+      };
+
+    case 'html':
+      return {
+        id,
+        type: 'html',
+        data: {
+          html: '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:12px;background:#eef2ff;border-radius:8px;">Custom HTML block</td></tr></table>',
+        },
+        style: {
+          padding: DEFAULT_PADDING,
+          alignment: 'left',
+          backgroundColor: null,
         },
       };
   }

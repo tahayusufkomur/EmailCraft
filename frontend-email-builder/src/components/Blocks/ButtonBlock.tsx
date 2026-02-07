@@ -7,6 +7,8 @@ interface Props {
 export function ButtonBlock({ block }: Props) {
   const { text } = block.data;
   const style = block.style;
+  const paddingX = style.paddingX ?? 24;
+  const paddingY = style.paddingY ?? 12;
 
   return (
     <div
@@ -21,7 +23,15 @@ export function ButtonBlock({ block }: Props) {
           borderRadius: (style.borderRadius || 4) + 'px',
           fontSize: (style.fontSize || 16) + 'px',
           fontFamily: style.fontFamily || 'Arial, Helvetica, sans-serif',
+          fontWeight: style.fontWeight || 600,
+          letterSpacing: `${style.letterSpacing || 0}px`,
+          textTransform: style.textTransform || 'none',
+          borderStyle: style.borderStyle || 'solid',
+          borderColor: style.borderColor || style.backgroundColor || '#007bff',
+          borderWidth: `${style.borderWidth || 0}px`,
+          padding: `${paddingY}px ${paddingX}px`,
           width: style.fullWidth ? '100%' : undefined,
+          display: style.fullWidth ? 'block' : 'inline-block',
           textAlign: 'center',
         }}
       >

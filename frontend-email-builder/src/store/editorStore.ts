@@ -17,6 +17,124 @@ const EMPTY_TEMPLATE: EmailTemplate = {
   footer: { blocks: [] },
 };
 
+function findBlockById(blocks: Block[], id: string): Block | null {
+  for (const block of blocks) {
+    if (block.id === id) return block;
+    if (block.type === 'columns') {
+      for (const column of block.data.columns) {
+        const match = findBlockById(column.blocks, id);
+        if (match) return match;
+      }
+    }
+  }
+  return null;
+}
+
+function cloneBlockWithNewIds(block: Block): Block {
+  const cloned = JSON.parse(JSON.stringify(block)) as Block;
+
+  const assignIdsRecursively = (target: Block): Block => {
+    target.id = crypto.randomUUID();
+    if (target.type === 'columns') {
+      target.data.columns = target.data.columns.map((column) => ({
+        ...column,
+        id: crypto.randomUUID(),
+        blocks: column.blocks.map((child) => assignIdsRecursively(child)),
+      }));
+    }
+    return target;
+  };
+
+  return assignIdsRecursively(cloned);
+}
+
+function insertBlockIntoColumn(
+  blocks: Block[],
+  parentBlockId: string,
+  columnId: string,
+  newBlock: Block,
+  index?: number,
+): { blocks: Block[]; inserted: boolean } {
+  let inserted = false;
+
+  const updatedBlocks = blocks.map((block) => {
+    if (block.type !== 'columns') return block;
+
+    if (block.id === parentBlockId) {
+      const updatedColumns = block.data.columns.map((column) => {
+        if (column.id !== columnId) return column;
+        const nextBlocks = [...column.blocks];
+        if (index !== undefined && index >= 0 && index <= nextBlocks.length) {
+          nextBlocks.splice(index, 0, newBlock);
+        } else {
+          nextBlocks.push(newBlock);
+        }
+        inserted = true;
+        return { ...column, blocks: nextBlocks };
+      });
+      return { ...block, data: { ...block.data, columns: updatedColumns } };
+    }
+
+    const nestedColumns = block.data.columns.map((column) => {
+      const result = insertBlockIntoColumn(column.blocks, parentBlockId, columnId, newBlock, index);
+      if (result.inserted) {
+        inserted = true;
+        return { ...column, blocks: result.blocks };
+      }
+      return column;
+    });
+
+    if (inserted) {
+      return { ...block, data: { ...block.data, columns: nestedColumns } };
+    }
+    return block;
+  });
+
+  return { blocks: inserted ? updatedBlocks : blocks, inserted };
+}
+
+function duplicateBlockInList(
+  blocks: Block[],
+  targetId: string,
+): { blocks: Block[]; duplicatedId: string | null; changed: boolean } {
+  let duplicatedId: string | null = null;
+  let changed = false;
+  const output: Block[] = [];
+
+  for (const block of blocks) {
+    if (block.id === targetId) {
+      const duplicate = cloneBlockWithNewIds(block);
+      output.push(block, duplicate);
+      duplicatedId = duplicate.id;
+      changed = true;
+      continue;
+    }
+
+    if (block.type === 'columns') {
+      let nestedChanged = false;
+      const updatedColumns = block.data.columns.map((column) => {
+        const nested = duplicateBlockInList(column.blocks, targetId);
+        if (nested.changed) {
+          nestedChanged = true;
+          if (!duplicatedId) duplicatedId = nested.duplicatedId;
+          return { ...column, blocks: nested.blocks };
+        }
+        return column;
+      });
+
+      if (nestedChanged) {
+        output.push({ ...block, data: { ...block.data, columns: updatedColumns } });
+        changed = true;
+        continue;
+      }
+    }
+
+    output.push(block);
+  }
+
+  return { blocks: changed ? output : blocks, duplicatedId, changed };
+}
+
 interface EditorState {
   template: EmailTemplate;
   selectedBlockId: string | null;
@@ -25,6 +143,7 @@ interface EditorState {
 
   // Actions
   addBlock: (block: Block, index?: number) => void;
+  addBlockToColumn: (parentBlockId: string, columnId: string, block: Block, index?: number) => void;
   updateBlock: (id: string, updates: Partial<Block>) => void;
   deleteBlock: (id: string) => void;
   moveBlock: (fromIndex: number, toIndex: number) => void;
@@ -60,6 +179,28 @@ export const useEditorStore = create<EditorState>((set, get) => ({
         template: {
           ...state.template,
           [section]: { blocks },
+        },
+        isDirty: true,
+        selectedBlockId: block.id,
+      };
+    });
+  },
+
+  addBlockToColumn: (parentBlockId, columnId, block, index) => {
+    set((state) => {
+      const headerResult = insertBlockIntoColumn(state.template.header.blocks, parentBlockId, columnId, block, index);
+      const bodyResult = insertBlockIntoColumn(state.template.body.blocks, parentBlockId, columnId, block, index);
+      const footerResult = insertBlockIntoColumn(state.template.footer.blocks, parentBlockId, columnId, block, index);
+      const inserted = headerResult.inserted || bodyResult.inserted || footerResult.inserted;
+
+      if (!inserted) return state;
+
+      return {
+        template: {
+          ...state.template,
+          header: { blocks: headerResult.blocks },
+          body: { blocks: bodyResult.blocks },
+          footer: { blocks: footerResult.blocks },
         },
         isDirty: true,
         selectedBlockId: block.id,
@@ -122,15 +263,29 @@ export const useEditorStore = create<EditorState>((set, get) => ({
             return b;
           });
 
+      const nextTemplate = {
+        ...state.template,
+        header: { blocks: filterBlocks(state.template.header.blocks) },
+        body: { blocks: filterBlocks(state.template.body.blocks) },
+        footer: { blocks: filterBlocks(state.template.footer.blocks) },
+      };
+      const stillSelected = state.selectedBlockId
+        ? Boolean(findBlockById(
+          [
+            ...nextTemplate.header.blocks,
+            ...nextTemplate.body.blocks,
+            ...nextTemplate.footer.blocks,
+          ],
+          state.selectedBlockId,
+        ))
+        : false;
+
       return {
         template: {
-          ...state.template,
-          header: { blocks: filterBlocks(state.template.header.blocks) },
-          body: { blocks: filterBlocks(state.template.body.blocks) },
-          footer: { blocks: filterBlocks(state.template.footer.blocks) },
+          ...nextTemplate,
         },
         isDirty: true,
-        selectedBlockId: state.selectedBlockId === id ? null : state.selectedBlockId,
+        selectedBlockId: stillSelected ? state.selectedBlockId : null,
       };
     });
   },
@@ -154,36 +309,25 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   selectBlock: (id) => set({ selectedBlockId: id }),
 
   duplicateBlock: (id) => {
-    const state = get();
-    const allBlocks = [
-      ...state.template.header.blocks,
-      ...state.template.body.blocks,
-      ...state.template.footer.blocks,
-    ];
-    const block = allBlocks.find((b) => b.id === id);
-    if (!block) return;
+    set((state) => {
+      const header = duplicateBlockInList(state.template.header.blocks, id);
+      const body = duplicateBlockInList(state.template.body.blocks, id);
+      const footer = duplicateBlockInList(state.template.footer.blocks, id);
+      const duplicatedId = header.duplicatedId || body.duplicatedId || footer.duplicatedId;
 
-    const newBlock = {
-      ...JSON.parse(JSON.stringify(block)),
-      id: crypto.randomUUID(),
-    };
+      if (!duplicatedId) return state;
 
-    // Find which section it's in and insert after
-    for (const section of ['header', 'body', 'footer'] as const) {
-      const idx = state.template[section].blocks.findIndex((b) => b.id === id);
-      if (idx !== -1) {
-        set((s) => {
-          const blocks = [...s.template[section].blocks];
-          blocks.splice(idx + 1, 0, newBlock);
-          return {
-            template: { ...s.template, [section]: { blocks } },
-            isDirty: true,
-            selectedBlockId: newBlock.id,
-          };
-        });
-        return;
-      }
-    }
+      return {
+        template: {
+          ...state.template,
+          header: { blocks: header.blocks },
+          body: { blocks: body.blocks },
+          footer: { blocks: footer.blocks },
+        },
+        isDirty: true,
+        selectedBlockId: duplicatedId,
+      };
+    });
   },
 
   updateSettings: (settings) => {
@@ -204,12 +348,12 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   getSelectedBlock: () => {
     const state = get();
     if (!state.selectedBlockId) return null;
-    const allBlocks = [
-      ...state.template.header.blocks,
-      ...state.template.body.blocks,
-      ...state.template.footer.blocks,
-    ];
-    return allBlocks.find((b) => b.id === state.selectedBlockId) || null;
+    return (
+      findBlockById(state.template.header.blocks, state.selectedBlockId)
+      || findBlockById(state.template.body.blocks, state.selectedBlockId)
+      || findBlockById(state.template.footer.blocks, state.selectedBlockId)
+      || null
+    );
   },
 
   getBodyBlocks: () => get().template.body.blocks,

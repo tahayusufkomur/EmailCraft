@@ -25,12 +25,18 @@ const PLATFORM_LABELS: Record<string, string> = {
 export function SocialBlock({ block }: Props) {
   const { platforms } = block.data;
   const style = block.style;
+  const justifyContent =
+    style.alignment === 'left'
+      ? 'flex-start'
+      : style.alignment === 'right'
+        ? 'flex-end'
+        : 'center';
 
   return (
     <div
       className="social-block-content"
       style={{
-        justifyContent: style.alignment || 'center',
+        justifyContent,
         gap: (style.spacing || 10) + 'px',
         flexDirection: style.layout === 'vertical' ? 'column' : 'row',
       }}
