@@ -631,6 +631,19 @@
   gap: 8px;
 }
 
+.media-modal-footer {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--chrome-text-muted);
+  font-size: 12px;
+}
+
+.media-modal-sentinel {
+  height: 2px;
+}
+
 /* Block content styles */
 .text-block-content {
   min-height: 40px;

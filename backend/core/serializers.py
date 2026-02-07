@@ -169,6 +169,7 @@ class SiteDashboardSerializer(serializers.Serializer):
     plan = serializers.CharField()
     rendered_emails_count = serializers.IntegerField()
     rendered_emails_limit = serializers.IntegerField()
+    max_media_files_per_upload = serializers.IntegerField()
     storage_used_bytes = serializers.IntegerField()
     storage_limit_bytes = serializers.IntegerField()
     organizations_count = serializers.IntegerField()

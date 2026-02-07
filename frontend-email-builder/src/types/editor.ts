@@ -18,6 +18,7 @@ export interface EditorConfig {
   variables: Variable[];
   plan: string;
   maxUploadSize: number;
+  maxMediaFilesPerUpload: number;
   storageUsed: number;
   storageLimit: number;
   context?: WidgetContext;

@@ -1,4 +1,5 @@
-import uuid
+import re
+import secrets
 
 import boto3
 from django.conf import settings
@@ -81,8 +82,36 @@ def media_list(request):
     ordering_prefix = '' if order_key == 'asc' else '-'
     queryset = queryset.order_by(f'{ordering_prefix}{sort_field}', '-created_at')
 
-    serializer = UploadedImageListSerializer(queryset, many=True)
-    return Response({'results': serializer.data})
+    try:
+        limit = int(request.query_params.get('limit', 24))
+    except (TypeError, ValueError):
+        limit = 24
+    try:
+        offset = int(request.query_params.get('offset', 0))
+    except (TypeError, ValueError):
+        offset = 0
+
+    if limit < 1:
+        limit = 1
+    if limit > 100:
+        limit = 100
+    if offset < 0:
+        offset = 0
+
+    total = queryset.count()
+    page_items = list(queryset[offset:offset + limit])
+    has_more = offset + len(page_items) < total
+    next_offset = offset + len(page_items) if has_more else None
+
+    serializer = UploadedImageListSerializer(page_items, many=True)
+    return Response({
+        'results': serializer.data,
+        'total': total,
+        'has_more': has_more,
+        'next_offset': next_offset,
+        'limit': limit,
+        'offset': offset,
+    })
 
 
 @api_view(['POST'])
@@ -94,6 +123,22 @@ def presign_upload(request):
     org = request.org
     billing_org = billing_organization_for_org(org)
     data = serializer.validated_data
+    upload_kind = data.get('kind', 'original')
+    upload_batch_size = data.get('upload_batch_size', 1)
+
+    if upload_kind == 'original' and upload_batch_size > billing_org.max_media_files_per_upload:
+        return Response(
+            {
+                'error': {
+                    'code': 'TOO_MANY_FILES_IN_UPLOAD',
+                    'message': (
+                        'Too many files selected for one upload. '
+                        f'Max is {billing_org.max_media_files_per_upload} files.'
+                    ),
+                }
+            },
+            status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+        )
 
     # Check plan-based upload size limit
     max_size = billing_org.max_upload_size_bytes
@@ -110,9 +155,17 @@ def presign_upload(request):
             status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
         )
 
+    requested_filename = data['filename'].split('/')[-1].split('\\')[-1].strip()
+    safe_filename = requested_filename or 'upload'
+    safe_filename = re.sub(r'[^A-Za-z0-9._-]+', '_', safe_filename).strip('._') or 'upload'
+    filename_with_prefix = f'{secrets.token_hex(6)}_{safe_filename}'
+
     # Generate S3 key: emailBuilder/<organization>/<file>
-    file_ext = data['filename'].rsplit('.', 1)[-1] if '.' in data['filename'] else 'bin'
-    s3_key = f"{settings.AWS_S3_KEY_PREFIX}/{org.id}/{uuid.uuid4().hex}.{file_ext}"
+    s3_directory = 'thumbs' if upload_kind == 'thumbnail' else ''
+    if s3_directory:
+        s3_key = f"{settings.AWS_S3_KEY_PREFIX}/{org.id}/{s3_directory}/{filename_with_prefix}"
+    else:
+        s3_key = f"{settings.AWS_S3_KEY_PREFIX}/{org.id}/{filename_with_prefix}"
     bucket_name = settings.AWS_S3_PUBLIC_BUCKET
     if not bucket_name:
         return Response(
@@ -151,26 +204,38 @@ def presign_upload(request):
     else:
         file_url = f"https://{bucket_name}.s3.{settings.AWS_S3_REGION_NAME}.amazonaws.com/{s3_key}"
 
-    # Record the image
-    requested_filename = data['filename'].split('/')[-1].split('\\')[-1].strip()
-    safe_filename = requested_filename or 'upload'
+    image_id = None
+    if upload_kind == 'thumbnail':
+        image = UploadedImage.objects.for_org(org).filter(id=data.get('image_id')).first()
+        if not image:
+            return Response(
+                {'error': {'code': 'IMAGE_NOT_FOUND', 'message': 'Image not found for thumbnail upload.'}},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+        image.thumbnail_s3_key = s3_key
+        image.thumbnail_url = file_url
+        image.save(update_fields=['thumbnail_s3_key', 'thumbnail_url'])
+        image_id = str(image.id)
+    else:
+        image = UploadedImage.objects.create(
+            org=org,
+            s3_key=s3_key,
+            url=file_url,
+            filename=filename_with_prefix[:255],
+            file_size=data['file_size'],
+            content_type=data['content_type'],
+        )
+        image_id = str(image.id)
 
-    UploadedImage.objects.create(
-        org=org,
-        s3_key=s3_key,
-        url=file_url,
-        filename=safe_filename[:255],
-        file_size=data['file_size'],
-        content_type=data['content_type'],
-    )
-
-    # Update storage used
+    # Update storage used for both original and thumbnail uploads
     billing_org.storage_used_bytes += data['file_size']
     billing_org.save(update_fields=['storage_used_bytes'])
 
     return Response({
         'upload_url': upload_url,
         'file_url': file_url,
+        'image_id': image_id,
+        'kind': upload_kind,
         'expires_at': None,  # Will be real expiry in production
     })
 

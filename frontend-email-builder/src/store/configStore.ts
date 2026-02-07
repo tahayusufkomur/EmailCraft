@@ -10,6 +10,7 @@ interface ConfigState {
   themeMode: ThemeMode;
   plan: string;
   maxUploadSize: number;
+  maxMediaFilesPerUpload: number;
   storageUsed: number;
   storageLimit: number;
 
@@ -25,6 +26,7 @@ export const useConfigStore = create<ConfigState>((set) => ({
   themeMode: 'system',
   plan: 'free',
   maxUploadSize: 5 * 1024 * 1024,
+  maxMediaFilesPerUpload: 5,
   storageUsed: 0,
   storageLimit: 100 * 1024 * 1024,
 

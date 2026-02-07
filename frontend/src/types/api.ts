@@ -15,6 +15,7 @@ export interface PricingPlan {
   rendered_emails_limit: number;
   storage_limit_bytes: number;
   max_upload_size_bytes: number;
+  max_media_files_per_upload: number;
 }
 
 export interface PricingResponse {
@@ -93,6 +94,7 @@ export interface SiteDashboardResponse {
   plan: PlanKey;
   rendered_emails_count: number;
   rendered_emails_limit: number;
+  max_media_files_per_upload: number;
   storage_used_bytes: number;
   storage_limit_bytes: number;
   organizations_count: number;

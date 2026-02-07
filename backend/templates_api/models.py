@@ -53,6 +53,8 @@ class UploadedImage(models.Model):
     s3_key = models.CharField(max_length=500, unique=True)
     url = models.URLField()
     filename = models.CharField(max_length=255, blank=True, default='')
+    thumbnail_s3_key = models.CharField(max_length=500, blank=True, default='')
+    thumbnail_url = models.URLField(blank=True, null=True)
     file_size = models.IntegerField()
     content_type = models.CharField(max_length=50)
     width = models.IntegerField(null=True, blank=True)

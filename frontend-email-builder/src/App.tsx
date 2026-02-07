@@ -223,6 +223,7 @@ function App() {
           plan: session.config.plan,
           variables: normalizeVariables(session.config.variables),
           maxUploadSize: session.config.max_upload_size_bytes,
+          maxMediaFilesPerUpload: session.config.max_media_files_per_upload,
           storageUsed: session.config.storage_used_bytes,
           storageLimit: session.config.storage_limit_bytes,
           ...(hostContextAppliedRef.current ? {} : sessionUiContext),

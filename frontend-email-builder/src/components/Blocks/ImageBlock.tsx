@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { api } from '../../lib/api';
 import { applyImageUrlToBlock } from '../../lib/media';
 import { MediaLibraryModal } from '../Media/MediaLibraryModal';
+import { useConfigStore } from '../../store/configStore';
 
 interface Props {
   block: ImageBlockType;
@@ -11,6 +12,7 @@ interface Props {
 
 export function ImageBlock({ block }: Props) {
   const updateBlock = useEditorStore((s) => s.updateBlock);
+  const maxMediaFilesPerUpload = useConfigStore((s) => s.maxMediaFilesPerUpload);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -21,6 +23,12 @@ export function ImageBlock({ block }: Props) {
     if (files.length === 0) return;
     const input = e.currentTarget;
 
+    if (files.length > maxMediaFilesPerUpload) {
+      setErrorMessage(`You can upload at most ${maxMediaFilesPerUpload} files at once.`);
+      input.value = '';
+      return;
+    }
+
     setIsUploading(true);
     setErrorMessage(null);
     try {
@@ -30,7 +38,7 @@ export function ImageBlock({ block }: Props) {
 
       for (const file of files) {
         try {
-          const uploaded = await api.uploadImage(file);
+          const uploaded = await api.uploadImage(file, { uploadBatchSize: files.length });
           successfulUploads += 1;
           if (!firstUploadedUrl) {
             firstUploadedUrl = uploaded.file_url;

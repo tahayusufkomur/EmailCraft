@@ -240,6 +240,10 @@ class SiteOrganizationsApiTests(TestCase):
             self.billing_org.rendered_emails_limit,
         )
         self.assertEqual(
+            response.data['config']['max_media_files_per_upload'],
+            self.billing_org.max_media_files_per_upload,
+        )
+        self.assertEqual(
             response.data['config']['variables'],
             [
                 {'key': 'user_name', 'label': 'User Name', 'defaultValue': 'Guest', 'type': 'text'},
@@ -314,6 +318,11 @@ class SiteOrganizationsApiTests(TestCase):
 
         response = self.client.get('/api/v1/media', HTTP_X_API_KEY=raw_key)
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data['total'], 2)
+        self.assertEqual(response.data['limit'], 24)
+        self.assertEqual(response.data['offset'], 0)
+        self.assertFalse(response.data['has_more'])
+        self.assertIsNone(response.data['next_offset'])
         self.assertEqual(len(response.data['results']), 2)
         self.assertEqual(response.data['results'][0]['id'], str(second_image.id))
         self.assertEqual(
@@ -334,6 +343,37 @@ class SiteOrganizationsApiTests(TestCase):
         sort_by_name_desc = self.client.get('/api/v1/media?sort=name&order=desc', HTTP_X_API_KEY=raw_key)
         self.assertEqual(sort_by_name_desc.status_code, 200)
         self.assertEqual(sort_by_name_desc.data['results'][0]['filename'], 'zeta.png')
+
+        paged = self.client.get('/api/v1/media?limit=1&offset=0', HTTP_X_API_KEY=raw_key)
+        self.assertEqual(paged.status_code, 200)
+        self.assertEqual(len(paged.data['results']), 1)
+        self.assertEqual(paged.data['total'], 2)
+        self.assertTrue(paged.data['has_more'])
+        self.assertEqual(paged.data['next_offset'], 1)
+
+    def test_presign_upload_rejects_too_many_files_for_one_upload(self):
+        raw_key = ApiKey.generate_key('test')
+        ApiKey.objects.create(
+            org=self.billing_org,
+            key_hash=ApiKey.hash_key(raw_key),
+            key_prefix=raw_key[:12],
+            environment='test',
+            scope='full',
+        )
+
+        response = self.client.post(
+            '/api/v1/upload/presign',
+            {
+                'filename': 'photo.png',
+                'content_type': 'image/png',
+                'file_size': 1024,
+                'upload_batch_size': self.billing_org.max_media_files_per_upload + 1,
+            },
+            format='json',
+            HTTP_X_API_KEY=raw_key,
+        )
+        self.assertEqual(response.status_code, 413)
+        self.assertEqual(response.data['error']['code'], 'TOO_MANY_FILES_IN_UPLOAD')
 
     def test_create_org_rejects_duplicate_available_variable_keys(self):
         response = self.client.post(

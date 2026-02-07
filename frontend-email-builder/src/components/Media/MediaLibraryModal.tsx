@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { api } from '../../lib/api';
 import type { UploadedImageItem } from '../../types/api';
+import { useConfigStore } from '../../store/configStore';
 
 interface Props {
   onClose: () => void;
@@ -10,6 +11,7 @@ interface Props {
 const ACCEPTED_UPLOAD_TYPES = 'image/png,image/jpeg,image/gif,image/webp';
 type MediaSortField = 'date' | 'name' | 'size';
 type SortOrder = 'asc' | 'desc';
+const PAGE_SIZE = 24;
 
 const formatBytes = (bytes: number): string => {
   if (!Number.isFinite(bytes) || bytes <= 0) return '0 B';
@@ -30,8 +32,10 @@ const asErrorMessage = (error: unknown): string => {
 };
 
 export function MediaLibraryModal({ onClose, onSelectUrl }: Props) {
+  const maxMediaFilesPerUpload = useConfigStore((s) => s.maxMediaFilesPerUpload);
   const [items, setItems] = useState<UploadedImageItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -39,27 +43,79 @@ export function MediaLibraryModal({ onClose, onSelectUrl }: Props) {
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
   const [uploadProgress, setUploadProgress] = useState<{ completed: number; total: number } | null>(null);
   const [copiedItemId, setCopiedItemId] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState(false);
+  const [nextOffset, setNextOffset] = useState<number | null>(0);
+  const [totalCount, setTotalCount] = useState(0);
   const uploadInputRef = useRef<HTMLInputElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  const requestVersionRef = useRef(0);
 
-  const loadMedia = useCallback(async (
+  const loadFirstPage = useCallback(async (
     params: { q?: string; sort?: MediaSortField; order?: SortOrder },
     showLoading = true,
   ) => {
+    const requestVersion = requestVersionRef.current + 1;
+    requestVersionRef.current = requestVersion;
     if (showLoading) setIsLoading(true);
+    setIsLoadingMore(false);
     setError(null);
     try {
-      const response = await api.listMedia(params);
+      const response = await api.listMedia({
+        ...params,
+        limit: PAGE_SIZE,
+        offset: 0,
+      });
+      if (requestVersionRef.current !== requestVersion) return;
       setItems(response.results);
+      setHasMore(response.has_more);
+      setNextOffset(response.next_offset);
+      setTotalCount(response.total);
     } catch (nextError) {
+      if (requestVersionRef.current !== requestVersion) return;
       setError(asErrorMessage(nextError));
     } finally {
-      if (showLoading) setIsLoading(false);
+      if (requestVersionRef.current === requestVersion) {
+        setIsLoading(false);
+      }
     }
   }, []);
 
+  const loadMore = useCallback(async () => {
+    if (isLoading || isLoadingMore || !hasMore || nextOffset === null) return;
+    const requestVersion = requestVersionRef.current;
+
+    setIsLoadingMore(true);
+    try {
+      const response = await api.listMedia({
+        q: searchQuery,
+        sort: sortField,
+        order: sortOrder,
+        limit: PAGE_SIZE,
+        offset: nextOffset,
+      });
+      if (requestVersionRef.current !== requestVersion) return;
+      setItems((current) => {
+        const existingIds = new Set(current.map((item) => item.id));
+        const appended = response.results.filter((item) => !existingIds.has(item.id));
+        return [...current, ...appended];
+      });
+      setHasMore(response.has_more);
+      setNextOffset(response.next_offset);
+      setTotalCount(response.total);
+    } catch (nextError) {
+      if (requestVersionRef.current !== requestVersion) return;
+      setError(asErrorMessage(nextError));
+    } finally {
+      if (requestVersionRef.current === requestVersion) {
+        setIsLoadingMore(false);
+      }
+    }
+  }, [hasMore, isLoading, isLoadingMore, nextOffset, searchQuery, sortField, sortOrder]);
+
   useEffect(() => {
     const timeout = window.setTimeout(() => {
-      void loadMedia(
+      void loadFirstPage(
         {
           q: searchQuery,
           sort: sortField,
@@ -69,12 +125,39 @@ export function MediaLibraryModal({ onClose, onSelectUrl }: Props) {
       );
     }, 180);
     return () => window.clearTimeout(timeout);
-  }, [loadMedia, searchQuery, sortField, sortOrder]);
+  }, [loadFirstPage, searchQuery, sortField, sortOrder]);
+
+  useEffect(() => {
+    const panel = panelRef.current;
+    const sentinel = sentinelRef.current;
+    if (!panel || !sentinel || !hasMore || isLoading || isLoadingMore) return undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          void loadMore();
+        }
+      },
+      {
+        root: panel,
+        rootMargin: '220px 0px',
+      },
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [hasMore, isLoading, isLoadingMore, loadMore]);
 
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.currentTarget.files || []);
     if (files.length === 0) return;
     const input = event.currentTarget;
+
+    if (files.length > maxMediaFilesPerUpload) {
+      setError(`You can upload at most ${maxMediaFilesPerUpload} files at once.`);
+      input.value = '';
+      return;
+    }
 
     setIsUploading(true);
     setUploadProgress({ completed: 0, total: files.length });
@@ -88,7 +171,7 @@ export function MediaLibraryModal({ onClose, onSelectUrl }: Props) {
       for (let index = 0; index < files.length; index += 1) {
         const file = files[index];
         try {
-          const uploaded = await api.uploadImage(file);
+          const uploaded = await api.uploadImage(file, { uploadBatchSize: files.length });
           successfulUploads += 1;
           if (!firstUploadedUrl) {
             firstUploadedUrl = uploaded.file_url;
@@ -100,7 +183,7 @@ export function MediaLibraryModal({ onClose, onSelectUrl }: Props) {
         }
       }
 
-      await loadMedia(
+      await loadFirstPage(
         {
           q: searchQuery,
           sort: sortField,
@@ -142,7 +225,7 @@ export function MediaLibraryModal({ onClose, onSelectUrl }: Props) {
 
   return (
     <div className="media-modal-overlay" onClick={onClose}>
-      <div className="media-modal-panel" onClick={(event) => event.stopPropagation()}>
+      <div className="media-modal-panel" ref={panelRef} onClick={(event) => event.stopPropagation()}>
         <div className="media-modal-header">
           <h2 style={{ margin: 0, fontSize: 18 }}>Media Library</h2>
           <div className="media-modal-header-actions">
@@ -220,37 +303,51 @@ export function MediaLibraryModal({ onClose, onSelectUrl }: Props) {
               : 'No uploaded media yet. Upload photos to start reusing them across templates.'}
           </div>
         ) : (
-          <div className="media-grid">
-            {items.map((item) => (
-              <article key={item.id} className="media-card">
-                <img src={item.url} alt="" loading="lazy" className="media-card-image" />
-                <div className="media-card-name" title={item.filename || 'Untitled'}>
-                  {item.filename || 'Untitled'}
-                </div>
-                <div className="media-card-meta">
-                  <span>{formatBytes(item.file_size)}</span>
-                  <span>{new Date(item.created_at).toLocaleDateString()}</span>
-                </div>
-                <div className="media-card-actions">
-                  {onSelectUrl && (
-                    <button
-                      className="btn btn-primary"
-                      type="button"
-                      onClick={() => {
-                        onSelectUrl(item.url);
-                        onClose();
-                      }}
-                    >
-                      Use image
+          <>
+            <div className="media-grid">
+              {items.map((item) => (
+                <article key={item.id} className="media-card">
+                  <img
+                    src={item.thumbnail_url || item.url}
+                    alt=""
+                    loading="lazy"
+                    className="media-card-image"
+                  />
+                  <div className="media-card-name" title={item.filename || 'Untitled'}>
+                    {item.filename || 'Untitled'}
+                  </div>
+                  <div className="media-card-meta">
+                    <span>{formatBytes(item.file_size)}</span>
+                    <span>{new Date(item.created_at).toLocaleDateString()}</span>
+                  </div>
+                  <div className="media-card-actions">
+                    {onSelectUrl && (
+                      <button
+                        className="btn btn-primary"
+                        type="button"
+                        onClick={() => {
+                          onSelectUrl(item.url);
+                          onClose();
+                        }}
+                      >
+                        Use image
+                      </button>
+                    )}
+                    <button className="btn" type="button" onClick={() => void handleCopyUrl(item)}>
+                      {copiedItemId === item.id ? 'Copied' : 'Copy URL'}
                     </button>
-                  )}
-                  <button className="btn" type="button" onClick={() => void handleCopyUrl(item)}>
-                    {copiedItemId === item.id ? 'Copied' : 'Copy URL'}
-                  </button>
-                </div>
-              </article>
-            ))}
-          </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="media-modal-footer">
+              <span>{`Showing ${items.length}${totalCount > 0 ? ` of ${totalCount}` : ''}`}</span>
+              <span>
+                {isLoadingMore ? 'Loading more...' : hasMore ? 'Scroll to load more' : 'All media loaded'}
+              </span>
+            </div>
+            <div ref={sentinelRef} className="media-modal-sentinel" aria-hidden="true" />
+          </>
         )}
       </div>
     </div>

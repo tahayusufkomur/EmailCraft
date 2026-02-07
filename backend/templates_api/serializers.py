@@ -54,6 +54,9 @@ class PresignRequestSerializer(serializers.Serializer):
     filename = serializers.CharField(max_length=255)
     content_type = serializers.CharField(max_length=50)
     file_size = serializers.IntegerField()
+    kind = serializers.ChoiceField(choices=['original', 'thumbnail'], required=False, default='original')
+    image_id = serializers.UUIDField(required=False, allow_null=True)
+    upload_batch_size = serializers.IntegerField(required=False, min_value=1, default=1)
 
     def validate_content_type(self, value):
         if value not in settings.ALLOWED_UPLOAD_TYPES:
@@ -67,6 +70,13 @@ class PresignRequestSerializer(serializers.Serializer):
             raise serializers.ValidationError("File size must be positive.")
         return value
 
+    def validate(self, attrs):
+        kind = attrs.get('kind', 'original')
+        image_id = attrs.get('image_id')
+        if kind == 'thumbnail' and not image_id:
+            raise serializers.ValidationError("image_id is required when kind is 'thumbnail'.")
+        return attrs
+
 
 class UploadedImageListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -75,6 +85,7 @@ class UploadedImageListSerializer(serializers.ModelSerializer):
             'id',
             'url',
             'filename',
+            'thumbnail_url',
             'file_size',
             'content_type',
             'width',

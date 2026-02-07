@@ -23,6 +23,7 @@ def _plan_payload(plan_key):
         'rendered_emails_limit': plan['rendered_emails_limit'],
         'storage_limit_bytes': plan['storage_limit_bytes'],
         'max_upload_size_bytes': plan['max_upload_size_bytes'],
+        'max_media_files_per_upload': plan.get('max_media_files_per_upload', 1),
     }
 
 
@@ -158,6 +159,7 @@ def create_session(request):
             'plan': billing_org.plan,
             'variables': org.available_variables or [],
             'max_upload_size_bytes': billing_org.max_upload_size_bytes,
+            'max_media_files_per_upload': billing_org.max_media_files_per_upload,
             'storage_used_bytes': billing_org.storage_used_bytes,
             'storage_limit_bytes': billing_org.storage_limit_bytes,
             'rendered_emails_count': billing_org.rendered_emails_count,

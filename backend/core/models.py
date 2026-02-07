@@ -59,6 +59,10 @@ class Organization(models.Model):
     def max_upload_size_bytes(self):
         return self.plan_limits['max_upload_size_bytes']
 
+    @property
+    def max_media_files_per_upload(self):
+        return self.plan_limits.get('max_media_files_per_upload', 1)
+
     def apply_plan_limits(self, save=True):
         limits = self.plan_limits
         self.rendered_emails_limit = limits['rendered_emails_limit']

@@ -158,6 +158,7 @@ def site_dashboard(request):
             'plan': billing_org.plan,
             'rendered_emails_count': billing_org.rendered_emails_count,
             'rendered_emails_limit': billing_org.rendered_emails_limit,
+            'max_media_files_per_upload': billing_org.max_media_files_per_upload,
             'storage_used_bytes': billing_org.storage_used_bytes,
             'storage_limit_bytes': billing_org.storage_limit_bytes,
             'organizations_count': organizations_for_user(request.user).count(),

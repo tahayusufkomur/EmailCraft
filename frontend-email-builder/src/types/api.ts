@@ -17,6 +17,7 @@ export interface SessionResponse {
       type?: 'text' | 'url';
     }>;
     max_upload_size_bytes: number;
+    max_media_files_per_upload: number;
     storage_used_bytes: number;
     storage_limit_bytes: number;
     rendered_emails_count: number;
@@ -42,6 +43,8 @@ export interface TemplateListItem {
 export interface PresignResponse {
   upload_url: string;
   file_url: string;
+  image_id: string;
+  kind: 'original' | 'thumbnail';
   expires_at: string | null;
 }
 
@@ -49,6 +52,7 @@ export interface UploadedImageItem {
   id: string;
   url: string;
   filename: string;
+  thumbnail_url: string | null;
   file_size: number;
   content_type: string;
   width: number | null;
@@ -58,6 +62,16 @@ export interface UploadedImageItem {
 
 export interface UploadImageResponse {
   file_url: string;
+  thumbnail_url: string | null;
+}
+
+export interface MediaListResponse {
+  results: UploadedImageItem[];
+  total: number;
+  has_more: boolean;
+  next_offset: number | null;
+  limit: number;
+  offset: number;
 }
 
 export interface ExportResponse {

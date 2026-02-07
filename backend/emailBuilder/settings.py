@@ -183,24 +183,28 @@ PLAN_LIMITS = {
         'rendered_emails_limit': 1000,
         'storage_limit_bytes': 1 * 1024 * 1024 * 1024,
         'max_upload_size_bytes': 5 * 1024 * 1024,
+        'max_media_files_per_upload': 5,
     },
     'starter': {
         'monthly_price_usd': 5,
         'rendered_emails_limit': 10000,
         'storage_limit_bytes': 5 * 1024 * 1024 * 1024,
         'max_upload_size_bytes': 25 * 1024 * 1024,
+        'max_media_files_per_upload': 15,
     },
     'pro': {
         'monthly_price_usd': 20,
         'rendered_emails_limit': 50000,
         'storage_limit_bytes': 20 * 1024 * 1024 * 1024,
         'max_upload_size_bytes': 50 * 1024 * 1024,
+        'max_media_files_per_upload': 40,
     },
     'enterprise': {
         'monthly_price_usd': 100,
         'rendered_emails_limit': 1000000,
         'storage_limit_bytes': 100 * 1024 * 1024 * 1024,
         'max_upload_size_bytes': 100 * 1024 * 1024,
+        'max_media_files_per_upload': 120,
     },
 }
 
