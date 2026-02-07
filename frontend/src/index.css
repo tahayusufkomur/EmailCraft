@@ -1,72 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 210 40% 98%;
-    --foreground: 222.2 47.4% 11.2%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 47.4% 11.2%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 47.4% 11.2%;
-    --primary: 198 94% 60%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 198 94% 60%;
-    --radius: 0.8rem;
-
-    --sidebar-width: 260px;
-    --panel-width: 320px;
-    --border-color: rgba(148, 163, 184, 0.35);
-    --surface: #ffffff;
-    --surface-elevated: #f8fafc;
-    --canvas-bg: radial-gradient(circle at top, #eef2ff 0%, #e2e8f0 55%, #dbeafe 100%);
-    --text-primary: #0f172a;
-    --text-muted: #64748b;
-    --accent-color: #38bdf8;
-    --accent-hover: #0ea5e9;
-    --accent-soft: rgba(56, 189, 248, 0.12);
-    --danger-color: #ef4444;
-    --success-color: #22c55e;
-    --shadow-lg: 0 20px 45px rgba(15, 23, 42, 0.12);
-    font-family: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
-    font-size: 14px;
-    color: var(--text-primary);
-  }
-
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #e0f2fe 100%);
-  }
+:root {
+  --background: 40 29% 96%;
+  --foreground: 220 26% 13%;
+  --muted: 38 25% 90%;
+  --muted-foreground: 220 11% 38%;
+  --card: 40 35% 99%;
+  --card-foreground: 220 26% 13%;
+  --border: 32 22% 82%;
+  --input: 32 22% 82%;
+  --primary: 205 89% 44%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 24 85% 58%;
+  --secondary-foreground: 27 25% 12%;
+  --accent: 192 56% 90%;
+  --accent-foreground: 221 30% 14%;
+  --destructive: 0 72% 50%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 205 89% 44%;
+  --radius: 0.75rem;
 }
 
-#root {
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
   min-height: 100vh;
 }
 
-button {
-  cursor: pointer;
-  font-family: inherit;
+.font-heading {
+  font-family: 'Manrope', sans-serif;
 }
 
-input, select, textarea {
-  font-family: inherit;
-  font-size: inherit;
+.font-mono {
+  font-family: 'IBM Plex Mono', monospace;
 }

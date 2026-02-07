@@ -1,7 +1,8 @@
 (function () {
   'use strict';
 
-  var EDITOR_URL = 'https://app.mailcraft.io';
+  var EDITOR_BASE_URL = 'https://app.mailcraft.io/builder';
+  var EDITOR_ORIGIN = new URL(EDITOR_BASE_URL).origin;
 
   var MailCraft = {
     _iframe: null,
@@ -41,7 +42,7 @@
 
       // Create iframe
       var iframe = document.createElement('iframe');
-      iframe.src = EDITOR_URL + '/editor?apiKey=' + encodeURIComponent(config.apiKey);
+      iframe.src = EDITOR_BASE_URL + '/?apiKey=' + encodeURIComponent(config.apiKey);
       iframe.style.width = '100%';
       iframe.style.height = '100%';
       iframe.style.border = 'none';
@@ -59,7 +60,7 @@
       // Listen for messages from iframe
       var self = this;
       this._messageHandler = function (event) {
-        if (event.origin !== EDITOR_URL) return;
+        if (event.origin !== EDITOR_ORIGIN) return;
         var data = event.data;
         if (!data || data.source !== 'mailcraft') return;
 
@@ -76,7 +77,7 @@
                   templateJson: config.templateJson || null,
                 },
               },
-              EDITOR_URL
+              EDITOR_ORIGIN
             );
             if (config.onReady) config.onReady();
             break;
@@ -112,7 +113,7 @@
           type: 'MAILCRAFT_LOAD_TEMPLATE',
           payload: { json: templateJson },
         },
-        EDITOR_URL
+        EDITOR_ORIGIN
       );
     },
 
@@ -124,7 +125,7 @@
       var self = this;
       return new Promise(function (resolve) {
         var handler = function (event) {
-          if (event.origin !== EDITOR_URL) return;
+          if (event.origin !== EDITOR_ORIGIN) return;
           if (
             event.data &&
             event.data.source === 'mailcraft' &&
@@ -142,7 +143,7 @@
             type: 'MAILCRAFT_EXPORT',
             payload: {},
           },
-          EDITOR_URL
+          EDITOR_ORIGIN
         );
       });
     },

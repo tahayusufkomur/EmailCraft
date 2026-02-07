@@ -5,7 +5,8 @@ import type { Block, EmailTemplate } from '../types/blocks';
  * The server-side export (/api/v1/export/html) is the canonical export.
  * This is used for real-time preview in the editor.
  */
-export function exportToHtml(template: EmailTemplate, _variablesMode: 'placeholders' | 'defaults' = 'placeholders'): string {
+export function exportToHtml(template: EmailTemplate, variablesMode: 'placeholders' | 'defaults' = 'placeholders'): string {
+  void variablesMode;
   const { settings } = template;
   const contentWidth = settings.contentWidth || 600;
 

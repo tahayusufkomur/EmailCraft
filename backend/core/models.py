@@ -2,6 +2,7 @@ import hashlib
 import secrets
 import uuid
 
+from django.contrib.auth.models import User
 from django.conf import settings
 from django.db import models
 
@@ -95,3 +96,24 @@ class ApiKey(models.Model):
     @staticmethod
     def hash_key(raw_key):
         return hashlib.sha256(raw_key.encode()).hexdigest()
+
+
+class UserOrganization(models.Model):
+    ROLE_CHOICES = [
+        ('owner', 'Owner'),
+        ('member', 'Member'),
+    ]
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='organization_membership')
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='memberships')
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='owner')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'user_organizations'
+        indexes = [
+            models.Index(fields=['organization', 'role'], name='user_org_role_idx'),
+        ]
+
+    def __str__(self):
+        return f"{self.user.username} -> {self.organization.name} ({self.role})"

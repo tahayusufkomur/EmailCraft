@@ -43,6 +43,9 @@ module.exports = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      boxShadow: {
+        soft: '0 8px 30px -12px hsl(var(--foreground) / 0.25)',
+      },
     },
   },
   plugins: [],

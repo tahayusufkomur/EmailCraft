@@ -26,6 +26,86 @@ def _plan_payload(plan_key):
     }
 
 
+def _set_org_plan(org, plan_key, stripe_subscription_id=None, stripe_customer_id=None):
+    org.plan = plan_key
+    org.apply_plan_limits(save=False)
+    if stripe_customer_id is not None:
+        org.stripe_customer_id = stripe_customer_id
+    if stripe_subscription_id is not None:
+        org.stripe_subscription_id = stripe_subscription_id
+    org.save(
+        update_fields=[
+            'plan',
+            'rendered_emails_limit',
+            'storage_limit_bytes',
+            'stripe_customer_id',
+            'stripe_subscription_id',
+            'updated_at',
+        ]
+    )
+
+
+def subscribe_org_to_plan(org, plan_key):
+    plan = settings.PLAN_LIMITS[plan_key]
+
+    if plan['monthly_price_usd'] == 0:
+        _set_org_plan(org, 'free', stripe_subscription_id=None)
+        return {'status': 'updated', 'plan': 'free'}, status.HTTP_200_OK
+
+    if not settings.STRIPE_API_KEY:
+        return (
+            {'error': {'code': 'STRIPE_NOT_CONFIGURED', 'message': 'Stripe API key is missing.'}},
+            status.HTTP_503_SERVICE_UNAVAILABLE,
+        )
+
+    stripe.api_key = settings.STRIPE_API_KEY
+
+    try:
+        customer_id = org.stripe_customer_id
+        if not customer_id:
+            customer = stripe.Customer.create(
+                email=org.email,
+                name=org.name,
+                metadata={'org_id': str(org.id)},
+            )
+            customer_id = customer.id
+            org.stripe_customer_id = customer_id
+            org.save(update_fields=['stripe_customer_id', 'updated_at'])
+
+        checkout_session = stripe.checkout.Session.create(
+            mode='subscription',
+            customer=customer_id,
+            success_url=settings.STRIPE_SUCCESS_URL,
+            cancel_url=settings.STRIPE_CANCEL_URL,
+            metadata={'org_id': str(org.id), 'plan': plan_key},
+            line_items=[
+                {
+                    'quantity': 1,
+                    'price_data': {
+                        'currency': 'usd',
+                        'unit_amount': int(plan['monthly_price_usd'] * 100),
+                        'recurring': {'interval': 'month'},
+                        'product_data': {'name': f'MailCraft {plan_key.title()} Plan'},
+                    },
+                }
+            ],
+        )
+    except stripe.error.StripeError as exc:
+        return (
+            {'error': {'code': 'STRIPE_CHECKOUT_ERROR', 'message': str(exc)}},
+            status.HTTP_502_BAD_GATEWAY,
+        )
+
+    return (
+        {
+            'checkout_url': checkout_session.url,
+            'session_id': checkout_session.id,
+            'plan': plan_key,
+        },
+        status.HTTP_200_OK,
+    )
+
+
 @api_view(['POST'])
 def create_session(request):
     """
@@ -131,66 +211,8 @@ def subscribe_plan(request):
     serializer.is_valid(raise_exception=True)
 
     org = request.org
-    plan_key = serializer.validated_data['plan']
-    plan = settings.PLAN_LIMITS[plan_key]
-
-    # Free plan does not require checkout.
-    if plan['monthly_price_usd'] == 0:
-        org.plan = 'free'
-        org.apply_plan_limits(save=False)
-        org.stripe_subscription_id = None
-        org.save(update_fields=['plan', 'rendered_emails_limit', 'storage_limit_bytes', 'stripe_subscription_id', 'updated_at'])
-        return Response({'status': 'updated', 'plan': 'free'})
-
-    if not settings.STRIPE_API_KEY:
-        return Response(
-            {'error': {'code': 'STRIPE_NOT_CONFIGURED', 'message': 'Stripe API key is missing.'}},
-            status=status.HTTP_503_SERVICE_UNAVAILABLE,
-        )
-
-    stripe.api_key = settings.STRIPE_API_KEY
-
-    try:
-        customer_id = org.stripe_customer_id
-        if not customer_id:
-            customer = stripe.Customer.create(
-                email=org.email,
-                name=org.name,
-                metadata={'org_id': str(org.id)},
-            )
-            customer_id = customer.id
-            org.stripe_customer_id = customer_id
-            org.save(update_fields=['stripe_customer_id', 'updated_at'])
-
-        checkout_session = stripe.checkout.Session.create(
-            mode='subscription',
-            customer=customer_id,
-            success_url=settings.STRIPE_SUCCESS_URL,
-            cancel_url=settings.STRIPE_CANCEL_URL,
-            metadata={'org_id': str(org.id), 'plan': plan_key},
-            line_items=[
-                {
-                    'quantity': 1,
-                    'price_data': {
-                        'currency': 'usd',
-                        'unit_amount': int(plan['monthly_price_usd'] * 100),
-                        'recurring': {'interval': 'month'},
-                        'product_data': {'name': f'MailCraft {plan_key.title()} Plan'},
-                    },
-                }
-            ],
-        )
-    except stripe.error.StripeError as exc:
-        return Response(
-            {'error': {'code': 'STRIPE_CHECKOUT_ERROR', 'message': str(exc)}},
-            status=status.HTTP_502_BAD_GATEWAY,
-        )
-
-    return Response({
-        'checkout_url': checkout_session.url,
-        'session_id': checkout_session.id,
-        'plan': plan_key,
-    })
+    payload, status_code = subscribe_org_to_plan(org, serializer.validated_data['plan'])
+    return Response(payload, status=status_code)
 
 
 @api_view(['POST'])
@@ -217,19 +239,11 @@ def stripe_webhook(request):
         if org_id and plan_key in settings.PLAN_LIMITS:
             try:
                 org = Organization.objects.get(pk=org_id)
-                org.plan = plan_key
-                org.stripe_customer_id = data.get('customer') or org.stripe_customer_id
-                org.stripe_subscription_id = data.get('subscription')
-                org.apply_plan_limits(save=False)
-                org.save(
-                    update_fields=[
-                        'plan',
-                        'stripe_customer_id',
-                        'stripe_subscription_id',
-                        'rendered_emails_limit',
-                        'storage_limit_bytes',
-                        'updated_at',
-                    ]
+                _set_org_plan(
+                    org,
+                    plan_key,
+                    stripe_subscription_id=data.get('subscription'),
+                    stripe_customer_id=data.get('customer') or org.stripe_customer_id,
                 )
             except Organization.DoesNotExist:
                 pass
@@ -239,10 +253,7 @@ def stripe_webhook(request):
         if customer_id:
             try:
                 org = Organization.objects.get(stripe_customer_id=customer_id)
-                org.plan = 'free'
-                org.stripe_subscription_id = None
-                org.apply_plan_limits(save=False)
-                org.save(update_fields=['plan', 'stripe_subscription_id', 'rendered_emails_limit', 'storage_limit_bytes', 'updated_at'])
+                _set_org_plan(org, 'free', stripe_subscription_id=None)
             except Organization.DoesNotExist:
                 pass
 

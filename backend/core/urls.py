@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 
 from core.views import (
     GoogleLoginView,
@@ -11,6 +11,7 @@ from core.views import (
 )
 
 urlpatterns = [
+    path('site/', include('core.site_urls')),
     path('auth/session', create_session, name='auth-session'),
     path('auth/google', GoogleLoginView.as_view(), name='auth-google'),
     path('pages/landing', landing_page, name='landing-page'),

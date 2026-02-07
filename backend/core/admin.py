@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Organization, ApiKey
+from core.models import ApiKey, Organization, UserOrganization
 
 
 @admin.register(Organization)
@@ -17,3 +17,10 @@ class ApiKeyAdmin(admin.ModelAdmin):
     list_filter = ['environment', 'scope', 'is_active']
     search_fields = ['key_prefix', 'org__name']
     readonly_fields = ['id', 'key_hash', 'created_at']
+
+
+@admin.register(UserOrganization)
+class UserOrganizationAdmin(admin.ModelAdmin):
+    list_display = ['user', 'organization', 'role', 'created_at']
+    list_filter = ['role']
+    search_fields = ['user__username', 'user__email', 'organization__name']
