@@ -5,7 +5,7 @@ from core.models import Organization, ApiKey
 
 @admin.register(Organization)
 class OrganizationAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'plan', 'is_active', 'created_at']
+    list_display = ['name', 'email', 'plan', 'rendered_emails_count', 'storage_used_bytes', 'is_active', 'created_at']
     list_filter = ['plan', 'is_active']
     search_fields = ['name', 'email']
     readonly_fields = ['id', 'created_at', 'updated_at']

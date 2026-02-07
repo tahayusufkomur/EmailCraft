@@ -2,7 +2,7 @@
        dev dev-backend dev-frontend \
        build migrate makemigrations \
        test test-backend lint-frontend \
-       seed create-key shell dbshell clean reset setup
+       seed create-key shell dbshell clean reset setup install-frontend-local
 
 COMPOSE := docker compose
 BACKEND := backend
@@ -60,10 +60,10 @@ lint-frontend: ## Type-check frontend
 # ─── Utilities ────────────────────────────────────────────
 
 seed: ## Create a demo org + test API key
-	@$(MANAGE) create_api_key --org-name "Demo" --org-email "demo@mailcraft.io" --env test
+	@$(MANAGE) create_api_key --org-name "Demo" --org-email "demo@mailcraft.io" --env test --plan free
 
-create-key: ## Create API key (usage: make create-key ORG="Name" EMAIL="a@b.com" ENV=live)
-	@$(MANAGE) create_api_key --org-name "$(ORG)" --org-email "$(EMAIL)" --env $(or $(ENV),test)
+create-key: ## Create API key (usage: make create-key ORG="Name" EMAIL="a@b.com" ENV=live PLAN=starter)
+	@$(MANAGE) create_api_key --org-name "$(ORG)" --org-email "$(EMAIL)" --env $(or $(ENV),test) --plan $(or $(PLAN),free)
 
 shell: ## Open Django shell
 	@$(MANAGE) shell
@@ -88,3 +88,7 @@ setup: ## Build, start containers, and run migrations
 	@$(MANAGE) migrate
 	@$(COMPOSE) exec -e DJANGO_SUPERUSER_USERNAME=t -e DJANGO_SUPERUSER_EMAIL=t@example.com -e DJANGO_SUPERUSER_PASSWORD=t \
 		backend python manage.py createsuperuser --noinput || true
+	@cd $(FRONTEND) && npm install
+
+install-frontend-local: ## Install frontend deps on host (for VS Code/TS)
+	@cd $(FRONTEND) && npm install

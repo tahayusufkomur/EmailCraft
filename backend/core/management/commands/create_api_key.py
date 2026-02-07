@@ -10,15 +10,20 @@ class Command(BaseCommand):
         parser.add_argument('--org-name', type=str, required=True)
         parser.add_argument('--org-email', type=str, required=True)
         parser.add_argument('--env', type=str, default='test', choices=['live', 'test'])
+        parser.add_argument('--plan', type=str, default='free', choices=['free', 'starter', 'pro', 'enterprise'])
 
     def handle(self, *args, **options):
         org, created = Organization.objects.get_or_create(
             email=options['org_email'],
-            defaults={'name': options['org_name']},
+            defaults={'name': options['org_name'], 'plan': options['plan']},
         )
         if created:
+            org.apply_plan_limits()
             self.stdout.write(self.style.SUCCESS(f'Created organization: {org.name}'))
         else:
+            if org.plan != options['plan']:
+                org.plan = options['plan']
+                org.apply_plan_limits()
             self.stdout.write(f'Using existing organization: {org.name}')
 
         raw_key = ApiKey.generate_key(options['env'])

@@ -1,10 +1,12 @@
 services:
   postgres:
     image: postgres:16-alpine
+    env_file:
+      - .env
     environment:
-      POSTGRES_DB: mailcraft
-      POSTGRES_USER: mailcraft
-      POSTGRES_PASSWORD: mailcraft
+      POSTGRES_DB: ${DB_NAME:-mailcraft}
+      POSTGRES_USER: ${DB_USER:-mailcraft}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-mailcraft}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -15,15 +17,17 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./backend:/app
+    env_file:
+      - .env
     environment:
       DJANGO_DEBUG: "True"
       DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1"
-      DB_ENGINE: "django.db.backends.postgresql"
-      DB_NAME: "mailcraft"
-      DB_USER: "mailcraft"
-      DB_PASSWORD: "mailcraft"
-      DB_HOST: "postgres"
-      DB_PORT: "5432"
+      DB_ENGINE: ${DB_ENGINE:-django.db.backends.postgresql}
+      DB_NAME: ${DB_NAME:-mailcraft}
+      DB_USER: ${DB_USER:-mailcraft}
+      DB_PASSWORD: ${DB_PASSWORD:-mailcraft}
+      DB_HOST: ${DB_HOST:-postgres}
+      DB_PORT: ${DB_PORT:-5432}
     depends_on:
       - postgres
     expose:

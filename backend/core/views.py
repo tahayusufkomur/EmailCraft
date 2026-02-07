@@ -1,13 +1,29 @@
 import secrets
 from datetime import timedelta
 
+import stripe
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from dj_rest_auth.registration.views import SocialLoginView
+from django.conf import settings
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from core.models import ApiKey
-from core.serializers import SessionRequestSerializer
+from core.models import ApiKey, Organization
+from core.serializers import SessionRequestSerializer, SubscribeRequestSerializer
+
+
+def _plan_payload(plan_key):
+    plan = settings.PLAN_LIMITS.get(plan_key, settings.PLAN_LIMITS['free'])
+    return {
+        'plan': plan_key,
+        'monthly_price_usd': plan['monthly_price_usd'],
+        'rendered_emails_limit': plan['rendered_emails_limit'],
+        'storage_limit_bytes': plan['storage_limit_bytes'],
+        'max_upload_size_bytes': plan['max_upload_size_bytes'],
+    }
 
 
 @api_view(['POST'])
@@ -51,20 +67,188 @@ def create_session(request):
                 status=status.HTTP_403_FORBIDDEN,
             )
 
-    # Generate session token
     session_token = f"sess_{secrets.token_hex(32)}"
     expires_at = timezone.now() + timedelta(hours=4)
-
-    from django.conf import settings
-    max_upload = settings.MAX_UPLOAD_SIZE_PRO if org.is_pro else settings.MAX_UPLOAD_SIZE_FREE
 
     return Response({
         'token': session_token,
         'expires_at': expires_at.isoformat(),
         'config': {
             'plan': org.plan,
-            'max_upload_size_bytes': max_upload,
+            'max_upload_size_bytes': org.max_upload_size_bytes,
             'storage_used_bytes': org.storage_used_bytes,
             'storage_limit_bytes': org.storage_limit_bytes,
+            'rendered_emails_count': org.rendered_emails_count,
+            'rendered_emails_limit': org.rendered_emails_limit,
         },
     })
+
+
+@api_view(['GET'])
+def landing_page(request):
+    return Response({
+        'hero': {
+            'title': 'MailCraft: Build and ship email templates quickly',
+            'subtitle': 'Drag, drop, and export production-safe email HTML with usage-based plans.',
+        },
+        'features': [
+            'Email-safe HTML export',
+            'Template management and gallery',
+            'S3-backed media uploads by organization',
+            'API-key based multi-tenant access',
+        ],
+        'cta': {
+            'pricing_path': '/pricing',
+            'subscribe_path': '/subscribe',
+        },
+    })
+
+
+@api_view(['GET'])
+def pricing_page(request):
+    plans = [_plan_payload(plan_key) for plan_key in settings.PLAN_LIMITS.keys()]
+    return Response({
+        'currency': 'USD',
+        'billing_cycle': 'monthly',
+        'plans': plans,
+        'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+    })
+
+
+@api_view(['GET'])
+def subscribe_page(request):
+    return Response({
+        'title': 'Subscribe to a MailCraft plan',
+        'description': 'Pick a plan and start checkout. Your organization limits are updated automatically.',
+        'endpoint': '/api/v1/billing/subscribe',
+        'required_payload': {'plan': 'starter | pro | enterprise | free'},
+    })
+
+
+@api_view(['POST'])
+def subscribe_plan(request):
+    serializer = SubscribeRequestSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+
+    org = request.org
+    plan_key = serializer.validated_data['plan']
+    plan = settings.PLAN_LIMITS[plan_key]
+
+    # Free plan does not require checkout.
+    if plan['monthly_price_usd'] == 0:
+        org.plan = 'free'
+        org.apply_plan_limits(save=False)
+        org.stripe_subscription_id = None
+        org.save(update_fields=['plan', 'rendered_emails_limit', 'storage_limit_bytes', 'stripe_subscription_id', 'updated_at'])
+        return Response({'status': 'updated', 'plan': 'free'})
+
+    if not settings.STRIPE_API_KEY:
+        return Response(
+            {'error': {'code': 'STRIPE_NOT_CONFIGURED', 'message': 'Stripe API key is missing.'}},
+            status=status.HTTP_503_SERVICE_UNAVAILABLE,
+        )
+
+    stripe.api_key = settings.STRIPE_API_KEY
+
+    try:
+        customer_id = org.stripe_customer_id
+        if not customer_id:
+            customer = stripe.Customer.create(
+                email=org.email,
+                name=org.name,
+                metadata={'org_id': str(org.id)},
+            )
+            customer_id = customer.id
+            org.stripe_customer_id = customer_id
+            org.save(update_fields=['stripe_customer_id', 'updated_at'])
+
+        checkout_session = stripe.checkout.Session.create(
+            mode='subscription',
+            customer=customer_id,
+            success_url=settings.STRIPE_SUCCESS_URL,
+            cancel_url=settings.STRIPE_CANCEL_URL,
+            metadata={'org_id': str(org.id), 'plan': plan_key},
+            line_items=[
+                {
+                    'quantity': 1,
+                    'price_data': {
+                        'currency': 'usd',
+                        'unit_amount': int(plan['monthly_price_usd'] * 100),
+                        'recurring': {'interval': 'month'},
+                        'product_data': {'name': f'MailCraft {plan_key.title()} Plan'},
+                    },
+                }
+            ],
+        )
+    except stripe.error.StripeError as exc:
+        return Response(
+            {'error': {'code': 'STRIPE_CHECKOUT_ERROR', 'message': str(exc)}},
+            status=status.HTTP_502_BAD_GATEWAY,
+        )
+
+    return Response({
+        'checkout_url': checkout_session.url,
+        'session_id': checkout_session.id,
+        'plan': plan_key,
+    })
+
+
+@api_view(['POST'])
+def stripe_webhook(request):
+    if not settings.STRIPE_API_KEY:
+        return Response({'detail': 'stripe not configured'}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+
+    stripe.api_key = settings.STRIPE_API_KEY
+    payload = request.body
+    signature = request.META.get('HTTP_STRIPE_SIGNATURE', '')
+
+    try:
+        event = stripe.Webhook.construct_event(payload, signature, settings.STRIPE_WEBHOOK_SECRET)
+    except Exception:
+        return Response({'detail': 'invalid webhook signature'}, status=status.HTTP_400_BAD_REQUEST)
+
+    event_type = event.get('type')
+    data = event.get('data', {}).get('object', {})
+
+    if event_type == 'checkout.session.completed':
+        metadata = data.get('metadata', {})
+        org_id = metadata.get('org_id')
+        plan_key = metadata.get('plan')
+        if org_id and plan_key in settings.PLAN_LIMITS:
+            try:
+                org = Organization.objects.get(pk=org_id)
+                org.plan = plan_key
+                org.stripe_customer_id = data.get('customer') or org.stripe_customer_id
+                org.stripe_subscription_id = data.get('subscription')
+                org.apply_plan_limits(save=False)
+                org.save(
+                    update_fields=[
+                        'plan',
+                        'stripe_customer_id',
+                        'stripe_subscription_id',
+                        'rendered_emails_limit',
+                        'storage_limit_bytes',
+                        'updated_at',
+                    ]
+                )
+            except Organization.DoesNotExist:
+                pass
+
+    if event_type == 'customer.subscription.deleted':
+        customer_id = data.get('customer')
+        if customer_id:
+            try:
+                org = Organization.objects.get(stripe_customer_id=customer_id)
+                org.plan = 'free'
+                org.stripe_subscription_id = None
+                org.apply_plan_limits(save=False)
+                org.save(update_fields=['plan', 'stripe_subscription_id', 'rendered_emails_limit', 'storage_limit_bytes', 'updated_at'])
+            except Organization.DoesNotExist:
+                pass
+
+    return Response({'received': True})
+
+
+class GoogleLoginView(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+    client_class = OAuth2Client

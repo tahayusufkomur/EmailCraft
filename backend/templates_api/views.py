@@ -1,5 +1,6 @@
 import uuid
 
+import boto3
 from django.conf import settings
 from rest_framework import status, viewsets
 from rest_framework.decorators import api_view
@@ -60,7 +61,7 @@ def presign_upload(request):
     data = serializer.validated_data
 
     # Check plan-based upload size limit
-    max_size = settings.MAX_UPLOAD_SIZE_PRO if org.is_pro else settings.MAX_UPLOAD_SIZE_FREE
+    max_size = org.max_upload_size_bytes
     if data['file_size'] > max_size:
         return Response(
             {'error': {'code': 'FILE_TOO_LARGE', 'message': f'Max file size is {max_size} bytes.'}},
@@ -74,17 +75,46 @@ def presign_upload(request):
             status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
         )
 
-    # Generate S3 key
+    # Generate S3 key: emailBuilder/<organization>/<file>
     file_ext = data['filename'].rsplit('.', 1)[-1] if '.' in data['filename'] else 'bin'
-    s3_key = f"uploads/{org.id}/{uuid.uuid4().hex}.{file_ext}"
+    s3_key = f"{settings.AWS_S3_KEY_PREFIX}/{org.id}/{uuid.uuid4().hex}.{file_ext}"
+    bucket_name = settings.AWS_S3_PUBLIC_BUCKET
+    if not bucket_name:
+        return Response(
+            {'error': {'code': 'S3_NOT_CONFIGURED', 'message': 'S3 public bucket is not configured.'}},
+            status=status.HTTP_503_SERVICE_UNAVAILABLE,
+        )
 
-    # In production this would use boto3 to generate a presigned URL.
-    # For now, return a mock response for development.
-    cdn_domain = settings.AWS_CLOUDFRONT_DOMAIN or f"https://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
-    file_url = f"{cdn_domain}/{s3_key}"
+    try:
+        s3_client = boto3.client(
+            's3',
+            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+            endpoint_url=settings.AWS_S3_ENDPOINT_URL,
+            region_name=settings.AWS_S3_REGION_NAME,
+        )
+        upload_url = s3_client.generate_presigned_url(
+            ClientMethod='put_object',
+            Params={
+                'Bucket': bucket_name,
+                'Key': s3_key,
+                'ContentType': data['content_type'],
+            },
+            ExpiresIn=settings.PRESIGNED_URL_EXPIRY,
+            HttpMethod='PUT',
+        )
+    except Exception as exc:
+        return Response(
+            {'error': {'code': 'S3_PRESIGN_ERROR', 'message': f'Unable to create upload URL: {exc}'}},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        )
 
-    # Create a placeholder upload_url (would be real presigned URL in production)
-    upload_url = f"https://{settings.AWS_STORAGE_BUCKET_NAME}.s3.{settings.AWS_S3_REGION_NAME}.amazonaws.com/{s3_key}"
+    if settings.AWS_CLOUDFRONT_DOMAIN:
+        file_url = f"{settings.AWS_CLOUDFRONT_DOMAIN.rstrip('/')}/{s3_key}"
+    elif settings.AWS_S3_ENDPOINT_URL:
+        file_url = f"{settings.AWS_S3_ENDPOINT_URL.rstrip('/')}/{bucket_name}/{s3_key}"
+    else:
+        file_url = f"https://{bucket_name}.s3.{settings.AWS_S3_REGION_NAME}.amazonaws.com/{s3_key}"
 
     # Record the image
     UploadedImage.objects.create(
@@ -112,10 +142,25 @@ def export_html(request):
     serializer = ExportRequestSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
 
+    org = request.org
+    if org.rendered_emails_count >= org.rendered_emails_limit:
+        return Response(
+            {
+                'error': {
+                    'code': 'EMAIL_RENDER_LIMIT_EXCEEDED',
+                    'message': 'Monthly rendered email limit exceeded for current plan.',
+                }
+            },
+            status=status.HTTP_402_PAYMENT_REQUIRED,
+        )
+
     json_data = serializer.validated_data['json_data']
     variables_mode = serializer.validated_data['variables_mode']
 
     result = render_email_html(json_data, variables_mode)
+
+    org.rendered_emails_count += 1
+    org.save(update_fields=['rendered_emails_count', 'updated_at'])
 
     return Response({
         'html': result['html'],

@@ -7,6 +7,7 @@ class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organization
         fields = ['id', 'name', 'email', 'plan', 'allowed_origins',
+                  'rendered_emails_count', 'rendered_emails_limit',
                   'storage_used_bytes', 'storage_limit_bytes', 'created_at']
         read_only_fields = ['id', 'created_at']
 
@@ -19,3 +20,7 @@ class SessionResponseSerializer(serializers.Serializer):
     token = serializers.CharField()
     expires_at = serializers.DateTimeField()
     config = serializers.DictField()
+
+
+class SubscribeRequestSerializer(serializers.Serializer):
+    plan = serializers.ChoiceField(choices=[choice[0] for choice in Organization.PLAN_CHOICES])

@@ -2,6 +2,7 @@ import hashlib
 import secrets
 import uuid
 
+from django.conf import settings
 from django.db import models
 
 
@@ -18,8 +19,12 @@ class Organization(models.Model):
     email = models.EmailField(unique=True)
     plan = models.CharField(max_length=20, choices=PLAN_CHOICES, default='free')
     allowed_origins = models.JSONField(default=list, blank=True)
+    rendered_emails_count = models.BigIntegerField(default=0)
+    rendered_emails_limit = models.BigIntegerField(default=1000)
     storage_used_bytes = models.BigIntegerField(default=0)
-    storage_limit_bytes = models.BigIntegerField(default=104857600)  # 100MB
+    storage_limit_bytes = models.BigIntegerField(default=1073741824)  # 1GB
+    stripe_customer_id = models.CharField(max_length=120, blank=True, null=True)
+    stripe_subscription_id = models.CharField(max_length=120, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -33,6 +38,21 @@ class Organization(models.Model):
     @property
     def is_pro(self):
         return self.plan in ('pro', 'enterprise')
+
+    @property
+    def plan_limits(self):
+        return settings.PLAN_LIMITS.get(self.plan, settings.PLAN_LIMITS['free'])
+
+    @property
+    def max_upload_size_bytes(self):
+        return self.plan_limits['max_upload_size_bytes']
+
+    def apply_plan_limits(self, save=True):
+        limits = self.plan_limits
+        self.rendered_emails_limit = limits['rendered_emails_limit']
+        self.storage_limit_bytes = limits['storage_limit_bytes']
+        if save:
+            self.save(update_fields=['rendered_emails_limit', 'storage_limit_bytes', 'updated_at'])
 
 
 class ApiKey(models.Model):

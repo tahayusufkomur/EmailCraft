@@ -8,7 +8,11 @@ from core.models import ApiKey
 # Paths that don't require API key authentication
 PUBLIC_PATHS = [
     '/admin/',
-    '/api/v1/auth/session',
+    '/api/v1/auth/',
+    '/api/v1/pages/landing',
+    '/api/v1/pages/pricing',
+    '/api/v1/pages/subscribe',
+    '/api/v1/billing/stripe/webhook',
 ]
 
 # Paths that are internal Django paths
