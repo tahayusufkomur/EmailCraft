@@ -5,7 +5,7 @@ interface ConfigState {
   apiKey: string;
   sessionToken: string;
   variables: Variable[];
-  hideLogo: boolean;
+  showLogo: boolean;
   showExportHtmlButton: boolean;
   themeMode: ThemeMode;
   plan: string;
@@ -20,7 +20,7 @@ export const useConfigStore = create<ConfigState>((set) => ({
   apiKey: '',
   sessionToken: '',
   variables: [],
-  hideLogo: false,
+  showLogo: true,
   showExportHtmlButton: true,
   themeMode: 'system',
   plan: 'free',

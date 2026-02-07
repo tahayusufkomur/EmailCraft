@@ -8,7 +8,7 @@ export interface Variable {
 export type ThemeMode = 'light' | 'dark' | 'system';
 
 export interface WidgetContext {
-  hideLogo?: boolean;
+  showLogo?: boolean;
   showExportHtmlButton?: boolean;
   themeMode?: ThemeMode;
 }

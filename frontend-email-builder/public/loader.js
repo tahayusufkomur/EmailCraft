@@ -19,10 +19,11 @@
      * @param {Array} [config.variables] - Variables available in the editor
      * @param {Object} [config.templateJson] - Pre-load a template
      * @param {Object} [config.context] - Widget UI context
-     * @param {boolean} [config.context.hideLogo=false] - Hide MailCraft logo/title in toolbar
+     * @param {boolean} [config.context.showLogo=true] - Show MailCraft logo/title in toolbar
      * @param {boolean} [config.context.showExportHtmlButton=true] - Show Export HTML button in toolbar
      * @param {'light'|'dark'|'system'} [config.context.themeMode='system'] - Theme mode for editor chrome
-     * @param {boolean} [config.hideLogo] - Deprecated alias for context.hideLogo
+     * @param {boolean} [config.showLogo] - Deprecated alias for context.showLogo
+     * @param {boolean} [config.hideLogo] - Deprecated alias for !context.showLogo
      * @param {boolean} [config.showExportHtmlButton] - Deprecated alias for context.showExportHtmlButton
      * @param {'light'|'dark'|'system'} [config.themeMode] - Deprecated alias for context.themeMode
      * @param {Function} [config.onSave] - Called when user saves
@@ -49,8 +50,14 @@
       this._config = config;
       var context = {};
       if (config.context && typeof config.context === 'object') {
-        if (typeof config.context.hideLogo === 'boolean') {
-          context.hideLogo = config.context.hideLogo;
+        if (typeof config.context.showLogo === 'boolean') {
+          context.showLogo = config.context.showLogo;
+        }
+        if (
+          typeof config.context.hideLogo === 'boolean' &&
+          typeof context.showLogo === 'undefined'
+        ) {
+          context.showLogo = !config.context.hideLogo;
         }
         if (typeof config.context.showExportHtmlButton === 'boolean') {
           context.showExportHtmlButton = config.context.showExportHtmlButton;
@@ -63,8 +70,11 @@
           context.themeMode = config.context.themeMode;
         }
       }
-      if (typeof config.hideLogo === 'boolean' && typeof context.hideLogo === 'undefined') {
-        context.hideLogo = config.hideLogo;
+      if (typeof config.showLogo === 'boolean' && typeof context.showLogo === 'undefined') {
+        context.showLogo = config.showLogo;
+      }
+      if (typeof config.hideLogo === 'boolean' && typeof context.showLogo === 'undefined') {
+        context.showLogo = !config.hideLogo;
       }
       if (
         typeof config.showExportHtmlButton === 'boolean' &&

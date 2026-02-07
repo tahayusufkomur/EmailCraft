@@ -15,10 +15,12 @@ type IncomingInitPayload = {
   variables?: unknown[];
   templateJson?: EmailTemplate;
   context?: {
+    showLogo?: unknown;
     hideLogo?: unknown;
     showExportHtmlButton?: unknown;
     themeMode?: unknown;
   };
+  showLogo?: unknown;
   hideLogo?: unknown;
   showExportHtmlButton?: unknown;
   themeMode?: unknown;

@@ -135,18 +135,6 @@
         font-weight: 600;
       }
 
-      .grid {
-        display: grid;
-        gap: 16px;
-        grid-template-columns: 1fr;
-      }
-
-      @media (max-width: 980px) {
-        .grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
       .frame-shell {
         border: 1px solid var(--border);
         border-radius: 12px;
@@ -163,32 +151,14 @@
         border: 0;
         display: block;
       }
-
-      #save-html {
-        width: 100%;
-        min-height: 150px;
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 10px;
-        resize: vertical;
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      }
-
-      #render-preview {
-        width: 100%;
-        min-height: 360px;
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        background: #fff;
-      }
     </style>
   </head>
   <body>
     <main>
       <h1>MailCraft Builder E2E Demo</h1>
       <p>
-        1) Launch iframe with your demo API key. 2) Edit and Save inside the builder.
-        3) Render with <code>{{ user_name }}</code> and <code>{{ user_email }}</code>.
+        Launch iframe with your demo API key, edit/save in the builder, and test variable-driven content
+        like <code>{{ user_name }}</code> and <code>{{ user_email }}</code>.
       </p>
 
       <section class="panel">
@@ -216,8 +186,8 @@
         </div>
         <div class="toggle-row">
           <label class="toggle">
-            <input id="hide-logo" type="checkbox" />
-            Hide logo
+            <input id="show-logo" type="checkbox" checked />
+            Show logo
           </label>
           <label class="toggle">
             <input id="show-export" type="checkbox" checked />
@@ -226,20 +196,13 @@
         </div>
         <div class="actions">
           <button id="launch-btn" class="btn-primary">Launch Builder Iframe</button>
-          <button id="render-btn" class="btn-secondary">Render Current Template</button>
         </div>
         <div id="status">Status: idle</div>
       </section>
 
-      <section class="grid panel">
+      <section class="panel">
         <div class="frame-shell">
           <iframe id="builder-frame" title="MailCraft Builder"></iframe>
-        </div>
-        <div>
-          <h3>Save Event HTML</h3>
-          <textarea id="save-html" readonly></textarea>
-          <h3>Rendered Preview</h3>
-          <iframe id="render-preview" title="Rendered Output"></iframe>
         </div>
       </section>
     </main>
@@ -248,22 +211,75 @@
       const apiKeyInput = document.getElementById('api-key');
       const userNameInput = document.getElementById('user-name');
       const userEmailInput = document.getElementById('user-email');
-      const hideLogoInput = document.getElementById('hide-logo');
+      const showLogoInput = document.getElementById('show-logo');
       const showExportInput = document.getElementById('show-export');
       const themeModeSelect = document.getElementById('theme-mode');
       const launchBtn = document.getElementById('launch-btn');
-      const renderBtn = document.getElementById('render-btn');
       const builderFrame = document.getElementById('builder-frame');
-      const saveHtml = document.getElementById('save-html');
-      const renderPreview = document.getElementById('render-preview');
       const statusEl = document.getElementById('status');
+      const SETTINGS_STORAGE_KEY = 'mailcraft_builder_demo_settings_v1';
+
+      function readSettingsFromUi() {
+        return {
+          apiKey: apiKeyInput.value,
+          userName: userNameInput.value,
+          userEmail: userEmailInput.value,
+          showLogo: showLogoInput.checked,
+          showExportHtmlButton: showExportInput.checked,
+          themeMode: themeModeSelect.value,
+        };
+      }
+
+      function persistSettings() {
+        try {
+          localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(readSettingsFromUi()));
+        } catch (_error) {
+          // Ignore persistence failures in constrained browser modes.
+        }
+      }
+
+      function restorePersistedSettings() {
+        try {
+          const raw = localStorage.getItem(SETTINGS_STORAGE_KEY);
+          if (!raw) return;
+          const parsed = JSON.parse(raw);
+          if (!parsed || typeof parsed !== 'object') return;
+
+          if (typeof parsed.apiKey === 'string') apiKeyInput.value = parsed.apiKey;
+          if (typeof parsed.userName === 'string') userNameInput.value = parsed.userName;
+          if (typeof parsed.userEmail === 'string') userEmailInput.value = parsed.userEmail;
+          if (typeof parsed.showLogo === 'boolean') {
+            showLogoInput.checked = parsed.showLogo;
+          } else if (typeof parsed.hideLogo === 'boolean') {
+            showLogoInput.checked = !parsed.hideLogo;
+          }
+          if (typeof parsed.showExportHtmlButton === 'boolean') {
+            showExportInput.checked = parsed.showExportHtmlButton;
+          }
+          if (
+            parsed.themeMode === 'light' ||
+            parsed.themeMode === 'dark' ||
+            parsed.themeMode === 'system'
+          ) {
+            themeModeSelect.value = parsed.themeMode;
+          }
+        } catch (_error) {
+          // Ignore invalid persisted payloads.
+        }
+      }
+
+      restorePersistedSettings();
 
       const params = new URLSearchParams(window.location.search);
-      apiKeyInput.value = params.get('apiKey') || '';
+      const apiKeyFromUrl = params.get('apiKey');
+      if (apiKeyFromUrl) {
+        apiKeyInput.value = apiKeyFromUrl;
+      }
       const themeModeFromUrl = params.get('themeMode');
       if (themeModeFromUrl === 'light' || themeModeFromUrl === 'dark' || themeModeFromUrl === 'system') {
         themeModeSelect.value = themeModeFromUrl;
       }
+      persistSettings();
 
       const demoTemplate = {
         version: 1,
@@ -357,7 +373,7 @@
               ],
               templateJson: state.templateJson,
               context: {
-                hideLogo: hideLogoInput.checked,
+                showLogo: showLogoInput.checked,
                 showExportHtmlButton: showExportInput.checked,
                 themeMode: themeModeSelect.value,
               },
@@ -388,52 +404,41 @@
         setStatus('iframe launched, waiting for MAILCRAFT_READY');
       }
 
-      async function renderTemplate() {
-        const key = apiKeyInput.value.trim();
-        if (!key) {
-          setStatus('missing API key');
-          return;
-        }
-
-        try {
-          const response = await fetch('/api/render', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-API-Key': key,
-            },
-            body: JSON.stringify({
-              json_data: state.templateJson,
-              variables: {
-                user_name: userNameInput.value,
-                user_email: userEmailInput.value,
-              },
-            }),
-          });
-
-          const payload = await response.json();
-          if (!response.ok) {
-            throw new Error(payload?.error?.message || `HTTP ${response.status}`);
-          }
-
-          renderPreview.srcdoc = payload.html;
-          setStatus('rendered successfully via /api/render');
-        } catch (error) {
-          setStatus(`render failed: ${error.message}`);
-        }
-      }
-
-      launchBtn.addEventListener('click', launchBuilder);
-      renderBtn.addEventListener('click', renderTemplate);
-      hideLogoInput.addEventListener('change', launchBuilder);
-      showExportInput.addEventListener('change', launchBuilder);
-      themeModeSelect.addEventListener('change', launchBuilder);
-      userNameInput.addEventListener('change', launchBuilder);
-      userEmailInput.addEventListener('change', launchBuilder);
-      apiKeyInput.addEventListener('change', launchBuilder);
+      launchBtn.addEventListener('click', () => {
+        persistSettings();
+        launchBuilder();
+      });
+      showLogoInput.addEventListener('change', () => {
+        persistSettings();
+        launchBuilder();
+      });
+      showExportInput.addEventListener('change', () => {
+        persistSettings();
+        launchBuilder();
+      });
+      themeModeSelect.addEventListener('change', () => {
+        persistSettings();
+        launchBuilder();
+      });
+      userNameInput.addEventListener('change', () => {
+        persistSettings();
+        launchBuilder();
+      });
+      userEmailInput.addEventListener('change', () => {
+        persistSettings();
+        launchBuilder();
+      });
+      apiKeyInput.addEventListener('change', () => {
+        persistSettings();
+        launchBuilder();
+      });
+      apiKeyInput.addEventListener('input', persistSettings);
+      userNameInput.addEventListener('input', persistSettings);
+      userEmailInput.addEventListener('input', persistSettings);
       apiKeyInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
           event.preventDefault();
+          persistSettings();
           launchBuilder();
         }
       });
@@ -450,9 +455,6 @@
         }
 
         if (data.type === 'MAILCRAFT_SAVE') {
-          if (data.payload?.html) {
-            saveHtml.value = data.payload.html;
-          }
           if (data.payload?.json) {
             state.templateJson = data.payload.json;
           }

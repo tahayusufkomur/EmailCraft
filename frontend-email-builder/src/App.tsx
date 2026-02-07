@@ -55,15 +55,17 @@ const asOptionalThemeMode = (value: unknown): ThemeMode | undefined => {
 
 const normalizeUiContext = (
   value: unknown,
-): { hideLogo?: boolean; showExportHtmlButton?: boolean; themeMode?: ThemeMode } => {
+): { showLogo?: boolean; showExportHtmlButton?: boolean; themeMode?: ThemeMode } => {
   if (!value || typeof value !== 'object') return {};
 
   const maybe = value as {
     context?: {
+      showLogo?: unknown;
       hideLogo?: unknown;
       showExportHtmlButton?: unknown;
       themeMode?: unknown;
     };
+    showLogo?: unknown;
     hideLogo?: unknown;
     showExportHtmlButton?: unknown;
     themeMode?: unknown;
@@ -72,9 +74,13 @@ const normalizeUiContext = (
   const embeddedContext =
     maybe.context && typeof maybe.context === 'object' ? maybe.context : {};
 
-  const hideLogo = asOptionalBoolean(
+  const showLogo = asOptionalBoolean(
+    embeddedContext.showLogo !== undefined ? embeddedContext.showLogo : maybe.showLogo,
+  );
+  const legacyHideLogo = asOptionalBoolean(
     embeddedContext.hideLogo !== undefined ? embeddedContext.hideLogo : maybe.hideLogo,
   );
+  const resolvedShowLogo = showLogo !== undefined ? showLogo : legacyHideLogo !== undefined ? !legacyHideLogo : undefined;
   const showExportHtmlButton = asOptionalBoolean(
     embeddedContext.showExportHtmlButton !== undefined
       ? embeddedContext.showExportHtmlButton
@@ -84,8 +90,8 @@ const normalizeUiContext = (
     embeddedContext.themeMode !== undefined ? embeddedContext.themeMode : maybe.themeMode,
   );
 
-  const output: { hideLogo?: boolean; showExportHtmlButton?: boolean; themeMode?: ThemeMode } = {};
-  if (hideLogo !== undefined) output.hideLogo = hideLogo;
+  const output: { showLogo?: boolean; showExportHtmlButton?: boolean; themeMode?: ThemeMode } = {};
+  if (resolvedShowLogo !== undefined) output.showLogo = resolvedShowLogo;
   if (showExportHtmlButton !== undefined) output.showExportHtmlButton = showExportHtmlButton;
   if (themeMode !== undefined) output.themeMode = themeMode;
   return output;
@@ -100,7 +106,7 @@ function App() {
   const isDirty = useEditorStore((s) => s.isDirty);
   const template = useEditorStore((s) => s.template);
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
-  const hideLogo = useConfigStore((s) => s.hideLogo);
+  const showLogo = useConfigStore((s) => s.showLogo);
   const showExportHtmlButton = useConfigStore((s) => s.showExportHtmlButton);
   const themeMode = useConfigStore((s) => s.themeMode);
   const setConfig = useConfigStore((s) => s.setConfig);
@@ -195,7 +201,7 @@ function App() {
   return (
     <div className={`app-shell ${isDarkChrome ? 'theme-dark' : 'theme-light'}`}>
       <div className="top-toolbar">
-        {!hideLogo && (
+        {showLogo && (
           <div className="brand">
             <div className="brand-title">MailCraft</div>
             <div className="brand-subtitle">Email Builder</div>
