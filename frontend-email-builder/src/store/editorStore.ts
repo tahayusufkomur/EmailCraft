@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import type { Editor } from '@tiptap/react';
 import type { Block, EmailTemplate, TemplateSettings } from '../types/blocks';
 
 const DEFAULT_SETTINGS: TemplateSettings = {
@@ -140,6 +141,7 @@ interface EditorState {
   selectedBlockId: string | null;
   isDirty: boolean;
   activeSection: 'header' | 'body' | 'footer';
+  tiptapEditor: Editor | null;
 
   // Actions
   addBlock: (block: Block, index?: number) => void;
@@ -149,6 +151,7 @@ interface EditorState {
   moveBlock: (fromIndex: number, toIndex: number) => void;
   moveBlockWithinColumn: (parentBlockId: string, columnId: string, fromIndex: number, toIndex: number) => void;
   moveBlockBetweenColumns: (blockId: string, sourceParentId: string, sourceColumnId: string, targetParentId: string, targetColumnId: string, targetIndex?: number) => void;
+  setTiptapEditor: (editor: Editor | null) => void;
   selectBlock: (id: string | null) => void;
   duplicateBlock: (id: string) => void;
   updateSettings: (settings: Partial<TemplateSettings>) => void;
@@ -167,6 +170,7 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   selectedBlockId: null,
   isDirty: false,
   activeSection: 'body',
+  tiptapEditor: null,
 
   addBlock: (block, index) => {
     set((state) => {
@@ -414,6 +418,8 @@ export const useEditorStore = create<EditorState>((set, get) => ({
       };
     });
   },
+
+  setTiptapEditor: (editor) => set({ tiptapEditor: editor }),
 
   selectBlock: (id) => set({ selectedBlockId: id }),
 

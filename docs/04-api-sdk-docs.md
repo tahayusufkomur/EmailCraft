@@ -78,9 +78,23 @@ MailCraft.init(config);
 // Load a template programmatically (after init)
 MailCraft.loadTemplate(templateJson);
 
-// Export current template
+// Export current template (HTML contains {{variable}} placeholders)
 MailCraft.export().then((output) => {
   // output.html, output.json
+});
+
+// Render a template with variable substitution via the API
+MailCraft.render({
+  templateId: "tpl_abc123",       // or use jsonData instead
+  variables: {
+    first_name: "Jane",
+    company_name: "Acme Inc",
+    unsubscribe_url: "https://example.com/unsub/abc"
+  }
+}).then((result) => {
+  // result.html            — fully rendered HTML, no {{placeholders}} remain
+  // result.warnings        — any rendering warnings
+  // result.variables_used  — ["first_name", "company_name", "unsubscribe_url"]
 });
 
 // Destroy the editor and clean up
@@ -142,6 +156,8 @@ All errors follow the same structure:
 | `STORAGE_LIMIT_EXCEEDED` | 413 | Org has exceeded storage quota |
 | `FILE_TOO_LARGE` | 413 | Upload exceeds max file size |
 | `INVALID_FILE_TYPE` | 415 | File type not allowed |
+| `MISSING_VARIABLES` | 400 | Template requires variables not provided in request |
+| `EMAIL_RENDER_LIMIT_EXCEEDED` | 402 | Monthly render limit exceeded for current plan |
 
 ---
 
@@ -348,6 +364,64 @@ Convert template JSON to email-compatible HTML.
 
 ---
 
+### POST /api/v1/render
+
+Render a template with variable substitution. This is the primary way to generate send-ready email HTML with dynamic content.
+
+**Request:**
+```json
+{
+  "template_id": "tpl_abc123",
+  "variables": {
+    "first_name": "Jane",
+    "company_name": "Acme Inc",
+    "unsubscribe_url": "https://example.com/unsub/abc"
+  }
+}
+```
+
+You can pass either `template_id` (loads from your saved templates) or `json_data` (inline template JSON), but not both.
+
+**Response (200):**
+```json
+{
+  "html": "<!DOCTYPE html><html>...",
+  "warnings": [],
+  "variables_used": ["first_name", "company_name", "unsubscribe_url"]
+}
+```
+
+**Error — missing variables (400):**
+
+If the template uses variables that aren't provided in the request, the API returns an error listing the missing keys:
+
+```json
+{
+  "error": {
+    "code": "MISSING_VARIABLES",
+    "message": "Missing required variables: coupon_code, product_name",
+    "missing_variables": ["coupon_code", "product_name"]
+  }
+}
+```
+
+**Variable key rules:**
+- Keys must match `[a-zA-Z_][a-zA-Z0-9_]*` (letters, digits, underscores only)
+- Flat keys only — no dot notation (`user_name`, not `user.name`)
+- Values are automatically HTML-escaped to prevent XSS
+
+**Supported block fields for variables:**
+
+| Block Type | Fields                        |
+|-----------|-------------------------------|
+| Text      | Rich text content (HTML)      |
+| Heading   | Heading text                  |
+| Button    | Button text, Link URL         |
+| Image     | Alt text, Link URL            |
+| HTML      | Raw HTML content              |
+
+---
+
 ## Rate Limits
 
 All responses include rate limit headers:
@@ -363,26 +437,66 @@ X-RateLimit-Reset: 1707312000
 | Templates (CRUD) | 60 req/min | 300 req/min |
 | Image upload | 10 req/min | 60 req/min |
 | HTML export | 30 req/min | 200 req/min |
+| Render | 30 req/min | 200 req/min |
 | Auth/session | 10 req/min | 10 req/min |
 
 ---
 
 ## Variable Usage in HTML Output
 
-The HTML export produces `{{variable_name}}` placeholders. The developer replaces them server-side before sending:
+### Option 1: Use the Render API (recommended)
+
+Call `POST /api/v1/render` and let MailCraft handle variable substitution, escaping, and HTML generation in one step:
 
 ```python
 # Python example
-html = mailcraft_html_output
-html = html.replace("{{first_name}}", customer.first_name)
-html = html.replace("{{unsubscribe_url}}", generate_unsubscribe_url(customer))
+import requests
+
+response = requests.post(
+    "https://api.mailcraft.io/api/v1/render",
+    headers={"X-API-Key": "mc_live_your_api_key_here"},
+    json={
+        "template_id": "tpl_abc123",
+        "variables": {
+            "first_name": customer.first_name,
+            "unsubscribe_url": generate_unsubscribe_url(customer),
+        }
+    }
+)
+html = response.json()["html"]
 send_email(to=customer.email, html_body=html)
 ```
 
 ```javascript
 // Node.js example
-let html = mailcraftOutput.html;
-html = html.replace(/\{\{first_name\}\}/g, customer.firstName);
-html = html.replace(/\{\{unsubscribe_url\}\}/g, generateUnsubscribeUrl(customer));
+const response = await fetch("https://api.mailcraft.io/api/v1/render", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "X-API-Key": "mc_live_your_api_key_here",
+  },
+  body: JSON.stringify({
+    template_id: "tpl_abc123",
+    variables: {
+      first_name: customer.firstName,
+      unsubscribe_url: generateUnsubscribeUrl(customer),
+    },
+  }),
+});
+const { html } = await response.json();
 await sendEmail({ to: customer.email, html });
 ```
+
+### Option 2: Manual replacement
+
+The export endpoint (`POST /api/v1/export/html`) produces HTML with `{{variable_name}}` placeholders. You can replace them yourself:
+
+```python
+# Python example
+html = mailcraft_html_output
+html = html.replace("{{first_name}}", escape(customer.first_name))
+html = html.replace("{{unsubscribe_url}}", customer.unsubscribe_url)
+send_email(to=customer.email, html_body=html)
+```
+
+> **Warning:** If you do manual replacement, make sure to HTML-escape variable values to prevent XSS. The Render API handles this automatically.

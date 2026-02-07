@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '../ui/button';
 import { useConfigStore } from '../../store/configStore';
 
@@ -9,11 +9,24 @@ interface Props {
 export function VariableInserter({ onInsert }: Props) {
   const variables = useConfigStore((s) => s.variables);
   const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Close on outside click
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleClick = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [isOpen]);
 
   if (variables.length === 0) return null;
 
   return (
-    <div style={{ position: 'relative', display: 'inline-block' }}>
+    <div ref={containerRef} style={{ position: 'relative', display: 'inline-block' }}>
       <Button
         size="sm"
         variant="outline"
@@ -25,7 +38,7 @@ export function VariableInserter({ onInsert }: Props) {
         <div style={{
           position: 'absolute', top: '100%', left: 0, background: 'white',
           border: '1px solid #e2e8f0', borderRadius: 4, boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-          zIndex: 100, minWidth: 180, marginTop: 4,
+          zIndex: 100, minWidth: 200, marginTop: 4,
         }}>
           {variables.map((v) => (
             <div
@@ -42,7 +55,12 @@ export function VariableInserter({ onInsert }: Props) {
               }}
             >
               <div style={{ fontWeight: 500 }}>{v.label}</div>
-              <div style={{ fontSize: 11, color: '#718096' }}>{`{{${v.key}}}`}</div>
+              <div style={{ fontSize: 11, color: '#718096', display: 'flex', justifyContent: 'space-between' }}>
+                <span>{`{{${v.key}}}`}</span>
+                {v.defaultValue && (
+                  <span style={{ fontStyle: 'italic' }}>default: {v.defaultValue}</span>
+                )}
+              </div>
             </div>
           ))}
         </div>

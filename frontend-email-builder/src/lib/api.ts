@@ -1,4 +1,4 @@
-import type { ExportResponse, PresignResponse, SessionResponse, TemplateListItem } from '../types/api';
+import type { ExportResponse, PresignResponse, RenderRequest, RenderResponse, SessionResponse, TemplateListItem } from '../types/api';
 
 const BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
@@ -61,6 +61,12 @@ export const api = {
 
   exportHtml: (data: { json_data: object; variables_mode?: string }) =>
     request<ExportResponse>('/export/html', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  renderTemplate: (data: RenderRequest) =>
+    request<RenderResponse>('/render', {
       method: 'POST',
       body: JSON.stringify(data),
     }),

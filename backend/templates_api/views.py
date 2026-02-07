@@ -11,11 +11,16 @@ from templates_api.serializers import (
     ExportRequestSerializer,
     GalleryTemplateSerializer,
     PresignRequestSerializer,
+    RenderRequestSerializer,
     TemplateCreateSerializer,
     TemplateDetailSerializer,
     TemplateListSerializer,
 )
-from templates_api.export_engine import render_email_html
+from templates_api.export_engine import (
+    extract_variable_keys,
+    render_email_html,
+    substitute_variables,
+)
 
 
 class TemplateViewSet(viewsets.ModelViewSet):
@@ -165,4 +170,70 @@ def export_html(request):
     return Response({
         'html': result['html'],
         'warnings': result.get('warnings', []),
+    })
+
+
+@api_view(['POST'])
+def render_template(request):
+    """POST /api/v1/render — render a template with variable substitution."""
+    serializer = RenderRequestSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+
+    org = request.org
+
+    # Rate limit check
+    if org.rendered_emails_count >= org.rendered_emails_limit:
+        return Response(
+            {
+                'error': {
+                    'code': 'EMAIL_RENDER_LIMIT_EXCEEDED',
+                    'message': 'Monthly rendered email limit exceeded for current plan.',
+                }
+            },
+            status=status.HTTP_402_PAYMENT_REQUIRED,
+        )
+
+    # Resolve json_data
+    template_id = serializer.validated_data.get('template_id')
+    if template_id:
+        try:
+            template_obj = Template.objects.for_org(org).get(pk=template_id)
+        except Template.DoesNotExist:
+            return Response(
+                {'error': {'code': 'TEMPLATE_NOT_FOUND', 'message': 'Template not found.'}},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+        json_data = template_obj.json_data
+    else:
+        json_data = serializer.validated_data['json_data']
+
+    variables = serializer.validated_data['variables']
+
+    # Strict mode: all used variables must be provided
+    used_keys = extract_variable_keys(json_data)
+    provided_keys = set(variables.keys())
+    missing_keys = used_keys - provided_keys
+    if missing_keys:
+        return Response(
+            {
+                'error': {
+                    'code': 'MISSING_VARIABLES',
+                    'message': f'Missing required variables: {", ".join(sorted(missing_keys))}',
+                    'missing_variables': sorted(missing_keys),
+                }
+            },
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    # Substitute and render
+    substituted_data = substitute_variables(json_data, variables)
+    result = render_email_html(substituted_data)
+
+    org.rendered_emails_count += 1
+    org.save(update_fields=['rendered_emails_count', 'updated_at'])
+
+    return Response({
+        'html': result['html'],
+        'warnings': result.get('warnings', []),
+        'variables_used': sorted(used_keys),
     })

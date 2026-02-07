@@ -8,8 +8,118 @@ Converts template JSON to email-compatible HTML following strict email client ru
 - Web-safe fonts
 """
 
+import copy
 import html as html_module
+import re
 
+
+# ---------------------------------------------------------------------------
+# Variable handling
+# ---------------------------------------------------------------------------
+
+_VAR_PATTERN = re.compile(r'\{\{([a-zA-Z_][a-zA-Z0-9_]*)\}\}')
+_VALID_KEY_PATTERN = re.compile(r'^[a-zA-Z_][a-zA-Z0-9_]*$')
+
+
+def validate_variable_key(key):
+    """Check that a variable key contains only letters, digits, and underscores."""
+    return bool(_VALID_KEY_PATTERN.match(key))
+
+
+def extract_variable_keys(json_data):
+    """Scan all blocks and return set of variable keys used in the template."""
+    keys = set()
+    for section_name in ('header', 'body', 'footer'):
+        blocks = json_data.get(section_name, {}).get('blocks', [])
+        _extract_keys_from_blocks(blocks, keys)
+    return keys
+
+
+def _extract_keys_from_blocks(blocks, keys):
+    for block in blocks:
+        block_type = block.get('type', '')
+        data = block.get('data', {})
+
+        fields_to_scan = []
+        if block_type == 'text':
+            fields_to_scan = [data.get('html', '')]
+        elif block_type == 'heading':
+            fields_to_scan = [data.get('text', '')]
+        elif block_type == 'button':
+            fields_to_scan = [data.get('text', ''), data.get('url', '')]
+        elif block_type == 'image':
+            fields_to_scan = [data.get('alt', ''), data.get('link', '')]
+        elif block_type == 'html':
+            fields_to_scan = [data.get('html', '')]
+        elif block_type == 'columns':
+            for col in data.get('columns', []):
+                _extract_keys_from_blocks(col.get('blocks', []), keys)
+
+        for field_value in fields_to_scan:
+            if field_value:
+                keys.update(_VAR_PATTERN.findall(field_value))
+
+
+def substitute_variables(json_data, variables):
+    """
+    Substitute ``{{key}}`` placeholders in all block data fields.
+
+    Returns a new json_data dict with substitutions applied.
+    For ``data.html`` fields (text and html blocks) the values are HTML-escaped
+    since the export engine passes them through raw.  For other fields
+    (heading text, button text/url, image alt/link) the values are inserted raw
+    because the export engine already escapes those.
+    """
+    result = copy.deepcopy(json_data)
+    for section_name in ('header', 'body', 'footer'):
+        section = result.get(section_name, {})
+        blocks = section.get('blocks', [])
+        _substitute_in_blocks(blocks, variables)
+    return result
+
+
+def _substitute_in_blocks(blocks, variables):
+    for block in blocks:
+        block_type = block.get('type', '')
+        data = block.get('data', {})
+
+        if block_type == 'text':
+            data['html'] = _replace_vars(data.get('html', ''), variables, escape=True)
+        elif block_type == 'heading':
+            data['text'] = _replace_vars(data.get('text', ''), variables, escape=False)
+        elif block_type == 'button':
+            data['text'] = _replace_vars(data.get('text', ''), variables, escape=False)
+            data['url'] = _replace_vars(data.get('url', ''), variables, escape=False)
+        elif block_type == 'image':
+            data['alt'] = _replace_vars(data.get('alt', ''), variables, escape=False)
+            data['link'] = _replace_vars(data.get('link', ''), variables, escape=False)
+        elif block_type == 'html':
+            data['html'] = _replace_vars(data.get('html', ''), variables, escape=True)
+        elif block_type == 'columns':
+            for col in data.get('columns', []):
+                _substitute_in_blocks(col.get('blocks', []), variables)
+
+
+def _replace_vars(text, variables, escape=True):
+    """Replace ``{{key}}`` with the variable value."""
+    if not text:
+        return text
+
+    def replacer(match):
+        key = match.group(1)
+        if key not in variables:
+            return match.group(0)  # leave unchanged if not provided
+        value = str(variables[key])
+        if escape:
+            return html_module.escape(value)
+        return value
+
+    return _VAR_PATTERN.sub(replacer, text)
+
+
+# ---------------------------------------------------------------------------
+# HTML rendering
+# ---------------------------------------------------------------------------
 
 def render_email_html(json_data, variables_mode='placeholders'):
     """
@@ -292,6 +402,58 @@ def _render_social_block(block, ctx):
 </tr>"""
 
 
+def _render_heading_block(block, ctx):
+    data = block.get('data', {})
+    style = block.get('style', {})
+    padding = _padding_str(style.get('padding', {}))
+    alignment = style.get('alignment', 'left')
+    level = data.get('level', 2)
+    text = html_module.escape(data.get('text', ''))
+    font_size = style.get('fontSize', 28)
+    font_weight = style.get('fontWeight', 700)
+    color = style.get('color', ctx['default_color'])
+    font_family = style.get('fontFamily', ctx['default_font'])
+    bg = style.get('backgroundColor')
+    bg_style = f' background-color: {bg};' if bg else ''
+    tag = f'h{level}'
+
+    return f"""<tr>
+  <td style="padding: {padding}; text-align: {alignment};{bg_style}">
+    <{tag} style="margin: 0; font-family: {font_family}; font-size: {font_size}px; line-height: {int(font_size * 1.2)}px; color: {color}; font-weight: {font_weight};">
+      {text}
+    </{tag}>
+  </td>
+</tr>"""
+
+
+def _render_spacer_block(block, ctx):
+    style = block.get('style', {})
+    height = max(0, style.get('height', 0))
+    bg = style.get('backgroundColor')
+    bg_style = f' background-color: {bg};' if bg else ''
+
+    return f"""<tr>
+  <td style="line-height: 0; font-size: 0; height: {height}px;{bg_style}">
+    &nbsp;
+  </td>
+</tr>"""
+
+
+def _render_html_block(block, ctx):
+    data = block.get('data', {})
+    style = block.get('style', {})
+    padding = _padding_str(style.get('padding', {}))
+    alignment = style.get('alignment', 'left')
+    bg = style.get('backgroundColor')
+    bg_style = f' background-color: {bg};' if bg else ''
+
+    return f"""<tr>
+  <td style="padding: {padding}; text-align: {alignment};{bg_style}">
+    {data.get('html', '')}
+  </td>
+</tr>"""
+
+
 def _padding_str(padding):
     if not padding:
         return '0'
@@ -311,4 +473,7 @@ BLOCK_RENDERERS = {
     'divider': _render_divider_block,
     'columns': _render_columns_block,
     'social': _render_social_block,
+    'heading': _render_heading_block,
+    'spacer': _render_spacer_block,
+    'html': _render_html_block,
 }

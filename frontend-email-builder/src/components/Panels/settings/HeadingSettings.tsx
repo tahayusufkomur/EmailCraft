@@ -1,7 +1,10 @@
+import { useRef } from 'react';
 import type { HeadingBlock } from '../../../types/blocks';
 import { useEditorStore } from '../../../store/editorStore';
 import { AlignmentPicker } from './AlignmentPicker';
 import { SpacingControl } from './SpacingControl';
+import { VariableInserter } from '../VariableInserter';
+import { insertAtCursor, restoreCursor } from '../../../lib/variableUtils';
 
 interface Props {
   block: HeadingBlock;
@@ -17,6 +20,7 @@ const WEB_SAFE_FONTS = [
 
 export function HeadingSettings({ block }: Props) {
   const updateBlock = useEditorStore((s) => s.updateBlock);
+  const textInputRef = useRef<HTMLInputElement>(null);
 
   const updateData = (data: Partial<HeadingBlock['data']>) => {
     updateBlock(block.id, { data: { ...block.data, ...data } } as Partial<HeadingBlock>);
@@ -26,6 +30,12 @@ export function HeadingSettings({ block }: Props) {
     updateBlock(block.id, { style: { ...block.style, ...style } });
   };
 
+  const handleInsertVariable = (variable: string) => {
+    const { newValue, cursorPos } = insertAtCursor(textInputRef.current, block.data.text, variable);
+    updateData({ text: newValue });
+    restoreCursor(textInputRef.current, cursorPos);
+  };
+
   return (
     <div>
       <div className="panel-section">
@@ -33,11 +43,13 @@ export function HeadingSettings({ block }: Props) {
         <div className="form-group">
           <label>Text</label>
           <input
+            ref={textInputRef}
             type="text"
             value={block.data.text}
             onChange={(e) => updateData({ text: e.target.value })}
           />
         </div>
+        <VariableInserter onInsert={handleInsertVariable} />
         <div className="form-group">
           <label>Level</label>
           <select

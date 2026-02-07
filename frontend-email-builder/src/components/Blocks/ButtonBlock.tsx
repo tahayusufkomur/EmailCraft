@@ -1,4 +1,5 @@
 import type { ButtonBlock as ButtonBlockType } from '../../types/blocks';
+import { highlightVariables } from '../../lib/variableUtils';
 
 interface Props {
   block: ButtonBlockType;
@@ -35,7 +36,7 @@ export function ButtonBlock({ block }: Props) {
           textAlign: 'center',
         }}
       >
-        {text || 'Click Here'}
+        {highlightVariables(text || 'Click Here')}
       </span>
     </div>
   );

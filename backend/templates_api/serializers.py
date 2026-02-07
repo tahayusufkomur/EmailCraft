@@ -74,3 +74,44 @@ class ExportRequestSerializer(serializers.Serializer):
         choices=['placeholders', 'defaults'],
         default='placeholders',
     )
+
+
+class RenderRequestSerializer(serializers.Serializer):
+    template_id = serializers.UUIDField(required=False)
+    json_data = serializers.JSONField(required=False)
+    variables = serializers.DictField(
+        child=serializers.CharField(max_length=10000),
+        required=True,
+    )
+
+    def validate_variables(self, value):
+        from templates_api.export_engine import validate_variable_key
+
+        invalid_keys = [k for k in value if not validate_variable_key(k)]
+        if invalid_keys:
+            raise serializers.ValidationError(
+                f"Invalid variable key(s): {', '.join(invalid_keys)}. "
+                "Keys must contain only letters, digits, and underscores, "
+                "and start with a letter or underscore."
+            )
+        return value
+
+    def validate_json_data(self, value):
+        if value is not None:
+            size = sys.getsizeof(json.dumps(value))
+            if size > settings.MAX_TEMPLATE_SIZE:
+                raise serializers.ValidationError(
+                    f"Template JSON exceeds maximum size of {settings.MAX_TEMPLATE_SIZE} bytes."
+                )
+        return value
+
+    def validate(self, attrs):
+        if not attrs.get('template_id') and not attrs.get('json_data'):
+            raise serializers.ValidationError(
+                "Either 'template_id' or 'json_data' must be provided."
+            )
+        if attrs.get('template_id') and attrs.get('json_data'):
+            raise serializers.ValidationError(
+                "Provide either 'template_id' or 'json_data', not both."
+            )
+        return attrs

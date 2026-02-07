@@ -2,6 +2,7 @@ import type { TextBlock } from '../../../types/blocks';
 import { useEditorStore } from '../../../store/editorStore';
 import { SpacingControl } from './SpacingControl';
 import { AlignmentPicker } from './AlignmentPicker';
+import { VariableInserter } from '../VariableInserter';
 
 interface Props {
   block: TextBlock;
@@ -9,9 +10,21 @@ interface Props {
 
 export function TextSettings({ block }: Props) {
   const updateBlock = useEditorStore((s) => s.updateBlock);
+  const tiptapEditor = useEditorStore((s) => s.tiptapEditor);
+
+  const handleInsertVariable = (variable: string) => {
+    if (tiptapEditor) {
+      tiptapEditor.chain().focus().insertContent(variable).run();
+    }
+  };
 
   return (
     <div>
+      <div className="panel-section">
+        <div className="panel-section-title">Variables</div>
+        <VariableInserter onInsert={handleInsertVariable} />
+      </div>
+
       <div className="panel-section">
         <div className="panel-section-title">Alignment</div>
         <AlignmentPicker

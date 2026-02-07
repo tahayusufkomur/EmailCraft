@@ -36,3 +36,15 @@ export interface ExportResponse {
   html: string;
   warnings: string[];
 }
+
+export interface RenderRequest {
+  template_id?: string;
+  json_data?: object;
+  variables: Record<string, string>;
+}
+
+export interface RenderResponse {
+  html: string;
+  warnings: string[];
+  variables_used: string[];
+}

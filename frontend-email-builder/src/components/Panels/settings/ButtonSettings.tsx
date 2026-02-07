@@ -1,6 +1,9 @@
+import { useRef } from 'react';
 import type { ButtonBlock } from '../../../types/blocks';
 import { useEditorStore } from '../../../store/editorStore';
 import { AlignmentPicker } from './AlignmentPicker';
+import { VariableInserter } from '../VariableInserter';
+import { insertAtCursor, restoreCursor } from '../../../lib/variableUtils';
 
 interface Props {
   block: ButtonBlock;
@@ -16,6 +19,8 @@ const WEB_SAFE_FONTS = [
 
 export function ButtonSettings({ block }: Props) {
   const updateBlock = useEditorStore((s) => s.updateBlock);
+  const textInputRef = useRef<HTMLInputElement>(null);
+  const urlInputRef = useRef<HTMLInputElement>(null);
 
   const updateData = (data: Partial<ButtonBlock['data']>) => {
     updateBlock(block.id, { data: { ...block.data, ...data } } as Partial<ButtonBlock>);
@@ -25,17 +30,31 @@ export function ButtonSettings({ block }: Props) {
     updateBlock(block.id, { style: { ...block.style, ...style } });
   };
 
+  const handleInsertTextVariable = (variable: string) => {
+    const { newValue, cursorPos } = insertAtCursor(textInputRef.current, block.data.text, variable);
+    updateData({ text: newValue });
+    restoreCursor(textInputRef.current, cursorPos);
+  };
+
+  const handleInsertUrlVariable = (variable: string) => {
+    const { newValue, cursorPos } = insertAtCursor(urlInputRef.current, block.data.url, variable);
+    updateData({ url: newValue });
+    restoreCursor(urlInputRef.current, cursorPos);
+  };
+
   return (
     <div>
       <div className="panel-section">
         <div className="panel-section-title">Button Content</div>
         <div className="form-group">
           <label>Button Text</label>
-          <input type="text" value={block.data.text} onChange={(e) => updateData({ text: e.target.value })} />
+          <input ref={textInputRef} type="text" value={block.data.text} onChange={(e) => updateData({ text: e.target.value })} />
+          <VariableInserter onInsert={handleInsertTextVariable} />
         </div>
         <div className="form-group">
           <label>Link URL</label>
-          <input type="url" value={block.data.url} onChange={(e) => updateData({ url: e.target.value })} />
+          <input ref={urlInputRef} type="url" value={block.data.url} onChange={(e) => updateData({ url: e.target.value })} />
+          <VariableInserter onInsert={handleInsertUrlVariable} />
         </div>
       </div>
 

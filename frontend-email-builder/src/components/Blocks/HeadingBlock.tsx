@@ -1,4 +1,5 @@
 import type { HeadingBlock as HeadingBlockType } from '../../types/blocks';
+import { highlightVariables } from '../../lib/variableUtils';
 
 interface Props {
   block: HeadingBlockType;
@@ -28,7 +29,7 @@ export function HeadingBlock({ block }: Props) {
           lineHeight: 1.2,
         }}
       >
-        {text || 'Your heading goes here'}
+        {highlightVariables(text || 'Your heading goes here')}
       </Tag>
     </div>
   );

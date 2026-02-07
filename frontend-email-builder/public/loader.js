@@ -2,6 +2,7 @@
   'use strict';
 
   var EDITOR_BASE_URL = 'https://app.mailcraft.io/builder';
+  var API_BASE_URL = 'https://api.mailcraft.io';
   var EDITOR_ORIGIN = new URL(EDITOR_BASE_URL).origin;
 
   var MailCraft = {
@@ -145,6 +146,37 @@
           },
           EDITOR_ORIGIN
         );
+      });
+    },
+
+    /**
+     * Render a template with variables via API.
+     * @param {Object} options
+     * @param {string} [options.templateId] - Template ID to render
+     * @param {Object} [options.jsonData] - Template JSON to render inline
+     * @param {Object} options.variables - Key-value variable substitutions
+     * @returns {Promise<{html: string, warnings: string[], variables_used: string[]}>}
+     */
+    render: function (options) {
+      if (!this._config || !this._config.apiKey) {
+        return Promise.reject(new Error('[MailCraft] Not initialized. Call init() first.'));
+      }
+      var body = { variables: options.variables || {} };
+      if (options.templateId) body.template_id = options.templateId;
+      if (options.jsonData) body.json_data = options.jsonData;
+
+      return fetch(API_BASE_URL + '/api/v1/render', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-Key': this._config.apiKey,
+        },
+        body: JSON.stringify(body),
+      }).then(function (res) {
+        if (!res.ok) {
+          return res.json().then(function (err) { throw err; });
+        }
+        return res.json();
       });
     },
 

@@ -1,7 +1,9 @@
 import { useState, useMemo } from 'react';
 import { Button } from '../ui/button';
 import { useEditorStore } from '../../store/editorStore';
+import { useConfigStore } from '../../store/configStore';
 import { exportToHtml } from '../../lib/htmlExporter';
+import { substituteVariablesClientSide } from '../../lib/variableUtils';
 
 interface Props {
   onClose: () => void;
@@ -11,9 +13,22 @@ type ViewMode = 'desktop' | 'mobile';
 
 export function PreviewModal({ onClose }: Props) {
   const [viewMode, setViewMode] = useState<ViewMode>('desktop');
+  const [showDefaults, setShowDefaults] = useState(false);
   const template = useEditorStore((s) => s.template);
+  const variables = useConfigStore((s) => s.variables);
 
-  const html = useMemo(() => exportToHtml(template, 'placeholders'), [template]);
+  const html = useMemo(() => {
+    if (showDefaults && variables.length > 0) {
+      const defaults: Record<string, string> = {};
+      for (const v of variables) {
+        defaults[v.key] = v.defaultValue || `[${v.label}]`;
+      }
+      const substituted = substituteVariablesClientSide(template, defaults);
+      return exportToHtml(substituted, 'defaults');
+    }
+    return exportToHtml(template, 'placeholders');
+  }, [template, showDefaults, variables]);
+
   const width = viewMode === 'desktop' ? 640 : 375;
 
   return (
@@ -50,6 +65,15 @@ export function PreviewModal({ onClose }: Props) {
             >
               Mobile
             </Button>
+            {variables.length > 0 && (
+              <Button
+                size="sm"
+                variant={showDefaults ? 'default' : 'outline'}
+                onClick={() => setShowDefaults(!showDefaults)}
+              >
+                {showDefaults ? 'Show Placeholders' : 'Show Sample Data'}
+              </Button>
+            )}
           </div>
           <Button size="sm" variant="ghost" onClick={onClose}>
             &times; Close
