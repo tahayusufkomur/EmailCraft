@@ -16,6 +16,7 @@ from templates_api.serializers import (
     TemplateCreateSerializer,
     TemplateDetailSerializer,
     TemplateListSerializer,
+    UploadedImageListSerializer,
 )
 from templates_api.export_engine import (
     extract_variable_keys,
@@ -55,6 +56,14 @@ def gallery_list(request):
 
     serializer = GalleryTemplateSerializer(queryset, many=True)
     return Response({'data': serializer.data})
+
+
+@api_view(['GET'])
+def media_list(request):
+    """GET /api/v1/media — list uploaded media for the current organization."""
+    queryset = UploadedImage.objects.for_org(request.org).order_by('-created_at')
+    serializer = UploadedImageListSerializer(queryset, many=True)
+    return Response({'results': serializer.data})
 
 
 @api_view(['POST'])

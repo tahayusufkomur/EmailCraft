@@ -504,6 +504,98 @@
   background: var(--accent-hover);
 }
 
+.media-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.56);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.media-modal-panel {
+  width: min(1080px, 95vw);
+  max-height: 86vh;
+  overflow-y: auto;
+  background: var(--chrome-surface);
+  border: 1px solid var(--chrome-border);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: var(--shadow-lg);
+}
+
+.media-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  color: var(--chrome-text-primary);
+}
+
+.media-modal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.media-modal-error {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.08);
+  color: #dc2626;
+  font-size: 12px;
+}
+
+.media-modal-empty {
+  border: 1px dashed var(--chrome-border);
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+  color: var(--chrome-text-muted);
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 12px;
+}
+
+.media-card {
+  border: 1px solid var(--chrome-border);
+  border-radius: 10px;
+  background: var(--chrome-surface-elevated);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.media-card-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--chrome-border);
+  background: var(--chrome-surface);
+}
+
+.media-card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--chrome-text-muted);
+}
+
+.media-card-actions {
+  display: flex;
+  gap: 8px;
+}
+
 /* Block content styles */
 .text-block-content {
   min-height: 40px;
@@ -542,10 +634,21 @@
   padding: 40px;
   background: var(--surface-elevated);
   color: var(--text-muted);
-  cursor: pointer;
+  cursor: default;
   border: 2px dashed var(--border-color);
   margin: 10px 20px;
   border-radius: 8px;
+}
+
+.image-block-placeholder-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.image-block-error {
+  color: #dc2626;
+  font-size: 12px;
 }
 
 .button-block-content {

@@ -7,6 +7,7 @@ class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organization
         fields = ['id', 'name', 'email', 'plan', 'allowed_origins',
+                  'show_logo', 'show_export_html_button', 'theme_mode',
                   'rendered_emails_count', 'rendered_emails_limit',
                   'storage_used_bytes', 'storage_limit_bytes', 'created_at']
         read_only_fields = ['id', 'created_at']
@@ -58,21 +59,37 @@ class SiteRegisterSerializer(serializers.Serializer):
     organization_name = serializers.CharField(max_length=255)
 
 
+class SiteLoginSerializer(serializers.Serializer):
+    identifier = serializers.CharField(max_length=255)
+    password = serializers.CharField(write_only=True, min_length=1)
+
+
 class SiteOrganizationCreateSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=255)
-    email = serializers.EmailField()
     allowed_origins = serializers.ListField(
         child=serializers.URLField(),
         required=False,
         default=list,
     )
+    show_logo = serializers.BooleanField(required=False, default=True)
+    show_export_html_button = serializers.BooleanField(required=False, default=True)
+    theme_mode = serializers.ChoiceField(
+        choices=[choice[0] for choice in Organization.THEME_MODE_CHOICES],
+        required=False,
+        default='system',
+    )
 
 
 class SiteOrganizationUpdateSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=255, required=False)
-    email = serializers.EmailField(required=False)
     allowed_origins = serializers.ListField(
         child=serializers.URLField(),
+        required=False,
+    )
+    show_logo = serializers.BooleanField(required=False)
+    show_export_html_button = serializers.BooleanField(required=False)
+    theme_mode = serializers.ChoiceField(
+        choices=[choice[0] for choice in Organization.THEME_MODE_CHOICES],
         required=False,
     )
 

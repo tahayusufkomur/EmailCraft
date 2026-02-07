@@ -1,7 +1,14 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from templates_api.views import TemplateViewSet, export_html, gallery_list, presign_upload, render_template
+from templates_api.views import (
+    TemplateViewSet,
+    export_html,
+    gallery_list,
+    media_list,
+    presign_upload,
+    render_template,
+)
 
 router = DefaultRouter()
 router.register('templates', TemplateViewSet, basename='template')
@@ -9,6 +16,7 @@ router.register('templates', TemplateViewSet, basename='template')
 urlpatterns = [
     path('', include(router.urls)),
     path('gallery', gallery_list, name='gallery-list'),
+    path('media', media_list, name='media-list'),
     path('upload/presign', presign_upload, name='upload-presign'),
     path('export/html', export_html, name='export-html'),
     path('render', render_template, name='render-template'),

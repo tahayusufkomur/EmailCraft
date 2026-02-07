@@ -1,6 +1,5 @@
 import type {
   LandingResponse,
-  LoginResponse,
   PricingResponse,
   SiteApiKeyCreateResponse,
   SiteDashboardResponse,
@@ -9,6 +8,7 @@ import type {
   SiteOrganizationsResponse,
   SiteRegisterResponse,
   SubscribeResponse,
+  ThemeMode,
 } from '../types/api';
 
 const BASE_URL = import.meta.env.VITE_API_URL || '/api';
@@ -58,21 +58,20 @@ export const api = {
   }),
 
   login: async (identifier: string, password: string) => {
-    const data = await request<LoginResponse>('/auth/login', {
+    const data = await request<{ token: string }>('/site/login', {
       method: 'POST',
-      body: JSON.stringify({ username: identifier, email: identifier, password }),
+      body: JSON.stringify({ identifier, password }),
     });
 
-    const token = data.key || data.token;
-    if (!token) {
+    if (!data.token) {
       throw new Error('Login succeeded but no token was returned.');
     }
 
-    return token;
+    return data.token;
   },
 
   logout: (token: string) =>
-    request('/auth/logout', { method: 'POST', body: JSON.stringify({}) }, token),
+    request('/site/logout', { method: 'POST', body: JSON.stringify({}) }, token),
 
   getMe: (token: string) => request<SiteMeResponse>('/site/me', {}, token),
 
@@ -85,8 +84,10 @@ export const api = {
     token: string,
     payload: {
       name: string;
-      email: string;
       allowed_origins?: string[];
+      show_logo?: boolean;
+      show_export_html_button?: boolean;
+      theme_mode?: ThemeMode;
     },
   ) =>
     request<SiteOrganizationCreateResponse>(
@@ -98,7 +99,13 @@ export const api = {
   updateOrganization: (
     token: string,
     id: string,
-    payload: { name?: string; email?: string; allowed_origins?: string[] },
+    payload: {
+      name?: string;
+      allowed_origins?: string[];
+      show_logo?: boolean;
+      show_export_html_button?: boolean;
+      theme_mode?: ThemeMode;
+    },
   ) =>
     request<SiteOrganizationCreateResponse['organization']>(
       `/site/organizations/${id}/`,

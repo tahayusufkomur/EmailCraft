@@ -6,6 +6,7 @@ import { SiteLayout } from './components/layout/SiteLayout';
 import { DashboardBillingPage } from './pages/DashboardBillingPage';
 import { DashboardOrganizationsPage } from './pages/DashboardOrganizationsPage';
 import { DashboardPage } from './pages/DashboardPage';
+import { DashboardWidgetBuilderPage } from './pages/DashboardWidgetBuilderPage';
 import { FaqPage } from './pages/FaqPage';
 import { ImpressumPage } from './pages/ImpressumPage';
 import { LandingPage } from './pages/LandingPage';
@@ -37,6 +38,7 @@ function App() {
         <Route index element={<DashboardPage />} />
         <Route path="templates" element={<Navigate to="/dashboard/organizations" replace />} />
         <Route path="organizations" element={<DashboardOrganizationsPage />} />
+        <Route path="widget-builder" element={<DashboardWidgetBuilderPage />} />
         <Route path="billing" element={<DashboardBillingPage />} />
       </Route>
 

@@ -68,6 +68,21 @@ class PresignRequestSerializer(serializers.Serializer):
         return value
 
 
+class UploadedImageListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UploadedImage
+        fields = [
+            'id',
+            'url',
+            'file_size',
+            'content_type',
+            'width',
+            'height',
+            'created_at',
+        ]
+        read_only_fields = fields
+
+
 class ExportRequestSerializer(serializers.Serializer):
     json_data = serializers.JSONField()
     variables_mode = serializers.ChoiceField(

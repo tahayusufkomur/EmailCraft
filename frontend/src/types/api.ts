@@ -1,4 +1,5 @@
 export type PlanKey = 'free' | 'starter' | 'pro' | 'enterprise';
+export type ThemeMode = 'light' | 'dark' | 'system';
 
 export interface PricingPlan {
   plan: PlanKey;
@@ -33,6 +34,9 @@ export interface OrganizationSummary {
   email: string;
   plan: PlanKey;
   allowed_origins: string[];
+  show_logo: boolean;
+  show_export_html_button: boolean;
+  theme_mode: ThemeMode;
   rendered_emails_count: number;
   rendered_emails_limit: number;
   storage_used_bytes: number;

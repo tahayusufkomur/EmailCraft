@@ -15,6 +15,11 @@ class Organization(models.Model):
         ('pro', 'Pro'),
         ('enterprise', 'Enterprise'),
     ]
+    THEME_MODE_CHOICES = [
+        ('light', 'Light'),
+        ('dark', 'Dark'),
+        ('system', 'System'),
+    ]
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
@@ -27,6 +32,9 @@ class Organization(models.Model):
     storage_limit_bytes = models.BigIntegerField(default=1073741824)  # 1GB
     stripe_customer_id = models.CharField(max_length=120, blank=True, null=True)
     stripe_subscription_id = models.CharField(max_length=120, blank=True, null=True)
+    show_logo = models.BooleanField(default=True)
+    show_export_html_button = models.BooleanField(default=True)
+    theme_mode = models.CharField(max_length=10, choices=THEME_MODE_CHOICES, default='system')
     test_key_version = models.PositiveIntegerField(default=1)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -161,6 +161,11 @@ def create_session(request):
             'storage_limit_bytes': billing_org.storage_limit_bytes,
             'rendered_emails_count': billing_org.rendered_emails_count,
             'rendered_emails_limit': billing_org.rendered_emails_limit,
+            'widget_context': {
+                'show_logo': org.show_logo,
+                'show_export_html_button': org.show_export_html_button,
+                'theme_mode': org.theme_mode,
+            },
         },
     })
 

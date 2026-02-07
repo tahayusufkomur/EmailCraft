@@ -2,6 +2,8 @@ from django.urls import path
 
 from core.site_views import (
     site_dashboard,
+    site_login,
+    site_logout,
     site_me,
     site_organization_api_keys,
     site_organization_detail,
@@ -14,6 +16,8 @@ from core.site_views import (
 
 urlpatterns = [
     path('register', site_register, name='site-register'),
+    path('login', site_login, name='site-login'),
+    path('logout', site_logout, name='site-logout'),
     path('me', site_me, name='site-me'),
     path('dashboard', site_dashboard, name='site-dashboard'),
     path('organizations/', site_organizations, name='site-organizations'),

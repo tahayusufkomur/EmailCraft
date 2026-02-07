@@ -1,3 +1,6 @@
+import uuid
+
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.db import IntegrityError, transaction
 from rest_framework import status
@@ -20,6 +23,7 @@ from core.serializers import (
     OrganizationSerializer,
     OrganizationWithApiKeysSerializer,
     SiteApiKeyCreateSerializer,
+    SiteLoginSerializer,
     SiteOrganizationCreateSerializer,
     SiteOrganizationUpdateSerializer,
     SiteRegisterSerializer,
@@ -36,6 +40,49 @@ def _organization_for_user(user: User):
 
 def _organization_membership_for_user(user: User, organization_id):
     return UserOrganization.objects.select_related('organization').filter(user=user, organization_id=organization_id).first()
+
+
+def _resolve_login_username(identifier: str):
+    normalized = identifier.strip()
+    if not normalized:
+        return None
+    if '@' in normalized:
+        user = User.objects.filter(email__iexact=normalized).first()
+        return user.username if user else None
+    return normalized
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def site_login(request):
+    serializer = SiteLoginSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    data = serializer.validated_data
+
+    username = _resolve_login_username(data['identifier'])
+    if not username:
+        return Response(
+            {'error': {'code': 'INVALID_CREDENTIALS', 'message': 'Invalid username/email or password.'}},
+            status=status.HTTP_401_UNAUTHORIZED,
+        )
+
+    user = authenticate(request, username=username, password=data['password'])
+    if not user:
+        return Response(
+            {'error': {'code': 'INVALID_CREDENTIALS', 'message': 'Invalid username/email or password.'}},
+            status=status.HTTP_401_UNAUTHORIZED,
+        )
+
+    token, _ = Token.objects.get_or_create(user=user)
+    return Response({'token': token.key})
+
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
+def site_logout(request):
+    Token.objects.filter(user=request.user).delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['POST'])
@@ -141,11 +188,15 @@ def site_organizations(request):
 
     try:
         with transaction.atomic():
+            generated_org_email = f'org-{uuid.uuid4().hex[:20]}@org.mailcraft.dev'
             org = Organization.objects.create(
                 name=data['name'],
-                email=data['email'],
+                email=generated_org_email,
                 plan=plan,
                 allowed_origins=data.get('allowed_origins', []),
+                show_logo=data.get('show_logo', True),
+                show_export_html_button=data.get('show_export_html_button', True),
+                theme_mode=data.get('theme_mode', 'system'),
             )
             org.apply_plan_limits(save=True)
             UserOrganization.objects.create(user=request.user, organization=org, role='owner')
@@ -153,7 +204,7 @@ def site_organizations(request):
             raw_key, created_key = ensure_reusable_test_api_key(org, refresh=False)
     except IntegrityError:
         return Response(
-            {'error': {'code': 'ORGANIZATION_CREATE_FAILED', 'message': 'Organization email already exists.'}},
+            {'error': {'code': 'ORGANIZATION_CREATE_FAILED', 'message': 'Failed to create organization.'}},
             status=status.HTTP_409_CONFLICT,
         )
     except ValueError as exc:
@@ -196,19 +247,13 @@ def site_organization_detail(request, organization_id):
 
     org = membership.organization
     changed_fields = []
-    for field in ['name', 'email', 'allowed_origins']:
+    for field in ['name', 'allowed_origins', 'show_logo', 'show_export_html_button', 'theme_mode']:
         if field in data:
             setattr(org, field, data[field])
             changed_fields.append(field)
 
     if changed_fields:
-        try:
-            org.save(update_fields=[*changed_fields, 'updated_at'])
-        except IntegrityError:
-            return Response(
-                {'error': {'code': 'ORGANIZATION_UPDATE_FAILED', 'message': 'Organization email already exists.'}},
-                status=status.HTTP_409_CONFLICT,
-            )
+        org.save(update_fields=[*changed_fields, 'updated_at'])
 
     return Response(OrganizationWithApiKeysSerializer(org).data)
 

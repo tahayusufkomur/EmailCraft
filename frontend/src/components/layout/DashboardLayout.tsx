@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 
 import { Button } from '../ui/button';
 import { useAuth } from '../../lib/auth';
@@ -7,16 +7,23 @@ import { cn } from '../../lib/utils';
 const links = [
   { to: '/dashboard', label: 'Overview', end: true },
   { to: '/dashboard/organizations', label: 'Organizations' },
+  { to: '/dashboard/widget-builder', label: 'Widget Builder' },
   { to: '/dashboard/billing', label: 'Billing' },
 ];
 
 export function DashboardLayout() {
+  const location = useLocation();
   const { organization, logout } = useAuth();
+  const isWidgetBuilderRoute = location.pathname.startsWith('/dashboard/widget-builder');
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="border-b border-border/60 bg-background/90 backdrop-blur">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4">
+        <div
+          className={`mx-auto flex h-16 w-full items-center justify-between px-4 ${
+            isWidgetBuilderRoute ? 'max-w-[1800px]' : 'max-w-6xl'
+          }`}
+        >
           <div>
             <p className="font-heading text-lg font-semibold">Dashboard</p>
             <p className="text-xs text-muted-foreground">{organization?.name}</p>
@@ -38,7 +45,13 @@ export function DashboardLayout() {
         </div>
       </header>
 
-      <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-8 md:grid-cols-[220px_1fr]">
+      <div
+        className={`mx-auto grid w-full gap-8 px-4 py-8 ${
+          isWidgetBuilderRoute
+            ? 'max-w-[1800px] md:grid-cols-[200px_1fr]'
+            : 'max-w-6xl md:grid-cols-[220px_1fr]'
+        }`}
+      >
         <aside className="h-fit rounded-lg border border-border bg-card p-2">
           <nav className="space-y-1">
             {links.map((link) => (

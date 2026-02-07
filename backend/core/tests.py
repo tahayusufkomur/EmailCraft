@@ -9,7 +9,7 @@ from rest_framework.test import APIClient
 
 from core.management.commands.create_demo_org import _highest_plan_key
 from core.models import ApiKey, Organization, UserOrganization
-from templates_api.models import Template
+from templates_api.models import Template, UploadedImage
 
 
 class CreateDemoOrgCommandTests(TestCase):
@@ -87,8 +87,10 @@ class SiteOrganizationsApiTests(TestCase):
             '/api/v1/site/organizations/',
             {
                 'name': 'Second Org',
-                'email': 'second-org@mailcraft.dev',
                 'allowed_origins': ['http://localhost:5173'],
+                'show_logo': False,
+                'show_export_html_button': False,
+                'theme_mode': 'dark',
             },
             format='json',
         )
@@ -101,18 +103,27 @@ class SiteOrganizationsApiTests(TestCase):
         self.assertTrue(
             UserOrganization.objects.filter(user=self.user, organization_id=org_id, role='owner').exists()
         )
+        self.assertFalse(create_response.data['organization']['show_logo'])
+        self.assertFalse(create_response.data['organization']['show_export_html_button'])
+        self.assertEqual(create_response.data['organization']['theme_mode'], 'dark')
 
         update_response = self.client.patch(
             f'/api/v1/site/organizations/{org_id}/',
             {
                 'name': 'Second Org Updated',
                 'allowed_origins': ['http://localhost:5174'],
+                'show_logo': True,
+                'show_export_html_button': True,
+                'theme_mode': 'light',
             },
             format='json',
         )
         self.assertEqual(update_response.status_code, 200)
         self.assertEqual(update_response.data['name'], 'Second Org Updated')
         self.assertEqual(update_response.data['allowed_origins'], ['http://localhost:5174'])
+        self.assertTrue(update_response.data['show_logo'])
+        self.assertTrue(update_response.data['show_export_html_button'])
+        self.assertEqual(update_response.data['theme_mode'], 'light')
 
         key_response = self.client.post(
             f'/api/v1/site/organizations/{org_id}/api-keys',
@@ -182,6 +193,9 @@ class SiteOrganizationsApiTests(TestCase):
             email='secondary-billing@mailcraft.dev',
             plan='free',
             allowed_origins=['http://localhost:5173'],
+            show_logo=False,
+            show_export_html_button=False,
+            theme_mode='dark',
         )
         secondary_org.apply_plan_limits(save=True)
         UserOrganization.objects.create(user=self.user, organization=secondary_org, role='owner')
@@ -206,4 +220,75 @@ class SiteOrganizationsApiTests(TestCase):
         self.assertEqual(
             response.data['config']['rendered_emails_limit'],
             self.billing_org.rendered_emails_limit,
+        )
+        self.assertEqual(
+            response.data['config']['widget_context'],
+            {
+                'show_logo': False,
+                'show_export_html_button': False,
+                'theme_mode': 'dark',
+            },
+        )
+
+    def test_site_login_and_logout(self):
+        login_response = self.client.post(
+            '/api/v1/site/login',
+            {'identifier': self.user.email, 'password': 'owner12345'},
+            format='json',
+        )
+        self.assertEqual(login_response.status_code, 200)
+        self.assertIn('token', login_response.data)
+        token = login_response.data['token']
+
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {token}')
+        logout_response = self.client.post('/api/v1/site/logout', {}, format='json')
+        self.assertEqual(logout_response.status_code, 204)
+        self.assertFalse(Token.objects.filter(user=self.user).exists())
+
+    def test_media_list_returns_only_current_org_images(self):
+        raw_key = ApiKey.generate_key('test')
+        ApiKey.objects.create(
+            org=self.billing_org,
+            key_hash=ApiKey.hash_key(raw_key),
+            key_prefix=raw_key[:12],
+            environment='test',
+            scope='full',
+        )
+
+        other_org = Organization.objects.create(
+            name='Other Org',
+            email='other-org@mailcraft.dev',
+            plan='starter',
+        )
+        other_org.apply_plan_limits(save=True)
+
+        UploadedImage.objects.create(
+            org=self.billing_org,
+            s3_key='uploads/billing/first.png',
+            url='https://cdn.example.com/uploads/billing/first.png',
+            file_size=1024,
+            content_type='image/png',
+        )
+        second_image = UploadedImage.objects.create(
+            org=self.billing_org,
+            s3_key='uploads/billing/second.png',
+            url='https://cdn.example.com/uploads/billing/second.png',
+            file_size=2048,
+            content_type='image/png',
+        )
+        UploadedImage.objects.create(
+            org=other_org,
+            s3_key='uploads/other/hidden.png',
+            url='https://cdn.example.com/uploads/other/hidden.png',
+            file_size=4096,
+            content_type='image/png',
+        )
+
+        response = self.client.get('/api/v1/media', HTTP_X_API_KEY=raw_key)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.data['results']), 2)
+        self.assertEqual(response.data['results'][0]['id'], str(second_image.id))
+        self.assertEqual(
+            response.data['results'][0]['url'],
+            'https://cdn.example.com/uploads/billing/second.png',
         )

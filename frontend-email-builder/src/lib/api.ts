@@ -1,4 +1,13 @@
-import type { ExportResponse, PresignResponse, RenderRequest, RenderResponse, SessionResponse, TemplateListItem } from '../types/api';
+import type {
+  ExportResponse,
+  PresignResponse,
+  RenderRequest,
+  RenderResponse,
+  SessionResponse,
+  TemplateListItem,
+  UploadedImageItem,
+  UploadImageResponse,
+} from '../types/api';
 
 const BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
@@ -53,11 +62,36 @@ export const api = {
   getGallery: (category?: string) =>
     request<{ data: TemplateListItem[] }>(`/gallery${category ? `?category=${category}` : ''}`),
 
+  listMedia: () =>
+    request<{ results: UploadedImageItem[] }>('/media'),
+
   getPresignedUrl: (data: { filename: string; content_type: string; file_size: number }) =>
     request<PresignResponse>('/upload/presign', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
+
+  uploadImage: async (file: File): Promise<UploadImageResponse> => {
+    const presigned = await request<PresignResponse>('/upload/presign', {
+      method: 'POST',
+      body: JSON.stringify({
+        filename: file.name,
+        content_type: file.type,
+        file_size: file.size,
+      }),
+    });
+
+    const uploadResponse = await fetch(presigned.upload_url, {
+      method: 'PUT',
+      headers: { 'Content-Type': file.type },
+      body: file,
+    });
+    if (!uploadResponse.ok) {
+      throw new Error(`Upload failed with status ${uploadResponse.status}`);
+    }
+
+    return { file_url: presigned.file_url };
+  },
 
   exportHtml: (data: { json_data: object; variables_mode?: string }) =>
     request<ExportResponse>('/export/html', {

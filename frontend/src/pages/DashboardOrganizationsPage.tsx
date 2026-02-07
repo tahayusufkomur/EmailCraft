@@ -1,32 +1,25 @@
 import { type FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
-import { Textarea } from '../components/ui/textarea';
 import { api } from '../lib/api';
 import { useAuth } from '../lib/auth';
 import type { OrganizationWithApiKeys, SiteDashboardResponse } from '../types/api';
 
 type OrganizationDraft = {
   name: string;
-  email: string;
-  allowedOriginsText: string;
+  allowedOrigins: string[];
+  originInput: string;
 };
-
-function parseAllowedOrigins(raw: string) {
-  return raw
-    .split(/[\n,]/)
-    .map((value) => value.trim())
-    .filter(Boolean);
-}
 
 function toDraft(org: OrganizationWithApiKeys): OrganizationDraft {
   return {
     name: org.name,
-    email: org.email,
-    allowedOriginsText: (org.allowed_origins || []).join('\n'),
+    allowedOrigins: org.allowed_origins || [],
+    originInput: '',
   };
 }
 
@@ -36,10 +29,10 @@ export function DashboardOrganizationsPage() {
   const [items, setItems] = useState<OrganizationWithApiKeys[]>([]);
   const [dashboard, setDashboard] = useState<SiteDashboardResponse | null>(null);
   const [drafts, setDrafts] = useState<Record<string, OrganizationDraft>>({});
-  const [createName, setCreateName] = useState('');
-  const [createEmail, setCreateEmail] = useState('');
-  const [createAllowedOriginsText, setCreateAllowedOriginsText] = useState('');
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [createName, setCreateName] = useState('');
+  const [createAllowedOrigins, setCreateAllowedOrigins] = useState<string[]>([]);
+  const [createOriginInput, setCreateOriginInput] = useState('');
   const [generatedKeys, setGeneratedKeys] = useState<Record<string, string>>({});
   const [copyFeedback, setCopyFeedback] = useState<Record<string, string>>({});
   const [busyAction, setBusyAction] = useState<string | null>(null);
@@ -55,8 +48,8 @@ export function DashboardOrganizationsPage() {
     setDashboard(dashboardResult);
     setDrafts((previous) => {
       const next: Record<string, OrganizationDraft> = {};
-      for (const org of orgResult.results) {
-        next[org.id] = previous[org.id] ?? toDraft(org);
+      for (const organization of orgResult.results) {
+        next[organization.id] = previous[organization.id] ?? toDraft(organization);
       }
       return next;
     });
@@ -69,6 +62,23 @@ export function DashboardOrganizationsPage() {
 
   const accountPlan = useMemo(() => dashboard?.plan ?? '-', [dashboard]);
 
+  const resetCreateState = () => {
+    setCreateName('');
+    setCreateAllowedOrigins([]);
+    setCreateOriginInput('');
+  };
+
+  const addCreateOrigin = () => {
+    const nextOrigin = createOriginInput.trim();
+    if (!nextOrigin) return;
+    setCreateAllowedOrigins((previous) => (previous.includes(nextOrigin) ? previous : [...previous, nextOrigin]));
+    setCreateOriginInput('');
+  };
+
+  const removeCreateOrigin = (origin: string) => {
+    setCreateAllowedOrigins((previous) => previous.filter((item) => item !== origin));
+  };
+
   const handleCreateOrganization = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!token) return;
@@ -77,14 +87,8 @@ export function DashboardOrganizationsPage() {
     try {
       const created = await api.createOrganization(token, {
         name: createName,
-        email: createEmail,
-        allowed_origins: parseAllowedOrigins(createAllowedOriginsText),
+        allowed_origins: createAllowedOrigins,
       });
-
-      setCreateName('');
-      setCreateEmail('');
-      setCreateAllowedOriginsText('');
-      setIsCreateOpen(false);
 
       if (created.created_api_key?.raw) {
         setGeneratedKeys((previous) => ({
@@ -93,12 +97,47 @@ export function DashboardOrganizationsPage() {
         }));
       }
 
+      resetCreateState();
+      setIsCreateOpen(false);
       await loadOrganizations();
     } catch (err) {
       setError((err as Error).message);
     } finally {
       setBusyAction(null);
     }
+  };
+
+  const updateDraft = (organizationId: string, patch: Partial<OrganizationDraft>) => {
+    setDrafts((previous) => ({
+      ...previous,
+      [organizationId]: {
+        ...previous[organizationId],
+        ...patch,
+      },
+    }));
+  };
+
+  const addDraftOrigin = (organizationId: string) => {
+    const current = drafts[organizationId];
+    if (!current) return;
+    const nextOrigin = current.originInput.trim();
+    if (!nextOrigin) return;
+    if (current.allowedOrigins.includes(nextOrigin)) {
+      updateDraft(organizationId, { originInput: '' });
+      return;
+    }
+    updateDraft(organizationId, {
+      allowedOrigins: [...current.allowedOrigins, nextOrigin],
+      originInput: '',
+    });
+  };
+
+  const removeDraftOrigin = (organizationId: string, origin: string) => {
+    const current = drafts[organizationId];
+    if (!current) return;
+    updateDraft(organizationId, {
+      allowedOrigins: current.allowedOrigins.filter((item) => item !== origin),
+    });
   };
 
   const handleSaveOrganization = async (organizationId: string) => {
@@ -110,12 +149,11 @@ export function DashboardOrganizationsPage() {
     try {
       const updated = await api.updateOrganization(token, organizationId, {
         name: draft.name,
-        email: draft.email,
-        allowed_origins: parseAllowedOrigins(draft.allowedOriginsText),
+        allowed_origins: draft.allowedOrigins,
       });
 
       setItems((previous) =>
-        previous.map((org) => (org.id === organizationId ? updated : org)),
+        previous.map((organization) => (organization.id === organizationId ? updated : organization)),
       );
       setDrafts((previous) => ({
         ...previous,
@@ -138,65 +176,7 @@ export function DashboardOrganizationsPage() {
     return response.raw;
   };
 
-  const handleCopyApiKey = async (organizationId: string) => {
-    setBusyAction(`copy:${organizationId}`);
-    setError(null);
-    try {
-      let apiKey = generatedKeys[organizationId];
-      if (!apiKey) {
-        const resolved = await getReusableApiKey(organizationId, false);
-        apiKey = resolved || '';
-      }
-      if (!apiKey) {
-        throw new Error('Unable to resolve API key for this organization.');
-      }
-      await copyApiKey(organizationId, apiKey);
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setBusyAction(null);
-    }
-  };
-
-  const handleRefreshApiKey = async (organizationId: string) => {
-    setBusyAction(`refresh:${organizationId}`);
-    setError(null);
-    try {
-      const refreshed = await getReusableApiKey(organizationId, true);
-      if (!refreshed) {
-        throw new Error('Unable to refresh API key for this organization.');
-      }
-      setCopyFeedback((previous) => ({ ...previous, [organizationId]: 'Refreshed' }));
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setBusyAction(null);
-    }
-  };
-
-  const handleGoToBuilder = async (organizationId: string) => {
-    setBusyAction(`builder:${organizationId}`);
-    setError(null);
-    try {
-      let apiKey = generatedKeys[organizationId];
-      if (!apiKey) {
-        const createdKey = await getReusableApiKey(organizationId, false);
-        apiKey = createdKey || '';
-      }
-      if (!apiKey) {
-        throw new Error('Unable to create API key for this organization.');
-      }
-
-      const builderUrl = `/builder/?apiKey=${encodeURIComponent(apiKey)}`;
-      window.open(builderUrl, '_blank', 'noopener,noreferrer');
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setBusyAction(null);
-    }
-  };
-
-  const copyApiKey = async (organizationId: string, apiKey: string) => {
+  const copyApiKeyToClipboard = async (organizationId: string, apiKey: string) => {
     try {
       if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(apiKey);
@@ -221,12 +201,48 @@ export function DashboardOrganizationsPage() {
     }
   };
 
+  const handleCopyApiKey = async (organizationId: string) => {
+    setBusyAction(`copy:${organizationId}`);
+    setError(null);
+    try {
+      let apiKey = generatedKeys[organizationId];
+      if (!apiKey) {
+        const resolved = await getReusableApiKey(organizationId, false);
+        apiKey = resolved || '';
+      }
+      if (!apiKey) {
+        throw new Error('Unable to resolve API key for this organization.');
+      }
+      await copyApiKeyToClipboard(organizationId, apiKey);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setBusyAction(null);
+    }
+  };
+
+  const handleRefreshApiKey = async (organizationId: string) => {
+    setBusyAction(`refresh:${organizationId}`);
+    setError(null);
+    try {
+      const refreshed = await getReusableApiKey(organizationId, true);
+      if (!refreshed) {
+        throw new Error('Unable to refresh API key for this organization.');
+      }
+      setCopyFeedback((previous) => ({ ...previous, [organizationId]: 'Refreshed' }));
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setBusyAction(null);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div>
         <h1 className="font-heading text-3xl font-semibold tracking-tight">Organizations</h1>
         <p className="text-muted-foreground">
-          Manage organization settings and API keys. Your package usage is shared across all organizations.
+          Manage per-organization API keys, allowed origins, and builder UI settings.
         </p>
       </div>
 
@@ -249,7 +265,7 @@ export function DashboardOrganizationsPage() {
         <div>
           <h2 className="font-heading text-xl font-semibold">Your organizations</h2>
           <p className="text-sm text-muted-foreground">
-            Each organization has separate settings and API keys.
+            Create organizations and manage allowed origins and API keys.
           </p>
         </div>
         <Button
@@ -266,42 +282,56 @@ export function DashboardOrganizationsPage() {
           <CardHeader>
             <CardTitle>Add organization</CardTitle>
             <CardDescription>
-              Fill the form below and we will create a test API key automatically.
+              Email is inherited from the account. Add optional allowed origins.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="space-y-3" onSubmit={handleCreateOrganization}>
-              <div className="grid gap-3 md:grid-cols-2">
-                <div className="space-y-2">
-                  <Label htmlFor="create-org-name">Name</Label>
-                  <Input
-                    id="create-org-name"
-                    value={createName}
-                    onChange={(event) => setCreateName(event.target.value)}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="create-org-email">Email</Label>
-                  <Input
-                    id="create-org-email"
-                    value={createEmail}
-                    onChange={(event) => setCreateEmail(event.target.value)}
-                    required
-                    type="email"
-                  />
-                </div>
-              </div>
+            <form className="space-y-4" onSubmit={handleCreateOrganization}>
               <div className="space-y-2">
-                <Label htmlFor="create-allowed-origins">Allowed origins (comma or new line separated)</Label>
-                <Textarea
-                  id="create-allowed-origins"
-                  value={createAllowedOriginsText}
-                  onChange={(event) => setCreateAllowedOriginsText(event.target.value)}
-                  className="min-h-[96px]"
-                  placeholder="http://localhost:5173"
+                <Label htmlFor="create-org-name">Name</Label>
+                <Input
+                  id="create-org-name"
+                  value={createName}
+                  onChange={(event) => setCreateName(event.target.value)}
+                  required
                 />
               </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="create-origin-input">Allowed origins</Label>
+                <div className="flex flex-wrap gap-2">
+                  <Input
+                    id="create-origin-input"
+                    value={createOriginInput}
+                    onChange={(event) => setCreateOriginInput(event.target.value)}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter') {
+                        event.preventDefault();
+                        addCreateOrigin();
+                      }
+                    }}
+                    placeholder="http://localhost:5173"
+                  />
+                  <Button type="button" variant="outline" onClick={addCreateOrigin}>
+                    +
+                  </Button>
+                </div>
+                {createAllowedOrigins.length > 0 && (
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {createAllowedOrigins.map((origin) => (
+                      <button
+                        key={origin}
+                        className="rounded-full border border-border px-3 py-1 text-xs hover:bg-muted"
+                        type="button"
+                        onClick={() => removeCreateOrigin(origin)}
+                      >
+                        {origin} ×
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               <Button disabled={busyAction === 'create'} type="submit">
                 {busyAction === 'create' ? 'Creating...' : 'Create organization'}
               </Button>
@@ -325,72 +355,69 @@ export function DashboardOrganizationsPage() {
           const isSaving = busyAction === `save:${organization.id}`;
           const isCopyingKey = busyAction === `copy:${organization.id}`;
           const isRefreshingKey = busyAction === `refresh:${organization.id}`;
-          const isOpeningBuilder = busyAction === `builder:${organization.id}`;
           const copyLabel = copyFeedback[organization.id];
 
           return (
             <Card key={organization.id}>
               <CardHeader>
                 <CardTitle>{organization.name}</CardTitle>
-                <CardDescription>
-                  {organization.email} · {organization.plan}
-                </CardDescription>
+                <CardDescription>Plan: {organization.plan}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid gap-3 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor={`name-${organization.id}`}>Name</Label>
-                    <Input
-                      id={`name-${organization.id}`}
-                      value={draft.name}
-                      onChange={(event) =>
-                        setDrafts((previous) => ({
-                          ...previous,
-                          [organization.id]: {
-                            ...draft,
-                            name: event.target.value,
-                          },
-                        }))
-                      }
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor={`email-${organization.id}`}>Email</Label>
-                    <Input
-                      id={`email-${organization.id}`}
-                      value={draft.email}
-                      onChange={(event) =>
-                        setDrafts((previous) => ({
-                          ...previous,
-                          [organization.id]: {
-                            ...draft,
-                            email: event.target.value,
-                          },
-                        }))
-                      }
-                      type="email"
-                    />
-                  </div>
+                <div className="space-y-2">
+                  <Label htmlFor={`name-${organization.id}`}>Name</Label>
+                  <Input
+                    id={`name-${organization.id}`}
+                    value={draft.name}
+                    onChange={(event) =>
+                      updateDraft(organization.id, {
+                        name: event.target.value,
+                      })
+                    }
+                  />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor={`allowed-origins-${organization.id}`}>
-                    Allowed origins (comma or new line separated)
-                  </Label>
-                  <Textarea
-                    id={`allowed-origins-${organization.id}`}
-                    value={draft.allowedOriginsText}
-                    onChange={(event) =>
-                      setDrafts((previous) => ({
-                        ...previous,
-                        [organization.id]: {
-                          ...draft,
-                          allowedOriginsText: event.target.value,
-                        },
-                      }))
-                    }
-                    className="min-h-[96px]"
-                  />
+                  <Label htmlFor={`origin-input-${organization.id}`}>Allowed origins</Label>
+                  <div className="flex flex-wrap gap-2">
+                    <Input
+                      id={`origin-input-${organization.id}`}
+                      value={draft.originInput}
+                      onChange={(event) =>
+                        updateDraft(organization.id, {
+                          originInput: event.target.value,
+                        })
+                      }
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter') {
+                          event.preventDefault();
+                          addDraftOrigin(organization.id);
+                        }
+                      }}
+                      placeholder="http://localhost:5173"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => addDraftOrigin(organization.id)}
+                    >
+                      +
+                    </Button>
+                  </div>
+                  {draft.allowedOrigins.length > 0 && (
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {draft.allowedOrigins.map((origin) => (
+                        <button
+                          key={origin}
+                          className="rounded-full border border-border px-3 py-1 text-xs hover:bg-muted"
+                          type="button"
+                          onClick={() => removeDraftOrigin(organization.id, origin)}
+                        >
+                          {origin} ×
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex flex-wrap gap-2">
@@ -424,14 +451,8 @@ export function DashboardOrganizationsPage() {
                   >
                     {isRefreshingKey ? 'Refreshing...' : 'Refresh API key'}
                   </Button>
-                  <Button
-                    disabled={isOpeningBuilder}
-                    onClick={() => {
-                      void handleGoToBuilder(organization.id);
-                    }}
-                    type="button"
-                  >
-                    {isOpeningBuilder ? 'Opening...' : 'Go to Builder'}
+                  <Button asChild type="button" variant="outline">
+                    <Link to={`/dashboard/widget-builder?orgId=${organization.id}`}>Open Widget Builder</Link>
                   </Button>
                 </div>
 
@@ -457,7 +478,7 @@ export function DashboardOrganizationsPage() {
                         type="button"
                         variant="outline"
                         onClick={() => {
-                          void copyApiKey(organization.id, generatedKey);
+                          void copyApiKeyToClipboard(organization.id, generatedKey);
                         }}
                       >
                         {copyLabel === 'Copied' ? 'Copied' : 'Copy'}
@@ -472,6 +493,7 @@ export function DashboardOrganizationsPage() {
                     )}
                   </div>
                 )}
+
               </CardContent>
             </Card>
           );

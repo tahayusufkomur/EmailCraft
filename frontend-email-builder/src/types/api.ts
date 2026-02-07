@@ -13,6 +13,13 @@ export interface SessionResponse {
     max_upload_size_bytes: number;
     storage_used_bytes: number;
     storage_limit_bytes: number;
+    rendered_emails_count: number;
+    rendered_emails_limit: number;
+    widget_context?: {
+      show_logo?: boolean;
+      show_export_html_button?: boolean;
+      theme_mode?: 'light' | 'dark' | 'system';
+    };
   };
 }
 
@@ -30,6 +37,20 @@ export interface PresignResponse {
   upload_url: string;
   file_url: string;
   expires_at: string | null;
+}
+
+export interface UploadedImageItem {
+  id: string;
+  url: string;
+  file_size: number;
+  content_type: string;
+  width: number | null;
+  height: number | null;
+  created_at: string;
+}
+
+export interface UploadImageResponse {
+  file_url: string;
 }
 
 export interface ExportResponse {
