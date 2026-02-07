@@ -11,6 +11,19 @@ type IncomingMessageType =
   | 'MAILCRAFT_LOAD_TEMPLATE'
   | 'MAILCRAFT_EXPORT';
 
+type IncomingInitPayload = {
+  variables?: unknown[];
+  templateJson?: EmailTemplate;
+  context?: {
+    hideLogo?: unknown;
+    showExportHtmlButton?: unknown;
+    themeMode?: unknown;
+  };
+  hideLogo?: unknown;
+  showExportHtmlButton?: unknown;
+  themeMode?: unknown;
+};
+
 interface MailCraftMessage {
   source: 'mailcraft';
   type: MessageType;
@@ -42,7 +55,7 @@ export function sendErrorEvent(code: string, message: string, targetOrigin = '*'
 }
 
 type IncomingHandler = {
-  onInit?: (config: { variables?: unknown[]; templateJson?: EmailTemplate }) => void;
+  onInit?: (config: IncomingInitPayload) => void;
   onLoadTemplate?: (json: EmailTemplate) => void;
   onExport?: () => void;
 };

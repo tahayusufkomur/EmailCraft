@@ -1,10 +1,13 @@
 import { create } from 'zustand';
-import type { Variable } from '../types/editor';
+import type { ThemeMode, Variable } from '../types/editor';
 
 interface ConfigState {
   apiKey: string;
   sessionToken: string;
   variables: Variable[];
+  hideLogo: boolean;
+  showExportHtmlButton: boolean;
+  themeMode: ThemeMode;
   plan: string;
   maxUploadSize: number;
   storageUsed: number;
@@ -17,6 +20,9 @@ export const useConfigStore = create<ConfigState>((set) => ({
   apiKey: '',
   sessionToken: '',
   variables: [],
+  hideLogo: false,
+  showExportHtmlButton: true,
+  themeMode: 'system',
   plan: 'free',
   maxUploadSize: 5 * 1024 * 1024,
   storageUsed: 0,

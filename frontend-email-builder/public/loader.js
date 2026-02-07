@@ -18,6 +18,13 @@
      * @param {string|HTMLElement} config.container - CSS selector or DOM element
      * @param {Array} [config.variables] - Variables available in the editor
      * @param {Object} [config.templateJson] - Pre-load a template
+     * @param {Object} [config.context] - Widget UI context
+     * @param {boolean} [config.context.hideLogo=false] - Hide MailCraft logo/title in toolbar
+     * @param {boolean} [config.context.showExportHtmlButton=true] - Show Export HTML button in toolbar
+     * @param {'light'|'dark'|'system'} [config.context.themeMode='system'] - Theme mode for editor chrome
+     * @param {boolean} [config.hideLogo] - Deprecated alias for context.hideLogo
+     * @param {boolean} [config.showExportHtmlButton] - Deprecated alias for context.showExportHtmlButton
+     * @param {'light'|'dark'|'system'} [config.themeMode] - Deprecated alias for context.themeMode
      * @param {Function} [config.onSave] - Called when user saves
      * @param {Function} [config.onAutoSave] - Called on auto-save
      * @param {Function} [config.onError] - Called on errors
@@ -40,6 +47,39 @@
       }
 
       this._config = config;
+      var context = {};
+      if (config.context && typeof config.context === 'object') {
+        if (typeof config.context.hideLogo === 'boolean') {
+          context.hideLogo = config.context.hideLogo;
+        }
+        if (typeof config.context.showExportHtmlButton === 'boolean') {
+          context.showExportHtmlButton = config.context.showExportHtmlButton;
+        }
+        if (
+          config.context.themeMode === 'light' ||
+          config.context.themeMode === 'dark' ||
+          config.context.themeMode === 'system'
+        ) {
+          context.themeMode = config.context.themeMode;
+        }
+      }
+      if (typeof config.hideLogo === 'boolean' && typeof context.hideLogo === 'undefined') {
+        context.hideLogo = config.hideLogo;
+      }
+      if (
+        typeof config.showExportHtmlButton === 'boolean' &&
+        typeof context.showExportHtmlButton === 'undefined'
+      ) {
+        context.showExportHtmlButton = config.showExportHtmlButton;
+      }
+      if (
+        (config.themeMode === 'light' ||
+          config.themeMode === 'dark' ||
+          config.themeMode === 'system') &&
+        typeof context.themeMode === 'undefined'
+      ) {
+        context.themeMode = config.themeMode;
+      }
 
       // Create iframe
       var iframe = document.createElement('iframe');
@@ -76,6 +116,7 @@
                 payload: {
                   variables: config.variables || [],
                   templateJson: config.templateJson || null,
+                  context: context,
                 },
               },
               EDITOR_ORIGIN

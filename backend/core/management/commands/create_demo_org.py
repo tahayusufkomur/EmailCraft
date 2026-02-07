@@ -1,8 +1,11 @@
+import re
+
 from django.conf import settings
-from django.core.management.base import BaseCommand
+from django.contrib.auth.models import User
+from django.core.management.base import BaseCommand, CommandError
 from django.utils import timezone
 
-from core.models import ApiKey, Organization
+from core.models import ApiKey, Organization, UserOrganization
 from templates_api.models import Template
 
 
@@ -113,6 +116,10 @@ class Command(BaseCommand):
         parser.add_argument('--org-name', type=str, default='MailCraft Demo Enterprise')
         parser.add_argument('--org-email', type=str, default='demo-enterprise@mailcraft.dev')
         parser.add_argument('--env', type=str, default='test', choices=['live', 'test'])
+        parser.add_argument('--api-key', type=str, default='')
+        parser.add_argument('--demo-username', type=str, default='demo')
+        parser.add_argument('--demo-user-email', type=str, default='demo-user@mailcraft.dev')
+        parser.add_argument('--demo-password', type=str, default='demo12345')
         parser.add_argument('--template-name', type=str, default='Builder E2E Demo Template')
         parser.add_argument('--skip-template', action='store_true')
         parser.add_argument('--iframe-src', type=str, default='https://example.com/embed')
@@ -156,20 +163,56 @@ class Command(BaseCommand):
             ]
         )
 
+        requested_api_key = (options.get('api_key') or '').strip() or f"mc_{options['env']}_{'0' * 32}"
+        if not re.fullmatch(rf'^mc_{options["env"]}_[a-f0-9]{{32}}$', requested_api_key):
+            raise CommandError(
+                f'--api-key must match mc_{options["env"]}_<32 lowercase hex chars>. '
+                f'Received: {requested_api_key}'
+            )
+
         now = timezone.now()
+        requested_hash = ApiKey.hash_key(requested_api_key)
+        existing_for_hash = ApiKey.objects.filter(key_hash=requested_hash).select_related('org').first()
+        if existing_for_hash and existing_for_hash.org_id != org.id:
+            raise CommandError(
+                f'The requested API key is already used by another organization: {existing_for_hash.org.email}'
+            )
+
         ApiKey.objects.filter(
             org=org,
             environment=options['env'],
             is_active=True,
             revoked_at__isnull=True,
-        ).update(is_active=False, revoked_at=now)
+        ).exclude(key_hash=requested_hash).update(is_active=False, revoked_at=now)
 
-        raw_key = ApiKey.generate_key(options['env'])
-        ApiKey.objects.create(
-            org=org,
-            key_hash=ApiKey.hash_key(raw_key),
-            key_prefix=raw_key[:12],
-            environment=options['env'],
+        if existing_for_hash:
+            existing_for_hash.environment = options['env']
+            existing_for_hash.key_prefix = requested_api_key[:12]
+            existing_for_hash.is_active = True
+            existing_for_hash.revoked_at = None
+            existing_for_hash.save(update_fields=['environment', 'key_prefix', 'is_active', 'revoked_at'])
+            raw_key = requested_api_key
+        else:
+            raw_key = requested_api_key
+            ApiKey.objects.create(
+                org=org,
+                key_hash=requested_hash,
+                key_prefix=raw_key[:12],
+                environment=options['env'],
+            )
+
+        demo_user, _ = User.objects.get_or_create(
+            username=options['demo_username'],
+            defaults={'email': options['demo_user_email']},
+        )
+        demo_user.email = options['demo_user_email']
+        demo_user.is_active = True
+        demo_user.set_password(options['demo_password'])
+        demo_user.save(update_fields=['email', 'is_active', 'password'])
+
+        UserOrganization.objects.update_or_create(
+            user=demo_user,
+            defaults={'organization': org, 'role': 'owner'},
         )
 
         template = None
@@ -195,6 +238,9 @@ class Command(BaseCommand):
         self.stdout.write(f'PLAN={org.plan}')
         self.stdout.write(f'RENDERED_EMAILS_LIMIT={org.rendered_emails_limit}')
         self.stdout.write(f'STORAGE_LIMIT_BYTES={org.storage_limit_bytes}')
+        self.stdout.write(f'DEMO_USERNAME={demo_user.username}')
+        self.stdout.write(f'DEMO_USER_EMAIL={demo_user.email}')
+        self.stdout.write(f'DEMO_PASSWORD={options["demo_password"]}')
         self.stdout.write(f'API_KEY={raw_key}')
         if template:
             self.stdout.write(f'TEMPLATE_ID={template.id}')

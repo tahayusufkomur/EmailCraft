@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="darkreader-lock" />
     <title>MailCraft Builder Demo</title>
     <style>
       :root {
@@ -70,6 +71,36 @@
         border: 1px solid var(--border);
         border-radius: 8px;
         font-size: 14px;
+      }
+
+      select {
+        width: 100%;
+        height: 38px;
+        padding: 0 10px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 14px;
+        background: #fff;
+      }
+
+      .toggle-row {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+
+      .toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--ink);
+        font-size: 13px;
+      }
+
+      .toggle input {
+        width: auto;
+        height: auto;
       }
 
       .actions {
@@ -174,6 +205,24 @@
             User email
             <input id="user-email" value="jane@example.com" />
           </label>
+          <label>
+            Chrome theme mode
+            <select id="theme-mode">
+              <option value="system" selected>System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <label class="toggle">
+            <input id="hide-logo" type="checkbox" />
+            Hide logo
+          </label>
+          <label class="toggle">
+            <input id="show-export" type="checkbox" checked />
+            Show Export HTML button
+          </label>
         </div>
         <div class="actions">
           <button id="launch-btn" class="btn-primary">Launch Builder Iframe</button>
@@ -199,6 +248,9 @@
       const apiKeyInput = document.getElementById('api-key');
       const userNameInput = document.getElementById('user-name');
       const userEmailInput = document.getElementById('user-email');
+      const hideLogoInput = document.getElementById('hide-logo');
+      const showExportInput = document.getElementById('show-export');
+      const themeModeSelect = document.getElementById('theme-mode');
       const launchBtn = document.getElementById('launch-btn');
       const renderBtn = document.getElementById('render-btn');
       const builderFrame = document.getElementById('builder-frame');
@@ -208,6 +260,10 @@
 
       const params = new URLSearchParams(window.location.search);
       apiKeyInput.value = params.get('apiKey') || '';
+      const themeModeFromUrl = params.get('themeMode');
+      if (themeModeFromUrl === 'light' || themeModeFromUrl === 'dark' || themeModeFromUrl === 'system') {
+        themeModeSelect.value = themeModeFromUrl;
+      }
 
       const demoTemplate = {
         version: 1,
@@ -300,6 +356,11 @@
                 },
               ],
               templateJson: state.templateJson,
+              context: {
+                hideLogo: hideLogoInput.checked,
+                showExportHtmlButton: showExportInput.checked,
+                themeMode: themeModeSelect.value,
+              },
             },
           },
           window.location.origin
@@ -314,6 +375,15 @@
         }
 
         const src = `/builder/?apiKey=${encodeURIComponent(key)}`;
+        const currentSrc = builderFrame.getAttribute('src') || '';
+
+        // If the same builder session is already loaded, just re-apply init context.
+        if (currentSrc === src) {
+          postInit();
+          setStatus('settings applied to running iframe');
+          return;
+        }
+
         builderFrame.src = src;
         setStatus('iframe launched, waiting for MAILCRAFT_READY');
       }
@@ -355,6 +425,18 @@
 
       launchBtn.addEventListener('click', launchBuilder);
       renderBtn.addEventListener('click', renderTemplate);
+      hideLogoInput.addEventListener('change', launchBuilder);
+      showExportInput.addEventListener('change', launchBuilder);
+      themeModeSelect.addEventListener('change', launchBuilder);
+      userNameInput.addEventListener('change', launchBuilder);
+      userEmailInput.addEventListener('change', launchBuilder);
+      apiKeyInput.addEventListener('change', launchBuilder);
+      apiKeyInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          launchBuilder();
+        }
+      });
 
       window.addEventListener('message', (event) => {
         if (event.origin !== window.location.origin) return;

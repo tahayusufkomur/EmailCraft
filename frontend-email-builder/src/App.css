@@ -2,6 +2,39 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  --chrome-surface: var(--surface);
+  --chrome-surface-elevated: var(--surface-elevated);
+  --chrome-border: var(--border-color);
+  --chrome-text-primary: var(--text-primary);
+  --chrome-text-muted: var(--text-muted);
+  --chrome-input-bg: #ffffff;
+  --chrome-input-text: #0f172a;
+}
+
+.app-shell.theme-dark {
+  --chrome-surface: #0f172a;
+  --chrome-surface-elevated: #1e293b;
+  --chrome-border: rgba(148, 163, 184, 0.3);
+  --chrome-text-primary: #e2e8f0;
+  --chrome-text-muted: #94a3b8;
+  --chrome-input-bg: #111827;
+  --chrome-input-text: #e2e8f0;
+  --background: 220 35% 8%;
+  --foreground: 210 40% 96%;
+  --card: 221 39% 11%;
+  --card-foreground: 210 40% 96%;
+  --popover: 221 39% 11%;
+  --popover-foreground: 210 40% 96%;
+  --primary: 198 94% 60%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 210 40% 96%;
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217 33% 17%;
+  --accent-foreground: 210 40% 96%;
+  --border: 217 24% 24%;
+  --input: 217 24% 24%;
 }
 
 .top-toolbar {
@@ -9,12 +42,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 22px;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border-color);
+  background: var(--chrome-surface);
+  border-bottom: 1px solid var(--chrome-border);
   position: sticky;
   top: 0;
   z-index: 20;
   animation: fade-in 0.4s ease;
+  color: var(--chrome-text-primary);
 }
 
 .brand {
@@ -27,14 +61,14 @@
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.6px;
-  color: var(--text-primary);
+  color: var(--chrome-text-primary);
 }
 
 .brand-subtitle {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--text-muted);
+  color: var(--chrome-text-muted);
 }
 
 .toolbar-actions {
@@ -53,22 +87,23 @@
 /* Left Sidebar - Block Palette */
 .sidebar {
   width: var(--sidebar-width);
-  background: var(--surface);
-  border-right: 1px solid var(--border-color);
+  background: var(--chrome-surface);
+  border-right: 1px solid var(--chrome-border);
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 64px);
   overflow-y: auto;
+  color: var(--chrome-text-primary);
 }
 
 .sidebar-header {
   padding: 16px 18px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--chrome-border);
   font-weight: 600;
   font-size: 13px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--chrome-text-muted);
 }
 
 /* Center Canvas */
@@ -122,31 +157,33 @@
 /* Right Panel - Style Settings */
 .style-panel {
   width: var(--panel-width);
-  background: var(--surface);
-  border-left: 1px solid var(--border-color);
+  background: var(--chrome-surface);
+  border-left: 1px solid var(--chrome-border);
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 64px);
   overflow-y: auto;
+  color: var(--chrome-text-primary);
 }
 
 .panel-header {
   padding: 16px 18px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--chrome-border);
   font-weight: 600;
   font-size: 14px;
+  color: var(--chrome-text-primary);
 }
 
 .panel-section {
   padding: 16px 18px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--chrome-border);
 }
 
 .panel-section-title {
   font-weight: 600;
   font-size: 11px;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--chrome-text-muted);
   margin-bottom: 12px;
   letter-spacing: 1px;
 }
@@ -165,13 +202,13 @@
   align-items: center;
   gap: 6px;
   padding: 12px 8px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--chrome-border);
   border-radius: 10px;
-  background: var(--surface-elevated);
+  background: var(--chrome-surface-elevated);
   cursor: grab;
   transition: all 0.15s ease;
   font-size: 12px;
-  color: var(--text-muted);
+  color: var(--chrome-text-muted);
 }
 
 .palette-item:hover {
@@ -342,7 +379,7 @@
   display: block;
   font-size: 12px;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--chrome-text-muted);
   margin-bottom: 4px;
 }
 
@@ -354,11 +391,12 @@
 .form-group textarea {
   width: 100%;
   padding: 8px 10px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--chrome-border);
   border-radius: 8px;
   font-size: 13px;
   outline: none;
-  background: #fff;
+  background: var(--chrome-input-bg);
+  color: var(--chrome-input-text);
   transition: border-color 0.15s;
 }
 
@@ -409,10 +447,11 @@
 .alignment-picker button {
   flex: 1;
   padding: 6px;
-  border: 1px solid var(--border-color);
-  background: var(--surface-elevated);
+  border: 1px solid var(--chrome-border);
+  background: var(--chrome-surface-elevated);
   border-radius: 8px;
   font-size: 14px;
+  color: var(--chrome-text-primary);
 }
 
 .alignment-picker button.active {
@@ -431,25 +470,28 @@
 .spacing-control input {
   width: 100%;
   padding: 6px 8px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--chrome-border);
   border-radius: 6px;
   font-size: 12px;
   text-align: center;
+  background: var(--chrome-input-bg);
+  color: var(--chrome-input-text);
 }
 
 /* Buttons for gallery/modal usage */
 .btn {
   padding: 6px 16px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--chrome-border);
   border-radius: 8px;
-  background: var(--surface);
+  background: var(--chrome-surface);
+  color: var(--chrome-text-primary);
   font-size: 13px;
   font-weight: 500;
   transition: all 0.15s;
 }
 
 .btn:hover {
-  background: var(--surface-elevated);
+  background: var(--chrome-surface-elevated);
 }
 
 .btn-primary {

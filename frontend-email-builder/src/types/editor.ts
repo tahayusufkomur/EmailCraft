@@ -5,6 +5,14 @@ export interface Variable {
   type?: 'text' | 'url';
 }
 
+export type ThemeMode = 'light' | 'dark' | 'system';
+
+export interface WidgetContext {
+  hideLogo?: boolean;
+  showExportHtmlButton?: boolean;
+  themeMode?: ThemeMode;
+}
+
 export interface EditorConfig {
   apiKey: string;
   variables: Variable[];
@@ -12,4 +20,5 @@ export interface EditorConfig {
   maxUploadSize: number;
   storageUsed: number;
   storageLimit: number;
+  context?: WidgetContext;
 }

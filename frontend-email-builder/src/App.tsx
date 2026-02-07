@@ -14,7 +14,7 @@ import { exportToHtml } from './lib/htmlExporter';
 import { useAutoSave, loadDraft } from './hooks/useAutoSave';
 import { listenToParent, sendReadyEvent, sendSaveEvent } from './lib/postMessage';
 import type { EmailTemplate } from './types/blocks';
-import type { Variable } from './types/editor';
+import type { ThemeMode, Variable } from './types/editor';
 
 const isEmailTemplate = (value: unknown): value is EmailTemplate => {
   if (!value || typeof value !== 'object') return false;
@@ -43,6 +43,54 @@ const normalizeVariables = (value: unknown): Variable[] => {
     }));
 };
 
+const asOptionalBoolean = (value: unknown): boolean | undefined => {
+  if (typeof value === 'boolean') return value;
+  return undefined;
+};
+
+const asOptionalThemeMode = (value: unknown): ThemeMode | undefined => {
+  if (value === 'light' || value === 'dark' || value === 'system') return value;
+  return undefined;
+};
+
+const normalizeUiContext = (
+  value: unknown,
+): { hideLogo?: boolean; showExportHtmlButton?: boolean; themeMode?: ThemeMode } => {
+  if (!value || typeof value !== 'object') return {};
+
+  const maybe = value as {
+    context?: {
+      hideLogo?: unknown;
+      showExportHtmlButton?: unknown;
+      themeMode?: unknown;
+    };
+    hideLogo?: unknown;
+    showExportHtmlButton?: unknown;
+    themeMode?: unknown;
+  };
+
+  const embeddedContext =
+    maybe.context && typeof maybe.context === 'object' ? maybe.context : {};
+
+  const hideLogo = asOptionalBoolean(
+    embeddedContext.hideLogo !== undefined ? embeddedContext.hideLogo : maybe.hideLogo,
+  );
+  const showExportHtmlButton = asOptionalBoolean(
+    embeddedContext.showExportHtmlButton !== undefined
+      ? embeddedContext.showExportHtmlButton
+      : maybe.showExportHtmlButton,
+  );
+  const themeMode = asOptionalThemeMode(
+    embeddedContext.themeMode !== undefined ? embeddedContext.themeMode : maybe.themeMode,
+  );
+
+  const output: { hideLogo?: boolean; showExportHtmlButton?: boolean; themeMode?: ThemeMode } = {};
+  if (hideLogo !== undefined) output.hideLogo = hideLogo;
+  if (showExportHtmlButton !== undefined) output.showExportHtmlButton = showExportHtmlButton;
+  if (themeMode !== undefined) output.themeMode = themeMode;
+  return output;
+};
+
 function emitSaveEvent(template: EmailTemplate) {
   const html = exportToHtml(template, 'placeholders');
   sendSaveEvent(html, template);
@@ -52,16 +100,44 @@ function App() {
   const isDirty = useEditorStore((s) => s.isDirty);
   const template = useEditorStore((s) => s.template);
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
+  const hideLogo = useConfigStore((s) => s.hideLogo);
+  const showExportHtmlButton = useConfigStore((s) => s.showExportHtmlButton);
+  const themeMode = useConfigStore((s) => s.themeMode);
   const setConfig = useConfigStore((s) => s.setConfig);
   const [showPreview, setShowPreview] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
+  const [prefersDarkScheme, setPrefersDarkScheme] = useState<boolean>(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return false;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
 
   useAutoSave();
 
   useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return undefined;
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (event: MediaQueryListEvent) => {
+      setPrefersDarkScheme(event.matches);
+    };
+
+    setPrefersDarkScheme(mediaQuery.matches);
+
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
+
+    mediaQuery.addListener(handleChange);
+    return () => mediaQuery.removeListener(handleChange);
+  }, []);
+
+  useEffect(() => {
     const stopListening = listenToParent({
       onInit: (config) => {
-        setConfig({ variables: normalizeVariables(config?.variables) });
+        setConfig({
+          variables: normalizeVariables(config?.variables),
+          ...normalizeUiContext(config),
+        });
         if (isEmailTemplate(config?.templateJson)) {
           loadTemplate(config.templateJson);
         }
@@ -114,13 +190,17 @@ function App() {
     URL.revokeObjectURL(url);
   };
 
+  const isDarkChrome = themeMode === 'dark' || (themeMode === 'system' && prefersDarkScheme);
+
   return (
-    <div className="app-shell">
+    <div className={`app-shell ${isDarkChrome ? 'theme-dark' : 'theme-light'}`}>
       <div className="top-toolbar">
-        <div className="brand">
-          <div className="brand-title">MailCraft</div>
-          <div className="brand-subtitle">Email Builder</div>
-        </div>
+        {!hideLogo && (
+          <div className="brand">
+            <div className="brand-title">MailCraft</div>
+            <div className="brand-subtitle">Email Builder</div>
+          </div>
+        )}
         <div className="toolbar-actions">
           <Button variant="secondary" onClick={() => setShowGallery(true)}>
             Gallery
@@ -131,9 +211,11 @@ function App() {
           <Button onClick={handleSave}>
             Save
           </Button>
-          <Button variant="default" onClick={handleExport}>
-            Export HTML
-          </Button>
+          {showExportHtmlButton && (
+            <Button variant="default" onClick={handleExport}>
+              Export HTML
+            </Button>
+          )}
           {isDirty && <Badge variant="secondary">Unsaved</Badge>}
         </div>
       </div>

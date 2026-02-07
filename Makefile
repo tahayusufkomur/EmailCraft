@@ -85,11 +85,18 @@ lint-frontend-builder: ## Type-check builder frontend
 
 # ─── Utilities ────────────────────────────────────────────
 
-seed: ## Create enterprise demo org + max quotas + API key + demo template
+seed: ## Create enterprise demo org + max quotas + static API key + demo user/password + demo template
 	@$(MANAGE) create_demo_org
 
-demo-org: ## Create demo org (usage: make demo-org ORG="Name" EMAIL="a@b.com" ENV=test)
-	@$(MANAGE) create_demo_org --org-name "$(or $(ORG),MailCraft Demo Enterprise)" --org-email "$(or $(EMAIL),demo-enterprise@mailcraft.dev)" --env $(or $(ENV),test)
+demo-org: ## Create demo org (usage: make demo-org ORG="Name" EMAIL="a@b.com" ENV=test API_KEY=mc_test_... USERNAME=demo USER_EMAIL=demo-user@mailcraft.dev PASSWORD=demo12345)
+	@$(MANAGE) create_demo_org \
+		--org-name "$(or $(ORG),MailCraft Demo Enterprise)" \
+		--org-email "$(or $(EMAIL),demo-enterprise@mailcraft.dev)" \
+		--env $(or $(ENV),test) \
+		$(if $(API_KEY),--api-key "$(API_KEY)",) \
+		$(if $(USERNAME),--demo-username "$(USERNAME)",) \
+		$(if $(USER_EMAIL),--demo-user-email "$(USER_EMAIL)",) \
+		$(if $(PASSWORD),--demo-password "$(PASSWORD)",)
 
 create-key: ## Create API key (usage: make create-key ORG="Name" EMAIL="a@b.com" ENV=live PLAN=starter)
 	@$(MANAGE) create_api_key --org-name "$(ORG)" --org-email "$(EMAIL)" --env $(or $(ENV),test) --plan $(or $(PLAN),free)
