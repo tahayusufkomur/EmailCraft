@@ -156,6 +156,7 @@ def create_session(request):
         'expires_at': expires_at.isoformat(),
         'config': {
             'plan': billing_org.plan,
+            'variables': org.available_variables or [],
             'max_upload_size_bytes': billing_org.max_upload_size_bytes,
             'storage_used_bytes': billing_org.storage_used_bytes,
             'storage_limit_bytes': billing_org.storage_limit_bytes,

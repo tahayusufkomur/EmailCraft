@@ -10,6 +10,12 @@ export interface SessionResponse {
   expires_at: string;
   config: {
     plan: string;
+    variables?: Array<{
+      key: string;
+      label: string;
+      defaultValue?: string;
+      type?: 'text' | 'url';
+    }>;
     max_upload_size_bytes: number;
     storage_used_bytes: number;
     storage_limit_bytes: number;
@@ -42,6 +48,7 @@ export interface PresignResponse {
 export interface UploadedImageItem {
   id: string;
   url: string;
+  filename: string;
   file_size: number;
   content_type: string;
   width: number | null;

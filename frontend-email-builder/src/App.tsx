@@ -197,6 +197,8 @@ function App() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const contextFromQuery = normalizeUiContextFromSearch(params);
+    const shouldApplyQueryContext =
+      asOptionalBooleanFromSearchParam(params.get('contextOverride')) === true || window.parent !== window;
     const apiKeyFromQuery = params.get('apiKey');
     let resolvedApiKey: string | null = null;
     if (apiKeyFromQuery) {
@@ -211,30 +213,49 @@ function App() {
       }
     }
 
-    if (resolvedApiKey) {
-      void api.createSession(window.location.origin)
-        .then((session) => {
-          const sessionUiContext = normalizeUiContextFromSession(session.config.widget_context);
-          setConfig({
-            sessionToken: session.token,
-            plan: session.config.plan,
-            maxUploadSize: session.config.max_upload_size_bytes,
-            storageUsed: session.config.storage_used_bytes,
-            storageLimit: session.config.storage_limit_bytes,
-            ...(hostContextAppliedRef.current ? {} : sessionUiContext),
-          });
-          if (Object.keys(contextFromQuery).length > 0) {
-            setConfig(contextFromQuery);
-          }
-        })
-        .catch(() => {
-          if (Object.keys(contextFromQuery).length > 0) {
-            setConfig(contextFromQuery);
-          }
+    const syncSessionConfig = async (apiKey: string) => {
+      try {
+        const session = await api.createSession(window.location.origin);
+        const sessionUiContext = normalizeUiContextFromSession(session.config.widget_context);
+        setConfig({
+          apiKey,
+          sessionToken: session.token,
+          plan: session.config.plan,
+          variables: normalizeVariables(session.config.variables),
+          maxUploadSize: session.config.max_upload_size_bytes,
+          storageUsed: session.config.storage_used_bytes,
+          storageLimit: session.config.storage_limit_bytes,
+          ...(hostContextAppliedRef.current ? {} : sessionUiContext),
         });
-    } else if (Object.keys(contextFromQuery).length > 0) {
+        if (shouldApplyQueryContext && Object.keys(contextFromQuery).length > 0) {
+          setConfig(contextFromQuery);
+        }
+      } catch {
+        if (shouldApplyQueryContext && Object.keys(contextFromQuery).length > 0) {
+          setConfig(contextFromQuery);
+        }
+      }
+    };
+
+    if (resolvedApiKey) {
+      void syncSessionConfig(resolvedApiKey);
+    } else if (shouldApplyQueryContext && Object.keys(contextFromQuery).length > 0) {
       setConfig(contextFromQuery);
     }
+
+    const refreshSessionIfNeeded = () => {
+      if (!resolvedApiKey) return;
+      void syncSessionConfig(resolvedApiKey);
+    };
+    const handleWindowFocus = () => {
+      refreshSessionIfNeeded();
+    };
+    const handleVisibilityChange = () => {
+      if (document.visibilityState !== 'visible') return;
+      refreshSessionIfNeeded();
+    };
+    window.addEventListener('focus', handleWindowFocus);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     const stopListening = listenToParent({
       onInit: (config) => {
@@ -242,10 +263,18 @@ function App() {
         if (Object.keys(uiContext).length > 0) {
           hostContextAppliedRef.current = true;
         }
-        setConfig({
-          variables: normalizeVariables(config?.variables),
+        const nextConfig: {
+          variables?: Variable[];
+          showLogo?: boolean;
+          showExportHtmlButton?: boolean;
+          themeMode?: ThemeMode;
+        } = {
           ...uiContext,
-        });
+        };
+        if (config && typeof config === 'object' && 'variables' in config) {
+          nextConfig.variables = normalizeVariables(config.variables);
+        }
+        setConfig(nextConfig);
         if (isEmailTemplate(config?.templateJson)) {
           loadTemplate(config.templateJson);
         }
@@ -266,7 +295,11 @@ function App() {
     }
 
     sendReadyEvent();
-    return stopListening;
+    return () => {
+      stopListening();
+      window.removeEventListener('focus', handleWindowFocus);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, [loadTemplate, setConfig]);
 
   const handleSave = () => {
@@ -307,7 +340,7 @@ function App() {
         )}
         <div className="toolbar-actions">
           <Button variant="secondary" onClick={() => setShowGallery(true)}>
-            Gallery
+            Templates
           </Button>
           <Button variant="secondary" onClick={() => setShowMedia(true)}>
             Media

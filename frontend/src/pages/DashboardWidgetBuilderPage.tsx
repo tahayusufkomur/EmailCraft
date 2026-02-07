@@ -2,12 +2,30 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Label } from '../components/ui/label';
+import { Input } from '../components/ui/input';
 import { api } from '../lib/api';
 import { useAuth } from '../lib/auth';
-import type { OrganizationWithApiKeys, ThemeMode } from '../types/api';
+import type { OrganizationVariable, OrganizationWithApiKeys, ThemeMode } from '../types/api';
 
 const DEFAULT_THEME_MODE: ThemeMode = 'system';
+const VARIABLE_KEY_PATTERN = /^[A-Za-z_][A-Za-z0-9_]*$/;
+
+const toVariableDraft = (item: OrganizationVariable): OrganizationVariable => ({
+  key: item.key || '',
+  label: item.label || '',
+  defaultValue: item.defaultValue || '',
+  type: item.type === 'url' ? 'url' : 'text',
+});
+
+const sanitizeVariables = (items: OrganizationVariable[]): OrganizationVariable[] =>
+  items
+    .map((item) => ({
+      key: item.key.trim(),
+      label: item.label.trim(),
+      type: item.type === 'url' ? 'url' : 'text',
+      defaultValue: item.defaultValue?.trim() || undefined,
+    }))
+    .filter((item) => item.key.length > 0 && item.label.length > 0);
 
 function parseInitialOrganizationId() {
   const params = new URLSearchParams(window.location.search);
@@ -21,7 +39,9 @@ export function DashboardWidgetBuilderPage() {
   const [showLogo, setShowLogo] = useState(true);
   const [showExportHtmlButton, setShowExportHtmlButton] = useState(true);
   const [themeMode, setThemeMode] = useState<ThemeMode>(DEFAULT_THEME_MODE);
+  const [availableVariables, setAvailableVariables] = useState<OrganizationVariable[]>([]);
   const [generatedKeys, setGeneratedKeys] = useState<Record<string, string>>({});
+  const [previewRevision, setPreviewRevision] = useState(0);
   const [status, setStatus] = useState('Ready');
   const [error, setError] = useState<string | null>(null);
   const [busyAction, setBusyAction] = useState<string | null>(null);
@@ -59,7 +79,41 @@ export function DashboardWidgetBuilderPage() {
     setShowLogo(selectedOrganization.show_logo);
     setShowExportHtmlButton(selectedOrganization.show_export_html_button);
     setThemeMode(selectedOrganization.theme_mode);
+    setAvailableVariables((selectedOrganization.available_variables || []).map(toVariableDraft));
   }, [selectedOrganization]);
+
+  const variableValidationError = useMemo(() => {
+    for (const item of availableVariables) {
+      const key = item.key.trim();
+      const label = item.label.trim();
+      const hasAnyValue = key.length > 0 || label.length > 0 || (item.defaultValue || '').trim().length > 0;
+      if (!hasAnyValue) continue;
+      if (!key || !label) {
+        return 'Each variable must include both key and label.';
+      }
+    }
+
+    const sanitized = sanitizeVariables(availableVariables);
+    const duplicates = new Set<string>();
+    const seen = new Set<string>();
+
+    for (const item of sanitized) {
+      if (!VARIABLE_KEY_PATTERN.test(item.key)) {
+        return `Invalid variable key "${item.key}". Use letters, digits, and underscores only, starting with a letter or underscore.`;
+      }
+      if (seen.has(item.key)) {
+        duplicates.add(item.key);
+      } else {
+        seen.add(item.key);
+      }
+    }
+
+    if (duplicates.size > 0) {
+      return `Duplicate variable keys: ${Array.from(duplicates).sort().join(', ')}.`;
+    }
+
+    return null;
+  }, [availableVariables]);
 
   const ensureReusableApiKey = useCallback(
     async (organizationId: string, refresh = false) => {
@@ -89,9 +143,10 @@ export function DashboardWidgetBuilderPage() {
       showLogo: showLogo ? 'true' : 'false',
       showExportHtmlButton: showExportHtmlButton ? 'true' : 'false',
       themeMode,
+      rev: String(previewRevision),
     });
     return `/builder/?${params.toString()}`;
-  }, [generatedKeys, selectedOrganizationId, showExportHtmlButton, showLogo, themeMode]);
+  }, [generatedKeys, previewRevision, selectedOrganizationId, showExportHtmlButton, showLogo, themeMode]);
 
   const copyToClipboard = async (value: string) => {
     if (navigator.clipboard?.writeText) {
@@ -114,6 +169,10 @@ export function DashboardWidgetBuilderPage() {
 
   const handleSaveSettings = async () => {
     if (!token || !selectedOrganizationId) return;
+    if (variableValidationError) {
+      setError(variableValidationError);
+      return;
+    }
     setBusyAction('save');
     setError(null);
     try {
@@ -121,8 +180,10 @@ export function DashboardWidgetBuilderPage() {
         show_logo: showLogo,
         show_export_html_button: showExportHtmlButton,
         theme_mode: themeMode,
+        available_variables: sanitizeVariables(availableVariables),
       });
       await loadOrganizations();
+      setPreviewRevision((previous) => previous + 1);
       setStatus('Settings saved');
     } catch (err) {
       setError((err as Error).message);
@@ -163,6 +224,39 @@ export function DashboardWidgetBuilderPage() {
     } finally {
       setBusyAction(null);
     }
+  };
+
+  const handleAddVariable = () => {
+    setAvailableVariables((previous) => [
+      ...previous,
+      { key: '', label: '', defaultValue: '', type: 'text' },
+    ]);
+  };
+
+  const handleRemoveVariable = (index: number) => {
+    setAvailableVariables((previous) => previous.filter((_, currentIndex) => currentIndex !== index));
+  };
+
+  const handleVariableChange = (
+    index: number,
+    field: keyof OrganizationVariable,
+    value: string,
+  ) => {
+    setAvailableVariables((previous) =>
+      previous.map((item, currentIndex) => {
+        if (currentIndex !== index) return item;
+        if (field === 'type') {
+          return { ...item, type: value === 'url' ? 'url' : 'text' };
+        }
+        if (field === 'label') {
+          return { ...item, label: value };
+        }
+        if (field === 'defaultValue') {
+          return { ...item, defaultValue: value };
+        }
+        return { ...item, key: value };
+      }),
+    );
   };
 
   const handleOpenBuilder = async () => {
@@ -253,8 +347,77 @@ export function DashboardWidgetBuilderPage() {
             </div>
           </div>
 
+          <div className="space-y-3 rounded-md border border-border p-3">
+            <div className="flex items-center justify-between gap-2">
+              <div>
+                <p className="text-sm font-medium">Available variables</p>
+                <p className="text-xs text-muted-foreground">
+                  These appear in the builder variable dropdown for this organization.
+                </p>
+              </div>
+              <Button type="button" variant="outline" onClick={handleAddVariable}>
+                + Add variable
+              </Button>
+            </div>
+
+            {availableVariables.length === 0 ? (
+              <p className="text-xs text-muted-foreground">
+                No variables configured yet.
+              </p>
+            ) : (
+              <div className="space-y-2">
+                {availableVariables.map((variable, index) => (
+                  <div key={`${index}-${variable.key}`} className="grid gap-2 md:grid-cols-12">
+                    <Input
+                      className="md:col-span-3"
+                      placeholder="key (user_name)"
+                      value={variable.key}
+                      onChange={(event) => handleVariableChange(index, 'key', event.target.value)}
+                    />
+                    <Input
+                      className="md:col-span-3"
+                      placeholder="Label"
+                      value={variable.label}
+                      onChange={(event) => handleVariableChange(index, 'label', event.target.value)}
+                    />
+                    <select
+                      className="h-10 rounded-md border border-input bg-background px-3 text-sm md:col-span-2"
+                      value={variable.type || 'text'}
+                      onChange={(event) => handleVariableChange(index, 'type', event.target.value)}
+                    >
+                      <option value="text">Text</option>
+                      <option value="url">URL</option>
+                    </select>
+                    <Input
+                      className="md:col-span-3"
+                      placeholder="Default value (optional)"
+                      value={variable.defaultValue || ''}
+                      onChange={(event) => handleVariableChange(index, 'defaultValue', event.target.value)}
+                    />
+                    <Button
+                      className="md:col-span-1"
+                      type="button"
+                      variant="outline"
+                      onClick={() => handleRemoveVariable(index)}
+                    >
+                      ×
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            )}
+            {variableValidationError && (
+              <p className="text-xs text-destructive">{variableValidationError}</p>
+            )}
+          </div>
+
           <div className="flex flex-wrap gap-2">
-            <Button type="button" variant="outline" onClick={handleSaveSettings} disabled={busyAction === 'save'}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleSaveSettings}
+              disabled={busyAction === 'save' || Boolean(variableValidationError)}
+            >
               {busyAction === 'save' ? 'Saving...' : 'Save settings'}
             </Button>
             <Button type="button" variant="secondary" onClick={handleCopyApiKey} disabled={busyAction === 'copy'}>

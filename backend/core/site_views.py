@@ -194,6 +194,7 @@ def site_organizations(request):
                 email=generated_org_email,
                 plan=plan,
                 allowed_origins=data.get('allowed_origins', []),
+                available_variables=data.get('available_variables', []),
                 show_logo=data.get('show_logo', True),
                 show_export_html_button=data.get('show_export_html_button', True),
                 theme_mode=data.get('theme_mode', 'system'),
@@ -247,7 +248,14 @@ def site_organization_detail(request, organization_id):
 
     org = membership.organization
     changed_fields = []
-    for field in ['name', 'allowed_origins', 'show_logo', 'show_export_html_button', 'theme_mode']:
+    for field in [
+        'name',
+        'allowed_origins',
+        'available_variables',
+        'show_logo',
+        'show_export_html_button',
+        'theme_mode',
+    ]:
         if field in data:
             setattr(org, field, data[field])
             changed_fields.append(field)

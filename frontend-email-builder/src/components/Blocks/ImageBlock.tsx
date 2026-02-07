@@ -17,15 +17,36 @@ export function ImageBlock({ block }: Props) {
   const [showMediaLibrary, setShowMediaLibrary] = useState(false);
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
     const input = e.currentTarget;
 
     setIsUploading(true);
     setErrorMessage(null);
     try {
-      const uploaded = await api.uploadImage(file);
-      applyImageUrlToBlock(block, uploaded.file_url, updateBlock);
+      let firstUploadedUrl: string | null = null;
+      let successfulUploads = 0;
+      const failedFiles: string[] = [];
+
+      for (const file of files) {
+        try {
+          const uploaded = await api.uploadImage(file);
+          successfulUploads += 1;
+          if (!firstUploadedUrl) {
+            firstUploadedUrl = uploaded.file_url;
+          }
+        } catch {
+          failedFiles.push(file.name);
+        }
+      }
+
+      if (firstUploadedUrl) {
+        applyImageUrlToBlock(block, firstUploadedUrl, updateBlock);
+      }
+
+      if (failedFiles.length > 0) {
+        setErrorMessage(`Uploaded ${successfulUploads}/${files.length}. Failed: ${failedFiles.join(', ')}`);
+      }
     } catch (error) {
       if (error instanceof Error && error.message.trim().length > 0) {
         setErrorMessage(error.message);
@@ -67,6 +88,7 @@ export function ImageBlock({ block }: Props) {
             ref={fileInputRef}
             type="file"
             accept="image/png,image/jpeg,image/gif,image/webp"
+            multiple
             style={{ display: 'none' }}
             onChange={handleFileSelect}
           />

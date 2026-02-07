@@ -74,6 +74,7 @@ class UploadedImageListSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'url',
+            'filename',
             'file_size',
             'content_type',
             'width',

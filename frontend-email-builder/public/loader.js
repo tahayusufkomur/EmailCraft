@@ -118,16 +118,19 @@
         switch (data.type) {
           case 'MAILCRAFT_READY':
             self._ready = true;
+            var initPayload = {
+              templateJson: config.templateJson || null,
+              context: context,
+            };
+            if (Array.isArray(config.variables)) {
+              initPayload.variables = config.variables;
+            }
             // Send config to iframe
             iframe.contentWindow.postMessage(
               {
                 source: 'mailcraft-host',
                 type: 'MAILCRAFT_INIT',
-                payload: {
-                  variables: config.variables || [],
-                  templateJson: config.templateJson || null,
-                  context: context,
-                },
+                payload: initPayload,
               },
               EDITOR_ORIGIN
             );

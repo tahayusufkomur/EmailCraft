@@ -1,5 +1,13 @@
 export type PlanKey = 'free' | 'starter' | 'pro' | 'enterprise';
 export type ThemeMode = 'light' | 'dark' | 'system';
+export type VariableType = 'text' | 'url';
+
+export interface OrganizationVariable {
+  key: string;
+  label: string;
+  defaultValue?: string;
+  type?: VariableType;
+}
 
 export interface PricingPlan {
   plan: PlanKey;
@@ -34,6 +42,7 @@ export interface OrganizationSummary {
   email: string;
   plan: PlanKey;
   allowed_origins: string[];
+  available_variables: OrganizationVariable[];
   show_logo: boolean;
   show_export_html_button: boolean;
   theme_mode: ThemeMode;

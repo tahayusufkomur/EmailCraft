@@ -26,6 +26,7 @@ class Organization(models.Model):
     email = models.EmailField(unique=True)
     plan = models.CharField(max_length=20, choices=PLAN_CHOICES, default='free')
     allowed_origins = models.JSONField(default=list, blank=True)
+    available_variables = models.JSONField(default=list, blank=True)
     rendered_emails_count = models.BigIntegerField(default=0)
     rendered_emails_limit = models.BigIntegerField(default=1000)
     storage_used_bytes = models.BigIntegerField(default=0)

@@ -10,6 +10,8 @@ import type {
 } from '../types/api';
 
 const BASE_URL = import.meta.env.VITE_API_URL || '/api';
+type MediaSortField = 'date' | 'name' | 'size';
+type SortOrder = 'asc' | 'desc';
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const apiKey = localStorage.getItem('mailcraft_api_key') || '';
@@ -62,8 +64,15 @@ export const api = {
   getGallery: (category?: string) =>
     request<{ data: TemplateListItem[] }>(`/gallery${category ? `?category=${category}` : ''}`),
 
-  listMedia: () =>
-    request<{ results: UploadedImageItem[] }>('/media'),
+  listMedia: (params?: { q?: string; sort?: MediaSortField; order?: SortOrder }) => {
+    const searchParams = new URLSearchParams();
+    const query = params?.q?.trim();
+    if (query) searchParams.set('q', query);
+    if (params?.sort) searchParams.set('sort', params.sort);
+    if (params?.order) searchParams.set('order', params.order);
+    const suffix = searchParams.toString();
+    return request<{ results: UploadedImageItem[] }>(`/media${suffix ? `?${suffix}` : ''}`);
+  },
 
   getPresignedUrl: (data: { filename: string; content_type: string; file_size: number }) =>
     request<PresignResponse>('/upload/presign', {

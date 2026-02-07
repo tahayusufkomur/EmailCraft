@@ -1,5 +1,6 @@
 import type {
   LandingResponse,
+  OrganizationVariable,
   PricingResponse,
   SiteApiKeyCreateResponse,
   SiteDashboardResponse,
@@ -85,6 +86,7 @@ export const api = {
     payload: {
       name: string;
       allowed_origins?: string[];
+      available_variables?: OrganizationVariable[];
       show_logo?: boolean;
       show_export_html_button?: boolean;
       theme_mode?: ThemeMode;
@@ -102,6 +104,7 @@ export const api = {
     payload: {
       name?: string;
       allowed_origins?: string[];
+      available_variables?: OrganizationVariable[];
       show_logo?: boolean;
       show_export_html_button?: boolean;
       theme_mode?: ThemeMode;

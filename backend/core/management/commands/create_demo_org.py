@@ -133,6 +133,10 @@ class Command(BaseCommand):
             'http://localhost:5173',
             'http://localhost:5174',
         ]
+        default_available_variables = [
+            {'key': 'user_name', 'label': 'User Name', 'defaultValue': 'Demo User', 'type': 'text'},
+            {'key': 'user_email', 'label': 'User Email', 'defaultValue': 'demo-user@mailcraft.dev', 'type': 'text'},
+        ]
 
         org, created = Organization.objects.get_or_create(
             email=options['org_email'],
@@ -140,6 +144,7 @@ class Command(BaseCommand):
                 'name': options['org_name'],
                 'plan': plan_key,
                 'allowed_origins': default_allowed_origins,
+                'available_variables': default_available_variables,
             },
         )
 
@@ -147,6 +152,7 @@ class Command(BaseCommand):
         org.name = options['org_name']
         org.plan = plan_key
         org.allowed_origins = merged_origins
+        org.available_variables = default_available_variables
         org.apply_plan_limits(save=False)
         org.stripe_customer_id = org.stripe_customer_id or f'cus_demo_{org.id.hex[:14]}'
         org.stripe_subscription_id = f'sub_demo_{plan_key}_{org.id.hex[:10]}'
@@ -155,6 +161,7 @@ class Command(BaseCommand):
                 'name',
                 'plan',
                 'allowed_origins',
+                'available_variables',
                 'rendered_emails_limit',
                 'storage_limit_bytes',
                 'stripe_customer_id',

@@ -1,7 +1,7 @@
 import { useEditorStore } from '../../store/editorStore';
 import type { EmailTemplate } from '../../types/blocks';
 
-// Pre-built gallery templates
+// Pre-built templates
 const GALLERY_TEMPLATES: { name: string; category: string; template: EmailTemplate }[] = [
   {
     name: 'Welcome Email',
@@ -241,7 +241,7 @@ export function TemplateGallery({ onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-          <h2 style={{ margin: 0, fontSize: 18 }}>Template Gallery</h2>
+          <h2 style={{ margin: 0, fontSize: 18 }}>Templates</h2>
           <button className="btn" onClick={onClose}>&times;</button>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>

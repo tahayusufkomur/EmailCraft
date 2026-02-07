@@ -8,6 +8,8 @@ interface Props {
 }
 
 const ACCEPTED_UPLOAD_TYPES = 'image/png,image/jpeg,image/gif,image/webp';
+type MediaSortField = 'date' | 'name' | 'size';
+type SortOrder = 'asc' | 'desc';
 
 const formatBytes = (bytes: number): string => {
   if (!Number.isFinite(bytes) || bytes <= 0) return '0 B';
@@ -32,14 +34,21 @@ export function MediaLibraryModal({ onClose, onSelectUrl }: Props) {
   const [isLoading, setIsLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortField, setSortField] = useState<MediaSortField>('date');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
+  const [uploadProgress, setUploadProgress] = useState<{ completed: number; total: number } | null>(null);
   const [copiedItemId, setCopiedItemId] = useState<string | null>(null);
   const uploadInputRef = useRef<HTMLInputElement>(null);
 
-  const loadMedia = useCallback(async (showLoading = true) => {
+  const loadMedia = useCallback(async (
+    params: { q?: string; sort?: MediaSortField; order?: SortOrder },
+    showLoading = true,
+  ) => {
     if (showLoading) setIsLoading(true);
     setError(null);
     try {
-      const response = await api.listMedia();
+      const response = await api.listMedia(params);
       setItems(response.results);
     } catch (nextError) {
       setError(asErrorMessage(nextError));
@@ -49,27 +58,68 @@ export function MediaLibraryModal({ onClose, onSelectUrl }: Props) {
   }, []);
 
   useEffect(() => {
-    void loadMedia();
-  }, [loadMedia]);
+    const timeout = window.setTimeout(() => {
+      void loadMedia(
+        {
+          q: searchQuery,
+          sort: sortField,
+          order: sortOrder,
+        },
+        true,
+      );
+    }, 180);
+    return () => window.clearTimeout(timeout);
+  }, [loadMedia, searchQuery, sortField, sortOrder]);
 
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.currentTarget.files?.[0];
-    if (!file) return;
+    const files = Array.from(event.currentTarget.files || []);
+    if (files.length === 0) return;
     const input = event.currentTarget;
 
     setIsUploading(true);
+    setUploadProgress({ completed: 0, total: files.length });
     setError(null);
+
+    let firstUploadedUrl: string | null = null;
+    let successfulUploads = 0;
+    const failedFiles: string[] = [];
+
     try {
-      const uploaded = await api.uploadImage(file);
-      await loadMedia(false);
-      if (onSelectUrl) {
-        onSelectUrl(uploaded.file_url);
+      for (let index = 0; index < files.length; index += 1) {
+        const file = files[index];
+        try {
+          const uploaded = await api.uploadImage(file);
+          successfulUploads += 1;
+          if (!firstUploadedUrl) {
+            firstUploadedUrl = uploaded.file_url;
+          }
+        } catch {
+          failedFiles.push(file.name);
+        } finally {
+          setUploadProgress({ completed: index + 1, total: files.length });
+        }
+      }
+
+      await loadMedia(
+        {
+          q: searchQuery,
+          sort: sortField,
+          order: sortOrder,
+        },
+        false,
+      );
+
+      if (failedFiles.length > 0) {
+        setError(`Uploaded ${successfulUploads}/${files.length}. Failed: ${failedFiles.join(', ')}`);
+      }
+
+      if (onSelectUrl && files.length === 1 && firstUploadedUrl) {
+        onSelectUrl(firstUploadedUrl);
         onClose();
       }
-    } catch (nextError) {
-      setError(asErrorMessage(nextError));
     } finally {
       input.value = '';
+      setUploadProgress(null);
       setIsUploading(false);
     }
   };
@@ -88,6 +138,8 @@ export function MediaLibraryModal({ onClose, onSelectUrl }: Props) {
     }
   };
 
+  const hasSearch = searchQuery.trim().length > 0;
+
   return (
     <div className="media-modal-overlay" onClick={onClose}>
       <div className="media-modal-panel" onClick={(event) => event.stopPropagation()}>
@@ -100,7 +152,9 @@ export function MediaLibraryModal({ onClose, onSelectUrl }: Props) {
               onClick={() => uploadInputRef.current?.click()}
               disabled={isUploading}
             >
-              {isUploading ? 'Uploading...' : 'Upload new photo'}
+              {isUploading && uploadProgress
+                ? `Uploading ${uploadProgress.completed}/${uploadProgress.total}...`
+                : 'Upload photos'}
             </button>
             <button className="btn" type="button" onClick={onClose} aria-label="Close media modal">
               &times;
@@ -112,23 +166,67 @@ export function MediaLibraryModal({ onClose, onSelectUrl }: Props) {
           ref={uploadInputRef}
           type="file"
           accept={ACCEPTED_UPLOAD_TYPES}
+          multiple
           style={{ display: 'none' }}
           onChange={handleUpload}
         />
 
         {error && <div className="media-modal-error">{error}</div>}
 
+        <div className="media-modal-controls">
+          <label className="media-modal-control">
+            <span>Search</span>
+            <input
+              type="text"
+              className="media-modal-input"
+              placeholder="Search by filename"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+            />
+          </label>
+
+          <label className="media-modal-control">
+            <span>Sort by</span>
+            <select
+              className="media-modal-select"
+              value={sortField}
+              onChange={(event) => setSortField(event.target.value as MediaSortField)}
+            >
+              <option value="date">Date</option>
+              <option value="name">Name</option>
+              <option value="size">Size</option>
+            </select>
+          </label>
+
+          <label className="media-modal-control">
+            <span>Order</span>
+            <select
+              className="media-modal-select"
+              value={sortOrder}
+              onChange={(event) => setSortOrder(event.target.value as SortOrder)}
+            >
+              <option value="desc">Desc</option>
+              <option value="asc">Asc</option>
+            </select>
+          </label>
+        </div>
+
         {isLoading ? (
           <div className="media-modal-empty">Loading media...</div>
         ) : items.length === 0 ? (
           <div className="media-modal-empty">
-            No uploaded media yet. Upload a photo to start reusing it across templates.
+            {hasSearch
+              ? 'No media found for this search.'
+              : 'No uploaded media yet. Upload photos to start reusing them across templates.'}
           </div>
         ) : (
           <div className="media-grid">
             {items.map((item) => (
               <article key={item.id} className="media-card">
                 <img src={item.url} alt="" loading="lazy" className="media-card-image" />
+                <div className="media-card-name" title={item.filename || 'Untitled'}>
+                  {item.filename || 'Untitled'}
+                </div>
                 <div className="media-card-meta">
                   <span>{formatBytes(item.file_size)}</span>
                   <span>{new Date(item.created_at).toLocaleDateString()}</span>

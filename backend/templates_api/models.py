@@ -52,6 +52,7 @@ class UploadedImage(models.Model):
     org = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='images')
     s3_key = models.CharField(max_length=500, unique=True)
     url = models.URLField()
+    filename = models.CharField(max_length=255, blank=True, default='')
     file_size = models.IntegerField()
     content_type = models.CharField(max_length=50)
     width = models.IntegerField(null=True, blank=True)

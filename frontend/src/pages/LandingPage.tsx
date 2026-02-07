@@ -50,7 +50,7 @@ export function LandingPage() {
       <section className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-14 md:grid-cols-2">
         {(data?.features ?? [
           'Email-safe HTML export',
-          'Template management and gallery',
+          'Template management and templates',
           'S3-backed media uploads by organization',
           'API-key based multi-tenant access',
         ]).map((feature, index) => {

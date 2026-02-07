@@ -2,6 +2,7 @@ import uuid
 
 import boto3
 from django.conf import settings
+from django.db.models import Q
 from rest_framework import status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -61,7 +62,25 @@ def gallery_list(request):
 @api_view(['GET'])
 def media_list(request):
     """GET /api/v1/media — list uploaded media for the current organization."""
-    queryset = UploadedImage.objects.for_org(request.org).order_by('-created_at')
+    queryset = UploadedImage.objects.for_org(request.org)
+    search_query = (request.query_params.get('q') or '').strip()
+    if search_query:
+        queryset = queryset.filter(
+            Q(filename__icontains=search_query)
+            | Q(url__icontains=search_query)
+        )
+
+    sort_field_key = (request.query_params.get('sort') or 'date').strip().lower()
+    order_key = (request.query_params.get('order') or 'desc').strip().lower()
+    sort_field_map = {
+        'date': 'created_at',
+        'name': 'filename',
+        'size': 'file_size',
+    }
+    sort_field = sort_field_map.get(sort_field_key, 'created_at')
+    ordering_prefix = '' if order_key == 'asc' else '-'
+    queryset = queryset.order_by(f'{ordering_prefix}{sort_field}', '-created_at')
+
     serializer = UploadedImageListSerializer(queryset, many=True)
     return Response({'results': serializer.data})
 
@@ -133,10 +152,14 @@ def presign_upload(request):
         file_url = f"https://{bucket_name}.s3.{settings.AWS_S3_REGION_NAME}.amazonaws.com/{s3_key}"
 
     # Record the image
+    requested_filename = data['filename'].split('/')[-1].split('\\')[-1].strip()
+    safe_filename = requested_filename or 'upload'
+
     UploadedImage.objects.create(
         org=org,
         s3_key=s3_key,
         url=file_url,
+        filename=safe_filename[:255],
         file_size=data['file_size'],
         content_type=data['content_type'],
     )

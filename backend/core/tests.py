@@ -88,6 +88,9 @@ class SiteOrganizationsApiTests(TestCase):
             {
                 'name': 'Second Org',
                 'allowed_origins': ['http://localhost:5173'],
+                'available_variables': [
+                    {'key': 'user_name', 'label': 'User Name', 'defaultValue': 'Guest', 'type': 'text'},
+                ],
                 'show_logo': False,
                 'show_export_html_button': False,
                 'theme_mode': 'dark',
@@ -106,12 +109,19 @@ class SiteOrganizationsApiTests(TestCase):
         self.assertFalse(create_response.data['organization']['show_logo'])
         self.assertFalse(create_response.data['organization']['show_export_html_button'])
         self.assertEqual(create_response.data['organization']['theme_mode'], 'dark')
+        self.assertEqual(
+            create_response.data['organization']['available_variables'],
+            [{'key': 'user_name', 'label': 'User Name', 'defaultValue': 'Guest', 'type': 'text'}],
+        )
 
         update_response = self.client.patch(
             f'/api/v1/site/organizations/{org_id}/',
             {
                 'name': 'Second Org Updated',
                 'allowed_origins': ['http://localhost:5174'],
+                'available_variables': [
+                    {'key': 'user_email', 'label': 'User Email', 'type': 'text'},
+                ],
                 'show_logo': True,
                 'show_export_html_button': True,
                 'theme_mode': 'light',
@@ -121,6 +131,10 @@ class SiteOrganizationsApiTests(TestCase):
         self.assertEqual(update_response.status_code, 200)
         self.assertEqual(update_response.data['name'], 'Second Org Updated')
         self.assertEqual(update_response.data['allowed_origins'], ['http://localhost:5174'])
+        self.assertEqual(
+            update_response.data['available_variables'],
+            [{'key': 'user_email', 'label': 'User Email', 'type': 'text'}],
+        )
         self.assertTrue(update_response.data['show_logo'])
         self.assertTrue(update_response.data['show_export_html_button'])
         self.assertEqual(update_response.data['theme_mode'], 'light')
@@ -193,6 +207,10 @@ class SiteOrganizationsApiTests(TestCase):
             email='secondary-billing@mailcraft.dev',
             plan='free',
             allowed_origins=['http://localhost:5173'],
+            available_variables=[
+                {'key': 'user_name', 'label': 'User Name', 'defaultValue': 'Guest', 'type': 'text'},
+                {'key': 'user_email', 'label': 'User Email', 'type': 'text'},
+            ],
             show_logo=False,
             show_export_html_button=False,
             theme_mode='dark',
@@ -220,6 +238,13 @@ class SiteOrganizationsApiTests(TestCase):
         self.assertEqual(
             response.data['config']['rendered_emails_limit'],
             self.billing_org.rendered_emails_limit,
+        )
+        self.assertEqual(
+            response.data['config']['variables'],
+            [
+                {'key': 'user_name', 'label': 'User Name', 'defaultValue': 'Guest', 'type': 'text'},
+                {'key': 'user_email', 'label': 'User Email', 'type': 'text'},
+            ],
         )
         self.assertEqual(
             response.data['config']['widget_context'],
@@ -266,6 +291,7 @@ class SiteOrganizationsApiTests(TestCase):
             org=self.billing_org,
             s3_key='uploads/billing/first.png',
             url='https://cdn.example.com/uploads/billing/first.png',
+            filename='alpha.png',
             file_size=1024,
             content_type='image/png',
         )
@@ -273,6 +299,7 @@ class SiteOrganizationsApiTests(TestCase):
             org=self.billing_org,
             s3_key='uploads/billing/second.png',
             url='https://cdn.example.com/uploads/billing/second.png',
+            filename='zeta.png',
             file_size=2048,
             content_type='image/png',
         )
@@ -280,6 +307,7 @@ class SiteOrganizationsApiTests(TestCase):
             org=other_org,
             s3_key='uploads/other/hidden.png',
             url='https://cdn.example.com/uploads/other/hidden.png',
+            filename='hidden.png',
             file_size=4096,
             content_type='image/png',
         )
@@ -292,3 +320,33 @@ class SiteOrganizationsApiTests(TestCase):
             response.data['results'][0]['url'],
             'https://cdn.example.com/uploads/billing/second.png',
         )
+        self.assertEqual(response.data['results'][0]['filename'], 'zeta.png')
+
+        search_response = self.client.get('/api/v1/media?q=alp', HTTP_X_API_KEY=raw_key)
+        self.assertEqual(search_response.status_code, 200)
+        self.assertEqual(len(search_response.data['results']), 1)
+        self.assertEqual(search_response.data['results'][0]['filename'], 'alpha.png')
+
+        sort_by_size = self.client.get('/api/v1/media?sort=size&order=asc', HTTP_X_API_KEY=raw_key)
+        self.assertEqual(sort_by_size.status_code, 200)
+        self.assertEqual(sort_by_size.data['results'][0]['filename'], 'alpha.png')
+
+        sort_by_name_desc = self.client.get('/api/v1/media?sort=name&order=desc', HTTP_X_API_KEY=raw_key)
+        self.assertEqual(sort_by_name_desc.status_code, 200)
+        self.assertEqual(sort_by_name_desc.data['results'][0]['filename'], 'zeta.png')
+
+    def test_create_org_rejects_duplicate_available_variable_keys(self):
+        response = self.client.post(
+            '/api/v1/site/organizations/',
+            {
+                'name': 'Duplicate Variable Org',
+                'available_variables': [
+                    {'key': 'user_name', 'label': 'User Name', 'type': 'text'},
+                    {'key': 'user_name', 'label': 'User Name Again', 'type': 'text'},
+                ],
+            },
+            format='json',
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('available_variables', response.data)

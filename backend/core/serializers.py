@@ -3,10 +3,52 @@ from rest_framework import serializers
 from core.models import ApiKey, Organization, UserOrganization
 
 
+class OrganizationVariableSerializer(serializers.Serializer):
+    key = serializers.CharField(max_length=100)
+    label = serializers.CharField(max_length=100)
+    defaultValue = serializers.CharField(required=False, allow_blank=True)
+    type = serializers.ChoiceField(choices=['text', 'url'], required=False, default='text')
+
+    def validate_key(self, value):
+        from templates_api.export_engine import validate_variable_key
+
+        normalized = value.strip()
+        if not validate_variable_key(normalized):
+            raise serializers.ValidationError(
+                'Variable key must contain only letters, digits, and underscores, '
+                'and start with a letter or underscore.'
+            )
+        return normalized
+
+    def validate_label(self, value):
+        normalized = value.strip()
+        if not normalized:
+            raise serializers.ValidationError('Variable label cannot be empty.')
+        return normalized
+
+
+def validate_organization_variables(value):
+    seen = set()
+    duplicate_keys = set()
+    for item in value:
+        key = item['key']
+        if key in seen:
+            duplicate_keys.add(key)
+        else:
+            seen.add(key)
+    duplicate_keys = sorted(duplicate_keys)
+    if duplicate_keys:
+        raise serializers.ValidationError(
+            f"Duplicate variable key(s): {', '.join(duplicate_keys)}."
+        )
+    return value
+
+
 class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organization
         fields = ['id', 'name', 'email', 'plan', 'allowed_origins',
+                  'available_variables',
                   'show_logo', 'show_export_html_button', 'theme_mode',
                   'rendered_emails_count', 'rendered_emails_limit',
                   'storage_used_bytes', 'storage_limit_bytes', 'created_at']
@@ -71,6 +113,7 @@ class SiteOrganizationCreateSerializer(serializers.Serializer):
         required=False,
         default=list,
     )
+    available_variables = OrganizationVariableSerializer(many=True, required=False, default=list)
     show_logo = serializers.BooleanField(required=False, default=True)
     show_export_html_button = serializers.BooleanField(required=False, default=True)
     theme_mode = serializers.ChoiceField(
@@ -79,6 +122,9 @@ class SiteOrganizationCreateSerializer(serializers.Serializer):
         default='system',
     )
 
+    def validate_available_variables(self, value):
+        return validate_organization_variables(value)
+
 
 class SiteOrganizationUpdateSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=255, required=False)
@@ -86,12 +132,16 @@ class SiteOrganizationUpdateSerializer(serializers.Serializer):
         child=serializers.URLField(),
         required=False,
     )
+    available_variables = OrganizationVariableSerializer(many=True, required=False)
     show_logo = serializers.BooleanField(required=False)
     show_export_html_button = serializers.BooleanField(required=False)
     theme_mode = serializers.ChoiceField(
         choices=[choice[0] for choice in Organization.THEME_MODE_CHOICES],
         required=False,
     )
+
+    def validate_available_variables(self, value):
+        return validate_organization_variables(value)
 
 
 class SiteApiKeyCreateSerializer(serializers.Serializer):
