@@ -3,7 +3,7 @@
        build build-frontend-site build-frontend-builder \
        migrate makemigrations \
        test test-backend lint-frontend lint-frontend-site lint-frontend-builder \
-       seed create-key shell dbshell superuser clean reset setup \
+       seed create-key logs-backend shell dbshell superuser clean reset setup \
        install-frontend-local install-frontend-site-local install-frontend-builder-local
 
 COMPOSE := docker compose
@@ -90,6 +90,9 @@ seed: ## Create a demo org + test API key
 
 create-key: ## Create API key (usage: make create-key ORG="Name" EMAIL="a@b.com" ENV=live PLAN=starter)
 	@$(MANAGE) create_api_key --org-name "$(ORG)" --org-email "$(EMAIL)" --env $(or $(ENV),test) --plan $(or $(PLAN),free)
+
+logs-backend: ## Tail backend container logs
+	@$(COMPOSE) logs -f backend
 
 shell: ## Open Django shell
 	@$(MANAGE) shell

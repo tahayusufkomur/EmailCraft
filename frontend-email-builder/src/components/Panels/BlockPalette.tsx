@@ -40,6 +40,7 @@ function DraggablePaletteItem({ config }: { config: PaletteItemConfig }) {
       {...listeners}
       {...attributes}
       className="palette-item"
+      data-block-type={config.type}
       style={{ opacity: isDragging ? 0.4 : 1 }}
       onClick={handleClick}
     >

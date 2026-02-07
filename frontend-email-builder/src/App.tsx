@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import { EditorDndContext } from './components/Editor/EditorDndContext';
 import { Canvas } from './components/Editor/Canvas';
 import { BlockPalette } from './components/Panels/BlockPalette';
 import { StylePanel } from './components/Panels/StylePanel';
@@ -83,11 +84,13 @@ function App() {
           {isDirty && <Badge variant="secondary">Unsaved</Badge>}
         </div>
       </div>
-      <div className="editor-layout">
-        <BlockPalette />
-        <Canvas />
-        <StylePanel />
-      </div>
+      <EditorDndContext>
+        <div className="editor-layout">
+          <BlockPalette />
+          <Canvas />
+          <StylePanel />
+        </div>
+      </EditorDndContext>
       {showPreview && <PreviewModal onClose={() => setShowPreview(false)} />}
       {showGallery && <TemplateGallery onClose={() => setShowGallery(false)} />}
     </div>

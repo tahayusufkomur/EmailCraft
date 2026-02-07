@@ -147,6 +147,8 @@ interface EditorState {
   updateBlock: (id: string, updates: Partial<Block>) => void;
   deleteBlock: (id: string) => void;
   moveBlock: (fromIndex: number, toIndex: number) => void;
+  moveBlockWithinColumn: (parentBlockId: string, columnId: string, fromIndex: number, toIndex: number) => void;
+  moveBlockBetweenColumns: (blockId: string, sourceParentId: string, sourceColumnId: string, targetParentId: string, targetColumnId: string, targetIndex?: number) => void;
   selectBlock: (id: string | null) => void;
   duplicateBlock: (id: string) => void;
   updateSettings: (settings: Partial<TemplateSettings>) => void;
@@ -300,6 +302,113 @@ export const useEditorStore = create<EditorState>((set, get) => ({
         template: {
           ...state.template,
           [section]: { blocks },
+        },
+        isDirty: true,
+      };
+    });
+  },
+
+  moveBlockWithinColumn: (parentBlockId, columnId, fromIndex, toIndex) => {
+    set((state) => {
+      const moveInBlocks = (blocks: Block[]): Block[] =>
+        blocks.map((b) => {
+          if (b.type !== 'columns') return b;
+          if (b.id === parentBlockId) {
+            const updatedColumns = b.data.columns.map((col) => {
+              if (col.id !== columnId) return col;
+              const newBlocks = [...col.blocks];
+              const [moved] = newBlocks.splice(fromIndex, 1);
+              newBlocks.splice(toIndex, 0, moved);
+              return { ...col, blocks: newBlocks };
+            });
+            return { ...b, data: { ...b.data, columns: updatedColumns } };
+          }
+          const updatedColumns = b.data.columns.map((col) => ({
+            ...col,
+            blocks: moveInBlocks(col.blocks),
+          }));
+          return { ...b, data: { ...b.data, columns: updatedColumns } };
+        });
+
+      return {
+        template: {
+          ...state.template,
+          header: { blocks: moveInBlocks(state.template.header.blocks) },
+          body: { blocks: moveInBlocks(state.template.body.blocks) },
+          footer: { blocks: moveInBlocks(state.template.footer.blocks) },
+        },
+        isDirty: true,
+      };
+    });
+  },
+
+  moveBlockBetweenColumns: (blockId, sourceParentId, sourceColumnId, targetParentId, targetColumnId, targetIndex) => {
+    set((state) => {
+      let movedBlock: Block | null = null;
+
+      const removeFromColumn = (blocks: Block[]): Block[] =>
+        blocks.map((b) => {
+          if (b.type !== 'columns') return b;
+          if (b.id === sourceParentId) {
+            const updatedColumns = b.data.columns.map((col) => {
+              if (col.id !== sourceColumnId) return col;
+              const blockIndex = col.blocks.findIndex((block) => block.id === blockId);
+              if (blockIndex !== -1) {
+                movedBlock = col.blocks[blockIndex];
+                const newBlocks = [...col.blocks];
+                newBlocks.splice(blockIndex, 1);
+                return { ...col, blocks: newBlocks };
+              }
+              return col;
+            });
+            return { ...b, data: { ...b.data, columns: updatedColumns } };
+          }
+          const updatedColumns = b.data.columns.map((col) => ({
+            ...col,
+            blocks: removeFromColumn(col.blocks),
+          }));
+          return { ...b, data: { ...b.data, columns: updatedColumns } };
+        });
+
+      const addToColumn = (blocks: Block[]): Block[] =>
+        blocks.map((b) => {
+          if (b.type !== 'columns' || !movedBlock) return b;
+          if (b.id === targetParentId) {
+            const updatedColumns = b.data.columns.map((col) => {
+              if (col.id !== targetColumnId) return col;
+              const newBlocks = [...col.blocks];
+              if (targetIndex !== undefined && targetIndex >= 0 && targetIndex <= newBlocks.length) {
+                newBlocks.splice(targetIndex, 0, movedBlock);
+              } else {
+                newBlocks.push(movedBlock);
+              }
+              return { ...col, blocks: newBlocks };
+            });
+            return { ...b, data: { ...b.data, columns: updatedColumns } };
+          }
+          const updatedColumns = b.data.columns.map((col) => ({
+            ...col,
+            blocks: addToColumn(col.blocks),
+          }));
+          return { ...b, data: { ...b.data, columns: updatedColumns } };
+        });
+
+      let headerBlocks = removeFromColumn(state.template.header.blocks);
+      let bodyBlocks = removeFromColumn(state.template.body.blocks);
+      let footerBlocks = removeFromColumn(state.template.footer.blocks);
+
+      if (movedBlock) {
+        headerBlocks = addToColumn(headerBlocks);
+        bodyBlocks = addToColumn(bodyBlocks);
+        footerBlocks = addToColumn(footerBlocks);
+      }
+
+      return {
+        template: {
+          ...state.template,
+          header: { blocks: headerBlocks },
+          body: { blocks: bodyBlocks },
+          footer: { blocks: footerBlocks },
         },
         isDirty: true,
       };

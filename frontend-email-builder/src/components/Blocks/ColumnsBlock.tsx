@@ -1,4 +1,6 @@
 import { useDroppable } from '@dnd-kit/core';
+import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import type { Block, ColumnsBlock as ColumnsBlockType } from '../../types/blocks';
 import { useEditorStore } from '../../store/editorStore';
 import { BlockRenderer } from '../Editor/BlockRenderer';
@@ -7,15 +9,46 @@ interface Props {
   block: ColumnsBlockType;
 }
 
-function NestedBlockWrapper({ block }: { block: Block }) {
+interface NestedBlockWrapperProps {
+  block: Block;
+  parentBlockId: string;
+  columnId: string;
+}
+
+function NestedBlockWrapper({ block, parentBlockId, columnId }: NestedBlockWrapperProps) {
   const selectedBlockId = useEditorStore((s) => s.selectedBlockId);
   const selectBlock = useEditorStore((s) => s.selectBlock);
   const deleteBlock = useEditorStore((s) => s.deleteBlock);
   const duplicateBlock = useEditorStore((s) => s.duplicateBlock);
   const isSelected = selectedBlockId === block.id;
 
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: block.id,
+    data: {
+      type: 'nested-block',
+      parentBlockId,
+      columnId,
+      block,
+    },
+  });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.3 : 1,
+  };
+
   return (
     <div
+      ref={setNodeRef}
+      style={style}
       className={`block-wrapper nested-block-wrapper ${isSelected ? 'selected' : ''}`}
       onClick={(e) => {
         e.stopPropagation();
@@ -23,6 +56,9 @@ function NestedBlockWrapper({ block }: { block: Block }) {
       }}
     >
       <div className="block-toolbar">
+        <button {...attributes} {...listeners} title="Drag to reorder">
+          &#x2630;
+        </button>
         <button
           onClick={(e) => {
             e.stopPropagation();
@@ -82,11 +118,21 @@ function ColumnSlot({
           <div className="column-slot-hint">Drag blocks from the left panel into this column</div>
         </div>
       ) : (
-        <div className="column-block-list">
-          {columnBlocks.map((childBlock) => (
-            <NestedBlockWrapper key={childBlock.id} block={childBlock} />
-          ))}
-        </div>
+        <SortableContext
+          items={columnBlocks.map((b) => b.id)}
+          strategy={verticalListSortingStrategy}
+        >
+          <div className="column-block-list">
+            {columnBlocks.map((childBlock) => (
+              <NestedBlockWrapper
+                key={childBlock.id}
+                block={childBlock}
+                parentBlockId={parentBlockId}
+                columnId={columnId}
+              />
+            ))}
+          </div>
+        </SortableContext>
       )}
     </div>
   );
