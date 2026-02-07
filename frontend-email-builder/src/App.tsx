@@ -8,11 +8,13 @@ import { PreviewModal } from './components/Preview/PreviewModal';
 import { TemplateGallery } from './components/Gallery/TemplateGallery';
 import { Badge } from './components/ui/badge';
 import { Button } from './components/ui/button';
+import { useConfigStore } from './store/configStore';
 import { useEditorStore } from './store/editorStore';
 import { exportToHtml } from './lib/htmlExporter';
 import { useAutoSave, loadDraft } from './hooks/useAutoSave';
-import { sendReadyEvent, sendSaveEvent } from './lib/postMessage';
+import { listenToParent, sendReadyEvent, sendSaveEvent } from './lib/postMessage';
 import type { EmailTemplate } from './types/blocks';
+import type { Variable } from './types/editor';
 
 const isEmailTemplate = (value: unknown): value is EmailTemplate => {
   if (!value || typeof value !== 'object') return false;
@@ -20,34 +22,85 @@ const isEmailTemplate = (value: unknown): value is EmailTemplate => {
   return Boolean(maybe.version && maybe.settings && maybe.body && Array.isArray(maybe.body.blocks));
 };
 
+const isVariable = (value: unknown): value is Variable => {
+  if (!value || typeof value !== 'object') return false;
+  const maybe = value as Variable;
+  if (typeof maybe.key !== 'string' || typeof maybe.label !== 'string') return false;
+  if (maybe.defaultValue !== undefined && typeof maybe.defaultValue !== 'string') return false;
+  if (maybe.type !== undefined && maybe.type !== 'text' && maybe.type !== 'url') return false;
+  return true;
+};
+
+const normalizeVariables = (value: unknown): Variable[] => {
+  if (!Array.isArray(value)) return [];
+  return value
+    .filter(isVariable)
+    .map((item) => ({
+      key: item.key,
+      label: item.label,
+      defaultValue: item.defaultValue,
+      type: item.type || 'text',
+    }));
+};
+
+function emitSaveEvent(template: EmailTemplate) {
+  const html = exportToHtml(template, 'placeholders');
+  sendSaveEvent(html, template);
+}
+
 function App() {
   const isDirty = useEditorStore((s) => s.isDirty);
   const template = useEditorStore((s) => s.template);
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
+  const setConfig = useConfigStore((s) => s.setConfig);
   const [showPreview, setShowPreview] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
 
   useAutoSave();
 
   useEffect(() => {
+    const stopListening = listenToParent({
+      onInit: (config) => {
+        setConfig({ variables: normalizeVariables(config?.variables) });
+        if (isEmailTemplate(config?.templateJson)) {
+          loadTemplate(config.templateJson);
+        }
+      },
+      onLoadTemplate: (json) => {
+        if (isEmailTemplate(json)) {
+          loadTemplate(json);
+        }
+      },
+      onExport: () => {
+        emitSaveEvent(useEditorStore.getState().template);
+      },
+    });
+
     const apiKeyFromQuery = new URLSearchParams(window.location.search).get('apiKey');
     if (apiKeyFromQuery) {
       localStorage.setItem('mailcraft_api_key', apiKeyFromQuery);
+      setConfig({ apiKey: apiKeyFromQuery });
+    } else {
+      const apiKeyFromStorage = localStorage.getItem('mailcraft_api_key');
+      if (apiKeyFromStorage) {
+        setConfig({ apiKey: apiKeyFromStorage });
+      }
     }
 
     const draft = loadDraft();
     if (draft && isEmailTemplate(draft)) {
       loadTemplate(draft);
     }
+
     sendReadyEvent();
-  }, [loadTemplate]);
+    return stopListening;
+  }, [loadTemplate, setConfig]);
 
   const handleSave = () => {
-    localStorage.setItem('mailcraft_draft', JSON.stringify(template));
+    const currentTemplate = useEditorStore.getState().template;
+    localStorage.setItem('mailcraft_draft', JSON.stringify(currentTemplate));
     useEditorStore.getState().markClean();
-
-    const html = exportToHtml(template, 'placeholders');
-    sendSaveEvent(html, template);
+    emitSaveEvent(currentTemplate);
   };
 
   const handleExport = () => {

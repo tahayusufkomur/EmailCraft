@@ -6,6 +6,11 @@ type MessageType =
   | 'MAILCRAFT_AUTO_SAVE'
   | 'MAILCRAFT_ERROR';
 
+type IncomingMessageType =
+  | 'MAILCRAFT_INIT'
+  | 'MAILCRAFT_LOAD_TEMPLATE'
+  | 'MAILCRAFT_EXPORT';
+
 interface MailCraftMessage {
   source: 'mailcraft';
   type: MessageType;
@@ -39,6 +44,7 @@ export function sendErrorEvent(code: string, message: string, targetOrigin = '*'
 type IncomingHandler = {
   onInit?: (config: { variables?: unknown[]; templateJson?: EmailTemplate }) => void;
   onLoadTemplate?: (json: EmailTemplate) => void;
+  onExport?: () => void;
 };
 
 export function listenToParent(handlers: IncomingHandler) {
@@ -46,12 +52,17 @@ export function listenToParent(handlers: IncomingHandler) {
     const data = event.data;
     if (!data || data.source !== 'mailcraft-host') return;
 
-    switch (data.type) {
+    const type = data.type as IncomingMessageType;
+
+    switch (type) {
       case 'MAILCRAFT_INIT':
         handlers.onInit?.(data.payload);
         break;
       case 'MAILCRAFT_LOAD_TEMPLATE':
         handlers.onLoadTemplate?.(data.payload.json);
+        break;
+      case 'MAILCRAFT_EXPORT':
+        handlers.onExport?.();
         break;
     }
   };

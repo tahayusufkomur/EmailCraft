@@ -3,7 +3,7 @@
        build build-frontend-site build-frontend-builder \
        migrate makemigrations \
        test test-backend lint-frontend lint-frontend-site lint-frontend-builder \
-       seed create-key logs-backend shell dbshell superuser clean reset setup \
+       seed demo-org create-key logs-backend shell dbshell superuser clean reset setup \
        install-frontend-local install-frontend-site-local install-frontend-builder-local
 
 COMPOSE := docker compose
@@ -85,8 +85,11 @@ lint-frontend-builder: ## Type-check builder frontend
 
 # ─── Utilities ────────────────────────────────────────────
 
-seed: ## Create a demo org + test API key
-	@$(MANAGE) create_api_key --org-name "Demo" --org-email "demo@mailcraft.io" --env test --plan free
+seed: ## Create enterprise demo org + max quotas + API key + demo template
+	@$(MANAGE) create_demo_org
+
+demo-org: ## Create demo org (usage: make demo-org ORG="Name" EMAIL="a@b.com" ENV=test)
+	@$(MANAGE) create_demo_org --org-name "$(or $(ORG),MailCraft Demo Enterprise)" --org-email "$(or $(EMAIL),demo-enterprise@mailcraft.dev)" --env $(or $(ENV),test)
 
 create-key: ## Create API key (usage: make create-key ORG="Name" EMAIL="a@b.com" ENV=live PLAN=starter)
 	@$(MANAGE) create_api_key --org-name "$(ORG)" --org-email "$(EMAIL)" --env $(or $(ENV),test) --plan $(or $(PLAN),free)
@@ -113,11 +116,12 @@ reset: ## Reset containers, images, volumes, and local caches
 	@rm -rf $(FRONTEND_BUILDER)/dist $(FRONTEND_BUILDER)/node_modules/.vite $(FRONTEND_BUILDER)/node_modules
 	@rm -rf venv
 
-setup: ## Build, start containers, run migrations, create superuser, and install frontend deps locally
+setup: ## Build/start stack, migrate DB, create superuser, seed demo org/template/key, and install frontend deps locally
 	@$(COMPOSE) up -d --build
 	@$(MANAGE) migrate
 	@$(COMPOSE) exec -e DJANGO_SUPERUSER_USERNAME=t -e DJANGO_SUPERUSER_EMAIL=t@example.com -e DJANGO_SUPERUSER_PASSWORD=t \
 		backend python manage.py createsuperuser --noinput || true
+	@$(MANAGE) create_demo_org
 	@cd $(FRONTEND_SITE) && npm install
 	@cd $(FRONTEND_BUILDER) && npm install
 

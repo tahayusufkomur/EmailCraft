@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MailCraft Builder Demo</title>
+    <style>
+      :root {
+        --bg: #f7f9fc;
+        --panel: #ffffff;
+        --ink: #0f172a;
+        --muted: #475569;
+        --border: #d0d7e2;
+        --accent: #0f62fe;
+        --builder-desktop-width: 1220px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: radial-gradient(circle at top, #dbeafe 0%, var(--bg) 45%);
+        color: var(--ink);
+        font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      main {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: 30px;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .panel {
+        margin-top: 16px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+      }
+
+      .controls {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      label {
+        display: grid;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      input {
+        width: 100%;
+        height: 38px;
+        padding: 0 10px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 14px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      button {
+        border: 0;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .btn-secondary {
+        background: #e2e8f0;
+        color: #0f172a;
+      }
+
+      #status {
+        margin-top: 12px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 1fr;
+      }
+
+      @media (max-width: 980px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .frame-shell {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        background: #fff;
+        min-height: 700px;
+      }
+
+      #builder-frame {
+        width: max(100%, var(--builder-desktop-width));
+        min-width: var(--builder-desktop-width);
+        height: 700px;
+        border: 0;
+        display: block;
+      }
+
+      #save-html {
+        width: 100%;
+        min-height: 150px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 10px;
+        resize: vertical;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+
+      #render-preview {
+        width: 100%;
+        min-height: 360px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>MailCraft Builder E2E Demo</h1>
+      <p>
+        1) Launch iframe with your demo API key. 2) Edit and Save inside the builder.
+        3) Render with <code>{{ user_name }}</code> and <code>{{ user_email }}</code>.
+      </p>
+
+      <section class="panel">
+        <div class="controls">
+          <label>
+            API key
+            <input id="api-key" placeholder="mc_test_..." />
+          </label>
+          <label>
+            User name
+            <input id="user-name" value="Jane Example" />
+          </label>
+          <label>
+            User email
+            <input id="user-email" value="jane@example.com" />
+          </label>
+        </div>
+        <div class="actions">
+          <button id="launch-btn" class="btn-primary">Launch Builder Iframe</button>
+          <button id="render-btn" class="btn-secondary">Render Current Template</button>
+        </div>
+        <div id="status">Status: idle</div>
+      </section>
+
+      <section class="grid panel">
+        <div class="frame-shell">
+          <iframe id="builder-frame" title="MailCraft Builder"></iframe>
+        </div>
+        <div>
+          <h3>Save Event HTML</h3>
+          <textarea id="save-html" readonly></textarea>
+          <h3>Rendered Preview</h3>
+          <iframe id="render-preview" title="Rendered Output"></iframe>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const apiKeyInput = document.getElementById('api-key');
+      const userNameInput = document.getElementById('user-name');
+      const userEmailInput = document.getElementById('user-email');
+      const launchBtn = document.getElementById('launch-btn');
+      const renderBtn = document.getElementById('render-btn');
+      const builderFrame = document.getElementById('builder-frame');
+      const saveHtml = document.getElementById('save-html');
+      const renderPreview = document.getElementById('render-preview');
+      const statusEl = document.getElementById('status');
+
+      const params = new URLSearchParams(window.location.search);
+      apiKeyInput.value = params.get('apiKey') || '';
+
+      const demoTemplate = {
+        version: 1,
+        settings: {
+          backgroundColor: '#f4f7fb',
+          contentWidth: 600,
+          defaultFont: 'Arial, Helvetica, sans-serif',
+          defaultFontSize: 14,
+          defaultColor: '#0f172a',
+        },
+        header: {
+          blocks: [
+            {
+              id: 'demo-header-1',
+              type: 'text',
+              data: {
+                html: '<p style="margin:0;font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:1px;">MailCraft Builder Demo</p>',
+                variables: [],
+              },
+              style: {
+                padding: { top: 24, right: 24, bottom: 8, left: 24 },
+                alignment: 'center',
+              },
+            },
+          ],
+        },
+        body: {
+          blocks: [
+            {
+              id: 'demo-body-1',
+              type: 'text',
+              data: {
+                html:
+                  '<h2 style="margin:0 0 12px 0;font-size:24px;">Hello {{user_name}},</h2>' +
+                  '<p style="margin:0 0 8px 0;">This template uses dynamic variables and a custom HTML block.</p>' +
+                  '<p style="margin:0;">Email on file: <strong>{{user_email}}</strong></p>',
+                variables: ['user_name', 'user_email'],
+              },
+              style: {
+                padding: { top: 12, right: 24, bottom: 16, left: 24 },
+                alignment: 'left',
+              },
+            },
+            {
+              id: 'demo-body-2',
+              type: 'html',
+              data: {
+                html:
+                  '<div style="border:1px solid #cbd5e1;border-radius:10px;overflow:hidden;">' +
+                  '<iframe src="https://example.com/embed?user_name={{user_name}}&user_email={{user_email}}" title="Demo Embedded Iframe" width="100%" height="180" style="border:0;display:block;"></iframe>' +
+                  '</div>',
+              },
+              style: {
+                padding: { top: 0, right: 24, bottom: 16, left: 24 },
+                alignment: 'left',
+              },
+            },
+          ],
+        },
+        footer: { blocks: [] },
+      };
+
+      const state = {
+        templateJson: demoTemplate,
+      };
+
+      function setStatus(message) {
+        statusEl.textContent = `Status: ${message}`;
+      }
+
+      function postInit() {
+        if (!builderFrame.contentWindow) return;
+        builderFrame.contentWindow.postMessage(
+          {
+            source: 'mailcraft-host',
+            type: 'MAILCRAFT_INIT',
+            payload: {
+              variables: [
+                {
+                  key: 'user_name',
+                  label: 'User Name',
+                  defaultValue: userNameInput.value,
+                  type: 'text',
+                },
+                {
+                  key: 'user_email',
+                  label: 'User Email',
+                  defaultValue: userEmailInput.value,
+                  type: 'text',
+                },
+              ],
+              templateJson: state.templateJson,
+            },
+          },
+          window.location.origin
+        );
+      }
+
+      function launchBuilder() {
+        const key = apiKeyInput.value.trim();
+        if (!key) {
+          setStatus('missing API key');
+          return;
+        }
+
+        const src = `/builder/?apiKey=${encodeURIComponent(key)}`;
+        builderFrame.src = src;
+        setStatus('iframe launched, waiting for MAILCRAFT_READY');
+      }
+
+      async function renderTemplate() {
+        const key = apiKeyInput.value.trim();
+        if (!key) {
+          setStatus('missing API key');
+          return;
+        }
+
+        try {
+          const response = await fetch('/api/render', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-API-Key': key,
+            },
+            body: JSON.stringify({
+              json_data: state.templateJson,
+              variables: {
+                user_name: userNameInput.value,
+                user_email: userEmailInput.value,
+              },
+            }),
+          });
+
+          const payload = await response.json();
+          if (!response.ok) {
+            throw new Error(payload?.error?.message || `HTTP ${response.status}`);
+          }
+
+          renderPreview.srcdoc = payload.html;
+          setStatus('rendered successfully via /api/render');
+        } catch (error) {
+          setStatus(`render failed: ${error.message}`);
+        }
+      }
+
+      launchBtn.addEventListener('click', launchBuilder);
+      renderBtn.addEventListener('click', renderTemplate);
+
+      window.addEventListener('message', (event) => {
+        if (event.origin !== window.location.origin) return;
+        const data = event.data;
+        if (!data || data.source !== 'mailcraft') return;
+
+        if (data.type === 'MAILCRAFT_READY') {
+          setStatus('builder ready, sending MAILCRAFT_INIT');
+          postInit();
+          return;
+        }
+
+        if (data.type === 'MAILCRAFT_SAVE') {
+          if (data.payload?.html) {
+            saveHtml.value = data.payload.html;
+          }
+          if (data.payload?.json) {
+            state.templateJson = data.payload.json;
+          }
+          setStatus('MAILCRAFT_SAVE received');
+          return;
+        }
+
+        if (data.type === 'MAILCRAFT_AUTO_SAVE') {
+          if (data.payload?.json) {
+            state.templateJson = data.payload.json;
+          }
+          setStatus('auto-save update received');
+          return;
+        }
+
+        if (data.type === 'MAILCRAFT_ERROR') {
+          const message = data.payload?.message || 'unknown error';
+          setStatus(`builder error: ${message}`);
+        }
+      });
+
+      if (apiKeyInput.value) {
+        launchBuilder();
+      }
+    </script>
+  </body>
+</html>
