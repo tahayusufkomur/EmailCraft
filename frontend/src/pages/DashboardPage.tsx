@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { api } from '../lib/api';
 import { useAuth } from '../lib/auth';
 import { PLAN_LABELS } from '../lib/plans';
 import type { SiteDashboardResponse } from '../types/api';
 import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { formatBytes } from '../lib/utils';
 
@@ -76,6 +78,18 @@ export function DashboardPage() {
             <div className="h-2 rounded-full bg-muted">
               <div className="h-2 rounded-full bg-primary" style={{ width: `${storageUsage}%` }} />
             </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardDescription>Organizations</CardDescription>
+            <CardTitle>{data?.organizations_count ?? '-'}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Button asChild size="sm">
+              <Link to="/dashboard/organizations">Go to Builder</Link>
+            </Button>
           </CardContent>
         </Card>
       </div>

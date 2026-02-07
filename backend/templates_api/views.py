@@ -6,6 +6,7 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from core.models import billing_organization_for_org
 from templates_api.models import Template, UploadedImage
 from templates_api.serializers import (
     ExportRequestSerializer,
@@ -63,10 +64,11 @@ def presign_upload(request):
     serializer.is_valid(raise_exception=True)
 
     org = request.org
+    billing_org = billing_organization_for_org(org)
     data = serializer.validated_data
 
     # Check plan-based upload size limit
-    max_size = org.max_upload_size_bytes
+    max_size = billing_org.max_upload_size_bytes
     if data['file_size'] > max_size:
         return Response(
             {'error': {'code': 'FILE_TOO_LARGE', 'message': f'Max file size is {max_size} bytes.'}},
@@ -74,7 +76,7 @@ def presign_upload(request):
         )
 
     # Check storage limit
-    if org.storage_used_bytes + data['file_size'] > org.storage_limit_bytes:
+    if billing_org.storage_used_bytes + data['file_size'] > billing_org.storage_limit_bytes:
         return Response(
             {'error': {'code': 'STORAGE_LIMIT_EXCEEDED', 'message': 'Organization storage limit exceeded.'}},
             status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
@@ -131,8 +133,8 @@ def presign_upload(request):
     )
 
     # Update storage used
-    org.storage_used_bytes += data['file_size']
-    org.save(update_fields=['storage_used_bytes'])
+    billing_org.storage_used_bytes += data['file_size']
+    billing_org.save(update_fields=['storage_used_bytes'])
 
     return Response({
         'upload_url': upload_url,
@@ -148,7 +150,8 @@ def export_html(request):
     serializer.is_valid(raise_exception=True)
 
     org = request.org
-    if org.rendered_emails_count >= org.rendered_emails_limit:
+    billing_org = billing_organization_for_org(org)
+    if billing_org.rendered_emails_count >= billing_org.rendered_emails_limit:
         return Response(
             {
                 'error': {
@@ -164,8 +167,8 @@ def export_html(request):
 
     result = render_email_html(json_data, variables_mode)
 
-    org.rendered_emails_count += 1
-    org.save(update_fields=['rendered_emails_count', 'updated_at'])
+    billing_org.rendered_emails_count += 1
+    billing_org.save(update_fields=['rendered_emails_count', 'updated_at'])
 
     return Response({
         'html': result['html'],
@@ -180,9 +183,10 @@ def render_template(request):
     serializer.is_valid(raise_exception=True)
 
     org = request.org
+    billing_org = billing_organization_for_org(org)
 
     # Rate limit check
-    if org.rendered_emails_count >= org.rendered_emails_limit:
+    if billing_org.rendered_emails_count >= billing_org.rendered_emails_limit:
         return Response(
             {
                 'error': {
@@ -229,8 +233,8 @@ def render_template(request):
     substituted_data = substitute_variables(json_data, variables)
     result = render_email_html(substituted_data)
 
-    org.rendered_emails_count += 1
-    org.save(update_fields=['rendered_emails_count', 'updated_at'])
+    billing_org.rendered_emails_count += 1
+    billing_org.save(update_fields=['rendered_emails_count', 'updated_at'])
 
     return Response({
         'html': result['html'],

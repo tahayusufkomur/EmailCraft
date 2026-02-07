@@ -12,6 +12,31 @@ class OrganizationSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at']
 
 
+class ApiKeySummarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ApiKey
+        fields = [
+            'id',
+            'key_prefix',
+            'environment',
+            'scope',
+            'is_active',
+            'last_used_at',
+            'created_at',
+        ]
+
+
+class OrganizationWithApiKeysSerializer(OrganizationSerializer):
+    api_keys = serializers.SerializerMethodField()
+
+    class Meta(OrganizationSerializer.Meta):
+        fields = [*OrganizationSerializer.Meta.fields, 'api_keys']
+
+    def get_api_keys(self, obj):
+        keys = obj.api_keys.filter(is_active=True, revoked_at__isnull=True).order_by('-created_at')
+        return ApiKeySummarySerializer(keys, many=True).data
+
+
 class SessionRequestSerializer(serializers.Serializer):
     origin = serializers.URLField(required=True)
 
@@ -31,6 +56,29 @@ class SiteRegisterSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True, min_length=8)
     organization_name = serializers.CharField(max_length=255)
+
+
+class SiteOrganizationCreateSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=255)
+    email = serializers.EmailField()
+    allowed_origins = serializers.ListField(
+        child=serializers.URLField(),
+        required=False,
+        default=list,
+    )
+
+
+class SiteOrganizationUpdateSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=255, required=False)
+    email = serializers.EmailField(required=False)
+    allowed_origins = serializers.ListField(
+        child=serializers.URLField(),
+        required=False,
+    )
+
+
+class SiteApiKeyCreateSerializer(serializers.Serializer):
+    refresh = serializers.BooleanField(required=False, default=False)
 
 
 class UserOrganizationSerializer(serializers.ModelSerializer):
@@ -56,4 +104,5 @@ class SiteDashboardSerializer(serializers.Serializer):
     rendered_emails_limit = serializers.IntegerField()
     storage_used_bytes = serializers.IntegerField()
     storage_limit_bytes = serializers.IntegerField()
+    organizations_count = serializers.IntegerField()
     stripe_subscription_id = serializers.CharField(allow_null=True)

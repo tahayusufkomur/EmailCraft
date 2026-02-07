@@ -6,7 +6,7 @@ import { cn } from '../../lib/utils';
 
 const links = [
   { to: '/dashboard', label: 'Overview', end: true },
-  { to: '/dashboard/templates', label: 'Templates' },
+  { to: '/dashboard/organizations', label: 'Organizations' },
   { to: '/dashboard/billing', label: 'Billing' },
 ];
 

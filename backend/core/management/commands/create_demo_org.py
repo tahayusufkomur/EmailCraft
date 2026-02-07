@@ -212,7 +212,8 @@ class Command(BaseCommand):
 
         UserOrganization.objects.update_or_create(
             user=demo_user,
-            defaults={'organization': org, 'role': 'owner'},
+            organization=org,
+            defaults={'role': 'owner'},
         )
 
         template = None

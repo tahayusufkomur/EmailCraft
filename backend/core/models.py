@@ -5,6 +5,7 @@ import uuid
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 
 
 class Organization(models.Model):
@@ -26,6 +27,7 @@ class Organization(models.Model):
     storage_limit_bytes = models.BigIntegerField(default=1073741824)  # 1GB
     stripe_customer_id = models.CharField(max_length=120, blank=True, null=True)
     stripe_subscription_id = models.CharField(max_length=120, blank=True, null=True)
+    test_key_version = models.PositiveIntegerField(default=1)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -98,13 +100,58 @@ class ApiKey(models.Model):
         return hashlib.sha256(raw_key.encode()).hexdigest()
 
 
+def derive_reusable_test_api_key(org):
+    seed = f'{settings.SECRET_KEY}:{org.id}:{org.test_key_version}'
+    digest = hashlib.sha256(seed.encode()).hexdigest()[:32]
+    return f'mc_test_{digest}'
+
+
+def ensure_reusable_test_api_key(org, refresh=False):
+    if refresh:
+        org.test_key_version += 1
+        org.save(update_fields=['test_key_version', 'updated_at'])
+
+    raw_key = derive_reusable_test_api_key(org)
+    requested_hash = ApiKey.hash_key(raw_key)
+
+    existing_for_hash = ApiKey.objects.filter(key_hash=requested_hash).first()
+    if existing_for_hash and existing_for_hash.org_id != org.id:
+        raise ValueError('Reusable test API key collision for another organization.')
+
+    ApiKey.objects.filter(
+        org=org,
+        environment='test',
+        is_active=True,
+        revoked_at__isnull=True,
+    ).exclude(key_hash=requested_hash).update(is_active=False, revoked_at=timezone.now())
+
+    if existing_for_hash:
+        existing_for_hash.environment = 'test'
+        existing_for_hash.scope = 'full'
+        existing_for_hash.key_prefix = raw_key[:12]
+        existing_for_hash.is_active = True
+        existing_for_hash.revoked_at = None
+        existing_for_hash.save(update_fields=['environment', 'scope', 'key_prefix', 'is_active', 'revoked_at'])
+        api_key = existing_for_hash
+    else:
+        api_key = ApiKey.objects.create(
+            org=org,
+            key_hash=requested_hash,
+            key_prefix=raw_key[:12],
+            environment='test',
+            scope='full',
+        )
+
+    return raw_key, api_key
+
+
 class UserOrganization(models.Model):
     ROLE_CHOICES = [
         ('owner', 'Owner'),
         ('member', 'Member'),
     ]
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='organization_membership')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='organization_memberships')
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='memberships')
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='owner')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -114,6 +161,41 @@ class UserOrganization(models.Model):
         indexes = [
             models.Index(fields=['organization', 'role'], name='user_org_role_idx'),
         ]
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'organization'], name='unique_user_organization_membership'),
+        ]
 
     def __str__(self):
         return f"{self.user.username} -> {self.organization.name} ({self.role})"
+
+
+def organizations_for_user(user):
+    return Organization.objects.filter(memberships__user=user).distinct()
+
+
+def primary_organization_for_user(user):
+    membership = (
+        UserOrganization.objects.select_related('organization')
+        .filter(user=user)
+        .order_by('created_at')
+        .first()
+    )
+    return membership.organization if membership else None
+
+
+def billing_organization_for_user(user):
+    return primary_organization_for_user(user)
+
+
+def billing_organization_for_org(org):
+    owner_membership = (
+        UserOrganization.objects.select_related('user')
+        .filter(organization=org, role='owner')
+        .order_by('created_at')
+        .first()
+    )
+    if not owner_membership:
+        return org
+
+    billing_org = billing_organization_for_user(owner_membership.user)
+    return billing_org or org

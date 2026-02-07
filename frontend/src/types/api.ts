@@ -32,11 +32,26 @@ export interface OrganizationSummary {
   name: string;
   email: string;
   plan: PlanKey;
+  allowed_origins: string[];
   rendered_emails_count: number;
   rendered_emails_limit: number;
   storage_used_bytes: number;
   storage_limit_bytes: number;
   created_at: string;
+}
+
+export interface ApiKeySummary {
+  id: string;
+  key_prefix: string;
+  environment: 'live' | 'test';
+  scope: 'full' | 'readonly';
+  is_active: boolean;
+  last_used_at: string | null;
+  created_at: string;
+}
+
+export interface OrganizationWithApiKeys extends OrganizationSummary {
+  api_keys: ApiKeySummary[];
 }
 
 export interface SiteUser {
@@ -67,7 +82,26 @@ export interface SiteDashboardResponse {
   rendered_emails_limit: number;
   storage_used_bytes: number;
   storage_limit_bytes: number;
+  organizations_count: number;
   stripe_subscription_id: string | null;
+}
+
+export interface SiteOrganizationsResponse {
+  results: OrganizationWithApiKeys[];
+}
+
+export interface SiteOrganizationCreateResponse {
+  organization: OrganizationWithApiKeys;
+  created_api_key?: {
+    raw: string;
+    item: ApiKeySummary;
+  };
+}
+
+export interface SiteApiKeyCreateResponse {
+  raw: string;
+  item: ApiKeySummary;
+  refreshed: boolean;
 }
 
 export interface TemplateListItem {

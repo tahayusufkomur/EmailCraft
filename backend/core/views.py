@@ -11,7 +11,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from core.models import ApiKey, Organization
+from core.models import ApiKey, Organization, billing_organization_for_org
 from core.serializers import SessionRequestSerializer, SubscribeRequestSerializer
 
 
@@ -138,6 +138,7 @@ def create_session(request):
         )
 
     org = api_key.org
+    billing_org = billing_organization_for_org(org)
 
     # Origin validation for live keys
     if api_key.environment == 'live' and org.allowed_origins:
@@ -154,12 +155,12 @@ def create_session(request):
         'token': session_token,
         'expires_at': expires_at.isoformat(),
         'config': {
-            'plan': org.plan,
-            'max_upload_size_bytes': org.max_upload_size_bytes,
-            'storage_used_bytes': org.storage_used_bytes,
-            'storage_limit_bytes': org.storage_limit_bytes,
-            'rendered_emails_count': org.rendered_emails_count,
-            'rendered_emails_limit': org.rendered_emails_limit,
+            'plan': billing_org.plan,
+            'max_upload_size_bytes': billing_org.max_upload_size_bytes,
+            'storage_used_bytes': billing_org.storage_used_bytes,
+            'storage_limit_bytes': billing_org.storage_limit_bytes,
+            'rendered_emails_count': billing_org.rendered_emails_count,
+            'rendered_emails_limit': billing_org.rendered_emails_limit,
         },
     })
 

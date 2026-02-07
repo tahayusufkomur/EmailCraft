@@ -2,12 +2,13 @@ import type {
   LandingResponse,
   LoginResponse,
   PricingResponse,
+  SiteApiKeyCreateResponse,
   SiteDashboardResponse,
   SiteMeResponse,
+  SiteOrganizationCreateResponse,
+  SiteOrganizationsResponse,
   SiteRegisterResponse,
   SubscribeResponse,
-  TemplateDetail,
-  TemplateListItem,
 } from '../types/api';
 
 const BASE_URL = import.meta.env.VITE_API_URL || '/api';
@@ -77,22 +78,44 @@ export const api = {
 
   getDashboard: (token: string) => request<SiteDashboardResponse>('/site/dashboard', {}, token),
 
-  listTemplates: (token: string) => request<{ results: TemplateListItem[] }>('/site/templates/', {}, token),
+  listOrganizations: (token: string) =>
+    request<SiteOrganizationsResponse>('/site/organizations/', {}, token),
 
-  getTemplate: (token: string, id: string) => request<TemplateDetail>(`/site/templates/${id}/`, {}, token),
-
-  createTemplate: (
+  createOrganization: (
     token: string,
-    payload: { name: string; json_data: Record<string, unknown>; category?: string; is_draft?: boolean },
-  ) => request<TemplateDetail>('/site/templates/', { method: 'POST', body: JSON.stringify(payload) }, token),
+    payload: {
+      name: string;
+      email: string;
+      allowed_origins?: string[];
+    },
+  ) =>
+    request<SiteOrganizationCreateResponse>(
+      '/site/organizations/',
+      { method: 'POST', body: JSON.stringify(payload) },
+      token,
+    ),
 
-  updateTemplate: (
+  updateOrganization: (
     token: string,
     id: string,
-    payload: { name?: string; json_data?: Record<string, unknown>; category?: string; is_draft?: boolean },
-  ) => request<TemplateDetail>(`/site/templates/${id}/`, { method: 'PUT', body: JSON.stringify(payload) }, token),
+    payload: { name?: string; email?: string; allowed_origins?: string[] },
+  ) =>
+    request<SiteOrganizationCreateResponse['organization']>(
+      `/site/organizations/${id}/`,
+      { method: 'PATCH', body: JSON.stringify(payload) },
+      token,
+    ),
 
-  deleteTemplate: (token: string, id: string) => request<void>(`/site/templates/${id}/`, { method: 'DELETE' }, token),
+  createOrganizationApiKey: (
+    token: string,
+    id: string,
+    payload?: { refresh?: boolean },
+  ) =>
+    request<SiteApiKeyCreateResponse>(
+      `/site/organizations/${id}/api-keys`,
+      { method: 'POST', body: JSON.stringify(payload || {}) },
+      token,
+    ),
 
   subscribe: (token: string, plan: 'free' | 'starter' | 'pro' | 'enterprise') =>
     request<SubscribeResponse>('/site/billing/subscribe', {
