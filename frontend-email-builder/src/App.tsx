@@ -16,8 +16,9 @@ import { applyImageUrlToBlock } from './lib/media';
 import { api } from './lib/api';
 import { useAutoSave, loadDraft } from './hooks/useAutoSave';
 import { listenToParent, sendErrorEvent, sendReadyEvent, sendSaveEvent } from './lib/postMessage';
-import type { EmailTemplate } from './types/blocks';
+import type { EmailTemplate, TemplateBackgroundStyle } from './types/blocks';
 import type { ThemeMode, Variable } from './types/editor';
+import { getBuilderThemePreset, resolveBuilderTheme } from './lib/builderTheme';
 
 const isEmailTemplate = (value: unknown): value is EmailTemplate => {
   if (!value || typeof value !== 'object') return false;
@@ -56,6 +57,40 @@ const asOptionalThemeMode = (value: unknown): ThemeMode | undefined => {
   return undefined;
 };
 
+const builderThemeFromThemeMode = (themeMode: ThemeMode | undefined) => {
+  if (themeMode === 'dark') return 'dark-slate' as const;
+  return 'light-breeze' as const;
+};
+
+const asOptionalBuilderTheme = (value: unknown) => {
+  const resolved = resolveBuilderTheme(value);
+  if (!value) return undefined;
+  return resolved;
+};
+
+const asOptionalTemplateBackgroundStyle = (value: unknown): TemplateBackgroundStyle | undefined => {
+  if (
+    value === 'none'
+    || value === 'aurora'
+    || value === 'sunset-glow'
+    || value === 'mint-weave'
+    || value === 'midnight-grid'
+    || value === 'paper-rings'
+  ) {
+    return value;
+  }
+  return undefined;
+};
+
+const asOptionalHexColor = (value: unknown): string | undefined => {
+  if (typeof value !== 'string') return undefined;
+  const normalized = value.trim();
+  if (/^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(normalized)) {
+    return normalized;
+  }
+  return undefined;
+};
+
 const asOptionalNonEmptyString = (value: unknown): string | undefined => {
   if (typeof value !== 'string') return undefined;
   const normalized = value.trim();
@@ -76,7 +111,14 @@ const asOptionalBooleanFromSearchParam = (value: string | null): boolean | undef
 
 const normalizeUiContext = (
   value: unknown,
-): { showLogo?: boolean; showExportHtmlButton?: boolean; themeMode?: ThemeMode } => {
+): {
+  showLogo?: boolean;
+  showExportHtmlButton?: boolean;
+  themeMode?: ThemeMode;
+  builderTheme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
+  emailBackgroundStyle?: TemplateBackgroundStyle;
+  emailBackgroundColor?: string;
+} => {
   if (!value || typeof value !== 'object') return {};
 
   const maybe = value as {
@@ -85,11 +127,17 @@ const normalizeUiContext = (
       hideLogo?: unknown;
       showExportHtmlButton?: unknown;
       themeMode?: unknown;
+      builderTheme?: unknown;
+      emailBackgroundStyle?: unknown;
+      emailBackgroundColor?: unknown;
     };
     showLogo?: unknown;
     hideLogo?: unknown;
     showExportHtmlButton?: unknown;
     themeMode?: unknown;
+    builderTheme?: unknown;
+    emailBackgroundStyle?: unknown;
+    emailBackgroundColor?: unknown;
   };
 
   const embeddedContext =
@@ -110,49 +158,127 @@ const normalizeUiContext = (
   const themeMode = asOptionalThemeMode(
     embeddedContext.themeMode !== undefined ? embeddedContext.themeMode : maybe.themeMode,
   );
+  const builderTheme = asOptionalBuilderTheme(
+    embeddedContext.builderTheme !== undefined ? embeddedContext.builderTheme : maybe.builderTheme,
+  );
+  const emailBackgroundStyle = asOptionalTemplateBackgroundStyle(
+    embeddedContext.emailBackgroundStyle !== undefined
+      ? embeddedContext.emailBackgroundStyle
+      : maybe.emailBackgroundStyle,
+  );
+  const emailBackgroundColor = asOptionalHexColor(
+    embeddedContext.emailBackgroundColor !== undefined
+      ? embeddedContext.emailBackgroundColor
+      : maybe.emailBackgroundColor,
+  );
 
-  const output: { showLogo?: boolean; showExportHtmlButton?: boolean; themeMode?: ThemeMode } = {};
+  const output: {
+    showLogo?: boolean;
+    showExportHtmlButton?: boolean;
+    themeMode?: ThemeMode;
+    builderTheme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
+    emailBackgroundStyle?: TemplateBackgroundStyle;
+    emailBackgroundColor?: string;
+  } = {};
   if (resolvedShowLogo !== undefined) output.showLogo = resolvedShowLogo;
   if (showExportHtmlButton !== undefined) output.showExportHtmlButton = showExportHtmlButton;
   if (themeMode !== undefined) output.themeMode = themeMode;
+  if (builderTheme !== undefined) {
+    output.builderTheme = builderTheme;
+  } else if (themeMode !== undefined) {
+    output.builderTheme = builderThemeFromThemeMode(themeMode);
+  }
+  if (emailBackgroundStyle !== undefined) output.emailBackgroundStyle = emailBackgroundStyle;
+  if (emailBackgroundColor !== undefined) output.emailBackgroundColor = emailBackgroundColor;
   return output;
 };
 
 const normalizeUiContextFromSession = (
   widgetContext: unknown,
-): { showLogo?: boolean; showExportHtmlButton?: boolean; themeMode?: ThemeMode } => {
+): {
+  showLogo?: boolean;
+  showExportHtmlButton?: boolean;
+  themeMode?: ThemeMode;
+  builderTheme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
+  emailBackgroundStyle?: TemplateBackgroundStyle;
+  emailBackgroundColor?: string;
+} => {
   if (!widgetContext || typeof widgetContext !== 'object') return {};
 
   const maybe = widgetContext as {
     show_logo?: unknown;
     show_export_html_button?: unknown;
     theme_mode?: unknown;
+    builder_theme?: unknown;
+    email_background_style?: unknown;
+    email_background_color?: unknown;
   };
 
-  const output: { showLogo?: boolean; showExportHtmlButton?: boolean; themeMode?: ThemeMode } = {};
+  const output: {
+    showLogo?: boolean;
+    showExportHtmlButton?: boolean;
+    themeMode?: ThemeMode;
+    builderTheme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
+    emailBackgroundStyle?: TemplateBackgroundStyle;
+    emailBackgroundColor?: string;
+  } = {};
   const showLogo = asOptionalBoolean(maybe.show_logo);
   const showExportHtmlButton = asOptionalBoolean(maybe.show_export_html_button);
   const themeMode = asOptionalThemeMode(maybe.theme_mode);
+  const builderTheme = asOptionalBuilderTheme(maybe.builder_theme);
+  const emailBackgroundStyle = asOptionalTemplateBackgroundStyle(maybe.email_background_style);
+  const emailBackgroundColor = asOptionalHexColor(maybe.email_background_color);
 
   if (showLogo !== undefined) output.showLogo = showLogo;
   if (showExportHtmlButton !== undefined) output.showExportHtmlButton = showExportHtmlButton;
   if (themeMode !== undefined) output.themeMode = themeMode;
+  if (builderTheme !== undefined) {
+    output.builderTheme = builderTheme;
+  } else if (themeMode !== undefined) {
+    output.builderTheme = builderThemeFromThemeMode(themeMode);
+  }
+  if (emailBackgroundStyle !== undefined) output.emailBackgroundStyle = emailBackgroundStyle;
+  if (emailBackgroundColor !== undefined) output.emailBackgroundColor = emailBackgroundColor;
   return output;
 };
 
 const normalizeUiContextFromSearch = (
   params: URLSearchParams,
-): { showLogo?: boolean; showExportHtmlButton?: boolean; themeMode?: ThemeMode } => {
+): {
+  showLogo?: boolean;
+  showExportHtmlButton?: boolean;
+  themeMode?: ThemeMode;
+  builderTheme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
+  emailBackgroundStyle?: TemplateBackgroundStyle;
+  emailBackgroundColor?: string;
+} => {
   const showLogo = asOptionalBooleanFromSearchParam(params.get('showLogo'));
   const legacyHideLogo = asOptionalBooleanFromSearchParam(params.get('hideLogo'));
   const showExportHtmlButton = asOptionalBooleanFromSearchParam(params.get('showExportHtmlButton'));
   const themeMode = asOptionalThemeMode(params.get('themeMode'));
+  const builderTheme = asOptionalBuilderTheme(params.get('builderTheme'));
+  const emailBackgroundStyle = asOptionalTemplateBackgroundStyle(params.get('emailBackgroundStyle'));
+  const emailBackgroundColor = asOptionalHexColor(params.get('emailBackgroundColor'));
 
-  const output: { showLogo?: boolean; showExportHtmlButton?: boolean; themeMode?: ThemeMode } = {};
+  const output: {
+    showLogo?: boolean;
+    showExportHtmlButton?: boolean;
+    themeMode?: ThemeMode;
+    builderTheme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
+    emailBackgroundStyle?: TemplateBackgroundStyle;
+    emailBackgroundColor?: string;
+  } = {};
   if (showLogo !== undefined) output.showLogo = showLogo;
   if (showLogo === undefined && legacyHideLogo !== undefined) output.showLogo = !legacyHideLogo;
   if (showExportHtmlButton !== undefined) output.showExportHtmlButton = showExportHtmlButton;
   if (themeMode !== undefined) output.themeMode = themeMode;
+  if (builderTheme !== undefined) {
+    output.builderTheme = builderTheme;
+  } else if (themeMode !== undefined) {
+    output.builderTheme = builderThemeFromThemeMode(themeMode);
+  }
+  if (emailBackgroundStyle !== undefined) output.emailBackgroundStyle = emailBackgroundStyle;
+  if (emailBackgroundColor !== undefined) output.emailBackgroundColor = emailBackgroundColor;
   return output;
 };
 
@@ -166,9 +292,10 @@ function App() {
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
   const selectedBlock = useEditorStore((s) => s.getSelectedBlock());
   const updateBlock = useEditorStore((s) => s.updateBlock);
+  const applyOrganizationBackground = useEditorStore((s) => s.applyOrganizationBackground);
   const showLogo = useConfigStore((s) => s.showLogo);
   const showExportHtmlButton = useConfigStore((s) => s.showExportHtmlButton);
-  const themeMode = useConfigStore((s) => s.themeMode);
+  const builderTheme = useConfigStore((s) => s.builderTheme);
   const setConfig = useConfigStore((s) => s.setConfig);
   const hostContextAppliedRef = useRef(false);
   const [showPreview, setShowPreview] = useState(false);
@@ -176,30 +303,16 @@ function App() {
   const [showMedia, setShowMedia] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const [exportError, setExportError] = useState<string | null>(null);
-  const [prefersDarkScheme, setPrefersDarkScheme] = useState<boolean>(() => {
-    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return false;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
+  const activeThemePreset = getBuilderThemePreset(builderTheme);
 
   useAutoSave();
 
   useEffect(() => {
-    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return undefined;
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (event: MediaQueryListEvent) => {
-      setPrefersDarkScheme(event.matches);
-    };
-
-    setPrefersDarkScheme(mediaQuery.matches);
-
-    if (typeof mediaQuery.addEventListener === 'function') {
-      mediaQuery.addEventListener('change', handleChange);
-      return () => mediaQuery.removeEventListener('change', handleChange);
-    }
-
-    mediaQuery.addListener(handleChange);
-    return () => mediaQuery.removeListener(handleChange);
-  }, []);
+    applyOrganizationBackground(
+      activeThemePreset.canvasBackgroundStyle,
+      activeThemePreset.canvasBackgroundColor,
+    );
+  }, [activeThemePreset, applyOrganizationBackground]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -224,6 +337,13 @@ function App() {
       try {
         const session = await api.createSession(window.location.origin);
         const sessionUiContext = normalizeUiContextFromSession(session.config.widget_context);
+        const sessionThemeContext = {
+          builderTheme: sessionUiContext.builderTheme,
+        };
+        const sessionEmailBackgroundContext = {
+          emailBackgroundStyle: sessionUiContext.emailBackgroundStyle,
+          emailBackgroundColor: sessionUiContext.emailBackgroundColor,
+        };
         setConfig({
           apiKey,
           sessionToken: session.token,
@@ -234,6 +354,8 @@ function App() {
           storageUsed: session.config.storage_used_bytes,
           storageLimit: session.config.storage_limit_bytes,
           ...(hostContextAppliedRef.current ? {} : sessionUiContext),
+          ...sessionThemeContext,
+          ...sessionEmailBackgroundContext,
         });
         if (shouldApplyQueryContext && Object.keys(contextFromQuery).length > 0) {
           setConfig(contextFromQuery);
@@ -280,6 +402,9 @@ function App() {
           showLogo?: boolean;
           showExportHtmlButton?: boolean;
           themeMode?: ThemeMode;
+          builderTheme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
+          emailBackgroundStyle?: TemplateBackgroundStyle;
+          emailBackgroundColor?: string;
         } = {
           ...uiContext,
         };
@@ -377,11 +502,11 @@ function App() {
     applyImageUrlToBlock(currentSelection, url, updateBlock);
   };
 
-  const isDarkChrome = themeMode === 'dark' || (themeMode === 'system' && prefersDarkScheme);
+  const isDarkChrome = activeThemePreset.chromeMode === 'dark';
   const canApplySelectedMedia = Boolean(selectedBlock && selectedBlock.type === 'image');
 
   return (
-    <div className={`app-shell ${isDarkChrome ? 'theme-dark' : 'theme-light'}`}>
+    <div className={`app-shell ${isDarkChrome ? 'theme-dark' : 'theme-light'} ${activeThemePreset.shellClassName}`}>
       <div className="top-toolbar">
         {showLogo && (
           <div className="brand">

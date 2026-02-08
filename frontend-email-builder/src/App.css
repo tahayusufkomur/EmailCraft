@@ -37,6 +37,57 @@
   --input: 217 24% 24%;
 }
 
+.app-shell.theme-preset-light-breeze {
+  --canvas-bg: radial-gradient(circle at top, #eef2ff 0%, #e2e8f0 55%, #dbeafe 100%);
+  --accent-color: #38bdf8;
+  --accent-hover: #0ea5e9;
+  --accent-soft: rgba(56, 189, 248, 0.12);
+}
+
+.app-shell.theme-preset-light-paper {
+  --surface: #fffdfa;
+  --surface-elevated: #faf7f2;
+  --chrome-surface: #fffdfa;
+  --chrome-surface-elevated: #faf7f2;
+  --chrome-border: rgba(120, 113, 108, 0.24);
+  --text-primary: #292524;
+  --text-muted: #78716c;
+  --chrome-text-primary: #292524;
+  --chrome-text-muted: #78716c;
+  --canvas-bg: radial-gradient(circle at 10% 10%, rgba(120, 113, 108, 0.12) 0, rgba(120, 113, 108, 0.12) 1px, transparent 1px), radial-gradient(circle at 70% 30%, rgba(148, 163, 184, 0.16) 0, rgba(148, 163, 184, 0.16) 2px, transparent 2px), radial-gradient(circle at 30% 80%, rgba(148, 163, 184, 0.12) 0, rgba(148, 163, 184, 0.12) 2px, transparent 2px), linear-gradient(140deg, #fafaf9 0%, #f5f5f4 52%, #e7e5e4 100%);
+  --accent-color: #b45309;
+  --accent-hover: #92400e;
+  --accent-soft: rgba(180, 83, 9, 0.12);
+}
+
+.app-shell.theme-dark.theme-preset-dark-slate {
+  --chrome-surface: #0b1220;
+  --chrome-surface-elevated: #111a2b;
+  --chrome-border: rgba(148, 163, 184, 0.24);
+  --chrome-text-primary: #dbe5f3;
+  --chrome-text-muted: #8ea3bb;
+  --chrome-input-bg: #0f172a;
+  --chrome-input-text: #dbe5f3;
+  --canvas-bg: linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px), radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.22), transparent 36%), radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.2), transparent 34%), linear-gradient(135deg, #0f172a 0%, #111827 55%, #1e293b 100%);
+  --accent-color: #38bdf8;
+  --accent-hover: #0ea5e9;
+  --accent-soft: rgba(56, 189, 248, 0.2);
+}
+
+.app-shell.theme-dark.theme-preset-dark-cosmos {
+  --chrome-surface: #120f24;
+  --chrome-surface-elevated: #1a1630;
+  --chrome-border: rgba(196, 181, 253, 0.28);
+  --chrome-text-primary: #e9e4ff;
+  --chrome-text-muted: #b9aedf;
+  --chrome-input-bg: #1b1533;
+  --chrome-input-text: #ece9ff;
+  --canvas-bg: radial-gradient(circle at 78% 18%, rgba(251, 113, 133, 0.26), transparent 42%), radial-gradient(circle at 22% 78%, rgba(251, 191, 36, 0.24), transparent 48%), linear-gradient(145deg, #271d3c 0%, #201a35 46%, #2c1e3f 100%);
+  --accent-color: #f472b6;
+  --accent-hover: #ec4899;
+  --accent-soft: rgba(244, 114, 182, 0.2);
+}
+
 .top-toolbar {
   display: flex;
   align-items: center;
@@ -424,6 +475,54 @@
 
 .color-input-row input[type="text"] {
   flex: 1;
+}
+
+.background-style-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.background-style-option {
+  border: 1px solid var(--chrome-border);
+  border-radius: 10px;
+  background: var(--chrome-surface-elevated);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+  text-align: left;
+  color: var(--chrome-text-primary);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.background-style-option:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-1px);
+}
+
+.background-style-option.active {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.18);
+}
+
+.background-style-preview {
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.background-style-name {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.background-style-description {
+  margin: 6px 0 0;
+  color: var(--chrome-text-muted);
+  font-size: 11px;
 }
 
 /* Toggle */

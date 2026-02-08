@@ -4,6 +4,7 @@ import type { Block, EmailTemplate, TemplateSettings } from '../types/blocks';
 
 const DEFAULT_SETTINGS: TemplateSettings = {
   backgroundColor: '#f4f4f4',
+  backgroundStyle: 'none',
   contentWidth: 600,
   defaultFont: 'Arial, Helvetica, sans-serif',
   defaultFontSize: 14,
@@ -155,6 +156,10 @@ interface EditorState {
   selectBlock: (id: string | null) => void;
   duplicateBlock: (id: string) => void;
   updateSettings: (settings: Partial<TemplateSettings>) => void;
+  applyOrganizationBackground: (
+    backgroundStyle: TemplateSettings['backgroundStyle'],
+    backgroundColor: string,
+  ) => void;
   loadTemplate: (template: EmailTemplate) => void;
   resetTemplate: () => void;
   setActiveSection: (section: 'header' | 'body' | 'footer') => void;
@@ -455,7 +460,41 @@ export const useEditorStore = create<EditorState>((set, get) => ({
     }));
   },
 
-  loadTemplate: (template) => set({ template, isDirty: false, selectedBlockId: null }),
+  applyOrganizationBackground: (backgroundStyle, backgroundColor) => {
+    set((state) => {
+      const current = state.template.settings;
+      if (
+        current.backgroundStyle === backgroundStyle
+        && current.backgroundColor === backgroundColor
+      ) {
+        return state;
+      }
+      return {
+        template: {
+          ...state.template,
+          settings: {
+            ...state.template.settings,
+            backgroundStyle: backgroundStyle || 'none',
+            backgroundColor: backgroundColor || '#f4f4f4',
+          },
+        },
+      };
+    });
+  },
+
+  loadTemplate: (template) => set((state) => ({
+    template: {
+      ...template,
+      settings: {
+        ...DEFAULT_SETTINGS,
+        ...template.settings,
+        backgroundStyle: state.template.settings.backgroundStyle || 'none',
+        backgroundColor: state.template.settings.backgroundColor || '#f4f4f4',
+      },
+    },
+    isDirty: false,
+    selectedBlockId: null,
+  })),
   resetTemplate: () => set({ template: EMPTY_TEMPLATE, isDirty: false, selectedBlockId: null }),
   setActiveSection: (section) => set({ activeSection: section }),
   markClean: () => set({ isDirty: false }),

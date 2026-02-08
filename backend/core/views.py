@@ -168,6 +168,9 @@ def create_session(request):
                 'show_logo': org.show_logo,
                 'show_export_html_button': org.show_export_html_button,
                 'theme_mode': org.theme_mode,
+                'builder_theme': org.builder_theme,
+                'email_background_style': org.email_background_style,
+                'email_background_color': org.email_background_color,
             },
         },
     })

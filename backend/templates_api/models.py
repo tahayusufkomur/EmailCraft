@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.db.models import Q
 
 from core.models import Organization
 
@@ -8,6 +9,12 @@ from core.models import Organization
 class TenantManager(models.Manager):
     def for_org(self, org):
         return self.filter(org=org)
+
+    def shared(self):
+        return self.filter(org__isnull=True, is_gallery=True)
+
+    def visible_to_org(self, org):
+        return self.filter(Q(org=org) | Q(org__isnull=True, is_gallery=True))
 
 
 class Template(models.Model):

@@ -118,6 +118,9 @@ class SiteOrganizationsApiTests(TestCase):
                 'show_logo': False,
                 'show_export_html_button': False,
                 'theme_mode': 'dark',
+                'builder_theme': 'light-paper',
+                'email_background_style': 'aurora',
+                'email_background_color': '#e2e8f0',
             },
             format='json',
         )
@@ -133,6 +136,9 @@ class SiteOrganizationsApiTests(TestCase):
         self.assertFalse(create_response.data['organization']['show_logo'])
         self.assertFalse(create_response.data['organization']['show_export_html_button'])
         self.assertEqual(create_response.data['organization']['theme_mode'], 'dark')
+        self.assertEqual(create_response.data['organization']['builder_theme'], 'light-paper')
+        self.assertEqual(create_response.data['organization']['email_background_style'], 'aurora')
+        self.assertEqual(create_response.data['organization']['email_background_color'], '#e2e8f0')
         self.assertEqual(
             create_response.data['organization']['available_variables'],
             [{'key': 'user_name', 'label': 'User Name', 'defaultValue': 'Guest', 'type': 'text'}],
@@ -149,6 +155,9 @@ class SiteOrganizationsApiTests(TestCase):
                 'show_logo': True,
                 'show_export_html_button': True,
                 'theme_mode': 'light',
+                'builder_theme': 'dark-cosmos',
+                'email_background_style': 'paper-rings',
+                'email_background_color': '#f8f6f1',
             },
             format='json',
         )
@@ -162,6 +171,9 @@ class SiteOrganizationsApiTests(TestCase):
         self.assertTrue(update_response.data['show_logo'])
         self.assertTrue(update_response.data['show_export_html_button'])
         self.assertEqual(update_response.data['theme_mode'], 'light')
+        self.assertEqual(update_response.data['builder_theme'], 'dark-cosmos')
+        self.assertEqual(update_response.data['email_background_style'], 'paper-rings')
+        self.assertEqual(update_response.data['email_background_color'], '#f8f6f1')
 
         key_response = self.client.post(
             f'/api/v1/site/organizations/{org_id}/api-keys',
@@ -238,6 +250,9 @@ class SiteOrganizationsApiTests(TestCase):
             show_logo=False,
             show_export_html_button=False,
             theme_mode='dark',
+            builder_theme='dark-slate',
+            email_background_style='midnight-grid',
+            email_background_color='#0f172a',
         )
         secondary_org.apply_plan_limits(save=True)
         UserOrganization.objects.create(user=self.user, organization=secondary_org, role='owner')
@@ -280,6 +295,9 @@ class SiteOrganizationsApiTests(TestCase):
                 'show_logo': False,
                 'show_export_html_button': False,
                 'theme_mode': 'dark',
+                'builder_theme': 'dark-slate',
+                'email_background_style': 'midnight-grid',
+                'email_background_color': '#0f172a',
             },
         )
 
@@ -413,4 +431,136 @@ class SiteOrganizationsApiTests(TestCase):
         )
 
         self.assertEqual(response.status_code, 400)
-        self.assertIn('available_variables', response.data)
+        self.assertIn('error', response.data)
+        self.assertEqual(response.data['error']['code'], 'VALIDATION_ERROR')
+        self.assertIn('available_variables', response.data['error']['message'])
+
+    def test_api_templates_are_split_between_user_owned_and_provided(self):
+        template_json = {
+            'version': 1,
+            'settings': {},
+            'header': {'blocks': []},
+            'body': {'blocks': []},
+            'footer': {'blocks': []},
+        }
+        own_template = Template.objects.create(
+            org=self.billing_org,
+            name='Owner Template',
+            json_data=template_json,
+            category='welcome',
+        )
+        shared_template = Template.objects.create(
+            org=None,
+            name='Provided Template',
+            json_data=template_json,
+            category='newsletter',
+            is_gallery=True,
+        )
+        other_org = Organization.objects.create(
+            name='Other Org',
+            email='other-template-org@mailcraft.dev',
+            plan='starter',
+        )
+        other_org.apply_plan_limits(save=True)
+        other_template = Template.objects.create(
+            org=other_org,
+            name='Other Org Private Template',
+            json_data=template_json,
+            category='promotional',
+        )
+
+        raw_key = ApiKey.generate_key('test')
+        ApiKey.objects.create(
+            org=self.billing_org,
+            key_hash=ApiKey.hash_key(raw_key),
+            key_prefix=raw_key[:12],
+            environment='test',
+            scope='full',
+        )
+
+        list_response = self.client.get('/api/v1/templates/', HTTP_X_API_KEY=raw_key)
+        self.assertEqual(list_response.status_code, 200)
+        self.assertIn('results', list_response.data)
+        result_ids = {item['id'] for item in list_response.data['results']}
+        self.assertIn(str(own_template.id), result_ids)
+        self.assertIn(str(shared_template.id), result_ids)
+        self.assertNotIn(str(other_template.id), result_ids)
+
+        by_id = {item['id']: item for item in list_response.data['results']}
+        self.assertEqual(by_id[str(own_template.id)]['template_type'], 'user')
+        self.assertEqual(by_id[str(shared_template.id)]['template_type'], 'provided')
+
+        shared_detail = self.client.get(f'/api/v1/templates/{shared_template.id}/', HTTP_X_API_KEY=raw_key)
+        self.assertEqual(shared_detail.status_code, 200)
+        self.assertEqual(shared_detail.data['template_type'], 'provided')
+
+        update_shared = self.client.put(
+            f'/api/v1/templates/{shared_template.id}/',
+            {'name': 'New Name', 'json_data': template_json, 'category': 'welcome', 'is_draft': False},
+            format='json',
+            HTTP_X_API_KEY=raw_key,
+        )
+        self.assertEqual(update_shared.status_code, 404)
+
+        delete_shared = self.client.delete(f'/api/v1/templates/{shared_template.id}/', HTTP_X_API_KEY=raw_key)
+        self.assertEqual(delete_shared.status_code, 404)
+
+    def test_site_templates_include_provided_templates_as_read_only(self):
+        template_json = {
+            'version': 1,
+            'settings': {},
+            'header': {'blocks': []},
+            'body': {'blocks': []},
+            'footer': {'blocks': []},
+        }
+        own_template = Template.objects.create(
+            org=self.billing_org,
+            name='Site Owner Template',
+            json_data=template_json,
+            category='welcome',
+        )
+        shared_template = Template.objects.create(
+            org=None,
+            name='Site Shared Template',
+            json_data=template_json,
+            category='newsletter',
+            is_gallery=True,
+        )
+        other_org = Organization.objects.create(
+            name='Other Site Org',
+            email='other-site-org@mailcraft.dev',
+            plan='starter',
+        )
+        other_org.apply_plan_limits(save=True)
+        other_template = Template.objects.create(
+            org=other_org,
+            name='Hidden Template',
+            json_data=template_json,
+            category='event',
+        )
+
+        list_response = self.client.get('/api/v1/site/templates/')
+        self.assertEqual(list_response.status_code, 200)
+        result_ids = {item['id'] for item in list_response.data['results']}
+        self.assertIn(str(own_template.id), result_ids)
+        self.assertIn(str(shared_template.id), result_ids)
+        self.assertNotIn(str(other_template.id), result_ids)
+
+        by_id = {item['id']: item for item in list_response.data['results']}
+        self.assertEqual(by_id[str(own_template.id)]['template_type'], 'user')
+        self.assertEqual(by_id[str(shared_template.id)]['template_type'], 'provided')
+
+        detail_response = self.client.get(f'/api/v1/site/templates/{shared_template.id}/')
+        self.assertEqual(detail_response.status_code, 200)
+        self.assertEqual(detail_response.data['template_type'], 'provided')
+
+        update_response = self.client.put(
+            f'/api/v1/site/templates/{shared_template.id}/',
+            {'name': 'Attempt Update', 'json_data': template_json, 'category': 'welcome', 'is_draft': False},
+            format='json',
+        )
+        self.assertEqual(update_response.status_code, 403)
+        self.assertEqual(update_response.data['error']['code'], 'FORBIDDEN')
+
+        delete_response = self.client.delete(f'/api/v1/site/templates/{shared_template.id}/')
+        self.assertEqual(delete_response.status_code, 403)

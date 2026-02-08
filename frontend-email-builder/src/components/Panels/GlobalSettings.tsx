@@ -15,25 +15,6 @@ export function GlobalSettings() {
   return (
     <div>
       <div className="panel-section">
-        <div className="panel-section-title">Background</div>
-        <div className="form-group">
-          <label>Background Color</label>
-          <div className="color-input-row">
-            <input
-              type="color"
-              value={settings.backgroundColor}
-              onChange={(e) => updateSettings({ backgroundColor: e.target.value })}
-            />
-            <input
-              type="text"
-              value={settings.backgroundColor}
-              onChange={(e) => updateSettings({ backgroundColor: e.target.value })}
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="panel-section">
         <div className="panel-section-title">Typography</div>
         <div className="form-group">
           <label>Default Font</label>

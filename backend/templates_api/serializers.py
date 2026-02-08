@@ -8,18 +8,37 @@ from templates_api.models import Template, UploadedImage
 
 
 class TemplateListSerializer(serializers.ModelSerializer):
+    template_type = serializers.SerializerMethodField()
+
     class Meta:
         model = Template
-        fields = ['id', 'name', 'thumbnail_url', 'category', 'is_draft', 'created_at', 'updated_at']
+        fields = [
+            'id',
+            'name',
+            'thumbnail_url',
+            'category',
+            'is_draft',
+            'template_type',
+            'created_at',
+            'updated_at',
+        ]
         read_only_fields = ['id', 'created_at', 'updated_at']
+
+    def get_template_type(self, obj):
+        return 'provided' if obj.org_id is None and obj.is_gallery else 'user'
 
 
 class TemplateDetailSerializer(serializers.ModelSerializer):
+    template_type = serializers.SerializerMethodField()
+
     class Meta:
         model = Template
         fields = ['id', 'name', 'json_data', 'thumbnail_url', 'category',
-                  'is_draft', 'created_at', 'updated_at']
+                  'is_draft', 'template_type', 'created_at', 'updated_at']
         read_only_fields = ['id', 'created_at', 'updated_at']
+
+    def get_template_type(self, obj):
+        return 'provided' if obj.org_id is None and obj.is_gallery else 'user'
 
     def validate_json_data(self, value):
         size = sys.getsizeof(json.dumps(value))
@@ -45,9 +64,14 @@ class TemplateCreateSerializer(serializers.ModelSerializer):
 
 
 class GalleryTemplateSerializer(serializers.ModelSerializer):
+    template_type = serializers.SerializerMethodField()
+
     class Meta:
         model = Template
-        fields = ['id', 'name', 'category', 'thumbnail_url', 'json_data']
+        fields = ['id', 'name', 'category', 'thumbnail_url', 'json_data', 'template_type']
+
+    def get_template_type(self, _obj):
+        return 'provided'
 
 
 class PresignRequestSerializer(serializers.Serializer):

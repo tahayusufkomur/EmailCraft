@@ -1,4 +1,5 @@
 import type { Block, EmailTemplate } from '../types/blocks';
+import { getEmailBackgroundCss } from './backgroundStyles';
 
 /**
  * Client-side HTML exporter for preview purposes.
@@ -9,6 +10,7 @@ export function exportToHtml(template: EmailTemplate, variablesMode: 'placeholde
   void variablesMode;
   const { settings } = template;
   const contentWidth = settings.contentWidth || 600;
+  const emailBackground = getEmailBackgroundCss(settings.backgroundStyle, settings.backgroundColor);
 
   const headerHtml = renderBlocks(template.header.blocks, settings);
   const bodyHtml = renderBlocks(template.body.blocks, settings);
@@ -34,9 +36,9 @@ export function exportToHtml(template: EmailTemplate, variablesMode: 'placeholde
     }
   </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: ${settings.backgroundColor || '#f4f4f4'};">
+<body style="margin: 0; padding: 0; background-color: ${emailBackground.backgroundColor}; background: ${emailBackground.background};">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-         style="background-color: ${settings.backgroundColor || '#f4f4f4'};">
+         style="background-color: ${emailBackground.backgroundColor}; background: ${emailBackground.background};">
     <tr>
       <td align="center" style="padding: 20px 0;">
         <table role="presentation" class="email-container" width="${contentWidth}" cellpadding="0"

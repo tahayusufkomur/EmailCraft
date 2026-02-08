@@ -50,6 +50,8 @@ class OrganizationSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'email', 'plan', 'allowed_origins',
                   'available_variables',
                   'show_logo', 'show_export_html_button', 'theme_mode',
+                  'builder_theme',
+                  'email_background_style', 'email_background_color',
                   'rendered_emails_count', 'rendered_emails_limit',
                   'storage_used_bytes', 'storage_limit_bytes', 'created_at']
         read_only_fields = ['id', 'created_at']
@@ -121,6 +123,21 @@ class SiteOrganizationCreateSerializer(serializers.Serializer):
         required=False,
         default='system',
     )
+    builder_theme = serializers.ChoiceField(
+        choices=[choice[0] for choice in Organization.BUILDER_THEME_CHOICES],
+        required=False,
+        default='light-breeze',
+    )
+    email_background_style = serializers.ChoiceField(
+        choices=[choice[0] for choice in Organization.EMAIL_BACKGROUND_STYLE_CHOICES],
+        required=False,
+        default='none',
+    )
+    email_background_color = serializers.RegexField(
+        regex=r'^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$',
+        required=False,
+        default='#f4f4f4',
+    )
 
     def validate_available_variables(self, value):
         return validate_organization_variables(value)
@@ -137,6 +154,18 @@ class SiteOrganizationUpdateSerializer(serializers.Serializer):
     show_export_html_button = serializers.BooleanField(required=False)
     theme_mode = serializers.ChoiceField(
         choices=[choice[0] for choice in Organization.THEME_MODE_CHOICES],
+        required=False,
+    )
+    builder_theme = serializers.ChoiceField(
+        choices=[choice[0] for choice in Organization.BUILDER_THEME_CHOICES],
+        required=False,
+    )
+    email_background_style = serializers.ChoiceField(
+        choices=[choice[0] for choice in Organization.EMAIL_BACKGROUND_STYLE_CHOICES],
+        required=False,
+    )
+    email_background_color = serializers.RegexField(
+        regex=r'^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$',
         required=False,
     )
 

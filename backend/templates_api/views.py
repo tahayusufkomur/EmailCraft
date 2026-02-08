@@ -38,19 +38,21 @@ class TemplateViewSet(viewsets.ModelViewSet):
         return TemplateDetailSerializer
 
     def get_queryset(self):
+        if self.action in ('list', 'retrieve'):
+            return Template.objects.visible_to_org(self.request.org)
         return Template.objects.for_org(self.request.org)
 
     def perform_create(self, serializer):
-        serializer.save(org=self.request.org)
+        serializer.save(org=self.request.org, is_gallery=False)
 
     def perform_update(self, serializer):
-        serializer.save(org=self.request.org)
+        serializer.save(org=self.request.org, is_gallery=False)
 
 
 @api_view(['GET'])
 def gallery_list(request):
     """GET /api/v1/gallery — list prebuilt gallery templates."""
-    queryset = Template.objects.filter(is_gallery=True)
+    queryset = Template.objects.shared()
 
     category = request.query_params.get('category')
     if category:

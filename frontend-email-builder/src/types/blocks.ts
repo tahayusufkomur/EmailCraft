@@ -1,4 +1,11 @@
 export type BlockType = 'text' | 'image' | 'button' | 'divider' | 'columns' | 'social' | 'heading' | 'spacer' | 'html';
+export type TemplateBackgroundStyle =
+  | 'none'
+  | 'aurora'
+  | 'sunset-glow'
+  | 'mint-weave'
+  | 'midnight-grid'
+  | 'paper-rings';
 
 export interface Spacing {
   top: number;
@@ -152,6 +159,7 @@ export type Block =
 
 export interface TemplateSettings {
   backgroundColor: string;
+  backgroundStyle?: TemplateBackgroundStyle;
   contentWidth: number;
   defaultFont: string;
   defaultFontSize: number;

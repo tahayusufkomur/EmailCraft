@@ -2,6 +2,7 @@ from django.test import TestCase
 
 from templates_api.export_engine import (
     extract_variable_keys,
+    render_email_html,
     substitute_variables,
     validate_variable_key,
 )
@@ -195,3 +196,28 @@ class TestVariableSubstitution(TestCase):
         original = _template(blocks)
         substitute_variables(original, {'name': 'John'})
         self.assertEqual(original['body']['blocks'][0]['data']['html'], '{{name}}')
+
+
+class TestTemplateBackgroundStyles(TestCase):
+    def test_background_style_renders_gradient_wrapper(self):
+        data = _template([])
+        data['settings']['backgroundStyle'] = 'aurora'
+        data['settings']['backgroundColor'] = '#e2e8f0'
+
+        result = render_email_html(data)
+        html = result['html']
+
+        self.assertIn('background-color: #e2e8f0;', html)
+        self.assertIn('radial-gradient(circle at 15% 15%', html)
+        self.assertIn('linear-gradient(135deg, #f6f7ff 0%, #e0e7ff 45%, #dbeafe 100%)', html)
+
+    def test_unknown_background_style_falls_back_to_background_color(self):
+        data = _template([])
+        data['settings']['backgroundStyle'] = 'unknown-style'
+        data['settings']['backgroundColor'] = '#abc123'
+
+        result = render_email_html(data)
+        html = result['html']
+
+        self.assertIn('background-color: #abc123;', html)
+        self.assertIn('background: #abc123;', html)

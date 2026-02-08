@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import type { ThemeMode, Variable } from '../types/editor';
+import type { TemplateBackgroundStyle } from '../types/blocks';
 
 interface ConfigState {
   apiKey: string;
@@ -8,6 +9,9 @@ interface ConfigState {
   showLogo: boolean;
   showExportHtmlButton: boolean;
   themeMode: ThemeMode;
+  builderTheme: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
+  emailBackgroundStyle: TemplateBackgroundStyle;
+  emailBackgroundColor: string;
   plan: string;
   maxUploadSize: number;
   maxMediaFilesPerUpload: number;
@@ -24,6 +28,9 @@ export const useConfigStore = create<ConfigState>((set) => ({
   showLogo: true,
   showExportHtmlButton: true,
   themeMode: 'system',
+  builderTheme: 'light-breeze',
+  emailBackgroundStyle: 'none',
+  emailBackgroundColor: '#f4f4f4',
   plan: 'free',
   maxUploadSize: 5 * 1024 * 1024,
   maxMediaFilesPerUpload: 5,

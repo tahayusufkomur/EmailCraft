@@ -3,9 +3,11 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useEditorStore } from '../../store/editorStore';
 import { BlockWrapper } from './BlockWrapper';
 import { BlockRenderer } from './BlockRenderer';
+import { getCanvasBackgroundStyle } from '../../lib/backgroundStyles';
 
 export function Canvas() {
   const blocks = useEditorStore((s) => s.template.body.blocks);
+  const settings = useEditorStore((s) => s.template.settings);
   const selectBlock = useEditorStore((s) => s.selectBlock);
   const { active, over } = useDndContext();
   const { isOver: isCanvasOver, setNodeRef: setCanvasDropRef } = useDroppable({
@@ -27,7 +29,11 @@ export function Canvas() {
   };
 
   return (
-    <div className="canvas-area" onClick={handleCanvasClick}>
+    <div
+      className="canvas-area"
+      style={getCanvasBackgroundStyle(settings.backgroundStyle, settings.backgroundColor)}
+      onClick={handleCanvasClick}
+    >
       <div ref={setCanvasDropRef} className={`canvas-container ${isCanvasOver ? 'canvas-drop-over' : ''}`}>
         {blocks.length === 0 ? (
           <div className="canvas-empty">

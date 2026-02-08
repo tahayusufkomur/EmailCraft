@@ -20,6 +20,20 @@ class Organization(models.Model):
         ('dark', 'Dark'),
         ('system', 'System'),
     ]
+    EMAIL_BACKGROUND_STYLE_CHOICES = [
+        ('none', 'Solid'),
+        ('aurora', 'Aurora'),
+        ('sunset-glow', 'Sunset Glow'),
+        ('mint-weave', 'Mint Weave'),
+        ('midnight-grid', 'Midnight Grid'),
+        ('paper-rings', 'Paper Rings'),
+    ]
+    BUILDER_THEME_CHOICES = [
+        ('light-breeze', 'Light Breeze'),
+        ('light-paper', 'Light Paper'),
+        ('dark-slate', 'Dark Slate'),
+        ('dark-cosmos', 'Dark Cosmos'),
+    ]
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
@@ -36,6 +50,13 @@ class Organization(models.Model):
     show_logo = models.BooleanField(default=True)
     show_export_html_button = models.BooleanField(default=True)
     theme_mode = models.CharField(max_length=10, choices=THEME_MODE_CHOICES, default='system')
+    email_background_style = models.CharField(
+        max_length=30,
+        choices=EMAIL_BACKGROUND_STYLE_CHOICES,
+        default='none',
+    )
+    email_background_color = models.CharField(max_length=20, default='#f4f4f4')
+    builder_theme = models.CharField(max_length=30, choices=BUILDER_THEME_CHOICES, default='light-breeze')
     test_key_version = models.PositiveIntegerField(default=1)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

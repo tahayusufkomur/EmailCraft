@@ -5,11 +5,21 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../co
 import { Input } from '../components/ui/input';
 import { api } from '../lib/api';
 import { useAuth } from '../lib/auth';
-import type { OrganizationVariable, OrganizationWithApiKeys, ThemeMode } from '../types/api';
+import type {
+  BuilderTheme,
+  OrganizationVariable,
+  OrganizationWithApiKeys,
+} from '../types/api';
 
-const DEFAULT_THEME_MODE: ThemeMode = 'system';
+const DEFAULT_BUILDER_THEME: BuilderTheme = 'light-breeze';
 const VARIABLE_KEY_PATTERN = /^[A-Za-z_][A-Za-z0-9_]*$/;
 const AUTO_SAVE_DEBOUNCE_MS = 1200;
+const BUILDER_THEME_OPTIONS: Array<{ value: BuilderTheme; label: string }> = [
+  { value: 'light-breeze', label: 'Light Breeze' },
+  { value: 'light-paper', label: 'Light Paper' },
+  { value: 'dark-slate', label: 'Dark Slate' },
+  { value: 'dark-cosmos', label: 'Dark Cosmos' },
+];
 
 const toVariableDraft = (item: OrganizationVariable): OrganizationVariable => ({
   key: item.key || '',
@@ -39,7 +49,7 @@ export function DashboardWidgetBuilderPage() {
   const [selectedOrganizationId, setSelectedOrganizationId] = useState<string>('');
   const [showLogo, setShowLogo] = useState(true);
   const [showExportHtmlButton, setShowExportHtmlButton] = useState(true);
-  const [themeMode, setThemeMode] = useState<ThemeMode>(DEFAULT_THEME_MODE);
+  const [builderTheme, setBuilderTheme] = useState<BuilderTheme>(DEFAULT_BUILDER_THEME);
   const [availableVariables, setAvailableVariables] = useState<OrganizationVariable[]>([]);
   const [generatedKeys, setGeneratedKeys] = useState<Record<string, string>>({});
   const [previewRevision, setPreviewRevision] = useState(0);
@@ -80,14 +90,14 @@ export function DashboardWidgetBuilderPage() {
     if (!selectedOrganization) return;
     setShowLogo(selectedOrganization.show_logo);
     setShowExportHtmlButton(selectedOrganization.show_export_html_button);
-    setThemeMode(selectedOrganization.theme_mode);
+    setBuilderTheme(selectedOrganization.builder_theme || DEFAULT_BUILDER_THEME);
     const nextVariables = (selectedOrganization.available_variables || []).map(toVariableDraft);
     setAvailableVariables(nextVariables);
     setLastAutoSavedUiSignature(
       JSON.stringify({
         show_logo: selectedOrganization.show_logo,
         show_export_html_button: selectedOrganization.show_export_html_button,
-        theme_mode: selectedOrganization.theme_mode,
+        builder_theme: selectedOrganization.builder_theme || DEFAULT_BUILDER_THEME,
       }),
     );
   }, [selectedOrganization]);
@@ -129,18 +139,18 @@ export function DashboardWidgetBuilderPage() {
     () => ({
       show_logo: showLogo,
       show_export_html_button: showExportHtmlButton,
-      theme_mode: themeMode,
+      builder_theme: builderTheme,
       available_variables: sanitizeVariables(availableVariables),
     }),
-    [availableVariables, showExportHtmlButton, showLogo, themeMode],
+    [availableVariables, builderTheme, showExportHtmlButton, showLogo],
   );
   const uiSettingsPayload = useMemo(
     () => ({
       show_logo: showLogo,
       show_export_html_button: showExportHtmlButton,
-      theme_mode: themeMode,
+      builder_theme: builderTheme,
     }),
-    [showExportHtmlButton, showLogo, themeMode],
+    [builderTheme, showExportHtmlButton, showLogo],
   );
   const uiSettingsSignature = useMemo(
     () => JSON.stringify(uiSettingsPayload),
@@ -174,11 +184,11 @@ export function DashboardWidgetBuilderPage() {
       apiKey,
       showLogo: showLogo ? 'true' : 'false',
       showExportHtmlButton: showExportHtmlButton ? 'true' : 'false',
-      themeMode,
+      builderTheme,
       rev: String(previewRevision),
     });
     return `/builder/?${params.toString()}`;
-  }, [generatedKeys, previewRevision, selectedOrganizationId, showExportHtmlButton, showLogo, themeMode]);
+  }, [builderTheme, generatedKeys, previewRevision, selectedOrganizationId, showExportHtmlButton, showLogo]);
 
   const copyToClipboard = async (value: string) => {
     if (navigator.clipboard?.writeText) {
@@ -379,19 +389,6 @@ export function DashboardWidgetBuilderPage() {
               </select>
             </label>
 
-            <label className="grid gap-1 text-sm">
-              Theme mode
-              <select
-                className="h-9 rounded-md border border-input bg-background px-3 text-sm"
-                value={themeMode}
-                onChange={(event) => setThemeMode(event.target.value as ThemeMode)}
-              >
-                <option value="system">System</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-              </select>
-            </label>
-
             <div className="flex items-end gap-3">
               <label className="flex items-center gap-2 text-sm">
                 <input
@@ -410,6 +407,21 @@ export function DashboardWidgetBuilderPage() {
                 Show export
               </label>
             </div>
+
+            <label className="grid gap-1 text-sm">
+              Builder theme
+              <select
+                className="h-9 rounded-md border border-input bg-background px-3 text-sm"
+                value={builderTheme}
+                onChange={(event) => setBuilderTheme(event.target.value as BuilderTheme)}
+              >
+                {BUILDER_THEME_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
 
           <div className="space-y-3 rounded-md border border-border p-3">
@@ -432,7 +444,7 @@ export function DashboardWidgetBuilderPage() {
             ) : (
               <div className="space-y-2">
                 {availableVariables.map((variable, index) => (
-                  <div key={`${index}-${variable.key}`} className="grid gap-2 md:grid-cols-12">
+                  <div key={index} className="grid gap-2 md:grid-cols-12">
                     <Input
                       className="md:col-span-3"
                       placeholder="key (user_name)"

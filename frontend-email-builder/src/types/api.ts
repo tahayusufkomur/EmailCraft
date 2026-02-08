@@ -26,6 +26,9 @@ export interface SessionResponse {
       show_logo?: boolean;
       show_export_html_button?: boolean;
       theme_mode?: 'light' | 'dark' | 'system';
+      builder_theme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
+      email_background_style?: 'none' | 'aurora' | 'sunset-glow' | 'mint-weave' | 'midnight-grid' | 'paper-rings';
+      email_background_color?: string;
     };
   };
 }
@@ -36,6 +39,7 @@ export interface TemplateListItem {
   thumbnail_url: string | null;
   category: string;
   is_draft: boolean;
+  template_type?: 'user' | 'provided';
   created_at: string;
   updated_at: string;
 }

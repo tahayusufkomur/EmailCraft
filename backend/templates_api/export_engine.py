@@ -12,6 +12,54 @@ import copy
 import html as html_module
 import re
 
+BACKGROUND_STYLE_PRESETS = {
+    'aurora': {
+        'fallback_color': '#e7ecff',
+        'background': (
+            'radial-gradient(circle at 15% 15%, rgba(168, 85, 247, 0.22), transparent 45%), '
+            'radial-gradient(circle at 85% 20%, rgba(14, 165, 233, 0.22), transparent 42%), '
+            'linear-gradient(135deg, #f6f7ff 0%, #e0e7ff 45%, #dbeafe 100%)'
+        ),
+    },
+    'sunset-glow': {
+        'fallback_color': '#fdf1e8',
+        'background': (
+            'radial-gradient(circle at 78% 18%, rgba(251, 113, 133, 0.22), transparent 42%), '
+            'radial-gradient(circle at 22% 78%, rgba(251, 191, 36, 0.2), transparent 48%), '
+            'linear-gradient(145deg, #fff7ed 0%, #fee2e2 48%, #ffedd5 100%)'
+        ),
+    },
+    'mint-weave': {
+        'fallback_color': '#eafbf6',
+        'background': (
+            'repeating-linear-gradient(45deg, rgba(15, 118, 110, 0.05) 0, rgba(15, 118, 110, 0.05) 1px, transparent 1px, transparent 18px), '
+            'repeating-linear-gradient(-45deg, rgba(20, 184, 166, 0.05) 0, rgba(20, 184, 166, 0.05) 1px, transparent 1px, transparent 18px), '
+            'linear-gradient(135deg, #f0fdfa 0%, #dcfce7 100%)'
+        ),
+    },
+    'midnight-grid': {
+        'fallback_color': '#0f172a',
+        'background': (
+            'linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px), '
+            'linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px), '
+            'radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.18), transparent 36%), '
+            'radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.16), transparent 34%), '
+            'linear-gradient(135deg, #0f172a 0%, #111827 55%, #1e293b 100%)'
+        ),
+    },
+    'paper-rings': {
+        'fallback_color': '#f8f6f1',
+        'background': (
+            'radial-gradient(circle at 10% 10%, rgba(120, 113, 108, 0.08) 0, rgba(120, 113, 108, 0.08) 1px, transparent 1px), '
+            'radial-gradient(circle at 70% 30%, rgba(148, 163, 184, 0.12) 0, rgba(148, 163, 184, 0.12) 2px, transparent 2px), '
+            'radial-gradient(circle at 30% 80%, rgba(148, 163, 184, 0.1) 0, rgba(148, 163, 184, 0.1) 2px, transparent 2px), '
+            'linear-gradient(140deg, #fafaf9 0%, #f5f5f4 52%, #e7e5e4 100%)'
+        ),
+    },
+}
+
+CSS_COLOR_PATTERN = re.compile(r'^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$')
+
 
 # ---------------------------------------------------------------------------
 # Variable handling
@@ -129,7 +177,11 @@ def render_email_html(json_data, variables_mode='placeholders'):
     warnings = []
     settings = json_data.get('settings', {})
 
-    bg_color = settings.get('backgroundColor', '#ffffff')
+    background_style = settings.get('backgroundStyle')
+    bg_color, bg_css = _resolve_template_background(
+        background_style=background_style,
+        background_color=settings.get('backgroundColor'),
+    )
     content_width = settings.get('contentWidth', 600)
     default_font = settings.get('defaultFont', 'Arial, Helvetica, sans-serif')
     default_font_size = settings.get('defaultFontSize', 14)
@@ -154,6 +206,7 @@ def render_email_html(json_data, variables_mode='placeholders'):
         body_html=body_html,
         footer_html=footer_html,
         bg_color=bg_color,
+        bg_css=bg_css,
         content_width=content_width,
         content_bg='#ffffff',
     )
@@ -161,7 +214,7 @@ def render_email_html(json_data, variables_mode='placeholders'):
     return {'html': full_html, 'warnings': warnings}
 
 
-def _email_skeleton(header_html, body_html, footer_html, bg_color, content_width, content_bg):
+def _email_skeleton(header_html, body_html, footer_html, bg_color, bg_css, content_width, content_bg):
     return f"""<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
       xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -193,9 +246,9 @@ def _email_skeleton(header_html, body_html, footer_html, bg_color, content_width
     }}
   </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: {bg_color};">
+<body style="margin: 0; padding: 0; background-color: {bg_color}; background: {bg_css};">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-         style="background-color: {bg_color};">
+         style="background-color: {bg_color}; background: {bg_css};">
     <tr>
       <td align="center" style="padding: 20px 0;">
         <table role="presentation" class="email-container" width="{content_width}" cellpadding="0"
@@ -210,6 +263,27 @@ def _email_skeleton(header_html, body_html, footer_html, bg_color, content_width
   </table>
 </body>
 </html>"""
+
+
+def _resolve_template_background(background_style, background_color):
+    default_color = '#f4f4f4'
+    safe_color = _sanitize_css_color(background_color, default_color)
+    preset = BACKGROUND_STYLE_PRESETS.get(background_style)
+    if not preset:
+        return safe_color, safe_color
+
+    fallback_color = _sanitize_css_color(preset.get('fallback_color'), default_color)
+    resolved_color = safe_color if background_color else fallback_color
+    return resolved_color, preset['background']
+
+
+def _sanitize_css_color(value, default):
+    if not value:
+        return default
+    normalized = str(value).strip()
+    if CSS_COLOR_PATTERN.match(normalized):
+        return normalized
+    return default
 
 
 def _render_blocks(blocks, ctx):

@@ -1,5 +1,9 @@
+import { useEffect, useMemo, useState } from 'react';
+
+import { api } from '../../lib/api';
 import { useEditorStore } from '../../store/editorStore';
 import type { EmailTemplate } from '../../types/blocks';
+import type { TemplateListItem } from '../../types/api';
 
 // Pre-built templates
 const GALLERY_TEMPLATES: { name: string; category: string; template: EmailTemplate }[] = [
@@ -198,6 +202,45 @@ interface Props {
 
 export function TemplateGallery({ onClose }: Props) {
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [templates, setTemplates] = useState<TemplateListItem[]>([]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadTemplates = async () => {
+      setIsLoading(true);
+      setLoadError(null);
+      try {
+        const list = await api.listTemplates();
+        if (!isMounted) return;
+        setTemplates(list.results || []);
+      } catch (error) {
+        if (!isMounted) return;
+        const message = error instanceof Error ? error.message : 'Unable to load templates.';
+        setLoadError(message);
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    void loadTemplates();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const userTemplates = useMemo(
+    () => templates.filter((item) => item.template_type !== 'provided'),
+    [templates],
+  );
+  const providedTemplates = useMemo(
+    () => templates.filter((item) => item.template_type === 'provided'),
+    [templates],
+  );
 
   const handleSelect = (template: EmailTemplate) => {
     // Deep clone to avoid reference sharing
@@ -226,6 +269,19 @@ export function TemplateGallery({ onClose }: Props) {
     onClose();
   };
 
+  const handleSelectSavedTemplate = async (item: TemplateListItem) => {
+    try {
+      const detail = await api.getTemplate(item.id);
+      if (!detail.json_data || typeof detail.json_data !== 'object') {
+        throw new Error('Template payload is invalid.');
+      }
+      handleSelect(detail.json_data as EmailTemplate);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unable to load template.';
+      setLoadError(message);
+    }
+  };
+
   return (
     <div style={{
       position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)',
@@ -244,30 +300,124 @@ export function TemplateGallery({ onClose }: Props) {
           <h2 style={{ margin: 0, fontSize: 18 }}>Templates</h2>
           <button className="btn" onClick={onClose}>&times;</button>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>
-          {GALLERY_TEMPLATES.map((item, i) => (
-            <div
-              key={i}
-              style={{
-                border: '1px solid #e2e8f0', borderRadius: 8, padding: 16,
-                cursor: 'pointer', transition: 'all 0.15s',
-              }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#3182ce'; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#e2e8f0'; }}
-              onClick={() => handleSelect(item.template)}
-            >
-              <div style={{
-                height: 100, background: '#f7fafc', borderRadius: 4,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                marginBottom: 12, fontSize: 32, color: '#a0aec0',
-              }}>
-                &#x2709;
-              </div>
-              <div style={{ fontWeight: 600, fontSize: 14 }}>{item.name}</div>
-              <div style={{ fontSize: 12, color: '#718096', marginTop: 4 }}>{item.category}</div>
-            </div>
-          ))}
-        </div>
+        {loadError && (
+          <div
+            style={{
+              marginBottom: 12,
+              border: '1px solid #fed7d7',
+              background: '#fff5f5',
+              color: '#c53030',
+              borderRadius: 6,
+              padding: '10px 12px',
+              fontSize: 13,
+            }}
+          >
+            {loadError}
+          </div>
+        )}
+        {isLoading ? (
+          <p style={{ margin: 0, color: '#4a5568' }}>Loading templates...</p>
+        ) : (
+          <div style={{ display: 'grid', gap: 20 }}>
+            <section>
+              <h3 style={{ margin: '0 0 10px 0', fontSize: 14 }}>Your templates</h3>
+              {userTemplates.length === 0 ? (
+                <p style={{ margin: 0, color: '#718096', fontSize: 13 }}>
+                  No user-owned templates yet.
+                </p>
+              ) : (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>
+                  {userTemplates.map((item) => (
+                    <div
+                      key={item.id}
+                      style={{
+                        border: '1px solid #e2e8f0', borderRadius: 8, padding: 16,
+                        cursor: 'pointer', transition: 'all 0.15s',
+                      }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#3182ce'; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#e2e8f0'; }}
+                      onClick={() => void handleSelectSavedTemplate(item)}
+                    >
+                      <div style={{
+                        height: 100, background: '#f7fafc', borderRadius: 4,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        marginBottom: 12, fontSize: 32, color: '#a0aec0',
+                      }}>
+                        &#x1F4C4;
+                      </div>
+                      <div style={{ fontWeight: 600, fontSize: 14 }}>{item.name}</div>
+                      <div style={{ fontSize: 12, color: '#718096', marginTop: 4 }}>
+                        {item.category || 'custom'}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+
+            <section>
+              <h3 style={{ margin: '0 0 10px 0', fontSize: 14 }}>Provided templates</h3>
+              {providedTemplates.length > 0 ? (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>
+                  {providedTemplates.map((item) => (
+                    <div
+                      key={item.id}
+                      style={{
+                        border: '1px solid #e2e8f0', borderRadius: 8, padding: 16,
+                        cursor: 'pointer', transition: 'all 0.15s',
+                      }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#3182ce'; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#e2e8f0'; }}
+                      onClick={() => void handleSelectSavedTemplate(item)}
+                    >
+                      <div style={{
+                        height: 100, background: '#f7fafc', borderRadius: 4,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        marginBottom: 12, fontSize: 32, color: '#a0aec0',
+                      }}>
+                        &#x2709;
+                      </div>
+                      <div style={{ fontWeight: 600, fontSize: 14 }}>{item.name}</div>
+                      <div style={{ fontSize: 12, color: '#718096', marginTop: 4 }}>
+                        {item.category || 'provided'}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>
+                  {GALLERY_TEMPLATES.map((item, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        border: '1px solid #e2e8f0', borderRadius: 8, padding: 16,
+                        cursor: 'pointer', transition: 'all 0.15s',
+                      }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#3182ce'; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#e2e8f0'; }}
+                      onClick={() => handleSelect(item.template)}
+                    >
+                      <div style={{
+                        height: 100, background: '#f7fafc', borderRadius: 4,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        marginBottom: 12, fontSize: 32, color: '#a0aec0',
+                      }}>
+                        &#x2709;
+                      </div>
+                      <div style={{ fontWeight: 600, fontSize: 14 }}>{item.name}</div>
+                      <div style={{ fontSize: 12, color: '#718096', marginTop: 4 }}>{item.category}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+          </div>
+        )}
+        {templates.length > 0 && (
+          <div style={{ marginTop: 14, color: '#718096', fontSize: 12 }}>
+            Provided templates are shared across all organizations and are read-only.
+          </div>
+        )}
       </div>
     </div>
   );

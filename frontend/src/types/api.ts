@@ -1,6 +1,8 @@
 export type PlanKey = 'free' | 'starter' | 'pro' | 'enterprise';
 export type ThemeMode = 'light' | 'dark' | 'system';
 export type VariableType = 'text' | 'url';
+export type BuilderTheme = 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
+export type EmailBackgroundStyle = 'none' | 'aurora' | 'sunset-glow' | 'mint-weave' | 'midnight-grid' | 'paper-rings';
 
 export interface OrganizationVariable {
   key: string;
@@ -47,6 +49,9 @@ export interface OrganizationSummary {
   show_logo: boolean;
   show_export_html_button: boolean;
   theme_mode: ThemeMode;
+  builder_theme: BuilderTheme;
+  email_background_style: EmailBackgroundStyle;
+  email_background_color: string;
   rendered_emails_count: number;
   rendered_emails_limit: number;
   storage_used_bytes: number;
@@ -124,6 +129,7 @@ export interface TemplateListItem {
   thumbnail_url: string | null;
   category: string;
   is_draft: boolean;
+  template_type?: 'user' | 'provided';
   created_at: string;
   updated_at: string;
 }

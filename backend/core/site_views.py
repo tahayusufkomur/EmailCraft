@@ -199,6 +199,9 @@ def site_organizations(request):
                 show_logo=data.get('show_logo', True),
                 show_export_html_button=data.get('show_export_html_button', True),
                 theme_mode=data.get('theme_mode', 'system'),
+                builder_theme=data.get('builder_theme', 'light-breeze'),
+                email_background_style=data.get('email_background_style', 'none'),
+                email_background_color=data.get('email_background_color', '#f4f4f4'),
             )
             org.apply_plan_limits(save=True)
             UserOrganization.objects.create(user=request.user, organization=org, role='owner')
@@ -256,6 +259,9 @@ def site_organization_detail(request, organization_id):
         'show_logo',
         'show_export_html_button',
         'theme_mode',
+        'builder_theme',
+        'email_background_style',
+        'email_background_color',
     ]:
         if field in data:
             setattr(org, field, data[field])
@@ -320,13 +326,13 @@ def site_templates(request):
         )
 
     if request.method == 'GET':
-        queryset = Template.objects.for_org(org)
+        queryset = Template.objects.visible_to_org(org)
         serializer = TemplateListSerializer(queryset, many=True)
         return Response({'results': serializer.data})
 
     serializer = TemplateCreateSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
-    template = serializer.save(org=org)
+    template = serializer.save(org=org, is_gallery=False)
     return Response(TemplateDetailSerializer(template).data, status=status.HTTP_201_CREATED)
 
 
@@ -341,7 +347,7 @@ def site_template_detail(request, template_id):
             status=status.HTTP_404_NOT_FOUND,
         )
 
-    template = Template.objects.for_org(org).filter(id=template_id).first()
+    template = Template.objects.visible_to_org(org).filter(id=template_id).first()
     if not template:
         return Response(
             {'error': {'code': 'TEMPLATE_NOT_FOUND', 'message': 'Template not found.'}},
@@ -351,13 +357,19 @@ def site_template_detail(request, template_id):
     if request.method == 'GET':
         return Response(TemplateDetailSerializer(template).data)
 
+    if template.org_id != org.id:
+        return Response(
+            {'error': {'code': 'FORBIDDEN', 'message': 'Provided templates are read-only.'}},
+            status=status.HTTP_403_FORBIDDEN,
+        )
+
     if request.method == 'DELETE':
         template.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     serializer = TemplateCreateSerializer(template, data=request.data, partial=True)
     serializer.is_valid(raise_exception=True)
-    serializer.save(org=org)
+    serializer.save(org=org, is_gallery=False)
     return Response(TemplateDetailSerializer(template).data)
 
 

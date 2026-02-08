@@ -1,6 +1,7 @@
 import type {
   LandingResponse,
   OrganizationVariable,
+  BuilderTheme,
   PricingResponse,
   SiteApiKeyCreateResponse,
   SiteDashboardResponse,
@@ -9,6 +10,7 @@ import type {
   SiteOrganizationsResponse,
   SiteRegisterResponse,
   SubscribeResponse,
+  EmailBackgroundStyle,
   ThemeMode,
 } from '../types/api';
 
@@ -90,6 +92,9 @@ export const api = {
       show_logo?: boolean;
       show_export_html_button?: boolean;
       theme_mode?: ThemeMode;
+      builder_theme?: BuilderTheme;
+      email_background_style?: EmailBackgroundStyle;
+      email_background_color?: string;
     },
   ) =>
     request<SiteOrganizationCreateResponse>(
@@ -108,6 +113,9 @@ export const api = {
       show_logo?: boolean;
       show_export_html_button?: boolean;
       theme_mode?: ThemeMode;
+      builder_theme?: BuilderTheme;
+      email_background_style?: EmailBackgroundStyle;
+      email_background_color?: string;
     },
   ) =>
     request<SiteOrganizationCreateResponse['organization']>(
