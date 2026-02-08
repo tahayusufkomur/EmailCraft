@@ -9,6 +9,7 @@ import type { OrganizationVariable, OrganizationWithApiKeys, ThemeMode } from '.
 
 const DEFAULT_THEME_MODE: ThemeMode = 'system';
 const VARIABLE_KEY_PATTERN = /^[A-Za-z_][A-Za-z0-9_]*$/;
+const AUTO_SAVE_DEBOUNCE_MS = 1200;
 
 const toVariableDraft = (item: OrganizationVariable): OrganizationVariable => ({
   key: item.key || '',
@@ -22,7 +23,7 @@ const sanitizeVariables = (items: OrganizationVariable[]): OrganizationVariable[
     .map((item) => ({
       key: item.key.trim(),
       label: item.label.trim(),
-      type: item.type === 'url' ? 'url' : 'text',
+      type: (item.type === 'url' ? 'url' : 'text') as OrganizationVariable['type'],
       defaultValue: item.defaultValue?.trim() || undefined,
     }))
     .filter((item) => item.key.length > 0 && item.label.length > 0);
@@ -45,6 +46,7 @@ export function DashboardWidgetBuilderPage() {
   const [status, setStatus] = useState('Ready');
   const [error, setError] = useState<string | null>(null);
   const [busyAction, setBusyAction] = useState<string | null>(null);
+  const [lastAutoSavedUiSignature, setLastAutoSavedUiSignature] = useState('');
 
   const initialOrganizationId = useMemo(parseInitialOrganizationId, []);
 
@@ -79,7 +81,15 @@ export function DashboardWidgetBuilderPage() {
     setShowLogo(selectedOrganization.show_logo);
     setShowExportHtmlButton(selectedOrganization.show_export_html_button);
     setThemeMode(selectedOrganization.theme_mode);
-    setAvailableVariables((selectedOrganization.available_variables || []).map(toVariableDraft));
+    const nextVariables = (selectedOrganization.available_variables || []).map(toVariableDraft);
+    setAvailableVariables(nextVariables);
+    setLastAutoSavedUiSignature(
+      JSON.stringify({
+        show_logo: selectedOrganization.show_logo,
+        show_export_html_button: selectedOrganization.show_export_html_button,
+        theme_mode: selectedOrganization.theme_mode,
+      }),
+    );
   }, [selectedOrganization]);
 
   const variableValidationError = useMemo(() => {
@@ -114,6 +124,28 @@ export function DashboardWidgetBuilderPage() {
 
     return null;
   }, [availableVariables]);
+
+  const settingsPayload = useMemo(
+    () => ({
+      show_logo: showLogo,
+      show_export_html_button: showExportHtmlButton,
+      theme_mode: themeMode,
+      available_variables: sanitizeVariables(availableVariables),
+    }),
+    [availableVariables, showExportHtmlButton, showLogo, themeMode],
+  );
+  const uiSettingsPayload = useMemo(
+    () => ({
+      show_logo: showLogo,
+      show_export_html_button: showExportHtmlButton,
+      theme_mode: themeMode,
+    }),
+    [showExportHtmlButton, showLogo, themeMode],
+  );
+  const uiSettingsSignature = useMemo(
+    () => JSON.stringify(uiSettingsPayload),
+    [uiSettingsPayload],
+  );
 
   const ensureReusableApiKey = useCallback(
     async (organizationId: string, refresh = false) => {
@@ -176,13 +208,13 @@ export function DashboardWidgetBuilderPage() {
     setBusyAction('save');
     setError(null);
     try {
-      await api.updateOrganization(token, selectedOrganizationId, {
-        show_logo: showLogo,
-        show_export_html_button: showExportHtmlButton,
-        theme_mode: themeMode,
-        available_variables: sanitizeVariables(availableVariables),
-      });
-      await loadOrganizations();
+      const updated = await api.updateOrganization(token, selectedOrganizationId, settingsPayload);
+      setOrganizations((previous) =>
+        previous.map((organization) => (
+          organization.id === selectedOrganizationId ? updated : organization
+        )),
+      );
+      setLastAutoSavedUiSignature(uiSettingsSignature);
       setPreviewRevision((previous) => previous + 1);
       setStatus('Settings saved');
     } catch (err) {
@@ -191,6 +223,39 @@ export function DashboardWidgetBuilderPage() {
       setBusyAction(null);
     }
   };
+
+  useEffect(() => {
+    if (!token || !selectedOrganizationId) return;
+    if (busyAction === 'save') return;
+    if (uiSettingsSignature === lastAutoSavedUiSignature) return;
+
+    const timer = window.setTimeout(() => {
+      setLastAutoSavedUiSignature(uiSettingsSignature);
+      void api
+        .updateOrganization(token, selectedOrganizationId, uiSettingsPayload)
+        .then((updated) => {
+          setOrganizations((previous) =>
+            previous.map((organization) => (
+              organization.id === selectedOrganizationId ? updated : organization
+            )),
+          );
+          setPreviewRevision((previous) => previous + 1);
+          setStatus('Display settings auto-saved');
+        })
+        .catch((err: Error) => {
+          setError(err.message);
+        });
+    }, AUTO_SAVE_DEBOUNCE_MS);
+
+    return () => window.clearTimeout(timer);
+  }, [
+    busyAction,
+    lastAutoSavedUiSignature,
+    selectedOrganizationId,
+    uiSettingsPayload,
+    uiSettingsSignature,
+    token,
+  ]);
 
   const handleCopyApiKey = async () => {
     if (!selectedOrganizationId) return;
@@ -280,9 +345,9 @@ export function DashboardWidgetBuilderPage() {
   return (
     <div className="space-y-4">
       <div>
-        <h1 className="font-heading text-3xl font-semibold tracking-tight">Widget Builder</h1>
+        <h1 className="font-heading text-3xl font-semibold tracking-tight">Email Builder</h1>
         <p className="text-muted-foreground">
-          Configure organization widget settings and view them on a full preview surface.
+          Configure organization email builder settings and view them on a full preview surface.
         </p>
       </div>
 
@@ -294,7 +359,7 @@ export function DashboardWidgetBuilderPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Widget Settings</CardTitle>
+          <CardTitle>Email Builder Settings</CardTitle>
           <CardDescription>{status}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

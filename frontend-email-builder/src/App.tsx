@@ -15,7 +15,7 @@ import { exportToHtml } from './lib/htmlExporter';
 import { applyImageUrlToBlock } from './lib/media';
 import { api } from './lib/api';
 import { useAutoSave, loadDraft } from './hooks/useAutoSave';
-import { listenToParent, sendReadyEvent, sendSaveEvent } from './lib/postMessage';
+import { listenToParent, sendErrorEvent, sendReadyEvent, sendSaveEvent } from './lib/postMessage';
 import type { EmailTemplate } from './types/blocks';
 import type { ThemeMode, Variable } from './types/editor';
 
@@ -54,6 +54,12 @@ const asOptionalBoolean = (value: unknown): boolean | undefined => {
 const asOptionalThemeMode = (value: unknown): ThemeMode | undefined => {
   if (value === 'light' || value === 'dark' || value === 'system') return value;
   return undefined;
+};
+
+const asOptionalNonEmptyString = (value: unknown): string | undefined => {
+  if (typeof value !== 'string') return undefined;
+  const normalized = value.trim();
+  return normalized.length > 0 ? normalized : undefined;
 };
 
 const asOptionalBooleanFromSearchParam = (value: string | null): boolean | undefined => {
@@ -157,7 +163,6 @@ function emitSaveEvent(template: EmailTemplate) {
 
 function App() {
   const isDirty = useEditorStore((s) => s.isDirty);
-  const template = useEditorStore((s) => s.template);
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
   const selectedBlock = useEditorStore((s) => s.getSelectedBlock());
   const updateBlock = useEditorStore((s) => s.updateBlock);
@@ -169,6 +174,8 @@ function App() {
   const [showPreview, setShowPreview] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
   const [showMedia, setShowMedia] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportError, setExportError] = useState<string | null>(null);
   const [prefersDarkScheme, setPrefersDarkScheme] = useState<boolean>(() => {
     if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return false;
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -264,7 +271,11 @@ function App() {
         if (Object.keys(uiContext).length > 0) {
           hostContextAppliedRef.current = true;
         }
+        const incomingApiKey = asOptionalNonEmptyString(
+          config?.apiKey ?? config?.api_key,
+        );
         const nextConfig: {
+          apiKey?: string;
           variables?: Variable[];
           showLogo?: boolean;
           showExportHtmlButton?: boolean;
@@ -272,6 +283,11 @@ function App() {
         } = {
           ...uiContext,
         };
+        if (incomingApiKey) {
+          localStorage.setItem('mailcraft_api_key', incomingApiKey);
+          nextConfig.apiKey = incomingApiKey;
+          void syncSessionConfig(incomingApiKey);
+        }
         if (config && typeof config === 'object' && 'variables' in config) {
           nextConfig.variables = normalizeVariables(config.variables);
         }
@@ -286,7 +302,7 @@ function App() {
         }
       },
       onExport: () => {
-        emitSaveEvent(useEditorStore.getState().template);
+        void exportTemplateUsingApi({ shouldDownload: false, shouldSendToHost: true });
       },
     });
 
@@ -310,15 +326,49 @@ function App() {
     emitSaveEvent(currentTemplate);
   };
 
-  const handleExport = () => {
-    const html = exportToHtml(template, 'placeholders');
-    const blob = new Blob([html], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'email-template.html';
-    a.click();
-    URL.revokeObjectURL(url);
+  const resolveErrorMessage = (error: unknown): string => {
+    if (error instanceof Error && error.message.trim().length > 0) return error.message;
+    return 'Unable to export HTML.';
+  };
+
+  const exportTemplateUsingApi = async (
+    options?: { shouldDownload?: boolean; shouldSendToHost?: boolean },
+  ) => {
+    const currentTemplate = useEditorStore.getState().template;
+    setExportError(null);
+    setIsExporting(true);
+
+    try {
+      const response = await api.exportHtml({
+        json_data: currentTemplate,
+        variables_mode: 'placeholders',
+      });
+      const html = response.html;
+
+      if (options?.shouldSendToHost) {
+        sendSaveEvent(html, currentTemplate);
+      }
+
+      if (options?.shouldDownload !== false) {
+        const blob = new Blob([html], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'email-template.html';
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+    } catch (error) {
+      const message = resolveErrorMessage(error);
+      setExportError(message);
+      sendErrorEvent('EXPORT_FAILED', message);
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  const handleExport = async () => {
+    await exportTemplateUsingApi({ shouldDownload: true });
   };
 
   const handleToolbarMediaSelect = (url: string) => {
@@ -353,11 +403,12 @@ function App() {
             Save
           </Button>
           {showExportHtmlButton && (
-            <Button variant="default" onClick={handleExport}>
-              Export HTML
+            <Button variant="default" onClick={() => void handleExport()} disabled={isExporting}>
+              {isExporting ? 'Exporting...' : 'Export HTML'}
             </Button>
           )}
           {isDirty && <Badge variant="secondary">Unsaved</Badge>}
+          {exportError && <Badge variant="destructive">{exportError}</Badge>}
         </div>
       </div>
       <EditorDndContext>

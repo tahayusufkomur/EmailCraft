@@ -48,6 +48,30 @@ class CreateDemoOrgCommandTests(TestCase):
         self.assertIn('DEMO_PASSWORD=demo12345', output)
         self.assertIn('TEMPLATE_ID=', output)
 
+        demo_starter = User.objects.get(username='demo_starter')
+        demo_pro = User.objects.get(username='demo_pro')
+        demo_enterprise = User.objects.get(username='demo_enterprise')
+        self.assertEqual(demo_starter.email, 'demo_starter@example.com')
+        self.assertEqual(demo_pro.email, 'demo_pro@example.com')
+        self.assertEqual(demo_enterprise.email, 'demo_enterprise@example.com')
+        self.assertTrue(demo_starter.check_password('demo'))
+        self.assertTrue(demo_pro.check_password('demo'))
+        self.assertTrue(demo_enterprise.check_password('demo'))
+
+        starter_org = Organization.objects.get(email='demo-starter-org@mailcraft.dev')
+        pro_org = Organization.objects.get(email='demo-pro-org@mailcraft.dev')
+        enterprise_org = Organization.objects.get(email='demo-enterprise-org@mailcraft.dev')
+        self.assertEqual(starter_org.plan, 'starter')
+        self.assertEqual(pro_org.plan, 'pro')
+        self.assertEqual(enterprise_org.plan, 'enterprise')
+        self.assertTrue(
+            UserOrganization.objects.filter(user=demo_starter, organization=starter_org, role='owner').exists()
+        )
+        self.assertTrue(UserOrganization.objects.filter(user=demo_pro, organization=pro_org, role='owner').exists())
+        self.assertTrue(
+            UserOrganization.objects.filter(user=demo_enterprise, organization=enterprise_org, role='owner').exists()
+        )
+
     def test_re_running_command_reuses_static_api_key(self):
         call_command('create_demo_org')
         call_command('create_demo_org')

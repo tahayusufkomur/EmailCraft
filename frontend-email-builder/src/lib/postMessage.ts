@@ -12,6 +12,8 @@ type IncomingMessageType =
   | 'MAILCRAFT_EXPORT';
 
 type IncomingInitPayload = {
+  apiKey?: unknown;
+  api_key?: unknown;
   variables?: unknown[];
   templateJson?: EmailTemplate;
   context?: {

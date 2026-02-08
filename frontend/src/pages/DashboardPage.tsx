@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../co
 import { formatBytes } from '../lib/utils';
 
 export function DashboardPage() {
-  const { token, organization } = useAuth();
+  const { token, organization, user } = useAuth();
   const [data, setData] = useState<SiteDashboardResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -90,6 +90,16 @@ export function DashboardPage() {
             <Button asChild size="sm">
               <Link to="/dashboard/organizations">Go to Builder</Link>
             </Button>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardDescription>User information</CardDescription>
+            <CardTitle>{user?.username ?? '-'}</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-1 text-sm text-muted-foreground">
+            <p>Email: {user?.email ?? '-'}</p>
           </CardContent>
         </Card>
       </div>

@@ -116,7 +116,7 @@ def site_register(request):
     return Response(
         {
             'token': token.key,
-            'user': {'id': user.id, 'username': user.username, 'email': user.email},
+            'user': {'username': user.username, 'email': user.email},
             'organization': OrganizationSerializer(org).data,
         },
         status=status.HTTP_201_CREATED,
@@ -136,7 +136,7 @@ def site_me(request):
 
     return Response(
         {
-            'user': {'id': request.user.id, 'username': request.user.username, 'email': request.user.email},
+            'user': {'username': request.user.username, 'email': request.user.email},
             'organization': OrganizationSerializer(org).data,
         }
     )

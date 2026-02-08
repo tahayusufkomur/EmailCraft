@@ -85,7 +85,7 @@ lint-frontend-builder: ## Type-check builder frontend
 
 # ─── Utilities ────────────────────────────────────────────
 
-seed: ## Create enterprise demo org + max quotas + static API key + demo user/password + demo template
+seed: ## Create enterprise demo org + static API key + demo template + plan demo users (starter/pro/enterprise, password: demo)
 	@$(MANAGE) create_demo_org
 
 demo-org: ## Create demo org (usage: make demo-org ORG="Name" EMAIL="a@b.com" ENV=test API_KEY=mc_test_... USERNAME=demo USER_EMAIL=demo-user@mailcraft.dev PASSWORD=demo12345)

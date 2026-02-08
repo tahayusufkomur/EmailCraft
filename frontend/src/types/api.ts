@@ -69,7 +69,6 @@ export interface OrganizationWithApiKeys extends OrganizationSummary {
 }
 
 export interface SiteUser {
-  id: number;
   username: string;
   email: string;
 }

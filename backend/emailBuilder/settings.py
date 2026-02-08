@@ -13,7 +13,6 @@ ROOT_DIR = BASE_DIR.parent
 load_dotenv(ROOT_DIR / '.env')
 
 APP_ENV = os.environ.get('APP_ENV', 'dev').lower()
-IS_PRODUCTION = APP_ENV in ('prod', 'production')
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -168,12 +167,32 @@ AWS_S3_ENDPOINT_URL = os.environ.get('AWS_ENDPOINT', '') or None
 AWS_CLOUDFRONT_DOMAIN = os.environ.get('AWS_CLOUDFRONT_DOMAIN', '')
 AWS_S3_KEY_PREFIX = os.environ.get('AWS_S3_KEY_PREFIX', 'emailBuilder')
 
-AWS_BUCKET_NAME_PUBLIC = os.environ.get('AWS_BUCKET_NAME_PUBLIC', '')
-AWS_BUCKET_NAME_PRIVATE = os.environ.get('AWS_BUCKET_NAME_PRIVATE', '')
-AWS_BUCKET_NAME_PUBLIC_PROD = os.environ.get('AWS_BUCKET_NAME_PUBLIC_PROD', AWS_BUCKET_NAME_PUBLIC)
-AWS_BUCKET_NAME_PRIVATE_PROD = os.environ.get('AWS_BUCKET_NAME_PRIVATE_PROD', AWS_BUCKET_NAME_PRIVATE)
-AWS_S3_PUBLIC_BUCKET = AWS_BUCKET_NAME_PUBLIC_PROD if IS_PRODUCTION else AWS_BUCKET_NAME_PUBLIC
-AWS_S3_PRIVATE_BUCKET = AWS_BUCKET_NAME_PRIVATE_PROD if IS_PRODUCTION else AWS_BUCKET_NAME_PRIVATE
+# Bucket selection by DEBUG flag:
+# - DEBUG=True  -> development bucket
+# - DEBUG=False -> production bucket
+# New preferred env vars:
+# - AWS_BUCKET_NAME_DEV
+# - AWS_BUCKET_NAME_PROD
+# Backward-compatible fallbacks keep old variable names working.
+AWS_BUCKET_NAME_DEV = os.environ.get(
+    'AWS_BUCKET_NAME_DEV',
+    os.environ.get('AWS_BUCKET_NAME_PUBLIC', ''),
+)
+AWS_BUCKET_NAME_PROD = os.environ.get(
+    'AWS_BUCKET_NAME_PROD',
+    os.environ.get('AWS_BUCKET_NAME_PUBLIC_PROD', AWS_BUCKET_NAME_DEV),
+)
+AWS_BUCKET_NAME_DEV_PRIVATE = os.environ.get(
+    'AWS_BUCKET_NAME_DEV_PRIVATE',
+    os.environ.get('AWS_BUCKET_NAME_PRIVATE', AWS_BUCKET_NAME_DEV),
+)
+AWS_BUCKET_NAME_PROD_PRIVATE = os.environ.get(
+    'AWS_BUCKET_NAME_PROD_PRIVATE',
+    os.environ.get('AWS_BUCKET_NAME_PRIVATE_PROD', AWS_BUCKET_NAME_PROD),
+)
+
+AWS_S3_PUBLIC_BUCKET = AWS_BUCKET_NAME_DEV if DEBUG else AWS_BUCKET_NAME_PROD
+AWS_S3_PRIVATE_BUCKET = AWS_BUCKET_NAME_DEV_PRIVATE if DEBUG else AWS_BUCKET_NAME_PROD_PRIVATE
 AWS_STORAGE_BUCKET_NAME = AWS_S3_PUBLIC_BUCKET
 
 

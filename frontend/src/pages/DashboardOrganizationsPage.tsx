@@ -7,6 +7,7 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { api } from '../lib/api';
 import { useAuth } from '../lib/auth';
+import { formatBytes } from '../lib/utils';
 import type { OrganizationWithApiKeys, SiteDashboardResponse } from '../types/api';
 
 type OrganizationDraft = {
@@ -61,6 +62,14 @@ export function DashboardOrganizationsPage() {
   }, [loadOrganizations, token]);
 
   const accountPlan = useMemo(() => dashboard?.plan ?? '-', [dashboard]);
+  const renderUsage = useMemo(() => {
+    if (!dashboard || dashboard.rendered_emails_limit === 0) return 0;
+    return Math.min(100, (dashboard.rendered_emails_count / dashboard.rendered_emails_limit) * 100);
+  }, [dashboard]);
+  const storageUsage = useMemo(() => {
+    if (!dashboard || dashboard.storage_limit_bytes === 0) return 0;
+    return Math.min(100, (dashboard.storage_used_bytes / dashboard.storage_limit_bytes) * 100);
+  }, [dashboard]);
 
   const resetCreateState = () => {
     setCreateName('');
@@ -420,6 +429,43 @@ export function DashboardOrganizationsPage() {
                   )}
                 </div>
 
+                {dashboard && (
+                  <div className="space-y-3 rounded-md border border-border bg-muted/40 p-3">
+                    <p className="text-sm font-medium">Usage for this organization</p>
+                    <p className="text-xs text-muted-foreground">
+                      Package usage is shared across all organizations in your account.
+                    </p>
+
+                    <div className="space-y-1">
+                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                        <span>Email renders</span>
+                        <span>
+                          {dashboard.rendered_emails_count.toLocaleString()} / {dashboard.rendered_emails_limit.toLocaleString()}
+                        </span>
+                      </div>
+                      <div className="h-2 rounded-full bg-muted">
+                        <div className="h-2 rounded-full bg-primary" style={{ width: `${renderUsage}%` }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                        <span>Storage</span>
+                        <span>
+                          {formatBytes(dashboard.storage_used_bytes)} / {formatBytes(dashboard.storage_limit_bytes)}
+                        </span>
+                      </div>
+                      <div className="h-2 rounded-full bg-muted">
+                        <div className="h-2 rounded-full bg-primary" style={{ width: `${storageUsage}%` }} />
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-muted-foreground">
+                      Max files per upload: {dashboard.max_media_files_per_upload}
+                    </p>
+                  </div>
+                )}
+
                 <div className="flex flex-wrap gap-2">
                   <Button
                     disabled={isSaving}
@@ -452,7 +498,7 @@ export function DashboardOrganizationsPage() {
                     {isRefreshingKey ? 'Refreshing...' : 'Refresh API key'}
                   </Button>
                   <Button asChild type="button" variant="outline">
-                    <Link to={`/dashboard/widget-builder?orgId=${organization.id}`}>Open Widget Builder</Link>
+                    <Link to={`/dashboard/email-builder?orgId=${organization.id}`}>Open Email Builder</Link>
                   </Button>
                 </div>
 

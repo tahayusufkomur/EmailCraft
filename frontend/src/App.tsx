@@ -38,7 +38,8 @@ function App() {
         <Route index element={<DashboardPage />} />
         <Route path="templates" element={<Navigate to="/dashboard/organizations" replace />} />
         <Route path="organizations" element={<DashboardOrganizationsPage />} />
-        <Route path="widget-builder" element={<DashboardWidgetBuilderPage />} />
+        <Route path="widget-builder" element={<Navigate to="/dashboard/email-builder" replace />} />
+        <Route path="email-builder" element={<DashboardWidgetBuilderPage />} />
         <Route path="billing" element={<DashboardBillingPage />} />
       </Route>
 

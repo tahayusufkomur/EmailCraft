@@ -9,6 +9,31 @@ from core.models import ApiKey, Organization, UserOrganization
 from templates_api.models import Template
 
 
+PLAN_DEMO_ACCOUNTS = [
+    {
+        'plan': 'starter',
+        'username': 'demo_starter',
+        'email': 'demo_starter@example.com',
+        'org_name': 'MailCraft Demo Starter',
+        'org_email': 'demo-starter-org@mailcraft.dev',
+    },
+    {
+        'plan': 'pro',
+        'username': 'demo_pro',
+        'email': 'demo_pro@example.com',
+        'org_name': 'MailCraft Demo Pro',
+        'org_email': 'demo-pro-org@mailcraft.dev',
+    },
+    {
+        'plan': 'enterprise',
+        'username': 'demo_enterprise',
+        'email': 'demo_enterprise@example.com',
+        'org_name': 'MailCraft Demo Enterprise User Org',
+        'org_email': 'demo-enterprise-org@mailcraft.dev',
+    },
+]
+
+
 def _highest_plan_key():
     return max(
         settings.PLAN_LIMITS.items(),
@@ -19,6 +44,57 @@ def _highest_plan_key():
             item[1].get('max_upload_size_bytes', 0),
         ),
     )[0]
+
+
+def _seed_plan_demo_account(account, password, default_allowed_origins, default_available_variables):
+    user, _ = User.objects.get_or_create(
+        username=account['username'],
+        defaults={'email': account['email']},
+    )
+    user.email = account['email']
+    user.is_active = True
+    user.set_password(password)
+    user.save(update_fields=['email', 'is_active', 'password'])
+
+    org, _ = Organization.objects.get_or_create(
+        email=account['org_email'],
+        defaults={
+            'name': account['org_name'],
+            'plan': account['plan'],
+            'allowed_origins': default_allowed_origins,
+            'available_variables': default_available_variables,
+        },
+    )
+
+    merged_origins = list(dict.fromkeys([*(org.allowed_origins or []), *default_allowed_origins]))
+    org.name = account['org_name']
+    org.plan = account['plan']
+    org.allowed_origins = merged_origins
+    org.available_variables = default_available_variables
+    org.apply_plan_limits(save=False)
+    org.stripe_customer_id = org.stripe_customer_id or f'cus_demo_{org.id.hex[:14]}'
+    org.stripe_subscription_id = f"sub_demo_{account['plan']}_{org.id.hex[:10]}"
+    org.save(
+        update_fields=[
+            'name',
+            'plan',
+            'allowed_origins',
+            'available_variables',
+            'rendered_emails_limit',
+            'storage_limit_bytes',
+            'stripe_customer_id',
+            'stripe_subscription_id',
+            'updated_at',
+        ]
+    )
+
+    UserOrganization.objects.update_or_create(
+        user=user,
+        organization=org,
+        defaults={'role': 'owner'},
+    )
+
+    return user, org
 
 
 def _demo_template_json(iframe_src):
@@ -109,7 +185,7 @@ def _demo_template_json(iframe_src):
 class Command(BaseCommand):
     help = (
         'Create or update a demo organization on the highest plan tier, '
-        'create a fresh API key, and seed a simple end-to-end test template.'
+        'create a static API key, seed a demo template, and create demo starter/pro/enterprise users.'
     )
 
     def add_arguments(self, parser):
@@ -223,6 +299,16 @@ class Command(BaseCommand):
             defaults={'role': 'owner'},
         )
 
+        seeded_plan_users = []
+        for account in PLAN_DEMO_ACCOUNTS:
+            plan_user, plan_org = _seed_plan_demo_account(
+                account=account,
+                password='demo',
+                default_allowed_origins=default_allowed_origins,
+                default_available_variables=default_available_variables,
+            )
+            seeded_plan_users.append((account['plan'], plan_user, plan_org))
+
         template = None
         if not options['skip_template']:
             template, _ = Template.objects.update_or_create(
@@ -250,6 +336,10 @@ class Command(BaseCommand):
         self.stdout.write(f'DEMO_USER_EMAIL={demo_user.email}')
         self.stdout.write(f'DEMO_PASSWORD={options["demo_password"]}')
         self.stdout.write(f'API_KEY={raw_key}')
+        for plan_key, plan_user, plan_org in seeded_plan_users:
+            self.stdout.write(f'PLAN_{plan_key.upper()}_DEMO_EMAIL={plan_user.email}')
+            self.stdout.write(f'PLAN_{plan_key.upper()}_DEMO_PASSWORD=demo')
+            self.stdout.write(f'PLAN_{plan_key.upper()}_DEMO_ORG_EMAIL={plan_org.email}')
         if template:
             self.stdout.write(f'TEMPLATE_ID={template.id}')
             self.stdout.write(f'TEMPLATE_NAME={template.name}')

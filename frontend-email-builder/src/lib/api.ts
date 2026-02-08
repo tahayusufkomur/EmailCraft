@@ -13,6 +13,21 @@ const BASE_URL = import.meta.env.VITE_API_URL || '/api';
 type MediaSortField = 'date' | 'name' | 'size';
 type SortOrder = 'asc' | 'desc';
 
+function resolveApiKey(): string {
+  const storageKey = 'mailcraft_api_key';
+  const fromStorage = localStorage.getItem(storageKey) || '';
+
+  if (typeof window === 'undefined') return fromStorage;
+
+  const fromQuery = new URLSearchParams(window.location.search).get('apiKey') || '';
+  if (fromQuery && fromQuery !== fromStorage) {
+    localStorage.setItem(storageKey, fromQuery);
+    return fromQuery;
+  }
+
+  return fromStorage;
+}
+
 async function uploadBinaryToPresignedUrl(url: string, contentType: string, body: Blob): Promise<void> {
   const uploadResponse = await fetch(url, {
     method: 'PUT',
@@ -61,7 +76,7 @@ async function createThumbnailBlob(file: File): Promise<Blob | null> {
 }
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
-  const apiKey = localStorage.getItem('mailcraft_api_key') || '';
+  const apiKey = resolveApiKey();
 
   const res = await fetch(`${BASE_URL}${path}`, {
     ...options,

@@ -155,7 +155,6 @@ class UserOrganizationSerializer(serializers.ModelSerializer):
 
 
 class SiteUserSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
     username = serializers.CharField()
     email = serializers.EmailField()
 
