@@ -5,18 +5,11 @@ import { AlignmentPicker } from './AlignmentPicker';
 import { SpacingControl } from './SpacingControl';
 import { VariableInserter } from '../VariableInserter';
 import { insertAtCursor, restoreCursor } from '../../../lib/variableUtils';
+import { FONT_OPTIONS } from '../../../lib/fonts';
 
 interface Props {
   block: HeadingBlock;
 }
-
-const WEB_SAFE_FONTS = [
-  'Arial, Helvetica, sans-serif',
-  'Georgia, "Times New Roman", Times, serif',
-  '"Trebuchet MS", Helvetica, sans-serif',
-  'Verdana, Geneva, sans-serif',
-  '"Courier New", Courier, monospace',
-];
 
 export function HeadingSettings({ block }: Props) {
   const updateBlock = useEditorStore((s) => s.updateBlock);
@@ -72,9 +65,9 @@ export function HeadingSettings({ block }: Props) {
             value={block.style.fontFamily}
             onChange={(e) => updateStyle({ fontFamily: e.target.value })}
           >
-            {WEB_SAFE_FONTS.map((font) => (
-              <option key={font} value={font}>
-                {font.split(',')[0].replace(/"/g, '')}
+            {FONT_OPTIONS.map((f) => (
+              <option key={f.value} value={f.value}>
+                {f.label}{f.isGoogle ? ' ✦' : ''}
               </option>
             ))}
           </select>

@@ -143,5 +143,32 @@ export function createBlock(type: BlockType): Block {
           backgroundColor: null,
         },
       };
+
+    case 'hero':
+      return {
+        id,
+        type: 'hero',
+        data: {
+          backgroundImage: '',
+          heading: 'Your headline here',
+          subheading: 'Add a supporting message for your audience.',
+          buttonText: 'Get Started',
+          buttonUrl: 'https://',
+        },
+        style: {
+          padding: { top: 0, right: 0, bottom: 0, left: 0 },
+          height: 400,
+          overlayColor: '#000000',
+          overlayOpacity: 0.4,
+          headingColor: '#ffffff',
+          headingFontSize: 36,
+          headingFontFamily: 'Arial, Helvetica, sans-serif',
+          subheadingColor: '#ffffffcc',
+          buttonBackgroundColor: '#ffffff',
+          buttonTextColor: '#000000',
+          buttonBorderRadius: 50,
+          contentAlignment: 'center',
+        },
+      };
   }
 }

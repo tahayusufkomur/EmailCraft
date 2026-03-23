@@ -1,4 +1,4 @@
-export type BlockType = 'text' | 'image' | 'button' | 'divider' | 'columns' | 'social' | 'heading' | 'spacer' | 'html';
+export type BlockType = 'text' | 'image' | 'button' | 'divider' | 'columns' | 'social' | 'heading' | 'spacer' | 'html' | 'hero';
 export type TemplateBackgroundStyle =
   | 'none'
   | 'aurora'
@@ -25,6 +25,7 @@ export interface BlockStyle {
   padding?: Spacing;
   margin?: Spacing;
   backgroundColor?: string | null;
+  backgroundGradient?: string | null;
   alignment?: 'left' | 'center' | 'right';
 }
 
@@ -160,6 +161,30 @@ export interface HtmlBlock extends BaseBlock {
   };
 }
 
+export interface HeroBlock extends BaseBlock {
+  type: 'hero';
+  data: {
+    backgroundImage: string;
+    heading: string;
+    subheading: string;
+    buttonText: string;
+    buttonUrl: string;
+  };
+  style: BlockStyle & {
+    height: number;
+    overlayColor: string;
+    overlayOpacity: number;
+    headingColor: string;
+    headingFontSize: number;
+    headingFontFamily: string;
+    subheadingColor: string;
+    buttonBackgroundColor: string;
+    buttonTextColor: string;
+    buttonBorderRadius: number;
+    contentAlignment: 'left' | 'center' | 'right';
+  };
+}
+
 export type Block =
   | TextBlock
   | ImageBlock
@@ -169,7 +194,8 @@ export type Block =
   | SocialBlock
   | HeadingBlock
   | SpacerBlock
-  | HtmlBlock;
+  | HtmlBlock
+  | HeroBlock;
 
 export interface TemplateSettings {
   backgroundColor: string;

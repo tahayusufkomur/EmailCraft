@@ -1,5 +1,6 @@
 import type { Block, EmailTemplate } from '../types/blocks';
 import { getEmailBackgroundCss, getEmailBodyBackgroundCss } from './backgroundStyles';
+import { collectTemplateFonts, getGoogleFontLinks } from './fonts';
 
 /**
  * Client-side HTML exporter for preview purposes.
@@ -19,6 +20,7 @@ export function exportToHtml(template: EmailTemplate, variablesMode: 'placeholde
   const headerHtml = renderBlocks(template.header.blocks, settings);
   const bodyHtml = renderBlocks(template.body.blocks, settings);
   const footerHtml = renderBlocks(template.footer.blocks, settings);
+  const googleFontLink = getGoogleFontLinks(collectTemplateFonts(template));
 
   return `<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
@@ -29,6 +31,7 @@ export function exportToHtml(template: EmailTemplate, variablesMode: 'placeholde
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="x-apple-disable-message-reformatting">
   <title></title>
+  ${googleFontLink}
   <style>
     body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
     table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
@@ -73,9 +76,10 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const padding = paddingStr(block.style.padding);
       const align = block.style.alignment || 'left';
       const background = block.style.backgroundColor;
+      const gradient = block.style.backgroundGradient;
       return `<tr>
   <td style="padding: ${padding}; font-family: ${font}; font-size: ${fontSize}px;
-             line-height: ${Math.round(fontSize * 1.6)}px; color: ${color}; text-align: ${align};${background ? ` background-color: ${background};` : ''}">
+             line-height: ${Math.round(fontSize * 1.6)}px; color: ${color}; text-align: ${align};${background ? ` background-color: ${background};` : ''}${gradient ? ` background: ${gradient};` : ''}">
     ${block.data.html}
   </td>
 </tr>`;
@@ -252,9 +256,54 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const padding = paddingStr(block.style.padding);
       const align = block.style.alignment || 'left';
       const background = block.style.backgroundColor;
+      const gradient = block.style.backgroundGradient;
       return `<tr>
-  <td style="padding: ${padding}; text-align: ${align};${background ? ` background-color: ${background};` : ''}">
+  <td style="padding: ${padding}; text-align: ${align};${background ? ` background-color: ${background};` : ''}${gradient ? ` background: ${gradient};` : ''}">
     ${block.data.html}
+  </td>
+</tr>`;
+    }
+
+    case 'hero': {
+      const contentW = settings.contentWidth || 600;
+      const bgImg = escapeHtml(block.data.backgroundImage);
+      const h = block.style.height || 400;
+      const overlayColor = block.style.overlayColor || '#000000';
+      const overlayOpacity = block.style.overlayOpacity ?? 0.4;
+      const overlayRgba = hexToRgba(overlayColor, overlayOpacity);
+      const headingColor = block.style.headingColor || '#ffffff';
+      const headingSize = block.style.headingFontSize || 32;
+      const headingFont = block.style.headingFontFamily || font;
+      const subColor = block.style.subheadingColor || '#ffffffcc';
+      const btnBg = block.style.buttonBackgroundColor || '#ffffff';
+      const btnColor = block.style.buttonTextColor || '#000000';
+      const btnRadius = block.style.buttonBorderRadius || 50;
+      const align = block.style.contentAlignment || 'center';
+      const heading = escapeHtml(block.data.heading);
+      const sub = escapeHtml(block.data.subheading);
+      const btnText = escapeHtml(block.data.buttonText);
+      const btnUrl = escapeHtml(block.data.buttonUrl);
+
+      return `<tr>
+  <td background="${bgImg}" width="${contentW}" height="${h}" valign="bottom" style="background-image: url('${bgImg}'); background-size: cover; background-position: center; height: ${h}px;">
+    <!--[if gte mso 9]>
+    <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:${contentW}px;height:${h}px;">
+      <v:fill type="tile" src="${bgImg}" />
+      <v:textbox inset="0,0,0,0">
+    <![endif]-->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td style="background: linear-gradient(to top, ${overlayRgba} 60%, transparent 100%); padding: 32px; text-align: ${align};" valign="bottom">
+          <h1 style="margin: 0 0 8px; font-family: ${headingFont}; font-size: ${headingSize}px; line-height: ${Math.round(headingSize * 1.15)}px; color: ${headingColor}; font-weight: 700;">${heading}</h1>
+          ${sub ? `<p style="margin: 0 0 20px; font-family: ${font}; font-size: ${fontSize}px; color: ${subColor}; line-height: 1.5;">${sub}</p>` : ''}
+          ${btnText ? `<a href="${btnUrl}" target="_blank" style="display: inline-block; padding: 14px 32px; background-color: ${btnBg}; color: ${btnColor}; font-family: ${font}; font-size: 15px; font-weight: 600; text-decoration: none; border-radius: ${btnRadius}px;">${btnText}</a>` : ''}
+        </td>
+      </tr>
+    </table>
+    <!--[if gte mso 9]>
+      </v:textbox>
+    </v:rect>
+    <![endif]-->
   </td>
 </tr>`;
     }
@@ -291,4 +340,12 @@ function socialIconDataUri(platform: string): string {
   if (!icon) return '';
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${icon.color}"><path d="${icon.path}"/></svg>`;
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}
+
+function hexToRgba(hex: string, opacity: number): string {
+  const h = hex.replace('#', '');
+  const r = parseInt(h.substring(0, 2), 16);
+  const g = parseInt(h.substring(2, 4), 16);
+  const b = parseInt(h.substring(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 }

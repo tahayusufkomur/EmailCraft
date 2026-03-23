@@ -249,6 +249,7 @@ def render_email_html(json_data, variables_mode='placeholders'):
     footer_html = _render_blocks(json_data.get('footer', {}).get('blocks', []), ctx)
 
     body_border_radius = settings.get('bodyBorderRadius', 0) or 0
+    google_font_link = _collect_google_font_links(json_data)
 
     full_html = _email_skeleton(
         header_html=header_html,
@@ -260,6 +261,7 @@ def render_email_html(json_data, variables_mode='placeholders'):
         content_bg_color=content_bg_color,
         content_bg_css=content_bg_css,
         body_border_radius=body_border_radius,
+        google_font_link=google_font_link,
     )
 
     return {'html': full_html, 'warnings': warnings}
@@ -275,6 +277,7 @@ def _email_skeleton(
     content_bg_color,
     content_bg_css,
     body_border_radius=0,
+    google_font_link='',
 ):
     return f"""<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
@@ -285,6 +288,7 @@ def _email_skeleton(
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="x-apple-disable-message-reformatting">
   <title></title>
+  {google_font_link}
   <!--[if mso]>
   <noscript>
     <xml>
@@ -646,6 +650,116 @@ def _padding_str(padding):
     return f'{top}px {right}px {bottom}px {left}px'
 
 
+def _render_hero_block(block, ctx):
+    data = block.get('data', {})
+    style = block.get('style', {})
+    bg_img = html_module.escape(data.get('backgroundImage', ''))
+    height = style.get('height', 400)
+    overlay_color = style.get('overlayColor', '#000000')
+    overlay_opacity = style.get('overlayOpacity', 0.4)
+    overlay_rgba = _hex_to_rgba(overlay_color, overlay_opacity)
+    heading_color = style.get('headingColor', '#ffffff')
+    heading_size = style.get('headingFontSize', 32)
+    heading_font = style.get('headingFontFamily', ctx['default_font'])
+    sub_color = style.get('subheadingColor', '#ffffffcc')
+    btn_bg = style.get('buttonBackgroundColor', '#ffffff')
+    btn_color = style.get('buttonTextColor', '#000000')
+    btn_radius = style.get('buttonBorderRadius', 50)
+    align = style.get('contentAlignment', 'center')
+    heading = html_module.escape(data.get('heading', ''))
+    sub = html_module.escape(data.get('subheading', ''))
+    btn_text = html_module.escape(data.get('buttonText', ''))
+    btn_url = html_module.escape(data.get('buttonUrl', '#'))
+    content_width = ctx['content_width']
+    default_font = ctx['default_font']
+    default_font_size = ctx['default_font_size']
+
+    sub_html = f'<p style="margin: 0 0 20px; font-family: {default_font}; font-size: {default_font_size}px; color: {sub_color}; line-height: 1.5;">{sub}</p>' if sub else ''
+    btn_html = f'<a href="{btn_url}" target="_blank" style="display: inline-block; padding: 14px 32px; background-color: {btn_bg}; color: {btn_color}; font-family: {default_font}; font-size: 15px; font-weight: 600; text-decoration: none; border-radius: {btn_radius}px;">{btn_text}</a>' if btn_text else ''
+
+    return f"""<tr>
+  <td background="{bg_img}" width="{content_width}" height="{height}" valign="bottom"
+      style="background-image: url('{bg_img}'); background-size: cover; background-position: center; height: {height}px;">
+    <!--[if gte mso 9]>
+    <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:{content_width}px;height:{height}px;">
+      <v:fill type="tile" src="{bg_img}" />
+      <v:textbox inset="0,0,0,0">
+    <![endif]-->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td style="background: linear-gradient(to top, {overlay_rgba} 60%, transparent 100%); padding: 32px; text-align: {align};" valign="bottom">
+          <h1 style="margin: 0 0 8px; font-family: {heading_font}; font-size: {heading_size}px; line-height: {int(heading_size * 1.15)}px; color: {heading_color}; font-weight: 700;">{heading}</h1>
+          {sub_html}
+          {btn_html}
+        </td>
+      </tr>
+    </table>
+    <!--[if gte mso 9]>
+      </v:textbox>
+    </v:rect>
+    <![endif]-->
+  </td>
+</tr>"""
+
+
+def _hex_to_rgba(hex_color, opacity):
+    h = hex_color.lstrip('#')
+    if len(h) < 6:
+        h = h + '0' * (6 - len(h))
+    r = int(h[0:2], 16)
+    g = int(h[2:4], 16)
+    b = int(h[4:6], 16)
+    return f'rgba({r}, {g}, {b}, {opacity})'
+
+
+_GOOGLE_FONT_SLUGS = {
+    'Noto Serif': 'Noto+Serif:wght@400;700',
+    'Plus Jakarta Sans': 'Plus+Jakarta+Sans:wght@300;400;500;600;700',
+    'Inter': 'Inter:wght@300;400;500;600;700',
+    'Playfair Display': 'Playfair+Display:wght@400;700',
+    'Lora': 'Lora:wght@400;700',
+    'Montserrat': 'Montserrat:wght@300;400;500;600;700',
+    'Open Sans': 'Open+Sans:wght@300;400;600;700',
+    'Raleway': 'Raleway:wght@300;400;500;600;700',
+    'Poppins': 'Poppins:wght@300;400;500;600;700',
+    'Roboto': 'Roboto:wght@300;400;500;700',
+    'DM Sans': 'DM+Sans:wght@400;500;600;700',
+    'Source Serif 4': 'Source+Serif+4:wght@400;600;700',
+    'Merriweather': 'Merriweather:wght@400;700',
+}
+
+
+def _collect_google_font_links(json_data):
+    fonts = set()
+    settings = json_data.get('settings', {})
+    fonts.add(settings.get('defaultFont', ''))
+
+    def scan_blocks(blocks):
+        for block in blocks:
+            style = block.get('style', {})
+            if style.get('fontFamily'):
+                fonts.add(style['fontFamily'])
+            if style.get('headingFontFamily'):
+                fonts.add(style['headingFontFamily'])
+            data = block.get('data', {})
+            for col in data.get('columns', []):
+                scan_blocks(col.get('blocks', []))
+
+    for section in ('header', 'body', 'footer'):
+        scan_blocks(json_data.get(section, {}).get('blocks', []))
+
+    names = set()
+    for ff in fonts:
+        for name in _GOOGLE_FONT_SLUGS:
+            if name in ff:
+                names.add(name)
+
+    if not names:
+        return ''
+    families = '&family='.join(_GOOGLE_FONT_SLUGS[n] for n in sorted(names))
+    return f'<link href="https://fonts.googleapis.com/css2?family={families}&display=swap" rel="stylesheet">'
+
+
 BLOCK_RENDERERS = {
     'text': _render_text_block,
     'image': _render_image_block,
@@ -656,4 +770,5 @@ BLOCK_RENDERERS = {
     'heading': _render_heading_block,
     'spacer': _render_spacer_block,
     'html': _render_html_block,
+    'hero': _render_hero_block,
 }

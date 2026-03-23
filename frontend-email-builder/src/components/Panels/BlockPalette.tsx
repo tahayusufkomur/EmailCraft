@@ -18,6 +18,7 @@ const BLOCK_TYPES: PaletteItemConfig[] = [
   { type: 'divider', label: 'Divider', icon: '\u2500' },
   { type: 'columns', label: 'Columns', icon: '\u{25EB}' },
   { type: 'social', label: 'Social', icon: '\u{1F310}' },
+  { type: 'hero', label: 'Hero', icon: '\u{1F3DE}' },
   { type: 'html', label: 'HTML', icon: '</>' },
 ];
 

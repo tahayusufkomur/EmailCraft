@@ -4,14 +4,7 @@ import {
   getBodyBackgroundStylePreset,
   resolveTemplateBodyBackgroundStyle,
 } from '../../lib/backgroundStyles';
-
-const WEB_SAFE_FONTS = [
-  'Arial, Helvetica, sans-serif',
-  'Georgia, "Times New Roman", Times, serif',
-  '"Trebuchet MS", Helvetica, sans-serif',
-  'Verdana, Geneva, sans-serif',
-  '"Courier New", Courier, monospace',
-];
+import { FONT_OPTIONS } from '../../lib/fonts';
 
 export function GlobalSettings() {
   const settings = useEditorStore((s) => s.template.settings);
@@ -74,8 +67,8 @@ export function GlobalSettings() {
             value={settings.defaultFont}
             onChange={(e) => updateSettings({ defaultFont: e.target.value })}
           >
-            {WEB_SAFE_FONTS.map((font) => (
-              <option key={font} value={font}>{font.split(',')[0].replace(/"/g, '')}</option>
+            {FONT_OPTIONS.map((f) => (
+              <option key={f.value} value={f.value}>{f.label}{f.isGoogle ? ' ✦' : ''}</option>
             ))}
           </select>
         </div>

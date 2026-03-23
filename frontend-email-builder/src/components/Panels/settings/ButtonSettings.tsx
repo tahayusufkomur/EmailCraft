@@ -4,18 +4,11 @@ import { useEditorStore } from '../../../store/editorStore';
 import { AlignmentPicker } from './AlignmentPicker';
 import { VariableInserter } from '../VariableInserter';
 import { insertAtCursor, restoreCursor } from '../../../lib/variableUtils';
+import { FONT_OPTIONS } from '../../../lib/fonts';
 
 interface Props {
   block: ButtonBlock;
 }
-
-const WEB_SAFE_FONTS = [
-  'Arial, Helvetica, sans-serif',
-  'Georgia, "Times New Roman", Times, serif',
-  '"Trebuchet MS", Helvetica, sans-serif',
-  'Verdana, Geneva, sans-serif',
-  '"Courier New", Courier, monospace',
-];
 
 export function ButtonSettings({ block }: Props) {
   const updateBlock = useEditorStore((s) => s.updateBlock);
@@ -92,9 +85,9 @@ export function ButtonSettings({ block }: Props) {
         </div>
         <div className="form-group">
           <label>Font Family</label>
-          <select value={block.style.fontFamily || WEB_SAFE_FONTS[0]} onChange={(e) => updateStyle({ fontFamily: e.target.value })}>
-            {WEB_SAFE_FONTS.map((font) => (
-              <option key={font} value={font}>{font.split(',')[0].replace(/"/g, '')}</option>
+          <select value={block.style.fontFamily || FONT_OPTIONS[0].value} onChange={(e) => updateStyle({ fontFamily: e.target.value })}>
+            {FONT_OPTIONS.map((f) => (
+              <option key={f.value} value={f.value}>{f.label}{f.isGoogle ? ' ✦' : ''}</option>
             ))}
           </select>
         </div>
