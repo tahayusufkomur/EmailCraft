@@ -101,6 +101,29 @@ export function HeadingSettings({ block }: Props) {
           />
         </div>
         <div className="form-group">
+          <label>Letter Spacing (px)</label>
+          <input
+            type="number"
+            min={-2}
+            max={20}
+            step={0.5}
+            value={block.style.letterSpacing || 0}
+            onChange={(e) => updateStyle({ letterSpacing: Number(e.target.value) })}
+          />
+        </div>
+        <div className="form-group">
+          <label>Text Transform</label>
+          <select
+            value={block.style.textTransform || 'none'}
+            onChange={(e) => updateStyle({ textTransform: e.target.value as 'none' | 'uppercase' | 'lowercase' | 'capitalize' })}
+          >
+            <option value="none">None</option>
+            <option value="uppercase">UPPERCASE</option>
+            <option value="lowercase">lowercase</option>
+            <option value="capitalize">Capitalize</option>
+          </select>
+        </div>
+        <div className="form-group">
           <label>Text Color</label>
           <div className="color-input-row">
             <input

@@ -58,6 +58,49 @@ BACKGROUND_STYLE_PRESETS = {
     },
 }
 
+BODY_BACKGROUND_STYLE_PRESETS = {
+    'mesh-blue': {
+        'fallback_color': '#eef4ff',
+        'background': (
+            'radial-gradient(circle at 18% 16%, rgba(59, 130, 246, 0.09), transparent 42%), '
+            'radial-gradient(circle at 84% 20%, rgba(14, 165, 233, 0.08), transparent 38%), '
+            'linear-gradient(145deg, #f8fbff 0%, #eef4ff 48%, #e5edff 100%)'
+        ),
+    },
+    'aurora-soft': {
+        'fallback_color': '#f2f3ff',
+        'background': (
+            'radial-gradient(circle at 15% 10%, rgba(168, 85, 247, 0.11), transparent 36%), '
+            'radial-gradient(circle at 85% 24%, rgba(34, 211, 238, 0.1), transparent 34%), '
+            'linear-gradient(150deg, #fcfcff 0%, #f2f3ff 45%, #ebf6ff 100%)'
+        ),
+    },
+    'sunset-paper': {
+        'fallback_color': '#fff5ef',
+        'background': (
+            'radial-gradient(circle at 74% 20%, rgba(251, 146, 60, 0.11), transparent 40%), '
+            'radial-gradient(circle at 20% 78%, rgba(251, 113, 133, 0.08), transparent 40%), '
+            'linear-gradient(145deg, #fffaf7 0%, #fff1e8 55%, #fee4dc 100%)'
+        ),
+    },
+    'carbon-grid': {
+        'fallback_color': '#111827',
+        'background': (
+            'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), '
+            'linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px), '
+            'linear-gradient(135deg, #0f172a 0%, #111827 60%, #1f2937 100%)'
+        ),
+    },
+    'opal-rings': {
+        'fallback_color': '#f7f7f5',
+        'background': (
+            'radial-gradient(circle at 14% 14%, rgba(120,113,108,0.07) 0, rgba(120,113,108,0.07) 1px, transparent 1px), '
+            'radial-gradient(circle at 72% 30%, rgba(148,163,184,0.1) 0, rgba(148,163,184,0.1) 2px, transparent 2px), '
+            'linear-gradient(140deg, #fcfcfb 0%, #f7f7f5 56%, #efefeb 100%)'
+        ),
+    },
+}
+
 CSS_COLOR_PATTERN = re.compile(r'^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$')
 
 
@@ -182,6 +225,10 @@ def render_email_html(json_data, variables_mode='placeholders'):
         background_style=background_style,
         background_color=settings.get('backgroundColor'),
     )
+    content_bg_color, content_bg_css = _resolve_email_body_background(
+        background_style=settings.get('bodyBackgroundStyle'),
+        background_color=settings.get('bodyBackgroundColor'),
+    )
     content_width = settings.get('contentWidth', 600)
     default_font = settings.get('defaultFont', 'Arial, Helvetica, sans-serif')
     default_font_size = settings.get('defaultFontSize', 14)
@@ -201,6 +248,8 @@ def render_email_html(json_data, variables_mode='placeholders'):
     body_html = _render_blocks(json_data.get('body', {}).get('blocks', []), ctx)
     footer_html = _render_blocks(json_data.get('footer', {}).get('blocks', []), ctx)
 
+    body_border_radius = settings.get('bodyBorderRadius', 0) or 0
+
     full_html = _email_skeleton(
         header_html=header_html,
         body_html=body_html,
@@ -208,13 +257,25 @@ def render_email_html(json_data, variables_mode='placeholders'):
         bg_color=bg_color,
         bg_css=bg_css,
         content_width=content_width,
-        content_bg='#ffffff',
+        content_bg_color=content_bg_color,
+        content_bg_css=content_bg_css,
+        body_border_radius=body_border_radius,
     )
 
     return {'html': full_html, 'warnings': warnings}
 
 
-def _email_skeleton(header_html, body_html, footer_html, bg_color, bg_css, content_width, content_bg):
+def _email_skeleton(
+    header_html,
+    body_html,
+    footer_html,
+    bg_color,
+    bg_css,
+    content_width,
+    content_bg_color,
+    content_bg_css,
+    body_border_radius=0,
+):
     return f"""<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
       xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -253,7 +314,7 @@ def _email_skeleton(header_html, body_html, footer_html, bg_color, bg_css, conte
       <td align="center" style="padding: 20px 0;">
         <table role="presentation" class="email-container" width="{content_width}" cellpadding="0"
                cellspacing="0" border="0" align="center"
-               style="margin: 0 auto; background-color: {content_bg};">
+               style="margin: 0 auto; background-color: {content_bg_color}; background: {content_bg_css};{f' border-radius: {body_border_radius}px; overflow: hidden;' if body_border_radius else ''}">
           {header_html}
           {body_html}
           {footer_html}
@@ -274,6 +335,22 @@ def _resolve_template_background(background_style, background_color):
 
     fallback_color = _sanitize_css_color(preset.get('fallback_color'), default_color)
     resolved_color = safe_color if background_color else fallback_color
+    return resolved_color, preset['background']
+
+
+def _resolve_email_body_background(background_style, background_color):
+    default_color = '#ffffff'
+    if background_style in (None, '', 'solid'):
+        safe_color = _sanitize_css_color(background_color, default_color)
+        return safe_color, safe_color
+
+    preset = BODY_BACKGROUND_STYLE_PRESETS.get(background_style)
+    if not preset:
+        safe_color = _sanitize_css_color(background_color, default_color)
+        return safe_color, safe_color
+
+    fallback_color = _sanitize_css_color(preset.get('fallback_color'), default_color)
+    resolved_color = _sanitize_css_color(background_color, fallback_color)
     return resolved_color, preset['background']
 
 
@@ -316,18 +393,21 @@ def _render_text_block(block, ctx):
 def _render_image_block(block, ctx):
     data = block.get('data', {})
     style = block.get('style', {})
-    padding = _padding_str(style.get('padding', {}))
+    full_width = style.get('fullWidth', False)
+    padding = '0' if full_width else _padding_str(style.get('padding', {}))
     alignment = style.get('alignment', 'center')
 
     src = html_module.escape(data.get('src', ''))
     alt = html_module.escape(data.get('alt', ''))
-    width = data.get('width', ctx['content_width'])
+    width = ctx['content_width'] if full_width else data.get('width', ctx['content_width'])
     height = data.get('height')
     link = data.get('link', '')
+    border_radius = style.get('borderRadius', 0) or 0
 
     height_attr = f' height="{height}"' if height else ''
+    radius_style = f' border-radius: {border_radius}px;' if border_radius else ''
 
-    img_tag = f'<img src="{src}" alt="{alt}" width="{width}"{height_attr} style="display: block; max-width: 100%; height: auto; border: 0;" />'
+    img_tag = f'<img src="{src}" alt="{alt}" width="{width}"{height_attr} style="display: block; max-width: 100%; height: auto; border: 0;{radius_style}" />'
 
     if link:
         link_escaped = html_module.escape(link)
@@ -425,11 +505,14 @@ def _render_columns_block(block, ctx):
         mso_start = f'<!--[if mso]><td width="{col_width}" valign="top"><![endif]-->' if i > 0 else f'<!--[if mso]><table role="presentation" width="{ctx["content_width"]}" cellpadding="0" cellspacing="0" border="0"><tr><td width="{col_width}" valign="top"><![endif]-->'
         mso_end = '<!--[if mso]></td><![endif]-->' if i < column_count - 1 else '<!--[if mso]></td></tr></table><![endif]-->'
 
+        col_bg = col.get('backgroundColor')
+        col_bg_style = f' background-color: {col_bg};' if col_bg else ''
+
         cols_html.append(f"""{mso_start}
       <div style="display: inline-block; width: 100%; max-width: {col_width}px; vertical-align: top;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
-            <td style="padding: 0 {gap // 2}px;">
+            <td style="padding: 0 {gap // 2}px;{col_bg_style}">
               {col_inner}
             </td>
           </tr>
@@ -487,13 +570,17 @@ def _render_heading_block(block, ctx):
     font_weight = style.get('fontWeight', 700)
     color = style.get('color', ctx['default_color'])
     font_family = style.get('fontFamily', ctx['default_font'])
+    letter_spacing = style.get('letterSpacing', 0) or 0
+    text_transform = style.get('textTransform', 'none') or 'none'
     bg = style.get('backgroundColor')
     bg_style = f' background-color: {bg};' if bg else ''
+    ls_style = f' letter-spacing: {letter_spacing}px;' if letter_spacing else ''
+    tt_style = f' text-transform: {text_transform};' if text_transform != 'none' else ''
     tag = f'h{level}'
 
     return f"""<tr>
   <td style="padding: {padding}; text-align: {alignment};{bg_style}">
-    <{tag} style="margin: 0; font-family: {font_family}; font-size: {font_size}px; line-height: {int(font_size * 1.2)}px; color: {color}; font-weight: {font_weight};">
+    <{tag} style="margin: 0; font-family: {font_family}; font-size: {font_size}px; line-height: {int(font_size * 1.2)}px; color: {color}; font-weight: {font_weight};{ls_style}{tt_style}">
       {text}
     </{tag}>
   </td>

@@ -13,8 +13,12 @@ FRONTEND_BUILDER := frontend-email-builder
 MANAGE := $(COMPOSE) exec backend python manage.py
 
 help: ## Show this help
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
-		awk 'BEGIN {FS = ":.*?## "}; {printf "  %-20s %s\n", $$1, $$2}'
+	@echo ""
+	@echo "Usage: make <target>"
+	@echo ""
+	@awk '/^# ─── /{gsub(/# ─── |─*/,""); printf "\033[1m%s\033[0m\n", $$0; next} \
+		/^[a-zA-Z_-]+:.*?## /{split($$0,a,":.*?## "); printf "  %-28s %s\n", a[1], a[2]}' $(MAKEFILE_LIST)
+	@echo ""
 
 # ─── Install ──────────────────────────────────────────────
 
@@ -85,8 +89,12 @@ lint-frontend-builder: ## Type-check builder frontend
 
 # ─── Utilities ────────────────────────────────────────────
 
-seed: ## Create enterprise demo org + static API key + demo template + plan demo users (starter/pro/enterprise, password: demo)
+seed: ## Create demo org + seed gallery templates + plan demo users
 	@$(MANAGE) create_demo_org
+	@$(MANAGE) seed_gallery
+
+seed-gallery: ## Seed/update 20 gallery templates from templates.json
+	@$(MANAGE) seed_gallery
 
 demo-org: ## Create demo org (usage: make demo-org ORG="Name" EMAIL="a@b.com" ENV=test API_KEY=mc_test_... USERNAME=demo USER_EMAIL=demo-user@mailcraft.dev PASSWORD=demo12345)
 	@$(MANAGE) create_demo_org \
@@ -116,12 +124,13 @@ superuser: ## Create Django superuser
 clean: ## Stop containers and remove volumes
 	@$(COMPOSE) down -v --remove-orphans
 
-reset: ## Reset containers, images, volumes, and local caches
+reset: ## Full reset: tear down everything, rebuild, migrate, seed, and install deps
 	@$(COMPOSE) down -v --remove-orphans --rmi local
 	@find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 	@rm -rf $(FRONTEND_SITE)/dist $(FRONTEND_SITE)/node_modules/.vite $(FRONTEND_SITE)/node_modules
 	@rm -rf $(FRONTEND_BUILDER)/dist $(FRONTEND_BUILDER)/node_modules/.vite $(FRONTEND_BUILDER)/node_modules
 	@rm -rf venv
+	@$(MAKE) setup
 
 setup: ## Build/start stack, migrate DB, create superuser, seed demo org/template/key, and install frontend deps locally
 	@$(COMPOSE) up -d --build
@@ -129,6 +138,7 @@ setup: ## Build/start stack, migrate DB, create superuser, seed demo org/templat
 	@$(COMPOSE) exec -e DJANGO_SUPERUSER_USERNAME=t -e DJANGO_SUPERUSER_EMAIL=t@example.com -e DJANGO_SUPERUSER_PASSWORD=t \
 		backend python manage.py createsuperuser --noinput || true
 	@$(MANAGE) create_demo_org
+	@$(MANAGE) seed_gallery
 	@cd $(FRONTEND_SITE) && npm install
 	@cd $(FRONTEND_BUILDER) && npm install
 

@@ -19,7 +19,7 @@ export function createBlock(type: BlockType): Block {
         id,
         type: 'image',
         data: { src: '', alt: 'Image', width: 600 },
-        style: { padding: { top: 0, right: 0, bottom: 0, left: 0 }, alignment: 'center' },
+        style: { padding: { top: 0, right: 0, bottom: 0, left: 0 }, alignment: 'center', borderRadius: 0, fullWidth: false },
       };
 
     case 'button':
@@ -113,6 +113,8 @@ export function createBlock(type: BlockType): Block {
           fontSize: 28,
           fontFamily: 'Arial, Helvetica, sans-serif',
           fontWeight: 700,
+          letterSpacing: 0,
+          textTransform: 'none',
         },
       };
 

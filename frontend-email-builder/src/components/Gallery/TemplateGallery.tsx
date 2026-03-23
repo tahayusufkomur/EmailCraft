@@ -1,200 +1,20 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { api } from '../../lib/api';
+import { exportToHtml } from '../../lib/htmlExporter';
 import { useEditorStore } from '../../store/editorStore';
 import type { EmailTemplate } from '../../types/blocks';
 import type { TemplateListItem } from '../../types/api';
 
-// Pre-built templates
-const GALLERY_TEMPLATES: { name: string; category: string; template: EmailTemplate }[] = [
-  {
-    name: 'Welcome Email',
-    category: 'welcome',
-    template: {
-      version: 1,
-      settings: {
-        backgroundColor: '#f0f0f0',
-        contentWidth: 600,
-        defaultFont: 'Arial, Helvetica, sans-serif',
-        defaultFontSize: 14,
-        defaultColor: '#333333',
-      },
-      header: { blocks: [] },
-      body: {
-        blocks: [
-          {
-            id: 'g1-1',
-            type: 'text',
-            data: {
-              html: '<h1 style="margin:0;font-size:24px;">Welcome to {{company_name}}!</h1>',
-              variables: ['company_name'],
-            },
-            style: { padding: { top: 30, right: 20, bottom: 10, left: 20 }, alignment: 'center' },
-          },
-          {
-            id: 'g1-2',
-            type: 'text',
-            data: {
-              html: '<p>Hi {{first_name}}, we\'re thrilled to have you on board. Here\'s what you can do next:</p>',
-              variables: ['first_name'],
-            },
-            style: { padding: { top: 10, right: 20, bottom: 10, left: 20 } },
-          },
-          {
-            id: 'g1-3',
-            type: 'button',
-            data: { text: 'Get Started', url: 'https://' },
-            style: {
-              padding: { top: 10, right: 20, bottom: 20, left: 20 },
-              alignment: 'center',
-              backgroundColor: '#007bff',
-              color: '#ffffff',
-              borderRadius: 4,
-              fullWidth: false,
-              fontSize: 16,
-              fontFamily: 'Arial, Helvetica, sans-serif',
-            },
-          },
-          {
-            id: 'g1-4',
-            type: 'divider',
-            data: {},
-            style: {
-              padding: { top: 0, right: 0, bottom: 0, left: 0 },
-              lineStyle: 'solid',
-              lineColor: '#e0e0e0',
-              lineThickness: 1,
-              spacing: 20,
-            },
-          },
-          {
-            id: 'g1-5',
-            type: 'social',
-            data: {
-              platforms: [
-                { type: 'facebook', url: 'https://facebook.com/' },
-                { type: 'twitter', url: 'https://x.com/' },
-                { type: 'instagram', url: 'https://instagram.com/' },
-              ],
-            },
-            style: {
-              padding: { top: 10, right: 20, bottom: 20, left: 20 },
-              alignment: 'center',
-              iconSize: 24,
-              iconStyle: 'colored',
-              layout: 'horizontal',
-              spacing: 10,
-            },
-          },
-        ],
-      },
-      footer: { blocks: [] },
-    },
-  },
-  {
-    name: 'Newsletter',
-    category: 'newsletter',
-    template: {
-      version: 1,
-      settings: {
-        backgroundColor: '#f4f4f4',
-        contentWidth: 600,
-        defaultFont: 'Georgia, "Times New Roman", Times, serif',
-        defaultFontSize: 15,
-        defaultColor: '#222222',
-      },
-      header: { blocks: [] },
-      body: {
-        blocks: [
-          {
-            id: 'g2-1',
-            type: 'text',
-            data: {
-              html: '<h1 style="margin:0;font-size:28px;text-align:center;">Weekly Newsletter</h1><p style="text-align:center;color:#666;">Your weekly dose of insights</p>',
-              variables: [],
-            },
-            style: { padding: { top: 30, right: 20, bottom: 20, left: 20 }, alignment: 'center' },
-          },
-          {
-            id: 'g2-2',
-            type: 'divider',
-            data: {},
-            style: { padding: { top: 0, right: 0, bottom: 0, left: 0 }, lineStyle: 'solid', lineColor: '#dddddd', lineThickness: 1, spacing: 10 },
-          },
-          {
-            id: 'g2-3',
-            type: 'text',
-            data: {
-              html: '<h2 style="margin:0 0 8px 0;font-size:20px;">Featured Article</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>',
-              variables: [],
-            },
-            style: { padding: { top: 20, right: 20, bottom: 10, left: 20 } },
-          },
-          {
-            id: 'g2-4',
-            type: 'button',
-            data: { text: 'Read More', url: 'https://' },
-            style: {
-              padding: { top: 10, right: 20, bottom: 20, left: 20 },
-              alignment: 'left',
-              backgroundColor: '#222222',
-              color: '#ffffff',
-              borderRadius: 0,
-              fullWidth: false,
-              fontSize: 14,
-              fontFamily: 'Georgia, "Times New Roman", Times, serif',
-            },
-          },
-        ],
-      },
-      footer: { blocks: [] },
-    },
-  },
-  {
-    name: 'Promotional',
-    category: 'promotional',
-    template: {
-      version: 1,
-      settings: {
-        backgroundColor: '#ffffff',
-        contentWidth: 600,
-        defaultFont: 'Arial, Helvetica, sans-serif',
-        defaultFontSize: 14,
-        defaultColor: '#333333',
-      },
-      header: { blocks: [] },
-      body: {
-        blocks: [
-          {
-            id: 'g3-1',
-            type: 'text',
-            data: {
-              html: '<h1 style="margin:0;font-size:32px;color:#e53e3e;text-align:center;">SALE 50% OFF</h1><p style="text-align:center;font-size:16px;">Limited time offer — don\'t miss out!</p>',
-              variables: [],
-            },
-            style: { padding: { top: 40, right: 20, bottom: 20, left: 20 }, alignment: 'center', backgroundColor: '#fff5f5' },
-          },
-          {
-            id: 'g3-2',
-            type: 'button',
-            data: { text: 'Shop Now', url: 'https://' },
-            style: {
-              padding: { top: 10, right: 20, bottom: 30, left: 20 },
-              alignment: 'center',
-              backgroundColor: '#e53e3e',
-              color: '#ffffff',
-              borderRadius: 50,
-              fullWidth: false,
-              fontSize: 18,
-              fontFamily: 'Arial, Helvetica, sans-serif',
-            },
-          },
-        ],
-      },
-      footer: { blocks: [] },
-    },
-  },
-];
+type Tab = 'yours' | 'library';
+
+const CATEGORY_LABELS: Record<string, string> = {
+  welcome: 'Welcome',
+  newsletter: 'Newsletter',
+  promotional: 'Promotional',
+  transactional: 'Transactional',
+  event: 'Event',
+};
 
 interface Props {
   onClose: () => void;
@@ -202,50 +22,64 @@ interface Props {
 
 export function TemplateGallery({ onClose }: Props) {
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
+  const [activeTab, setActiveTab] = useState<Tab>('library');
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [templates, setTemplates] = useState<TemplateListItem[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   useEffect(() => {
     let isMounted = true;
+    setIsLoading(true);
+    setLoadError(null);
 
-    const loadTemplates = async () => {
-      setIsLoading(true);
-      setLoadError(null);
+    void (async () => {
       try {
         const list = await api.listTemplates();
         if (!isMounted) return;
         setTemplates(list.results || []);
       } catch (error) {
         if (!isMounted) return;
-        const message = error instanceof Error ? error.message : 'Unable to load templates.';
-        setLoadError(message);
+        setLoadError(error instanceof Error ? error.message : 'Unable to load templates.');
       } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
+        if (isMounted) setIsLoading(false);
       }
-    };
+    })();
 
-    void loadTemplates();
-    return () => {
-      isMounted = false;
-    };
+    return () => { isMounted = false; };
   }, []);
 
   const userTemplates = useMemo(
-    () => templates.filter((item) => item.template_type !== 'provided'),
-    [templates],
-  );
-  const providedTemplates = useMemo(
-    () => templates.filter((item) => item.template_type === 'provided'),
+    () => templates.filter((t) => t.template_type !== 'provided'),
     [templates],
   );
 
-  const handleSelect = (template: EmailTemplate) => {
-    // Deep clone to avoid reference sharing
-    const cloned = JSON.parse(JSON.stringify(template));
-    // Generate new IDs
+  const libraryTemplates = useMemo(
+    () => templates.filter((t) => t.template_type === 'provided'),
+    [templates],
+  );
+
+  const categories = useMemo(() => {
+    const cats = new Set(libraryTemplates.map((t) => t.category).filter(Boolean));
+    return Array.from(cats).sort();
+  }, [libraryTemplates]);
+
+  const filteredLibrary = useMemo(
+    () => activeCategory ? libraryTemplates.filter((t) => t.category === activeCategory) : libraryTemplates,
+    [libraryTemplates, activeCategory],
+  );
+
+  const groupedLibrary = useMemo(() => {
+    const groups: Record<string, TemplateListItem[]> = {};
+    for (const t of filteredLibrary) {
+      const cat = t.category || 'other';
+      (groups[cat] ??= []).push(t);
+    }
+    return groups;
+  }, [filteredLibrary]);
+
+  const handleSelect = useCallback((template: EmailTemplate) => {
+    const cloned: EmailTemplate = JSON.parse(JSON.stringify(template));
     const reId = (blocks: EmailTemplate['body']['blocks']): EmailTemplate['body']['blocks'] =>
       blocks.map((b) => ({
         ...b,
@@ -253,23 +87,24 @@ export function TemplateGallery({ onClose }: Props) {
         ...(b.type === 'columns' ? {
           data: {
             ...b.data,
-            columns: (b.data as { columns: { id: string; blocks: EmailTemplate['body']['blocks'] }[] }).columns.map((col: { id: string; blocks: EmailTemplate['body']['blocks'] }) => ({
-              ...col,
-              id: crypto.randomUUID(),
-              blocks: reId(col.blocks),
-            })),
+            columns: (b.data as { columns: { id: string; blocks: EmailTemplate['body']['blocks'] }[] }).columns.map(
+              (col: { id: string; blocks: EmailTemplate['body']['blocks'] }) => ({
+                ...col,
+                id: crypto.randomUUID(),
+                blocks: reId(col.blocks),
+              }),
+            ),
           },
         } : {}),
       })) as EmailTemplate['body']['blocks'];
     cloned.header.blocks = reId(cloned.header.blocks);
     cloned.body.blocks = reId(cloned.body.blocks);
     cloned.footer.blocks = reId(cloned.footer.blocks);
-
     loadTemplate(cloned);
     onClose();
-  };
+  }, [loadTemplate, onClose]);
 
-  const handleSelectSavedTemplate = async (item: TemplateListItem) => {
+  const handleSelectSaved = useCallback(async (item: TemplateListItem) => {
     try {
       const detail = await api.getTemplate(item.id);
       if (!detail.json_data || typeof detail.json_data !== 'object') {
@@ -277,148 +112,281 @@ export function TemplateGallery({ onClose }: Props) {
       }
       handleSelect(detail.json_data as EmailTemplate);
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unable to load template.';
-      setLoadError(message);
+      setLoadError(error instanceof Error ? error.message : 'Unable to load template.');
     }
-  };
+  }, [handleSelect]);
 
   return (
-    <div style={{
-      position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000,
-    }}
-      onClick={onClose}
-    >
-      <div
-        style={{
-          background: 'white', borderRadius: 8, width: '90vw', maxWidth: 700,
-          maxHeight: '80vh', overflow: 'auto', padding: 24,
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+    <div style={styles.overlay} onClick={onClose}>
+      <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
+        {/* Header */}
+        <div style={styles.header}>
           <h2 style={{ margin: 0, fontSize: 18 }}>Templates</h2>
-          <button className="btn" onClick={onClose}>&times;</button>
+          <button className="btn" onClick={onClose} style={{ fontSize: 18, lineHeight: 1 }}>&times;</button>
         </div>
-        {loadError && (
-          <div
-            style={{
-              marginBottom: 12,
-              border: '1px solid #fed7d7',
-              background: '#fff5f5',
-              color: '#c53030',
-              borderRadius: 6,
-              padding: '10px 12px',
-              fontSize: 13,
-            }}
-          >
-            {loadError}
-          </div>
-        )}
-        {isLoading ? (
-          <p style={{ margin: 0, color: '#4a5568' }}>Loading templates...</p>
-        ) : (
-          <div style={{ display: 'grid', gap: 20 }}>
-            <section>
-              <h3 style={{ margin: '0 0 10px 0', fontSize: 14 }}>Your templates</h3>
-              {userTemplates.length === 0 ? (
-                <p style={{ margin: 0, color: '#718096', fontSize: 13 }}>
-                  No user-owned templates yet.
-                </p>
-              ) : (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>
-                  {userTemplates.map((item) => (
-                    <div
-                      key={item.id}
-                      style={{
-                        border: '1px solid #e2e8f0', borderRadius: 8, padding: 16,
-                        cursor: 'pointer', transition: 'all 0.15s',
-                      }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#3182ce'; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#e2e8f0'; }}
-                      onClick={() => void handleSelectSavedTemplate(item)}
-                    >
-                      <div style={{
-                        height: 100, background: '#f7fafc', borderRadius: 4,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        marginBottom: 12, fontSize: 32, color: '#a0aec0',
-                      }}>
-                        &#x1F4C4;
-                      </div>
-                      <div style={{ fontWeight: 600, fontSize: 14 }}>{item.name}</div>
-                      <div style={{ fontSize: 12, color: '#718096', marginTop: 4 }}>
-                        {item.category || 'custom'}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </section>
 
-            <section>
-              <h3 style={{ margin: '0 0 10px 0', fontSize: 14 }}>Provided templates</h3>
-              {providedTemplates.length > 0 ? (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>
-                  {providedTemplates.map((item) => (
-                    <div
-                      key={item.id}
-                      style={{
-                        border: '1px solid #e2e8f0', borderRadius: 8, padding: 16,
-                        cursor: 'pointer', transition: 'all 0.15s',
-                      }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#3182ce'; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#e2e8f0'; }}
-                      onClick={() => void handleSelectSavedTemplate(item)}
-                    >
-                      <div style={{
-                        height: 100, background: '#f7fafc', borderRadius: 4,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        marginBottom: 12, fontSize: 32, color: '#a0aec0',
-                      }}>
-                        &#x2709;
-                      </div>
-                      <div style={{ fontWeight: 600, fontSize: 14 }}>{item.name}</div>
-                      <div style={{ fontSize: 12, color: '#718096', marginTop: 4 }}>
-                        {item.category || 'provided'}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>
-                  {GALLERY_TEMPLATES.map((item, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        border: '1px solid #e2e8f0', borderRadius: 8, padding: 16,
-                        cursor: 'pointer', transition: 'all 0.15s',
-                      }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#3182ce'; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = '#e2e8f0'; }}
-                      onClick={() => handleSelect(item.template)}
-                    >
-                      <div style={{
-                        height: 100, background: '#f7fafc', borderRadius: 4,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        marginBottom: 12, fontSize: 32, color: '#a0aec0',
-                      }}>
-                        &#x2709;
-                      </div>
-                      <div style={{ fontWeight: 600, fontSize: 14 }}>{item.name}</div>
-                      <div style={{ fontSize: 12, color: '#718096', marginTop: 4 }}>{item.category}</div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </section>
-          </div>
-        )}
-        {templates.length > 0 && (
-          <div style={{ marginTop: 14, color: '#718096', fontSize: 12 }}>
-            Provided templates are shared across all organizations and are read-only.
-          </div>
-        )}
+        {/* Tabs */}
+        <div style={styles.tabs}>
+          <button
+            style={activeTab === 'yours' ? { ...styles.tab, ...styles.tabActive } : styles.tab}
+            onClick={() => setActiveTab('yours')}
+          >
+            Your Templates
+            {!isLoading && <span style={styles.badge}>{userTemplates.length}</span>}
+          </button>
+          <button
+            style={activeTab === 'library' ? { ...styles.tab, ...styles.tabActive } : styles.tab}
+            onClick={() => setActiveTab('library')}
+          >
+            Library
+            {!isLoading && <span style={styles.badge}>{libraryTemplates.length}</span>}
+          </button>
+        </div>
+
+        {/* Error */}
+        {loadError && <div style={styles.error}>{loadError}</div>}
+
+        {/* Content */}
+        <div style={styles.content}>
+          {isLoading ? (
+            <p style={{ margin: 0, color: '#64748b', padding: 20, textAlign: 'center' }}>Loading templates...</p>
+          ) : activeTab === 'yours' ? (
+            <YourTemplatesTab templates={userTemplates} onSelect={handleSelectSaved} />
+          ) : (
+            <LibraryTab
+              groups={groupedLibrary}
+              categories={categories}
+              activeCategory={activeCategory}
+              onCategoryChange={setActiveCategory}
+              onSelect={handleSelectSaved}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
 }
+
+/* ---- Your Templates Tab ---- */
+
+function YourTemplatesTab({ templates, onSelect }: {
+  templates: TemplateListItem[];
+  onSelect: (item: TemplateListItem) => void;
+}) {
+  if (templates.length === 0) {
+    return (
+      <div style={styles.empty}>
+        <span style={{ fontSize: 32 }}>&#x1F4C4;</span>
+        <p style={{ margin: '8px 0 0', color: '#64748b', fontSize: 14 }}>No saved templates yet.</p>
+        <p style={{ margin: '4px 0 0', color: '#94a3b8', fontSize: 13 }}>Templates you save will appear here.</p>
+      </div>
+    );
+  }
+  return (
+    <div style={styles.grid}>
+      {templates.map((item) => (
+        <TemplateCard key={item.id} item={item} onSelect={() => onSelect(item)} />
+      ))}
+    </div>
+  );
+}
+
+/* ---- Library Tab ---- */
+
+function LibraryTab({ groups, categories, activeCategory, onCategoryChange, onSelect }: {
+  groups: Record<string, TemplateListItem[]>;
+  categories: string[];
+  activeCategory: string | null;
+  onCategoryChange: (cat: string | null) => void;
+  onSelect: (item: TemplateListItem) => void;
+}) {
+  return (
+    <div>
+      {/* Category Filters */}
+      {categories.length > 1 && (
+        <div style={styles.filters}>
+          <button
+            style={activeCategory === null ? { ...styles.filterChip, ...styles.filterChipActive } : styles.filterChip}
+            onClick={() => onCategoryChange(null)}
+          >
+            All
+          </button>
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              style={activeCategory === cat ? { ...styles.filterChip, ...styles.filterChipActive } : styles.filterChip}
+              onClick={() => onCategoryChange(cat)}
+            >
+              {CATEGORY_LABELS[cat] || cat}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Grouped templates */}
+      {Object.keys(groups).length === 0 ? (
+        <div style={styles.empty}>
+          <span style={{ fontSize: 32 }}>&#x1F4DA;</span>
+          <p style={{ margin: '8px 0 0', color: '#64748b', fontSize: 14 }}>No library templates available.</p>
+        </div>
+      ) : (
+        Object.entries(groups).map(([category, items]) => (
+          <div key={category} style={{ marginBottom: 24 }}>
+            <h3 style={styles.groupTitle}>{CATEGORY_LABELS[category] || category}</h3>
+            <div style={styles.grid}>
+              {items.map((item) => (
+                <TemplateCard key={item.id} item={item} onSelect={() => onSelect(item)} />
+              ))}
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+  );
+}
+
+/* ---- Template Card with Thumbnail Preview ---- */
+
+function TemplateCard({ item, onSelect }: { item: TemplateListItem; onSelect: () => void }) {
+  const [thumbnailHtml, setThumbnailHtml] = useState<string | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [hovered, setHovered] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const detail = await api.getTemplate(item.id);
+        if (cancelled || !detail.json_data) return;
+        const html = exportToHtml(detail.json_data as EmailTemplate);
+        setThumbnailHtml(html);
+      } catch {
+        // Silently fail — show fallback
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [item.id]);
+
+  return (
+    <div
+      style={{
+        ...styles.card,
+        borderColor: hovered ? '#6366f1' : '#e2e8f0',
+        boxShadow: hovered ? '0 2px 8px rgba(99,102,241,0.15)' : 'none',
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onClick={onSelect}
+    >
+      <div style={styles.thumbnailWrap}>
+        {thumbnailHtml ? (
+          <iframe
+            ref={iframeRef}
+            srcDoc={thumbnailHtml}
+            title={item.name}
+            sandbox="allow-same-origin"
+            style={styles.thumbnailIframe}
+            tabIndex={-1}
+          />
+        ) : (
+          <div style={styles.thumbnailFallback}>
+            <span style={{ fontSize: 28, color: '#cbd5e1' }}>&#x2709;</span>
+          </div>
+        )}
+      </div>
+      <div style={styles.cardBody}>
+        <div style={styles.cardName}>{item.name}</div>
+        <div style={styles.cardCategory}>{CATEGORY_LABELS[item.category] || item.category || 'Template'}</div>
+      </div>
+    </div>
+  );
+}
+
+/* ---- Styles ---- */
+
+const styles: Record<string, React.CSSProperties> = {
+  overlay: {
+    position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)',
+    display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000,
+  },
+  modal: {
+    background: '#ffffff', borderRadius: 12, width: '92vw', maxWidth: 860,
+    maxHeight: '85vh', display: 'flex', flexDirection: 'column', overflow: 'hidden',
+  },
+  header: {
+    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+    padding: '16px 20px', borderBottom: '1px solid #f1f5f9', flexShrink: 0,
+  },
+  tabs: {
+    display: 'flex', gap: 0, borderBottom: '1px solid #e2e8f0',
+    padding: '0 20px', flexShrink: 0,
+  },
+  tab: {
+    padding: '10px 16px', fontSize: 14, fontWeight: 500, cursor: 'pointer',
+    background: 'none', border: 'none', borderBottom: '2px solid transparent',
+    color: '#64748b', display: 'flex', alignItems: 'center', gap: 6,
+    transition: 'all 0.15s',
+  },
+  tabActive: {
+    color: '#0f172a', borderBottomColor: '#6366f1', fontWeight: 600,
+  },
+  badge: {
+    fontSize: 11, fontWeight: 600, background: '#f1f5f9', color: '#64748b',
+    borderRadius: 10, padding: '1px 7px',
+  },
+  error: {
+    margin: '12px 20px 0', border: '1px solid #fed7d7', background: '#fff5f5',
+    color: '#c53030', borderRadius: 6, padding: '8px 12px', fontSize: 13, flexShrink: 0,
+  },
+  content: {
+    flex: 1, overflow: 'auto', padding: 20,
+  },
+  filters: {
+    display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 20,
+  },
+  filterChip: {
+    padding: '5px 14px', fontSize: 13, fontWeight: 500, cursor: 'pointer',
+    background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 20,
+    color: '#64748b', transition: 'all 0.15s',
+  },
+  filterChipActive: {
+    background: '#6366f1', borderColor: '#6366f1', color: '#ffffff',
+  },
+  groupTitle: {
+    margin: '0 0 12px', fontSize: 13, fontWeight: 700, color: '#94a3b8',
+    textTransform: 'uppercase' as const, letterSpacing: 1,
+  },
+  grid: {
+    display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))', gap: 14,
+  },
+  card: {
+    border: '1px solid #e2e8f0', borderRadius: 10, cursor: 'pointer',
+    transition: 'all 0.15s', overflow: 'hidden', background: '#ffffff',
+  },
+  thumbnailWrap: {
+    height: 180, overflow: 'hidden', background: '#f8fafc', position: 'relative' as const,
+    borderBottom: '1px solid #f1f5f9',
+  },
+  thumbnailIframe: {
+    width: 600, height: 800, border: 'none', pointerEvents: 'none' as const,
+    transform: 'scale(0.32)', transformOrigin: 'top left',
+    position: 'absolute' as const, top: 0, left: 0,
+  },
+  thumbnailFallback: {
+    width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+  },
+  cardBody: {
+    padding: '10px 12px',
+  },
+  cardName: {
+    fontWeight: 600, fontSize: 13, color: '#0f172a',
+    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const,
+  },
+  cardCategory: {
+    fontSize: 11, color: '#94a3b8', marginTop: 2,
+  },
+  empty: {
+    display: 'flex', flexDirection: 'column' as const, alignItems: 'center',
+    justifyContent: 'center', padding: '48px 20px', textAlign: 'center' as const,
+  },
+};

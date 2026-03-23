@@ -53,6 +53,14 @@ export function ImageSettings({ block }: Props) {
           <label>Width (px)</label>
           <input type="number" min={50} max={600} value={block.data.width} onChange={(e) => update({ width: Number(e.target.value) })} />
         </div>
+        <div className="form-group">
+          <label>Border Radius (px)</label>
+          <input type="number" min={0} max={300} value={block.style.borderRadius || 0} onChange={(e) => updateBlock(block.id, { style: { ...block.style, borderRadius: Number(e.target.value) } })} />
+        </div>
+        <div className="toggle-row">
+          <label>Full Width (edge-to-edge)</label>
+          <input type="checkbox" checked={block.style.fullWidth || false} onChange={(e) => updateBlock(block.id, { style: { ...block.style, fullWidth: e.target.checked } })} />
+        </div>
       </div>
       <div className="panel-section">
         <div className="panel-section-title">Alignment</div>

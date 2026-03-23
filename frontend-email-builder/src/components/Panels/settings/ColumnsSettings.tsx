@@ -65,6 +65,38 @@ export function ColumnsSettings({ block }: Props) {
           />
         </div>
       </div>
+
+      <div className="panel-section">
+        <div className="panel-section-title">Column Backgrounds</div>
+        {block.data.columns.map((col, index) => (
+          <div className="form-group" key={col.id}>
+            <label>Column {index + 1} Background</label>
+            <div className="color-input-row">
+              <input
+                type="color"
+                value={col.backgroundColor || '#ffffff'}
+                onChange={(e) => {
+                  const columns = block.data.columns.map((c, i) =>
+                    i === index ? { ...c, backgroundColor: e.target.value } : c,
+                  );
+                  updateBlock(block.id, { data: { ...block.data, columns } } as Partial<ColumnsBlock>);
+                }}
+              />
+              <input
+                type="text"
+                value={col.backgroundColor || ''}
+                placeholder="transparent"
+                onChange={(e) => {
+                  const columns = block.data.columns.map((c, i) =>
+                    i === index ? { ...c, backgroundColor: e.target.value || null } : c,
+                  );
+                  updateBlock(block.id, { data: { ...block.data, columns } } as Partial<ColumnsBlock>);
+                }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

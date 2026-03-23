@@ -27,6 +27,8 @@ export function HeadingBlock({ block }: Props) {
           fontFamily: style.fontFamily || 'Arial, Helvetica, sans-serif',
           fontWeight: style.fontWeight || 700,
           lineHeight: 1.2,
+          letterSpacing: style.letterSpacing ? `${style.letterSpacing}px` : undefined,
+          textTransform: style.textTransform !== 'none' ? style.textTransform : undefined,
         }}
       >
         {highlightVariables(text || 'Your heading goes here')}

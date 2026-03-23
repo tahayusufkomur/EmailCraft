@@ -118,7 +118,11 @@ export function ImageBlock({ block }: Props) {
       <img
         src={block.data.src}
         alt={block.data.alt}
-        style={{ maxWidth: block.data.width, width: '100%' }}
+        style={{
+          maxWidth: block.style.fullWidth ? '100%' : block.data.width,
+          width: '100%',
+          borderRadius: block.style.borderRadius ? `${block.style.borderRadius}px` : undefined,
+        }}
       />
     </div>
   );

@@ -6,6 +6,13 @@ export type TemplateBackgroundStyle =
   | 'mint-weave'
   | 'midnight-grid'
   | 'paper-rings';
+export type TemplateBodyBackgroundStyle =
+  | 'solid'
+  | 'mesh-blue'
+  | 'aurora-soft'
+  | 'sunset-paper'
+  | 'carbon-grid'
+  | 'opal-rings';
 
 export interface Spacing {
   top: number;
@@ -43,6 +50,10 @@ export interface ImageBlock extends BaseBlock {
     link?: string;
     width: number;
     height?: number;
+  };
+  style: BlockStyle & {
+    borderRadius?: number;
+    fullWidth?: boolean;
   };
 }
 
@@ -97,6 +108,7 @@ export interface ColumnsBlock extends BaseBlock {
 export interface Column {
   id: string;
   blocks: Block[];
+  backgroundColor?: string | null;
 }
 
 export interface SocialPlatform {
@@ -128,6 +140,8 @@ export interface HeadingBlock extends BaseBlock {
     fontSize: number;
     fontFamily: string;
     fontWeight: number;
+    letterSpacing?: number;
+    textTransform?: 'none' | 'uppercase' | 'lowercase' | 'capitalize';
   };
 }
 
@@ -160,7 +174,10 @@ export type Block =
 export interface TemplateSettings {
   backgroundColor: string;
   backgroundStyle?: TemplateBackgroundStyle;
+  bodyBackgroundStyle?: TemplateBodyBackgroundStyle;
+  bodyBackgroundColor?: string;
   contentWidth: number;
+  bodyBorderRadius?: number;
   defaultFont: string;
   defaultFontSize: number;
   defaultColor: string;

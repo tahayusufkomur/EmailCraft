@@ -3,7 +3,7 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useEditorStore } from '../../store/editorStore';
 import { BlockWrapper } from './BlockWrapper';
 import { BlockRenderer } from './BlockRenderer';
-import { getCanvasBackgroundStyle } from '../../lib/backgroundStyles';
+import { getCanvasBackgroundStyle, getCanvasBodyBackgroundStyle } from '../../lib/backgroundStyles';
 
 export function Canvas() {
   const blocks = useEditorStore((s) => s.template.body.blocks);
@@ -34,7 +34,15 @@ export function Canvas() {
       style={getCanvasBackgroundStyle(settings.backgroundStyle, settings.backgroundColor)}
       onClick={handleCanvasClick}
     >
-      <div ref={setCanvasDropRef} className={`canvas-container ${isCanvasOver ? 'canvas-drop-over' : ''}`}>
+      <div
+        ref={setCanvasDropRef}
+        className={`canvas-container ${isCanvasOver ? 'canvas-drop-over' : ''}`}
+        style={{
+          ...getCanvasBodyBackgroundStyle(settings.bodyBackgroundStyle, settings.bodyBackgroundColor),
+          borderRadius: settings.bodyBorderRadius ? `${settings.bodyBorderRadius}px` : undefined,
+          overflow: settings.bodyBorderRadius ? 'hidden' : undefined,
+        }}
+      >
         {blocks.length === 0 ? (
           <div className="canvas-empty">
             Drag blocks here to start building your email

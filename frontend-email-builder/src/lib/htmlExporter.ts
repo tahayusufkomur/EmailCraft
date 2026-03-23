@@ -1,5 +1,5 @@
 import type { Block, EmailTemplate } from '../types/blocks';
-import { getEmailBackgroundCss } from './backgroundStyles';
+import { getEmailBackgroundCss, getEmailBodyBackgroundCss } from './backgroundStyles';
 
 /**
  * Client-side HTML exporter for preview purposes.
@@ -11,6 +11,10 @@ export function exportToHtml(template: EmailTemplate, variablesMode: 'placeholde
   const { settings } = template;
   const contentWidth = settings.contentWidth || 600;
   const emailBackground = getEmailBackgroundCss(settings.backgroundStyle, settings.backgroundColor);
+  const emailBodyBackground = getEmailBodyBackgroundCss(
+    settings.bodyBackgroundStyle,
+    settings.bodyBackgroundColor,
+  );
 
   const headerHtml = renderBlocks(template.header.blocks, settings);
   const bodyHtml = renderBlocks(template.body.blocks, settings);
@@ -43,7 +47,7 @@ export function exportToHtml(template: EmailTemplate, variablesMode: 'placeholde
       <td align="center" style="padding: 20px 0;">
         <table role="presentation" class="email-container" width="${contentWidth}" cellpadding="0"
                cellspacing="0" border="0" align="center"
-               style="margin: 0 auto; background-color: #ffffff;">
+               style="margin: 0 auto; background-color: ${emailBodyBackground.backgroundColor}; background: ${emailBodyBackground.background};${settings.bodyBorderRadius ? ` border-radius: ${settings.bodyBorderRadius}px; overflow: hidden;` : ''}">
           ${headerHtml}
           ${bodyHtml}
           ${footerHtml}
@@ -78,14 +82,17 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
     }
 
     case 'image': {
-      const padding = paddingStr(block.style.padding);
+      const isFullWidth = block.style.fullWidth || false;
+      const padding = isFullWidth ? '0' : paddingStr(block.style.padding);
       const align = block.style.alignment || 'center';
       const src = escapeHtml(block.data.src);
       const alt = escapeHtml(block.data.alt);
-      const width = block.data.width || 600;
+      const width = isFullWidth ? (settings.contentWidth || 600) : (block.data.width || 600);
       const heightAttr = block.data.height ? ` height="${block.data.height}"` : '';
+      const borderRadius = block.style.borderRadius || 0;
+      const radiusStyle = borderRadius > 0 ? ` border-radius: ${borderRadius}px;` : '';
 
-      let imgTag = `<img src="${src}" alt="${alt}" width="${width}"${heightAttr} style="display: block; max-width: 100%; height: auto; border: 0;" />`;
+      let imgTag = `<img src="${src}" alt="${alt}" width="${width}"${heightAttr} style="display: block; max-width: 100%; height: auto; border: 0;${radiusStyle}" />`;
 
       if (block.data.link) {
         imgTag = `<a href="${escapeHtml(block.data.link)}" target="_blank" style="text-decoration: none;">${imgTag}</a>`;
@@ -174,10 +181,11 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
         const colContent = renderBlocks(col.blocks, settings);
         const inner = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${colContent}</table>`;
         const stackClass = block.style.stackOnMobile === false ? '' : 'stack-column';
+        const colBg = col.backgroundColor ? ` background-color: ${col.backgroundColor};` : '';
 
         return `<div class="${stackClass}" style="display: inline-block; width: 100%; max-width: ${colWidth}px; vertical-align: top;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-          <tr><td style="padding: 0 ${gap / 2}px;">${inner}</td></tr>
+          <tr><td style="padding: 0 ${gap / 2}px;${colBg}">${inner}</td></tr>
         </table>
       </div>`;
       }).join('\n');
@@ -218,10 +226,12 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const headingWeight = block.style.fontWeight || 700;
       const headingColor = block.style.color || color;
       const headingFont = block.style.fontFamily || font;
+      const headingLetterSpacing = block.style.letterSpacing || 0;
+      const headingTextTransform = block.style.textTransform || 'none';
       const background = block.style.backgroundColor;
       return `<tr>
   <td style="padding: ${padding}; text-align: ${align};${background ? ` background-color: ${background};` : ''}">
-    <${headingTag} style="margin: 0; font-family: ${headingFont}; font-size: ${headingSize}px; line-height: ${Math.round(headingSize * 1.2)}px; color: ${headingColor}; font-weight: ${headingWeight};">
+    <${headingTag} style="margin: 0; font-family: ${headingFont}; font-size: ${headingSize}px; line-height: ${Math.round(headingSize * 1.2)}px; color: ${headingColor}; font-weight: ${headingWeight};${headingLetterSpacing ? ` letter-spacing: ${headingLetterSpacing}px;` : ''}${headingTextTransform !== 'none' ? ` text-transform: ${headingTextTransform};` : ''}">
       ${headingText}
     </${headingTag}>
   </td>
