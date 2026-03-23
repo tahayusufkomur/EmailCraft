@@ -540,7 +540,8 @@ def _render_social_block(block, ctx):
         p_type = html_module.escape(platform.get('type', ''))
         p_url = html_module.escape(platform.get('url', '#'))
         # Use placeholder icon URLs — in production these would be hosted on CDN
-        icon_url = f"https://assets.mailcraft.io/icons/{p_type}-{icon_size}.png"
+        slug = 'x' if p_type == 'twitter' else p_type
+        icon_url = f"https://cdn.simpleicons.org/{slug}"
         icons_html.append(f"""<td style="padding: 0 {spacing // 2}px;">
       <a href="{p_url}" target="_blank">
         <img src="{icon_url}" alt="{p_type.title()}" width="{icon_size}" height="{icon_size}"

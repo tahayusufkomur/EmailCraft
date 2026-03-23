@@ -200,7 +200,7 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
 
       const iconsHtml = block.data.platforms.map((p) => {
         const url = escapeHtml(p.url);
-        const iconUrl = `https://assets.mailcraft.io/icons/${p.type}-${iconSize}.png`;
+        const iconUrl = `https://cdn.simpleicons.org/${p.type === 'twitter' ? 'x' : p.type}`;
         return `<td style="padding: 0 ${spacing / 2}px;">
       <a href="${url}" target="_blank">
         <img src="${iconUrl}" alt="${p.type}" width="${iconSize}" height="${iconSize}" style="display: block; border: 0;" />
