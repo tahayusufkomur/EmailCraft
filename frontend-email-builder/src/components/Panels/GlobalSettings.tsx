@@ -1,4 +1,5 @@
 import { useEditorStore } from '../../store/editorStore';
+import { SliderInput } from './settings/SliderInput';
 import {
   BODY_BACKGROUND_STYLE_PRESETS,
   getBodyBackgroundStylePreset,
@@ -62,27 +63,8 @@ export function GlobalSettings() {
 
       <div className="panel-section">
         <div className="panel-section-title">Layout</div>
-        <div className="form-group">
-          <label>Content Width (px)</label>
-          <input
-            type="number"
-            min={320}
-            max={800}
-            step={10}
-            value={settings.contentWidth}
-            onChange={(e) => updateSettings({ contentWidth: Number(e.target.value) })}
-          />
-        </div>
-        <div className="form-group">
-          <label>Body Border Radius (px)</label>
-          <input
-            type="number"
-            min={0}
-            max={32}
-            value={settings.bodyBorderRadius || 0}
-            onChange={(e) => updateSettings({ bodyBorderRadius: Number(e.target.value) })}
-          />
-        </div>
+        <SliderInput label="Content Width" value={settings.contentWidth} min={320} max={800} step={10} onChange={(v) => updateSettings({ contentWidth: v })} />
+        <SliderInput label="Body Border Radius" value={settings.bodyBorderRadius || 0} min={0} max={32} onChange={(v) => updateSettings({ bodyBorderRadius: v })} />
       </div>
     </div>
   );

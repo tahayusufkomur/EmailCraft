@@ -113,14 +113,20 @@ export function ImageBlock({ block }: Props) {
     );
   }
 
+  const align = block.style.alignment || 'center';
+  const isFullWidth = block.style.fullWidth;
+  const marginMap = { left: '0 auto 0 0', center: '0 auto', right: '0 0 0 auto' } as const;
+
   return (
-    <div className="image-block-content" style={{ textAlign: block.style.alignment || 'center' }}>
+    <div className="image-block-content">
       <img
         src={block.data.src}
         alt={block.data.alt}
         style={{
-          maxWidth: block.style.fullWidth ? '100%' : block.data.width,
-          width: '100%',
+          display: 'block',
+          maxWidth: '100%',
+          width: isFullWidth ? '100%' : block.data.width,
+          margin: isFullWidth ? undefined : marginMap[align as keyof typeof marginMap] || '0 auto',
           borderRadius: block.style.borderRadius ? `${block.style.borderRadius}px` : undefined,
         }}
       />

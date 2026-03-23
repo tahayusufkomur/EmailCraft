@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import type { Block, BlockType } from '../../types/blocks';
 import { createBlock } from '../../lib/blockFactory';
-import { getPresetsForType } from '../../lib/blockPresets';
+import { getPresetsForType, deleteCustomPreset } from '../../lib/blockPresets';
 import { useEditorStore } from '../../store/editorStore';
 import { GlobalSettings } from './GlobalSettings';
 
@@ -97,9 +97,11 @@ function DraggableBlockItem({ blockType, children, id }: {
   );
 }
 
-function BlockTypeRow({ config }: { config: BlockTypeConfig }) {
+function BlockTypeRow({ config, refreshKey }: { config: BlockTypeConfig; refreshKey: number }) {
   const [expanded, setExpanded] = useState(false);
   const addBlock = useEditorStore((s) => s.addBlock);
+  // refreshKey triggers re-read of presets when custom presets change
+  void refreshKey;
   const presets = getPresetsForType(config.type);
   const hasPresets = presets.length > 0;
 
@@ -110,6 +112,11 @@ function BlockTypeRow({ config }: { config: BlockTypeConfig }) {
 
   const handleAddPreset = (block: Block) => {
     addBlock(block);
+  };
+
+  const handleDeletePreset = (e: React.MouseEvent, presetId: string) => {
+    e.stopPropagation();
+    deleteCustomPreset(presetId);
   };
 
   return (
@@ -150,18 +157,34 @@ function BlockTypeRow({ config }: { config: BlockTypeConfig }) {
             </svg>
             <span>Empty {config.label}</span>
           </button>
-          {presets.map((preset) => (
-            <button
-              key={preset.id}
-              type="button"
-              className="block-preset-item"
-              onClick={() => handleAddPreset(preset.create())}
-              title={preset.preview}
-            >
-              <span className="block-preset-preview">{preset.preview}</span>
-              <span className="block-preset-label">{preset.label}</span>
-            </button>
-          ))}
+          {presets.map((preset) => {
+            const isCustom = preset.id.startsWith('custom-');
+            return (
+              <div key={preset.id} className="block-preset-row">
+                <button
+                  type="button"
+                  className="block-preset-item"
+                  onClick={() => handleAddPreset(preset.create())}
+                  title={preset.preview}
+                >
+                  <span className="block-preset-preview">{preset.preview}</span>
+                  <span className="block-preset-label">{preset.label}</span>
+                </button>
+                {isCustom && (
+                  <button
+                    type="button"
+                    className="block-preset-delete"
+                    onClick={(e) => handleDeletePreset(e, preset.id)}
+                    title="Remove preset"
+                  >
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                  </button>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
@@ -200,6 +223,14 @@ function CollapsibleSection({ title, icon, defaultOpen, children }: {
 }
 
 export function BlockPalette() {
+  const [refreshKey, setRefreshKey] = useState(0);
+  const refresh = useCallback(() => setRefreshKey((k) => k + 1), []);
+
+  useEffect(() => {
+    window.addEventListener('mailcraft-presets-changed', refresh);
+    return () => window.removeEventListener('mailcraft-presets-changed', refresh);
+  }, [refresh]);
+
   return (
     <div className="sidebar">
       <CollapsibleSection
@@ -225,7 +256,7 @@ export function BlockPalette() {
       >
         <div className="block-type-list">
           {BLOCK_TYPES.map((config) => (
-            <BlockTypeRow key={config.type} config={config} />
+            <BlockTypeRow key={config.type} config={config} refreshKey={refreshKey} />
           ))}
         </div>
       </CollapsibleSection>

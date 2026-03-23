@@ -1,5 +1,6 @@
 import type { ColumnsBlock } from '../../../types/blocks';
 import { useEditorStore } from '../../../store/editorStore';
+import { SliderInput } from './SliderInput';
 
 interface Props {
   block: ColumnsBlock;
@@ -46,16 +47,7 @@ export function ColumnsSettings({ block }: Props) {
             </button>
           </div>
         </div>
-        <div className="form-group">
-          <label>Column Gap (px)</label>
-          <input
-            type="number"
-            min={0}
-            max={40}
-            value={block.style.gap || 10}
-            onChange={(e) => updateStyle({ gap: Number(e.target.value) })}
-          />
-        </div>
+        <SliderInput label="Column Gap" value={block.style.gap || 10} min={0} max={40} onChange={(v) => updateStyle({ gap: v })} />
         <div className="toggle-row">
           <label>Stack on Mobile</label>
           <input

@@ -2,6 +2,7 @@ import type { HeroBlock } from '../../../types/blocks';
 import { useEditorStore } from '../../../store/editorStore';
 import { AlignmentPicker } from './AlignmentPicker';
 import { FONT_OPTIONS } from '../../../lib/fonts';
+import { SliderInput } from './SliderInput';
 
 interface Props {
   block: HeroBlock;
@@ -46,10 +47,7 @@ export function HeroSettings({ block }: Props) {
 
       <div className="panel-section">
         <div className="panel-section-title">Layout</div>
-        <div className="form-group">
-          <label>Height (px)</label>
-          <input type="number" min={200} max={800} value={block.style.height || 400} onChange={(e) => updateStyle({ height: Number(e.target.value) })} />
-        </div>
+        <SliderInput label="Height" value={block.style.height || 400} min={200} max={800} onChange={(v) => updateStyle({ height: v })} />
         <div className="form-group">
           <label>Content Alignment</label>
           <AlignmentPicker value={block.style.contentAlignment || 'center'} onChange={(v) => updateStyle({ contentAlignment: v as 'left' | 'center' | 'right' })} />
@@ -75,10 +73,7 @@ export function HeroSettings({ block }: Props) {
             <input type="text" value={block.style.overlayColor || '#000000'} onChange={(e) => updateStyle({ overlayColor: e.target.value })} />
           </div>
         </div>
-        <div className="form-group">
-          <label>Overlay Opacity ({Math.round((block.style.overlayOpacity ?? 0.4) * 100)}%)</label>
-          <input type="range" min={0} max={1} step={0.05} value={block.style.overlayOpacity ?? 0.4} onChange={(e) => updateStyle({ overlayOpacity: Number(e.target.value) })} />
-        </div>
+        <SliderInput label="Overlay Opacity" value={block.style.overlayOpacity ?? 0.4} min={0} max={1} step={0.05} unit="" onChange={(v) => updateStyle({ overlayOpacity: v })} />
       </div>
 
       <div className="panel-section">
@@ -91,10 +86,7 @@ export function HeroSettings({ block }: Props) {
             ))}
           </select>
         </div>
-        <div className="form-group">
-          <label>Heading Size (px)</label>
-          <input type="number" min={16} max={72} value={block.style.headingFontSize || 36} onChange={(e) => updateStyle({ headingFontSize: Number(e.target.value) })} />
-        </div>
+        <SliderInput label="Heading Size" value={block.style.headingFontSize || 36} min={16} max={72} onChange={(v) => updateStyle({ headingFontSize: v })} />
         <div className="form-group">
           <label>Heading Color</label>
           <div className="color-input-row">
@@ -127,10 +119,7 @@ export function HeroSettings({ block }: Props) {
             <input type="text" value={block.style.buttonTextColor || '#000000'} onChange={(e) => updateStyle({ buttonTextColor: e.target.value })} />
           </div>
         </div>
-        <div className="form-group">
-          <label>Button Border Radius</label>
-          <input type="number" min={0} max={50} value={block.style.buttonBorderRadius || 50} onChange={(e) => updateStyle({ buttonBorderRadius: Number(e.target.value) })} />
-        </div>
+        <SliderInput label="Button Border Radius" value={block.style.buttonBorderRadius || 50} min={0} max={50} onChange={(v) => updateStyle({ buttonBorderRadius: v })} />
       </div>
     </div>
   );

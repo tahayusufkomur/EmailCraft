@@ -5,6 +5,7 @@ import { AlignmentPicker } from './AlignmentPicker';
 import { VariableInserter } from '../VariableInserter';
 import { insertAtCursor, restoreCursor } from '../../../lib/variableUtils';
 import { FONT_OPTIONS } from '../../../lib/fonts';
+import { SliderInput } from './SliderInput';
 
 interface Props {
   block: ButtonBlock;
@@ -67,22 +68,10 @@ export function ButtonSettings({ block }: Props) {
             <input type="text" value={block.style.color || '#ffffff'} onChange={(e) => updateStyle({ color: e.target.value })} />
           </div>
         </div>
-        <div className="form-group">
-          <label>Border Radius (px)</label>
-          <input type="number" min={0} max={50} value={block.style.borderRadius || 4} onChange={(e) => updateStyle({ borderRadius: Number(e.target.value) })} />
-        </div>
-        <div className="form-group">
-          <label>Horizontal Padding (px)</label>
-          <input type="number" min={8} max={60} value={block.style.paddingX || 24} onChange={(e) => updateStyle({ paddingX: Number(e.target.value) })} />
-        </div>
-        <div className="form-group">
-          <label>Vertical Padding (px)</label>
-          <input type="number" min={6} max={30} value={block.style.paddingY || 12} onChange={(e) => updateStyle({ paddingY: Number(e.target.value) })} />
-        </div>
-        <div className="form-group">
-          <label>Font Size (px)</label>
-          <input type="number" min={10} max={32} value={block.style.fontSize || 16} onChange={(e) => updateStyle({ fontSize: Number(e.target.value) })} />
-        </div>
+        <SliderInput label="Border Radius" value={block.style.borderRadius || 4} min={0} max={50} onChange={(v) => updateStyle({ borderRadius: v })} />
+        <SliderInput label="Horizontal Padding" value={block.style.paddingX || 24} min={8} max={60} onChange={(v) => updateStyle({ paddingX: v })} />
+        <SliderInput label="Vertical Padding" value={block.style.paddingY || 12} min={6} max={30} onChange={(v) => updateStyle({ paddingY: v })} />
+        <SliderInput label="Font Size" value={block.style.fontSize || 16} min={10} max={32} onChange={(v) => updateStyle({ fontSize: v })} />
         <div className="form-group">
           <label>Font Family</label>
           <select value={block.style.fontFamily || FONT_OPTIONS[0].value} onChange={(e) => updateStyle({ fontFamily: e.target.value })}>
@@ -91,10 +80,7 @@ export function ButtonSettings({ block }: Props) {
             ))}
           </select>
         </div>
-        <div className="form-group">
-          <label>Font Weight</label>
-          <input type="number" min={300} max={900} step={100} value={block.style.fontWeight || 600} onChange={(e) => updateStyle({ fontWeight: Number(e.target.value) })} />
-        </div>
+        <SliderInput label="Font Weight" value={block.style.fontWeight || 600} min={300} max={900} step={100} unit="" onChange={(v) => updateStyle({ fontWeight: v })} />
         <div className="form-group">
           <label>Text Transform</label>
           <select value={block.style.textTransform || 'none'} onChange={(e) => updateStyle({ textTransform: e.target.value as 'none' | 'uppercase' | 'lowercase' | 'capitalize' })}>
@@ -104,10 +90,7 @@ export function ButtonSettings({ block }: Props) {
             <option value="capitalize">Capitalize</option>
           </select>
         </div>
-        <div className="form-group">
-          <label>Letter Spacing (px)</label>
-          <input type="number" min={0} max={8} step={0.5} value={block.style.letterSpacing || 0} onChange={(e) => updateStyle({ letterSpacing: Number(e.target.value) })} />
-        </div>
+        <SliderInput label="Letter Spacing" value={block.style.letterSpacing || 0} min={0} max={8} step={0.5} onChange={(v) => updateStyle({ letterSpacing: v })} />
         <div className="toggle-row">
           <label>Full Width</label>
           <input type="checkbox" checked={block.style.fullWidth || false} onChange={(e) => updateStyle({ fullWidth: e.target.checked })} />
@@ -116,10 +99,7 @@ export function ButtonSettings({ block }: Props) {
 
       <div className="panel-section">
         <div className="panel-section-title">Border</div>
-        <div className="form-group">
-          <label>Border Width (px)</label>
-          <input type="number" min={0} max={12} value={block.style.borderWidth || 0} onChange={(e) => updateStyle({ borderWidth: Number(e.target.value) })} />
-        </div>
+        <SliderInput label="Border Width" value={block.style.borderWidth || 0} min={0} max={12} onChange={(v) => updateStyle({ borderWidth: v })} />
         <div className="form-group">
           <label>Border Style</label>
           <select value={block.style.borderStyle || 'solid'} onChange={(e) => updateStyle({ borderStyle: e.target.value as 'solid' | 'dashed' | 'dotted' })}>

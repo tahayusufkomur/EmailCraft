@@ -1,5 +1,6 @@
 import type { DividerBlock } from '../../../types/blocks';
 import { useEditorStore } from '../../../store/editorStore';
+import { SliderInput } from './SliderInput';
 
 interface Props {
   block: DividerBlock;
@@ -34,14 +35,8 @@ export function DividerSettings({ block }: Props) {
             <input type="text" value={block.style.lineColor || '#cccccc'} onChange={(e) => updateStyle({ lineColor: e.target.value })} />
           </div>
         </div>
-        <div className="form-group">
-          <label>Line Thickness (px)</label>
-          <input type="number" min={1} max={10} value={block.style.lineThickness || 1} onChange={(e) => updateStyle({ lineThickness: Number(e.target.value) })} />
-        </div>
-        <div className="form-group">
-          <label>Spacing (px)</label>
-          <input type="number" min={0} max={100} value={block.style.spacing || 20} onChange={(e) => updateStyle({ spacing: Number(e.target.value) })} />
-        </div>
+        <SliderInput label="Line Thickness" value={block.style.lineThickness || 1} min={1} max={10} onChange={(v) => updateStyle({ lineThickness: v })} />
+        <SliderInput label="Spacing" value={block.style.spacing || 20} min={0} max={100} onChange={(v) => updateStyle({ spacing: v })} />
       </div>
     </div>
   );

@@ -450,6 +450,59 @@ const PRESETS: Partial<Record<BlockType, BlockPreset[]>> = {
   ],
 };
 
+const CUSTOM_PRESETS_KEY = 'mailcraft_custom_presets';
+
+interface StoredPreset {
+  id: string;
+  label: string;
+  type: BlockType;
+  blockData: Omit<Block, 'id'>;
+}
+
+function loadStoredPresets(): StoredPreset[] {
+  try {
+    const raw = localStorage.getItem(CUSTOM_PRESETS_KEY);
+    if (!raw) return [];
+    return JSON.parse(raw) as StoredPreset[];
+  } catch {
+    return [];
+  }
+}
+
+function persistPresets(presets: StoredPreset[]) {
+  localStorage.setItem(CUSTOM_PRESETS_KEY, JSON.stringify(presets));
+}
+
+export function saveCustomPreset(block: Block, label: string) {
+  const stored = loadStoredPresets();
+  const { id: _id, ...blockWithoutId } = block;
+  stored.push({
+    id: `custom-${uid()}`,
+    label,
+    type: block.type,
+    blockData: blockWithoutId,
+  });
+  persistPresets(stored);
+  window.dispatchEvent(new Event('mailcraft-presets-changed'));
+}
+
+export function deleteCustomPreset(presetId: string) {
+  const stored = loadStoredPresets().filter((p) => p.id !== presetId);
+  persistPresets(stored);
+  window.dispatchEvent(new Event('mailcraft-presets-changed'));
+}
+
+export function getCustomPresetsForType(type: BlockType): BlockPreset[] {
+  return loadStoredPresets()
+    .filter((p) => p.type === type)
+    .map((p) => ({
+      id: p.id,
+      label: p.label,
+      preview: '★',
+      create: () => ({ ...structuredClone(p.blockData), id: uid() } as Block),
+    }));
+}
+
 export function getPresetsForType(type: BlockType): BlockPreset[] {
-  return PRESETS[type] || [];
+  return [...(PRESETS[type] || []), ...getCustomPresetsForType(type)];
 }

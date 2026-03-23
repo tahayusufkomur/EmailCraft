@@ -2,6 +2,7 @@ import type { SocialBlock, SocialPlatform } from '../../../types/blocks';
 import { useEditorStore } from '../../../store/editorStore';
 import { Button } from '../../ui/button';
 import { AlignmentPicker } from './AlignmentPicker';
+import { SliderInput } from './SliderInput';
 
 interface Props {
   block: SocialBlock;
@@ -61,10 +62,7 @@ export function SocialSettings({ block }: Props) {
 
       <div className="panel-section">
         <div className="panel-section-title">Style</div>
-        <div className="form-group">
-          <label>Icon Size (px)</label>
-          <input type="number" min={16} max={64} value={block.style.iconSize || 32} onChange={(e) => updateStyle({ iconSize: Number(e.target.value) })} />
-        </div>
+        <SliderInput label="Icon Size" value={block.style.iconSize || 32} min={16} max={64} onChange={(v) => updateStyle({ iconSize: v })} />
         <div className="form-group">
           <label>Icon Style</label>
           <select value={block.style.iconStyle || 'colored'} onChange={(e) => updateStyle({ iconStyle: e.target.value as 'colored' | 'monochrome' })}>
@@ -79,10 +77,7 @@ export function SocialSettings({ block }: Props) {
             <option value="vertical">Vertical</option>
           </select>
         </div>
-        <div className="form-group">
-          <label>Spacing (px)</label>
-          <input type="number" min={0} max={40} value={block.style.spacing || 10} onChange={(e) => updateStyle({ spacing: Number(e.target.value) })} />
-        </div>
+        <SliderInput label="Spacing" value={block.style.spacing || 10} min={0} max={40} onChange={(v) => updateStyle({ spacing: v })} />
       </div>
 
       <div className="panel-section">

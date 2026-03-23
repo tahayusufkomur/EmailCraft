@@ -6,6 +6,7 @@ import { SpacingControl } from './SpacingControl';
 import { VariableInserter } from '../VariableInserter';
 import { insertAtCursor, restoreCursor } from '../../../lib/variableUtils';
 import { FONT_OPTIONS } from '../../../lib/fonts';
+import { SliderInput } from './SliderInput';
 
 interface Props {
   block: HeadingBlock;
@@ -72,38 +73,9 @@ export function HeadingSettings({ block }: Props) {
             ))}
           </select>
         </div>
-        <div className="form-group">
-          <label>Font Size (px)</label>
-          <input
-            type="number"
-            min={12}
-            max={72}
-            value={block.style.fontSize || 28}
-            onChange={(e) => updateStyle({ fontSize: Number(e.target.value) })}
-          />
-        </div>
-        <div className="form-group">
-          <label>Font Weight</label>
-          <input
-            type="number"
-            min={300}
-            max={900}
-            step={100}
-            value={block.style.fontWeight || 700}
-            onChange={(e) => updateStyle({ fontWeight: Number(e.target.value) })}
-          />
-        </div>
-        <div className="form-group">
-          <label>Letter Spacing (px)</label>
-          <input
-            type="number"
-            min={-2}
-            max={20}
-            step={0.5}
-            value={block.style.letterSpacing || 0}
-            onChange={(e) => updateStyle({ letterSpacing: Number(e.target.value) })}
-          />
-        </div>
+        <SliderInput label="Font Size" value={block.style.fontSize || 28} min={12} max={72} onChange={(v) => updateStyle({ fontSize: v })} />
+        <SliderInput label="Font Weight" value={block.style.fontWeight || 700} min={300} max={900} step={100} unit="" onChange={(v) => updateStyle({ fontWeight: v })} />
+        <SliderInput label="Letter Spacing" value={block.style.letterSpacing || 0} min={-2} max={20} step={0.5} onChange={(v) => updateStyle({ letterSpacing: v })} />
         <div className="form-group">
           <label>Text Transform</label>
           <select
