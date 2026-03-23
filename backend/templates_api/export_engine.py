@@ -666,6 +666,9 @@ def _render_hero_block(block, ctx):
     btn_color = style.get('buttonTextColor', '#000000')
     btn_radius = style.get('buttonBorderRadius', 50)
     align = style.get('contentAlignment', 'center')
+    v_align = style.get('verticalAlignment', 'bottom')
+    valign_attr = 'top' if v_align == 'top' else ('middle' if v_align == 'center' else 'bottom')
+    grad_dir = 'to bottom' if v_align == 'top' else 'to top'
     heading = html_module.escape(data.get('heading', ''))
     sub = html_module.escape(data.get('subheading', ''))
     btn_text = html_module.escape(data.get('buttonText', ''))
@@ -678,16 +681,16 @@ def _render_hero_block(block, ctx):
     btn_html = f'<a href="{btn_url}" target="_blank" style="display: inline-block; padding: 14px 32px; background-color: {btn_bg}; color: {btn_color}; font-family: {default_font}; font-size: 15px; font-weight: 600; text-decoration: none; border-radius: {btn_radius}px;">{btn_text}</a>' if btn_text else ''
 
     return f"""<tr>
-  <td background="{bg_img}" width="{content_width}" height="{height}" valign="bottom"
+  <td background="{bg_img}" width="{content_width}" height="{height}" valign="{valign_attr}"
       style="background-image: url('{bg_img}'); background-size: cover; background-position: center; height: {height}px;">
     <!--[if gte mso 9]>
     <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:{content_width}px;height:{height}px;">
       <v:fill type="tile" src="{bg_img}" />
       <v:textbox inset="0,0,0,0">
     <![endif]-->
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="height: {height}px;">
       <tr>
-        <td style="background: linear-gradient(to top, {overlay_rgba} 60%, transparent 100%); padding: 32px; text-align: {align};" valign="bottom">
+        <td style="background: linear-gradient({grad_dir}, {overlay_rgba} 60%, transparent 100%); padding: 32px; text-align: {align};" valign="{valign_attr}">
           <h1 style="margin: 0 0 8px; font-family: {heading_font}; font-size: {heading_size}px; line-height: {int(heading_size * 1.15)}px; color: {heading_color}; font-weight: 700;">{heading}</h1>
           {sub_html}
           {btn_html}

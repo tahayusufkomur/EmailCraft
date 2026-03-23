@@ -69,15 +69,19 @@ export function HeroBlock({ block }: Props) {
     );
   }
 
+  const vAlign = block.style.verticalAlignment || 'bottom';
+  const flexAlign = vAlign === 'top' ? 'flex-start' : vAlign === 'center' ? 'center' : 'flex-end';
+  const gradientDir = vAlign === 'top' ? 'to bottom' : vAlign === 'center' ? 'to bottom' : 'to top';
+
   return (
     <div style={{
       position: 'relative', height: block.style.height || 400, overflow: 'hidden', borderRadius: 4,
       backgroundImage: `url(${block.data.backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center',
-      display: 'flex', alignItems: block.style.contentAlignment === 'center' ? 'flex-end' : 'flex-end',
+      display: 'flex', alignItems: flexAlign,
     }}>
       <div style={{
         position: 'absolute', inset: 0,
-        background: `linear-gradient(to top, ${overlayRgba} 60%, transparent 100%)`,
+        background: `linear-gradient(${gradientDir}, ${overlayRgba} 60%, transparent 100%)`,
       }} />
       <div style={{
         position: 'relative', zIndex: 1, padding: 32, width: '100%',
@@ -96,15 +100,21 @@ export function HeroBlock({ block }: Props) {
           </p>
         )}
         {block.data.buttonText && (
-          <span style={{
-            display: 'inline-block', padding: '14px 32px',
-            backgroundColor: block.style.buttonBackgroundColor || '#ffffff',
-            color: block.style.buttonTextColor || '#000000',
-            borderRadius: block.style.buttonBorderRadius || 50,
-            fontSize: 15, fontWeight: 600,
-          }}>
+          <a
+            href={block.data.buttonUrl || '#'}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block', padding: '14px 32px', cursor: 'pointer',
+              backgroundColor: block.style.buttonBackgroundColor || '#ffffff',
+              color: block.style.buttonTextColor || '#000000',
+              borderRadius: block.style.buttonBorderRadius || 50,
+              fontSize: 15, fontWeight: 600, textDecoration: 'none',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
             {block.data.buttonText}
-          </span>
+          </a>
         )}
       </div>
     </div>

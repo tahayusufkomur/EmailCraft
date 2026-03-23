@@ -182,6 +182,7 @@ export interface HeroBlock extends BaseBlock {
     buttonTextColor: string;
     buttonBorderRadius: number;
     contentAlignment: 'left' | 'center' | 'right';
+    verticalAlignment: 'top' | 'center' | 'bottom';
   };
 }
 

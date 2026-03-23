@@ -54,6 +54,16 @@ export function HeroSettings({ block }: Props) {
           <label>Content Alignment</label>
           <AlignmentPicker value={block.style.contentAlignment || 'center'} onChange={(v) => updateStyle({ contentAlignment: v as 'left' | 'center' | 'right' })} />
         </div>
+        <div className="form-group">
+          <label>Vertical Position</label>
+          <div className="alignment-picker">
+            {(['top', 'center', 'bottom'] as const).map((v) => (
+              <button key={v} className={(block.style.verticalAlignment || 'bottom') === v ? 'active' : ''} onClick={() => updateStyle({ verticalAlignment: v })}>
+                {v.charAt(0).toUpperCase() + v.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="panel-section">

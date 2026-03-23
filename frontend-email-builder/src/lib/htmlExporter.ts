@@ -279,21 +279,24 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const btnColor = block.style.buttonTextColor || '#000000';
       const btnRadius = block.style.buttonBorderRadius || 50;
       const align = block.style.contentAlignment || 'center';
+      const vAlign = block.style.verticalAlignment || 'bottom';
+      const valignAttr = vAlign === 'top' ? 'top' : vAlign === 'center' ? 'middle' : 'bottom';
+      const gradDir = vAlign === 'top' ? 'to bottom' : 'to top';
       const heading = escapeHtml(block.data.heading);
       const sub = escapeHtml(block.data.subheading);
       const btnText = escapeHtml(block.data.buttonText);
       const btnUrl = escapeHtml(block.data.buttonUrl);
 
       return `<tr>
-  <td background="${bgImg}" width="${contentW}" height="${h}" valign="bottom" style="background-image: url('${bgImg}'); background-size: cover; background-position: center; height: ${h}px;">
+  <td background="${bgImg}" width="${contentW}" height="${h}" valign="${valignAttr}" style="background-image: url('${bgImg}'); background-size: cover; background-position: center; height: ${h}px;">
     <!--[if gte mso 9]>
     <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:${contentW}px;height:${h}px;">
       <v:fill type="tile" src="${bgImg}" />
       <v:textbox inset="0,0,0,0">
     <![endif]-->
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="height: ${h}px;">
       <tr>
-        <td style="background: linear-gradient(to top, ${overlayRgba} 60%, transparent 100%); padding: 32px; text-align: ${align};" valign="bottom">
+        <td style="background: linear-gradient(${gradDir}, ${overlayRgba} 60%, transparent 100%); padding: 32px; text-align: ${align};" valign="${valignAttr}">
           <h1 style="margin: 0 0 8px; font-family: ${headingFont}; font-size: ${headingSize}px; line-height: ${Math.round(headingSize * 1.15)}px; color: ${headingColor}; font-weight: 700;">${heading}</h1>
           ${sub ? `<p style="margin: 0 0 20px; font-family: ${font}; font-size: ${fontSize}px; color: ${subColor}; line-height: 1.5;">${sub}</p>` : ''}
           ${btnText ? `<a href="${btnUrl}" target="_blank" style="display: inline-block; padding: 14px 32px; background-color: ${btnBg}; color: ${btnColor}; font-family: ${font}; font-size: 15px; font-weight: 600; text-decoration: none; border-radius: ${btnRadius}px;">${btnText}</a>` : ''}

@@ -168,6 +168,7 @@ export function createBlock(type: BlockType): Block {
           buttonTextColor: '#000000',
           buttonBorderRadius: 50,
           contentAlignment: 'center',
+          verticalAlignment: 'bottom',
         },
       };
   }
