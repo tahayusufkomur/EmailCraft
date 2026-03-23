@@ -284,7 +284,7 @@ function TemplateCard({ item, onSelect }: { item: TemplateListItem; onSelect: ()
             ref={iframeRef}
             srcDoc={thumbnailHtml}
             title={item.name}
-            sandbox="allow-same-origin"
+            sandbox="allow-same-origin allow-scripts"
             style={styles.thumbnailIframe}
             tabIndex={-1}
           />
