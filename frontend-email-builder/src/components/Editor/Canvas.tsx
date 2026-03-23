@@ -40,7 +40,6 @@ export function Canvas() {
         style={{
           ...getCanvasBodyBackgroundStyle(settings.bodyBackgroundStyle, settings.bodyBackgroundColor),
           borderRadius: settings.bodyBorderRadius ? `${settings.bodyBorderRadius}px` : undefined,
-          overflow: settings.bodyBorderRadius ? 'hidden' : undefined,
         }}
       >
         {blocks.length === 0 ? (

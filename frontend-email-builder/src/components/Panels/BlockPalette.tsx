@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useDraggable } from '@dnd-kit/core';
-import type { BlockType } from '../../types/blocks';
+import type { Block, BlockType } from '../../types/blocks';
 import { createBlock } from '../../lib/blockFactory';
+import { getPresetsForType } from '../../lib/blockPresets';
 import { useEditorStore } from '../../store/editorStore';
 import { GlobalSettings } from './GlobalSettings';
 
 const svgProps = { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
+const svgPropsSmall = { ...svgProps, width: 16, height: 16 };
 
 const BLOCK_ICONS: Record<BlockType, React.ReactNode> = {
   heading: (
@@ -60,12 +62,12 @@ const BLOCK_ICONS: Record<BlockType, React.ReactNode> = {
   ),
 };
 
-interface PaletteItemConfig {
+interface BlockTypeConfig {
   type: BlockType;
   label: string;
 }
 
-const BLOCK_TYPES: PaletteItemConfig[] = [
+const BLOCK_TYPES: BlockTypeConfig[] = [
   { type: 'heading', label: 'Heading' },
   { type: 'text', label: 'Text' },
   { type: 'image', label: 'Image' },
@@ -78,31 +80,90 @@ const BLOCK_TYPES: PaletteItemConfig[] = [
   { type: 'html', label: 'HTML' },
 ];
 
-function DraggablePaletteItem({ config }: { config: PaletteItemConfig }) {
-  const addBlock = useEditorStore((s) => s.addBlock);
-
+function DraggableBlockItem({ blockType, children, id }: {
+  blockType: BlockType;
+  children: React.ReactNode;
+  id: string;
+}) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
-    id: `palette-${config.type}`,
-    data: { fromPalette: true, blockType: config.type },
+    id,
+    data: { fromPalette: true, blockType },
   });
 
-  const handleClick = () => {
-    const block = createBlock(config.type);
+  return (
+    <div ref={setNodeRef} {...listeners} {...attributes} style={{ opacity: isDragging ? 0.4 : 1 }}>
+      {children}
+    </div>
+  );
+}
+
+function BlockTypeRow({ config }: { config: BlockTypeConfig }) {
+  const [expanded, setExpanded] = useState(false);
+  const addBlock = useEditorStore((s) => s.addBlock);
+  const presets = getPresetsForType(config.type);
+  const hasPresets = presets.length > 0;
+
+  const handleAddDefault = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    addBlock(createBlock(config.type));
+  };
+
+  const handleAddPreset = (block: Block) => {
     addBlock(block);
   };
 
   return (
-    <div
-      ref={setNodeRef}
-      {...listeners}
-      {...attributes}
-      className="palette-item"
-      data-block-type={config.type}
-      style={{ opacity: isDragging ? 0.4 : 1 }}
-      onClick={handleClick}
-    >
-      <span className="palette-item-icon">{BLOCK_ICONS[config.type]}</span>
-      <span>{config.label}</span>
+    <div className="block-type-row">
+      <DraggableBlockItem blockType={config.type} id={`palette-${config.type}`}>
+        <button
+          type="button"
+          className={`block-type-header ${expanded ? 'expanded' : ''}`}
+          onClick={() => hasPresets ? setExpanded((v) => !v) : handleAddDefault({ stopPropagation: () => {} } as React.MouseEvent)}
+        >
+          <span className="block-type-header-left">
+            <span className="block-type-icon">{BLOCK_ICONS[config.type]}</span>
+            <span className="block-type-label">{config.label}</span>
+          </span>
+          {hasPresets ? (
+            <svg
+              {...svgPropsSmall} width="12" height="12"
+              style={{ transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s ease', opacity: 0.5 }}
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          ) : (
+            <svg {...svgPropsSmall} width="12" height="12" style={{ opacity: 0.35 }}>
+              <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          )}
+        </button>
+      </DraggableBlockItem>
+      {expanded && hasPresets && (
+        <div className="block-presets">
+          <button
+            type="button"
+            className="block-preset-item block-preset-empty"
+            onClick={handleAddDefault}
+          >
+            <svg {...svgPropsSmall} width="14" height="14" style={{ opacity: 0.45 }}>
+              <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            <span>Empty {config.label}</span>
+          </button>
+          {presets.map((preset) => (
+            <button
+              key={preset.id}
+              type="button"
+              className="block-preset-item"
+              onClick={() => handleAddPreset(preset.create())}
+              title={preset.preview}
+            >
+              <span className="block-preset-preview">{preset.preview}</span>
+              <span className="block-preset-label">{preset.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -162,9 +223,9 @@ export function BlockPalette() {
           </svg>
         }
       >
-        <div className="palette-grid">
+        <div className="block-type-list">
           {BLOCK_TYPES.map((config) => (
-            <DraggablePaletteItem key={config.type} config={config} />
+            <BlockTypeRow key={config.type} config={config} />
           ))}
         </div>
       </CollapsibleSection>
