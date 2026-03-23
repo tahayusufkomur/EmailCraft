@@ -108,13 +108,13 @@ export const api = {
   getTemplate: (id: string) =>
     request<TemplateListItem & { json_data: object }>(`/templates/${id}/`),
 
-  saveTemplate: (data: { name: string; json_data: object; is_draft?: boolean }) =>
+  saveTemplate: (data: { name: string; json_data: object; category?: string; is_draft?: boolean }) =>
     request<{ id: string }>('/templates/', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
 
-  updateTemplate: (id: string, data: { name?: string; json_data?: object }) =>
+  updateTemplate: (id: string, data: { name?: string; json_data?: object; category?: string }) =>
     request<{ id: string }>(`/templates/${id}/`, {
       method: 'PUT',
       body: JSON.stringify(data),

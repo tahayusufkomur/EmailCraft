@@ -176,6 +176,18 @@ function YourTemplatesTab({ templates, onSelect }: {
   templates: TemplateListItem[];
   onSelect: (item: TemplateListItem) => void;
 }) {
+  const [activeTag, setActiveTag] = useState<string | null>(null);
+
+  const tags = useMemo(() => {
+    const t = new Set(templates.map((item) => item.category).filter(Boolean));
+    return Array.from(t).sort();
+  }, [templates]);
+
+  const filtered = useMemo(
+    () => activeTag ? templates.filter((t) => t.category === activeTag) : templates,
+    [templates, activeTag],
+  );
+
   if (templates.length === 0) {
     return (
       <div style={styles.empty}>
@@ -186,10 +198,31 @@ function YourTemplatesTab({ templates, onSelect }: {
     );
   }
   return (
-    <div style={styles.grid}>
-      {templates.map((item) => (
-        <TemplateCard key={item.id} item={item} onSelect={() => onSelect(item)} />
-      ))}
+    <div>
+      {tags.length > 0 && (
+        <div style={styles.filters}>
+          <button
+            style={activeTag === null ? { ...styles.filterChip, ...styles.filterChipActive } : styles.filterChip}
+            onClick={() => setActiveTag(null)}
+          >
+            All
+          </button>
+          {tags.map((tag) => (
+            <button
+              key={tag}
+              style={activeTag === tag ? { ...styles.filterChip, ...styles.filterChipActive } : styles.filterChip}
+              onClick={() => setActiveTag(tag)}
+            >
+              {CATEGORY_LABELS[tag] || tag}
+            </button>
+          ))}
+        </div>
+      )}
+      <div style={styles.grid}>
+        {filtered.map((item) => (
+          <TemplateCard key={item.id} item={item} onSelect={() => onSelect(item)} />
+        ))}
+      </div>
     </div>
   );
 }

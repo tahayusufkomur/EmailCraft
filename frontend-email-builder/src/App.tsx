@@ -6,6 +6,7 @@ import { BlockPalette } from './components/Panels/BlockPalette';
 import { StylePanel } from './components/Panels/StylePanel';
 import { PreviewModal } from './components/Preview/PreviewModal';
 import { TemplateGallery } from './components/Gallery/TemplateGallery';
+import { SaveTemplateModal } from './components/Gallery/SaveTemplateModal';
 import { MediaLibraryModal } from './components/Media/MediaLibraryModal';
 import { Badge } from './components/ui/badge';
 import { Button } from './components/ui/button';
@@ -305,6 +306,7 @@ function App() {
   const [exportError, setExportError] = useState<string | null>(null);
   const [savedTemplateId, setSavedTemplateId] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
   const activeThemePreset = getBuilderThemePreset(builderTheme);
 
   useAutoSave();
@@ -451,22 +453,36 @@ function App() {
     localStorage.setItem('mailcraft_draft', JSON.stringify(currentTemplate));
     emitSaveEvent(currentTemplate);
 
+    if (!savedTemplateId) {
+      setShowSaveModal(true);
+      return;
+    }
+
     setIsSaving(true);
     try {
-      if (savedTemplateId) {
-        await api.updateTemplate(savedTemplateId, { json_data: currentTemplate });
-      } else {
-        const name = prompt('Template name:');
-        if (!name) {
-          setIsSaving(false);
-          return;
-        }
-        const result = await api.saveTemplate({ name, json_data: currentTemplate });
-        setSavedTemplateId(result.id);
-      }
+      await api.updateTemplate(savedTemplateId, { json_data: currentTemplate });
       useEditorStore.getState().markClean();
     } catch {
-      // localStorage save already succeeded — API save is best-effort
+      // localStorage save already succeeded
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleSaveNew = async (name: string, category: string) => {
+    const currentTemplate = useEditorStore.getState().template;
+    setIsSaving(true);
+    try {
+      const result = await api.saveTemplate({
+        name,
+        json_data: currentTemplate,
+        category: category || undefined,
+      });
+      setSavedTemplateId(result.id);
+      useEditorStore.getState().markClean();
+      setShowSaveModal(false);
+    } catch {
+      // best-effort
     } finally {
       setIsSaving(false);
     }
@@ -575,6 +591,13 @@ function App() {
         <MediaLibraryModal
           onClose={() => setShowMedia(false)}
           onSelectUrl={canApplySelectedMedia ? handleToolbarMediaSelect : undefined}
+        />
+      )}
+      {showSaveModal && (
+        <SaveTemplateModal
+          onSave={(name, category) => void handleSaveNew(name, category)}
+          onClose={() => setShowSaveModal(false)}
+          isSaving={isSaving}
         />
       )}
     </div>
