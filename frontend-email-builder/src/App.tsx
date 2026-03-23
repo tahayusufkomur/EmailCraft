@@ -303,6 +303,8 @@ function App() {
   const [showMedia, setShowMedia] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const [exportError, setExportError] = useState<string | null>(null);
+  const [savedTemplateId, setSavedTemplateId] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
   const activeThemePreset = getBuilderThemePreset(builderTheme);
 
   useAutoSave();
@@ -444,11 +446,30 @@ function App() {
     };
   }, [loadTemplate, setConfig]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const currentTemplate = useEditorStore.getState().template;
     localStorage.setItem('mailcraft_draft', JSON.stringify(currentTemplate));
-    useEditorStore.getState().markClean();
     emitSaveEvent(currentTemplate);
+
+    setIsSaving(true);
+    try {
+      if (savedTemplateId) {
+        await api.updateTemplate(savedTemplateId, { json_data: currentTemplate });
+      } else {
+        const name = prompt('Template name:');
+        if (!name) {
+          setIsSaving(false);
+          return;
+        }
+        const result = await api.saveTemplate({ name, json_data: currentTemplate });
+        setSavedTemplateId(result.id);
+      }
+      useEditorStore.getState().markClean();
+    } catch {
+      // localStorage save already succeeded — API save is best-effort
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const resolveErrorMessage = (error: unknown): string => {
@@ -524,8 +545,8 @@ function App() {
           <Button variant="outline" onClick={() => setShowPreview(true)}>
             Preview
           </Button>
-          <Button onClick={handleSave}>
-            Save
+          <Button onClick={() => void handleSave()} disabled={isSaving}>
+            {isSaving ? 'Saving...' : 'Save'}
           </Button>
           {showExportHtmlButton && (
             <Button variant="default" onClick={() => void handleExport()} disabled={isExporting}>
@@ -544,7 +565,12 @@ function App() {
         </div>
       </EditorDndContext>
       {showPreview && <PreviewModal onClose={() => setShowPreview(false)} />}
-      {showGallery && <TemplateGallery onClose={() => setShowGallery(false)} />}
+      {showGallery && (
+        <TemplateGallery
+          onClose={() => setShowGallery(false)}
+          onTemplateLoaded={(id) => setSavedTemplateId(id)}
+        />
+      )}
       {showMedia && (
         <MediaLibraryModal
           onClose={() => setShowMedia(false)}

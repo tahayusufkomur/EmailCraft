@@ -18,9 +18,10 @@ const CATEGORY_LABELS: Record<string, string> = {
 
 interface Props {
   onClose: () => void;
+  onTemplateLoaded?: (templateId: string | null) => void;
 }
 
-export function TemplateGallery({ onClose }: Props) {
+export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
   const [activeTab, setActiveTab] = useState<Tab>('library');
   const [isLoading, setIsLoading] = useState(true);
@@ -110,11 +111,13 @@ export function TemplateGallery({ onClose }: Props) {
       if (!detail.json_data || typeof detail.json_data !== 'object') {
         throw new Error('Template payload is invalid.');
       }
+      const isUserOwned = item.template_type !== 'provided';
       handleSelect(detail.json_data as EmailTemplate);
+      onTemplateLoaded?.(isUserOwned ? item.id : null);
     } catch (error) {
       setLoadError(error instanceof Error ? error.message : 'Unable to load template.');
     }
-  }, [handleSelect]);
+  }, [handleSelect, onTemplateLoaded]);
 
   return (
     <div style={styles.overlay} onClick={onClose}>
