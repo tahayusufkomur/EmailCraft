@@ -16,8 +16,12 @@ export function ButtonBlock({ block }: Props) {
       className="button-block-content"
       style={{ textAlign: style.alignment || 'center' }}
     >
-      <span
+      <a
+        href={block.data.url || '#'}
+        target="_blank"
+        rel="noopener noreferrer"
         className="button-block-preview"
+        onClick={(e) => e.stopPropagation()}
         style={{
           backgroundColor: style.backgroundColor || '#007bff',
           color: style.color || '#ffffff',
@@ -34,10 +38,13 @@ export function ButtonBlock({ block }: Props) {
           width: style.fullWidth ? '100%' : undefined,
           display: style.fullWidth ? 'block' : 'inline-block',
           textAlign: 'center',
+          textDecoration: 'none',
+          cursor: 'pointer',
+          boxSizing: 'border-box',
         }}
       >
         {highlightVariables(text || 'Click Here')}
-      </span>
+      </a>
     </div>
   );
 }
