@@ -5,6 +5,8 @@ import type { Block, EmailTemplate, TemplateSettings } from '../types/blocks';
 const DEFAULT_SETTINGS: TemplateSettings = {
   backgroundColor: '#f4f4f4',
   backgroundStyle: 'none',
+  bodyBackgroundStyle: 'solid',
+  bodyBackgroundColor: '#ffffff',
   contentWidth: 600,
   defaultFont: 'Arial, Helvetica, sans-serif',
   defaultFontSize: 14,
@@ -379,17 +381,20 @@ export const useEditorStore = create<EditorState>((set, get) => ({
           return { ...b, data: { ...b.data, columns: updatedColumns } };
         });
 
-      const addToColumn = (blocks: Block[]): Block[] =>
-        blocks.map((b) => {
-          if (b.type !== 'columns' || !movedBlock) return b;
+      const addToColumn = (blocks: Block[]): Block[] => {
+        if (!movedBlock) return blocks;
+        const blockToInsert = movedBlock;
+
+        return blocks.map((b) => {
+          if (b.type !== 'columns') return b;
           if (b.id === targetParentId) {
             const updatedColumns = b.data.columns.map((col) => {
               if (col.id !== targetColumnId) return col;
               const newBlocks = [...col.blocks];
               if (targetIndex !== undefined && targetIndex >= 0 && targetIndex <= newBlocks.length) {
-                newBlocks.splice(targetIndex, 0, movedBlock);
+                newBlocks.splice(targetIndex, 0, blockToInsert);
               } else {
-                newBlocks.push(movedBlock);
+                newBlocks.push(blockToInsert);
               }
               return { ...col, blocks: newBlocks };
             });
@@ -401,6 +406,7 @@ export const useEditorStore = create<EditorState>((set, get) => ({
           }));
           return { ...b, data: { ...b.data, columns: updatedColumns } };
         });
+      };
 
       let headerBlocks = removeFromColumn(state.template.header.blocks);
       let bodyBlocks = removeFromColumn(state.template.body.blocks);

@@ -221,3 +221,25 @@ class TestTemplateBackgroundStyles(TestCase):
 
         self.assertIn('background-color: #abc123;', html)
         self.assertIn('background: #abc123;', html)
+
+    def test_body_background_style_renders_on_content_table(self):
+        data = _template([])
+        data['settings']['bodyBackgroundStyle'] = 'mesh-blue'
+        data['settings']['bodyBackgroundColor'] = '#eef4ff'
+
+        result = render_email_html(data)
+        html = result['html']
+
+        self.assertIn('background-color: #eef4ff;', html)
+        self.assertIn('linear-gradient(145deg, #f8fbff 0%, #eef4ff 48%, #e5edff 100%)', html)
+
+    def test_unknown_body_background_style_falls_back_to_solid_color(self):
+        data = _template([])
+        data['settings']['bodyBackgroundStyle'] = 'not-real'
+        data['settings']['bodyBackgroundColor'] = '#fafafa'
+
+        result = render_email_html(data)
+        html = result['html']
+
+        self.assertIn('background-color: #fafafa;', html)
+        self.assertIn('background: #fafafa;', html)

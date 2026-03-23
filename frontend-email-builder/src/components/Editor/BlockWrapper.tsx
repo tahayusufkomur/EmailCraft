@@ -26,7 +26,6 @@ export function BlockWrapper({ block, children }: Props) {
     transform,
     transition,
     isDragging,
-    isOver: isSortableOver,
   } = useSortable({ id: block.id });
 
   // Check if dragging from palette and hovering over this block

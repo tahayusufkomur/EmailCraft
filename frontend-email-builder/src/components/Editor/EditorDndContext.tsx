@@ -2,7 +2,6 @@ import {
   type CollisionDetection,
   DndContext,
   type DragEndEvent,
-  type DragOverEvent,
   DragOverlay,
   type DragStartEvent,
   PointerSensor,
@@ -30,7 +29,6 @@ export function EditorDndContext({ children }: Props) {
   const moveBlockBetweenColumns = useEditorStore((s) => s.moveBlockBetweenColumns);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [activeBlock, setActiveBlock] = useState<Block | null>(null);
-  const [overId, setOverId] = useState<string | null>(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -47,11 +45,6 @@ export function EditorDndContext({ children }: Props) {
       const tempBlock = createBlock(blockType);
       setActiveBlock(tempBlock);
     }
-  };
-
-  const handleDragOver = (event: DragOverEvent) => {
-    const { over } = event;
-    setOverId(over ? (over.id as string) : null);
   };
 
   const collisionDetection: CollisionDetection = (args) => {
@@ -81,7 +74,6 @@ export function EditorDndContext({ children }: Props) {
   const handleDragEnd = (event: DragEndEvent) => {
     setActiveId(null);
     setActiveBlock(null);
-    setOverId(null);
     const { active, over } = event;
 
     if (!over) return;
@@ -195,7 +187,6 @@ export function EditorDndContext({ children }: Props) {
       sensors={sensors}
       collisionDetection={collisionDetection}
       onDragStart={handleDragStart}
-      onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
       {children}
