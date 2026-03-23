@@ -4,7 +4,7 @@ import {
   getBodyBackgroundStylePreset,
   resolveTemplateBodyBackgroundStyle,
 } from '../../lib/backgroundStyles';
-import { FONT_OPTIONS } from '../../lib/fonts';
+
 
 export function GlobalSettings() {
   const settings = useEditorStore((s) => s.template.settings);
@@ -59,45 +59,6 @@ export function GlobalSettings() {
         </div>
       </div>
 
-      <div className="panel-section">
-        <div className="panel-section-title">Typography</div>
-        <div className="form-group">
-          <label>Default Font</label>
-          <select
-            value={settings.defaultFont}
-            onChange={(e) => updateSettings({ defaultFont: e.target.value })}
-          >
-            {FONT_OPTIONS.map((f) => (
-              <option key={f.value} value={f.value}>{f.label}{f.isGoogle ? ' ✦' : ''}</option>
-            ))}
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Default Font Size (px)</label>
-          <input
-            type="number"
-            min={10}
-            max={32}
-            value={settings.defaultFontSize}
-            onChange={(e) => updateSettings({ defaultFontSize: Number(e.target.value) })}
-          />
-        </div>
-        <div className="form-group">
-          <label>Default Text Color</label>
-          <div className="color-input-row">
-            <input
-              type="color"
-              value={settings.defaultColor}
-              onChange={(e) => updateSettings({ defaultColor: e.target.value })}
-            />
-            <input
-              type="text"
-              value={settings.defaultColor}
-              onChange={(e) => updateSettings({ defaultColor: e.target.value })}
-            />
-          </div>
-        </div>
-      </div>
 
       <div className="panel-section">
         <div className="panel-section-title">Layout</div>

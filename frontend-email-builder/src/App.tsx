@@ -554,24 +554,32 @@ function App() {
           </div>
         )}
         <div className="toolbar-actions">
-          <Button variant="secondary" onClick={() => setShowGallery(true)}>
+          <Button variant="ghost" size="sm" onClick={() => setShowGallery(true)}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
             Templates
           </Button>
-          <Button variant="secondary" onClick={() => setShowMedia(true)}>
+          <Button variant="ghost" size="sm" onClick={() => setShowMedia(true)}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="9" cy="9" r="1.5" fill="currentColor" stroke="none" /><path d="m21 15-4.5-4.5L9 18" /></svg>
             Media
           </Button>
-          <Button variant="outline" onClick={() => setShowPreview(true)}>
+          <div className="toolbar-separator" />
+          <Button variant="ghost" size="sm" onClick={() => setShowPreview(true)}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" /></svg>
             Preview
           </Button>
-          <Button variant={showCode ? 'default' : 'outline'} onClick={() => setShowCode((v) => !v)}>
-            {'</>'}
+          <Button variant={showCode ? 'default' : 'ghost'} size="sm" onClick={() => setShowCode((v) => !v)}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
+            Code
           </Button>
-          <Button onClick={() => void handleSave()} disabled={isSaving}>
+          <div className="toolbar-separator" />
+          <Button size="sm" onClick={() => void handleSave()} disabled={isSaving}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" /></svg>
             {isSaving ? 'Saving...' : 'Save'}
           </Button>
           {showExportHtmlButton && (
-            <Button variant="default" onClick={() => void handleExport()} disabled={isExporting}>
-              {isExporting ? 'Exporting...' : 'Export HTML'}
+            <Button size="sm" onClick={() => void handleExport()} disabled={isExporting}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+              {isExporting ? 'Exporting...' : 'Export'}
             </Button>
           )}
           {isDirty && <Badge variant="secondary">Unsaved</Badge>}
