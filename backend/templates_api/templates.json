@@ -1,937 +1,167 @@
 [
   {
-    "name": "Welcome — Warm Onboarding",
+    "name": "Welcome — Zenith Flow",
     "category": "welcome",
     "template": {
       "version": 1,
       "settings": {
-        "backgroundColor": "#f5f3ff",
-        "backgroundStyle": "aurora",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 16,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#334155"
-      },
-      "header": {
-        "blocks": [
-          {
-            "id": "t01-h1", "type": "image",
-            "data": { "src": "https://placehold.co/600x260/6366f1/ffffff?text=Welcome+to+Acme Inc", "alt": "Welcome banner", "width": 600 },
-            "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "alignment": "center", "fullWidth": true, "borderRadius": 0 }
-          }
-        ]
-      },
-      "body": {
-        "blocks": [
-          {
-            "id": "t01-b1", "type": "heading",
-            "data": { "text": "You're in, Sarah!", "level": 1 },
-            "style": { "padding": { "top": 28, "right": 32, "bottom": 8, "left": 32 }, "alignment": "left", "color": "#1e1b4b", "fontSize": 28, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" }
-          },
-          {
-            "id": "t01-b2", "type": "text",
-            "data": { "html": "<p style=\"margin:0;color:#64748b;\">We're thrilled to have you on board. Here are three quick steps to get the most out of Acme Inc.</p>", "variables": [] },
-            "style": { "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 } }
-          },
-          {
-            "id": "t01-b3", "type": "columns",
-            "data": {
-              "columnCount": 3, "columnRatio": [33, 34, 33],
-              "columns": [
-                { "id": "t01-c1", "backgroundColor": "#f5f3ff", "blocks": [
-                  { "id": "t01-c1b1", "type": "heading", "data": { "text": "01", "level": 2 }, "style": { "padding": { "top": 16, "right": 12, "bottom": 0, "left": 12 }, "alignment": "center", "color": "#6366f1", "fontSize": 28, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-                  { "id": "t01-c1b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:13px;text-align:center;font-weight:600;\">Complete profile</p><p style=\"margin:4px 0 0;font-size:12px;color:#64748b;text-align:center;\">Add your photo and bio</p>", "variables": [] }, "style": { "padding": { "top": 4, "right": 8, "bottom": 16, "left": 8 } } }
-                ]},
-                { "id": "t01-c2", "backgroundColor": "#f5f3ff", "blocks": [
-                  { "id": "t01-c2b1", "type": "heading", "data": { "text": "02", "level": 2 }, "style": { "padding": { "top": 16, "right": 12, "bottom": 0, "left": 12 }, "alignment": "center", "color": "#6366f1", "fontSize": 28, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-                  { "id": "t01-c2b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:13px;text-align:center;font-weight:600;\">First project</p><p style=\"margin:4px 0 0;font-size:12px;color:#64748b;text-align:center;\">Create in 30 seconds</p>", "variables": [] }, "style": { "padding": { "top": 4, "right": 8, "bottom": 16, "left": 8 } } }
-                ]},
-                { "id": "t01-c3", "backgroundColor": "#f5f3ff", "blocks": [
-                  { "id": "t01-c3b1", "type": "heading", "data": { "text": "03", "level": 2 }, "style": { "padding": { "top": 16, "right": 12, "bottom": 0, "left": 12 }, "alignment": "center", "color": "#6366f1", "fontSize": 28, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-                  { "id": "t01-c3b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:13px;text-align:center;font-weight:600;\">Invite team</p><p style=\"margin:4px 0 0;font-size:12px;color:#64748b;text-align:center;\">Collaboration is key</p>", "variables": [] }, "style": { "padding": { "top": 4, "right": 8, "bottom": 16, "left": 8 } } }
-                ]}
-              ]
-            },
-            "style": { "padding": { "top": 0, "right": 24, "bottom": 0, "left": 24 }, "gap": 12, "stackOnMobile": true }
-          },
-          {
-            "id": "t01-b4", "type": "button",
-            "data": { "text": "Go to Dashboard", "url": "https://" },
-            "style": { "padding": { "top": 24, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "backgroundColor": "#6366f1", "color": "#ffffff", "borderRadius": 50, "fullWidth": false, "fontSize": 15, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "letterSpacing": 0.5, "textTransform": "none", "paddingX": 32, "paddingY": 14 }
-          },
-          {
-            "id": "t01-b5", "type": "text",
-            "data": { "html": "<p style=\"margin:0;font-size:12px;color:#94a3b8;text-align:center;\">Questions? Reply to this email — we're happy to help.</p>", "variables": [] },
-            "style": { "padding": { "top": 8, "right": 32, "bottom": 28, "left": 32 }, "alignment": "center" }
-          }
-        ]
-      },
-      "footer": { "blocks": [] }
-    }
-  },
-  {
-    "name": "Welcome — Founder Letter",
-    "category": "welcome",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#fdf1e8",
-        "backgroundStyle": "sunset-glow",
-        "bodyBackgroundStyle": "sunset-paper",
-        "bodyBackgroundColor": "#fffaf7",
-        "bodyBorderRadius": 12,
-        "contentWidth": 600,
-        "defaultFont": "Georgia, 'Times New Roman', Times, serif",
-        "defaultFontSize": 16,
-        "defaultColor": "#44403c"
-      },
-      "header": { "blocks": [] },
-      "body": {
-        "blocks": [
-          { "id": "t02-b1", "type": "spacer", "data": {}, "style": { "height": 28 } },
-          {
-            "id": "t02-b2", "type": "image",
-            "data": { "src": "https://placehold.co/80x80/c2410c/ffffff?text=TK", "alt": "Founder photo", "width": 80, "height": 80 },
-            "style": { "padding": { "top": 0, "right": 32, "bottom": 16, "left": 32 }, "alignment": "left", "borderRadius": 50, "fullWidth": false }
-          },
-          {
-            "id": "t02-b3", "type": "heading",
-            "data": { "text": "A warm welcome, Sarah", "level": 1 },
-            "style": { "padding": { "top": 0, "right": 32, "bottom": 12, "left": 32 }, "alignment": "left", "color": "#9a3412", "fontSize": 26, "fontFamily": "Georgia, 'Times New Roman', Times, serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" }
-          },
-          {
-            "id": "t02-b4", "type": "text",
-            "data": { "html": "<p style=\"margin:0 0 14px;\">Thank you for joining Acme Inc. I started this because I believe everyone deserves tools that feel thoughtful — not just functional.</p><p style=\"margin:0 0 14px;\">Over the next few days, I'll share tips to help you get the most out of your account. But for now, just know we're here whenever you need us.</p><p style=\"margin:0;\">Cheers,<br><strong>Alex Chen</strong><br><span style=\"color:#a8a29e;font-style:italic;\">Founder, Acme Inc</span></p>", "variables": [] },
-            "style": { "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 } }
-          },
-          {
-            "id": "t02-b5", "type": "button",
-            "data": { "text": "Visit Your Account", "url": "https://" },
-            "style": { "padding": { "top": 0, "right": 32, "bottom": 32, "left": 32 }, "alignment": "left", "backgroundColor": "#c2410c", "color": "#ffffff", "borderRadius": 6, "fullWidth": false, "fontSize": 15, "fontFamily": "Georgia, 'Times New Roman', Times, serif", "fontWeight": 600, "paddingX": 28, "paddingY": 12 }
-          }
-        ]
-      },
-      "footer": { "blocks": [] }
-    }
-  },
-  {
-    "name": "Welcome — SaaS Product",
-    "category": "welcome",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#f0f4f8",
+        "backgroundColor": "#f9faf8",
         "backgroundStyle": "none",
         "bodyBackgroundStyle": "solid",
         "bodyBackgroundColor": "#ffffff",
         "bodyBorderRadius": 12,
         "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
+        "defaultFont": "'Plus Jakarta Sans', Arial, sans-serif",
         "defaultFontSize": 15,
-        "defaultColor": "#334155"
+        "defaultColor": "#2e3432"
       },
       "header": {
         "blocks": [
-          { "id": "t03-h1", "type": "spacer", "data": {}, "style": { "height": 6, "backgroundColor": "#2563eb" } },
           {
-            "id": "t03-h2", "type": "heading",
-            "data": { "text": "Acme Inc", "level": 3 },
-            "style": { "padding": { "top": 20, "right": 32, "bottom": 20, "left": 32 }, "alignment": "center", "color": "#2563eb", "fontSize": 18, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 1, "textTransform": "uppercase" }
+            "id": "w-h1", "type": "heading",
+            "data": { "text": "THE BREATHABLE CANVAS", "level": 3 },
+            "style": { "padding": { "top": 28, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center", "color": "#406660", "fontSize": 14, "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "fontWeight": 700, "letterSpacing": 4, "textTransform": "uppercase" }
           }
         ]
       },
       "body": {
         "blocks": [
           {
-            "id": "t03-b1", "type": "heading",
-            "data": { "text": "Welcome aboard, Sarah!", "level": 1 },
-            "style": { "padding": { "top": 24, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "color": "#0f172a", "fontSize": 28, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" }
+            "id": "w-b1", "type": "hero",
+            "data": { "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuB4lEG-_Pnf_BmpFXva5QD8bRqcTs-OFUic-CGqOClFlf9SLgGd2pz6woJhL7Ck6Ow6Cmm7JmYyIdUIHCi9hZXOWIkqQItqwy2hQ3j6dXYuqbhFet7a3hr9ihkkj5Dxdc0A0ZwHkuIADYMOljz0z9ckYhyUn-O25l5P8g0jDCc0Zbg9FYIJnoSlP0ufq-P0RWKxiDV9mH25aeWA7jxFgmafIc4nZRe0eHUVrRxVq74eIFndv3ZHA_abgG2CjQReOgqn5K13kUhXFddw", "heading": "Welcome to the Zenith Flow Family!", "subheading": "We're so glad to have you on this journey with us. Start your practice today.", "buttonText": "Book Your First Class", "buttonUrl": "https://" },
+            "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "height": 480, "overlayColor": "#1c1917", "overlayOpacity": 0.45, "headingColor": "#ffffff", "headingFontSize": 34, "headingFontFamily": "'Noto Serif', Georgia, serif", "subheadingColor": "#ffffffcc", "buttonBackgroundColor": "#406660", "buttonTextColor": "#e2fff9", "buttonBorderRadius": 50, "contentAlignment": "left" }
           },
+          { "id": "w-b2", "type": "spacer", "data": {}, "style": { "height": 32 } },
           {
-            "id": "t03-b2", "type": "text",
-            "data": { "html": "<p style=\"margin:0;text-align:center;color:#64748b;\">Your account is ready. Here's everything you need to get started.</p>", "variables": [] },
-            "style": { "padding": { "top": 0, "right": 48, "bottom": 24, "left": 48 }, "alignment": "center" }
+            "id": "w-b3", "type": "columns",
+            "data": { "columnCount": 2, "columnRatio": [50, 50], "columns": [
+              { "id": "w-c1", "backgroundColor": "#f2f4f2", "blocks": [
+                { "id": "w-c1b1", "type": "heading", "data": { "text": "The Studio Space", "level": 3 }, "style": { "padding": { "top": 24, "right": 16, "bottom": 4, "left": 16 }, "alignment": "left", "color": "#2e3432", "fontSize": 18, "fontFamily": "'Noto Serif', Georgia, serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
+                { "id": "w-c1b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:13px;color:#5a605e;line-height:1.6;\">Discover our sanctuary designed for silence and movement. Our mats are laid out, waiting for your breath.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 16, "bottom": 8, "left": 16 } } },
+                { "id": "w-c1b3", "type": "heading", "data": { "text": "EXPLORE STUDIO →", "level": 4 }, "style": { "padding": { "top": 8, "right": 16, "bottom": 24, "left": 16 }, "alignment": "left", "color": "#406660", "fontSize": 11, "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "fontWeight": 700, "letterSpacing": 2, "textTransform": "uppercase" } }
+              ]},
+              { "id": "w-c2", "backgroundColor": "#c2ebe3", "blocks": [
+                { "id": "w-c2b1", "type": "heading", "data": { "text": "Class Schedule", "level": 3 }, "style": { "padding": { "top": 24, "right": 16, "bottom": 4, "left": 16 }, "alignment": "left", "color": "#335853", "fontSize": 18, "fontFamily": "'Noto Serif', Georgia, serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
+                { "id": "w-c2b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:13px;color:#335853;line-height:1.6;\">From sunrise Vinyasa to restorative Yin, find the rhythm that matches your energy today.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 16, "bottom": 8, "left": 16 } } },
+                { "id": "w-c2b3", "type": "heading", "data": { "text": "VIEW TIMES →", "level": 4 }, "style": { "padding": { "top": 8, "right": 16, "bottom": 24, "left": 16 }, "alignment": "left", "color": "#335853", "fontSize": 11, "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "fontWeight": 700, "letterSpacing": 2, "textTransform": "uppercase" } }
+              ]}
+            ]},
+            "style": { "padding": { "top": 0, "right": 20, "bottom": 0, "left": 20 }, "gap": 12, "stackOnMobile": true }
           },
-          {
-            "id": "t03-b3", "type": "image",
-            "data": { "src": "https://placehold.co/536x280/eff6ff/2563eb?text=Product+Dashboard", "alt": "Product screenshot", "width": 536 },
-            "style": { "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center", "borderRadius": 12, "fullWidth": false }
-          },
-          {
-            "id": "t03-b4", "type": "button",
-            "data": { "text": "Open Dashboard", "url": "https://" },
-            "style": { "padding": { "top": 0, "right": 32, "bottom": 16, "left": 32 }, "alignment": "center", "backgroundColor": "#2563eb", "color": "#ffffff", "borderRadius": 8, "fullWidth": false, "fontSize": 16, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 32, "paddingY": 14 }
-          },
-          {
-            "id": "t03-b5", "type": "divider",
-            "data": {},
-            "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "lineStyle": "solid", "lineColor": "#e2e8f0", "lineThickness": 1, "spacing": 12 }
-          },
-          {
-            "id": "t03-b6", "type": "text",
-            "data": { "html": "<p style=\"margin:0;font-size:13px;color:#94a3b8;text-align:center;\">Need help getting started? <a href=\"https://\" style=\"color:#2563eb;\">Visit our help center</a></p>", "variables": [] },
-            "style": { "padding": { "top": 8, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center" }
-          }
+          { "id": "w-b4", "type": "spacer", "data": {}, "style": { "height": 32 } },
+          { "id": "w-b5", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-size:11px;color:#635f57;text-transform:uppercase;letter-spacing:3px;\">A Moment of Intent</p>", "variables": [] }, "style": { "padding": { "top": 28, "right": 32, "bottom": 4, "left": 32 }, "alignment": "center", "backgroundColor": "#f9faf8" } },
+          { "id": "w-b6", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:22px;font-style:italic;color:#2e3432;line-height:1.5;\">\"Yoga is the journey of the self, through the self, to the self.\"</p><p style=\"margin:12px 0 0;text-align:center;font-size:13px;color:#5a605e;\">— The Bhagavad Gita</p>", "variables": [] }, "style": { "padding": { "top": 12, "right": 40, "bottom": 28, "left": 40 }, "alignment": "center", "backgroundColor": "#f9faf8" } },
+          { "id": "w-b7", "type": "spacer", "data": {}, "style": { "height": 16 } },
+          { "id": "w-b8", "type": "heading", "data": { "text": "Next steps for your journey", "level": 3 }, "style": { "padding": { "top": 16, "right": 32, "bottom": 12, "left": 32 }, "alignment": "left", "color": "#5a605e", "fontSize": 16, "fontFamily": "'Noto Serif', Georgia, serif", "fontWeight": 400, "letterSpacing": 0, "textTransform": "none" } },
+          { "id": "w-b9", "type": "text", "data": { "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding:14px 16px;background:#f2f4f2;border-radius:8px;\"><strong style=\"color:#2e3432;\">Complete your profile</strong><br><span style=\"font-size:12px;color:#5a605e;\">Help us personalize your experience</span></td></tr><tr><td style=\"height:8px;\"></td></tr><tr><td style=\"padding:14px 16px;\"><strong style=\"color:#2e3432;\">Enable notifications</strong><br><span style=\"font-size:12px;color:#5a605e;\">Get reminders for your booked sessions</span></td></tr><tr><td style=\"height:8px;\"></td></tr><tr><td style=\"padding:14px 16px;background:#f2f4f2;border-radius:8px;\"><strong style=\"color:#2e3432;\">Refer a friend</strong><br><span style=\"font-size:12px;color:#5a605e;\">Practicing together is more grounding</span></td></tr></table>", "variables": [] }, "style": { "padding": { "top": 0, "right": 32, "bottom": 32, "left": 32 } } }
         ]
       },
       "footer": {
         "blocks": [
-          {
-            "id": "t03-f1", "type": "social",
-            "data": { "platforms": [{ "type": "twitter", "url": "https://x.com/" }, { "type": "linkedin", "url": "https://linkedin.com/" }] },
-            "style": { "padding": { "top": 16, "right": 24, "bottom": 16, "left": 24 }, "alignment": "center", "iconSize": 24, "iconStyle": "monochrome", "layout": "horizontal", "spacing": 12 }
-          }
+          { "id": "w-f1", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#635f57;\"><a href=\"#\" style=\"color:#635f57;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;text-decoration:underline;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;text-decoration:underline;\">Privacy Policy</a></p>", "variables": [] }, "style": { "padding": { "top": 24, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "backgroundColor": "#f2f4f2" } },
+          { "id": "w-f2", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">© 2024 The Breathable Canvas. All rights reserved.</p>", "variables": [] }, "style": { "padding": { "top": 8, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center", "backgroundColor": "#f2f4f2" } }
         ]
       }
     }
   },
   {
-    "name": "Newsletter — Editorial",
-    "category": "newsletter",
+    "name": "Class Reminder — Zen Flow",
+    "category": "event",
     "template": {
       "version": 1,
-      "settings": {
-        "backgroundColor": "#f8f6f1",
-        "backgroundStyle": "paper-rings",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 0,
-        "contentWidth": 600,
-        "defaultFont": "Georgia, 'Times New Roman', Times, serif",
-        "defaultFontSize": 16,
-        "defaultColor": "#1c1917"
-      },
-      "header": {
-        "blocks": [
-          {
-            "id": "t04-h1", "type": "heading",
-            "data": { "text": "The Weekly Brief", "level": 3 },
-            "style": { "padding": { "top": 24, "right": 32, "bottom": 4, "left": 32 }, "alignment": "center", "color": "#a8a29e", "fontSize": 11, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "letterSpacing": 3, "textTransform": "uppercase" }
-          },
-          { "id": "t04-h2", "type": "divider", "data": {}, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "lineStyle": "solid", "lineColor": "#d6d3d1", "lineThickness": 1, "spacing": 8 } }
-        ]
-      },
-      "body": {
-        "blocks": [
-          {
-            "id": "t04-b1", "type": "heading",
-            "data": { "text": "This Week in Tech", "level": 1 },
-            "style": { "padding": { "top": 24, "right": 32, "bottom": 8, "left": 32 }, "alignment": "left", "color": "#1c1917", "fontSize": 32, "fontFamily": "Georgia, 'Times New Roman', Times, serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" }
-          },
-          {
-            "id": "t04-b2", "type": "text",
-            "data": { "html": "<p style=\"margin:0;color:#78716c;\">Good morning, Sarah. Here's your curated digest of the week's most important stories.</p>", "variables": [] },
-            "style": { "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 } }
-          },
-          {
-            "id": "t04-b3", "type": "image",
-            "data": { "src": "https://placehold.co/536x280/e7e5e4/44403c?text=Featured+Story", "alt": "Featured story", "width": 536 },
-            "style": { "padding": { "top": 0, "right": 32, "bottom": 20, "left": 32 }, "alignment": "center", "borderRadius": 8, "fullWidth": false }
-          },
-          {
-            "id": "t04-b4", "type": "heading",
-            "data": { "text": "The Future of Remote Collaboration", "level": 2 },
-            "style": { "padding": { "top": 0, "right": 32, "bottom": 6, "left": 32 }, "alignment": "left", "color": "#1c1917", "fontSize": 22, "fontFamily": "Georgia, 'Times New Roman', Times, serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" }
-          },
-          {
-            "id": "t04-b5", "type": "text",
-            "data": { "html": "<p style=\"margin:0;color:#57534e;\">Teams are rethinking async communication. New research suggests it may hold the key to deeper work and faster shipping cycles.</p>", "variables": [] },
-            "style": { "padding": { "top": 0, "right": 32, "bottom": 16, "left": 32 } }
-          },
-          {
-            "id": "t04-b6", "type": "button",
-            "data": { "text": "Read the full story", "url": "https://" },
-            "style": { "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 }, "alignment": "left", "backgroundColor": "#1c1917", "color": "#ffffff", "borderRadius": 0, "fullWidth": false, "fontSize": 13, "fontFamily": "Georgia, 'Times New Roman', Times, serif", "fontWeight": 600, "letterSpacing": 0.5, "textTransform": "uppercase", "paddingX": 20, "paddingY": 10 }
-          },
-          { "id": "t04-b7", "type": "divider", "data": {}, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "lineStyle": "solid", "lineColor": "#d6d3d1", "lineThickness": 1, "spacing": 8 } },
-          {
-            "id": "t04-b8", "type": "heading",
-            "data": { "text": "Quick Reads", "level": 3 },
-            "style": { "padding": { "top": 16, "right": 32, "bottom": 8, "left": 32 }, "alignment": "left", "color": "#a8a29e", "fontSize": 11, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 2, "textTransform": "uppercase" }
-          },
-          {
-            "id": "t04-b9", "type": "text",
-            "data": { "html": "<p style=\"margin:0 0 12px;\"><strong>Why startups are ditching Slack</strong><br><span style=\"color:#78716c;\">The move toward calmer tools is gaining momentum.</span></p><p style=\"margin:0 0 12px;\"><strong>AI in design: threat or tool?</strong><br><span style=\"color:#78716c;\">Designers weigh in on generative AI in creative workflows.</span></p><p style=\"margin:0;\"><strong>The metrics that actually matter</strong><br><span style=\"color:#78716c;\">Vanity metrics vs. actionable data — a founder's guide.</span></p>", "variables": [] },
-            "style": { "padding": { "top": 0, "right": 32, "bottom": 28, "left": 32 } }
-          }
-        ]
-      },
-      "footer": {
-        "blocks": [
-          { "id": "t04-f1", "type": "social", "data": { "platforms": [{ "type": "twitter", "url": "https://x.com/" }, { "type": "linkedin", "url": "https://linkedin.com/" }] }, "style": { "padding": { "top": 20, "right": 24, "bottom": 8, "left": 24 }, "alignment": "center", "iconSize": 24, "iconStyle": "monochrome", "layout": "horizontal", "spacing": 12 } },
-          { "id": "t04-f2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#a8a29e;text-align:center;\">You subscribed to Acme Inc.<br><a href=\"https://\" style=\"color:#78716c;\">Unsubscribe</a></p>", "variables": [] }, "style": { "padding": { "top": 4, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center" } }
-        ]
-      }
-    }
-  },
-  {
-    "name": "Newsletter — Dark Mode",
-    "category": "newsletter",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#0f172a",
-        "backgroundStyle": "midnight-grid",
-        "bodyBackgroundStyle": "carbon-grid",
-        "bodyBackgroundColor": "#111827",
-        "bodyBorderRadius": 12,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#cbd5e1"
-      },
-      "header": {
-        "blocks": [
-          { "id": "t05-h1", "type": "heading", "data": { "text": "Acme Inc", "level": 3 }, "style": { "padding": { "top": 24, "right": 32, "bottom": 16, "left": 32 }, "alignment": "center", "color": "#38bdf8", "fontSize": 12, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 3, "textTransform": "uppercase" } }
-        ]
-      },
-      "body": {
-        "blocks": [
-          { "id": "t05-b1", "type": "heading", "data": { "text": "The Night Briefing", "level": 1 }, "style": { "padding": { "top": 8, "right": 32, "bottom": 4, "left": 32 }, "alignment": "center", "color": "#f1f5f9", "fontSize": 30, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" } },
-          { "id": "t05-b2", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;color:#64748b;font-size:13px;\">Issue #42 &middot; March 21, 2025</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center" } },
-          { "id": "t05-b3", "type": "divider", "data": {}, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "lineStyle": "solid", "lineColor": "#1e293b", "lineThickness": 1, "spacing": 4 } },
-          { "id": "t05-b4", "type": "heading", "data": { "text": "Top Story", "level": 4 }, "style": { "padding": { "top": 20, "right": 32, "bottom": 4, "left": 32 }, "alignment": "left", "color": "#38bdf8", "fontSize": 11, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 2, "textTransform": "uppercase" } },
-          { "id": "t05-b5", "type": "text", "data": { "html": "<h3 style=\"margin:0 0 8px;color:#f8fafc;font-size:20px;\">Open-source is having its biggest year yet</h3><p style=\"margin:0;color:#94a3b8;\">From AI frameworks to database engines, companies are betting big on community-driven software. Here's what's driving the shift.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 32, "bottom": 16, "left": 32 } } },
-          { "id": "t05-b6", "type": "button", "data": { "text": "Read More", "url": "https://" }, "style": { "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 }, "alignment": "left", "backgroundColor": "#38bdf8", "color": "#0f172a", "borderRadius": 6, "fullWidth": false, "fontSize": 13, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none", "paddingX": 20, "paddingY": 10 } },
-          { "id": "t05-b7", "type": "divider", "data": {}, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "lineStyle": "solid", "lineColor": "#1e293b", "lineThickness": 1, "spacing": 4 } },
-          { "id": "t05-b8", "type": "heading", "data": { "text": "Dev Picks", "level": 4 }, "style": { "padding": { "top": 20, "right": 32, "bottom": 8, "left": 32 }, "alignment": "left", "color": "#38bdf8", "fontSize": 11, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 2, "textTransform": "uppercase" } },
-          { "id": "t05-b9", "type": "text", "data": { "html": "<p style=\"margin:0 0 10px;\"><strong style=\"color:#e2e8f0;\">Rust in production</strong><br><span style=\"color:#94a3b8;\">Three teams share honest migration benchmarks.</span></p><p style=\"margin:0;\"><strong style=\"color:#e2e8f0;\">Design tokens explained</strong><br><span style=\"color:#94a3b8;\">Why every design system needs a single source of truth.</span></p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 32, "bottom": 28, "left": 32 } } }
-        ]
-      },
-      "footer": {
-        "blocks": [
-          { "id": "t05-f1", "type": "social", "data": { "platforms": [{ "type": "twitter", "url": "https://x.com/" }, { "type": "youtube", "url": "https://youtube.com/" }, { "type": "linkedin", "url": "https://linkedin.com/" }] }, "style": { "padding": { "top": 16, "right": 24, "bottom": 8, "left": 24 }, "alignment": "center", "iconSize": 24, "iconStyle": "monochrome", "layout": "horizontal", "spacing": 12 } },
-          { "id": "t05-f2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#475569;text-align:center;\"><a href=\"https://\" style=\"color:#64748b;\">Unsubscribe</a> &middot; <a href=\"https://\" style=\"color:#64748b;\">View in browser</a></p>", "variables": [] }, "style": { "padding": { "top": 4, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center" } }
-        ]
-      }
-    }
-  },
-  {
-    "name": "Promo — Flash Sale",
-    "category": "promotional",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#fef2f2",
-        "backgroundStyle": "none",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 16,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#1e293b"
-      },
-      "header": { "blocks": [] },
-      "body": {
-        "blocks": [
-          { "id": "t06-b1", "type": "spacer", "data": {}, "style": { "height": 8, "backgroundColor": "#dc2626" } },
-          { "id": "t06-b2", "type": "heading", "data": { "text": "Flash Sale", "level": 4 }, "style": { "padding": { "top": 28, "right": 32, "bottom": 0, "left": 32 }, "alignment": "center", "color": "#dc2626", "fontSize": 12, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 4, "textTransform": "uppercase" } },
-          { "id": "t06-b3", "type": "heading", "data": { "text": "Up to 50% Off", "level": 1 }, "style": { "padding": { "top": 4, "right": 32, "bottom": 4, "left": 32 }, "alignment": "center", "color": "#0f172a", "fontSize": 36, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -1, "textTransform": "none" } },
-          { "id": "t06-b4", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;color:#64748b;\">24 hours only. Use code <strong style=\"color:#dc2626;\">SPRING50</strong> at checkout.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 48, "bottom": 20, "left": 48 }, "alignment": "center" } },
-          { "id": "t06-b5", "type": "image", "data": { "src": "https://placehold.co/600x300/fef2f2/dc2626?text=50%25+OFF+EVERYTHING", "alt": "Sale banner", "width": 600 }, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "alignment": "center", "fullWidth": true, "borderRadius": 0 } },
-          { "id": "t06-b6", "type": "button", "data": { "text": "Shop the Sale", "url": "https://" }, "style": { "padding": { "top": 24, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "backgroundColor": "#dc2626", "color": "#ffffff", "borderRadius": 50, "fullWidth": false, "fontSize": 16, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 36, "paddingY": 14 } },
-          { "id": "t06-b7", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#94a3b8;text-align:center;\">Sale ends March 31. Cannot be combined with other offers.</p>", "variables": [] }, "style": { "padding": { "top": 8, "right": 32, "bottom": 28, "left": 32 }, "alignment": "center" } }
-        ]
-      },
-      "footer": { "blocks": [] }
-    }
-  },
-  {
-    "name": "Promo — Product Launch",
-    "category": "promotional",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#eff6ff",
-        "backgroundStyle": "none",
-        "bodyBackgroundStyle": "mesh-blue",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 16,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#334155"
-      },
-      "header": { "blocks": [] },
-      "body": {
-        "blocks": [
-          { "id": "t07-b1", "type": "heading", "data": { "text": "Just Launched", "level": 4 }, "style": { "padding": { "top": 32, "right": 32, "bottom": 0, "left": 32 }, "alignment": "center", "color": "#4f46e5", "fontSize": 12, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 3, "textTransform": "uppercase" } },
-          { "id": "t07-b2", "type": "heading", "data": { "text": "Introducing Acme Pro", "level": 1 }, "style": { "padding": { "top": 8, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "color": "#0f172a", "fontSize": 30, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" } },
-          { "id": "t07-b3", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;color:#475569;\">Built from the ground up for speed, simplicity, and scale.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 48, "bottom": 24, "left": 48 }, "alignment": "center" } },
-          { "id": "t07-b4", "type": "image", "data": { "src": "https://placehold.co/536x300/e0e7ff/4f46e5?text=Product+Preview", "alt": "Product screenshot", "width": 536 }, "style": { "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center", "borderRadius": 12, "fullWidth": false } },
-          {
-            "id": "t07-b5", "type": "columns",
-            "data": {
-              "columnCount": 3, "columnRatio": [33, 34, 33],
-              "columns": [
-                { "id": "t07-c1", "backgroundColor": "#f5f3ff", "blocks": [
-                  { "id": "t07-c1b1", "type": "heading", "data": { "text": "Fast", "level": 3 }, "style": { "padding": { "top": 16, "right": 8, "bottom": 4, "left": 8 }, "alignment": "center", "color": "#4f46e5", "fontSize": 15, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-                  { "id": "t07-c1b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#64748b;text-align:center;\">Sub-second load times on every page</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 8, "bottom": 16, "left": 8 } } }
-                ]},
-                { "id": "t07-c2", "backgroundColor": "#f5f3ff", "blocks": [
-                  { "id": "t07-c2b1", "type": "heading", "data": { "text": "Team Ready", "level": 3 }, "style": { "padding": { "top": 16, "right": 8, "bottom": 4, "left": 8 }, "alignment": "center", "color": "#4f46e5", "fontSize": 15, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-                  { "id": "t07-c2b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#64748b;text-align:center;\">Built for collaboration from day one</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 8, "bottom": 16, "left": 8 } } }
-                ]},
-                { "id": "t07-c3", "backgroundColor": "#f5f3ff", "blocks": [
-                  { "id": "t07-c3b1", "type": "heading", "data": { "text": "Secure", "level": 3 }, "style": { "padding": { "top": 16, "right": 8, "bottom": 4, "left": 8 }, "alignment": "center", "color": "#4f46e5", "fontSize": 15, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-                  { "id": "t07-c3b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#64748b;text-align:center;\">SOC 2 with end-to-end encryption</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 8, "bottom": 16, "left": 8 } } }
-                ]}
-              ]
-            },
-            "style": { "padding": { "top": 0, "right": 24, "bottom": 8, "left": 24 }, "gap": 10, "stackOnMobile": true }
-          },
-          { "id": "t07-b6", "type": "button", "data": { "text": "Try It Free", "url": "https://" }, "style": { "padding": { "top": 20, "right": 32, "bottom": 32, "left": 32 }, "alignment": "center", "backgroundColor": "#4f46e5", "color": "#ffffff", "borderRadius": 8, "fullWidth": false, "fontSize": 16, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 32, "paddingY": 14 } }
-        ]
-      },
-      "footer": { "blocks": [] }
-    }
-  },
-  {
-    "name": "Promo — Seasonal Collection",
-    "category": "promotional",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#fdf2f8",
-        "backgroundStyle": "none",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 0,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#1e293b"
-      },
-      "header": { "blocks": [] },
-      "body": {
-        "blocks": [
-          { "id": "t08-b1", "type": "image", "data": { "src": "https://placehold.co/600x300/fce7f3/9d174d?text=Spring+Collection", "alt": "Spring collection", "width": 600 }, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "alignment": "center", "fullWidth": true, "borderRadius": 0 } },
-          { "id": "t08-b2", "type": "heading", "data": { "text": "New Season", "level": 4 }, "style": { "padding": { "top": 28, "right": 32, "bottom": 0, "left": 32 }, "alignment": "center", "color": "#be185d", "fontSize": 11, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 3, "textTransform": "uppercase" } },
-          { "id": "t08-b3", "type": "heading", "data": { "text": "Fresh Arrivals Are Here", "level": 1 }, "style": { "padding": { "top": 4, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "color": "#0f172a", "fontSize": 28, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" } },
-          { "id": "t08-b4", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;color:#64748b;\">Explore our curated collection designed for the season ahead.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 40, "bottom": 20, "left": 40 }, "alignment": "center" } },
-          {
-            "id": "t08-b5", "type": "columns",
-            "data": {
-              "columnCount": 2, "columnRatio": [50, 50],
-              "columns": [
-                { "id": "t08-c1", "blocks": [
-                  { "id": "t08-c1b1", "type": "image", "data": { "src": "https://placehold.co/260x260/fce7f3/9d174d?text=Item+1", "alt": "Product 1", "width": 260 }, "style": { "padding": { "top": 0, "right": 4, "bottom": 8, "left": 4 }, "alignment": "center", "borderRadius": 8, "fullWidth": false } },
-                  { "id": "t08-c1b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-weight:600;text-align:center;\">Classic Tote</p><p style=\"margin:2px 0 0;color:#be185d;text-align:center;font-weight:700;\">$49</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 4, "bottom": 12, "left": 4 } } }
-                ]},
-                { "id": "t08-c2", "blocks": [
-                  { "id": "t08-c2b1", "type": "image", "data": { "src": "https://placehold.co/260x260/fce7f3/9d174d?text=Item+2", "alt": "Product 2", "width": 260 }, "style": { "padding": { "top": 0, "right": 4, "bottom": 8, "left": 4 }, "alignment": "center", "borderRadius": 8, "fullWidth": false } },
-                  { "id": "t08-c2b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-weight:600;text-align:center;\">Linen Scarf</p><p style=\"margin:2px 0 0;color:#be185d;text-align:center;font-weight:700;\">$35</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 4, "bottom": 12, "left": 4 } } }
-                ]}
-              ]
-            },
-            "style": { "padding": { "top": 0, "right": 20, "bottom": 8, "left": 20 }, "gap": 16, "stackOnMobile": true }
-          },
-          { "id": "t08-b6", "type": "button", "data": { "text": "Shop the Collection", "url": "https://" }, "style": { "padding": { "top": 12, "right": 32, "bottom": 32, "left": 32 }, "alignment": "center", "backgroundColor": "#be185d", "color": "#ffffff", "borderRadius": 50, "fullWidth": false, "fontSize": 15, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 32, "paddingY": 14 } }
-        ]
-      },
+      "settings": { "backgroundColor": "#f9faf8", "backgroundStyle": "none", "bodyBackgroundStyle": "solid", "bodyBackgroundColor": "#ffffff", "bodyBorderRadius": 12, "contentWidth": 600, "defaultFont": "'Plus Jakarta Sans', Arial, sans-serif", "defaultFontSize": 15, "defaultColor": "#2e3432" },
+      "header": { "blocks": [
+        { "id": "cr-h1", "type": "heading", "data": { "text": "THE BREATHABLE CANVAS", "level": 3 }, "style": { "padding": { "top": 28, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center", "color": "#406660", "fontSize": 14, "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "fontWeight": 700, "letterSpacing": 4, "textTransform": "uppercase" } }
+      ]},
+      "body": { "blocks": [
+        { "id": "cr-b1", "type": "hero", "data": { "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuDv_4XompXgdieKDYX5BKdA9kz4LQPLNEZH8Se0nCilk13GTA6Yp3gM-FqiGUYw_P_fUOQjVVC_v11jd9aDd3IaTrFw7lgsoFwFMW8uvBZQCYkdk-OKGx0rczvSEKpOxOR99se1fqgLEiu3B3kOuuF6fXxyBYfiBpeIuCmqkrdtVIphtPfEgJB2paAt5uyjtO6Sak1-XswX3tumhZ6ZNQGmnXTXochchYptxgvYoa6_qawVjuzUa-bRS0UGlnT6xuQZ1N58Kba_gu9b", "heading": "Your Zen Flow session is coming up soon!", "subheading": "", "buttonText": "", "buttonUrl": "" }, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "height": 360, "overlayColor": "#f9faf8", "overlayOpacity": 0.7, "headingColor": "#406660", "headingFontSize": 30, "headingFontFamily": "'Noto Serif', Georgia, serif", "subheadingColor": "#5a605e", "buttonBackgroundColor": "#406660", "buttonTextColor": "#e2fff9", "buttonBorderRadius": 50, "contentAlignment": "center" } },
+        { "id": "cr-b2", "type": "columns", "data": { "columnCount": 2, "columnRatio": [50, 50], "columns": [
+          { "id": "cr-c1", "backgroundColor": "#f2f4f2", "blocks": [
+            { "id": "cr-c1b1", "type": "heading", "data": { "text": "TIME", "level": 4 }, "style": { "padding": { "top": 24, "right": 16, "bottom": 0, "left": 16 }, "alignment": "left", "color": "#635f57", "fontSize": 11, "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "fontWeight": 700, "letterSpacing": 3, "textTransform": "uppercase" } },
+            { "id": "cr-c1b2", "type": "heading", "data": { "text": "9:00 AM", "level": 2 }, "style": { "padding": { "top": 4, "right": 16, "bottom": 16, "left": 16 }, "alignment": "left", "color": "#2e3432", "fontSize": 26, "fontFamily": "'Noto Serif', Georgia, serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
+            { "id": "cr-c1b3", "type": "button", "data": { "text": "Add to Calendar", "url": "https://" }, "style": { "padding": { "top": 0, "right": 16, "bottom": 24, "left": 16 }, "alignment": "center", "backgroundColor": "#406660", "color": "#e2fff9", "borderRadius": 50, "fullWidth": true, "fontSize": 13, "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "fontWeight": 700, "paddingX": 16, "paddingY": 12 } }
+          ]},
+          { "id": "cr-c2", "backgroundColor": "#c2ebe3", "blocks": [
+            { "id": "cr-c2b1", "type": "heading", "data": { "text": "INSTRUCTOR", "level": 4 }, "style": { "padding": { "top": 24, "right": 16, "bottom": 0, "left": 16 }, "alignment": "left", "color": "#335853", "fontSize": 11, "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "fontWeight": 700, "letterSpacing": 3, "textTransform": "uppercase" } },
+            { "id": "cr-c2b2", "type": "image", "data": { "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuDo6GcVwxFvkQVA9m15xLNg0ek5weHEZdaMWwj-cLAG4u73XN9V1tenlFXZbpmlKxo9VNKHD7dKz9lwy-x-tI0MKeVGBO740TqddKtLgMuYWFOImqg_r2OLxI5-41bJNHo9bI_WpKew6bvKktUUnXRQy_fZf9oUs8GJsEr1lRh7l8nQ971YFHE0lkCOZ2y7dRD4doXjVK5gzGoCQsD47oH5mRFLYA4hQiYHpJ-Dn1G24s7mA4Ka6tf2j-uj_PBs6z0IOdW76m2XJ22I", "alt": "Instructor Sarah", "width": 56, "height": 56 }, "style": { "padding": { "top": 8, "right": 16, "bottom": 4, "left": 16 }, "alignment": "left", "borderRadius": 50, "fullWidth": false } },
+            { "id": "cr-c2b3", "type": "heading", "data": { "text": "Sarah", "level": 2 }, "style": { "padding": { "top": 0, "right": 16, "bottom": 4, "left": 16 }, "alignment": "left", "color": "#335853", "fontSize": 22, "fontFamily": "'Noto Serif', Georgia, serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
+            { "id": "cr-c2b4", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#335853;line-height:1.5;\">Guiding your morning flow with mindfulness and grace.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 16, "bottom": 24, "left": 16 } } }
+          ]}
+        ]}, "style": { "padding": { "top": 20, "right": 20, "bottom": 0, "left": 20 }, "gap": 12, "stackOnMobile": true } },
+        { "id": "cr-b3", "type": "spacer", "data": {}, "style": { "height": 16 } },
+        { "id": "cr-b4", "type": "text", "data": { "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding:20px 24px;background:#f9faf8;border-radius:12px;\"><table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding-right:16px;vertical-align:top;\"><div style=\"width:40px;height:40px;background:#c5ebdd;border-radius:8px;text-align:center;line-height:40px;font-size:18px;\">🧘</div></td><td><strong style=\"font-size:16px;font-family:'Noto Serif',Georgia,serif;\">Preparation is Practice</strong><br><span style=\"font-size:13px;color:#635f57;\">Don't forget your mat and water bottle. Arrive 5 minutes early to ground yourself.</span></td></tr></table></td></tr></table>", "variables": [] }, "style": { "padding": { "top": 8, "right": 20, "bottom": 8, "left": 20 } } },
+        { "id": "cr-b5", "type": "spacer", "data": {}, "style": { "height": 16 } },
+        { "id": "cr-b6", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:20px;font-style:italic;color:#44665c;line-height:1.5;\">\"Yoga is not about touching your toes, it's about what you learn on the way down.\"</p>", "variables": [] }, "style": { "padding": { "top": 16, "right": 40, "bottom": 24, "left": 40 }, "alignment": "center" } },
+        { "id": "cr-b7", "type": "divider", "data": {}, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "lineStyle": "solid", "lineColor": "#b4ddd5", "lineThickness": 2, "spacing": 4 } }
+      ]},
       "footer": { "blocks": [
-        { "id": "t08-f1", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#9ca3af;text-align:center;\"><a href=\"https://\" style=\"color:#9ca3af;\">Unsubscribe</a> &middot; <a href=\"https://\" style=\"color:#9ca3af;\">View in browser</a></p>", "variables": [] }, "style": { "padding": { "top": 16, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center" } }
+        { "id": "cr-f1", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#635f57;\"><a href=\"#\" style=\"color:#635f57;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">Privacy Policy</a></p>", "variables": [] }, "style": { "padding": { "top": 20, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "backgroundColor": "#f2f4f2" } },
+        { "id": "cr-f2", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">© 2024 The Breathable Canvas. All rights reserved.</p>", "variables": [] }, "style": { "padding": { "top": 8, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center", "backgroundColor": "#f2f4f2" } }
       ]}
     }
   },
   {
-    "name": "Promo — Referral Program",
-    "category": "promotional",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#ecfdf5",
-        "backgroundStyle": "none",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 16,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#1e293b"
-      },
-      "header": { "blocks": [] },
-      "body": {
-        "blocks": [
-          { "id": "t09-b1", "type": "spacer", "data": {}, "style": { "height": 6, "backgroundColor": "#059669" } },
-          { "id": "t09-b2", "type": "heading", "data": { "text": "Refer & Earn", "level": 4 }, "style": { "padding": { "top": 28, "right": 32, "bottom": 0, "left": 32 }, "alignment": "center", "color": "#059669", "fontSize": 12, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 3, "textTransform": "uppercase" } },
-          { "id": "t09-b3", "type": "heading", "data": { "text": "Give $20, Get $20", "level": 1 }, "style": { "padding": { "top": 4, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "color": "#0f172a", "fontSize": 30, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" } },
-          { "id": "t09-b4", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;color:#64748b;\">Love Acme Pro? Share it and you both get rewarded.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 40, "bottom": 20, "left": 40 }, "alignment": "center" } },
-          { "id": "t09-b5", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;\">Your referral code</p><p style=\"margin:8px 0 0;text-align:center;font-size:28px;font-weight:700;color:#059669;letter-spacing:4px;\">SARAH-20</p>", "variables": [] }, "style": { "padding": { "top": 16, "right": 32, "bottom": 16, "left": 32 }, "alignment": "center", "backgroundColor": "#ecfdf5" } },
-          {
-            "id": "t09-b6", "type": "columns",
-            "data": {
-              "columnCount": 3, "columnRatio": [33, 34, 33],
-              "columns": [
-                { "id": "t09-c1", "blocks": [
-                  { "id": "t09-c1b1", "type": "heading", "data": { "text": "1. Share", "level": 3 }, "style": { "padding": { "top": 16, "right": 4, "bottom": 2, "left": 4 }, "alignment": "center", "color": "#059669", "fontSize": 14, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-                  { "id": "t09-c1b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#64748b;text-align:center;\">Send your code</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 4, "bottom": 16, "left": 4 } } }
-                ]},
-                { "id": "t09-c2", "blocks": [
-                  { "id": "t09-c2b1", "type": "heading", "data": { "text": "2. They join", "level": 3 }, "style": { "padding": { "top": 16, "right": 4, "bottom": 2, "left": 4 }, "alignment": "center", "color": "#059669", "fontSize": 14, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-                  { "id": "t09-c2b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#64748b;text-align:center;\">$20 off for them</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 4, "bottom": 16, "left": 4 } } }
-                ]},
-                { "id": "t09-c3", "blocks": [
-                  { "id": "t09-c3b1", "type": "heading", "data": { "text": "3. You earn", "level": 3 }, "style": { "padding": { "top": 16, "right": 4, "bottom": 2, "left": 4 }, "alignment": "center", "color": "#059669", "fontSize": 14, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-                  { "id": "t09-c3b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#64748b;text-align:center;\">$20 credit for you</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 4, "bottom": 16, "left": 4 } } }
-                ]}
-              ]
-            },
-            "style": { "padding": { "top": 0, "right": 20, "bottom": 8, "left": 20 }, "gap": 8, "stackOnMobile": true }
-          },
-          { "id": "t09-b7", "type": "button", "data": { "text": "Share Your Link", "url": "https://" }, "style": { "padding": { "top": 16, "right": 32, "bottom": 32, "left": 32 }, "alignment": "center", "backgroundColor": "#059669", "color": "#ffffff", "borderRadius": 50, "fullWidth": false, "fontSize": 15, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 32, "paddingY": 14 } }
-        ]
-      },
-      "footer": { "blocks": [] }
-    }
-  },
-  {
-    "name": "Transactional — Order Confirmed",
-    "category": "transactional",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#f0fdf4",
-        "backgroundStyle": "none",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 12,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#1e293b"
-      },
-      "header": {
-        "blocks": [
-          { "id": "t10-h1", "type": "spacer", "data": {}, "style": { "height": 6, "backgroundColor": "#16a34a" } }
-        ]
-      },
-      "body": {
-        "blocks": [
-          { "id": "t10-b1", "type": "heading", "data": { "text": "Order Confirmed", "level": 1 }, "style": { "padding": { "top": 28, "right": 32, "bottom": 4, "left": 32 }, "alignment": "center", "color": "#16a34a", "fontSize": 28, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" } },
-          { "id": "t10-b2", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;color:#64748b;\">Thanks, Sarah! We're preparing your order.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 32, "bottom": 20, "left": 32 }, "alignment": "center" } },
-          { "id": "t10-b3", "type": "divider", "data": {}, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "lineStyle": "dashed", "lineColor": "#d1d5db", "lineThickness": 1, "spacing": 4 } },
-          {
-            "id": "t10-b4", "type": "columns",
-            "data": {
-              "columnCount": 2, "columnRatio": [50, 50],
-              "columns": [
-                { "id": "t10-c1", "backgroundColor": "#f0fdf4", "blocks": [
-                  { "id": "t10-c1b1", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;\">Order Number</p><p style=\"margin:4px 0 0;font-weight:700;font-size:16px;\">#AC-20587</p>", "variables": [] }, "style": { "padding": { "top": 16, "right": 12, "bottom": 16, "left": 12 } } }
-                ]},
-                { "id": "t10-c2", "backgroundColor": "#f0fdf4", "blocks": [
-                  { "id": "t10-c2b1", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;\">Est. Delivery</p><p style=\"margin:4px 0 0;font-weight:700;font-size:16px;\">March 28, 2025</p>", "variables": [] }, "style": { "padding": { "top": 16, "right": 12, "bottom": 16, "left": 12 } } }
-                ]}
-              ]
-            },
-            "style": { "padding": { "top": 0, "right": 20, "bottom": 0, "left": 20 }, "gap": 12, "stackOnMobile": false }
-          },
-          { "id": "t10-b5", "type": "divider", "data": {}, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "lineStyle": "dashed", "lineColor": "#d1d5db", "lineThickness": 1, "spacing": 4 } },
-          { "id": "t10-b6", "type": "text", "data": { "html": "<p style=\"margin:0;\"><strong>Order Total:</strong> $127.00</p>", "variables": [] }, "style": { "padding": { "top": 16, "right": 32, "bottom": 20, "left": 32 } } },
-          { "id": "t10-b7", "type": "button", "data": { "text": "Track Your Order", "url": "https://" }, "style": { "padding": { "top": 0, "right": 32, "bottom": 28, "left": 32 }, "alignment": "center", "backgroundColor": "#16a34a", "color": "#ffffff", "borderRadius": 8, "fullWidth": true, "fontSize": 16, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 24, "paddingY": 14 } }
-        ]
-      },
-      "footer": {
-        "blocks": [
-          { "id": "t10-f1", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#94a3b8;text-align:center;\">Need help? <a href=\"https://\" style=\"color:#16a34a;\">Contact support</a></p>", "variables": [] }, "style": { "padding": { "top": 12, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center" } }
-        ]
-      }
-    }
-  },
-  {
-    "name": "Transactional — Password Reset",
-    "category": "transactional",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#f1f5f9",
-        "backgroundStyle": "none",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 12,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#334155"
-      },
-      "header": { "blocks": [] },
-      "body": {
-        "blocks": [
-          { "id": "t11-b1", "type": "spacer", "data": {}, "style": { "height": 32 } },
-          { "id": "t11-b2", "type": "heading", "data": { "text": "Reset Your Password", "level": 1 }, "style": { "padding": { "top": 0, "right": 32, "bottom": 12, "left": 32 }, "alignment": "center", "color": "#0f172a", "fontSize": 26, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" } },
-          { "id": "t11-b3", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;color:#64748b;\">Hi Sarah, we received a request to reset your password. Click below to choose a new one.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 48, "bottom": 24, "left": 48 }, "alignment": "center" } },
-          { "id": "t11-b4", "type": "button", "data": { "text": "Reset Password", "url": "https://" }, "style": { "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center", "backgroundColor": "#0f172a", "color": "#ffffff", "borderRadius": 8, "fullWidth": false, "fontSize": 16, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 32, "paddingY": 14 } },
-          { "id": "t11-b5", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:13px;color:#94a3b8;text-align:center;\">This link expires in 60 minutes. If you didn't request this, ignore this email.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 48, "bottom": 32, "left": 48 }, "alignment": "center" } }
-        ]
-      },
-      "footer": { "blocks": [] }
-    }
-  },
-  {
-    "name": "Transactional — Verify Email",
-    "category": "transactional",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#f8fafc",
-        "backgroundStyle": "none",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 12,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#334155"
-      },
-      "header": { "blocks": [] },
-      "body": {
-        "blocks": [
-          { "id": "t12-b1", "type": "spacer", "data": {}, "style": { "height": 32 } },
-          { "id": "t12-b2", "type": "heading", "data": { "text": "Verify your email", "level": 1 }, "style": { "padding": { "top": 0, "right": 32, "bottom": 12, "left": 32 }, "alignment": "center", "color": "#0f172a", "fontSize": 26, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" } },
-          { "id": "t12-b3", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;color:#64748b;\">Confirm your address to activate your Acme Inc account.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 48, "bottom": 24, "left": 48 }, "alignment": "center" } },
-          { "id": "t12-b4", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#94a3b8;\">Your verification code</p><p style=\"margin:8px 0 0;text-align:center;font-size:36px;font-weight:700;color:#0f172a;letter-spacing:8px;\">482 916</p>", "variables": [] }, "style": { "padding": { "top": 16, "right": 32, "bottom": 16, "left": 32 }, "alignment": "center", "backgroundColor": "#f8fafc" } },
-          { "id": "t12-b5", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:13px;color:#94a3b8;text-align:center;\">Or click the button below</p>", "variables": [] }, "style": { "padding": { "top": 16, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center" } },
-          { "id": "t12-b6", "type": "button", "data": { "text": "Verify Email", "url": "https://" }, "style": { "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center", "backgroundColor": "#0f172a", "color": "#ffffff", "borderRadius": 8, "fullWidth": false, "fontSize": 16, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 32, "paddingY": 14 } },
-          { "id": "t12-b7", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#94a3b8;text-align:center;\">Code expires in 24 hours. Didn't create an account? Ignore this email.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 48, "bottom": 32, "left": 48 }, "alignment": "center" } }
-        ]
-      },
-      "footer": { "blocks": [] }
-    }
-  },
-  {
-    "name": "Transactional — Invoice",
-    "category": "transactional",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#f8fafc",
-        "backgroundStyle": "none",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 12,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 14,
-        "defaultColor": "#1e293b"
-      },
-      "header": {
-        "blocks": [
-          {
-            "id": "t13-h1", "type": "columns",
-            "data": {
-              "columnCount": 2, "columnRatio": [50, 50],
-              "columns": [
-                { "id": "t13-hc1", "blocks": [
-                  { "id": "t13-hc1b1", "type": "heading", "data": { "text": "Acme Inc", "level": 3 }, "style": { "padding": { "top": 24, "right": 8, "bottom": 24, "left": 8 }, "alignment": "left", "color": "#0f172a", "fontSize": 18, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } }
-                ]},
-                { "id": "t13-hc2", "blocks": [
-                  { "id": "t13-hc2b1", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:right;font-size:13px;color:#64748b;\">Invoice #INV-2025-0042<br>March 1, 2025</p>", "variables": [] }, "style": { "padding": { "top": 24, "right": 8, "bottom": 24, "left": 8 } } }
-                ]}
-              ]
-            },
-            "style": { "padding": { "top": 0, "right": 24, "bottom": 0, "left": 24 }, "gap": 12, "stackOnMobile": false }
-          }
-        ]
-      },
-      "body": {
-        "blocks": [
-          { "id": "t13-b1", "type": "divider", "data": {}, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "lineStyle": "solid", "lineColor": "#e2e8f0", "lineThickness": 1, "spacing": 4 } },
-          { "id": "t13-b2", "type": "text", "data": { "html": "<p style=\"margin:0 0 2px;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;\">Billed to</p><p style=\"margin:0;font-weight:600;\">Sarah Johnson</p><p style=\"margin:2px 0 0;color:#64748b;font-size:13px;\">sarah@example.com</p>", "variables": [] }, "style": { "padding": { "top": 16, "right": 32, "bottom": 20, "left": 32 } } },
-          { "id": "t13-b3", "type": "html", "data": { "html": "<table width=\"100%\" cellpadding=\"10\" cellspacing=\"0\" style=\"font-family:Arial,sans-serif;font-size:14px;border-collapse:collapse;\"><tr style=\"background:#f8fafc;\"><td style=\"font-weight:600;border-bottom:1px solid #e2e8f0;\">Description</td><td style=\"font-weight:600;text-align:right;border-bottom:1px solid #e2e8f0;\">Amount</td></tr><tr><td style=\"border-bottom:1px solid #f1f5f9;\">Pro Plan (monthly)</td><td style=\"text-align:right;border-bottom:1px solid #f1f5f9;\">$29.00</td></tr><tr><td style=\"border-bottom:1px solid #f1f5f9;\">Additional storage</td><td style=\"text-align:right;border-bottom:1px solid #f1f5f9;\">$5.00</td></tr><tr><td style=\"font-weight:700;\">Total</td><td style=\"text-align:right;font-weight:700;\">$34.00</td></tr></table>" }, "style": { "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 } } },
-          { "id": "t13-b4", "type": "button", "data": { "text": "Download PDF", "url": "https://" }, "style": { "padding": { "top": 0, "right": 32, "bottom": 28, "left": 32 }, "alignment": "center", "backgroundColor": "#0f172a", "color": "#ffffff", "borderRadius": 6, "fullWidth": false, "fontSize": 14, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 24, "paddingY": 12 } }
-        ]
-      },
-      "footer": {
-        "blocks": [
-          { "id": "t13-f1", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:11px;color:#94a3b8;text-align:center;\">Questions? <a href=\"https://\" style=\"color:#64748b;\">Contact billing</a></p>", "variables": [] }, "style": { "padding": { "top": 12, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center" } }
-        ]
-      }
-    }
-  },
-  {
-    "name": "Transactional — Shipping Update",
-    "category": "transactional",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#eff6ff",
-        "backgroundStyle": "none",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 12,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#1e293b"
-      },
-      "header": { "blocks": [] },
-      "body": {
-        "blocks": [
-          { "id": "t14-b1", "type": "heading", "data": { "text": "Your order is on the way!", "level": 1 }, "style": { "padding": { "top": 32, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "color": "#1d4ed8", "fontSize": 26, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" } },
-          { "id": "t14-b2", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;color:#64748b;\">Hi Sarah, your package has shipped.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 32, "bottom": 20, "left": 32 }, "alignment": "center" } },
-          { "id": "t14-b3", "type": "heading", "data": { "text": "Tracking Number", "level": 4 }, "style": { "padding": { "top": 16, "right": 32, "bottom": 0, "left": 32 }, "alignment": "center", "color": "#94a3b8", "fontSize": 11, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "letterSpacing": 2, "textTransform": "uppercase" } },
-          { "id": "t14-b4", "type": "heading", "data": { "text": "1Z999AA10123456784", "level": 2 }, "style": { "padding": { "top": 4, "right": 32, "bottom": 16, "left": 32 }, "alignment": "center", "color": "#1d4ed8", "fontSize": 20, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 2, "textTransform": "none", "backgroundColor": "#eff6ff" } },
-          {
-            "id": "t14-b5", "type": "columns",
-            "data": {
-              "columnCount": 2, "columnRatio": [50, 50],
-              "columns": [
-                { "id": "t14-c1", "backgroundColor": "#f8fafc", "blocks": [
-                  { "id": "t14-c1b1", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;\">Carrier</p><p style=\"margin:4px 0 0;font-weight:700;\">FedEx</p>", "variables": [] }, "style": { "padding": { "top": 14, "right": 12, "bottom": 14, "left": 12 } } }
-                ]},
-                { "id": "t14-c2", "backgroundColor": "#f8fafc", "blocks": [
-                  { "id": "t14-c2b1", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;\">Est. Delivery</p><p style=\"margin:4px 0 0;font-weight:700;\">March 28, 2025</p>", "variables": [] }, "style": { "padding": { "top": 14, "right": 12, "bottom": 14, "left": 12 } } }
-                ]}
-              ]
-            },
-            "style": { "padding": { "top": 0, "right": 20, "bottom": 0, "left": 20 }, "gap": 12, "stackOnMobile": false }
-          },
-          { "id": "t14-b6", "type": "button", "data": { "text": "Track Package", "url": "https://" }, "style": { "padding": { "top": 24, "right": 32, "bottom": 32, "left": 32 }, "alignment": "center", "backgroundColor": "#1d4ed8", "color": "#ffffff", "borderRadius": 8, "fullWidth": false, "fontSize": 16, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 32, "paddingY": 14 } }
-        ]
-      },
-      "footer": { "blocks": [] }
-    }
-  },
-  {
-    "name": "Event — Conference Invitation",
-    "category": "event",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#0f172a",
-        "backgroundStyle": "midnight-grid",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 16,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#334155"
-      },
-      "header": { "blocks": [] },
-      "body": {
-        "blocks": [
-          { "id": "t15-b1", "type": "spacer", "data": {}, "style": { "height": 6, "backgroundColor": "#8b5cf6" } },
-          { "id": "t15-b2", "type": "image", "data": { "src": "https://placehold.co/600x280/4c1d95/e9d5ff?text=ProductCon 2025", "alt": "Event banner", "width": 600 }, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "alignment": "center", "fullWidth": true, "borderRadius": 0 } },
-          { "id": "t15-b3", "type": "heading", "data": { "text": "You're Invited", "level": 4 }, "style": { "padding": { "top": 28, "right": 32, "bottom": 0, "left": 32 }, "alignment": "center", "color": "#7c3aed", "fontSize": 12, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 3, "textTransform": "uppercase" } },
-          { "id": "t15-b4", "type": "heading", "data": { "text": "ProductCon 2025", "level": 1 }, "style": { "padding": { "top": 4, "right": 32, "bottom": 4, "left": 32 }, "alignment": "center", "color": "#0f172a", "fontSize": 28, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" } },
-          { "id": "t15-b5", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;color:#64748b;\">April 15, 2025 &middot; San Francisco</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 32, "bottom": 20, "left": 32 }, "alignment": "center" } },
-          { "id": "t15-b6", "type": "text", "data": { "html": "<p style=\"margin:0;color:#475569;\">Hi Sarah,</p><p style=\"margin:12px 0 0;color:#475569;\">Join industry leaders for a day of talks, workshops, and networking that will reshape how you build products.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 } } },
-          { "id": "t15-b7", "type": "button", "data": { "text": "Reserve My Spot", "url": "https://" }, "style": { "padding": { "top": 0, "right": 32, "bottom": 12, "left": 32 }, "alignment": "center", "backgroundColor": "#7c3aed", "color": "#ffffff", "borderRadius": 50, "fullWidth": false, "fontSize": 15, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 32, "paddingY": 14 } },
-          { "id": "t15-b8", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#94a3b8;text-align:center;\">Seats are limited — register now to guarantee your spot.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 32, "bottom": 28, "left": 32 }, "alignment": "center" } }
-        ]
-      },
-      "footer": {
-        "blocks": [
-          { "id": "t15-f1", "type": "social", "data": { "platforms": [{ "type": "twitter", "url": "https://x.com/" }, { "type": "linkedin", "url": "https://linkedin.com/" }, { "type": "instagram", "url": "https://instagram.com/" }] }, "style": { "padding": { "top": 16, "right": 24, "bottom": 16, "left": 24 }, "alignment": "center", "iconSize": 24, "iconStyle": "colored", "layout": "horizontal", "spacing": 12 } }
-        ]
-      }
-    }
-  },
-  {
-    "name": "Event — Webinar",
-    "category": "event",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#eafbf6",
-        "backgroundStyle": "mint-weave",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 12,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#134e4a"
-      },
-      "header": { "blocks": [] },
-      "body": {
-        "blocks": [
-          { "id": "t16-b1", "type": "heading", "data": { "text": "Free Live Webinar", "level": 4 }, "style": { "padding": { "top": 32, "right": 32, "bottom": 0, "left": 32 }, "alignment": "center", "color": "#0f766e", "fontSize": 12, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 3, "textTransform": "uppercase" } },
-          { "id": "t16-b2", "type": "heading", "data": { "text": "Shipping Faster Without Burnout", "level": 1 }, "style": { "padding": { "top": 8, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "color": "#042f2e", "fontSize": 28, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" } },
-          { "id": "t16-b3", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;color:#115e59;\">March 27 at 2:00 PM EST<br>Hosted by <strong>Dr. Maya Patel</strong>, VP Engineering</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 40, "bottom": 24, "left": 40 }, "alignment": "center" } },
-          { "id": "t16-b4", "type": "image", "data": { "src": "https://placehold.co/80x80/0d9488/ffffff?text=AV", "alt": "Speaker photo", "width": 80, "height": 80 }, "style": { "padding": { "top": 0, "right": 32, "bottom": 20, "left": 32 }, "alignment": "center", "borderRadius": 50, "fullWidth": false } },
-          { "id": "t16-b5", "type": "divider", "data": {}, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "lineStyle": "solid", "lineColor": "#99f6e4", "lineThickness": 2, "spacing": 4 } },
-          { "id": "t16-b6", "type": "text", "data": { "html": "<p style=\"margin:0;font-weight:600;\">What you'll learn:</p><ul style=\"margin:8px 0 0;padding-left:20px;color:#115e59;\"><li style=\"margin-bottom:6px;\">How top teams ship faster without burnout</li><li style=\"margin-bottom:6px;\">The three metrics that predict success</li><li>Live Q&A with real takeaways</li></ul>", "variables": [] }, "style": { "padding": { "top": 20, "right": 32, "bottom": 24, "left": 32 } } },
-          { "id": "t16-b7", "type": "button", "data": { "text": "Register for Free", "url": "https://" }, "style": { "padding": { "top": 0, "right": 32, "bottom": 32, "left": 32 }, "alignment": "center", "backgroundColor": "#0d9488", "color": "#ffffff", "borderRadius": 8, "fullWidth": false, "fontSize": 16, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 32, "paddingY": 14 } }
-        ]
-      },
-      "footer": { "blocks": [] }
-    }
-  },
-  {
-    "name": "Event — Post-Event Recap",
-    "category": "event",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#faf5ff",
-        "backgroundStyle": "none",
-        "bodyBackgroundStyle": "aurora-soft",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 16,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#1e293b"
-      },
-      "header": { "blocks": [] },
-      "body": {
-        "blocks": [
-          { "id": "t17-b1", "type": "heading", "data": { "text": "Thanks for attending!", "level": 1 }, "style": { "padding": { "top": 32, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "color": "#6d28d9", "fontSize": 28, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" } },
-          { "id": "t17-b2", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;color:#64748b;\">Hi Sarah, here's your recap and links from <strong>ProductCon 2025</strong>.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 40, "bottom": 24, "left": 40 }, "alignment": "center" } },
-          { "id": "t17-b3", "type": "divider", "data": {}, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "lineStyle": "solid", "lineColor": "#e9d5ff", "lineThickness": 2, "spacing": 4 } },
-          {
-            "id": "t17-b4", "type": "columns",
-            "data": {
-              "columnCount": 2, "columnRatio": [50, 50],
-              "columns": [
-                { "id": "t17-c1", "backgroundColor": "#faf5ff", "blocks": [
-                  { "id": "t17-c1b1", "type": "heading", "data": { "text": "Recordings", "level": 3 }, "style": { "padding": { "top": 16, "right": 12, "bottom": 4, "left": 12 }, "alignment": "center", "color": "#6d28d9", "fontSize": 16, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-                  { "id": "t17-c1b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#64748b;text-align:center;\">Watch all sessions on-demand</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 8, "bottom": 12, "left": 8 } } },
-                  { "id": "t17-c1b3", "type": "button", "data": { "text": "Watch Now", "url": "https://" }, "style": { "padding": { "top": 0, "right": 8, "bottom": 16, "left": 8 }, "alignment": "center", "backgroundColor": "#7c3aed", "color": "#ffffff", "borderRadius": 6, "fullWidth": false, "fontSize": 13, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 16, "paddingY": 8 } }
-                ]},
-                { "id": "t17-c2", "backgroundColor": "#faf5ff", "blocks": [
-                  { "id": "t17-c2b1", "type": "heading", "data": { "text": "Slides", "level": 3 }, "style": { "padding": { "top": 16, "right": 12, "bottom": 4, "left": 12 }, "alignment": "center", "color": "#6d28d9", "fontSize": 16, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-                  { "id": "t17-c2b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#64748b;text-align:center;\">Download every presentation</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 8, "bottom": 12, "left": 8 } } },
-                  { "id": "t17-c2b3", "type": "button", "data": { "text": "Download", "url": "https://" }, "style": { "padding": { "top": 0, "right": 8, "bottom": 16, "left": 8 }, "alignment": "center", "backgroundColor": "#7c3aed", "color": "#ffffff", "borderRadius": 6, "fullWidth": false, "fontSize": 13, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 16, "paddingY": 8 } }
-                ]}
-              ]
-            },
-            "style": { "padding": { "top": 0, "right": 20, "bottom": 8, "left": 20 }, "gap": 12, "stackOnMobile": true }
-          },
-          { "id": "t17-b5", "type": "spacer", "data": {}, "style": { "height": 20 } }
-        ]
-      },
-      "footer": {
-        "blocks": [
-          { "id": "t17-f1", "type": "social", "data": { "platforms": [{ "type": "twitter", "url": "https://x.com/" }, { "type": "linkedin", "url": "https://linkedin.com/" }, { "type": "youtube", "url": "https://youtube.com/" }] }, "style": { "padding": { "top": 16, "right": 24, "bottom": 16, "left": 24 }, "alignment": "center", "iconSize": 24, "iconStyle": "colored", "layout": "horizontal", "spacing": 12 } }
-        ]
-      }
-    }
-  },
-  {
-    "name": "Newsletter — Minimal Tech",
+    "name": "Monthly Newsletter — Zenith",
     "category": "newsletter",
     "template": {
       "version": 1,
-      "settings": {
-        "backgroundColor": "#f4f4f4",
-        "backgroundStyle": "none",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 12,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#111827"
-      },
-      "header": { "blocks": [] },
-      "body": {
-        "blocks": [
-          { "id": "t18-b1", "type": "heading", "data": { "text": "Acme Inc", "level": 4 }, "style": { "padding": { "top": 28, "right": 32, "bottom": 0, "left": 32 }, "alignment": "left", "color": "#6b7280", "fontSize": 11, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 2, "textTransform": "uppercase" } },
-          { "id": "t18-b2", "type": "heading", "data": { "text": "Product Updates", "level": 1 }, "style": { "padding": { "top": 4, "right": 32, "bottom": 4, "left": 32 }, "alignment": "left", "color": "#111827", "fontSize": 26, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" } },
-          { "id": "t18-b3", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:13px;color:#9ca3af;\">Issue #42 &middot; March 21, 2025</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 32, "bottom": 20, "left": 32 } } },
-          { "id": "t18-b4", "type": "divider", "data": {}, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "lineStyle": "solid", "lineColor": "#111827", "lineThickness": 2, "spacing": 4 } },
-          { "id": "t18-b5", "type": "heading", "data": { "text": "What's New", "level": 3 }, "style": { "padding": { "top": 20, "right": 32, "bottom": 4, "left": 32 }, "alignment": "left", "color": "#111827", "fontSize": 18, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-          { "id": "t18-b6", "type": "text", "data": { "html": "<p style=\"margin:0;color:#374151;\">We shipped <strong>real-time collaboration</strong> and <strong>custom themes</strong> this week. Both were requested by hundreds of users.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 32, "bottom": 16, "left": 32 } } },
-          { "id": "t18-b7", "type": "heading", "data": { "text": "From the Blog", "level": 3 }, "style": { "padding": { "top": 8, "right": 32, "bottom": 4, "left": 32 }, "alignment": "left", "color": "#111827", "fontSize": 18, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-          { "id": "t18-b8", "type": "text", "data": { "html": "<p style=\"margin:0;color:#374151;\">How modern teams reduce cycle times without sacrificing quality. A 5-minute read with concrete tactics.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 32, "bottom": 20, "left": 32 } } },
-          { "id": "t18-b9", "type": "button", "data": { "text": "Read on the Blog", "url": "https://" }, "style": { "padding": { "top": 0, "right": 32, "bottom": 28, "left": 32 }, "alignment": "left", "backgroundColor": "#111827", "color": "#ffffff", "borderRadius": 6, "fullWidth": false, "fontSize": 14, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 20, "paddingY": 10 } }
-        ]
-      },
-      "footer": {
-        "blocks": [
-          { "id": "t18-f1", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#9ca3af;text-align:center;\">Acme Inc<br><a href=\"https://\" style=\"color:#6b7280;\">Unsubscribe</a> &middot; <a href=\"https://\" style=\"color:#6b7280;\">Preferences</a></p>", "variables": [] }, "style": { "padding": { "top": 16, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center" } }
-        ]
-      }
+      "settings": { "backgroundColor": "#f9faf8", "backgroundStyle": "none", "bodyBackgroundStyle": "solid", "bodyBackgroundColor": "#ffffff", "bodyBorderRadius": 12, "contentWidth": 600, "defaultFont": "'Plus Jakarta Sans', Arial, sans-serif", "defaultFontSize": 15, "defaultColor": "#2e3432" },
+      "header": { "blocks": [
+        { "id": "nl-h1", "type": "heading", "data": { "text": "THE BREATHABLE CANVAS", "level": 3 }, "style": { "padding": { "top": 28, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center", "color": "#406660", "fontSize": 14, "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "fontWeight": 700, "letterSpacing": 4, "textTransform": "uppercase" } }
+      ]},
+      "body": { "blocks": [
+        { "id": "nl-b1", "type": "hero", "data": { "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCQKETTiXno_IOiIhAd_bYgw0UKBVaWWTmq5qVR125dOJhShJbr09b9iOGy73bQD9-CErwriMXzpx3n_GYQdF49IO1Wq0WglQF14iVm79K4rjYKTBbmiAYt1Qpf-XnAZDdnn7Gk-u5DiF3WZqzJqMZR034bRoMNJOG0Y0TC_0-XB1c2X_CQ2Kvf72XgD8egqawmTfyKfy2q_ZW4EySL5RhWxGtEzIJkJBZnRXTVLEpaqS2pH2hJklta9vyhYl2EsqIPRLFafKTJhW50", "heading": "Zenith Monthly: Find Your Balance", "subheading": "Your monthly sanctuary exploring the delicate intersection of rest, breath, and groundedness.", "buttonText": "", "buttonUrl": "" }, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "height": 500, "overlayColor": "#f9faf8", "overlayOpacity": 0.75, "headingColor": "#2e3432", "headingFontSize": 34, "headingFontFamily": "'Noto Serif', Georgia, serif", "subheadingColor": "#5a605e", "buttonBackgroundColor": "#406660", "buttonTextColor": "#e2fff9", "buttonBorderRadius": 50, "contentAlignment": "left" } },
+        { "id": "nl-b2", "type": "spacer", "data": {}, "style": { "height": 24 } },
+        { "id": "nl-b3", "type": "columns", "data": { "columnCount": 2, "columnRatio": [50, 50], "columns": [
+          { "id": "nl-c1", "blocks": [
+            { "id": "nl-c1b1", "type": "text", "data": { "html": "<p style=\"margin:0 0 8px;\"><span style=\"display:inline-block;padding:2px 8px;background:#c5ebdd;color:#24453c;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;\">Wellness</span></p><h3 style=\"margin:0 0 6px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#2e3432;\">5 Poses for Better Sleep</h3><p style=\"margin:0 0 8px;font-size:13px;color:#5a605e;line-height:1.6;\">Discover how restorative asanas can prepare your nervous system for deep rest.</p><a href=\"#\" style=\"color:#406660;font-size:13px;font-weight:600;\">Explore Poses →</a>", "variables": [] }, "style": { "padding": { "top": 0, "right": 12, "bottom": 16, "left": 0 } } }
+          ]},
+          { "id": "nl-c2", "blocks": [
+            { "id": "nl-c2b1", "type": "image", "data": { "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuDrdVzT0VzWV2bLjjsDJnIKiHvGmGfy5_WiNRaWi47RWJkomIA2sNZKrBLzYgexSByx4MgE-qIu1fUiervslttgDEkcDZ78gnzvZhk1IIQa5uvEy7sHK71Sy7qSgBo2ImgFWUYr8v60kZvFRB3o-J7iK1JBD-axvQo8Jz6wTr6-0LgJhXys-sNWxMXDrDfHzjQp00DFuEu6tuTxrjbRcapFMsER3qG-QbcaBhfvjGbFj1l2bRxUJgIDM08c4c42fQSV6sU-0sgAwAbN", "alt": "Sleeping yoga", "width": 260 }, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "alignment": "center", "borderRadius": 12, "fullWidth": false } }
+          ]}
+        ]}, "style": { "padding": { "top": 0, "right": 24, "bottom": 0, "left": 24 }, "gap": 16, "stackOnMobile": true } },
+        { "id": "nl-b4", "type": "spacer", "data": {}, "style": { "height": 16 } },
+        { "id": "nl-b5", "type": "columns", "data": { "columnCount": 2, "columnRatio": [50, 50], "columns": [
+          { "id": "nl-c3", "blocks": [
+            { "id": "nl-c3b1", "type": "image", "data": { "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCxenewmqkyHogpeR0tQFjclo8Om3JwKA1X3j78UYINTa0wiE1r6LMl9bq3ofpnD3DVV-O8sCrVm0M3ObvIPNhBm8tIx4xA0jIJ9QE2AIZicwXeBb27RbwOpFiAJGsYxRyPE3YOZDFlBGZ_WdTMIoaIxL7qCLc1D39ru_RTWcal8ql6JO7FXHnJ6TI_reZsZbd1FePeAYpqKCN_pJtBB-LvUjer8lKgKQBhTooZA0nZMB-wLSbCH4PKHYxFbTPQJeg3NrPSbAawEQzL", "alt": "Breathwork", "width": 260 }, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "alignment": "center", "borderRadius": 12, "fullWidth": false } }
+          ]},
+          { "id": "nl-c4", "blocks": [
+            { "id": "nl-c4b1", "type": "text", "data": { "html": "<p style=\"margin:0 0 8px;\"><span style=\"display:inline-block;padding:2px 8px;background:#c5ebdd;color:#24453c;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;\">Mindfulness</span></p><h3 style=\"margin:0 0 6px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#2e3432;\">The Benefits of Breathwork</h3><p style=\"margin:0 0 8px;font-size:13px;color:#5a605e;line-height:1.6;\">Pranayama is more than breathing — it is the mastery of vital energy.</p><a href=\"#\" style=\"color:#406660;font-size:13px;font-weight:600;\">Learn the Technique →</a>", "variables": [] }, "style": { "padding": { "top": 0, "right": 0, "bottom": 16, "left": 12 } } }
+          ]}
+        ]}, "style": { "padding": { "top": 0, "right": 24, "bottom": 0, "left": 24 }, "gap": 16, "stackOnMobile": true } },
+        { "id": "nl-b6", "type": "spacer", "data": {}, "style": { "height": 16 } },
+        { "id": "nl-b7", "type": "text", "data": { "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding:28px;background:#ebefec;border-radius:16px;\"><p style=\"margin:0 0 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#406660;\">The Practice</p><h3 style=\"margin:0 0 12px;font-family:'Noto Serif',Georgia,serif;font-size:24px;color:#2e3432;\">Yoga Pose of the Month: Tree Pose</h3><p style=\"margin:0 0 8px;font-size:13px;color:#5a605e;line-height:1.6;\">Vrksasana teaches us the beauty of balance. Even as the branches sway, the roots remain firm.</p><p style=\"margin:0;font-size:13px;color:#5a605e;line-height:1.6;\">✓ Improves focus and concentration<br>✓ Strengthens thighs, calves, and ankles</p></td></tr></table>", "variables": [] }, "style": { "padding": { "top": 0, "right": 24, "bottom": 16, "left": 24 } } },
+        { "id": "nl-b8", "type": "button", "data": { "text": "Read Full Newsletter", "url": "https://" }, "style": { "padding": { "top": 8, "right": 32, "bottom": 32, "left": 32 }, "alignment": "center", "backgroundColor": "#406660", "color": "#e2fff9", "borderRadius": 50, "fullWidth": false, "fontSize": 15, "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "fontWeight": 600, "paddingX": 32, "paddingY": 14 } }
+      ]},
+      "footer": { "blocks": [
+        { "id": "nl-f1", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#635f57;\"><a href=\"#\" style=\"color:#635f57;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">Privacy Policy</a></p>", "variables": [] }, "style": { "padding": { "top": 24, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "backgroundColor": "#f2f4f2" } },
+        { "id": "nl-f2", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-size:11px;color:#5a605e;opacity:0.6;\">© 2024 The Breathable Canvas. All rights reserved.</p>", "variables": [] }, "style": { "padding": { "top": 4, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center", "backgroundColor": "#f2f4f2" } }
+      ]}
     }
   },
   {
-    "name": "Promo — Trial Ending",
+    "name": "Re-engagement — We Miss You",
     "category": "promotional",
     "template": {
       "version": 1,
-      "settings": {
-        "backgroundColor": "#fffbeb",
-        "backgroundStyle": "none",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 16,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#1c1917"
-      },
-      "header": { "blocks": [] },
-      "body": {
-        "blocks": [
-          { "id": "t19-b1", "type": "spacer", "data": {}, "style": { "height": 6, "backgroundColor": "#d97706" } },
-          { "id": "t19-b2", "type": "heading", "data": { "text": "Trial Ending Soon", "level": 4 }, "style": { "padding": { "top": 28, "right": 32, "bottom": 0, "left": 32 }, "alignment": "center", "color": "#d97706", "fontSize": 12, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 3, "textTransform": "uppercase" } },
-          { "id": "t19-b3", "type": "heading", "data": { "text": "3 days left", "level": 1 }, "style": { "padding": { "top": 4, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "color": "#0f172a", "fontSize": 30, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" } },
-          { "id": "t19-b4", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;color:#78716c;\">Hi Sarah, don't lose access to everything you've built on Acme Pro.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 48, "bottom": 20, "left": 48 }, "alignment": "center" } },
-          { "id": "t19-b5", "type": "divider", "data": {}, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "lineStyle": "solid", "lineColor": "#fde68a", "lineThickness": 2, "spacing": 4 } },
-          {
-            "id": "t19-b6", "type": "columns",
-            "data": {
-              "columnCount": 3, "columnRatio": [33, 34, 33],
-              "columns": [
-                { "id": "t19-c1", "backgroundColor": "#fffbeb", "blocks": [
-                  { "id": "t19-c1b1", "type": "heading", "data": { "text": "12", "level": 2 }, "style": { "padding": { "top": 16, "right": 4, "bottom": 0, "left": 4 }, "alignment": "center", "color": "#d97706", "fontSize": 28, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-                  { "id": "t19-c1b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:11px;color:#78716c;text-align:center;text-transform:uppercase;letter-spacing:1px;\">Projects</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 4, "bottom": 16, "left": 4 } } }
-                ]},
-                { "id": "t19-c2", "backgroundColor": "#fffbeb", "blocks": [
-                  { "id": "t19-c2b1", "type": "heading", "data": { "text": "5", "level": 2 }, "style": { "padding": { "top": 16, "right": 4, "bottom": 0, "left": 4 }, "alignment": "center", "color": "#d97706", "fontSize": 28, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-                  { "id": "t19-c2b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:11px;color:#78716c;text-align:center;text-transform:uppercase;letter-spacing:1px;\">Members</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 4, "bottom": 16, "left": 4 } } }
-                ]},
-                { "id": "t19-c3", "backgroundColor": "#fffbeb", "blocks": [
-                  { "id": "t19-c3b1", "type": "heading", "data": { "text": "48", "level": 2 }, "style": { "padding": { "top": 16, "right": 4, "bottom": 0, "left": 4 }, "alignment": "center", "color": "#d97706", "fontSize": 28, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
-                  { "id": "t19-c3b2", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:11px;color:#78716c;text-align:center;text-transform:uppercase;letter-spacing:1px;\">Hours Saved</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 4, "bottom": 16, "left": 4 } } }
-                ]}
-              ]
-            },
-            "style": { "padding": { "top": 0, "right": 20, "bottom": 8, "left": 20 }, "gap": 8, "stackOnMobile": false }
-          },
-          { "id": "t19-b7", "type": "button", "data": { "text": "Upgrade Now", "url": "https://" }, "style": { "padding": { "top": 16, "right": 32, "bottom": 12, "left": 32 }, "alignment": "center", "backgroundColor": "#d97706", "color": "#ffffff", "borderRadius": 8, "fullWidth": false, "fontSize": 16, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 32, "paddingY": 14 } },
-          { "id": "t19-b8", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:12px;color:#a8a29e;text-align:center;\">Questions? <a href=\"https://\" style=\"color:#d97706;\">Talk to our team</a></p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 32, "bottom": 28, "left": 32 }, "alignment": "center" } }
-        ]
-      },
-      "footer": { "blocks": [] }
-    }
-  },
-  {
-    "name": "Welcome — Minimal Clean",
-    "category": "welcome",
-    "template": {
-      "version": 1,
-      "settings": {
-        "backgroundColor": "#f4f4f4",
-        "backgroundStyle": "none",
-        "bodyBackgroundStyle": "solid",
-        "bodyBackgroundColor": "#ffffff",
-        "bodyBorderRadius": 16,
-        "contentWidth": 600,
-        "defaultFont": "Arial, Helvetica, sans-serif",
-        "defaultFontSize": 15,
-        "defaultColor": "#1a202c"
-      },
-      "header": { "blocks": [] },
-      "body": {
-        "blocks": [
-          { "id": "t20-b1", "type": "spacer", "data": {}, "style": { "height": 32 } },
-          { "id": "t20-b2", "type": "image", "data": { "src": "https://placehold.co/100x100/2563eb/ffffff?text=Logo", "alt": "Company logo", "width": 100, "height": 100 }, "style": { "padding": { "top": 0, "right": 32, "bottom": 20, "left": 32 }, "alignment": "center", "borderRadius": 20, "fullWidth": false } },
-          { "id": "t20-b3", "type": "heading", "data": { "text": "Welcome to Acme Inc", "level": 1 }, "style": { "padding": { "top": 0, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "color": "#1a202c", "fontSize": 26, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 700, "letterSpacing": -0.5, "textTransform": "none" } },
-          { "id": "t20-b4", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;color:#64748b;\">Hi Sarah, your account is ready. Click below to get started.</p>", "variables": [] }, "style": { "padding": { "top": 0, "right": 48, "bottom": 24, "left": 48 }, "alignment": "center" } },
-          { "id": "t20-b5", "type": "button", "data": { "text": "Get Started", "url": "https://" }, "style": { "padding": { "top": 0, "right": 32, "bottom": 16, "left": 32 }, "alignment": "center", "backgroundColor": "#2563eb", "color": "#ffffff", "borderRadius": 8, "fullWidth": false, "fontSize": 16, "fontFamily": "Arial, Helvetica, sans-serif", "fontWeight": 600, "paddingX": 36, "paddingY": 14 } },
-          { "id": "t20-b6", "type": "divider", "data": {}, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "lineStyle": "solid", "lineColor": "#e2e8f0", "lineThickness": 1, "spacing": 12 } },
-          { "id": "t20-b7", "type": "text", "data": { "html": "<p style=\"margin:0;font-size:13px;color:#94a3b8;text-align:center;\">Questions? Reply to this email — we're here to help.</p>", "variables": [] }, "style": { "padding": { "top": 4, "right": 32, "bottom": 28, "left": 32 }, "alignment": "center" } }
-        ]
-      },
-      "footer": { "blocks": [] }
+      "settings": { "backgroundColor": "#f9faf8", "backgroundStyle": "none", "bodyBackgroundStyle": "solid", "bodyBackgroundColor": "#ffffff", "bodyBorderRadius": 12, "contentWidth": 600, "defaultFont": "'Plus Jakarta Sans', Arial, sans-serif", "defaultFontSize": 15, "defaultColor": "#2e3432" },
+      "header": { "blocks": [
+        { "id": "re-h1", "type": "heading", "data": { "text": "THE BREATHABLE CANVAS", "level": 3 }, "style": { "padding": { "top": 28, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center", "color": "#406660", "fontSize": 14, "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "fontWeight": 700, "letterSpacing": 4, "textTransform": "uppercase" } }
+      ]},
+      "body": { "blocks": [
+        { "id": "re-b1", "type": "hero", "data": { "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCoyD7eYIGn0brhyR1J_KSUDsnqmrXdhM7Urt2vWlnA1J_JzfOidQiCIRO5pmP7_kPMf2IWE1T_0aliJmOOcMYCb0VP_CqPmNcZepAyuPRq4NRMwDZe3mGluLGeHKi8PIV3Tio7b-yYUL_QVOHfEEVmviHuMZ6-l2PRYP63tkb0ldRhj16V99y7GGumFCJ3Up1mH3ZQ338CDEZ7kxfxp8KCU0f_s8YH1OSM4MocLRsXvObjVr9FsfoyDhaqIDwk7Fz-jY8QNoAL2j2J", "heading": "We've missed you on the mat!", "subheading": "Come back and flow with us. We've added new classes designed to ground your practice.", "buttonText": "", "buttonUrl": "" }, "style": { "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "height": 420, "overlayColor": "#1c1917", "overlayOpacity": 0.5, "headingColor": "#ffffff", "headingFontSize": 32, "headingFontFamily": "'Noto Serif', Georgia, serif", "subheadingColor": "#ffffffcc", "buttonBackgroundColor": "#406660", "buttonTextColor": "#e2fff9", "buttonBorderRadius": 50, "contentAlignment": "left" } },
+        { "id": "re-b2", "type": "spacer", "data": {}, "style": { "height": 24 } },
+        { "id": "re-b3", "type": "heading", "data": { "text": "Fresh Flows for Your Return", "level": 2 }, "style": { "padding": { "top": 0, "right": 32, "bottom": 16, "left": 32 }, "alignment": "left", "color": "#2e3432", "fontSize": 22, "fontFamily": "'Noto Serif', Georgia, serif", "fontWeight": 700, "letterSpacing": 0, "textTransform": "none" } },
+        { "id": "re-b4", "type": "text", "data": { "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding:16px 20px;background:#ebefec;border-radius:12px;\"><p style=\"margin:0 0 2px;\"><span style=\"display:inline-block;padding:2px 8px;background:#c5ebdd;color:#24453c;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;border-radius:2px;\">New Series</span></p><h4 style=\"margin:4px 0;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#406660;\">Lunar Yin &amp; Nidra</h4><p style=\"margin:0;font-size:13px;color:#5a605e;\">Restore your nervous system with candlelit deep stretching.</p></td></tr><tr><td style=\"height:8px;\"></td></tr><tr><td style=\"padding:16px 20px;background:#c2ebe3;border-radius:12px;text-align:center;\"><h4 style=\"margin:0 0 4px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#335853;\">Breathwork Foundations</h4><p style=\"margin:0;font-size:12px;color:#335853;\">Master the art of the conscious exhale.</p></td></tr><tr><td style=\"height:8px;\"></td></tr><tr><td style=\"padding:16px 20px;background:#f2f4f2;border-radius:12px;\"><h4 style=\"margin:0 0 4px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#2e3432;\">Vinyasa Rhythm</h4><p style=\"margin:0;font-size:13px;color:#635f57;\">A fast-paced flow synchronized to melodic beats.</p></td></tr></table>", "variables": [] }, "style": { "padding": { "top": 0, "right": 24, "bottom": 24, "left": 24 } } },
+        { "id": "re-b5", "type": "text", "data": { "html": "<h3 style=\"margin:0 0 8px;font-family:'Noto Serif',Georgia,serif;font-size:24px;font-style:italic;color:#e2fff9;text-align:center;\">Exclusive offer: A free class on us.</h3><p style=\"margin:0 0 20px;font-size:14px;color:#e2fff9cc;text-align:center;\">We believe your practice is waiting for you. Use this gift to reconnect with your center today.</p><p style=\"margin:0;text-align:center;\"><a href=\"#\" style=\"display:inline-block;padding:14px 32px;background:#ffffff;color:#406660;font-weight:700;font-size:14px;text-decoration:none;border-radius:50px;\">Claim Your Free Class</a></p><p style=\"margin:16px 0 0;text-align:center;font-size:10px;color:#e2fff980;text-transform:uppercase;letter-spacing:2px;\">Valid for 14 days • Single class credit</p>", "variables": [] }, "style": { "padding": { "top": 32, "right": 32, "bottom": 32, "left": 32 }, "alignment": "center", "backgroundGradient": "linear-gradient(145deg, #406660 0%, #345a54 100%)" } },
+        { "id": "re-b6", "type": "spacer", "data": {}, "style": { "height": 24 } },
+        { "id": "re-b7", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:20px;font-style:italic;color:#57534b;line-height:1.5;\">\"Yoga is not about touching your toes, it's about what you learn on the way down.\"</p>", "variables": [] }, "style": { "padding": { "top": 8, "right": 40, "bottom": 32, "left": 40 }, "alignment": "center" } }
+      ]},
+      "footer": { "blocks": [
+        { "id": "re-f1", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#635f57;\"><a href=\"#\" style=\"color:#635f57;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">Privacy Policy</a></p>", "variables": [] }, "style": { "padding": { "top": 24, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "backgroundColor": "#f2f4f2" } },
+        { "id": "re-f2", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">© 2024 The Breathable Canvas. All rights reserved.</p>", "variables": [] }, "style": { "padding": { "top": 4, "right": 32, "bottom": 8, "left": 32 }, "alignment": "center", "backgroundColor": "#f2f4f2" } },
+        { "id": "re-f3", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;\"><a href=\"#\" style=\"font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#635f57;\">Unsubscribe</a></p>", "variables": [] }, "style": { "padding": { "top": 4, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center", "backgroundColor": "#f2f4f2" } }
+      ]}
     }
   }
 ]
