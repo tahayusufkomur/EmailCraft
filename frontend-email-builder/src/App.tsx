@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { EditorDndContext } from './components/Editor/EditorDndContext';
 import { Canvas } from './components/Editor/Canvas';
+import { RawHtmlView } from './components/Editor/RawHtmlView';
 import { BlockPalette } from './components/Panels/BlockPalette';
 import { StylePanel } from './components/Panels/StylePanel';
 import { PreviewModal } from './components/Preview/PreviewModal';
@@ -307,6 +308,7 @@ function App() {
   const [savedTemplateId, setSavedTemplateId] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
+  const [showCode, setShowCode] = useState(false);
   const activeThemePreset = getBuilderThemePreset(builderTheme);
 
   useAutoSave();
@@ -561,6 +563,9 @@ function App() {
           <Button variant="outline" onClick={() => setShowPreview(true)}>
             Preview
           </Button>
+          <Button variant={showCode ? 'default' : 'outline'} onClick={() => setShowCode((v) => !v)}>
+            {'</>'}
+          </Button>
           <Button onClick={() => void handleSave()} disabled={isSaving}>
             {isSaving ? 'Saving...' : 'Save'}
           </Button>
@@ -573,13 +578,17 @@ function App() {
           {exportError && <Badge variant="destructive">{exportError}</Badge>}
         </div>
       </div>
-      <EditorDndContext>
-        <div className="editor-layout">
-          <BlockPalette />
-          <Canvas />
-          <StylePanel />
-        </div>
-      </EditorDndContext>
+      {showCode ? (
+        <RawHtmlView />
+      ) : (
+        <EditorDndContext>
+          <div className="editor-layout">
+            <BlockPalette />
+            <Canvas />
+            <StylePanel />
+          </div>
+        </EditorDndContext>
+      )}
       {showPreview && <PreviewModal onClose={() => setShowPreview(false)} />}
       {showGallery && (
         <TemplateGallery
