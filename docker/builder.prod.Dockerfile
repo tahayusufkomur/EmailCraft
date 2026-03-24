@@ -1,6 +1,6 @@
 FROM node:20-slim AS build
 WORKDIR /app
-COPY frontend-email-builder/package*.json ./
+COPY frontend-email-builder/package.json ./
 RUN npm install
 COPY frontend-email-builder/ .
 RUN npm run build
