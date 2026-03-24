@@ -324,7 +324,8 @@ GOOGLE_USERINFO_URL = 'https://www.googleapis.com/oauth2/v2/userinfo'
 def _get_google_redirect_uri(request):
     scheme = 'https' if request.is_secure() or request.META.get('HTTP_X_FORWARDED_PROTO') == 'https' else 'http'
     host = request.get_host()
-    return f'{scheme}://{host}/api/v1/auth/google/callback/'
+    # Use /api/ (not /api/v1/) because Caddy rewrites /api/* → /api/v1/*
+    return f'{scheme}://{host}/api/auth/google/callback/'
 
 
 def _get_frontend_url(request):
