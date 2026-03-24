@@ -265,7 +265,7 @@ STRIPE_CANCEL_URL = os.environ.get('STRIPE_CANCEL_URL', 'http://localhost/pricin
 # --- Email ---
 RESEND_API_KEY = os.environ.get('RESEND_API_KEY', '')
 if RESEND_API_KEY:
-    EMAIL_BACKEND = 'resend.backend.ResendBackend'
+    EMAIL_BACKEND = 'core.email_backend.ResendEmailBackend'
 else:
     EMAIL_BACKEND = os.environ.get(
         'EMAIL_BACKEND',
