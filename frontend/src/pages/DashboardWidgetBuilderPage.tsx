@@ -43,6 +43,115 @@ function parseInitialOrganizationId() {
   return params.get('orgId');
 }
 
+type SnippetTab = 'html' | 'react' | 'curl';
+
+const SNIPPET_TABS: Array<{ id: SnippetTab; label: string }> = [
+  { id: 'html', label: 'HTML' },
+  { id: 'react', label: 'React' },
+  { id: 'curl', label: 'cURL' },
+];
+
+function getSnippet(tab: SnippetTab, apiKey: string): string {
+  switch (tab) {
+    case 'html':
+      return `<iframe
+  src="https://emailcraft.contentor.app/builder/?apiKey=${apiKey}"
+  width="100%"
+  height="800"
+  frameborder="0"
+  allow="clipboard-write"
+></iframe>`;
+    case 'react':
+      return `import { useEffect, useRef } from 'react';
+
+export function EmailBuilder() {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handle = (e) => {
+      if (e.data?.source !== 'mailcraft') return;
+      if (e.data.type === 'MAILCRAFT_SAVE') {
+        console.log('HTML:', e.data.payload.html);
+        console.log('JSON:', e.data.payload.json);
+      }
+    };
+    window.addEventListener('message', handle);
+    return () => window.removeEventListener('message', handle);
+  }, []);
+
+  return (
+    <iframe
+      ref={ref}
+      src="https://emailcraft.contentor.app/builder/?apiKey=${apiKey}"
+      style={{ width: '100%', height: '800px', border: 'none' }}
+      allow="clipboard-write"
+    />
+  );
+}`;
+    case 'curl':
+      return `curl -X POST https://emailcraft.contentor.app/api/v1/render \\
+  -H "X-API-Key: ${apiKey}" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "template_id": "YOUR_TEMPLATE_ID",
+    "variables": {
+      "user_name": "Jane"
+    }
+  }'`;
+  }
+}
+
+function EmbedSnippetsCard({ apiKey, onCopy }: { apiKey: string; onCopy: (text: string) => Promise<void> }) {
+  const [activeTab, setActiveTab] = useState<SnippetTab>('html');
+  const snippet = apiKey ? getSnippet(activeTab, apiKey) : '';
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Embed Snippets</CardTitle>
+        <CardDescription>Copy a snippet with your API key pre-filled. Paste it into your project and it works immediately.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        {apiKey ? (
+          <div>
+            <div className="mb-3 flex items-center justify-between">
+              <div className="flex gap-0 rounded-lg border border-input bg-muted/50 p-0.5">
+                {SNIPPET_TABS.map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`rounded-md px-3 py-1.5 text-xs font-medium transition ${
+                      activeTab === tab.id
+                        ? 'bg-background text-foreground shadow-sm'
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => void onCopy(snippet)}
+              >
+                Copy
+              </Button>
+            </div>
+            <pre className="overflow-x-auto rounded-lg border border-border bg-muted/50 p-3 text-xs leading-relaxed">
+              <code>{snippet}</code>
+            </pre>
+          </div>
+        ) : (
+          <p className="text-sm text-muted-foreground">Select an organization to see embed snippets with your API key.</p>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
 export function DashboardWidgetBuilderPage() {
   const { token } = useAuth();
   const [organizations, setOrganizations] = useState<OrganizationWithApiKeys[]>([]);
@@ -510,115 +619,13 @@ export function DashboardWidgetBuilderPage() {
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Embed Snippets</CardTitle>
-          <CardDescription>Copy a snippet with your API key pre-filled. Paste it into your project and it works immediately.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {generatedKeys[selectedOrganizationId] ? (
-            <>
-              <div>
-                <div className="mb-1 flex items-center justify-between">
-                  <p className="text-sm font-medium">HTML iframe</p>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => void copyToClipboard(
-                      `<iframe\n  src="https://emailcraft.contentor.app/builder/?apiKey=${generatedKeys[selectedOrganizationId]}"\n  width="100%"\n  height="800"\n  frameborder="0"\n  allow="clipboard-write"\n></iframe>`,
-                    ).then(() => setStatus('Snippet copied'))}
-                  >
-                    Copy
-                  </Button>
-                </div>
-                <pre className="overflow-x-auto rounded-lg border border-border bg-muted/50 p-3 text-xs leading-relaxed">
-                  <code>{`<iframe
-  src="https://emailcraft.contentor.app/builder/?apiKey=${generatedKeys[selectedOrganizationId]}"
-  width="100%"
-  height="800"
-  frameborder="0"
-  allow="clipboard-write"
-></iframe>`}</code>
-                </pre>
-              </div>
-
-              <div>
-                <div className="mb-1 flex items-center justify-between">
-                  <p className="text-sm font-medium">React component</p>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => void copyToClipboard(
-                      `import { useEffect, useRef } from 'react';\n\nexport function EmailBuilder() {\n  const ref = useRef(null);\n\n  useEffect(() => {\n    const handle = (e) => {\n      if (e.data?.source !== 'mailcraft') return;\n      if (e.data.type === 'MAILCRAFT_SAVE') {\n        console.log('HTML:', e.data.payload.html);\n        console.log('JSON:', e.data.payload.json);\n      }\n    };\n    window.addEventListener('message', handle);\n    return () => window.removeEventListener('message', handle);\n  }, []);\n\n  return (\n    <iframe\n      ref={ref}\n      src="https://emailcraft.contentor.app/builder/?apiKey=${generatedKeys[selectedOrganizationId]}"\n      style={{ width: '100%', height: '800px', border: 'none' }}\n      allow="clipboard-write"\n    />\n  );\n}`,
-                    ).then(() => setStatus('Snippet copied'))}
-                  >
-                    Copy
-                  </Button>
-                </div>
-                <pre className="overflow-x-auto rounded-lg border border-border bg-muted/50 p-3 text-xs leading-relaxed">
-                  <code>{`import { useEffect, useRef } from 'react';
-
-export function EmailBuilder() {
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const handle = (e) => {
-      if (e.data?.source !== 'mailcraft') return;
-      if (e.data.type === 'MAILCRAFT_SAVE') {
-        console.log('HTML:', e.data.payload.html);
-        console.log('JSON:', e.data.payload.json);
-      }
-    };
-    window.addEventListener('message', handle);
-    return () => window.removeEventListener('message', handle);
-  }, []);
-
-  return (
-    <iframe
-      ref={ref}
-      src="https://emailcraft.contentor.app/builder/?apiKey=${generatedKeys[selectedOrganizationId]}"
-      style={{ width: '100%', height: '800px', border: 'none' }}
-      allow="clipboard-write"
-    />
-  );
-}`}</code>
-                </pre>
-              </div>
-
-              <div>
-                <div className="mb-1 flex items-center justify-between">
-                  <p className="text-sm font-medium">Server-side render (cURL)</p>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => void copyToClipboard(
-                      `curl -X POST https://emailcraft.contentor.app/api/v1/render \\\n  -H "X-API-Key: ${generatedKeys[selectedOrganizationId]}" \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "template_id": "YOUR_TEMPLATE_ID",\n    "variables": {\n      "user_name": "Jane"\n    }\n  }'`,
-                    ).then(() => setStatus('Snippet copied'))}
-                  >
-                    Copy
-                  </Button>
-                </div>
-                <pre className="overflow-x-auto rounded-lg border border-border bg-muted/50 p-3 text-xs leading-relaxed">
-                  <code>{`curl -X POST https://emailcraft.contentor.app/api/v1/render \\
-  -H "X-API-Key: ${generatedKeys[selectedOrganizationId]}" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "template_id": "YOUR_TEMPLATE_ID",
-    "variables": {
-      "user_name": "Jane"
-    }
-  }'`}</code>
-                </pre>
-              </div>
-            </>
-          ) : (
-            <p className="text-sm text-muted-foreground">Select an organization to see embed snippets with your API key.</p>
-          )}
-        </CardContent>
-      </Card>
+      <EmbedSnippetsCard
+        apiKey={generatedKeys[selectedOrganizationId] || ''}
+        onCopy={async (text: string) => {
+          await copyToClipboard(text);
+          setStatus('Snippet copied');
+        }}
+      />
 
       <Card>
         <CardHeader>
