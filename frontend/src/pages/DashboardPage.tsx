@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { api } from '../lib/api';
@@ -8,6 +8,7 @@ import type { SiteDashboardResponse } from '../types/api';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Input } from '../components/ui/input';
 import { formatBytes } from '../lib/utils';
 
 export function DashboardPage() {
@@ -32,6 +33,17 @@ export function DashboardPage() {
     if (!data || data.storage_limit_bytes === 0) return 0;
     return Math.min(100, (data.storage_used_bytes / data.storage_limit_bytes) * 100);
   }, [data]);
+
+  const [tokenVisible, setTokenVisible] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const copyToken = useCallback(() => {
+    if (!token) return;
+    navigator.clipboard.writeText(token).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }, [token]);
 
   return (
     <div className="space-y-6">
@@ -103,6 +115,33 @@ export function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base">Developer Token</CardTitle>
+          <CardDescription>
+            Use this token to access the Account API programmatically. Create organizations and API keys via the <code className="rounded bg-muted px-1 text-xs">POST /api/v1/site/provision</code> endpoint.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          <div className="flex gap-2">
+            <Input
+              readOnly
+              value={tokenVisible && token ? token : '••••••••••••••••••••••••••••••••••••••••'}
+              className="font-mono text-xs"
+            />
+            <Button variant="outline" size="sm" onClick={() => setTokenVisible((v) => !v)}>
+              {tokenVisible ? 'Hide' : 'Reveal'}
+            </Button>
+            <Button variant="outline" size="sm" onClick={copyToken}>
+              {copied ? 'Copied!' : 'Copy'}
+            </Button>
+          </div>
+          <p className="text-xs text-muted-foreground">
+            This token authenticates you as the account owner. Pass it as <code className="rounded bg-muted px-1">Authorization: Token {'<token>'}</code> in API requests. See the <Link to="/docs#account-api" className="text-foreground underline">Account API docs</Link>.
+          </p>
+        </CardContent>
+      </Card>
     </div>
   );
 }
