@@ -42,6 +42,7 @@
   --accent-color: #38bdf8;
   --accent-hover: #0ea5e9;
   --accent-soft: rgba(56, 189, 248, 0.12);
+  --accent-border: rgba(56, 189, 248, 0.2);
 }
 
 .app-shell.theme-preset-light-paper {
@@ -58,6 +59,7 @@
   --accent-color: #b45309;
   --accent-hover: #92400e;
   --accent-soft: rgba(180, 83, 9, 0.12);
+  --accent-border: rgba(180, 83, 9, 0.2);
 }
 
 .app-shell.theme-dark.theme-preset-dark-slate {
@@ -72,6 +74,7 @@
   --accent-color: #38bdf8;
   --accent-hover: #0ea5e9;
   --accent-soft: rgba(56, 189, 248, 0.2);
+  --accent-border: rgba(56, 189, 248, 0.25);
 }
 
 .app-shell.theme-dark.theme-preset-dark-cosmos {
@@ -86,6 +89,7 @@
   --accent-color: #f472b6;
   --accent-hover: #ec4899;
   --accent-soft: rgba(244, 114, 182, 0.2);
+  --accent-border: rgba(244, 114, 182, 0.25);
 }
 
 .top-toolbar {
@@ -136,6 +140,17 @@
   background: var(--chrome-border);
   margin: 0 4px;
   flex-shrink: 0;
+}
+
+.toolbar-action-btn {
+  background: var(--accent-soft) !important;
+  color: var(--accent-color) !important;
+  border: 1px solid var(--accent-border) !important;
+}
+
+.toolbar-action-btn:hover {
+  background: var(--accent-border) !important;
+  color: var(--accent-hover) !important;
 }
 
 .editor-layout {
@@ -587,6 +602,10 @@
   margin-bottom: 0;
 }
 
+.nested-block-wrapper .block-toolbar {
+  z-index: 12;
+}
+
 .block-toolbar {
   position: absolute;
   top: -40px;
@@ -652,6 +671,27 @@
   background: rgba(255, 255, 255, 0.15);
   margin: 0 2px;
   flex-shrink: 0;
+}
+
+.block-toolbar-info {
+  position: relative;
+}
+
+.block-toolbar-info:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: #0f172a;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 11px;
+  font-weight: 400;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  z-index: 20;
 }
 
 .block-save-preset-bar {
@@ -1267,11 +1307,12 @@
   min-height: 60px;
   border: 1px dashed var(--border-color);
   border-radius: 8px;
-  padding: 8px;
+  padding: 36px 8px 8px;
   background: rgba(255, 255, 255, 0.6);
   display: flex;
   flex-direction: column;
   gap: 10px;
+  overflow: visible;
 }
 
 .column-slot-over {
@@ -1298,6 +1339,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  overflow: visible;
 }
 
 .heading-block-content {
