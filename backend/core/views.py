@@ -1,17 +1,25 @@
 import secrets
+import uuid
 from datetime import timedelta
+from urllib.parse import urlencode
 
+import requests as http_requests
 import stripe
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.db import transaction
+from django.http import HttpResponseRedirect
 from django.utils import timezone
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from core.models import ApiKey, Organization, Session, billing_organization_for_org
+from core.models import ApiKey, Organization, Session, UserOrganization, billing_organization_for_org
 from core.serializers import SessionRequestSerializer, SubscribeRequestSerializer
 
 
@@ -306,3 +314,123 @@ def stripe_webhook(request):
 class GoogleLoginView(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
     client_class = OAuth2Client
+
+
+GOOGLE_AUTH_URL = 'https://accounts.google.com/o/oauth2/v2/auth'
+GOOGLE_TOKEN_URL = 'https://oauth2.googleapis.com/token'
+GOOGLE_USERINFO_URL = 'https://www.googleapis.com/oauth2/v2/userinfo'
+
+
+def _get_google_redirect_uri(request):
+    scheme = 'https' if request.is_secure() or request.META.get('HTTP_X_FORWARDED_PROTO') == 'https' else 'http'
+    host = request.get_host()
+    return f'{scheme}://{host}/api/v1/auth/google/callback/'
+
+
+def _get_frontend_url(request):
+    scheme = 'https' if request.is_secure() or request.META.get('HTTP_X_FORWARDED_PROTO') == 'https' else 'http'
+    host = request.get_host()
+    return f'{scheme}://{host}'
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def google_login_redirect(request):
+    """Redirect user to Google's OAuth consent screen."""
+    provider = settings.SOCIALACCOUNT_PROVIDERS.get('google', {})
+    client_id = provider.get('APP', {}).get('client_id', '')
+
+    params = {
+        'client_id': client_id,
+        'redirect_uri': _get_google_redirect_uri(request),
+        'response_type': 'code',
+        'scope': 'openid email profile',
+        'access_type': 'online',
+        'prompt': 'select_account',
+    }
+    return HttpResponseRedirect(f'{GOOGLE_AUTH_URL}?{urlencode(params)}')
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def google_callback(request):
+    """Handle Google's OAuth callback: exchange code, find/create user + org, redirect with token."""
+    code = request.query_params.get('code')
+    error = request.query_params.get('error')
+    frontend_url = _get_frontend_url(request)
+
+    if error or not code:
+        return HttpResponseRedirect(f'{frontend_url}/login?error=google_denied')
+
+    provider = settings.SOCIALACCOUNT_PROVIDERS.get('google', {})
+    client_id = provider.get('APP', {}).get('client_id', '')
+    client_secret = provider.get('APP', {}).get('secret', '')
+
+    # Exchange code for tokens
+    token_resp = http_requests.post(GOOGLE_TOKEN_URL, data={
+        'code': code,
+        'client_id': client_id,
+        'client_secret': client_secret,
+        'redirect_uri': _get_google_redirect_uri(request),
+        'grant_type': 'authorization_code',
+    }, timeout=10)
+
+    if token_resp.status_code != 200:
+        return HttpResponseRedirect(f'{frontend_url}/login?error=google_token_failed')
+
+    access_token = token_resp.json().get('access_token')
+    if not access_token:
+        return HttpResponseRedirect(f'{frontend_url}/login?error=google_token_failed')
+
+    # Get user info from Google
+    userinfo_resp = http_requests.get(GOOGLE_USERINFO_URL, headers={
+        'Authorization': f'Bearer {access_token}',
+    }, timeout=10)
+
+    if userinfo_resp.status_code != 200:
+        return HttpResponseRedirect(f'{frontend_url}/login?error=google_userinfo_failed')
+
+    google_user = userinfo_resp.json()
+    email = google_user.get('email', '').lower().strip()
+    name = google_user.get('name', '')
+
+    if not email:
+        return HttpResponseRedirect(f'{frontend_url}/login?error=google_no_email')
+
+    # Find or create Django user
+    user = User.objects.filter(email__iexact=email).first()
+
+    if not user:
+        # New user — create with unusable password
+        username = email.split('@')[0]
+        # Ensure unique username
+        base_username = username
+        counter = 1
+        while User.objects.filter(username=username).exists():
+            username = f'{base_username}{counter}'
+            counter += 1
+
+        with transaction.atomic():
+            user = User.objects.create_user(
+                username=username,
+                email=email,
+                first_name=name.split(' ')[0] if name else '',
+                last_name=' '.join(name.split(' ')[1:]) if name and ' ' in name else '',
+            )
+            user.set_unusable_password()
+            user.save()
+
+            # Auto-create organization
+            org_name = name or email.split('@')[0]
+            org = Organization.objects.create(
+                name=f"{org_name}'s Organization",
+                email=email,
+                plan='free',
+            )
+            org.apply_plan_limits(save=True)
+            UserOrganization.objects.create(user=user, organization=org, role='owner')
+
+    # Generate DRF token
+    token, _ = Token.objects.get_or_create(user=user)
+
+    return HttpResponseRedirect(f'{frontend_url}/login?token={token.key}')

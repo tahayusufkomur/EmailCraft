@@ -24,8 +24,31 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
+function extractOAuthToken(): string | null {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get('token');
+  if (token) {
+    // Clean the URL without reloading
+    params.delete('token');
+    const cleanUrl = params.toString()
+      ? `${window.location.pathname}?${params.toString()}`
+      : window.location.pathname;
+    window.history.replaceState({}, '', cleanUrl);
+    return token;
+  }
+  return null;
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [token, setToken] = useState<string | null>(() => localStorage.getItem(TOKEN_KEY));
+  const [token, setToken] = useState<string | null>(() => {
+    // OAuth callback token takes priority
+    const oauthToken = extractOAuthToken();
+    if (oauthToken) {
+      localStorage.setItem(TOKEN_KEY, oauthToken);
+      return oauthToken;
+    }
+    return localStorage.getItem(TOKEN_KEY);
+  });
   const [user, setUser] = useState<SiteUser | null>(null);
   const [organization, setOrganization] = useState<OrganizationSummary | null>(null);
   const [isLoading, setIsLoading] = useState(true);

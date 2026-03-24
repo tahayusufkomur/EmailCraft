@@ -88,6 +88,9 @@ export function RegisterPage() {
             <Button className="w-full" disabled={busy} type="submit">
               {busy ? 'Creating account...' : 'Create account'}
             </Button>
+            <Button asChild className="w-full" type="button" variant="outline">
+              <a href="/api/v1/auth/google/login/">Continue with Google</a>
+            </Button>
           </form>
           <p className="mt-4 text-sm text-muted-foreground">
             Already have an account?{' '}

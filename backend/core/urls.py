@@ -3,6 +3,8 @@ from django.urls import include, path
 from core.views import (
     GoogleLoginView,
     create_session,
+    google_callback,
+    google_login_redirect,
     landing_page,
     pricing_page,
     stripe_webhook,
@@ -14,6 +16,8 @@ urlpatterns = [
     path('site/', include('core.site_urls')),
     path('auth/session', create_session, name='auth-session'),
     path('auth/google', GoogleLoginView.as_view(), name='auth-google'),
+    path('auth/google/login/', google_login_redirect, name='auth-google-login'),
+    path('auth/google/callback/', google_callback, name='auth-google-callback'),
     path('pages/landing', landing_page, name='landing-page'),
     path('pages/pricing', pricing_page, name='pricing-page'),
     path('pages/subscribe', subscribe_page, name='subscribe-page'),
