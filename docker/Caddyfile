@@ -1,0 +1,26 @@
+{$DOMAIN:localhost} {
+    request_body {
+        max_size 50MB
+    }
+
+    handle_path /api/* {
+        rewrite * /api/v1{uri}
+        reverse_proxy backend:8000
+    }
+
+    handle /admin/* {
+        reverse_proxy backend:8000
+    }
+
+    handle /static/* {
+        reverse_proxy backend:8000
+    }
+
+    handle_path /builder/* {
+        reverse_proxy builder:80
+    }
+
+    handle {
+        reverse_proxy frontend:80
+    }
+}
