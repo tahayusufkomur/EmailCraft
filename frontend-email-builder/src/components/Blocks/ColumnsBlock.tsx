@@ -1,9 +1,11 @@
 import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { GripVertical, Copy, Trash2, Info } from 'lucide-react';
 import type { Block, ColumnsBlock as ColumnsBlockType } from '../../types/blocks';
 import { useEditorStore } from '../../store/editorStore';
 import { BlockRenderer } from '../Editor/BlockRenderer';
+import { BLOCK_DESCRIPTIONS } from '../../lib/blockDescriptions';
 
 interface Props {
   block: ColumnsBlockType;
@@ -56,27 +58,34 @@ function NestedBlockWrapper({ block, parentBlockId, columnId }: NestedBlockWrapp
       }}
     >
       <div className="block-toolbar">
-        <button {...attributes} {...listeners} title="Drag to reorder">
-          &#x2630;
+        <button className="block-toolbar-btn drag-handle" {...attributes} {...listeners} title="Drag to reorder">
+          <GripVertical size={14} />
+          <span>Move</span>
         </button>
         <button
+          className="block-toolbar-btn"
           onClick={(e) => {
             e.stopPropagation();
             duplicateBlock(block.id);
           }}
-          title="Duplicate"
+          title="Duplicate block"
         >
-          &#x2398;
+          <Copy size={14} />
+          <span>Duplicate</span>
         </button>
+        <button className="block-toolbar-btn block-toolbar-info" data-tooltip={BLOCK_DESCRIPTIONS[block.type]} title={BLOCK_DESCRIPTIONS[block.type]}>
+          <Info size={14} />
+        </button>
+        <div className="block-toolbar-sep" />
         <button
+          className="block-toolbar-btn danger"
           onClick={(e) => {
             e.stopPropagation();
             deleteBlock(block.id);
           }}
-          className="danger"
-          title="Delete"
+          title="Delete block"
         >
-          &#x2715;
+          <Trash2 size={14} />
         </button>
       </div>
       <BlockRenderer block={block} />
