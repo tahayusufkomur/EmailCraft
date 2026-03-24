@@ -31,13 +31,22 @@ class Command(BaseCommand):
         created = 0
         updated = 0
         for entry in entries:
+            raw_tags = entry.get('tags') or []
+            if not isinstance(raw_tags, list):
+                raw_tags = []
+            category = entry.get('category', '')
+            normalized_tags = [t for t in raw_tags if isinstance(t, str) and t.strip()]
+            if category and category not in normalized_tags:
+                normalized_tags.insert(0, category)
             _, was_created = Template.objects.update_or_create(
                 org=None,
                 name=entry['name'],
                 defaults={
                     'json_data': entry['template'],
-                    'category': entry.get('category', ''),
+                    'category': category,
                     'is_gallery': True,
+                    'is_premium': bool(entry.get('is_premium', False)),
+                    'tags': normalized_tags,
                     'is_draft': False,
                 },
             )

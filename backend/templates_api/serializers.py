@@ -18,6 +18,8 @@ class TemplateListSerializer(serializers.ModelSerializer):
             'thumbnail_url',
             'category',
             'is_draft',
+            'is_premium',
+            'tags',
             'template_type',
             'created_at',
             'updated_at',
@@ -34,7 +36,7 @@ class TemplateDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Template
         fields = ['id', 'name', 'json_data', 'thumbnail_url', 'category',
-                  'is_draft', 'template_type', 'created_at', 'updated_at']
+                  'is_draft', 'is_premium', 'tags', 'template_type', 'created_at', 'updated_at']
         read_only_fields = ['id', 'created_at', 'updated_at']
 
     def get_template_type(self, obj):
@@ -52,7 +54,7 @@ class TemplateDetailSerializer(serializers.ModelSerializer):
 class TemplateCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Template
-        fields = ['name', 'json_data', 'category', 'is_draft']
+        fields = ['name', 'json_data', 'category', 'is_draft', 'tags']
 
     def validate_json_data(self, value):
         size = sys.getsizeof(json.dumps(value))
@@ -68,7 +70,7 @@ class GalleryTemplateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Template
-        fields = ['id', 'name', 'category', 'thumbnail_url', 'json_data', 'template_type']
+        fields = ['id', 'name', 'category', 'thumbnail_url', 'json_data', 'is_premium', 'tags', 'template_type']
 
     def get_template_type(self, _obj):
         return 'provided'

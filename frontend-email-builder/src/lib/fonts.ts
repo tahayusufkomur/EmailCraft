@@ -14,6 +14,7 @@ export const FONT_OPTIONS: FontOption[] = [
   // Google Fonts
   { label: 'Noto Serif', value: "'Noto Serif', Georgia, serif", isGoogle: true },
   { label: 'Plus Jakarta Sans', value: "'Plus Jakarta Sans', Arial, sans-serif", isGoogle: true },
+  { label: 'Be Vietnam Pro', value: "'Be Vietnam Pro', Arial, sans-serif", isGoogle: true },
   { label: 'Inter', value: "'Inter', Arial, sans-serif", isGoogle: true },
   { label: 'Playfair Display', value: "'Playfair Display', Georgia, serif", isGoogle: true },
   { label: 'Lora', value: "'Lora', Georgia, serif", isGoogle: true },
@@ -30,6 +31,7 @@ export const FONT_OPTIONS: FontOption[] = [
 const GOOGLE_FONT_SLUG: Record<string, string> = {
   'Noto Serif': 'Noto+Serif:wght@400;700',
   'Plus Jakarta Sans': 'Plus+Jakarta+Sans:wght@300;400;500;600;700',
+  'Be Vietnam Pro': 'Be+Vietnam+Pro:wght@300;400;500;600;700',
   'Inter': 'Inter:wght@300;400;500;600;700',
   'Playfair Display': 'Playfair+Display:wght@400;700',
   'Lora': 'Lora:wght@400;700',

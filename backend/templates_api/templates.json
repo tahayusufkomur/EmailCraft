@@ -1,6 +1,6 @@
 [
   {
-    "name": "Welcome \u2014 Zenith Flow",
+    "name": "Welcome — Zenith Flow",
     "category": "welcome",
     "template": {
       "version": 1,
@@ -282,7 +282,7 @@
             "id": "w-b6",
             "type": "text",
             "data": {
-              "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:22px;font-style:italic;color:#2e3432;line-height:1.5;\">\"Yoga is the journey of the self, through the self, to the self.\"</p><p style=\"margin:12px 0 0;text-align:center;font-size:13px;color:#5a605e;\">\u2014 The Bhagavad Gita</p>",
+              "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:22px;font-style:italic;color:#2e3432;line-height:1.5;\">\"Yoga is the journey of the self, through the self, to the self.\"</p><p style=\"margin:12px 0 0;text-align:center;font-size:13px;color:#5a605e;\">— The Bhagavad Gita</p>",
               "variables": []
             },
             "style": {
@@ -479,7 +479,7 @@
             "id": "w-f2",
             "type": "text",
             "data": {
-              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">\u00a9 2024 The Breathable Canvas. All rights reserved.</p>",
+              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">© 2024 The Breathable Canvas. All rights reserved.</p>",
               "variables": []
             },
             "style": {
@@ -495,10 +495,13 @@
           }
         ]
       }
-    }
+    },
+    "tags": [
+      "welcome"
+    ]
   },
   {
-    "name": "Class Reminder \u2014 Zen Flow",
+    "name": "Class Reminder — Zen Flow",
     "category": "event",
     "template": {
       "version": 1,
@@ -775,7 +778,7 @@
             "id": "cr-b4",
             "type": "text",
             "data": {
-              "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding:20px 24px;background:#f9faf8;border-radius:12px;\"><table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding-right:16px;vertical-align:top;\"><div style=\"width:40px;height:40px;background:#c5ebdd;border-radius:8px;text-align:center;line-height:40px;font-size:18px;\">\ud83e\uddd8</div></td><td><strong style=\"font-size:16px;font-family:'Noto Serif',Georgia,serif;\">Preparation is Practice</strong><br><span style=\"font-size:13px;color:#635f57;\">Don't forget your mat and water bottle. Arrive 5 minutes early to ground yourself.</span></td></tr></table></td></tr></table>",
+              "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding:20px 24px;background:#f9faf8;border-radius:12px;\"><table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding-right:16px;vertical-align:top;\"><div style=\"width:40px;height:40px;background:#c5ebdd;border-radius:8px;text-align:center;line-height:40px;font-size:18px;\">🧘</div></td><td><strong style=\"font-size:16px;font-family:'Noto Serif',Georgia,serif;\">Preparation is Practice</strong><br><span style=\"font-size:13px;color:#635f57;\">Don't forget your mat and water bottle. Arrive 5 minutes early to ground yourself.</span></td></tr></table></td></tr></table>",
               "variables": []
             },
             "style": {
@@ -855,7 +858,7 @@
             "id": "cr-f2",
             "type": "text",
             "data": {
-              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">\u00a9 2024 The Breathable Canvas. All rights reserved.</p>",
+              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">© 2024 The Breathable Canvas. All rights reserved.</p>",
               "variables": []
             },
             "style": {
@@ -871,10 +874,13 @@
           }
         ]
       }
-    }
+    },
+    "tags": [
+      "event"
+    ]
   },
   {
-    "name": "Monthly Newsletter \u2014 Zenith",
+    "name": "Monthly Newsletter — Zenith",
     "category": "newsletter",
     "template": {
       "version": 1,
@@ -974,7 +980,7 @@
                       "id": "nl-c1b1",
                       "type": "text",
                       "data": {
-                        "html": "<p style=\"margin:0 0 8px;\"><span style=\"display:inline-block;padding:2px 8px;background:#c5ebdd;color:#24453c;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;\">Wellness</span></p><h3 style=\"margin:0 0 6px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#2e3432;\">5 Poses for Better Sleep</h3><p style=\"margin:0 0 8px;font-size:13px;color:#5a605e;line-height:1.6;\">Discover how restorative asanas can prepare your nervous system for deep rest.</p><a href=\"#\" style=\"color:#406660;font-size:13px;font-weight:600;\">Explore Poses \u2192</a>",
+                        "html": "<p style=\"margin:0 0 8px;\"><span style=\"display:inline-block;padding:2px 8px;background:#c5ebdd;color:#24453c;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;\">Wellness</span></p><h3 style=\"margin:0 0 6px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#2e3432;\">5 Poses for Better Sleep</h3><p style=\"margin:0 0 8px;font-size:13px;color:#5a605e;line-height:1.6;\">Discover how restorative asanas can prepare your nervous system for deep rest.</p><a href=\"#\" style=\"color:#406660;font-size:13px;font-weight:600;\">Explore Poses →</a>",
                         "variables": []
                       },
                       "style": {
@@ -1076,7 +1082,7 @@
                       "id": "nl-c4b1",
                       "type": "text",
                       "data": {
-                        "html": "<p style=\"margin:0 0 8px;\"><span style=\"display:inline-block;padding:2px 8px;background:#c5ebdd;color:#24453c;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;\">Mindfulness</span></p><h3 style=\"margin:0 0 6px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#2e3432;\">The Benefits of Breathwork</h3><p style=\"margin:0 0 8px;font-size:13px;color:#5a605e;line-height:1.6;\">Pranayama is more than breathing \u2014 it is the mastery of vital energy.</p><a href=\"#\" style=\"color:#406660;font-size:13px;font-weight:600;\">Learn the Technique \u2192</a>",
+                        "html": "<p style=\"margin:0 0 8px;\"><span style=\"display:inline-block;padding:2px 8px;background:#c5ebdd;color:#24453c;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;\">Mindfulness</span></p><h3 style=\"margin:0 0 6px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#2e3432;\">The Benefits of Breathwork</h3><p style=\"margin:0 0 8px;font-size:13px;color:#5a605e;line-height:1.6;\">Pranayama is more than breathing — it is the mastery of vital energy.</p><a href=\"#\" style=\"color:#406660;font-size:13px;font-weight:600;\">Learn the Technique →</a>",
                         "variables": []
                       },
                       "style": {
@@ -1115,7 +1121,7 @@
             "id": "nl-b7",
             "type": "text",
             "data": {
-              "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding:28px;background:#ebefec;border-radius:16px;\"><p style=\"margin:0 0 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#406660;\">The Practice</p><h3 style=\"margin:0 0 12px;font-family:'Noto Serif',Georgia,serif;font-size:24px;color:#2e3432;\">Yoga Pose of the Month: Tree Pose</h3><p style=\"margin:0 0 8px;font-size:13px;color:#5a605e;line-height:1.6;\">Vrksasana teaches us the beauty of balance. Even as the branches sway, the roots remain firm.</p><p style=\"margin:0;font-size:13px;color:#5a605e;line-height:1.6;\">\u2713 Improves focus and concentration<br>\u2713 Strengthens thighs, calves, and ankles</p></td></tr></table>",
+              "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding:28px;background:#ebefec;border-radius:16px;\"><p style=\"margin:0 0 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#406660;\">The Practice</p><h3 style=\"margin:0 0 12px;font-family:'Noto Serif',Georgia,serif;font-size:24px;color:#2e3432;\">Yoga Pose of the Month: Tree Pose</h3><p style=\"margin:0 0 8px;font-size:13px;color:#5a605e;line-height:1.6;\">Vrksasana teaches us the beauty of balance. Even as the branches sway, the roots remain firm.</p><p style=\"margin:0;font-size:13px;color:#5a605e;line-height:1.6;\">✓ Improves focus and concentration<br>✓ Strengthens thighs, calves, and ankles</p></td></tr></table>",
               "variables": []
             },
             "style": {
@@ -1179,7 +1185,7 @@
             "id": "nl-f2",
             "type": "text",
             "data": {
-              "html": "<p style=\"margin:0;text-align:center;font-size:11px;color:#5a605e;opacity:0.6;\">\u00a9 2024 The Breathable Canvas. All rights reserved.</p>",
+              "html": "<p style=\"margin:0;text-align:center;font-size:11px;color:#5a605e;opacity:0.6;\">© 2024 The Breathable Canvas. All rights reserved.</p>",
               "variables": []
             },
             "style": {
@@ -1195,10 +1201,13 @@
           }
         ]
       }
-    }
+    },
+    "tags": [
+      "newsletter"
+    ]
   },
   {
-    "name": "Re-engagement \u2014 We Miss You",
+    "name": "Re-engagement — We Miss You",
     "category": "promotional",
     "template": {
       "version": 1,
@@ -1324,7 +1333,7 @@
             "id": "re-b5",
             "type": "text",
             "data": {
-              "html": "<h3 style=\"margin:0 0 8px;font-family:'Noto Serif',Georgia,serif;font-size:24px;font-style:italic;color:#e2fff9;text-align:center;\">Exclusive offer: A free class on us.</h3><p style=\"margin:0 0 20px;font-size:14px;color:#e2fff9cc;text-align:center;\">We believe your practice is waiting for you. Use this gift to reconnect with your center today.</p><p style=\"margin:0;text-align:center;\"><a href=\"#\" style=\"display:inline-block;padding:14px 32px;background:#ffffff;color:#406660;font-weight:700;font-size:14px;text-decoration:none;border-radius:50px;\">Claim Your Free Class</a></p><p style=\"margin:16px 0 0;text-align:center;font-size:10px;color:#e2fff980;text-transform:uppercase;letter-spacing:2px;\">Valid for 14 days \u2022 Single class credit</p>",
+              "html": "<h3 style=\"margin:0 0 8px;font-family:'Noto Serif',Georgia,serif;font-size:24px;font-style:italic;color:#e2fff9;text-align:center;\">Exclusive offer: A free class on us.</h3><p style=\"margin:0 0 20px;font-size:14px;color:#e2fff9cc;text-align:center;\">We believe your practice is waiting for you. Use this gift to reconnect with your center today.</p><p style=\"margin:0;text-align:center;\"><a href=\"#\" style=\"display:inline-block;padding:14px 32px;background:#ffffff;color:#406660;font-weight:700;font-size:14px;text-decoration:none;border-radius:50px;\">Claim Your Free Class</a></p><p style=\"margin:16px 0 0;text-align:center;font-size:10px;color:#e2fff980;text-transform:uppercase;letter-spacing:2px;\">Valid for 14 days • Single class credit</p>",
               "variables": []
             },
             "style": {
@@ -1389,7 +1398,7 @@
             "id": "re-f2",
             "type": "text",
             "data": {
-              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">\u00a9 2024 The Breathable Canvas. All rights reserved.</p>",
+              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">© 2024 The Breathable Canvas. All rights reserved.</p>",
               "variables": []
             },
             "style": {
@@ -1423,6 +1432,4160 @@
           }
         ]
       }
-    }
+    },
+    "tags": [
+      "promotional"
+    ]
+  },
+  {
+    "name": "Welcome — Meridian Coffee",
+    "category": "welcome",
+    "template": {
+      "version": 1,
+      "settings": {
+        "backgroundColor": "#faf9f6",
+        "backgroundStyle": "none",
+        "bodyBackgroundStyle": "solid",
+        "bodyBackgroundColor": "#ffffff",
+        "bodyBorderRadius": 0,
+        "contentWidth": 600,
+        "defaultFont": "'Manrope', Arial, sans-serif",
+        "defaultFontSize": 14,
+        "defaultColor": "#1a1c1a",
+        "version": 1
+      },
+      "header": {
+        "blocks": [
+          {
+            "id": "m1-h1",
+            "type": "heading",
+            "data": {
+              "text": "MERIDIAN COFFEE CO.",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 28,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#271310",
+              "fontSize": 13,
+              "fontFamily": "'Work Sans', Arial, sans-serif",
+              "fontWeight": 700,
+              "letterSpacing": 4,
+              "textTransform": "uppercase"
+            }
+          }
+        ]
+      },
+      "body": {
+        "blocks": [
+          {
+            "id": "m1-b1",
+            "type": "hero",
+            "data": {
+              "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuBggKkyDasQdFtDDZ9Mal3dXFX9mK_4qbOwotoPwtQJxmYEZa8mG7VaHsJRafRW02eNtAThEzyAK9vdCgZt6CrMH5lwxMKlGlItWTgWW-rJdHuEuDui2ZddkLVZh4gQUXcU34ii7zYZuhYtCw1XVR410zpy-XHHksUCzJvNcAfHTYTdnGD2KVp1P-2NLEU8REBw0cE8UuZrw4YseyFI4zw98-csjQbYPYtcpudtTswmYC2KY5r-GOf8XlEnNRFkLUP319ZAlJCGTxU",
+              "heading": "Your Journey Begins Here",
+              "subheading": "Welcome to a world of single-origin excellence. Your first bag is already on its way.",
+              "buttonText": "Explore the Roast",
+              "buttonUrl": "https://"
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "height": 480,
+              "overlayColor": "#271310",
+              "overlayOpacity": 0.45,
+              "headingColor": "#ffffff",
+              "headingFontSize": 34,
+              "headingFontFamily": "'Noto Serif', Georgia, serif",
+              "subheadingColor": "#ffffffcc",
+              "buttonBackgroundColor": "#735c00",
+              "buttonTextColor": "#ffffff",
+              "buttonBorderRadius": 50,
+              "contentAlignment": "center",
+              "verticalAlignment": "middle"
+            }
+          },
+          {
+            "id": "m1-b2",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 32
+            }
+          },
+          {
+            "id": "m1-b3",
+            "type": "columns",
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                50,
+                50
+              ],
+              "columns": [
+                {
+                  "id": "m1-c1",
+                  "backgroundColor": "#f4f3f1",
+                  "blocks": [
+                    {
+                      "id": "m1-c1b1",
+                      "type": "heading",
+                      "data": {
+                        "text": "Your First Bag",
+                        "level": 3
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 24,
+                          "right": 16,
+                          "bottom": 4,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "color": "#1a1c1a",
+                        "fontSize": 18,
+                        "fontFamily": "'Noto Serif', Georgia, serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 0,
+                        "textTransform": "none"
+                      }
+                    },
+                    {
+                      "id": "m1-c1b2",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:13px;color:#504442;line-height:1.6;\">Your curated selection of single-origin beans has been roasted and packed. Track your shipment below.</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 16,
+                          "bottom": 8,
+                          "left": 16
+                        }
+                      }
+                    },
+                    {
+                      "id": "m1-c1b3",
+                      "type": "button",
+                      "data": {
+                        "text": "TRACK SHIPMENT",
+                        "url": "https://"
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 8,
+                          "right": 16,
+                          "bottom": 24,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "backgroundColor": "#271310",
+                        "color": "#ffffff",
+                        "borderRadius": 50,
+                        "fullWidth": false,
+                        "fontSize": 11,
+                        "fontFamily": "'Work Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 1,
+                        "textTransform": "uppercase",
+                        "paddingX": 16,
+                        "paddingY": 8
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "m1-c2",
+                  "backgroundColor": "#735c00",
+                  "blocks": [
+                    {
+                      "id": "m1-c2b1",
+                      "type": "heading",
+                      "data": {
+                        "text": "Brew Guide",
+                        "level": 3
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 24,
+                          "right": 16,
+                          "bottom": 4,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "color": "#ffffff",
+                        "fontSize": 18,
+                        "fontFamily": "'Noto Serif', Georgia, serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 0,
+                        "textTransform": "none"
+                      }
+                    },
+                    {
+                      "id": "m1-c2b2",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:13px;color:#ffffffcc;line-height:1.6;\">Every origin has a story, and every brew method unlocks a different chapter. Start your masterclass.</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 16,
+                          "bottom": 8,
+                          "left": 16
+                        }
+                      }
+                    },
+                    {
+                      "id": "m1-c2b3",
+                      "type": "button",
+                      "data": {
+                        "text": "VIEW MASTERCLASS",
+                        "url": "https://"
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 8,
+                          "right": 16,
+                          "bottom": 24,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "backgroundColor": "#ffffff",
+                        "color": "#735c00",
+                        "borderRadius": 50,
+                        "fullWidth": false,
+                        "fontSize": 11,
+                        "fontFamily": "'Work Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 1,
+                        "textTransform": "uppercase",
+                        "paddingX": 16,
+                        "paddingY": 8
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 20,
+                "bottom": 0,
+                "left": 20
+              },
+              "gap": 12,
+              "stackOnMobile": true
+            }
+          },
+          {
+            "id": "m1-b4",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 32
+            }
+          },
+          {
+            "id": "m1-b5",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:22px;font-style:italic;color:#1a1c1a;line-height:1.5;\">\"Coffee is a language in itself.\"</p><p style=\"margin:12px 0 0;text-align:center;font-size:13px;color:#504442;\">— Jackie Chan</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 28,
+                "right": 40,
+                "bottom": 28,
+                "left": 40
+              },
+              "alignment": "center",
+              "backgroundColor": "#faf9f6"
+            }
+          },
+          {
+            "id": "m1-b6",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 16
+            }
+          },
+          {
+            "id": "m1-b7",
+            "type": "heading",
+            "data": {
+              "text": "Next steps for your journey",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 16,
+                "right": 32,
+                "bottom": 12,
+                "left": 32
+              },
+              "alignment": "left",
+              "color": "#504442",
+              "fontSize": 16,
+              "fontFamily": "'Noto Serif', Georgia, serif",
+              "fontWeight": 400,
+              "letterSpacing": 0,
+              "textTransform": "none"
+            }
+          },
+          {
+            "id": "m1-b8",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;font-size:14px;line-height:1.8;\"><strong style=\"color:#1a1c1a;font-family:'Work Sans',Arial,sans-serif;font-size:11px;letter-spacing:2px;\">01</strong><br/><strong style=\"font-size:15px;color:#1a1c1a;\">Set Up Your Taste Profile</strong><br/><span style=\"font-size:13px;color:#504442;\">Tell us your flavor preferences so we can curate every shipment to your palate.</span></p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 16,
+                "right": 32,
+                "bottom": 16,
+                "left": 32
+              },
+              "backgroundColor": "#ffffff"
+            }
+          },
+          {
+            "id": "m1-b9",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;font-size:14px;line-height:1.8;\"><strong style=\"color:#1a1c1a;font-family:'Work Sans',Arial,sans-serif;font-size:11px;letter-spacing:2px;\">02</strong><br/><strong style=\"font-size:15px;color:#1a1c1a;\">Download the Brew Timer</strong><br/><span style=\"font-size:13px;color:#504442;\">Our free app guides you through pour-over, French press, and espresso techniques.</span></p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 16,
+                "right": 32,
+                "bottom": 16,
+                "left": 32
+              },
+              "backgroundColor": "#f4f3f1"
+            }
+          },
+          {
+            "id": "m1-b10",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;font-size:14px;line-height:1.8;\"><strong style=\"color:#1a1c1a;font-family:'Work Sans',Arial,sans-serif;font-size:11px;letter-spacing:2px;\">03</strong><br/><strong style=\"font-size:15px;color:#1a1c1a;\">Join the Community</strong><br/><span style=\"font-size:13px;color:#504442;\">Connect with fellow coffee enthusiasts and share your brewing discoveries.</span></p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 16,
+                "right": 32,
+                "bottom": 16,
+                "left": 32
+              },
+              "backgroundColor": "#ffffff"
+            }
+          }
+        ]
+      },
+      "footer": {
+        "blocks": [
+          {
+            "id": "m1-f1",
+            "type": "heading",
+            "data": {
+              "text": "Meridian Coffee Co.",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 24,
+                "right": 32,
+                "bottom": 4,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#271310",
+              "fontSize": 16,
+              "fontFamily": "'Noto Serif', Georgia, serif",
+              "fontWeight": 700,
+              "letterSpacing": 0,
+              "textTransform": "none"
+            }
+          },
+          {
+            "id": "m1-f2",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#504442;\"><a href=\"#\" style=\"color:#504442;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;\">Shop</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Privacy Policy</a></p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 4,
+                "right": 32,
+                "bottom": 8,
+                "left": 32
+              },
+              "alignment": "center",
+              "backgroundColor": "#f4f3f1"
+            }
+          },
+          {
+            "id": "m1-f3",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#827472;\">© 2025 Meridian Coffee Co. All rights reserved.</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 8,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "backgroundColor": "#f4f3f1"
+            }
+          }
+        ]
+      }
+    },
+    "tags": [
+      "welcome"
+    ]
+  },
+  {
+    "name": "Newsletter — Meridian Coffee",
+    "category": "newsletter",
+    "template": {
+      "version": 1,
+      "settings": {
+        "backgroundColor": "#faf9f6",
+        "backgroundStyle": "none",
+        "bodyBackgroundStyle": "solid",
+        "bodyBackgroundColor": "#ffffff",
+        "bodyBorderRadius": 0,
+        "contentWidth": 600,
+        "defaultFont": "'Manrope', Arial, sans-serif",
+        "defaultFontSize": 14,
+        "defaultColor": "#1a1c1a",
+        "version": 1
+      },
+      "header": {
+        "blocks": [
+          {
+            "id": "m2-h1",
+            "type": "heading",
+            "data": {
+              "text": "MERIDIAN COFFEE CO.",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 28,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#271310",
+              "fontSize": 13,
+              "fontFamily": "'Work Sans', Arial, sans-serif",
+              "fontWeight": 700,
+              "letterSpacing": 4,
+              "textTransform": "uppercase"
+            }
+          }
+        ]
+      },
+      "body": {
+        "blocks": [
+          {
+            "id": "m2-b1",
+            "type": "hero",
+            "data": {
+              "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCfXyCGF_EEilFggWckLjY1iBJH6mrbqyTTATrsR_qNnHYUhe0k5TdooqvC6T2G0DXXqv8TNkhN1SaQNvwBLkc6e04fSMzfZ3GDdpsEY_V_cRfbUsvtcyctrUQrGuSrytGUowBAheQ1UZWZYJHeFFyi5iH0nRVazBmcoVUxKUygDMwXCSQv2NgMpZq9TmRxEFsJzZaVmHusjXyGHoALp_E3MBpumx_4Mb8Jn6n3wt8sMOxzvsJtPuy2VGQKr8p1mAYcZTDWujSJ5n4",
+              "heading": "The Roaster's Journal: Origins",
+              "subheading": "Issue No. 042",
+              "buttonText": "",
+              "buttonUrl": ""
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "height": 480,
+              "overlayColor": "#271310",
+              "overlayOpacity": 0.5,
+              "headingColor": "#ffffff",
+              "headingFontSize": 34,
+              "headingFontFamily": "'Noto Serif', Georgia, serif",
+              "subheadingColor": "#ffffffcc",
+              "contentAlignment": "left",
+              "verticalAlignment": "bottom"
+            }
+          },
+          {
+            "id": "m2-b2",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;font-size:14px;color:#ffffffcc;line-height:1.6;\">Exploring the terroir, technique, and tradition behind every cup we pour.</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "m2-b3",
+            "type": "columns",
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                66,
+                34
+              ],
+              "columns": [
+                {
+                  "id": "m2-c1",
+                  "backgroundColor": "#ffffff",
+                  "blocks": [
+                    {
+                      "id": "m2-c1b1",
+                      "type": "heading",
+                      "data": {
+                        "text": "Origins",
+                        "level": 4
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 24,
+                          "right": 16,
+                          "bottom": 4,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "color": "#735c00",
+                        "fontSize": 11,
+                        "fontFamily": "'Work Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 2,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    {
+                      "id": "m2-c1b2",
+                      "type": "heading",
+                      "data": {
+                        "text": "The Soul of the Soil",
+                        "level": 3
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 16,
+                          "bottom": 4,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "color": "#1a1c1a",
+                        "fontSize": 20,
+                        "fontFamily": "'Noto Serif', Georgia, serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 0,
+                        "textTransform": "none"
+                      }
+                    },
+                    {
+                      "id": "m2-c1b3",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:13px;color:#504442;line-height:1.6;\">How volcanic minerals in Guatemalan highlands create the bright acidity and chocolate undertones that define our Reserve line.</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 16,
+                          "bottom": 8,
+                          "left": 16
+                        }
+                      }
+                    },
+                    {
+                      "id": "m2-c1b4",
+                      "type": "button",
+                      "data": {
+                        "text": "READ NARRATIVE",
+                        "url": "https://"
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 8,
+                          "right": 16,
+                          "bottom": 24,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "backgroundColor": "#271310",
+                        "color": "#ffffff",
+                        "borderRadius": 50,
+                        "fullWidth": false,
+                        "fontSize": 11,
+                        "fontFamily": "'Work Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 1,
+                        "textTransform": "uppercase",
+                        "paddingX": 16,
+                        "paddingY": 8
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "m2-c2",
+                  "backgroundColor": "#ffffff",
+                  "blocks": [
+                    {
+                      "id": "m2-c2b1",
+                      "type": "image",
+                      "data": {
+                        "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuDviUWSJSvyAJQ0Rk7u81sk0l3QU4k1vi3uCHfey33Gvr47shn_qwUYuPJlfvegZ4eFidkdhqiWNHjuOl3hOyRKOEAK6rsPiuQRfwgoVpreeA1PFUvbEmLeTQr9UKuQzVp785V574-WJxHHj7jj6F0DTFBj8jGAmoB3AXpcUXTPPRuKxkr5XJWdknWSOo2zdDhfytBtUcfup1_1c_cLcG3yOVDngUTT8N5qxy3buUnPBKhfIGAZLWNn3I1Hvf30ZpPCrJTi_mmWZr8",
+                        "alt": "Coffee soil origins"
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 16,
+                          "right": 16,
+                          "bottom": 16,
+                          "left": 0
+                        },
+                        "borderRadius": 12,
+                        "maxWidth": "100%"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 20,
+                "bottom": 0,
+                "left": 20
+              },
+              "gap": 12,
+              "stackOnMobile": true
+            }
+          },
+          {
+            "id": "m2-b4",
+            "type": "columns",
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                34,
+                66
+              ],
+              "columns": [
+                {
+                  "id": "m2-c3",
+                  "backgroundColor": "#f4f3f1",
+                  "blocks": [
+                    {
+                      "id": "m2-c3b1",
+                      "type": "image",
+                      "data": {
+                        "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuB5N5PyQ4KI0Kskfk_JDq43DostckqQuibfwSfVEMohNWileLBeRnnLwDs1WpuuH0PElpX2ynCp8AIobeJpiMdyg_Y0m4O-kuX9RigUo74vzbmbacrZOVhTAkKSFpHXgdBX6FgbqAadPKvpv5AbBydTrUCQ4NPag8nrLJywSCxiaYdeFQJozmaUzZ8scXTZ8pgsF_MXrc--XgM8zwRXAGXllsA3B3Z_62NHCgZr2TRIgX6QMM28WFQhh9o_bDgKyC7VxfmyetFPnn0",
+                        "alt": "Coffee roaster"
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 16,
+                          "right": 0,
+                          "bottom": 16,
+                          "left": 16
+                        },
+                        "borderRadius": 12,
+                        "maxWidth": "100%"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "m2-c4",
+                  "backgroundColor": "#f4f3f1",
+                  "blocks": [
+                    {
+                      "id": "m2-c4b1",
+                      "type": "heading",
+                      "data": {
+                        "text": "Technique",
+                        "level": 4
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 24,
+                          "right": 16,
+                          "bottom": 4,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "color": "#735c00",
+                        "fontSize": 11,
+                        "fontFamily": "'Work Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 2,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    {
+                      "id": "m2-c4b2",
+                      "type": "heading",
+                      "data": {
+                        "text": "The Maillard Curve",
+                        "level": 3
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 16,
+                          "bottom": 4,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "color": "#1a1c1a",
+                        "fontSize": 20,
+                        "fontFamily": "'Noto Serif', Georgia, serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 0,
+                        "textTransform": "none"
+                      }
+                    },
+                    {
+                      "id": "m2-c4b3",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:13px;color:#504442;line-height:1.6;\">The science of browning sugars and amino acids that transforms a green seed into the complex flavor profile in your cup.</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 16,
+                          "bottom": 8,
+                          "left": 16
+                        }
+                      }
+                    },
+                    {
+                      "id": "m2-c4b4",
+                      "type": "button",
+                      "data": {
+                        "text": "STUDY PROCESS",
+                        "url": "https://"
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 8,
+                          "right": 16,
+                          "bottom": 24,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "backgroundColor": "#271310",
+                        "color": "#ffffff",
+                        "borderRadius": 50,
+                        "fullWidth": false,
+                        "fontSize": 11,
+                        "fontFamily": "'Work Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 1,
+                        "textTransform": "uppercase",
+                        "paddingX": 16,
+                        "paddingY": 8
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 20,
+                "bottom": 0,
+                "left": 20
+              },
+              "gap": 12,
+              "stackOnMobile": true
+            }
+          },
+          {
+            "id": "m2-b5",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 32
+            }
+          },
+          {
+            "id": "m2-b6",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;font-family:'Work Sans',Arial,sans-serif;font-size:11px;color:#735c00;text-transform:uppercase;letter-spacing:2px;text-align:center;\">FEATURE ROAST</p><p style=\"margin:12px 0;font-family:'Noto Serif',Georgia,serif;font-size:22px;color:#1a1c1a;text-align:center;font-weight:700;\">Bean of the Month: Ethiopian Yirgacheffe</p><p style=\"margin:0 0 16px;font-family:'Noto Serif',Georgia,serif;font-size:15px;font-style:italic;color:#504442;text-align:center;line-height:1.6;\">\"A floral symphony with notes of jasmine, bergamot, and a whisper of dark honey.\"</p><p style=\"margin:0;font-size:13px;color:#504442;line-height:1.8;text-align:center;\">Region: Gedeo Zone, Yirgacheffe &bull; Altitude: 1,950–2,100m<br/>Process: Washed &bull; Varietal: Heirloom Ethiopian<br/>Roast: Light-Medium &bull; Cupping Score: 91</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 28,
+                "right": 32,
+                "bottom": 8,
+                "left": 32
+              },
+              "alignment": "center",
+              "backgroundColor": "#faf9f6"
+            }
+          },
+          {
+            "id": "m2-b7",
+            "type": "button",
+            "data": {
+              "text": "Read Full Journal",
+              "url": "https://"
+            },
+            "style": {
+              "padding": {
+                "top": 8,
+                "right": 32,
+                "bottom": 28,
+                "left": 32
+              },
+              "alignment": "center",
+              "backgroundColor": "#271310",
+              "color": "#ffffff",
+              "borderRadius": 50,
+              "fullWidth": false,
+              "fontSize": 14,
+              "fontFamily": "'Manrope', Arial, sans-serif",
+              "fontWeight": 600,
+              "paddingX": 24,
+              "paddingY": 12
+            }
+          }
+        ]
+      },
+      "footer": {
+        "blocks": [
+          {
+            "id": "m2-f1",
+            "type": "heading",
+            "data": {
+              "text": "Meridian Coffee Co.",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 24,
+                "right": 32,
+                "bottom": 4,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#271310",
+              "fontSize": 16,
+              "fontFamily": "'Noto Serif', Georgia, serif",
+              "fontWeight": 700,
+              "letterSpacing": 0,
+              "textTransform": "none"
+            }
+          },
+          {
+            "id": "m2-f2",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#504442;\"><a href=\"#\" style=\"color:#504442;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;\">Shop</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Privacy Policy</a></p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 4,
+                "right": 32,
+                "bottom": 8,
+                "left": 32
+              },
+              "alignment": "center",
+              "backgroundColor": "#f4f3f1"
+            }
+          },
+          {
+            "id": "m2-f3",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#827472;\">© 2025 Meridian Coffee Co. All rights reserved.</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 8,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "backgroundColor": "#f4f3f1"
+            }
+          }
+        ]
+      }
+    },
+    "tags": [
+      "newsletter"
+    ]
+  },
+  {
+    "name": "Order Shipped — Meridian Coffee",
+    "category": "transactional",
+    "template": {
+      "version": 1,
+      "settings": {
+        "backgroundColor": "#faf9f6",
+        "backgroundStyle": "none",
+        "bodyBackgroundStyle": "solid",
+        "bodyBackgroundColor": "#ffffff",
+        "bodyBorderRadius": 0,
+        "contentWidth": 600,
+        "defaultFont": "'Manrope', Arial, sans-serif",
+        "defaultFontSize": 14,
+        "defaultColor": "#1a1c1a",
+        "version": 1
+      },
+      "header": {
+        "blocks": [
+          {
+            "id": "m3-h1",
+            "type": "heading",
+            "data": {
+              "text": "MERIDIAN COFFEE CO.",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 28,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#271310",
+              "fontSize": 13,
+              "fontFamily": "'Work Sans', Arial, sans-serif",
+              "fontWeight": 700,
+              "letterSpacing": 4,
+              "textTransform": "uppercase"
+            }
+          }
+        ]
+      },
+      "body": {
+        "blocks": [
+          {
+            "id": "m3-b1",
+            "type": "hero",
+            "data": {
+              "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCTvxZebb0waqH5GLWofAB07wZKqhLh1H5AUagipNuFdD6LZsu_kzxF3HNfBLkFSgxzr5JNjqX9MZbVOna41PjeKq5wTjqf8cEB3WOvIl604GweEJ67VXakhi5_Vch1jm9HMw_KfvEMzstUWH-_cBQIG3aWfetGFN61WDFVJt-6N_vLgEqXH2BudL-REWhWHnqATFdGAyB7ENsk8BNqy9z7njU25EgCqIpJKPat4fzC0UXyWX_ol6h09dy7zlWKF37XeaDbCK5omDI",
+              "heading": "Your coffee is on its way!",
+              "subheading": "",
+              "buttonText": "",
+              "buttonUrl": ""
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "height": 400,
+              "overlayColor": "#271310",
+              "overlayOpacity": 0.5,
+              "headingColor": "#ffffff",
+              "headingFontSize": 34,
+              "headingFontFamily": "'Noto Serif', Georgia, serif",
+              "subheadingColor": "#ffffffcc",
+              "contentAlignment": "center",
+              "verticalAlignment": "middle"
+            }
+          },
+          {
+            "id": "m3-b2",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 32
+            }
+          },
+          {
+            "id": "m3-b3",
+            "type": "columns",
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                50,
+                50
+              ],
+              "columns": [
+                {
+                  "id": "m3-c1",
+                  "backgroundColor": "#f4f3f1",
+                  "blocks": [
+                    {
+                      "id": "m3-c1b1",
+                      "type": "heading",
+                      "data": {
+                        "text": "Delivery Status",
+                        "level": 4
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 24,
+                          "right": 16,
+                          "bottom": 2,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "color": "#735c00",
+                        "fontSize": 11,
+                        "fontFamily": "'Work Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 2,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    {
+                      "id": "m3-c1b2",
+                      "type": "heading",
+                      "data": {
+                        "text": "Expected Friday",
+                        "level": 3
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 16,
+                          "bottom": 4,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "color": "#1a1c1a",
+                        "fontSize": 20,
+                        "fontFamily": "'Noto Serif', Georgia, serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 0,
+                        "textTransform": "none"
+                      }
+                    },
+                    {
+                      "id": "m3-c1b3",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:13px;color:#504442;line-height:1.6;\">Your package has left our roastery and is in transit. Estimated delivery: <strong>Friday, March 28</strong>.</p><p style=\"margin:8px 0 0;font-size:12px;color:#827472;\">Tracking: <strong style=\"color:#1a1c1a;\">MC-2025-0328-7741</strong></p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 16,
+                          "bottom": 8,
+                          "left": 16
+                        }
+                      }
+                    },
+                    {
+                      "id": "m3-c1b4",
+                      "type": "button",
+                      "data": {
+                        "text": "TRACK SHIPMENT",
+                        "url": "https://"
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 8,
+                          "right": 16,
+                          "bottom": 24,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "backgroundColor": "#271310",
+                        "color": "#ffffff",
+                        "borderRadius": 50,
+                        "fullWidth": false,
+                        "fontSize": 11,
+                        "fontFamily": "'Work Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 1,
+                        "textTransform": "uppercase",
+                        "paddingX": 16,
+                        "paddingY": 8
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "m3-c2",
+                  "backgroundColor": "#fed65b",
+                  "blocks": [
+                    {
+                      "id": "m3-c2b1",
+                      "type": "heading",
+                      "data": {
+                        "text": "Curated Selection",
+                        "level": 4
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 24,
+                          "right": 16,
+                          "bottom": 2,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "color": "#271310",
+                        "fontSize": 11,
+                        "fontFamily": "'Work Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 2,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    {
+                      "id": "m3-c2b2",
+                      "type": "heading",
+                      "data": {
+                        "text": "Highland Reserve",
+                        "level": 3
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 16,
+                          "bottom": 4,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "color": "#271310",
+                        "fontSize": 20,
+                        "fontFamily": "'Noto Serif', Georgia, serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 0,
+                        "textTransform": "none"
+                      }
+                    },
+                    {
+                      "id": "m3-c2b3",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:13px;color:#3e2723;line-height:1.6;\">A single-origin Colombian with notes of dark chocolate, toasted walnut, and a smooth caramel finish.</p><p style=\"margin:8px 0 0;font-size:12px;color:#504442;\"><strong>Tasting Notes:</strong> Chocolate &bull; Walnut &bull; Caramel</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 16,
+                          "bottom": 24,
+                          "left": 16
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 20,
+                "bottom": 0,
+                "left": 20
+              },
+              "gap": 12,
+              "stackOnMobile": true
+            }
+          },
+          {
+            "id": "m3-b4",
+            "type": "divider",
+            "data": {},
+            "style": {
+              "padding": {
+                "top": 24,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "color": "#e9c349",
+              "thickness": 1,
+              "width": 100
+            }
+          },
+          {
+            "id": "m3-b5",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#1a1c1a;font-weight:700;line-height:1.4;\">Brewing tips for this blend</p><p style=\"margin:12px 0 0;font-size:14px;color:#504442;line-height:1.7;\">Highland Reserve shines with a medium-coarse grind. For pour-over, use a 1:16 coffee-to-water ratio at 200°F. Let it bloom for 30 seconds, then pour in slow concentric circles. Total brew time: 3:30–4:00 minutes. For French press, steep for 4 minutes and plunge slowly.</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 32,
+                "bottom": 0,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "m3-b6",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 24
+            }
+          },
+          {
+            "id": "m3-b7",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:18px;font-style:italic;color:#1a1c1a;line-height:1.5;\">\"The best coffee is the one you share with someone.\"</p><p style=\"margin:12px 0 0;text-align:center;font-size:13px;color:#504442;\">— Meridian Coffee Co.</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 24,
+                "right": 40,
+                "bottom": 24,
+                "left": 40
+              },
+              "alignment": "center",
+              "backgroundColor": "#faf9f6"
+            }
+          }
+        ]
+      },
+      "footer": {
+        "blocks": [
+          {
+            "id": "m3-f1",
+            "type": "heading",
+            "data": {
+              "text": "Meridian Coffee Co.",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 24,
+                "right": 32,
+                "bottom": 4,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#271310",
+              "fontSize": 16,
+              "fontFamily": "'Noto Serif', Georgia, serif",
+              "fontWeight": 700,
+              "letterSpacing": 0,
+              "textTransform": "none"
+            }
+          },
+          {
+            "id": "m3-f2",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#504442;\"><a href=\"#\" style=\"color:#504442;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;\">Shop</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Privacy Policy</a></p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 4,
+                "right": 32,
+                "bottom": 8,
+                "left": 32
+              },
+              "alignment": "center",
+              "backgroundColor": "#f4f3f1"
+            }
+          },
+          {
+            "id": "m3-f3",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#827472;\">© 2025 Meridian Coffee Co. All rights reserved.</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 8,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "backgroundColor": "#f4f3f1"
+            }
+          }
+        ]
+      }
+    },
+    "tags": [
+      "transactional"
+    ]
+  },
+  {
+    "name": "Win Back — Meridian Coffee",
+    "category": "promotional",
+    "template": {
+      "version": 1,
+      "settings": {
+        "backgroundColor": "#faf9f6",
+        "backgroundStyle": "none",
+        "bodyBackgroundStyle": "solid",
+        "bodyBackgroundColor": "#ffffff",
+        "bodyBorderRadius": 0,
+        "contentWidth": 600,
+        "defaultFont": "'Manrope', Arial, sans-serif",
+        "defaultFontSize": 14,
+        "defaultColor": "#1a1c1a",
+        "version": 1
+      },
+      "header": {
+        "blocks": [
+          {
+            "id": "m4-h1",
+            "type": "heading",
+            "data": {
+              "text": "MERIDIAN COFFEE CO.",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 28,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#271310",
+              "fontSize": 13,
+              "fontFamily": "'Work Sans', Arial, sans-serif",
+              "fontWeight": 700,
+              "letterSpacing": 4,
+              "textTransform": "uppercase"
+            }
+          }
+        ]
+      },
+      "body": {
+        "blocks": [
+          {
+            "id": "m4-b1",
+            "type": "hero",
+            "data": {
+              "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuDTu-2B3-ihUujuLePIHXqYFNR_DAlkNeaiYzA8S6eCTbFCw3DNjoF_jtpQRLfOANnaZbFjUp0BF0_3_LB0IszhEEZQ1TYt2cNX7vaTzH_C8O-jSSJ1W7M2rbcQyjuevk6b8FICfAUilrVLBeD0uOCvJAz77w_zRmbtDHaDZMgcXNwAtL1ZvtGyabldGrmyzQJQ5Gc84r51fsdJvS-tYNKpYnvws4yQ3Nz7-u01B9uyItRZwrZa_uuoonFK6-n-KC_2G4EWGRZN6Pk",
+              "heading": "We've saved your seat at the bar",
+              "subheading": "",
+              "buttonText": "",
+              "buttonUrl": ""
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "height": 420,
+              "overlayColor": "#271310",
+              "overlayOpacity": 0.55,
+              "headingColor": "#ffffff",
+              "headingFontSize": 34,
+              "headingFontFamily": "'Noto Serif', Georgia, serif",
+              "subheadingColor": "#ffffffcc",
+              "contentAlignment": "center",
+              "verticalAlignment": "middle"
+            }
+          },
+          {
+            "id": "m4-b2",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:18px;font-style:italic;color:#504442;line-height:1.6;\">The roast hasn't been the same without you.</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 28,
+                "right": 40,
+                "bottom": 8,
+                "left": 40
+              },
+              "alignment": "center"
+            }
+          },
+          {
+            "id": "m4-b3",
+            "type": "divider",
+            "data": {},
+            "style": {
+              "padding": {
+                "top": 8,
+                "right": 180,
+                "bottom": 8,
+                "left": 180
+              },
+              "color": "#e9c349",
+              "thickness": 1,
+              "width": 100
+            }
+          },
+          {
+            "id": "m4-b4",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:14px;color:#504442;line-height:1.7;\">It's been a while since your last order, and we wanted to reach out. Our roasters have been busy crafting new blends and perfecting seasonal favorites—and we think you'd love what's new.</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 8,
+                "right": 40,
+                "bottom": 24,
+                "left": 40
+              },
+              "alignment": "center"
+            }
+          },
+          {
+            "id": "m4-b5",
+            "type": "heading",
+            "data": {
+              "text": "WHATS NEW AT THE ROASTERY",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 16,
+                "right": 32,
+                "bottom": 16,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#735c00",
+              "fontSize": 11,
+              "fontFamily": "'Work Sans', Arial, sans-serif",
+              "fontWeight": 700,
+              "letterSpacing": 3,
+              "textTransform": "uppercase"
+            }
+          },
+          {
+            "id": "m4-b6",
+            "type": "columns",
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                40,
+                60
+              ],
+              "columns": [
+                {
+                  "id": "m4-c1",
+                  "backgroundColor": "#faf9f6",
+                  "blocks": [
+                    {
+                      "id": "m4-c1b1",
+                      "type": "image",
+                      "data": {
+                        "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuC6L0OOH7z0CDpah2upyR5Syq02oVKvBlVEoaXOwJPPR_xk_reMzyH9lxtLjQLt59qF3IHdZwjlAdKfrHbu14CK7wWDxoviq8S_pwFiAqdu3fzI8nZfy37QfnpQcQdIcpKL8We-9bM8VsQP4dUbeTpEzhCTwIja-LXKV2BA48y93dftpwLx-m6NXM8Zi63zdPzz61FyXdAov3itDlXZoTKlzeMwxi-Y_CdTDXiDJSh-zHnORFqRFE5qiFiJKrRUnL823_mFeTpX-6g",
+                        "alt": "Single-origin beans"
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 12,
+                          "right": 8,
+                          "bottom": 12,
+                          "left": 12
+                        },
+                        "borderRadius": 12,
+                        "maxWidth": "100%"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "m4-c2",
+                  "backgroundColor": "#faf9f6",
+                  "blocks": [
+                    {
+                      "id": "m4-c2b1",
+                      "type": "heading",
+                      "data": {
+                        "text": "Single-Origin Beans",
+                        "level": 3
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 20,
+                          "right": 16,
+                          "bottom": 4,
+                          "left": 8
+                        },
+                        "alignment": "left",
+                        "color": "#1a1c1a",
+                        "fontSize": 18,
+                        "fontFamily": "'Noto Serif', Georgia, serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 0,
+                        "textTransform": "none"
+                      }
+                    },
+                    {
+                      "id": "m4-c2b2",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:13px;color:#504442;line-height:1.6;\">New arrivals from Guatemala and Rwanda. Bright acidity, floral notes, and a clean finish.</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 16,
+                          "bottom": 16,
+                          "left": 8
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 20,
+                "bottom": 8,
+                "left": 20
+              },
+              "gap": 0,
+              "stackOnMobile": true
+            }
+          },
+          {
+            "id": "m4-b7",
+            "type": "columns",
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                60,
+                40
+              ],
+              "columns": [
+                {
+                  "id": "m4-c3",
+                  "backgroundColor": "#fed65b",
+                  "blocks": [
+                    {
+                      "id": "m4-c3b1",
+                      "type": "heading",
+                      "data": {
+                        "text": "Cold Brew Concentrate",
+                        "level": 3
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 20,
+                          "right": 8,
+                          "bottom": 4,
+                          "left": 16
+                        },
+                        "alignment": "left",
+                        "color": "#271310",
+                        "fontSize": 18,
+                        "fontFamily": "'Noto Serif', Georgia, serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 0,
+                        "textTransform": "none"
+                      }
+                    },
+                    {
+                      "id": "m4-c3b2",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:13px;color:#3e2723;line-height:1.6;\">Slow-steeped for 18 hours. Rich, smooth, and ready to dilute your way. Summer's favorite.</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 8,
+                          "bottom": 16,
+                          "left": 16
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "m4-c4",
+                  "backgroundColor": "#fed65b",
+                  "blocks": [
+                    {
+                      "id": "m4-c4b1",
+                      "type": "image",
+                      "data": {
+                        "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCLudqIp2L3-oddj0y4JTXi_0psuwSNFxbU13xgUaKszh9cgSLkAs7VfrNQRtoX7gI6FYFWAu5znaTqHQTJ92cM7_4Eg9mS0PCFQUwNRrX0JyYj64iGS8112hbufjebIG2sWpNXDIYSj41lXBJADnz1OawO0k5pa2tMaYs_Ez3PKaQEw-w-6m-VJDr-YgQn5Ht93kVWI385lzGZQvjJI0Li6tJZ1W5NWR_-12ycJikYy95IxE482DlpcYH7wRSyGqOU6c8fPEql0Lg",
+                        "alt": "Cold brew concentrate"
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 12,
+                          "right": 12,
+                          "bottom": 12,
+                          "left": 8
+                        },
+                        "borderRadius": 12,
+                        "maxWidth": "100%"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 20,
+                "bottom": 8,
+                "left": 20
+              },
+              "gap": 0,
+              "stackOnMobile": true
+            }
+          },
+          {
+            "id": "m4-b8",
+            "type": "columns",
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                40,
+                60
+              ],
+              "columns": [
+                {
+                  "id": "m4-c5",
+                  "backgroundColor": "#efeeeb",
+                  "blocks": [
+                    {
+                      "id": "m4-c5b1",
+                      "type": "image",
+                      "data": {
+                        "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuAOjLKVsxFUlckI6kyxMpg_aDJ03WjkoipUWfSX5s2av7du5XSuyHCsVrFTobr-Ey8r8Uk-v6ZKnLkfkNmqNKk6wsiekD6I-KVRUhjSoNAl59E2rTzvtMOXBr1whMIj-3IiIiGiC_Xi9lVncoQn2I-VQGjEizxH475VyOwRKxWl5AiTLvUID_wEipdd-WWo2hlwC04Nz-S6N4n4Ko8YIps2zPa3iMh6wzDPm5ml5oTTqQZvO5Ig9Itn8MQg5tgG8RFEA463LwBjCNY",
+                        "alt": "Espresso blend"
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 12,
+                          "right": 8,
+                          "bottom": 12,
+                          "left": 12
+                        },
+                        "borderRadius": 12,
+                        "maxWidth": "100%"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "m4-c6",
+                  "backgroundColor": "#efeeeb",
+                  "blocks": [
+                    {
+                      "id": "m4-c6b1",
+                      "type": "heading",
+                      "data": {
+                        "text": "Espresso Blend No. 7",
+                        "level": 3
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 20,
+                          "right": 16,
+                          "bottom": 4,
+                          "left": 8
+                        },
+                        "alignment": "left",
+                        "color": "#1a1c1a",
+                        "fontSize": 18,
+                        "fontFamily": "'Noto Serif', Georgia, serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 0,
+                        "textTransform": "none"
+                      }
+                    },
+                    {
+                      "id": "m4-c6b2",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:13px;color:#504442;line-height:1.6;\">Our darkest roast yet. Bold, syrupy body with notes of baker's chocolate and smoked walnut.</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 16,
+                          "bottom": 16,
+                          "left": 8
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 20,
+                "bottom": 0,
+                "left": 20
+              },
+              "gap": 0,
+              "stackOnMobile": true
+            }
+          },
+          {
+            "id": "m4-b9",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 24
+            }
+          },
+          {
+            "id": "m4-b10",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:24px;color:#ffffff;font-weight:700;line-height:1.4;\">Come back for a free bag on us</p><p style=\"margin:12px 0 0;text-align:center;font-size:14px;color:#ffffffcc;line-height:1.6;\">Use code <strong style=\"color:#fed65b;\">WELCOME-BACK</strong> at checkout for a complimentary 250g bag of any blend in our collection.</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 32,
+                "right": 40,
+                "bottom": 8,
+                "left": 40
+              },
+              "alignment": "center",
+              "backgroundGradient": "linear-gradient(135deg, #271310 0%, #3e2723 100%)"
+            }
+          },
+          {
+            "id": "m4-b11",
+            "type": "button",
+            "data": {
+              "text": "RECLAIM YOUR RITUAL",
+              "url": "https://"
+            },
+            "style": {
+              "padding": {
+                "top": 8,
+                "right": 40,
+                "bottom": 32,
+                "left": 40
+              },
+              "alignment": "center",
+              "backgroundColor": "#ffffff",
+              "color": "#271310",
+              "borderRadius": 50,
+              "fullWidth": false,
+              "fontSize": 12,
+              "fontFamily": "'Work Sans', Arial, sans-serif",
+              "fontWeight": 700,
+              "letterSpacing": 1,
+              "textTransform": "uppercase",
+              "paddingX": 24,
+              "paddingY": 12,
+              "backgroundGradient": "linear-gradient(135deg, #271310 0%, #3e2723 100%)"
+            }
+          },
+          {
+            "id": "m4-b12",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 24
+            }
+          },
+          {
+            "id": "m4-b13",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:18px;font-style:italic;color:#1a1c1a;line-height:1.5;\">\"Life's too short for bad coffee.\"</p><p style=\"margin:12px 0 0;text-align:center;font-size:13px;color:#504442;\">— Meridian Coffee Co.</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 24,
+                "right": 40,
+                "bottom": 24,
+                "left": 40
+              },
+              "alignment": "center",
+              "backgroundColor": "#faf9f6"
+            }
+          }
+        ]
+      },
+      "footer": {
+        "blocks": [
+          {
+            "id": "m4-f1",
+            "type": "heading",
+            "data": {
+              "text": "Meridian Coffee Co.",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 24,
+                "right": 32,
+                "bottom": 4,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#271310",
+              "fontSize": 16,
+              "fontFamily": "'Noto Serif', Georgia, serif",
+              "fontWeight": 700,
+              "letterSpacing": 0,
+              "textTransform": "none"
+            }
+          },
+          {
+            "id": "m4-f2",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#504442;\"><a href=\"#\" style=\"color:#504442;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;\">Shop</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Privacy Policy</a></p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 4,
+                "right": 32,
+                "bottom": 8,
+                "left": 32
+              },
+              "alignment": "center",
+              "backgroundColor": "#f4f3f1"
+            }
+          },
+          {
+            "id": "m4-f3",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#827472;\">© 2025 Meridian Coffee Co. All rights reserved.</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 8,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "backgroundColor": "#f4f3f1"
+            }
+          }
+        ]
+      }
+    },
+    "tags": [
+      "promotional"
+    ]
+  },
+  {
+    "name": "Welcome — Sunrise Yoga",
+    "category": "welcome",
+    "template": {
+      "version": 1,
+      "settings": {
+        "backgroundColor": "#fef5f0",
+        "backgroundStyle": "none",
+        "bodyBackgroundStyle": "solid",
+        "bodyBackgroundColor": "#fef5f0",
+        "bodyBorderRadius": 16,
+        "contentWidth": 600,
+        "defaultFont": "'Be Vietnam Pro', Arial, sans-serif",
+        "defaultFontSize": 15,
+        "defaultColor": "#322e2b"
+      },
+      "header": {
+        "blocks": [
+          {
+            "id": "sun-w-h1",
+            "type": "heading",
+            "data": {
+              "text": "SUNRISE YOGA",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 28,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#8c4a00",
+              "fontSize": 18,
+              "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+              "fontWeight": 800,
+              "letterSpacing": 3,
+              "textTransform": "uppercase"
+            }
+          }
+        ]
+      },
+      "body": {
+        "blocks": [
+          {
+            "id": "sun-w-b1",
+            "type": "columns",
+            "style": {
+              "gap": 16,
+              "stackOnMobile": true,
+              "padding": {
+                "top": 8,
+                "right": 24,
+                "bottom": 16,
+                "left": 24
+              }
+            },
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                55,
+                45
+              ],
+              "columns": [
+                {
+                  "id": "sun-w-c1",
+                  "blocks": [
+                    {
+                      "id": "sun-w-c1-tag",
+                      "type": "text",
+                      "data": {
+                        "html": "<span style=\"display:inline-block;padding:6px 12px;border-radius:999px;background:#ffd709;color:#5b4b00;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-family:'Plus Jakarta Sans', Arial, sans-serif;\">New Beginnings</span>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 8,
+                          "left": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "sun-w-c1-title",
+                      "type": "text",
+                      "data": {
+                        "html": "<h1 style=\"margin:0;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:34px;line-height:1.1;font-weight:800;color:#322e2b;\">Your Journey<br/><span style=\"color:#8c4a00;font-style:italic;\">Starts at Dawn</span></h1>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 12,
+                          "left": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "sun-w-c1-copy",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:15px;line-height:1.7;color:#605a57;\">Welcome to a sanctuary where movement meets mindfulness. We're honored to have you join our collective of morning energy seekers.</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 16,
+                          "left": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "sun-w-c1-cta",
+                      "type": "button",
+                      "data": {
+                        "text": "Book Your First Class",
+                        "url": "https://"
+                      },
+                      "style": {
+                        "alignment": "left",
+                        "backgroundColor": "#8c4a00",
+                        "color": "#fff0e7",
+                        "borderRadius": 999,
+                        "fontSize": 14,
+                        "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 0,
+                          "left": 0
+                        },
+                        "paddingX": 24,
+                        "paddingY": 12,
+                        "fullWidth": false
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "sun-w-c2",
+                  "blocks": [
+                    {
+                      "id": "sun-w-c2-img",
+                      "type": "image",
+                      "data": {
+                        "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuArUl2TSJhruFAqZr76TXFt54t9k2OuM7sweYJoMU3G3-mMaau14fr9jeAiXMahD6vswRmrdYK4rM81g8w193YJpZeFg09L4wQYFI49JBU6NMoISBhU1xZT_d5CTWNjXVfCuzImu0RZyOxRA1KmuzhmN75iupZe64RU7hXacScwIan-KOWpecedHgkulBQ_rRcD1slCxjfhLxrUnQg6wLsRJ9VWkOP4UaslA2XCWpXDcMHg_lxQ99u1Whr1JPDZ5qpCuTougN2n48hO",
+                        "alt": "Yoga practice",
+                        "width": 240
+                      },
+                      "style": {
+                        "alignment": "center",
+                        "borderRadius": 20,
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 0,
+                          "left": 0
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "sun-w-b2",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 20
+            }
+          },
+          {
+            "id": "sun-w-b3",
+            "type": "heading",
+            "data": {
+              "text": "Studio Vibes",
+              "level": 2
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 32,
+                "bottom": 4,
+                "left": 32
+              },
+              "alignment": "left",
+              "color": "#322e2b",
+              "fontSize": 24,
+              "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+              "fontWeight": 700
+            }
+          },
+          {
+            "id": "sun-w-b4",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#7c7672;font-weight:700;font-family:'Plus Jakarta Sans', Arial, sans-serif;\">Our Space</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 32,
+                "bottom": 16,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "sun-w-b5",
+            "type": "html",
+            "data": {
+              "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td width=\"60%\" valign=\"top\" style=\"padding-right:8px;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#f0e6e1;border-radius:16px;overflow:hidden;\"><img src=\"https://lh3.googleusercontent.com/aida-public/AB6AXuC-GUDNRYDNOSlc_eSEPV8g7Toj_AmAH0TwSlKpEUTSdNeEAflW304Z1egdF9McW-qL8aAuDGC39jg1tKQe_3fAIOggju2ZXdOvtGpHN5QwWrDuFMkCBD1l7xajJfaSL8BLd2Ot-z-HF_iMCKbTaerU_6_N95za-fmp6y0coWdQU8c7UDtDx_SnprFrAtX7Z3yG3Awl4Mbtqmf-EkR-YWIqU2J_5OWmaFMhEOCDq4O-Ee9Iir57y6-xwrVcnBbO88OAkOeTW7fvC8Qm\" alt=\"Studio space\" width=\"100%\" style=\"display:block;width:100%;height:auto;border-radius:16px 16px 0 0;\"/><div style=\"padding:12px 16px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:14px;font-weight:700;color:#322e2b;\">Luminous Shala</div></td></tr></table></td><td width=\"40%\" valign=\"top\" style=\"padding-left:8px;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#fff1e8;border-radius:16px;padding:16px;text-align:center;font-style:italic;color:#6c5a00;font-size:13px;line-height:1.6;\">&quot;A breath of fresh air for your morning routine.&quot;</td></tr><tr><td style=\"height:12px;line-height:12px;font-size:0;\">&nbsp;</td></tr><tr><td style=\"background:#f7f1ed;border-radius:16px;overflow:hidden;\"><img src=\"https://lh3.googleusercontent.com/aida-public/AB6AXuANhUMxt61HLrteiGeNLUiP-zn2TQKPnx1FEVsgJ_u4AXTCNh9SqxMOCiBmE36OfV6uSOoeJ2sWUEcNtR9uAnYuGAF4MRu2cWY27OYCzcGUkgXfHjvhNjEMQAtikgE98eNDnEUuKBMsVKcVpQfh2cB7wkIo1LxK_up5MtSYNTFu_u7qz-l1c_bJfstuu3KhGCg46Sk-n7XtB6rGl5JoFW3dnEgXeHxk0Z26fb-TkJCtTwsBud3mPu4SzemF7_SH1qKZDX47TEoVFPvb\" alt=\"Yoga gear\" width=\"100%\" style=\"display:block;width:100%;height:auto;\"/><div style=\"padding:10px 12px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:#6a43b7;\">Sustainable Gear</div></td></tr></table></td></tr></table>"
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 32,
+                "bottom": 16,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "sun-w-b6",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 20
+            }
+          },
+          {
+            "id": "sun-w-b7",
+            "type": "heading",
+            "data": {
+              "text": "Meet Your Guides",
+              "level": 2
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 32,
+                "bottom": 4,
+                "left": 32
+              },
+              "alignment": "left",
+              "color": "#322e2b",
+              "fontSize": 24,
+              "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+              "fontWeight": 700
+            }
+          },
+          {
+            "id": "sun-w-b8",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;font-size:14px;color:#605a57;line-height:1.6;\">Our instructors are here to light your path and support your unique flow.</p>",
+              "variables": []
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 32,
+                "bottom": 16,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "sun-w-b9",
+            "type": "columns",
+            "style": {
+              "gap": 16,
+              "stackOnMobile": true,
+              "padding": {
+                "top": 0,
+                "right": 24,
+                "bottom": 8,
+                "left": 24
+              }
+            },
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                50,
+                50
+              ],
+              "columns": [
+                {
+                  "id": "sun-w-c3",
+                  "blocks": [
+                    {
+                      "id": "sun-w-c3-card",
+                      "type": "html",
+                      "data": {
+                        "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#ffffff;border-radius:16px;padding:16px;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td width=\"72\" valign=\"top\" style=\"padding-right:12px;\"><img src=\"https://lh3.googleusercontent.com/aida-public/AB6AXuAEPNUjp-5hQ1cRO4fvH0RWj02UcCG_dxomMHYfXiEbjbBz4uyLoiZ2E9EkcPbSIRqEXNRRFEsuoMgbozRi4x-lzRRRPgyt7sFvCpaYa3kD4fXLoSKm39tyy-BDDX6-1Pdwm8NTyLGUjtXPJTl1Cwf4h_YASTpYg5uiuCgTqoDZm_RwLD9AkZQnGqxPJ_fobMp-MXc6_b_ua5mGZzp6Ghr0u8jC66zMvOskBrGQi4UCBygMcSlAMzzu45SGeloEVG_PloLieHxAx4DX\" alt=\"Instructor Elena\" width=\"72\" height=\"72\" style=\"display:block;border-radius:999px;\"/></td><td valign=\"top\"><div style=\"margin-bottom:6px;\"><span style=\"display:inline-block;padding:6px 12px;border-radius:999px;background:#efe7ff;color:#6a43b7;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-family:'Plus Jakarta Sans', Arial, sans-serif;\">Vinyasa</span></div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:16px;color:#322e2b;margin-bottom:4px;\">Elena Rivers</div><div style=\"font-size:13px;color:#605a57;line-height:1.5;\">Specializing in fluid movements that synchronize with your natural rhythm.</div></td></tr></table></td></tr></table>"
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 0,
+                          "left": 0
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "sun-w-c4",
+                  "blocks": [
+                    {
+                      "id": "sun-w-c4-card",
+                      "type": "html",
+                      "data": {
+                        "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#ffffff;border-radius:16px;padding:16px;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td width=\"72\" valign=\"top\" style=\"padding-right:12px;\"><img src=\"https://lh3.googleusercontent.com/aida-public/AB6AXuAQY34ZAiflwlKmTWVe3C66qc09j3JWThz00Wk0VD-3EVTgSC2K3xqBjkN-4WcQWicIasr4e5z1ixq0yASMGfA9EUKuTjrB2CZdSVLJt5IY0YbtRBJO-3gCoUxWQKiSSb4qNwd6OtbuHmxVPGEhn3upOZXs2I21jzHG-o345xa6B7ytvqcYNnBgozh_QZc-50eanAlzZZ2Jnz8jcTbQRS9uBdIkHlw-mbq1x2Vm-iMaPeJO9qOS1F8j5kV_-cwr3q2Xy8inhN0JeJAu\" alt=\"Instructor Marcus\" width=\"72\" height=\"72\" style=\"display:block;border-radius:999px;\"/></td><td valign=\"top\"><div style=\"margin-bottom:6px;\"><span style=\"display:inline-block;padding:6px 12px;border-radius:999px;background:#ffe9cc;color:#8c4a00;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-family:'Plus Jakarta Sans', Arial, sans-serif;\">Ashtanga</span></div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:16px;color:#322e2b;margin-bottom:4px;\">Marcus Thorne</div><div style=\"font-size:13px;color:#605a57;line-height:1.5;\">Focusing on strength, alignment, and the power of controlled breath.</div></td></tr></table></td></tr></table>"
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 0,
+                          "left": 0
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "sun-w-b10",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 20
+            }
+          },
+          {
+            "id": "sun-w-b11",
+            "type": "html",
+            "data": {
+              "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#f8efea;border-radius:20px;padding:24px;text-align:center;\"><div style=\"width:48px;height:48px;background:#fd8b00;border-radius:999px;line-height:48px;margin:0 auto 12px;font-size:20px;color:#fff0e7;\">❤</div><h3 style=\"margin:0 0 8px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:24px;color:#322e2b;font-weight:800;\">Ready to glow?</h3><p style=\"margin:0 0 16px;color:#605a57;font-size:15px;line-height:1.6;\">Your first sunrise session is waiting. Let's meet on the mat.</p><a href=\"https://\" style=\"display:inline-block;background:#8c4a00;color:#fff0e7;padding:12px 28px;border-radius:999px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;text-decoration:none;font-size:14px;\">Start Your Morning</a></td></tr></table>"
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center"
+            }
+          }
+        ]
+      },
+      "footer": {
+        "blocks": [
+          {
+            "id": "sun-w-f1",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms of Service</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Manage Preferences</a></p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "backgroundColor": "#f8efea",
+              "padding": {
+                "top": 20,
+                "right": 32,
+                "bottom": 8,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "sun-w-f2",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2024 Sunrise Yoga. All rights reserved.</p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "backgroundColor": "#f8efea",
+              "padding": {
+                "top": 8,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              }
+            }
+          }
+        ]
+      }
+    },
+    "is_premium": true,
+    "tags": [
+      "welcome"
+    ]
+  },
+  {
+    "name": "Special Promotion — Sunrise Yoga",
+    "category": "promotional",
+    "template": {
+      "version": 1,
+      "settings": {
+        "backgroundColor": "#fef5f0",
+        "backgroundStyle": "none",
+        "bodyBackgroundStyle": "solid",
+        "bodyBackgroundColor": "#fef5f0",
+        "bodyBorderRadius": 16,
+        "contentWidth": 600,
+        "defaultFont": "'Be Vietnam Pro', Arial, sans-serif",
+        "defaultFontSize": 15,
+        "defaultColor": "#322e2b"
+      },
+      "header": {
+        "blocks": [
+          {
+            "id": "sun-p-h1",
+            "type": "heading",
+            "data": {
+              "text": "SUNRISE YOGA",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 28,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#8c4a00",
+              "fontSize": 18,
+              "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+              "fontWeight": 800,
+              "letterSpacing": 3,
+              "textTransform": "uppercase"
+            }
+          }
+        ]
+      },
+      "body": {
+        "blocks": [
+          {
+            "id": "sun-p-b1",
+            "type": "hero",
+            "data": {
+              "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuDJ-pgF3dvI1797eAXq1yhR3_17P2bGOauQvVKKWlP9i6tGUbMlDKgijEBS5eo3Wup9dTR_AByckZ_h47Jxm89JPc1E44KRZEkQ3P--xbyHKY87I7JhGJWlApjMD9owBHlx7bfDSnC6u72iEubNEZE4oyNewhGi2kNCUvpNqhYSnKh-44zF8hYg8D-kMmiHz7Mai_8nR1WqSjs8Z6aMinVqS_UvHEBgdlMA3ZTKdobOToxe-7TaCIno67Gr66bxLdh6bEXi2eK6E3uT",
+              "heading": "Awaken Your Inner Glow",
+              "subheading": "Embrace the rhythm of the sunrise with our exclusive seasonal membership event.",
+              "buttonText": "Claim Offer",
+              "buttonUrl": "https://"
+            },
+            "style": {
+              "height": 420,
+              "overlayColor": "#000000",
+              "overlayOpacity": 0.35,
+              "headingColor": "#ffffff",
+              "headingFontSize": 34,
+              "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+              "subheadingColor": "#ffffffcc",
+              "buttonBackgroundColor": "#fd8b00",
+              "buttonTextColor": "#ffffff",
+              "buttonBorderRadius": 999,
+              "contentAlignment": "left",
+              "verticalAlignment": "bottom",
+              "padding": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              }
+            }
+          },
+          {
+            "id": "sun-p-b2",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 16
+            }
+          },
+          {
+            "id": "sun-p-b3",
+            "type": "columns",
+            "style": {
+              "gap": 16,
+              "stackOnMobile": true,
+              "padding": {
+                "top": 0,
+                "right": 24,
+                "bottom": 16,
+                "left": 24
+              }
+            },
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                50,
+                50
+              ],
+              "columns": [
+                {
+                  "id": "sun-p-c1",
+                  "backgroundColor": "#ffd709",
+                  "blocks": [
+                    {
+                      "id": "sun-p-c1-label",
+                      "type": "heading",
+                      "data": {
+                        "text": "OFFER DETAILS",
+                        "level": 4
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 20,
+                          "right": 20,
+                          "bottom": 4,
+                          "left": 20
+                        },
+                        "alignment": "center",
+                        "color": "#5b4b00",
+                        "fontSize": 11,
+                        "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 3,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    {
+                      "id": "sun-p-c1-main",
+                      "type": "text",
+                      "data": {
+                        "html": "<div style=\"text-align:center;\"><span style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:56px;font-weight:800;color:#5b4b00;\">20</span><span style=\"font-size:28px;font-weight:700;color:#5b4b00;\">% OFF</span></div>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 20,
+                          "bottom": 8,
+                          "left": 20
+                        }
+                      }
+                    },
+                    {
+                      "id": "sun-p-c1-sub",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;text-align:center;font-size:14px;color:#5b4b00;font-weight:600;\">All Monthly &amp; Yearly Memberships</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 20,
+                          "bottom": 20,
+                          "left": 20
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "sun-p-c2",
+                  "backgroundColor": "#f8efea",
+                  "blocks": [
+                    {
+                      "id": "sun-p-c2-code",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0 0 12px;text-align:center;font-size:13px;color:#605a57;font-style:italic;\">Use code at checkout to redeem</p><div style=\"border:2px dashed #fd8b00;border-radius:999px;padding:10px 16px;text-align:center;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:800;font-size:20px;letter-spacing:3px;color:#8c4a00;\">SUNRISE20</div><p style=\"margin:12px 0 0;text-align:center;font-size:11px;color:#7c7672;\">Valid until the end of the month</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 20,
+                          "right": 20,
+                          "bottom": 20,
+                          "left": 20
+                        },
+                        "alignment": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "sun-p-b4",
+            "type": "html",
+            "data": {
+              "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#ffffff;border-radius:20px;padding:24px;text-align:center;\"><h3 style=\"margin:0 0 8px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:24px;color:#322e2b;font-weight:800;\">Ready to find your flow?</h3><p style=\"margin:0 0 16px;color:#605a57;font-size:15px;line-height:1.6;\">Join our community of mindful practitioners and gain unlimited access to vinyasa, hatha, and meditation sessions.</p><a href=\"https://\" style=\"display:inline-block;background:#8c4a00;color:#fff0e7;padding:12px 28px;border-radius:999px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;text-decoration:none;font-size:14px;\">Claim Offer</a></td></tr></table>"
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 32,
+                "bottom": 20,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "sun-p-b5",
+            "type": "columns",
+            "style": {
+              "gap": 12,
+              "stackOnMobile": true,
+              "padding": {
+                "top": 0,
+                "right": 24,
+                "bottom": 16,
+                "left": 24
+              }
+            },
+            "data": {
+              "columnCount": 3,
+              "columnRatio": [
+                34,
+                33,
+                33
+              ],
+              "columns": [
+                {
+                  "id": "sun-p-c3",
+                  "blocks": [
+                    {
+                      "id": "sun-p-c3-t",
+                      "type": "text",
+                      "data": {
+                        "html": "<div style=\"text-align:center;\"><div style=\"font-size:24px;\">🧘</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">Expert Guides</div><div style=\"font-size:12px;color:#605a57;\">World-class instructors for every level.</div></div>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 0,
+                          "left": 0
+                        },
+                        "alignment": "center"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "sun-p-c4",
+                  "blocks": [
+                    {
+                      "id": "sun-p-c4-t",
+                      "type": "text",
+                      "data": {
+                        "html": "<div style=\"text-align:center;\"><div style=\"font-size:24px;\">⏰</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">Flexible Access</div><div style=\"font-size:12px;color:#605a57;\">Live streaming and on-demand library.</div></div>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 0,
+                          "left": 0
+                        },
+                        "alignment": "center"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "sun-p-c5",
+                  "blocks": [
+                    {
+                      "id": "sun-p-c5-t",
+                      "type": "text",
+                      "data": {
+                        "html": "<div style=\"text-align:center;\"><div style=\"font-size:24px;\">🤝</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">Community</div><div style=\"font-size:12px;color:#605a57;\">Connect with a global wellness family.</div></div>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 0,
+                          "left": 0
+                        },
+                        "alignment": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "footer": {
+        "blocks": [
+          {
+            "id": "sun-p-f1",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms of Service</a></p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "backgroundColor": "#f8efea",
+              "padding": {
+                "top": 20,
+                "right": 32,
+                "bottom": 8,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "sun-p-f2",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2024 Sunrise Yoga. All rights reserved.</p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "backgroundColor": "#f8efea",
+              "padding": {
+                "top": 8,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              }
+            }
+          }
+        ]
+      }
+    },
+    "is_premium": true,
+    "tags": [
+      "promotional"
+    ]
+  },
+  {
+    "name": "Class Reminder — Sunrise Yoga",
+    "category": "event",
+    "template": {
+      "version": 1,
+      "settings": {
+        "backgroundColor": "#fef5f0",
+        "backgroundStyle": "none",
+        "bodyBackgroundStyle": "solid",
+        "bodyBackgroundColor": "#fef5f0",
+        "bodyBorderRadius": 16,
+        "contentWidth": 600,
+        "defaultFont": "'Be Vietnam Pro', Arial, sans-serif",
+        "defaultFontSize": 15,
+        "defaultColor": "#322e2b"
+      },
+      "header": {
+        "blocks": [
+          {
+            "id": "sun-c-h1",
+            "type": "heading",
+            "data": {
+              "text": "SUNRISE YOGA",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 28,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#8c4a00",
+              "fontSize": 18,
+              "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+              "fontWeight": 800,
+              "letterSpacing": 3,
+              "textTransform": "uppercase"
+            }
+          }
+        ]
+      },
+      "body": {
+        "blocks": [
+          {
+            "id": "sun-c-b1",
+            "type": "hero",
+            "data": {
+              "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCVfAYFH-v3BaXiFvgtAnEk2IT2EjWsilf9B-w5w7OIvifimGOK4ivMB83jlO0LU1Q5Z59ROCdpmZLRbEEc8PeJqXoy6Ci3H0u-I07RvMxraQR5i17OG4DlOssRTan4s6tOsVWEaKfGVqggDX9l7d24XsuJSlhNsDVS02mfH1FNMWHKVdaBbkoO0Mt8pQ24XvD3rDaq1nXMueas_hFrrt2fExCC1wZzDQ76p1LeSvUvtGY3U4zHEN84IXNlZd-KSTT4KgdiY8B0pMha",
+              "heading": "Your Energy Awaits.",
+              "subheading": "Vinyasa Flow • Tomorrow, 6:30 AM",
+              "buttonText": "",
+              "buttonUrl": ""
+            },
+            "style": {
+              "height": 360,
+              "overlayColor": "#322e2b",
+              "overlayOpacity": 0.55,
+              "headingColor": "#ffffff",
+              "headingFontSize": 32,
+              "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+              "subheadingColor": "#ffffffcc",
+              "buttonBackgroundColor": "#fd8b00",
+              "buttonTextColor": "#ffffff",
+              "buttonBorderRadius": 999,
+              "contentAlignment": "left",
+              "verticalAlignment": "bottom",
+              "padding": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              }
+            }
+          },
+          {
+            "id": "sun-c-b2",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 16
+            }
+          },
+          {
+            "id": "sun-c-b3",
+            "type": "columns",
+            "style": {
+              "gap": 16,
+              "stackOnMobile": true,
+              "padding": {
+                "top": 0,
+                "right": 24,
+                "bottom": 16,
+                "left": 24
+              }
+            },
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                50,
+                50
+              ],
+              "columns": [
+                {
+                  "id": "sun-c-c1",
+                  "backgroundColor": "#ffffff",
+                  "blocks": [
+                    {
+                      "id": "sun-c-c1-label",
+                      "type": "heading",
+                      "data": {
+                        "text": "CLASS TIME",
+                        "level": 4
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 20,
+                          "right": 20,
+                          "bottom": 4,
+                          "left": 20
+                        },
+                        "alignment": "left",
+                        "color": "#7c7672",
+                        "fontSize": 11,
+                        "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 3,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    {
+                      "id": "sun-c-c1-time",
+                      "type": "heading",
+                      "data": {
+                        "text": "Tomorrow, 6:30 AM",
+                        "level": 2
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 20,
+                          "bottom": 12,
+                          "left": 20
+                        },
+                        "alignment": "left",
+                        "color": "#322e2b",
+                        "fontSize": 22,
+                        "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                        "fontWeight": 700
+                      }
+                    },
+                    {
+                      "id": "sun-c-c1-btn",
+                      "type": "button",
+                      "data": {
+                        "text": "Add to Calendar",
+                        "url": "https://"
+                      },
+                      "style": {
+                        "alignment": "center",
+                        "backgroundColor": "#8c4a00",
+                        "color": "#fff0e7",
+                        "borderRadius": 999,
+                        "fontSize": 13,
+                        "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "padding": {
+                          "top": 0,
+                          "right": 20,
+                          "bottom": 20,
+                          "left": 20
+                        },
+                        "paddingX": 18,
+                        "paddingY": 10,
+                        "fullWidth": true
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "sun-c-c2",
+                  "backgroundColor": "#fff1e8",
+                  "blocks": [
+                    {
+                      "id": "sun-c-c2-label",
+                      "type": "heading",
+                      "data": {
+                        "text": "INSTRUCTOR",
+                        "level": 4
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 20,
+                          "right": 20,
+                          "bottom": 8,
+                          "left": 20
+                        },
+                        "alignment": "left",
+                        "color": "#8c4a00",
+                        "fontSize": 11,
+                        "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 3,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    {
+                      "id": "sun-c-c2-img",
+                      "type": "image",
+                      "data": {
+                        "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuBiDK-xYpj5m76BU-E9XbHhyjJawLzxWq3JUiy3xy6J3OylRzieiDMXcBevQzFt_rk23U9i-s_0JKl2icQyDXsYUxOpop3PpfYOzvAdxLR3v8ExHQSDidegYgLSPH1HwVfCL7rn4uKQLWKwSRKsl1Gj13QZwu47l8akAX9waWrPEIW0k_96UmMncpoZilf-TbU3FIYhw-jZsTkD5gYRPXSXI0LV9gTtwKhzCSbP4abIl7ZWjVHP3dy3rKLovzMCdFoKBZoz62VyGkKb",
+                        "alt": "Instructor Elena",
+                        "width": 64,
+                        "height": 64
+                      },
+                      "style": {
+                        "alignment": "left",
+                        "borderRadius": 999,
+                        "padding": {
+                          "top": 0,
+                          "right": 20,
+                          "bottom": 8,
+                          "left": 20
+                        }
+                      }
+                    },
+                    {
+                      "id": "sun-c-c2-name",
+                      "type": "heading",
+                      "data": {
+                        "text": "Elena Thorne",
+                        "level": 3
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 20,
+                          "bottom": 4,
+                          "left": 20
+                        },
+                        "alignment": "left",
+                        "color": "#322e2b",
+                        "fontSize": 18,
+                        "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                        "fontWeight": 700
+                      }
+                    },
+                    {
+                      "id": "sun-c-c2-role",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:13px;color:#605a57;\">Lead Vinyasa Instructor</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 20,
+                          "bottom": 20,
+                          "left": 20
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "sun-c-b4",
+            "type": "html",
+            "data": {
+              "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#f8efea;border-radius:20px;padding:24px;text-align:center;\"><h3 style=\"margin:0 0 8px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:22px;color:#322e2b;font-weight:800;\">Ready to find your flow?</h3><p style=\"margin:0 0 16px;color:#605a57;font-size:14px;line-height:1.6;\">Don't forget your mat and a bottle of water. We recommend logging in 5 minutes early to ground yourself.</p><a href=\"https://\" style=\"display:inline-block;background:#8c4a00;color:#fff0e7;padding:12px 28px;border-radius:999px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;text-decoration:none;font-size:14px;\">Get Ready to Flow</a><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-top:16px;\"><tr><td align=\"center\" style=\"font-size:12px;color:#605a57;\">✔ Calendar Synced</td><td align=\"center\" style=\"font-size:12px;color:#605a57;\">✔ Reminder Set</td></tr></table></td></tr></table>"
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 32,
+                "bottom": 20,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "sun-c-b5",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:18px;font-style:italic;color:#6c5a00;line-height:1.6;\">\"The sun is a daily reminder that we too can rise again from the darkness.\"</p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "padding": {
+                "top": 8,
+                "right": 40,
+                "bottom": 24,
+                "left": 40
+              }
+            }
+          }
+        ]
+      },
+      "footer": {
+        "blocks": [
+          {
+            "id": "sun-c-f1",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms of Service</a></p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "backgroundColor": "#f8efea",
+              "padding": {
+                "top": 20,
+                "right": 32,
+                "bottom": 8,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "sun-c-f2",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2024 Sunrise Yoga. All rights reserved.</p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "backgroundColor": "#f8efea",
+              "padding": {
+                "top": 8,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              }
+            }
+          }
+        ]
+      }
+    },
+    "is_premium": true,
+    "tags": [
+      "event"
+    ]
+  },
+  {
+    "name": "Re-engagement — Sunrise Yoga",
+    "category": "promotional",
+    "template": {
+      "version": 1,
+      "settings": {
+        "backgroundColor": "#fef5f0",
+        "backgroundStyle": "none",
+        "bodyBackgroundStyle": "solid",
+        "bodyBackgroundColor": "#fef5f0",
+        "bodyBorderRadius": 16,
+        "contentWidth": 600,
+        "defaultFont": "'Be Vietnam Pro', Arial, sans-serif",
+        "defaultFontSize": 15,
+        "defaultColor": "#322e2b"
+      },
+      "header": {
+        "blocks": [
+          {
+            "id": "sun-r-h1",
+            "type": "heading",
+            "data": {
+              "text": "SUNRISE YOGA",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 28,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#8c4a00",
+              "fontSize": 18,
+              "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+              "fontWeight": 800,
+              "letterSpacing": 3,
+              "textTransform": "uppercase"
+            }
+          }
+        ]
+      },
+      "body": {
+        "blocks": [
+          {
+            "id": "sun-r-b1",
+            "type": "columns",
+            "style": {
+              "gap": 16,
+              "stackOnMobile": true,
+              "padding": {
+                "top": 8,
+                "right": 24,
+                "bottom": 16,
+                "left": 24
+              }
+            },
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                55,
+                45
+              ],
+              "columns": [
+                {
+                  "id": "sun-r-c1",
+                  "blocks": [
+                    {
+                      "id": "sun-r-c1-label",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#8c4a00;font-weight:700;font-family:'Plus Jakarta Sans', Arial, sans-serif;\">Welcome Back</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 8,
+                          "left": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "sun-r-c1-title",
+                      "type": "text",
+                      "data": {
+                        "html": "<h1 style=\"margin:0;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:34px;line-height:1.1;font-weight:800;color:#322e2b;\">We've missed<br/><span style=\"color:#8c4a00;font-style:italic;\">your energy!</span></h1>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 12,
+                          "left": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "sun-r-c1-copy",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:15px;line-height:1.7;color:#605a57;\">The mat feels a little emptier without your presence. It's time to reignite that morning glow and reconnect with your flow.</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 0,
+                          "left": 0
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "sun-r-c2",
+                  "blocks": [
+                    {
+                      "id": "sun-r-c2-img",
+                      "type": "image",
+                      "data": {
+                        "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuBjLlyjrVH2KhlQpNYTHLXtrj46iGsA_wVMo0ZDUCq4Z8rGCSuyWjw36OkzTjO2DAhy73SMqI9F268obCF9rCItr9qAujdkwULSWzcHofv6Jzu_1WzekVQteUYPlAnWZ5dC8fRB4V4uIyRTPOrQ8NKUFqYS3u-36hkuyX46QJCftkxa1ubAjXZfMZpDinJPRGhPsrB7kb5csmmO7uKv-9Hio-8PHzBEt-isfPa20MkkysDQQ5IHwkY2dcasPKZ7d274S9x9uTY7VkKv",
+                        "alt": "Sunrise studio",
+                        "width": 240
+                      },
+                      "style": {
+                        "alignment": "center",
+                        "borderRadius": 20,
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 0,
+                          "left": 0
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "sun-r-b2",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 20
+            }
+          },
+          {
+            "id": "sun-r-b3",
+            "type": "columns",
+            "style": {
+              "gap": 16,
+              "stackOnMobile": true,
+              "padding": {
+                "top": 0,
+                "right": 24,
+                "bottom": 16,
+                "left": 24
+              }
+            },
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                50,
+                50
+              ],
+              "columns": [
+                {
+                  "id": "sun-r-c3",
+                  "backgroundColor": "#f8efea",
+                  "blocks": [
+                    {
+                      "id": "sun-r-c3-t",
+                      "type": "text",
+                      "data": {
+                        "html": "<div style=\"font-size:22px;\">✨</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">New Morning Flows</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;\">We've added 12 new Vinyasa sequences designed to energize your rhythm.</div>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 20,
+                          "right": 20,
+                          "bottom": 20,
+                          "left": 20
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "sun-r-c4",
+                  "backgroundColor": "#fff1e8",
+                  "blocks": [
+                    {
+                      "id": "sun-r-c4-t",
+                      "type": "text",
+                      "data": {
+                        "html": "<div style=\"font-size:22px;\">🌿</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">Guided Breathwork</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;\">Enhanced meditation sessions to ground you before the day begins.</div>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 20,
+                          "right": 20,
+                          "bottom": 20,
+                          "left": 20
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "sun-r-b4",
+            "type": "html",
+            "data": {
+              "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#ffffff;border-radius:20px;padding:24px;text-align:center;\"><h3 style=\"margin:0 0 8px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:24px;color:#322e2b;font-weight:800;\">Your Mat is Ready</h3><p style=\"margin:0 0 16px;color:#605a57;font-size:15px;line-height:1.6;\">To celebrate your return, we've added a complimentary session to your account. No strings, just pure energy.</p><a href=\"https://\" style=\"display:inline-block;background:#8c4a00;color:#fff0e7;padding:12px 28px;border-radius:999px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;text-decoration:none;font-size:14px;\">Claim Free Class</a><p style=\"margin:12px 0 0;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#7c7672;font-weight:700;\">Offer valid for 7 days</p></td></tr></table>"
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 32,
+                "bottom": 16,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "sun-r-b5",
+            "type": "text",
+            "data": {
+              "html": "<div style=\"text-align:center;\"><span style=\"display:inline-block;width:10px;height:10px;border-radius:999px;background:#fd8b00;margin:0 4px;\"></span><span style=\"display:inline-block;width:10px;height:10px;border-radius:999px;background:#fd8b00;opacity:0.6;margin:0 4px;\"></span><span style=\"display:inline-block;width:10px;height:10px;border-radius:999px;background:#fd8b00;opacity:0.3;margin:0 4px;\"></span></div>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "padding": {
+                "top": 8,
+                "right": 32,
+                "bottom": 16,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "sun-r-b6",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:18px;font-style:italic;color:#6c5a00;line-height:1.6;\">\"The morning sun is a daily invitation to start again, to breathe deeper, and to find your center.\"</p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "padding": {
+                "top": 0,
+                "right": 40,
+                "bottom": 24,
+                "left": 40
+              }
+            }
+          }
+        ]
+      },
+      "footer": {
+        "blocks": [
+          {
+            "id": "sun-r-f1",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms of Service</a></p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "backgroundColor": "#f8efea",
+              "padding": {
+                "top": 20,
+                "right": 32,
+                "bottom": 8,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "sun-r-f2",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2024 Sunrise Yoga. All rights reserved.</p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "backgroundColor": "#f8efea",
+              "padding": {
+                "top": 8,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              }
+            }
+          }
+        ]
+      }
+    },
+    "is_premium": true,
+    "tags": [
+      "promotional"
+    ]
+  },
+  {
+    "name": "Retreat Announcement — Sunrise Yoga",
+    "category": "event",
+    "template": {
+      "version": 1,
+      "settings": {
+        "backgroundColor": "#fef5f0",
+        "backgroundStyle": "none",
+        "bodyBackgroundStyle": "solid",
+        "bodyBackgroundColor": "#fef5f0",
+        "bodyBorderRadius": 16,
+        "contentWidth": 600,
+        "defaultFont": "'Be Vietnam Pro', Arial, sans-serif",
+        "defaultFontSize": 15,
+        "defaultColor": "#322e2b"
+      },
+      "header": {
+        "blocks": [
+          {
+            "id": "sun-e1-h1",
+            "type": "heading",
+            "data": {
+              "text": "SUNRISE YOGA",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 28,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#8c4a00",
+              "fontSize": 18,
+              "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+              "fontWeight": 800,
+              "letterSpacing": 3,
+              "textTransform": "uppercase"
+            }
+          }
+        ]
+      },
+      "body": {
+        "blocks": [
+          {
+            "id": "sun-e1-b1",
+            "type": "hero",
+            "data": {
+              "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuDJ-pgF3dvI1797eAXq1yhR3_17P2bGOauQvVKKWlP9i6tGUbMlDKgijEBS5eo3Wup9dTR_AByckZ_h47Jxm89JPc1E44KRZEkQ3P--xbyHKY87I7JhGJWlApjMD9owBHlx7bfDSnC6u72iEubNEZE4oyNewhGi2kNCUvpNqhYSnKh-44zF8hYg8D-kMmiHz7Mai_8nR1WqSjs8Z6aMinVqS_UvHEBgdlMA3ZTKdobOToxe-7TaCIno67Gr66bxLdh6bEXi2eK6E3uT",
+              "heading": "Dawn Retreat Weekend",
+              "subheading": "Big Sur • June 14–16",
+              "buttonText": "Reserve Your Spot",
+              "buttonUrl": "https://"
+            },
+            "style": {
+              "height": 420,
+              "overlayColor": "#000000",
+              "overlayOpacity": 0.4,
+              "headingColor": "#ffffff",
+              "headingFontSize": 34,
+              "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+              "subheadingColor": "#ffffffcc",
+              "buttonBackgroundColor": "#fd8b00",
+              "buttonTextColor": "#ffffff",
+              "buttonBorderRadius": 999,
+              "contentAlignment": "left",
+              "verticalAlignment": "bottom",
+              "padding": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              }
+            }
+          },
+          {
+            "id": "sun-e1-b2",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 16
+            }
+          },
+          {
+            "id": "sun-e1-b3",
+            "type": "columns",
+            "style": {
+              "gap": 12,
+              "stackOnMobile": true,
+              "padding": {
+                "top": 0,
+                "right": 24,
+                "bottom": 16,
+                "left": 24
+              }
+            },
+            "data": {
+              "columnCount": 3,
+              "columnRatio": [
+                34,
+                33,
+                33
+              ],
+              "columns": [
+                {
+                  "id": "sun-e1-c1",
+                  "backgroundColor": "#fff1e8",
+                  "blocks": [
+                    {
+                      "id": "sun-e1-c1-t",
+                      "type": "text",
+                      "data": {
+                        "html": "<div style=\"text-align:left;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:11px;color:#8c4a00;\">Day 1</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:16px;color:#322e2b;margin-top:6px;\">Ground &amp; Flow</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;margin-top:6px;\">Sunrise Vinyasa, ocean breathwork, communal dinner.</div></div>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 18,
+                          "right": 18,
+                          "bottom": 18,
+                          "left": 18
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "sun-e1-c2",
+                  "backgroundColor": "#f8efea",
+                  "blocks": [
+                    {
+                      "id": "sun-e1-c2-t",
+                      "type": "text",
+                      "data": {
+                        "html": "<div style=\"text-align:left;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:11px;color:#6c5a00;\">Day 2</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:16px;color:#322e2b;margin-top:6px;\">Rest &amp; Restore</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;margin-top:6px;\">Forest hike, yin workshop, sound bath at dusk.</div></div>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 18,
+                          "right": 18,
+                          "bottom": 18,
+                          "left": 18
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "sun-e1-c3",
+                  "backgroundColor": "#ffffff",
+                  "blocks": [
+                    {
+                      "id": "sun-e1-c3-t",
+                      "type": "text",
+                      "data": {
+                        "html": "<div style=\"text-align:left;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:11px;color:#6a43b7;\">Day 3</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:16px;color:#322e2b;margin-top:6px;\">Renew &amp; Rise</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;margin-top:6px;\">Meditation at dawn, closing circle, take-home ritual.</div></div>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 18,
+                          "right": 18,
+                          "bottom": 18,
+                          "left": 18
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "sun-e1-b4",
+            "type": "html",
+            "data": {
+              "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#ffffff;border-radius:20px;padding:24px;text-align:center;\"><h3 style=\"margin:0 0 8px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:24px;color:#322e2b;font-weight:800;\">What's included</h3><p style=\"margin:0 0 14px;color:#605a57;font-size:14px;line-height:1.6;\">Lodging, all classes, two meals daily, and a retreat journal.</p><a href=\"https://\" style=\"display:inline-block;background:#8c4a00;color:#fff0e7;padding:12px 28px;border-radius:999px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;text-decoration:none;font-size:14px;\">View Itinerary</a></td></tr></table>"
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 32,
+                "bottom": 20,
+                "left": 32
+              }
+            }
+          }
+        ]
+      },
+      "footer": {
+        "blocks": [
+          {
+            "id": "sun-e1-f1",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms of Service</a></p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "backgroundColor": "#f8efea",
+              "padding": {
+                "top": 20,
+                "right": 32,
+                "bottom": 8,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "sun-e1-f2",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2024 Sunrise Yoga. All rights reserved.</p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "backgroundColor": "#f8efea",
+              "padding": {
+                "top": 8,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              }
+            }
+          }
+        ]
+      }
+    },
+    "is_premium": true,
+    "tags": [
+      "event"
+    ]
+  },
+  {
+    "name": "Workshop Invitation — Sunrise Yoga",
+    "category": "event",
+    "template": {
+      "version": 1,
+      "settings": {
+        "backgroundColor": "#fef5f0",
+        "backgroundStyle": "none",
+        "bodyBackgroundStyle": "solid",
+        "bodyBackgroundColor": "#fef5f0",
+        "bodyBorderRadius": 16,
+        "contentWidth": 600,
+        "defaultFont": "'Be Vietnam Pro', Arial, sans-serif",
+        "defaultFontSize": 15,
+        "defaultColor": "#322e2b"
+      },
+      "header": {
+        "blocks": [
+          {
+            "id": "sun-e2-h1",
+            "type": "heading",
+            "data": {
+              "text": "SUNRISE YOGA",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 28,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#8c4a00",
+              "fontSize": 18,
+              "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+              "fontWeight": 800,
+              "letterSpacing": 3,
+              "textTransform": "uppercase"
+            }
+          }
+        ]
+      },
+      "body": {
+        "blocks": [
+          {
+            "id": "sun-e2-b1",
+            "type": "hero",
+            "data": {
+              "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCVfAYFH-v3BaXiFvgtAnEk2IT2EjWsilf9B-w5w7OIvifimGOK4ivMB83jlO0LU1Q5Z59ROCdpmZLRbEEc8PeJqXoy6Ci3H0u-I07RvMxraQR5i17OG4DlOssRTan4s6tOsVWEaKfGVqggDX9l7d24XsuJSlhNsDVS02mfH1FNMWHKVdaBbkoO0Mt8pQ24XvD3rDaq1nXMueas_hFrrt2fExCC1wZzDQ76p1LeSvUvtGY3U4zHEN84IXNlZd-KSTT4KgdiY8B0pMha",
+              "heading": "Breathwork & Sound Bath",
+              "subheading": "Friday, 7:00 PM • Studio B",
+              "buttonText": "Save Your Cushion",
+              "buttonUrl": "https://"
+            },
+            "style": {
+              "height": 380,
+              "overlayColor": "#322e2b",
+              "overlayOpacity": 0.5,
+              "headingColor": "#ffffff",
+              "headingFontSize": 32,
+              "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+              "subheadingColor": "#ffffffcc",
+              "buttonBackgroundColor": "#fd8b00",
+              "buttonTextColor": "#ffffff",
+              "buttonBorderRadius": 999,
+              "contentAlignment": "left",
+              "verticalAlignment": "bottom",
+              "padding": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              }
+            }
+          },
+          {
+            "id": "sun-e2-b2",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 16
+            }
+          },
+          {
+            "id": "sun-e2-b3",
+            "type": "columns",
+            "style": {
+              "gap": 16,
+              "stackOnMobile": true,
+              "padding": {
+                "top": 0,
+                "right": 24,
+                "bottom": 16,
+                "left": 24
+              }
+            },
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                50,
+                50
+              ],
+              "columns": [
+                {
+                  "id": "sun-e2-c1",
+                  "backgroundColor": "#ffffff",
+                  "blocks": [
+                    {
+                      "id": "sun-e2-c1-label",
+                      "type": "heading",
+                      "data": {
+                        "text": "WHAT YOU'LL EXPERIENCE",
+                        "level": 4
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 18,
+                          "right": 18,
+                          "bottom": 6,
+                          "left": 18
+                        },
+                        "alignment": "left",
+                        "color": "#7c7672",
+                        "fontSize": 11,
+                        "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 2,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    {
+                      "id": "sun-e2-c1-text",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:13px;color:#605a57;line-height:1.6;\">Guided pranayama, crystal bowl immersion, and a deep-release meditation to close the week.</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 18,
+                          "bottom": 18,
+                          "left": 18
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "sun-e2-c2",
+                  "backgroundColor": "#fff1e8",
+                  "blocks": [
+                    {
+                      "id": "sun-e2-c2-label",
+                      "type": "heading",
+                      "data": {
+                        "text": "WHAT TO BRING",
+                        "level": 4
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 18,
+                          "right": 18,
+                          "bottom": 6,
+                          "left": 18
+                        },
+                        "alignment": "left",
+                        "color": "#8c4a00",
+                        "fontSize": 11,
+                        "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "letterSpacing": 2,
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    {
+                      "id": "sun-e2-c2-text",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:13px;color:#605a57;line-height:1.6;\">A blanket, a journal, and your favorite grounding scent. We provide bolsters and tea.</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 18,
+                          "bottom": 18,
+                          "left": 18
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "sun-e2-b4",
+            "type": "html",
+            "data": {
+              "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#f8efea;border-radius:20px;padding:20px;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td width=\"80\" valign=\"top\" style=\"padding-right:16px;\"><img src=\"https://lh3.googleusercontent.com/aida-public/AB6AXuBiDK-xYpj5m76BU-E9XbHhyjJawLzxWq3JUiy3xy6J3OylRzieiDMXcBevQzFt_rk23U9i-s_0JKl2icQyDXsYUxOpop3PpfYOzvAdxLR3v8ExHQSDidegYgLSPH1HwVfCL7rn4uKQLWKwSRKsl1Gj13QZwu47l8akAX9waWrPEIW0k_96UmMncpoZilf-TbU3FIYhw-jZsTkD5gYRPXSXI0LV9gTtwKhzCSbP4abIl7ZWjVHP3dy3rKLovzMCdFoKBZoz62VyGkKb\" alt=\"Guest Instructor\" width=\"80\" height=\"80\" style=\"display:block;border-radius:999px;\"/></td><td valign=\"top\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:18px;color:#322e2b;\">Elena Rivers</div><div style=\"font-size:13px;color:#605a57;margin-top:4px;\">Guest facilitator • Breathwork &amp; meditation</div><div style=\"margin-top:10px;\"><a href=\"https://\" style=\"display:inline-block;background:#8c4a00;color:#fff0e7;padding:10px 20px;border-radius:999px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;text-decoration:none;font-size:13px;\">Reserve Seat</a></div></td></tr></table></td></tr></table>"
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 32,
+                "bottom": 20,
+                "left": 32
+              }
+            }
+          }
+        ]
+      },
+      "footer": {
+        "blocks": [
+          {
+            "id": "sun-e2-f1",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms of Service</a></p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "backgroundColor": "#f8efea",
+              "padding": {
+                "top": 20,
+                "right": 32,
+                "bottom": 8,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "sun-e2-f2",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2024 Sunrise Yoga. All rights reserved.</p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "backgroundColor": "#f8efea",
+              "padding": {
+                "top": 8,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              }
+            }
+          }
+        ]
+      }
+    },
+    "is_premium": true,
+    "tags": [
+      "event"
+    ]
+  },
+  {
+    "name": "Sunrise Challenge — Sunrise Yoga",
+    "category": "event",
+    "template": {
+      "version": 1,
+      "settings": {
+        "backgroundColor": "#fef5f0",
+        "backgroundStyle": "none",
+        "bodyBackgroundStyle": "solid",
+        "bodyBackgroundColor": "#fef5f0",
+        "bodyBorderRadius": 16,
+        "contentWidth": 600,
+        "defaultFont": "'Be Vietnam Pro', Arial, sans-serif",
+        "defaultFontSize": 15,
+        "defaultColor": "#322e2b"
+      },
+      "header": {
+        "blocks": [
+          {
+            "id": "sun-e3-h1",
+            "type": "heading",
+            "data": {
+              "text": "SUNRISE YOGA",
+              "level": 3
+            },
+            "style": {
+              "padding": {
+                "top": 28,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              },
+              "alignment": "center",
+              "color": "#8c4a00",
+              "fontSize": 18,
+              "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+              "fontWeight": 800,
+              "letterSpacing": 3,
+              "textTransform": "uppercase"
+            }
+          }
+        ]
+      },
+      "body": {
+        "blocks": [
+          {
+            "id": "sun-e3-b1",
+            "type": "columns",
+            "style": {
+              "gap": 16,
+              "stackOnMobile": true,
+              "padding": {
+                "top": 12,
+                "right": 24,
+                "bottom": 16,
+                "left": 24
+              }
+            },
+            "data": {
+              "columnCount": 2,
+              "columnRatio": [
+                55,
+                45
+              ],
+              "columns": [
+                {
+                  "id": "sun-e3-c1",
+                  "blocks": [
+                    {
+                      "id": "sun-e3-c1-label",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#8c4a00;font-weight:700;font-family:'Plus Jakarta Sans', Arial, sans-serif;\">7-Day Challenge</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 8,
+                          "left": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "sun-e3-c1-title",
+                      "type": "text",
+                      "data": {
+                        "html": "<h1 style=\"margin:0;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:34px;line-height:1.1;font-weight:800;color:#322e2b;\">Rise With The Sun</h1>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 12,
+                          "left": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "sun-e3-c1-copy",
+                      "type": "text",
+                      "data": {
+                        "html": "<p style=\"margin:0;font-size:15px;line-height:1.7;color:#605a57;\">Join us for seven dawn sessions designed to reset your rhythm and build a mindful morning ritual.</p>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 16,
+                          "left": 0
+                        }
+                      }
+                    },
+                    {
+                      "id": "sun-e3-c1-cta",
+                      "type": "button",
+                      "data": {
+                        "text": "Join the Challenge",
+                        "url": "https://"
+                      },
+                      "style": {
+                        "alignment": "left",
+                        "backgroundColor": "#8c4a00",
+                        "color": "#fff0e7",
+                        "borderRadius": 999,
+                        "fontSize": 14,
+                        "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                        "fontWeight": 700,
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 0,
+                          "left": 0
+                        },
+                        "paddingX": 24,
+                        "paddingY": 12,
+                        "fullWidth": false
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "sun-e3-c2",
+                  "blocks": [
+                    {
+                      "id": "sun-e3-c2-img",
+                      "type": "image",
+                      "data": {
+                        "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuBjLlyjrVH2KhlQpNYTHLXtrj46iGsA_wVMo0ZDUCq4Z8rGCSuyWjw36OkzTjO2DAhy73SMqI9F268obCF9rCItr9qAujdkwULSWzcHofv6Jzu_1WzekVQteUYPlAnWZ5dC8fRB4V4uIyRTPOrQ8NKUFqYS3u-36hkuyX46QJCftkxa1ubAjXZfMZpDinJPRGhPsrB7kb5csmmO7uKv-9Hio-8PHzBEt-isfPa20MkkysDQQ5IHwkY2dcasPKZ7d274S9x9uTY7VkKv",
+                        "alt": "Morning studio",
+                        "width": 240
+                      },
+                      "style": {
+                        "alignment": "center",
+                        "borderRadius": 20,
+                        "padding": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 0,
+                          "left": 0
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "sun-e3-b2",
+            "type": "spacer",
+            "data": {},
+            "style": {
+              "height": 16
+            }
+          },
+          {
+            "id": "sun-e3-b3",
+            "type": "columns",
+            "style": {
+              "gap": 12,
+              "stackOnMobile": true,
+              "padding": {
+                "top": 0,
+                "right": 24,
+                "bottom": 16,
+                "left": 24
+              }
+            },
+            "data": {
+              "columnCount": 3,
+              "columnRatio": [
+                34,
+                33,
+                33
+              ],
+              "columns": [
+                {
+                  "id": "sun-e3-c3",
+                  "backgroundColor": "#ffffff",
+                  "blocks": [
+                    {
+                      "id": "sun-e3-c3-t",
+                      "type": "text",
+                      "data": {
+                        "html": "<div style=\"text-align:center;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:800;font-size:18px;color:#8c4a00;\">6:30 AM</div><div style=\"font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7c7672;font-weight:700;margin-top:4px;\">Daily Start</div></div>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 16,
+                          "right": 16,
+                          "bottom": 16,
+                          "left": 16
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "sun-e3-c4",
+                  "backgroundColor": "#fff1e8",
+                  "blocks": [
+                    {
+                      "id": "sun-e3-c4-t",
+                      "type": "text",
+                      "data": {
+                        "html": "<div style=\"text-align:center;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:800;font-size:18px;color:#8c4a00;\">7 Days</div><div style=\"font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7c7672;font-weight:700;margin-top:4px;\">Full Reset</div></div>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 16,
+                          "right": 16,
+                          "bottom": 16,
+                          "left": 16
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "sun-e3-c5",
+                  "backgroundColor": "#f8efea",
+                  "blocks": [
+                    {
+                      "id": "sun-e3-c5-t",
+                      "type": "text",
+                      "data": {
+                        "html": "<div style=\"text-align:center;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:800;font-size:18px;color:#8c4a00;\">Live</div><div style=\"font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7c7672;font-weight:700;margin-top:4px;\">+ Replays</div></div>",
+                        "variables": []
+                      },
+                      "style": {
+                        "padding": {
+                          "top": 16,
+                          "right": 16,
+                          "bottom": 16,
+                          "left": 16
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "sun-e3-b4",
+            "type": "html",
+            "data": {
+              "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#ffffff;border-radius:20px;padding:22px;\"><h3 style=\"margin:0 0 10px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:22px;color:#322e2b;font-weight:800;\">Challenge rhythm</h3><p style=\"margin:0 0 12px;color:#605a57;font-size:14px;line-height:1.6;\">Each day includes a 35-minute flow, a 10-minute breath reset, and a short reflection prompt.</p><p style=\"margin:0;font-size:12px;color:#7c7672;letter-spacing:2px;text-transform:uppercase;font-weight:700;\">Begins Monday</p></td></tr></table>"
+            },
+            "style": {
+              "padding": {
+                "top": 0,
+                "right": 32,
+                "bottom": 20,
+                "left": 32
+              }
+            }
+          }
+        ]
+      },
+      "footer": {
+        "blocks": [
+          {
+            "id": "sun-e3-f1",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms of Service</a></p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "backgroundColor": "#f8efea",
+              "padding": {
+                "top": 20,
+                "right": 32,
+                "bottom": 8,
+                "left": 32
+              }
+            }
+          },
+          {
+            "id": "sun-e3-f2",
+            "type": "text",
+            "data": {
+              "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2024 Sunrise Yoga. All rights reserved.</p>",
+              "variables": []
+            },
+            "style": {
+              "alignment": "center",
+              "backgroundColor": "#f8efea",
+              "padding": {
+                "top": 8,
+                "right": 32,
+                "bottom": 24,
+                "left": 32
+              }
+            }
+          }
+        ]
+      }
+    },
+    "is_premium": true,
+    "tags": [
+      "event"
+    ]
   }
 ]

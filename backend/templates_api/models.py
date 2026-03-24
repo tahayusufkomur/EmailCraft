@@ -35,6 +35,8 @@ class Template(models.Model):
     json_data = models.JSONField()
     thumbnail_url = models.URLField(blank=True, null=True)
     is_gallery = models.BooleanField(default=False, db_index=True)
+    is_premium = models.BooleanField(default=False, db_index=True)
+    tags = models.JSONField(default=list, blank=True)
     category = models.CharField(max_length=50, blank=True, choices=CATEGORY_CHOICES)
     is_draft = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -47,6 +49,7 @@ class Template(models.Model):
         indexes = [
             models.Index(fields=['org', 'created_at']),
             models.Index(fields=['is_gallery', 'category']),
+            models.Index(fields=['is_gallery', 'is_premium'], name='tmpl_gallery_prem_idx'),
         ]
         ordering = ['-updated_at']
 

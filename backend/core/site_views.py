@@ -31,7 +31,12 @@ from core.serializers import (
 )
 from core.views import subscribe_org_to_plan
 from templates_api.models import Template
-from templates_api.serializers import TemplateCreateSerializer, TemplateDetailSerializer, TemplateListSerializer
+from templates_api.serializers import (
+    GalleryTemplateSerializer,
+    TemplateCreateSerializer,
+    TemplateDetailSerializer,
+    TemplateListSerializer,
+)
 
 
 def _organization_for_user(user: User):
@@ -334,6 +339,24 @@ def site_templates(request):
     serializer.is_valid(raise_exception=True)
     template = serializer.save(org=org, is_gallery=False)
     return Response(TemplateDetailSerializer(template).data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
+def site_gallery(request):
+    billing_org = billing_organization_for_user(request.user)
+    queryset = Template.objects.shared()
+
+    category = request.query_params.get('category')
+    if category:
+        queryset = queryset.filter(category=category)
+
+    if not billing_org or billing_org.plan == 'free':
+        queryset = queryset.filter(is_premium=False)
+
+    serializer = GalleryTemplateSerializer(queryset, many=True)
+    return Response({'data': serializer.data})
 
 
 @api_view(['GET', 'PUT', 'DELETE'])

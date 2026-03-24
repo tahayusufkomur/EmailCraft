@@ -14,6 +14,7 @@ import { LoginPage } from './pages/LoginPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PricingPage } from './pages/PricingPage';
 import { RegisterPage } from './pages/RegisterPage';
+import { TemplatesPage } from './pages/TemplatesPage';
 
 function App() {
   return (
@@ -21,6 +22,14 @@ function App() {
       <Route element={<SiteLayout />}>
         <Route index element={<LandingPage />} />
         <Route path="pricing" element={<PricingPage />} />
+        <Route
+          path="templates"
+          element={
+            <ProtectedRoute>
+              <TemplatesPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="faq" element={<FaqPage />} />
         <Route path="impressum" element={<ImpressumPage />} />
         <Route path="login" element={<LoginPage />} />

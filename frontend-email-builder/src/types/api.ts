@@ -39,6 +39,8 @@ export interface TemplateListItem {
   thumbnail_url: string | null;
   category: string;
   is_draft: boolean;
+  is_premium?: boolean;
+  tags?: string[];
   template_type?: 'user' | 'provided';
   created_at: string;
   updated_at: string;

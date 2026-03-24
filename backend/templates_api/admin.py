@@ -5,8 +5,8 @@ from templates_api.models import Template, UploadedImage
 
 @admin.register(Template)
 class TemplateAdmin(admin.ModelAdmin):
-    list_display = ['name', 'org', 'category', 'is_gallery', 'is_draft', 'updated_at']
-    list_filter = ['is_gallery', 'category', 'is_draft']
+    list_display = ['name', 'org', 'category', 'is_gallery', 'is_premium', 'is_draft', 'updated_at']
+    list_filter = ['is_gallery', 'is_premium', 'category', 'is_draft']
     search_fields = ['name', 'org__name']
     readonly_fields = ['id', 'created_at', 'updated_at']
 

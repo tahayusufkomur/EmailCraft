@@ -12,6 +12,7 @@ import type {
   SubscribeResponse,
   EmailBackgroundStyle,
   ThemeMode,
+  GalleryTemplatesResponse,
 } from '../types/api';
 
 const BASE_URL = import.meta.env.VITE_API_URL || '/api';
@@ -49,6 +50,8 @@ export const api = {
   fetchLanding: () => request<LandingResponse>('/pages/landing'),
 
   fetchPricing: () => request<PricingResponse>('/pages/pricing'),
+
+  fetchGalleryTemplates: (token: string) => request<GalleryTemplatesResponse>('/site/gallery', {}, token),
 
   register: (payload: {
     username: string;

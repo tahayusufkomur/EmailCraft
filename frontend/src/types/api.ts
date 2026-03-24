@@ -129,6 +129,8 @@ export interface TemplateListItem {
   thumbnail_url: string | null;
   category: string;
   is_draft: boolean;
+  is_premium?: boolean;
+  tags?: string[];
   template_type?: 'user' | 'provided';
   created_at: string;
   updated_at: string;
@@ -136,6 +138,21 @@ export interface TemplateListItem {
 
 export interface TemplateDetail extends TemplateListItem {
   json_data: Record<string, unknown>;
+}
+
+export interface GalleryTemplate {
+  id: string;
+  name: string;
+  category: string;
+  thumbnail_url: string | null;
+  json_data: Record<string, unknown>;
+  is_premium?: boolean;
+  tags?: string[];
+  template_type?: 'provided';
+}
+
+export interface GalleryTemplatesResponse {
+  data: GalleryTemplate[];
 }
 
 export interface SubscribeResponse {

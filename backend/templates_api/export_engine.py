@@ -718,6 +718,7 @@ def _hex_to_rgba(hex_color, opacity):
 _GOOGLE_FONT_SLUGS = {
     'Noto Serif': 'Noto+Serif:wght@400;700',
     'Plus Jakarta Sans': 'Plus+Jakarta+Sans:wght@300;400;500;600;700',
+    'Be Vietnam Pro': 'Be+Vietnam+Pro:wght@300;400;500;600;700',
     'Inter': 'Inter:wght@300;400;500;600;700',
     'Playfair Display': 'Playfair+Display:wght@400;700',
     'Lora': 'Lora:wght@400;700',
