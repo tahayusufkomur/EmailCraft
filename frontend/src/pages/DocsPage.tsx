@@ -73,9 +73,9 @@ export function DocsPage() {
         </p>
       </div>
 
-      <div className="grid gap-8 md:grid-cols-[200px_1fr]">
+      <div className="grid gap-8 md:grid-cols-[200px_1fr]" style={{ height: 'calc(100vh - 200px)' }}>
         {/* Sidebar nav */}
-        <nav className="hidden h-fit space-y-1 md:block">
+        <nav className="hidden space-y-1 overflow-y-auto md:block">
           {SECTIONS.map((s) => (
             <a
               key={s.id}
@@ -91,7 +91,7 @@ export function DocsPage() {
         </nav>
 
         {/* Content */}
-        <div className="space-y-12">
+        <div className="space-y-12 overflow-y-auto pr-2">
           <Section id="overview" title="Overview">
             <p>
               MailCraft is an embeddable email template builder. Your users design email templates
