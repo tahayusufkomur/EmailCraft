@@ -5,7 +5,7 @@
        test test-backend lint-frontend lint-frontend-site lint-frontend-builder \
        seed demo-org create-key logs-backend shell dbshell superuser clean reset setup \
        install-frontend-local install-frontend-site-local install-frontend-builder-local \
-       deploy deploy-seed deploy-logs
+       deploy deploy-shell deploy-superuser deploy-migrate deploy-seed deploy-logs
 
 COMPOSE := docker compose
 BACKEND := backend
@@ -156,6 +156,15 @@ install-frontend-builder-local: ## Install builder deps on host
 PROD_HOST := root@46.224.76.186
 PROD_DIR := /opt/mailcraft
 PROD_COMPOSE := docker compose -f docker/docker-compose.prod.yml --env-file .env.prod
+
+deploy-shell: ## Open Django shell on production
+	@ssh $(PROD_HOST) -t "cd $(PROD_DIR) && $(PROD_COMPOSE) exec backend python manage.py shell"
+
+deploy-superuser: ## Create superuser on production
+	@ssh $(PROD_HOST) -t "cd $(PROD_DIR) && $(PROD_COMPOSE) exec backend python manage.py createsuperuser"
+
+deploy-migrate: ## Run migrations on production
+	@ssh $(PROD_HOST) "cd $(PROD_DIR) && $(PROD_COMPOSE) exec -T backend python manage.py migrate"
 
 deploy-seed: ## Seed gallery templates on production
 	@ssh $(PROD_HOST) "cd $(PROD_DIR) && $(PROD_COMPOSE) exec -T backend python manage.py seed_gallery"
