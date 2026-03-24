@@ -1,8 +1,21 @@
 import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Sun, Moon, Monitor } from 'lucide-react';
 
 import { Button } from '../ui/button';
 import { useAuth } from '../../lib/auth';
+import { useTheme } from '../../lib/theme';
 import { cn } from '../../lib/utils';
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  const next = theme === 'system' ? 'light' : theme === 'light' ? 'dark' : 'system';
+  const Icon = theme === 'system' ? Monitor : theme === 'light' ? Sun : Moon;
+  return (
+    <Button variant="ghost" size="sm" onClick={() => setTheme(next)} title={`Theme: ${theme}`}>
+      <Icon className="h-4 w-4" />
+    </Button>
+  );
+}
 
 const navItems = [
   { to: '/', label: 'Home' },
@@ -39,6 +52,7 @@ export function SiteLayout() {
             </a>
           </nav>
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             {isAuthenticated ? (
               <>
                 <Button asChild variant="outline" size="sm">

@@ -18,7 +18,7 @@ export function LandingPage() {
 
   return (
     <div>
-      <section className="relative overflow-hidden border-b border-border/60 bg-[radial-gradient(circle_at_top,_hsl(205_90%_58%_/_0.17),transparent_45%),radial-gradient(circle_at_80%_50%,_hsl(33_95%_57%_/_0.16),transparent_45%)]">
+      <section className="relative overflow-hidden border-b border-border/60 bg-[radial-gradient(circle_at_top,_hsl(205_90%_58%_/_0.17),transparent_45%),radial-gradient(circle_at_80%_50%,_hsl(33_95%_57%_/_0.16),transparent_45%)] dark:bg-[radial-gradient(circle_at_top,_hsl(205_90%_58%_/_0.08),transparent_45%),radial-gradient(circle_at_80%_50%,_hsl(33_95%_57%_/_0.06),transparent_45%)]">
         <div className="mx-auto w-full max-w-6xl px-4 py-20 md:py-28">
           <p className="mb-4 inline-flex rounded-full border border-border bg-background/90 px-3 py-1 text-xs font-medium text-muted-foreground">
             Built for product teams shipping email at scale

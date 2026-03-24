@@ -85,7 +85,7 @@ export function TemplatesPage() {
 
   return (
     <div className="relative overflow-hidden">
-      <section className="border-b border-border/60 bg-[radial-gradient(circle_at_top,_hsl(205_90%_58%_/_0.12),transparent_45%),radial-gradient(circle_at_80%_40%,_hsl(33_95%_57%_/_0.12),transparent_45%)]">
+      <section className="border-b border-border/60 bg-[radial-gradient(circle_at_top,_hsl(205_90%_58%_/_0.12),transparent_45%),radial-gradient(circle_at_80%_40%,_hsl(33_95%_57%_/_0.12),transparent_45%)] dark:bg-[radial-gradient(circle_at_top,_hsl(205_90%_58%_/_0.06),transparent_45%),radial-gradient(circle_at_80%_40%,_hsl(33_95%_57%_/_0.05),transparent_45%)]">
         <div className="mx-auto w-full max-w-6xl px-4 py-16 md:py-20">
           <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/80 px-3 py-1 text-xs font-medium text-muted-foreground">
             Gallery
