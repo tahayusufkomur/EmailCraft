@@ -1,0 +1,327 @@
+{
+  "name": "Monthly Newsletter — Zenith",
+  "category": "newsletter",
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundColor": "#f9faf8",
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBackgroundColor": "#ffffff",
+      "bodyBorderRadius": 12,
+      "contentWidth": 600,
+      "defaultFont": "'Plus Jakarta Sans', Arial, sans-serif",
+      "defaultFontSize": 15,
+      "defaultColor": "#2e3432"
+    },
+    "header": {
+      "blocks": [
+        {
+          "id": "nl-h1",
+          "type": "heading",
+          "data": {
+            "text": "THE BREATHABLE CANVAS",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#406660",
+            "fontSize": 14,
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 4,
+            "textTransform": "uppercase"
+          }
+        }
+      ]
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "nl-b1",
+          "type": "hero",
+          "data": {
+            "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCQKETTiXno_IOiIhAd_bYgw0UKBVaWWTmq5qVR125dOJhShJbr09b9iOGy73bQD9-CErwriMXzpx3n_GYQdF49IO1Wq0WglQF14iVm79K4rjYKTBbmiAYt1Qpf-XnAZDdnn7Gk-u5DiF3WZqzJqMZR034bRoMNJOG0Y0TC_0-XB1c2X_CQ2Kvf72XgD8egqawmTfyKfy2q_ZW4EySL5RhWxGtEzIJkJBZnRXTVLEpaqS2pH2hJklta9vyhYl2EsqIPRLFafKTJhW50",
+            "heading": "Zenith Monthly: Find Your Balance",
+            "subheading": "Your monthly sanctuary exploring the delicate intersection of rest, breath, and groundedness.",
+            "buttonText": "",
+            "buttonUrl": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "height": 500,
+            "overlayColor": "#f9faf8",
+            "overlayOpacity": 0.75,
+            "headingColor": "#2e3432",
+            "headingFontSize": 34,
+            "headingFontFamily": "'Noto Serif', Georgia, serif",
+            "subheadingColor": "#5a605e",
+            "buttonBackgroundColor": "#406660",
+            "buttonTextColor": "#e2fff9",
+            "buttonBorderRadius": 50,
+            "contentAlignment": "left",
+            "verticalAlignment": "bottom"
+          }
+        },
+        {
+          "id": "nl-b2",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
+          }
+        },
+        {
+          "id": "nl-b3",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              50,
+              50
+            ],
+            "columns": [
+              {
+                "id": "nl-c1",
+                "blocks": [
+                  {
+                    "id": "nl-c1b1",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"margin:0 0 8px;\"><span style=\"display:inline-block;padding:2px 8px;background:#c5ebdd;color:#24453c;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;\">Wellness</span></p><h3 style=\"margin:0 0 6px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#2e3432;\">5 Poses for Better Sleep</h3><p style=\"margin:0 0 8px;font-size:13px;color:#5a605e;line-height:1.6;\">Discover how restorative asanas can prepare your nervous system for deep rest.</p><a href=\"#\" style=\"color:#406660;font-size:13px;font-weight:600;\">Explore Poses →</a>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 12,
+                        "bottom": 16,
+                        "left": 0
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nl-c2",
+                "blocks": [
+                  {
+                    "id": "nl-c2b1",
+                    "type": "image",
+                    "data": {
+                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuDrdVzT0VzWV2bLjjsDJnIKiHvGmGfy5_WiNRaWi47RWJkomIA2sNZKrBLzYgexSByx4MgE-qIu1fUiervslttgDEkcDZ78gnzvZhk1IIQa5uvEy7sHK71Sy7qSgBo2ImgFWUYr8v60kZvFRB3o-J7iK1JBD-axvQo8Jz6wTr6-0LgJhXys-sNWxMXDrDfHzjQp00DFuEu6tuTxrjbRcapFMsER3qG-QbcaBhfvjGbFj1l2bRxUJgIDM08c4c42fQSV6sU-0sgAwAbN",
+                      "alt": "Sleeping yoga",
+                      "width": 260
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "borderRadius": 12,
+                      "fullWidth": false
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 0,
+              "left": 24
+            },
+            "gap": 16,
+            "stackOnMobile": true
+          }
+        },
+        {
+          "id": "nl-b4",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 16
+          }
+        },
+        {
+          "id": "nl-b5",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              50,
+              50
+            ],
+            "columns": [
+              {
+                "id": "nl-c3",
+                "blocks": [
+                  {
+                    "id": "nl-c3b1",
+                    "type": "image",
+                    "data": {
+                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCxenewmqkyHogpeR0tQFjclo8Om3JwKA1X3j78UYINTa0wiE1r6LMl9bq3ofpnD3DVV-O8sCrVm0M3ObvIPNhBm8tIx4xA0jIJ9QE2AIZicwXeBb27RbwOpFiAJGsYxRyPE3YOZDFlBGZ_WdTMIoaIxL7qCLc1D39ru_RTWcal8ql6JO7FXHnJ6TI_reZsZbd1FePeAYpqKCN_pJtBB-LvUjer8lKgKQBhTooZA0nZMB-wLSbCH4PKHYxFbTPQJeg3NrPSbAawEQzL",
+                      "alt": "Breathwork",
+                      "width": 260
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "borderRadius": 12,
+                      "fullWidth": false
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nl-c4",
+                "blocks": [
+                  {
+                    "id": "nl-c4b1",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"margin:0 0 8px;\"><span style=\"display:inline-block;padding:2px 8px;background:#c5ebdd;color:#24453c;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;\">Mindfulness</span></p><h3 style=\"margin:0 0 6px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#2e3432;\">The Benefits of Breathwork</h3><p style=\"margin:0 0 8px;font-size:13px;color:#5a605e;line-height:1.6;\">Pranayama is more than breathing — it is the mastery of vital energy.</p><a href=\"#\" style=\"color:#406660;font-size:13px;font-weight:600;\">Learn the Technique →</a>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 16,
+                        "left": 12
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 0,
+              "left": 24
+            },
+            "gap": 16,
+            "stackOnMobile": true
+          }
+        },
+        {
+          "id": "nl-b6",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 16
+          }
+        },
+        {
+          "id": "nl-b7",
+          "type": "text",
+          "data": {
+            "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding:28px;background:#ebefec;border-radius:16px;\"><p style=\"margin:0 0 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#406660;\">The Practice</p><h3 style=\"margin:0 0 12px;font-family:'Noto Serif',Georgia,serif;font-size:24px;color:#2e3432;\">Yoga Pose of the Month: Tree Pose</h3><p style=\"margin:0 0 8px;font-size:13px;color:#5a605e;line-height:1.6;\">Vrksasana teaches us the beauty of balance. Even as the branches sway, the roots remain firm.</p><p style=\"margin:0;font-size:13px;color:#5a605e;line-height:1.6;\">✓ Improves focus and concentration<br>✓ Strengthens thighs, calves, and ankles</p></td></tr></table>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 16,
+              "left": 24
+            }
+          }
+        },
+        {
+          "id": "nl-b8",
+          "type": "button",
+          "data": {
+            "text": "Read Full Newsletter",
+            "url": "https://"
+          },
+          "style": {
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 32,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#406660",
+            "color": "#e2fff9",
+            "borderRadius": 50,
+            "fullWidth": false,
+            "fontSize": 15,
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "fontWeight": 600,
+            "paddingX": 32,
+            "paddingY": 14
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": [
+        {
+          "id": "nl-f1",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#635f57;\"><a href=\"#\" style=\"color:#635f57;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">Privacy Policy</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 24,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#f2f4f2"
+          }
+        },
+        {
+          "id": "nl-f2",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:11px;color:#5a605e;opacity:0.6;\">© 2024 The Breathable Canvas. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 4,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#f2f4f2"
+          }
+        }
+      ]
+    }
+  },
+  "tags": [
+    "newsletter"
+  ]
+}

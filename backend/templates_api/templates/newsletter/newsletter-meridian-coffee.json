@@ -1,0 +1,498 @@
+{
+  "name": "Newsletter — Meridian Coffee",
+  "category": "newsletter",
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundColor": "#faf9f6",
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBackgroundColor": "#ffffff",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "defaultFont": "'Manrope', Arial, sans-serif",
+      "defaultFontSize": 14,
+      "defaultColor": "#1a1c1a",
+      "version": 1
+    },
+    "header": {
+      "blocks": [
+        {
+          "id": "m2-h1",
+          "type": "heading",
+          "data": {
+            "text": "MERIDIAN COFFEE CO.",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#271310",
+            "fontSize": 13,
+            "fontFamily": "'Work Sans', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 4,
+            "textTransform": "uppercase"
+          }
+        }
+      ]
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "m2-b1",
+          "type": "hero",
+          "data": {
+            "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCfXyCGF_EEilFggWckLjY1iBJH6mrbqyTTATrsR_qNnHYUhe0k5TdooqvC6T2G0DXXqv8TNkhN1SaQNvwBLkc6e04fSMzfZ3GDdpsEY_V_cRfbUsvtcyctrUQrGuSrytGUowBAheQ1UZWZYJHeFFyi5iH0nRVazBmcoVUxKUygDMwXCSQv2NgMpZq9TmRxEFsJzZaVmHusjXyGHoALp_E3MBpumx_4Mb8Jn6n3wt8sMOxzvsJtPuy2VGQKr8p1mAYcZTDWujSJ5n4",
+            "heading": "The Roaster's Journal: Origins",
+            "subheading": "Issue No. 042",
+            "buttonText": "",
+            "buttonUrl": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "height": 480,
+            "overlayColor": "#271310",
+            "overlayOpacity": 0.5,
+            "headingColor": "#ffffff",
+            "headingFontSize": 34,
+            "headingFontFamily": "'Noto Serif', Georgia, serif",
+            "subheadingColor": "#ffffffcc",
+            "contentAlignment": "left",
+            "verticalAlignment": "bottom"
+          }
+        },
+        {
+          "id": "m2-b2",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;font-size:14px;color:#ffffffcc;line-height:1.6;\">Exploring the terroir, technique, and tradition behind every cup we pour.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "m2-b3",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              66,
+              34
+            ],
+            "columns": [
+              {
+                "id": "m2-c1",
+                "backgroundColor": "#ffffff",
+                "blocks": [
+                  {
+                    "id": "m2-c1b1",
+                    "type": "heading",
+                    "data": {
+                      "text": "Origins",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 24,
+                        "right": 16,
+                        "bottom": 4,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "color": "#735c00",
+                      "fontSize": 11,
+                      "fontFamily": "'Work Sans', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 2,
+                      "textTransform": "uppercase"
+                    }
+                  },
+                  {
+                    "id": "m2-c1b2",
+                    "type": "heading",
+                    "data": {
+                      "text": "The Soul of the Soil",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 16,
+                        "bottom": 4,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "color": "#1a1c1a",
+                      "fontSize": 20,
+                      "fontFamily": "'Noto Serif', Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  },
+                  {
+                    "id": "m2-c1b3",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"margin:0;font-size:13px;color:#504442;line-height:1.6;\">How volcanic minerals in Guatemalan highlands create the bright acidity and chocolate undertones that define our Reserve line.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 16,
+                        "bottom": 8,
+                        "left": 16
+                      }
+                    }
+                  },
+                  {
+                    "id": "m2-c1b4",
+                    "type": "button",
+                    "data": {
+                      "text": "READ NARRATIVE",
+                      "url": "https://"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 16,
+                        "bottom": 24,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#271310",
+                      "color": "#ffffff",
+                      "borderRadius": 50,
+                      "fullWidth": false,
+                      "fontSize": 11,
+                      "fontFamily": "'Work Sans', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "uppercase",
+                      "paddingX": 16,
+                      "paddingY": 8
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "m2-c2",
+                "backgroundColor": "#ffffff",
+                "blocks": [
+                  {
+                    "id": "m2-c2b1",
+                    "type": "image",
+                    "data": {
+                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuDviUWSJSvyAJQ0Rk7u81sk0l3QU4k1vi3uCHfey33Gvr47shn_qwUYuPJlfvegZ4eFidkdhqiWNHjuOl3hOyRKOEAK6rsPiuQRfwgoVpreeA1PFUvbEmLeTQr9UKuQzVp785V574-WJxHHj7jj6F0DTFBj8jGAmoB3AXpcUXTPPRuKxkr5XJWdknWSOo2zdDhfytBtUcfup1_1c_cLcG3yOVDngUTT8N5qxy3buUnPBKhfIGAZLWNn3I1Hvf30ZpPCrJTi_mmWZr8",
+                      "alt": "Coffee soil origins"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 16,
+                        "bottom": 16,
+                        "left": 0
+                      },
+                      "borderRadius": 12,
+                      "maxWidth": "100%"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 20,
+              "bottom": 0,
+              "left": 20
+            },
+            "gap": 12,
+            "stackOnMobile": true
+          }
+        },
+        {
+          "id": "m2-b4",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              34,
+              66
+            ],
+            "columns": [
+              {
+                "id": "m2-c3",
+                "backgroundColor": "#f4f3f1",
+                "blocks": [
+                  {
+                    "id": "m2-c3b1",
+                    "type": "image",
+                    "data": {
+                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuB5N5PyQ4KI0Kskfk_JDq43DostckqQuibfwSfVEMohNWileLBeRnnLwDs1WpuuH0PElpX2ynCp8AIobeJpiMdyg_Y0m4O-kuX9RigUo74vzbmbacrZOVhTAkKSFpHXgdBX6FgbqAadPKvpv5AbBydTrUCQ4NPag8nrLJywSCxiaYdeFQJozmaUzZ8scXTZ8pgsF_MXrc--XgM8zwRXAGXllsA3B3Z_62NHCgZr2TRIgX6QMM28WFQhh9o_bDgKyC7VxfmyetFPnn0",
+                      "alt": "Coffee roaster"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 0,
+                        "bottom": 16,
+                        "left": 16
+                      },
+                      "borderRadius": 12,
+                      "maxWidth": "100%"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "m2-c4",
+                "backgroundColor": "#f4f3f1",
+                "blocks": [
+                  {
+                    "id": "m2-c4b1",
+                    "type": "heading",
+                    "data": {
+                      "text": "Technique",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 24,
+                        "right": 16,
+                        "bottom": 4,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "color": "#735c00",
+                      "fontSize": 11,
+                      "fontFamily": "'Work Sans', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 2,
+                      "textTransform": "uppercase"
+                    }
+                  },
+                  {
+                    "id": "m2-c4b2",
+                    "type": "heading",
+                    "data": {
+                      "text": "The Maillard Curve",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 16,
+                        "bottom": 4,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "color": "#1a1c1a",
+                      "fontSize": 20,
+                      "fontFamily": "'Noto Serif', Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  },
+                  {
+                    "id": "m2-c4b3",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"margin:0;font-size:13px;color:#504442;line-height:1.6;\">The science of browning sugars and amino acids that transforms a green seed into the complex flavor profile in your cup.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 16,
+                        "bottom": 8,
+                        "left": 16
+                      }
+                    }
+                  },
+                  {
+                    "id": "m2-c4b4",
+                    "type": "button",
+                    "data": {
+                      "text": "STUDY PROCESS",
+                      "url": "https://"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 16,
+                        "bottom": 24,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#271310",
+                      "color": "#ffffff",
+                      "borderRadius": 50,
+                      "fullWidth": false,
+                      "fontSize": 11,
+                      "fontFamily": "'Work Sans', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "uppercase",
+                      "paddingX": 16,
+                      "paddingY": 8
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 20,
+              "bottom": 0,
+              "left": 20
+            },
+            "gap": 12,
+            "stackOnMobile": true
+          }
+        },
+        {
+          "id": "m2-b5",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 32
+          }
+        },
+        {
+          "id": "m2-b6",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;font-family:'Work Sans',Arial,sans-serif;font-size:11px;color:#735c00;text-transform:uppercase;letter-spacing:2px;text-align:center;\">FEATURE ROAST</p><p style=\"margin:12px 0;font-family:'Noto Serif',Georgia,serif;font-size:22px;color:#1a1c1a;text-align:center;font-weight:700;\">Bean of the Month: Ethiopian Yirgacheffe</p><p style=\"margin:0 0 16px;font-family:'Noto Serif',Georgia,serif;font-size:15px;font-style:italic;color:#504442;text-align:center;line-height:1.6;\">\"A floral symphony with notes of jasmine, bergamot, and a whisper of dark honey.\"</p><p style=\"margin:0;font-size:13px;color:#504442;line-height:1.8;text-align:center;\">Region: Gedeo Zone, Yirgacheffe &bull; Altitude: 1,950–2,100m<br/>Process: Washed &bull; Varietal: Heirloom Ethiopian<br/>Roast: Light-Medium &bull; Cupping Score: 91</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#faf9f6"
+          }
+        },
+        {
+          "id": "m2-b7",
+          "type": "button",
+          "data": {
+            "text": "Read Full Journal",
+            "url": "https://"
+          },
+          "style": {
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 28,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#271310",
+            "color": "#ffffff",
+            "borderRadius": 50,
+            "fullWidth": false,
+            "fontSize": 14,
+            "fontFamily": "'Manrope', Arial, sans-serif",
+            "fontWeight": 600,
+            "paddingX": 24,
+            "paddingY": 12
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": [
+        {
+          "id": "m2-f1",
+          "type": "heading",
+          "data": {
+            "text": "Meridian Coffee Co.",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 24,
+              "right": 32,
+              "bottom": 4,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#271310",
+            "fontSize": 16,
+            "fontFamily": "'Noto Serif', Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "m2-f2",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#504442;\"><a href=\"#\" style=\"color:#504442;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;\">Shop</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Privacy Policy</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 4,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#f4f3f1"
+          }
+        },
+        {
+          "id": "m2-f3",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#827472;\">© 2025 Meridian Coffee Co. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#f4f3f1"
+          }
+        }
+      ]
+    }
+  },
+  "tags": [
+    "newsletter"
+  ]
+}

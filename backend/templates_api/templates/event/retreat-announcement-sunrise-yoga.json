@@ -1,0 +1,237 @@
+{
+  "name": "Retreat Announcement — Sunrise Yoga",
+  "category": "event",
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundColor": "#fef5f0",
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBackgroundColor": "#fef5f0",
+      "bodyBorderRadius": 16,
+      "contentWidth": 600,
+      "defaultFont": "'Be Vietnam Pro', Arial, sans-serif",
+      "defaultFontSize": 15,
+      "defaultColor": "#322e2b"
+    },
+    "header": {
+      "blocks": [
+        {
+          "id": "sun-e1-h1",
+          "type": "heading",
+          "data": {
+            "text": "SUNRISE YOGA",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#8c4a00",
+            "fontSize": 18,
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 3,
+            "textTransform": "uppercase"
+          }
+        }
+      ]
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "sun-e1-b1",
+          "type": "hero",
+          "data": {
+            "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuDJ-pgF3dvI1797eAXq1yhR3_17P2bGOauQvVKKWlP9i6tGUbMlDKgijEBS5eo3Wup9dTR_AByckZ_h47Jxm89JPc1E44KRZEkQ3P--xbyHKY87I7JhGJWlApjMD9owBHlx7bfDSnC6u72iEubNEZE4oyNewhGi2kNCUvpNqhYSnKh-44zF8hYg8D-kMmiHz7Mai_8nR1WqSjs8Z6aMinVqS_UvHEBgdlMA3ZTKdobOToxe-7TaCIno67Gr66bxLdh6bEXi2eK6E3uT",
+            "heading": "Dawn Retreat Weekend",
+            "subheading": "Big Sur • June 14–16",
+            "buttonText": "Reserve Your Spot",
+            "buttonUrl": "https://"
+          },
+          "style": {
+            "height": 420,
+            "overlayColor": "#000000",
+            "overlayOpacity": 0.4,
+            "headingColor": "#ffffff",
+            "headingFontSize": 34,
+            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "subheadingColor": "#ffffffcc",
+            "buttonBackgroundColor": "#fd8b00",
+            "buttonTextColor": "#ffffff",
+            "buttonBorderRadius": 999,
+            "contentAlignment": "left",
+            "verticalAlignment": "bottom",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "id": "sun-e1-b2",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 16
+          }
+        },
+        {
+          "id": "sun-e1-b3",
+          "type": "columns",
+          "style": {
+            "gap": 12,
+            "stackOnMobile": true,
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 16,
+              "left": 24
+            }
+          },
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              34,
+              33,
+              33
+            ],
+            "columns": [
+              {
+                "id": "sun-e1-c1",
+                "backgroundColor": "#fff1e8",
+                "blocks": [
+                  {
+                    "id": "sun-e1-c1-t",
+                    "type": "text",
+                    "data": {
+                      "html": "<div style=\"text-align:left;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:11px;color:#8c4a00;\">Day 1</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:16px;color:#322e2b;margin-top:6px;\">Ground &amp; Flow</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;margin-top:6px;\">Sunrise Vinyasa, ocean breathwork, communal dinner.</div></div>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 18,
+                        "right": 18,
+                        "bottom": 18,
+                        "left": 18
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sun-e1-c2",
+                "backgroundColor": "#f8efea",
+                "blocks": [
+                  {
+                    "id": "sun-e1-c2-t",
+                    "type": "text",
+                    "data": {
+                      "html": "<div style=\"text-align:left;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:11px;color:#6c5a00;\">Day 2</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:16px;color:#322e2b;margin-top:6px;\">Rest &amp; Restore</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;margin-top:6px;\">Forest hike, yin workshop, sound bath at dusk.</div></div>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 18,
+                        "right": 18,
+                        "bottom": 18,
+                        "left": 18
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sun-e1-c3",
+                "backgroundColor": "#ffffff",
+                "blocks": [
+                  {
+                    "id": "sun-e1-c3-t",
+                    "type": "text",
+                    "data": {
+                      "html": "<div style=\"text-align:left;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:11px;color:#6a43b7;\">Day 3</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:16px;color:#322e2b;margin-top:6px;\">Renew &amp; Rise</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;margin-top:6px;\">Meditation at dawn, closing circle, take-home ritual.</div></div>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 18,
+                        "right": 18,
+                        "bottom": 18,
+                        "left": 18
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "sun-e1-b4",
+          "type": "html",
+          "data": {
+            "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#ffffff;border-radius:20px;padding:24px;text-align:center;\"><h3 style=\"margin:0 0 8px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:24px;color:#322e2b;font-weight:800;\">What's included</h3><p style=\"margin:0 0 14px;color:#605a57;font-size:14px;line-height:1.6;\">Lodging, all classes, two meals daily, and a retreat journal.</p><a href=\"https://\" style=\"display:inline-block;background:#8c4a00;color:#fff0e7;padding:12px 28px;border-radius:999px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;text-decoration:none;font-size:14px;\">View Itinerary</a></td></tr></table>"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 20,
+              "left": 32
+            }
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": [
+        {
+          "id": "sun-e1-f1",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms of Service</a></p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "backgroundColor": "#f8efea",
+            "padding": {
+              "top": 20,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "sun-e1-f2",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2024 Sunrise Yoga. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "backgroundColor": "#f8efea",
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            }
+          }
+        }
+      ]
+    }
+  },
+  "is_premium": true,
+  "tags": [
+    "event"
+  ]
+}

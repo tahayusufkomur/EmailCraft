@@ -7,7 +7,7 @@ from templates_api.models import Template
 
 
 class Command(BaseCommand):
-    help = 'Seed gallery templates from templates.json (org=None, is_gallery=True)'
+    help = 'Seed gallery templates from templates/*/*.json (org=None, is_gallery=True)'
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -17,12 +17,24 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        json_path = Path(__file__).resolve().parent.parent.parent / 'templates.json'
-        if not json_path.exists():
-            raise FileNotFoundError(f'templates.json not found at {json_path}')
+        entries = []
+        templates_dir = Path(__file__).resolve().parent.parent.parent / 'templates'
+        if templates_dir.exists():
+            for json_path in sorted(templates_dir.rglob('*.json')):
+                with open(json_path, 'r') as f:
+                    entry = json.load(f)
+                if not isinstance(entry, dict) or 'template' not in entry:
+                    continue
+                entry['_source_category'] = json_path.parent.name
+                entries.append(entry)
 
-        with open(json_path, 'r') as f:
-            entries = json.load(f)
+        if not entries:
+            json_path = Path(__file__).resolve().parent.parent.parent / 'templates.json'
+            if not json_path.exists():
+                raise FileNotFoundError(f'templates.json not found at {json_path}')
+
+            with open(json_path, 'r') as f:
+                entries = json.load(f)
 
         if options['clear']:
             deleted, _ = Template.objects.shared().delete()
@@ -34,7 +46,7 @@ class Command(BaseCommand):
             raw_tags = entry.get('tags') or []
             if not isinstance(raw_tags, list):
                 raw_tags = []
-            category = entry.get('category', '')
+            category = entry.get('category') or entry.get('_source_category', '')
             normalized_tags = [t for t in raw_tags if isinstance(t, str) and t.strip()]
             if category and category not in normalized_tags:
                 normalized_tags.insert(0, category)

@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { EditorDndContext } from './components/Editor/EditorDndContext';
 import { Canvas } from './components/Editor/Canvas';
-import { RawHtmlView } from './components/Editor/RawHtmlView';
 import { BlockPalette } from './components/Panels/BlockPalette';
 import { StylePanel } from './components/Panels/StylePanel';
 import { PreviewModal } from './components/Preview/PreviewModal';
@@ -21,7 +20,7 @@ import { listenToParent, sendErrorEvent, sendReadyEvent, sendSaveEvent } from '.
 import type { EmailTemplate, TemplateBackgroundStyle } from './types/blocks';
 import type { ThemeMode, Variable } from './types/editor';
 import { getBuilderThemePreset, resolveBuilderTheme } from './lib/builderTheme';
-import { LayoutGrid, Image, Eye, Code2, Save, Download } from 'lucide-react';
+import { LayoutGrid, Image, Eye, Save, Download } from 'lucide-react';
 
 const isEmailTemplate = (value: unknown): value is EmailTemplate => {
   if (!value || typeof value !== 'object') return false;
@@ -309,7 +308,6 @@ function App() {
   const [savedTemplateId, setSavedTemplateId] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
-  const [showCode, setShowCode] = useState(false);
   const activeThemePreset = getBuilderThemePreset(builderTheme);
 
   useAutoSave();
@@ -568,10 +566,6 @@ function App() {
             <Eye size={16} />
             Preview
           </Button>
-          <Button variant={showCode ? 'default' : 'ghost'} size="sm" onClick={() => setShowCode((v) => !v)}>
-            <Code2 size={16} />
-            Code
-          </Button>
           <div className="toolbar-separator" />
           <Button variant="ghost" size="sm" className="toolbar-action-btn" onClick={() => void handleSave()} disabled={isSaving}>
             <Save size={16} />
@@ -587,17 +581,13 @@ function App() {
           {exportError && <Badge variant="destructive">{exportError}</Badge>}
         </div>
       </div>
-      {showCode ? (
-        <RawHtmlView />
-      ) : (
-        <EditorDndContext>
-          <div className="editor-layout">
-            <BlockPalette />
-            <Canvas />
-            <StylePanel />
-          </div>
-        </EditorDndContext>
-      )}
+      <EditorDndContext>
+        <div className="editor-layout">
+          <BlockPalette />
+          <Canvas />
+          <StylePanel />
+        </div>
+      </EditorDndContext>
       {showPreview && <PreviewModal onClose={() => setShowPreview(false)} />}
       {showGallery && (
         <TemplateGallery

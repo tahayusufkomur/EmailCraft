@@ -1,0 +1,317 @@
+{
+  "name": "Re-engagement — Sunrise Yoga",
+  "category": "promotional",
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundColor": "#fef5f0",
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBackgroundColor": "#fef5f0",
+      "bodyBorderRadius": 16,
+      "contentWidth": 600,
+      "defaultFont": "'Be Vietnam Pro', Arial, sans-serif",
+      "defaultFontSize": 15,
+      "defaultColor": "#322e2b"
+    },
+    "header": {
+      "blocks": [
+        {
+          "id": "sun-r-h1",
+          "type": "heading",
+          "data": {
+            "text": "SUNRISE YOGA",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#8c4a00",
+            "fontSize": 18,
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 3,
+            "textTransform": "uppercase"
+          }
+        }
+      ]
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "sun-r-b1",
+          "type": "columns",
+          "style": {
+            "gap": 16,
+            "stackOnMobile": true,
+            "padding": {
+              "top": 8,
+              "right": 24,
+              "bottom": 16,
+              "left": 24
+            }
+          },
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              55,
+              45
+            ],
+            "columns": [
+              {
+                "id": "sun-r-c1",
+                "blocks": [
+                  {
+                    "id": "sun-r-c1-label",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"margin:0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#8c4a00;font-weight:700;font-family:'Plus Jakarta Sans', Arial, sans-serif;\">Welcome Back</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 8,
+                        "left": 0
+                      }
+                    }
+                  },
+                  {
+                    "id": "sun-r-c1-title",
+                    "type": "text",
+                    "data": {
+                      "html": "<h1 style=\"margin:0;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:34px;line-height:1.1;font-weight:800;color:#322e2b;\">We've missed<br/><span style=\"color:#8c4a00;font-style:italic;\">your energy!</span></h1>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 12,
+                        "left": 0
+                      }
+                    }
+                  },
+                  {
+                    "id": "sun-r-c1-copy",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"margin:0;font-size:15px;line-height:1.7;color:#605a57;\">The mat feels a little emptier without your presence. It's time to reignite that morning glow and reconnect with your flow.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sun-r-c2",
+                "blocks": [
+                  {
+                    "id": "sun-r-c2-img",
+                    "type": "image",
+                    "data": {
+                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuBjLlyjrVH2KhlQpNYTHLXtrj46iGsA_wVMo0ZDUCq4Z8rGCSuyWjw36OkzTjO2DAhy73SMqI9F268obCF9rCItr9qAujdkwULSWzcHofv6Jzu_1WzekVQteUYPlAnWZ5dC8fRB4V4uIyRTPOrQ8NKUFqYS3u-36hkuyX46QJCftkxa1ubAjXZfMZpDinJPRGhPsrB7kb5csmmO7uKv-9Hio-8PHzBEt-isfPa20MkkysDQQ5IHwkY2dcasPKZ7d274S9x9uTY7VkKv",
+                      "alt": "Sunrise studio",
+                      "width": 240
+                    },
+                    "style": {
+                      "alignment": "center",
+                      "borderRadius": 20,
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "sun-r-b2",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 20
+          }
+        },
+        {
+          "id": "sun-r-b3",
+          "type": "columns",
+          "style": {
+            "gap": 16,
+            "stackOnMobile": true,
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 16,
+              "left": 24
+            }
+          },
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              50,
+              50
+            ],
+            "columns": [
+              {
+                "id": "sun-r-c3",
+                "backgroundColor": "#f8efea",
+                "blocks": [
+                  {
+                    "id": "sun-r-c3-t",
+                    "type": "text",
+                    "data": {
+                      "html": "<div style=\"font-size:22px;\">✨</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">New Morning Flows</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;\">We've added 12 new Vinyasa sequences designed to energize your rhythm.</div>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 20,
+                        "right": 20,
+                        "bottom": 20,
+                        "left": 20
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sun-r-c4",
+                "backgroundColor": "#fff1e8",
+                "blocks": [
+                  {
+                    "id": "sun-r-c4-t",
+                    "type": "text",
+                    "data": {
+                      "html": "<div style=\"font-size:22px;\">🌿</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">Guided Breathwork</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;\">Enhanced meditation sessions to ground you before the day begins.</div>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 20,
+                        "right": 20,
+                        "bottom": 20,
+                        "left": 20
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "sun-r-b4",
+          "type": "html",
+          "data": {
+            "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#ffffff;border-radius:20px;padding:24px;text-align:center;\"><h3 style=\"margin:0 0 8px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:24px;color:#322e2b;font-weight:800;\">Your Mat is Ready</h3><p style=\"margin:0 0 16px;color:#605a57;font-size:15px;line-height:1.6;\">To celebrate your return, we've added a complimentary session to your account. No strings, just pure energy.</p><a href=\"https://\" style=\"display:inline-block;background:#8c4a00;color:#fff0e7;padding:12px 28px;border-radius:999px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;text-decoration:none;font-size:14px;\">Claim Free Class</a><p style=\"margin:12px 0 0;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#7c7672;font-weight:700;\">Offer valid for 7 days</p></td></tr></table>"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 16,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "sun-r-b5",
+          "type": "text",
+          "data": {
+            "html": "<div style=\"text-align:center;\"><span style=\"display:inline-block;width:10px;height:10px;border-radius:999px;background:#fd8b00;margin:0 4px;\"></span><span style=\"display:inline-block;width:10px;height:10px;border-radius:999px;background:#fd8b00;opacity:0.6;margin:0 4px;\"></span><span style=\"display:inline-block;width:10px;height:10px;border-radius:999px;background:#fd8b00;opacity:0.3;margin:0 4px;\"></span></div>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 16,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "sun-r-b6",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:18px;font-style:italic;color:#6c5a00;line-height:1.6;\">\"The morning sun is a daily invitation to start again, to breathe deeper, and to find your center.\"</p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 24,
+              "left": 40
+            }
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": [
+        {
+          "id": "sun-r-f1",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms of Service</a></p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "backgroundColor": "#f8efea",
+            "padding": {
+              "top": 20,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "sun-r-f2",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2024 Sunrise Yoga. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "backgroundColor": "#f8efea",
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            }
+          }
+        }
+      ]
+    }
+  },
+  "is_premium": true,
+  "tags": [
+    "promotional"
+  ]
+}

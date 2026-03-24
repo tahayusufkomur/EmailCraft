@@ -1,0 +1,501 @@
+{
+  "name": "Welcome — Zenith Flow",
+  "category": "welcome",
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundColor": "#f9faf8",
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBackgroundColor": "#ffffff",
+      "bodyBorderRadius": 12,
+      "contentWidth": 600,
+      "defaultFont": "'Plus Jakarta Sans', Arial, sans-serif",
+      "defaultFontSize": 15,
+      "defaultColor": "#2e3432"
+    },
+    "header": {
+      "blocks": [
+        {
+          "id": "w-h1",
+          "type": "heading",
+          "data": {
+            "text": "THE BREATHABLE CANVAS",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#406660",
+            "fontSize": 14,
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 4,
+            "textTransform": "uppercase"
+          }
+        }
+      ]
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "w-b1",
+          "type": "hero",
+          "data": {
+            "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuB4lEG-_Pnf_BmpFXva5QD8bRqcTs-OFUic-CGqOClFlf9SLgGd2pz6woJhL7Ck6Ow6Cmm7JmYyIdUIHCi9hZXOWIkqQItqwy2hQ3j6dXYuqbhFet7a3hr9ihkkj5Dxdc0A0ZwHkuIADYMOljz0z9ckYhyUn-O25l5P8g0jDCc0Zbg9FYIJnoSlP0ufq-P0RWKxiDV9mH25aeWA7jxFgmafIc4nZRe0eHUVrRxVq74eIFndv3ZHA_abgG2CjQReOgqn5K13kUhXFddw",
+            "heading": "Welcome to the Zenith Flow Family!",
+            "subheading": "We're so glad to have you on this journey with us. Start your practice today.",
+            "buttonText": "Book Your First Class",
+            "buttonUrl": "https://"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "height": 480,
+            "overlayColor": "#1c1917",
+            "overlayOpacity": 0.45,
+            "headingColor": "#ffffff",
+            "headingFontSize": 34,
+            "headingFontFamily": "'Noto Serif', Georgia, serif",
+            "subheadingColor": "#ffffffcc",
+            "buttonBackgroundColor": "#406660",
+            "buttonTextColor": "#e2fff9",
+            "buttonBorderRadius": 50,
+            "contentAlignment": "left",
+            "verticalAlignment": "bottom"
+          }
+        },
+        {
+          "id": "w-b2",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 32
+          }
+        },
+        {
+          "id": "w-b3",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              50,
+              50
+            ],
+            "columns": [
+              {
+                "id": "w-c1",
+                "backgroundColor": "#f2f4f2",
+                "blocks": [
+                  {
+                    "id": "w-c1b1",
+                    "type": "heading",
+                    "data": {
+                      "text": "The Studio Space",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 24,
+                        "right": 16,
+                        "bottom": 4,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "color": "#2e3432",
+                      "fontSize": 18,
+                      "fontFamily": "'Noto Serif', Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  },
+                  {
+                    "id": "w-c1b2",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"margin:0;font-size:13px;color:#5a605e;line-height:1.6;\">Discover our sanctuary designed for silence and movement. Our mats are laid out, waiting for your breath.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 16,
+                        "bottom": 8,
+                        "left": 16
+                      }
+                    }
+                  },
+                  {
+                    "id": "w-c1b3",
+                    "type": "button",
+                    "data": {
+                      "text": "EXPLORE STUDIO",
+                      "url": "https://"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 16,
+                        "bottom": 24,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#406660",
+                      "color": "#e2fff9",
+                      "borderRadius": 50,
+                      "fullWidth": false,
+                      "fontSize": 11,
+                      "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "uppercase",
+                      "paddingX": 16,
+                      "paddingY": 8
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "w-c2",
+                "backgroundColor": "#c2ebe3",
+                "blocks": [
+                  {
+                    "id": "w-c2b1",
+                    "type": "heading",
+                    "data": {
+                      "text": "Class Schedule",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 24,
+                        "right": 16,
+                        "bottom": 4,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "color": "#335853",
+                      "fontSize": 18,
+                      "fontFamily": "'Noto Serif', Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  },
+                  {
+                    "id": "w-c2b2",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"margin:0;font-size:13px;color:#335853;line-height:1.6;\">From sunrise Vinyasa to restorative Yin, find the rhythm that matches your energy today.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 16,
+                        "bottom": 8,
+                        "left": 16
+                      }
+                    }
+                  },
+                  {
+                    "id": "w-c2b3",
+                    "type": "button",
+                    "data": {
+                      "text": "VIEW TIMES",
+                      "url": "https://"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 16,
+                        "bottom": 24,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#335853",
+                      "color": "#e2fff9",
+                      "borderRadius": 50,
+                      "fullWidth": false,
+                      "fontSize": 11,
+                      "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "uppercase",
+                      "paddingX": 16,
+                      "paddingY": 8
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 20,
+              "bottom": 0,
+              "left": 20
+            },
+            "gap": 12,
+            "stackOnMobile": true
+          }
+        },
+        {
+          "id": "w-b4",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 32
+          }
+        },
+        {
+          "id": "w-b5",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:11px;color:#635f57;text-transform:uppercase;letter-spacing:3px;\">A Moment of Intent</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 4,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#f9faf8"
+          }
+        },
+        {
+          "id": "w-b6",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:22px;font-style:italic;color:#2e3432;line-height:1.5;\">\"Yoga is the journey of the self, through the self, to the self.\"</p><p style=\"margin:12px 0 0;text-align:center;font-size:13px;color:#5a605e;\">— The Bhagavad Gita</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 12,
+              "right": 40,
+              "bottom": 28,
+              "left": 40
+            },
+            "alignment": "center",
+            "backgroundColor": "#f9faf8"
+          }
+        },
+        {
+          "id": "w-b7",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 16
+          }
+        },
+        {
+          "id": "w-b8",
+          "type": "heading",
+          "data": {
+            "text": "Next steps for your journey",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 16,
+              "right": 32,
+              "bottom": 12,
+              "left": 32
+            },
+            "alignment": "left",
+            "color": "#5a605e",
+            "fontSize": 16,
+            "fontFamily": "'Noto Serif', Georgia, serif",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "w-s1",
+          "type": "button",
+          "data": {
+            "text": "Complete your profile",
+            "url": "https://"
+          },
+          "style": {
+            "padding": {
+              "top": 4,
+              "right": 32,
+              "bottom": 4,
+              "left": 32
+            },
+            "alignment": "left",
+            "backgroundColor": "#406660",
+            "color": "#e2fff9",
+            "borderRadius": 8,
+            "fullWidth": true,
+            "fontSize": 14,
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "fontWeight": 600,
+            "paddingX": 20,
+            "paddingY": 14
+          }
+        },
+        {
+          "id": "w-s1-desc",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;font-size:12px;color:#5a605e;\">Help us personalize your experience</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 12,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "w-s2",
+          "type": "button",
+          "data": {
+            "text": "Enable notifications",
+            "url": "https://"
+          },
+          "style": {
+            "padding": {
+              "top": 4,
+              "right": 32,
+              "bottom": 4,
+              "left": 32
+            },
+            "alignment": "left",
+            "backgroundColor": "#406660",
+            "color": "#e2fff9",
+            "borderRadius": 8,
+            "fullWidth": true,
+            "fontSize": 14,
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "fontWeight": 600,
+            "paddingX": 20,
+            "paddingY": 14
+          }
+        },
+        {
+          "id": "w-s2-desc",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;font-size:12px;color:#5a605e;\">Get reminders for your booked sessions</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 12,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "w-s3",
+          "type": "button",
+          "data": {
+            "text": "Refer a friend",
+            "url": "https://"
+          },
+          "style": {
+            "padding": {
+              "top": 4,
+              "right": 32,
+              "bottom": 4,
+              "left": 32
+            },
+            "alignment": "left",
+            "backgroundColor": "#406660",
+            "color": "#e2fff9",
+            "borderRadius": 8,
+            "fullWidth": true,
+            "fontSize": 14,
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "fontWeight": 600,
+            "paddingX": 20,
+            "paddingY": 14
+          }
+        },
+        {
+          "id": "w-s3-desc",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;font-size:12px;color:#5a605e;\">Practicing together is more grounding</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 12,
+              "left": 32
+            }
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": [
+        {
+          "id": "w-f1",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#635f57;\"><a href=\"#\" style=\"color:#635f57;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;text-decoration:underline;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;text-decoration:underline;\">Privacy Policy</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 24,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#f2f4f2"
+          }
+        },
+        {
+          "id": "w-f2",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">© 2024 The Breathable Canvas. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#f2f4f2"
+          }
+        }
+      ]
+    }
+  },
+  "tags": [
+    "welcome"
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "name": "Re-engagement — We Miss You",
+  "category": "promotional",
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundColor": "#f9faf8",
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBackgroundColor": "#ffffff",
+      "bodyBorderRadius": 12,
+      "contentWidth": 600,
+      "defaultFont": "'Plus Jakarta Sans', Arial, sans-serif",
+      "defaultFontSize": 15,
+      "defaultColor": "#2e3432"
+    },
+    "header": {
+      "blocks": [
+        {
+          "id": "re-h1",
+          "type": "heading",
+          "data": {
+            "text": "THE BREATHABLE CANVAS",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#406660",
+            "fontSize": 14,
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 4,
+            "textTransform": "uppercase"
+          }
+        }
+      ]
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "re-b1",
+          "type": "hero",
+          "data": {
+            "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCoyD7eYIGn0brhyR1J_KSUDsnqmrXdhM7Urt2vWlnA1J_JzfOidQiCIRO5pmP7_kPMf2IWE1T_0aliJmOOcMYCb0VP_CqPmNcZepAyuPRq4NRMwDZe3mGluLGeHKi8PIV3Tio7b-yYUL_QVOHfEEVmviHuMZ6-l2PRYP63tkb0ldRhj16V99y7GGumFCJ3Up1mH3ZQ338CDEZ7kxfxp8KCU0f_s8YH1OSM4MocLRsXvObjVr9FsfoyDhaqIDwk7Fz-jY8QNoAL2j2J",
+            "heading": "We've missed you on the mat!",
+            "subheading": "Come back and flow with us. We've added new classes designed to ground your practice.",
+            "buttonText": "",
+            "buttonUrl": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "height": 420,
+            "overlayColor": "#1c1917",
+            "overlayOpacity": 0.5,
+            "headingColor": "#ffffff",
+            "headingFontSize": 32,
+            "headingFontFamily": "'Noto Serif', Georgia, serif",
+            "subheadingColor": "#ffffffcc",
+            "buttonBackgroundColor": "#406660",
+            "buttonTextColor": "#e2fff9",
+            "buttonBorderRadius": 50,
+            "contentAlignment": "left",
+            "verticalAlignment": "bottom"
+          }
+        },
+        {
+          "id": "re-b2",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
+          }
+        },
+        {
+          "id": "re-b3",
+          "type": "heading",
+          "data": {
+            "text": "Fresh Flows for Your Return",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 16,
+              "left": 32
+            },
+            "alignment": "left",
+            "color": "#2e3432",
+            "fontSize": 22,
+            "fontFamily": "'Noto Serif', Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "re-b4",
+          "type": "text",
+          "data": {
+            "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding:16px 20px;background:#ebefec;border-radius:12px;\"><p style=\"margin:0 0 2px;\"><span style=\"display:inline-block;padding:2px 8px;background:#c5ebdd;color:#24453c;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;border-radius:2px;\">New Series</span></p><h4 style=\"margin:4px 0;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#406660;\">Lunar Yin &amp; Nidra</h4><p style=\"margin:0;font-size:13px;color:#5a605e;\">Restore your nervous system with candlelit deep stretching.</p></td></tr><tr><td style=\"height:8px;\"></td></tr><tr><td style=\"padding:16px 20px;background:#c2ebe3;border-radius:12px;text-align:center;\"><h4 style=\"margin:0 0 4px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#335853;\">Breathwork Foundations</h4><p style=\"margin:0;font-size:12px;color:#335853;\">Master the art of the conscious exhale.</p></td></tr><tr><td style=\"height:8px;\"></td></tr><tr><td style=\"padding:16px 20px;background:#f2f4f2;border-radius:12px;\"><h4 style=\"margin:0 0 4px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#2e3432;\">Vinyasa Rhythm</h4><p style=\"margin:0;font-size:13px;color:#635f57;\">A fast-paced flow synchronized to melodic beats.</p></td></tr></table>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 24,
+              "left": 24
+            }
+          }
+        },
+        {
+          "id": "re-b5",
+          "type": "text",
+          "data": {
+            "html": "<h3 style=\"margin:0 0 8px;font-family:'Noto Serif',Georgia,serif;font-size:24px;font-style:italic;color:#e2fff9;text-align:center;\">Exclusive offer: A free class on us.</h3><p style=\"margin:0 0 20px;font-size:14px;color:#e2fff9cc;text-align:center;\">We believe your practice is waiting for you. Use this gift to reconnect with your center today.</p><p style=\"margin:0;text-align:center;\"><a href=\"#\" style=\"display:inline-block;padding:14px 32px;background:#ffffff;color:#406660;font-weight:700;font-size:14px;text-decoration:none;border-radius:50px;\">Claim Your Free Class</a></p><p style=\"margin:16px 0 0;text-align:center;font-size:10px;color:#e2fff980;text-transform:uppercase;letter-spacing:2px;\">Valid for 14 days • Single class credit</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 32,
+              "right": 32,
+              "bottom": 32,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundGradient": "linear-gradient(145deg, #406660 0%, #345a54 100%)"
+          }
+        },
+        {
+          "id": "re-b6",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
+          }
+        },
+        {
+          "id": "re-b7",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:20px;font-style:italic;color:#57534b;line-height:1.5;\">\"Yoga is not about touching your toes, it's about what you learn on the way down.\"</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 8,
+              "right": 40,
+              "bottom": 32,
+              "left": 40
+            },
+            "alignment": "center"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": [
+        {
+          "id": "re-f1",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#635f57;\"><a href=\"#\" style=\"color:#635f57;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">Privacy Policy</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 24,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#f2f4f2"
+          }
+        },
+        {
+          "id": "re-f2",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">© 2024 The Breathable Canvas. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 4,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#f2f4f2"
+          }
+        },
+        {
+          "id": "re-f3",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;\"><a href=\"#\" style=\"font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#635f57;\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 4,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#f2f4f2"
+          }
+        }
+      ]
+    }
+  },
+  "tags": [
+    "promotional"
+  ]
+}

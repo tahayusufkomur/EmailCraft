@@ -1,0 +1,344 @@
+{
+  "name": "Special Promotion — Sunrise Yoga",
+  "category": "promotional",
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundColor": "#fef5f0",
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBackgroundColor": "#fef5f0",
+      "bodyBorderRadius": 16,
+      "contentWidth": 600,
+      "defaultFont": "'Be Vietnam Pro', Arial, sans-serif",
+      "defaultFontSize": 15,
+      "defaultColor": "#322e2b"
+    },
+    "header": {
+      "blocks": [
+        {
+          "id": "sun-p-h1",
+          "type": "heading",
+          "data": {
+            "text": "SUNRISE YOGA",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#8c4a00",
+            "fontSize": 18,
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 3,
+            "textTransform": "uppercase"
+          }
+        }
+      ]
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "sun-p-b1",
+          "type": "hero",
+          "data": {
+            "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuDJ-pgF3dvI1797eAXq1yhR3_17P2bGOauQvVKKWlP9i6tGUbMlDKgijEBS5eo3Wup9dTR_AByckZ_h47Jxm89JPc1E44KRZEkQ3P--xbyHKY87I7JhGJWlApjMD9owBHlx7bfDSnC6u72iEubNEZE4oyNewhGi2kNCUvpNqhYSnKh-44zF8hYg8D-kMmiHz7Mai_8nR1WqSjs8Z6aMinVqS_UvHEBgdlMA3ZTKdobOToxe-7TaCIno67Gr66bxLdh6bEXi2eK6E3uT",
+            "heading": "Awaken Your Inner Glow",
+            "subheading": "Embrace the rhythm of the sunrise with our exclusive seasonal membership event.",
+            "buttonText": "Claim Offer",
+            "buttonUrl": "https://"
+          },
+          "style": {
+            "height": 420,
+            "overlayColor": "#000000",
+            "overlayOpacity": 0.35,
+            "headingColor": "#ffffff",
+            "headingFontSize": 34,
+            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "subheadingColor": "#ffffffcc",
+            "buttonBackgroundColor": "#fd8b00",
+            "buttonTextColor": "#ffffff",
+            "buttonBorderRadius": 999,
+            "contentAlignment": "left",
+            "verticalAlignment": "bottom",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "id": "sun-p-b2",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 16
+          }
+        },
+        {
+          "id": "sun-p-b3",
+          "type": "columns",
+          "style": {
+            "gap": 16,
+            "stackOnMobile": true,
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 16,
+              "left": 24
+            }
+          },
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              50,
+              50
+            ],
+            "columns": [
+              {
+                "id": "sun-p-c1",
+                "backgroundColor": "#ffd709",
+                "blocks": [
+                  {
+                    "id": "sun-p-c1-label",
+                    "type": "heading",
+                    "data": {
+                      "text": "OFFER DETAILS",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 20,
+                        "right": 20,
+                        "bottom": 4,
+                        "left": 20
+                      },
+                      "alignment": "center",
+                      "color": "#5b4b00",
+                      "fontSize": 11,
+                      "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 3,
+                      "textTransform": "uppercase"
+                    }
+                  },
+                  {
+                    "id": "sun-p-c1-main",
+                    "type": "text",
+                    "data": {
+                      "html": "<div style=\"text-align:center;\"><span style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:56px;font-weight:800;color:#5b4b00;\">20</span><span style=\"font-size:28px;font-weight:700;color:#5b4b00;\">% OFF</span></div>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 20,
+                        "bottom": 8,
+                        "left": 20
+                      }
+                    }
+                  },
+                  {
+                    "id": "sun-p-c1-sub",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"margin:0;text-align:center;font-size:14px;color:#5b4b00;font-weight:600;\">All Monthly &amp; Yearly Memberships</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 20,
+                        "bottom": 20,
+                        "left": 20
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sun-p-c2",
+                "backgroundColor": "#f8efea",
+                "blocks": [
+                  {
+                    "id": "sun-p-c2-code",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"margin:0 0 12px;text-align:center;font-size:13px;color:#605a57;font-style:italic;\">Use code at checkout to redeem</p><div style=\"border:2px dashed #fd8b00;border-radius:999px;padding:10px 16px;text-align:center;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:800;font-size:20px;letter-spacing:3px;color:#8c4a00;\">SUNRISE20</div><p style=\"margin:12px 0 0;text-align:center;font-size:11px;color:#7c7672;\">Valid until the end of the month</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 20,
+                        "right": 20,
+                        "bottom": 20,
+                        "left": 20
+                      },
+                      "alignment": "center"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "sun-p-b4",
+          "type": "html",
+          "data": {
+            "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#ffffff;border-radius:20px;padding:24px;text-align:center;\"><h3 style=\"margin:0 0 8px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:24px;color:#322e2b;font-weight:800;\">Ready to find your flow?</h3><p style=\"margin:0 0 16px;color:#605a57;font-size:15px;line-height:1.6;\">Join our community of mindful practitioners and gain unlimited access to vinyasa, hatha, and meditation sessions.</p><a href=\"https://\" style=\"display:inline-block;background:#8c4a00;color:#fff0e7;padding:12px 28px;border-radius:999px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;text-decoration:none;font-size:14px;\">Claim Offer</a></td></tr></table>"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 20,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "sun-p-b5",
+          "type": "columns",
+          "style": {
+            "gap": 12,
+            "stackOnMobile": true,
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 16,
+              "left": 24
+            }
+          },
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              34,
+              33,
+              33
+            ],
+            "columns": [
+              {
+                "id": "sun-p-c3",
+                "blocks": [
+                  {
+                    "id": "sun-p-c3-t",
+                    "type": "text",
+                    "data": {
+                      "html": "<div style=\"text-align:center;\"><div style=\"font-size:24px;\">🧘</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">Expert Guides</div><div style=\"font-size:12px;color:#605a57;\">World-class instructors for every level.</div></div>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sun-p-c4",
+                "blocks": [
+                  {
+                    "id": "sun-p-c4-t",
+                    "type": "text",
+                    "data": {
+                      "html": "<div style=\"text-align:center;\"><div style=\"font-size:24px;\">⏰</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">Flexible Access</div><div style=\"font-size:12px;color:#605a57;\">Live streaming and on-demand library.</div></div>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sun-p-c5",
+                "blocks": [
+                  {
+                    "id": "sun-p-c5-t",
+                    "type": "text",
+                    "data": {
+                      "html": "<div style=\"text-align:center;\"><div style=\"font-size:24px;\">🤝</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">Community</div><div style=\"font-size:12px;color:#605a57;\">Connect with a global wellness family.</div></div>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": [
+        {
+          "id": "sun-p-f1",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms of Service</a></p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "backgroundColor": "#f8efea",
+            "padding": {
+              "top": 20,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "sun-p-f2",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2024 Sunrise Yoga. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "backgroundColor": "#f8efea",
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            }
+          }
+        }
+      ]
+    }
+  },
+  "is_premium": true,
+  "tags": [
+    "promotional"
+  ]
+}

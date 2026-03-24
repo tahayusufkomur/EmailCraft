@@ -1,0 +1,432 @@
+{
+  "name": "Welcome — Meridian Coffee",
+  "category": "welcome",
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundColor": "#faf9f6",
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBackgroundColor": "#ffffff",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "defaultFont": "'Manrope', Arial, sans-serif",
+      "defaultFontSize": 14,
+      "defaultColor": "#1a1c1a",
+      "version": 1
+    },
+    "header": {
+      "blocks": [
+        {
+          "id": "m1-h1",
+          "type": "heading",
+          "data": {
+            "text": "MERIDIAN COFFEE CO.",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#271310",
+            "fontSize": 13,
+            "fontFamily": "'Work Sans', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 4,
+            "textTransform": "uppercase"
+          }
+        }
+      ]
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "m1-b1",
+          "type": "hero",
+          "data": {
+            "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuBggKkyDasQdFtDDZ9Mal3dXFX9mK_4qbOwotoPwtQJxmYEZa8mG7VaHsJRafRW02eNtAThEzyAK9vdCgZt6CrMH5lwxMKlGlItWTgWW-rJdHuEuDui2ZddkLVZh4gQUXcU34ii7zYZuhYtCw1XVR410zpy-XHHksUCzJvNcAfHTYTdnGD2KVp1P-2NLEU8REBw0cE8UuZrw4YseyFI4zw98-csjQbYPYtcpudtTswmYC2KY5r-GOf8XlEnNRFkLUP319ZAlJCGTxU",
+            "heading": "Your Journey Begins Here",
+            "subheading": "Welcome to a world of single-origin excellence. Your first bag is already on its way.",
+            "buttonText": "Explore the Roast",
+            "buttonUrl": "https://"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "height": 480,
+            "overlayColor": "#271310",
+            "overlayOpacity": 0.45,
+            "headingColor": "#ffffff",
+            "headingFontSize": 34,
+            "headingFontFamily": "'Noto Serif', Georgia, serif",
+            "subheadingColor": "#ffffffcc",
+            "buttonBackgroundColor": "#735c00",
+            "buttonTextColor": "#ffffff",
+            "buttonBorderRadius": 50,
+            "contentAlignment": "center",
+            "verticalAlignment": "middle"
+          }
+        },
+        {
+          "id": "m1-b2",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 32
+          }
+        },
+        {
+          "id": "m1-b3",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              50,
+              50
+            ],
+            "columns": [
+              {
+                "id": "m1-c1",
+                "backgroundColor": "#f4f3f1",
+                "blocks": [
+                  {
+                    "id": "m1-c1b1",
+                    "type": "heading",
+                    "data": {
+                      "text": "Your First Bag",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 24,
+                        "right": 16,
+                        "bottom": 4,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "color": "#1a1c1a",
+                      "fontSize": 18,
+                      "fontFamily": "'Noto Serif', Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  },
+                  {
+                    "id": "m1-c1b2",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"margin:0;font-size:13px;color:#504442;line-height:1.6;\">Your curated selection of single-origin beans has been roasted and packed. Track your shipment below.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 16,
+                        "bottom": 8,
+                        "left": 16
+                      }
+                    }
+                  },
+                  {
+                    "id": "m1-c1b3",
+                    "type": "button",
+                    "data": {
+                      "text": "TRACK SHIPMENT",
+                      "url": "https://"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 16,
+                        "bottom": 24,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#271310",
+                      "color": "#ffffff",
+                      "borderRadius": 50,
+                      "fullWidth": false,
+                      "fontSize": 11,
+                      "fontFamily": "'Work Sans', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "uppercase",
+                      "paddingX": 16,
+                      "paddingY": 8
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "m1-c2",
+                "backgroundColor": "#735c00",
+                "blocks": [
+                  {
+                    "id": "m1-c2b1",
+                    "type": "heading",
+                    "data": {
+                      "text": "Brew Guide",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 24,
+                        "right": 16,
+                        "bottom": 4,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "color": "#ffffff",
+                      "fontSize": 18,
+                      "fontFamily": "'Noto Serif', Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  },
+                  {
+                    "id": "m1-c2b2",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"margin:0;font-size:13px;color:#ffffffcc;line-height:1.6;\">Every origin has a story, and every brew method unlocks a different chapter. Start your masterclass.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 16,
+                        "bottom": 8,
+                        "left": 16
+                      }
+                    }
+                  },
+                  {
+                    "id": "m1-c2b3",
+                    "type": "button",
+                    "data": {
+                      "text": "VIEW MASTERCLASS",
+                      "url": "https://"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 16,
+                        "bottom": 24,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#ffffff",
+                      "color": "#735c00",
+                      "borderRadius": 50,
+                      "fullWidth": false,
+                      "fontSize": 11,
+                      "fontFamily": "'Work Sans', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "uppercase",
+                      "paddingX": 16,
+                      "paddingY": 8
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 20,
+              "bottom": 0,
+              "left": 20
+            },
+            "gap": 12,
+            "stackOnMobile": true
+          }
+        },
+        {
+          "id": "m1-b4",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 32
+          }
+        },
+        {
+          "id": "m1-b5",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:22px;font-style:italic;color:#1a1c1a;line-height:1.5;\">\"Coffee is a language in itself.\"</p><p style=\"margin:12px 0 0;text-align:center;font-size:13px;color:#504442;\">— Jackie Chan</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 28,
+              "left": 40
+            },
+            "alignment": "center",
+            "backgroundColor": "#faf9f6"
+          }
+        },
+        {
+          "id": "m1-b6",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 16
+          }
+        },
+        {
+          "id": "m1-b7",
+          "type": "heading",
+          "data": {
+            "text": "Next steps for your journey",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 16,
+              "right": 32,
+              "bottom": 12,
+              "left": 32
+            },
+            "alignment": "left",
+            "color": "#504442",
+            "fontSize": 16,
+            "fontFamily": "'Noto Serif', Georgia, serif",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "m1-b8",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;font-size:14px;line-height:1.8;\"><strong style=\"color:#1a1c1a;font-family:'Work Sans',Arial,sans-serif;font-size:11px;letter-spacing:2px;\">01</strong><br/><strong style=\"font-size:15px;color:#1a1c1a;\">Set Up Your Taste Profile</strong><br/><span style=\"font-size:13px;color:#504442;\">Tell us your flavor preferences so we can curate every shipment to your palate.</span></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 16,
+              "right": 32,
+              "bottom": 16,
+              "left": 32
+            },
+            "backgroundColor": "#ffffff"
+          }
+        },
+        {
+          "id": "m1-b9",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;font-size:14px;line-height:1.8;\"><strong style=\"color:#1a1c1a;font-family:'Work Sans',Arial,sans-serif;font-size:11px;letter-spacing:2px;\">02</strong><br/><strong style=\"font-size:15px;color:#1a1c1a;\">Download the Brew Timer</strong><br/><span style=\"font-size:13px;color:#504442;\">Our free app guides you through pour-over, French press, and espresso techniques.</span></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 16,
+              "right": 32,
+              "bottom": 16,
+              "left": 32
+            },
+            "backgroundColor": "#f4f3f1"
+          }
+        },
+        {
+          "id": "m1-b10",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;font-size:14px;line-height:1.8;\"><strong style=\"color:#1a1c1a;font-family:'Work Sans',Arial,sans-serif;font-size:11px;letter-spacing:2px;\">03</strong><br/><strong style=\"font-size:15px;color:#1a1c1a;\">Join the Community</strong><br/><span style=\"font-size:13px;color:#504442;\">Connect with fellow coffee enthusiasts and share your brewing discoveries.</span></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 16,
+              "right": 32,
+              "bottom": 16,
+              "left": 32
+            },
+            "backgroundColor": "#ffffff"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": [
+        {
+          "id": "m1-f1",
+          "type": "heading",
+          "data": {
+            "text": "Meridian Coffee Co.",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 24,
+              "right": 32,
+              "bottom": 4,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#271310",
+            "fontSize": 16,
+            "fontFamily": "'Noto Serif', Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "m1-f2",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#504442;\"><a href=\"#\" style=\"color:#504442;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;\">Shop</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Privacy Policy</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 4,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#f4f3f1"
+          }
+        },
+        {
+          "id": "m1-f3",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#827472;\">© 2025 Meridian Coffee Co. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#f4f3f1"
+          }
+        }
+      ]
+    }
+  },
+  "tags": [
+    "welcome"
+  ]
+}
