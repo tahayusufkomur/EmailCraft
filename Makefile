@@ -4,7 +4,8 @@
        migrate makemigrations \
        test test-backend lint-frontend lint-frontend-site lint-frontend-builder \
        seed demo-org create-key logs-backend shell dbshell superuser clean reset setup \
-       install-frontend-local install-frontend-site-local install-frontend-builder-local
+       install-frontend-local install-frontend-site-local install-frontend-builder-local \
+       deploy deploy-logs
 
 COMPOSE := docker compose
 BACKEND := backend
@@ -149,3 +150,19 @@ install-frontend-site-local: ## Install website deps on host
 
 install-frontend-builder-local: ## Install builder deps on host
 	@cd $(FRONTEND_BUILDER) && npm install
+
+# ─── Production ──────────────────────────────────────────
+
+PROD_HOST := root@46.224.76.186
+PROD_DIR := /opt/mailcraft
+PROD_COMPOSE := docker compose -f docker/docker-compose.prod.yml --env-file .env.prod
+
+deploy: ## Deploy latest changes to production
+	@echo "Pushing to origin..."
+	@git push origin main
+	@echo "Deploying to production..."
+	@ssh $(PROD_HOST) "cd $(PROD_DIR) && git pull origin main && $(PROD_COMPOSE) up --build -d && $(PROD_COMPOSE) exec -T backend python manage.py migrate"
+	@echo "Deploy complete: https://emailcraft.contentor.app"
+
+deploy-logs: ## Tail production logs
+	@ssh $(PROD_HOST) "cd $(PROD_DIR) && $(PROD_COMPOSE) logs -f --tail=100"
