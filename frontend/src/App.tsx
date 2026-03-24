@@ -11,6 +11,7 @@ import { FaqPage } from './pages/FaqPage';
 import { ImpressumPage } from './pages/ImpressumPage';
 import { LandingPage } from './pages/LandingPage';
 import { LoginPage } from './pages/LoginPage';
+import { DocsPage } from './pages/DocsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PricingPage } from './pages/PricingPage';
 import { RegisterPage } from './pages/RegisterPage';
@@ -30,6 +31,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="docs" element={<DocsPage />} />
         <Route path="faq" element={<FaqPage />} />
         <Route path="impressum" element={<ImpressumPage />} />
         <Route path="login" element={<LoginPage />} />
@@ -50,6 +52,7 @@ function App() {
         <Route path="widget-builder" element={<Navigate to="/dashboard/email-builder" replace />} />
         <Route path="email-builder" element={<DashboardWidgetBuilderPage />} />
         <Route path="billing" element={<DashboardBillingPage />} />
+        <Route path="docs" element={<DocsPage />} />
       </Route>
 
       <Route path="builder" element={<Navigate to="/builder/" replace />} />

@@ -22,6 +22,7 @@ const links = [
   { to: '/dashboard/organizations', label: 'Organizations' },
   { to: '/dashboard/email-builder', label: 'Email Builder' },
   { to: '/dashboard/billing', label: 'Billing' },
+  { to: '/dashboard/docs', label: 'Docs' },
 ];
 
 export function DashboardLayout() {

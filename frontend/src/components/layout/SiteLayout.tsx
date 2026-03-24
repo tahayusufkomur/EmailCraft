@@ -20,6 +20,7 @@ function ThemeToggle() {
 const navItems = [
   { to: '/', label: 'Home' },
   { to: '/templates', label: 'Templates' },
+  { to: '/docs', label: 'Docs' },
   { to: '/pricing', label: 'Pricing' },
   { to: '/faq', label: 'FAQ' },
   { to: '/impressum', label: 'Impressum' },
