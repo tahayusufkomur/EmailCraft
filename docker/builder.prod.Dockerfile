@@ -1,7 +1,7 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 COPY frontend-email-builder/package*.json ./
-RUN npm ci
+RUN npm install
 COPY frontend-email-builder/ .
 RUN npm run build
 
