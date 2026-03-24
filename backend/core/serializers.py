@@ -177,6 +177,10 @@ class SiteApiKeyCreateSerializer(serializers.Serializer):
     refresh = serializers.BooleanField(required=False, default=False)
 
 
+class SiteProvisionSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=255)
+
+
 class UserOrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserOrganization

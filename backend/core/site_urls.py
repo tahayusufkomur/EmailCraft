@@ -9,6 +9,7 @@ from core.site_views import (
     site_organization_api_keys,
     site_organization_detail,
     site_organizations,
+    site_provision,
     site_register,
     site_subscribe,
     site_template_detail,
@@ -28,4 +29,5 @@ urlpatterns = [
     path('templates/', site_templates, name='site-templates'),
     path('templates/<uuid:template_id>/', site_template_detail, name='site-template-detail'),
     path('billing/subscribe', site_subscribe, name='site-billing-subscribe'),
+    path('provision', site_provision, name='site-provision'),
 ]

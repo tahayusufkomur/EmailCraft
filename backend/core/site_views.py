@@ -28,7 +28,9 @@ from core.serializers import (
     SiteOrganizationUpdateSerializer,
     SiteRegisterSerializer,
     SubscribeRequestSerializer,
+    SiteProvisionSerializer,
 )
+from core.models import ApiKey
 from core.views import subscribe_org_to_plan
 from templates_api.models import Template
 from templates_api.serializers import (
@@ -411,3 +413,68 @@ def site_subscribe(request):
     serializer.is_valid(raise_exception=True)
     payload, status_code = subscribe_org_to_plan(billing_org, serializer.validated_data['plan'])
     return Response(payload, status=status_code)
+
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
+def site_provision(request):
+    """Create a new organization with a live API key in one call.
+
+    POST /api/v1/site/provision
+    Body: { "name": "My Org" }
+    Auth: Token <site_token>
+
+    Returns the org details and the raw live API key (shown only once).
+    """
+    serializer = SiteProvisionSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    name = serializer.validated_data['name']
+
+    billing_org = billing_organization_for_user(request.user)
+    plan = billing_org.plan if billing_org else 'free'
+
+    try:
+        with transaction.atomic():
+            org_email = f'org-{uuid.uuid4().hex[:20]}@org.mailcraft.dev'
+            org = Organization.objects.create(
+                name=name,
+                email=org_email,
+                plan=plan,
+            )
+            org.apply_plan_limits(save=True)
+            UserOrganization.objects.create(user=request.user, organization=org, role='owner')
+
+            # Create live API key
+            raw_key = ApiKey.generate_key(environment='live')
+            api_key = ApiKey.objects.create(
+                org=org,
+                key_hash=ApiKey.hash_key(raw_key),
+                key_prefix=raw_key[:12],
+                environment='live',
+                scope='full',
+            )
+
+            # Also create the reusable test key
+            ensure_reusable_test_api_key(org, refresh=False)
+    except IntegrityError:
+        return Response(
+            {'error': {'code': 'PROVISION_FAILED', 'message': 'Failed to create organization.'}},
+            status=status.HTTP_409_CONFLICT,
+        )
+
+    return Response(
+        {
+            'organization': {
+                'id': str(org.id),
+                'name': org.name,
+                'plan': org.plan,
+            },
+            'api_key': {
+                'raw': raw_key,
+                'prefix': api_key.key_prefix,
+                'environment': api_key.environment,
+            },
+        },
+        status=status.HTTP_201_CREATED,
+    )
