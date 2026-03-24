@@ -21,6 +21,7 @@ import { listenToParent, sendErrorEvent, sendReadyEvent, sendSaveEvent } from '.
 import type { EmailTemplate, TemplateBackgroundStyle } from './types/blocks';
 import type { ThemeMode, Variable } from './types/editor';
 import { getBuilderThemePreset, resolveBuilderTheme } from './lib/builderTheme';
+import { LayoutGrid, Image, Eye, Code2, Save, Download } from 'lucide-react';
 
 const isEmailTemplate = (value: unknown): value is EmailTemplate => {
   if (!value || typeof value !== 'object') return false;
@@ -555,30 +556,30 @@ function App() {
         )}
         <div className="toolbar-actions">
           <Button variant="ghost" size="sm" onClick={() => setShowGallery(true)}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
+            <LayoutGrid size={16} />
             Templates
           </Button>
           <Button variant="ghost" size="sm" onClick={() => setShowMedia(true)}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="9" cy="9" r="1.5" fill="currentColor" stroke="none" /><path d="m21 15-4.5-4.5L9 18" /></svg>
+            <Image size={16} />
             Media
           </Button>
           <div className="toolbar-separator" />
           <Button variant="ghost" size="sm" onClick={() => setShowPreview(true)}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" /></svg>
+            <Eye size={16} />
             Preview
           </Button>
           <Button variant={showCode ? 'default' : 'ghost'} size="sm" onClick={() => setShowCode((v) => !v)}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
+            <Code2 size={16} />
             Code
           </Button>
           <div className="toolbar-separator" />
-          <Button size="sm" onClick={() => void handleSave()} disabled={isSaving}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" /></svg>
+          <Button variant="ghost" size="sm" className="toolbar-action-btn" onClick={() => void handleSave()} disabled={isSaving}>
+            <Save size={16} />
             {isSaving ? 'Saving...' : 'Save'}
           </Button>
           {showExportHtmlButton && (
-            <Button size="sm" onClick={() => void handleExport()} disabled={isExporting}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+            <Button variant="ghost" size="sm" className="toolbar-action-btn" onClick={() => void handleExport()} disabled={isExporting}>
+              <Download size={16} />
               {isExporting ? 'Exporting...' : 'Export'}
             </Button>
           )}
