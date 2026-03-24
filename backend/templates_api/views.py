@@ -38,8 +38,7 @@ class TemplateViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         if self.action in ('list', 'retrieve'):
-            queryset = Template.objects.visible_to_org(self.request.org)
-            return filter_gallery_by_plan(queryset, self.request.org)
+            return Template.objects.visible_to_org(self.request.org)
         return Template.objects.for_org(self.request.org)
 
     def perform_create(self, serializer):
@@ -58,18 +57,9 @@ def gallery_list(request):
     if category:
         queryset = queryset.filter(category=category)
 
-    queryset = filter_gallery_by_plan(queryset, getattr(request, 'org', None))
-
     serializer = GalleryTemplateSerializer(queryset, many=True)
     return Response({'data': serializer.data})
 
-
-def filter_gallery_by_plan(queryset, org):
-    if org:
-        billing_org = billing_organization_for_org(org)
-        if billing_org and billing_org.plan != 'free':
-            return queryset
-    return queryset.exclude(org__isnull=True, is_gallery=True, is_premium=True)
 
 
 @api_view(['GET'])
