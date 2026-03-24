@@ -11,7 +11,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from core.models import ApiKey, Organization, billing_organization_for_org
+from core.models import ApiKey, Organization, Session, billing_organization_for_org
 from core.serializers import SessionRequestSerializer, SubscribeRequestSerializer
 
 
@@ -107,51 +107,8 @@ def subscribe_org_to_plan(org, plan_key):
     )
 
 
-@api_view(['POST'])
-def create_session(request):
-    """
-    POST /api/v1/auth/session
-    Validates API key + origin, returns a session token and config.
-    """
-    serializer = SessionRequestSerializer(data=request.data)
-    serializer.is_valid(raise_exception=True)
-
-    api_key_raw = request.META.get('HTTP_X_API_KEY', '')
-    origin = serializer.validated_data['origin']
-
-    if not api_key_raw:
-        return Response(
-            {'error': {'code': 'INVALID_API_KEY', 'message': 'API key is required.'}},
-            status=status.HTTP_401_UNAUTHORIZED,
-        )
-
-    key_hash = ApiKey.hash_key(api_key_raw)
-    try:
-        api_key = ApiKey.objects.select_related('org').get(
-            key_hash=key_hash,
-            is_active=True,
-            revoked_at__isnull=True,
-        )
-    except ApiKey.DoesNotExist:
-        return Response(
-            {'error': {'code': 'INVALID_API_KEY', 'message': 'Invalid or revoked API key.'}},
-            status=status.HTTP_401_UNAUTHORIZED,
-        )
-
-    org = api_key.org
+def _build_session_config_response(org, session_token, expires_at):
     billing_org = billing_organization_for_org(org)
-
-    # Origin validation for live keys
-    if api_key.environment == 'live' and org.allowed_origins:
-        if origin not in org.allowed_origins:
-            return Response(
-                {'error': {'code': 'UNAUTHORIZED_ORIGIN', 'message': f'Origin {origin} is not allowed.'}},
-                status=status.HTTP_403_FORBIDDEN,
-            )
-
-    session_token = f"sess_{secrets.token_hex(32)}"
-    expires_at = timezone.now() + timedelta(hours=4)
-
     return Response({
         'token': session_token,
         'expires_at': expires_at.isoformat(),
@@ -174,6 +131,80 @@ def create_session(request):
             },
         },
     })
+
+
+@api_view(['POST'])
+def create_session(request):
+    """
+    POST /api/v1/auth/session
+    Authenticates via API key or existing session token.
+    With API key: creates a new session token and returns config.
+    With session token: refreshes config without creating a new session.
+    """
+    serializer = SessionRequestSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    origin = serializer.validated_data['origin']
+
+    # Try session token first (for config refresh)
+    session_token_raw = request.META.get('HTTP_X_SESSION_TOKEN', '')
+    if session_token_raw:
+        token_hash = Session.hash_token(session_token_raw)
+        try:
+            session = Session.objects.select_related('org').get(token_hash=token_hash)
+        except Session.DoesNotExist:
+            return Response(
+                {'error': {'code': 'INVALID_SESSION', 'message': 'Invalid session token.'}},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+        if session.is_expired:
+            return Response(
+                {'error': {'code': 'SESSION_EXPIRED', 'message': 'Session expired. Create a new session with your API key.'}},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+        return _build_session_config_response(session.org, session_token_raw, session.expires_at)
+
+    # Fall back to API key (creates a new session)
+    api_key_raw = request.META.get('HTTP_X_API_KEY', '')
+    if not api_key_raw:
+        return Response(
+            {'error': {'code': 'AUTH_REQUIRED', 'message': 'API key or session token is required.'}},
+            status=status.HTTP_401_UNAUTHORIZED,
+        )
+
+    key_hash = ApiKey.hash_key(api_key_raw)
+    try:
+        api_key = ApiKey.objects.select_related('org').get(
+            key_hash=key_hash,
+            is_active=True,
+            revoked_at__isnull=True,
+        )
+    except ApiKey.DoesNotExist:
+        return Response(
+            {'error': {'code': 'INVALID_API_KEY', 'message': 'Invalid or revoked API key.'}},
+            status=status.HTTP_401_UNAUTHORIZED,
+        )
+
+    org = api_key.org
+
+    # Origin validation for live keys
+    if api_key.environment == 'live' and org.allowed_origins:
+        if origin not in org.allowed_origins:
+            return Response(
+                {'error': {'code': 'UNAUTHORIZED_ORIGIN', 'message': f'Origin {origin} is not allowed.'}},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+    new_token = Session.generate_token()
+    token_hash = Session.hash_token(new_token)
+    expires_at = timezone.now() + timedelta(hours=4)
+
+    Session.objects.create(
+        org=org,
+        token_hash=token_hash,
+        expires_at=expires_at,
+    )
+
+    return _build_session_config_response(org, new_token, expires_at)
 
 
 @api_view(['GET'])

@@ -324,13 +324,28 @@ function App() {
     const contextFromQuery = normalizeUiContextFromSearch(params);
     const shouldApplyQueryContext =
       asOptionalBooleanFromSearchParam(params.get('contextOverride')) === true || window.parent !== window;
+    const sessionTokenFromQuery = params.get('sessionToken');
     const apiKeyFromQuery = params.get('apiKey');
     let resolvedApiKey: string | null = null;
+    let hasSessionToken = false;
+
+    if (sessionTokenFromQuery) {
+      localStorage.setItem('mailcraft_session_token', sessionTokenFromQuery);
+      setConfig({ sessionToken: sessionTokenFromQuery });
+      hasSessionToken = true;
+    } else {
+      const sessionTokenFromStorage = localStorage.getItem('mailcraft_session_token');
+      if (sessionTokenFromStorage) {
+        setConfig({ sessionToken: sessionTokenFromStorage });
+        hasSessionToken = true;
+      }
+    }
+
     if (apiKeyFromQuery) {
       localStorage.setItem('mailcraft_api_key', apiKeyFromQuery);
       resolvedApiKey = apiKeyFromQuery;
       setConfig({ apiKey: apiKeyFromQuery });
-    } else {
+    } else if (!hasSessionToken) {
       const apiKeyFromStorage = localStorage.getItem('mailcraft_api_key');
       if (apiKeyFromStorage) {
         resolvedApiKey = apiKeyFromStorage;
@@ -374,13 +389,15 @@ function App() {
 
     if (resolvedApiKey) {
       void syncSessionConfig(resolvedApiKey);
+    } else if (hasSessionToken) {
+      void syncSessionConfig('');
     } else if (shouldApplyQueryContext && Object.keys(contextFromQuery).length > 0) {
       setConfig(contextFromQuery);
     }
 
     const refreshSessionIfNeeded = () => {
-      if (!resolvedApiKey) return;
-      void syncSessionConfig(resolvedApiKey);
+      if (!resolvedApiKey && !hasSessionToken) return;
+      void syncSessionConfig(resolvedApiKey || '');
     };
     const handleWindowFocus = () => {
       refreshSessionIfNeeded();

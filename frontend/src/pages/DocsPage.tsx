@@ -134,9 +134,19 @@ export function DocsPage() {
 
           <Section id="embedding" title="Embedding the Builder">
             <Subsection title="Basic iframe">
-              <p>The simplest integration — works with any framework or plain HTML.</p>
-              <Code>{`<iframe
+              <p>The simplest integration — works with any framework or plain HTML. For production, use session tokens instead of API keys (see Security section).</p>
+              <Code>{`<!-- Quick start (API key in URL — ok for development) -->
+<iframe
   src="${DOMAIN}/builder/?apiKey=YOUR_API_KEY"
+  width="100%"
+  height="800"
+  frameborder="0"
+  allow="clipboard-write"
+></iframe>
+
+<!-- Recommended for production (session token — API key stays on your server) -->
+<iframe
+  src="${DOMAIN}/builder/?sessionToken=sess_abc123..."
   width="100%"
   height="800"
   frameborder="0"
@@ -328,10 +338,29 @@ Content-Type: application/json
             </Subsection>
 
             <Subsection title="Session">
-              <Code>{`POST /api/v1/auth/session
+              <p>Create a session token server-side, then pass it to the iframe instead of your API key. This keeps your API key secret.</p>
+              <Code>{`# Create session from your backend (API key never reaches the browser)
+POST /api/v1/auth/session
 X-API-Key: mc_live_abc123...
-Origin: https://your-domain.com`}</Code>
-              <p>Creates a session token. Returns plan info, variable config, storage usage, and UI context. The builder calls this automatically on load.</p>
+Content-Type: application/json
+{"origin": "https://your-domain.com"}
+
+# Response:
+# {
+#   "token": "sess_abc123...",
+#   "expires_at": "2026-03-24T20:00:00Z",
+#   "config": { plan, variables, limits, widget_context... }
+# }
+
+# Then embed the builder with the session token:
+# <iframe src="${DOMAIN}/builder/?sessionToken=sess_abc123..." ...>`}</Code>
+              <p>Session tokens expire after 4 hours. All API endpoints accept <InlineCode>X-Session-Token</InlineCode> as an alternative to <InlineCode>X-API-Key</InlineCode>.</p>
+              <p>To refresh config with an existing session token:</p>
+              <Code>{`POST /api/v1/auth/session
+X-Session-Token: sess_abc123...
+Content-Type: application/json
+{"origin": "https://your-domain.com"}
+# Returns config without creating a new token`}</Code>
             </Subsection>
           </Section>
 
@@ -501,7 +530,37 @@ Content-Type: image/jpeg
               <p>
                 API keys are hashed with SHA-256 before storage — the raw key is never stored in the database.
                 The key format <InlineCode>{'mc_{live|test}_{32hex}'}</InlineCode> indicates environment.
-                Treat API keys like passwords: never expose them in client-side code outside of iframe src attributes.
+                Treat API keys like passwords: never expose them in client-side code.
+              </p>
+            </Subsection>
+
+            <Subsection title="Secure embedding with session tokens (recommended)">
+              <p>
+                Instead of putting your API key in the iframe URL (where any user can inspect it),
+                create a session token on your backend and pass only the token to the browser.
+              </p>
+              <Code>{`// Your backend (Node.js example)
+app.get('/api/email-builder-session', async (req, res) => {
+  const response = await fetch('${DOMAIN}/api/v1/auth/session', {
+    method: 'POST',
+    headers: {
+      'X-API-Key': process.env.MAILCRAFT_API_KEY,  // secret, never sent to browser
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ origin: 'https://your-domain.com' }),
+  });
+  const { token } = await response.json();
+  res.json({ sessionToken: token });
+});
+
+// Your frontend
+const { sessionToken } = await fetch('/api/email-builder-session').then(r => r.json());
+const iframe = document.createElement('iframe');
+iframe.src = \`${DOMAIN}/builder/?sessionToken=\${sessionToken}\`;
+// API key never appears in the browser`}</Code>
+              <p>
+                Session tokens expire after 4 hours and are scoped to the same organization as the API key that created them.
+                All API endpoints accept <InlineCode>X-Session-Token</InlineCode> header as an alternative to <InlineCode>X-API-Key</InlineCode>.
               </p>
             </Subsection>
 

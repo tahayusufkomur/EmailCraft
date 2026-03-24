@@ -3,7 +3,7 @@ import re
 from django.http import JsonResponse
 from django.utils import timezone
 
-from core.models import ApiKey
+from core.models import ApiKey, Session
 
 # Paths that don't require API key authentication
 PUBLIC_PATHS = [
@@ -25,8 +25,10 @@ INTERNAL_PATHS = [
 
 class ApiKeyAuthMiddleware:
     """
-    Authenticates requests via X-API-Key header.
+    Authenticates requests via X-API-Key header or X-Session-Token header.
     Attaches org and api_key to the request object.
+    Session tokens are an alternative to API keys — they allow the parent
+    window to avoid exposing the raw API key in the browser.
     """
 
     def __init__(self, get_response):
@@ -43,14 +45,21 @@ class ApiKeyAuthMiddleware:
         if not path.startswith('/api/'):
             return self.get_response(request)
 
+        # Try session token first, then API key
+        session_token = request.META.get('HTTP_X_SESSION_TOKEN', '')
+        if session_token:
+            return self._auth_via_session(request, session_token)
+
         api_key_raw = request.META.get('HTTP_X_API_KEY', '')
+        if api_key_raw:
+            return self._auth_via_api_key(request, api_key_raw)
 
-        if not api_key_raw:
-            return JsonResponse(
-                {'error': {'code': 'INVALID_API_KEY', 'message': 'API key is required.'}},
-                status=401,
-            )
+        return JsonResponse(
+            {'error': {'code': 'AUTH_REQUIRED', 'message': 'API key or session token is required.'}},
+            status=401,
+        )
 
+    def _auth_via_api_key(self, request, api_key_raw):
         # Validate key format
         if not re.match(r'^mc_(live|test)_[a-f0-9]{32}$', api_key_raw):
             return JsonResponse(
@@ -93,6 +102,41 @@ class ApiKeyAuthMiddleware:
 
         # Update last used
         ApiKey.objects.filter(pk=api_key.pk).update(last_used_at=timezone.now())
+
+        return self.get_response(request)
+
+    def _auth_via_session(self, request, session_token):
+        # Validate token format
+        if not re.match(r'^sess_[a-f0-9]{64}$', session_token):
+            return JsonResponse(
+                {'error': {'code': 'INVALID_SESSION', 'message': 'Invalid session token format.'}},
+                status=401,
+            )
+
+        token_hash = Session.hash_token(session_token)
+        try:
+            session = Session.objects.select_related('org').get(token_hash=token_hash)
+        except Session.DoesNotExist:
+            return JsonResponse(
+                {'error': {'code': 'INVALID_SESSION', 'message': 'Invalid or expired session token.'}},
+                status=401,
+            )
+
+        if session.is_expired:
+            return JsonResponse(
+                {'error': {'code': 'SESSION_EXPIRED', 'message': 'Session token has expired. Create a new session.'}},
+                status=401,
+            )
+
+        if not session.org.is_active:
+            return JsonResponse(
+                {'error': {'code': 'INVALID_SESSION', 'message': 'Organization is deactivated.'}},
+                status=401,
+            )
+
+        # Attach to request (no api_key in session-based auth)
+        request.org = session.org
+        request.api_key = None
 
         return self.get_response(request)
 

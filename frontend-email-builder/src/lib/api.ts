@@ -28,6 +28,21 @@ function resolveApiKey(): string {
   return fromStorage;
 }
 
+function resolveSessionToken(): string {
+  const storageKey = 'mailcraft_session_token';
+  const fromStorage = localStorage.getItem(storageKey) || '';
+
+  if (typeof window === 'undefined') return fromStorage;
+
+  const fromQuery = new URLSearchParams(window.location.search).get('sessionToken') || '';
+  if (fromQuery && fromQuery !== fromStorage) {
+    localStorage.setItem(storageKey, fromQuery);
+    return fromQuery;
+  }
+
+  return fromStorage;
+}
+
 async function uploadBinaryToPresignedUrl(url: string, contentType: string, body: Blob): Promise<void> {
   const uploadResponse = await fetch(url, {
     method: 'PUT',
@@ -76,13 +91,21 @@ async function createThumbnailBlob(file: File): Promise<Blob | null> {
 }
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
+  const sessionToken = resolveSessionToken();
   const apiKey = resolveApiKey();
+
+  const authHeaders: Record<string, string> = {};
+  if (sessionToken) {
+    authHeaders['X-Session-Token'] = sessionToken;
+  } else if (apiKey) {
+    authHeaders['X-API-Key'] = apiKey;
+  }
 
   const res = await fetch(`${BASE_URL}${path}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      'X-API-Key': apiKey,
+      ...authHeaders,
       ...options.headers,
     },
   });

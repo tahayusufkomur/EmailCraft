@@ -134,6 +134,35 @@ class ApiKey(models.Model):
         return hashlib.sha256(raw_key.encode()).hexdigest()
 
 
+class Session(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    org = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='sessions')
+    token_hash = models.CharField(max_length=64, unique=True, db_index=True)
+    expires_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'sessions'
+        indexes = [
+            models.Index(fields=['expires_at']),
+        ]
+
+    def __str__(self):
+        return f"Session {self.id} ({self.org.name})"
+
+    @property
+    def is_expired(self):
+        return timezone.now() >= self.expires_at
+
+    @staticmethod
+    def generate_token():
+        return f"sess_{secrets.token_hex(32)}"
+
+    @staticmethod
+    def hash_token(raw_token):
+        return hashlib.sha256(raw_token.encode()).hexdigest()
+
+
 def derive_reusable_test_api_key(org):
     seed = f'{settings.SECRET_KEY}:{org.id}:{org.test_key_version}'
     digest = hashlib.sha256(seed.encode()).hexdigest()[:32]
