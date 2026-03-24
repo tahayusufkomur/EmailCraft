@@ -31,7 +31,7 @@ Add `lucide-react` to `frontend-email-builder/package.json` dependencies.
 | `IconTrash` (custom SVG) | `Trash2` | 14 |
 | `IconStar` (custom SVG) | `Star` | 14 |
 
-Remove the `iconProps` constant and all four icon component definitions.
+Remove the `iconProps` constant and all four icon component definitions. Note: `IconStar` is also used inside the `showSaveInput` preset save bar (line 125) — replace that usage with `<Star size={14} />` as well.
 
 **BlockPalette.tsx** — Replace `BLOCK_ICONS` record and all inline SVGs:
 
@@ -58,6 +58,8 @@ Other inline SVGs:
 - Preset delete X: `X` (size 10)
 
 Remove `svgProps` and `svgPropsSmall` constants.
+
+Also replace the independent inline SVG chevron in `CollapsibleSection` (lines 212–219) with `<ChevronDown size={14} />` to match.
 
 **App.tsx toolbar** — Replace all inline SVGs next to button labels:
 
@@ -114,18 +116,26 @@ Save and Export use the default solid primary button style (blue), which feels h
 
 **App.css — New `.toolbar-action-btn` class:**
 
+Add a new `--accent-border` CSS variable to each theme preset (alongside the existing `--accent-soft`):
+- light-breeze: `--accent-border: rgba(56, 189, 248, 0.2)`
+- light-paper: `--accent-border: rgba(180, 83, 9, 0.2)`
+- dark-slate: `--accent-border: rgba(56, 189, 248, 0.25)`
+- dark-cosmos: `--accent-border: rgba(244, 114, 182, 0.25)`
+
 ```css
 .toolbar-action-btn {
   background: var(--accent-soft);
   color: var(--accent-color);
-  border: 1px solid rgba(from var(--accent-color) r g b / 0.2);
+  border: 1px solid var(--accent-border);
 }
 
 .toolbar-action-btn:hover {
-  background: rgba(from var(--accent-color) r g b / 0.2);
+  background: var(--accent-border);
   color: var(--accent-hover);
 }
 ```
+
+Note: Avoids `rgba(from var(...))` relative color syntax which lacks Firefox support.
 
 This uses theme-aware CSS variables already defined per theme preset:
 - light-breeze: sky blue accent
@@ -144,7 +154,7 @@ This uses theme-aware CSS variables already defined per theme preset:
 
 ### Block Descriptions
 
-A `Record<BlockType, string>` constant defined in a shared location (e.g., `BlockWrapper.tsx` or a new `blockDescriptions.ts` if needed by both `BlockWrapper` and `ColumnsBlock`):
+A `Record<BlockType, string>` constant defined in `src/lib/blockDescriptions.ts` (shared by both `BlockWrapper` and `ColumnsBlock` to avoid coupling them):
 
 ```typescript
 const BLOCK_DESCRIPTIONS: Record<BlockType, string> = {
@@ -171,7 +181,7 @@ const BLOCK_DESCRIPTIONS: Record<BlockType, string> = {
 </button>
 ```
 
-**ColumnsBlock.tsx** — Same info button in `NestedBlockWrapper`.
+**ColumnsBlock.tsx** — Same info button in `NestedBlockWrapper`, positioned before the `block-toolbar-sep` divider (which will be added as part of section 2's toolbar unification).
 
 ### CSS Tooltip
 
@@ -215,5 +225,5 @@ Tooltip appears below the toolbar on hover, matching the dark toolbar aesthetic.
 | `src/components/Panels/BlockPalette.tsx` | Replace all SVGs with Lucide icons |
 | `src/components/Blocks/ColumnsBlock.tsx` | Unify nested toolbar with BlockWrapper style, add Lucide icons + Info button |
 
-Optional new file:
-| `src/lib/blockDescriptions.ts` | `BLOCK_DESCRIPTIONS` constant (if sharing between BlockWrapper and ColumnsBlock) |
+New file:
+| `src/lib/blockDescriptions.ts` | `BLOCK_DESCRIPTIONS` constant shared by BlockWrapper and ColumnsBlock |
