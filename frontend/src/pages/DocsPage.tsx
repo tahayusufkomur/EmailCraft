@@ -6,6 +6,7 @@ const DOMAIN = 'https://emailcraft.contentor.app';
 type SectionId =
   | 'overview'
   | 'getting-started'
+  | 'account-api'
   | 'embedding'
   | 'postmessage'
   | 'api-reference'
@@ -18,6 +19,7 @@ type SectionId =
 const SECTIONS: Array<{ id: SectionId; label: string }> = [
   { id: 'overview', label: 'Overview' },
   { id: 'getting-started', label: 'Getting Started' },
+  { id: 'account-api', label: 'Account API' },
   { id: 'embedding', label: 'Embedding the Builder' },
   { id: 'postmessage', label: 'postMessage API' },
   { id: 'api-reference', label: 'REST API Reference' },
@@ -129,6 +131,81 @@ export function DocsPage() {
             </Subsection>
             <Subsection title="4. Listen for saves">
               <p>The builder sends <InlineCode>MAILCRAFT_SAVE</InlineCode> events via postMessage containing both the HTML output and the JSON template data.</p>
+            </Subsection>
+          </Section>
+
+          <Section id="account-api" title="Account API">
+            <p>
+              Manage your account programmatically. These endpoints use your <strong className="text-foreground">site token</strong> (returned at login), not an API key.
+              Base URL: <InlineCode>{`${DOMAIN}/api/v1/site`}</InlineCode>
+            </p>
+
+            <Subsection title="Authentication">
+              <p>Log in to get your site token, then pass it as a Bearer token in subsequent requests.</p>
+              <Code>{`# Log in (email or username)
+POST ${DOMAIN}/api/v1/site/login
+Content-Type: application/json
+
+{ "identifier": "you@example.com", "password": "your-password" }
+
+# Response: { "token": "abc123..." }
+
+# Use the token for all account API calls
+Authorization: Token abc123...`}</Code>
+            </Subsection>
+
+            <Subsection title="Provision an organization">
+              <p>
+                Create a new organization and get a <strong className="text-foreground">live API key</strong> in one call.
+                The raw key is returned only once — store it securely.
+              </p>
+              <Code>{`POST ${DOMAIN}/api/v1/site/provision
+Authorization: Token <your_site_token>
+Content-Type: application/json
+
+{ "name": "My Client App" }
+
+# Response (201):
+{
+  "organization": {
+    "id": "uuid",
+    "name": "My Client App",
+    "plan": "free"
+  },
+  "api_key": {
+    "raw": "mc_live_abc123...",
+    "prefix": "mc_live_abc1",
+    "environment": "live"
+  }
+}`}</Code>
+              <p>
+                The new organization inherits the plan of your billing organization.
+                A test key is also created automatically.
+                Use the returned <InlineCode>api_key.raw</InlineCode> value to embed the builder or call the REST API.
+              </p>
+            </Subsection>
+
+            <Subsection title="Other account endpoints">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs">
+                  <thead>
+                    <tr className="border-b border-border">
+                      <th className="py-2 pr-4 font-semibold text-foreground">Method</th>
+                      <th className="py-2 pr-4 font-semibold text-foreground">Endpoint</th>
+                      <th className="py-2 font-semibold text-foreground">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border">
+                    <tr><td className="py-2 pr-4">POST</td><td className="py-2 pr-4"><InlineCode>/site/login</InlineCode></td><td className="py-2">Log in with email/username + password. Returns site token.</td></tr>
+                    <tr><td className="py-2 pr-4">POST</td><td className="py-2 pr-4"><InlineCode>/site/register</InlineCode></td><td className="py-2">Create account + first organization.</td></tr>
+                    <tr><td className="py-2 pr-4">POST</td><td className="py-2 pr-4"><InlineCode>/site/logout</InlineCode></td><td className="py-2">Revoke your site token.</td></tr>
+                    <tr><td className="py-2 pr-4">GET</td><td className="py-2 pr-4"><InlineCode>/site/me</InlineCode></td><td className="py-2">Get current user + primary organization.</td></tr>
+                    <tr><td className="py-2 pr-4">POST</td><td className="py-2 pr-4"><InlineCode>/site/provision</InlineCode></td><td className="py-2">Create org + live API key (see above).</td></tr>
+                    <tr><td className="py-2 pr-4">GET</td><td className="py-2 pr-4"><InlineCode>/site/organizations/</InlineCode></td><td className="py-2">List all your organizations with API keys.</td></tr>
+                    <tr><td className="py-2 pr-4">PUT</td><td className="py-2 pr-4"><InlineCode>{'/site/organizations/{id}/'}</InlineCode></td><td className="py-2">Update org settings (name, allowed origins, theme, etc.).</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </Subsection>
           </Section>
 
