@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { api } from '../../lib/api';
 import { exportToHtml } from '../../lib/htmlExporter';
 import { useEditorStore } from '../../store/editorStore';
+import { useConfigStore } from '../../store/configStore';
 import type { EmailTemplate } from '../../types/blocks';
 import type { TemplateListItem } from '../../types/api';
 
@@ -23,9 +24,11 @@ interface Props {
 
 export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
+  const plan = useConfigStore((s) => s.plan);
   const [activeTab, setActiveTab] = useState<Tab>('library');
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [premiumNotice, setPremiumNotice] = useState<string | null>(null);
   const [templates, setTemplates] = useState<TemplateListItem[]>([]);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
@@ -106,6 +109,11 @@ export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
   }, [loadTemplate, onClose]);
 
   const handleSelectSaved = useCallback(async (item: TemplateListItem) => {
+    if (item.is_premium && plan === 'free') {
+      setPremiumNotice('Upgrade your plan to use premium templates');
+      setTimeout(() => setPremiumNotice(null), 3000);
+      return;
+    }
     try {
       const detail = await api.getTemplate(item.id);
       if (!detail.json_data || typeof detail.json_data !== 'object') {
@@ -117,7 +125,7 @@ export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
     } catch (error) {
       setLoadError(error instanceof Error ? error.message : 'Unable to load template.');
     }
-  }, [handleSelect, onTemplateLoaded]);
+  }, [handleSelect, onTemplateLoaded, plan]);
 
   return (
     <div style={styles.overlay} onClick={onClose}>
@@ -148,6 +156,7 @@ export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
 
         {/* Error */}
         {loadError && <div style={styles.error}>{loadError}</div>}
+        {premiumNotice && <div style={styles.premiumNotice}>{premiumNotice}</div>}
 
         {/* Content */}
         <div style={styles.content}>
@@ -329,6 +338,7 @@ function TemplateCard({ item, onSelect }: { item: TemplateListItem; onSelect: ()
             <span style={{ fontSize: 28, color: '#cbd5e1' }}>&#x2709;</span>
           </div>
         )}
+        {item.is_premium && <span style={styles.premiumBadge}>Premium</span>}
       </div>
       <div style={styles.cardBody}>
         <div style={styles.cardName}>{item.name}</div>
@@ -424,5 +434,15 @@ const styles: Record<string, React.CSSProperties> = {
   empty: {
     display: 'flex', flexDirection: 'column' as const, alignItems: 'center',
     justifyContent: 'center', padding: '48px 20px', textAlign: 'center' as const,
+  },
+  premiumBadge: {
+    position: 'absolute' as const, top: 8, right: 8,
+    background: 'rgba(15, 23, 42, 0.75)', color: '#ffffff',
+    fontSize: 10, fontWeight: 600, padding: '3px 8px', borderRadius: 10,
+    letterSpacing: 0.5,
+  },
+  premiumNotice: {
+    margin: '12px 20px 0', border: '1px solid #fbbf24', background: '#fffbeb',
+    color: '#92400e', borderRadius: 6, padding: '8px 12px', fontSize: 13, flexShrink: 0,
   },
 };
