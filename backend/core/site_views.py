@@ -11,10 +11,11 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from core.models import (
+    Account,
     Organization,
     Plan,
     UserOrganization,
-    billing_organization_for_user,
+    account_for_user,
     ensure_reusable_test_api_key,
     organizations_for_user,
     primary_organization_for_user,
@@ -32,7 +33,7 @@ from core.serializers import (
     SiteProvisionSerializer,
 )
 from core.models import ApiKey
-from core.views import subscribe_org_to_plan
+from core.views import subscribe_account_to_plan
 from templates_api.models import Template
 from templates_api.serializers import (
     GalleryTemplateSerializer,
@@ -110,10 +111,10 @@ def site_register(request):
             org = Organization.objects.create(
                 name=data['organization_name'],
                 email=data['email'],
-                plan=Plan.get_default(),
             )
-            org.apply_plan_limits(save=True)
+
             UserOrganization.objects.create(user=user, organization=org, role='owner')
+            Account.objects.create(user=user, plan=Plan.get_default())
             token, _ = Token.objects.get_or_create(user=user)
     except IntegrityError:
         return Response(
@@ -154,8 +155,8 @@ def site_me(request):
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def site_dashboard(request):
-    billing_org = billing_organization_for_user(request.user)
-    if not billing_org:
+    account = account_for_user(request.user)
+    if not account:
         return Response(
             {'error': {'code': 'ORG_NOT_FOUND', 'message': 'No organization linked to this user.'}},
             status=status.HTTP_404_NOT_FOUND,
@@ -163,14 +164,14 @@ def site_dashboard(request):
 
     return Response(
         {
-            'plan': billing_org.plan_slug,
-            'rendered_emails_count': billing_org.rendered_emails_count,
-            'rendered_emails_limit': billing_org.rendered_emails_limit,
-            'max_media_files_per_upload': billing_org.max_media_files_per_upload,
-            'storage_used_bytes': billing_org.storage_used_bytes,
-            'storage_limit_bytes': billing_org.storage_limit_bytes,
+            'plan': account.plan_slug,
+            'rendered_emails_count': account.rendered_emails_count,
+            'rendered_emails_limit': account.rendered_emails_limit,
+            'max_media_files_per_upload': account.max_media_files_per_upload,
+            'storage_used_bytes': account.storage_used_bytes,
+            'storage_limit_bytes': account.storage_limit_bytes,
             'organizations_count': organizations_for_user(request.user).count(),
-            'stripe_subscription_id': billing_org.stripe_subscription_id,
+            'stripe_subscription_id': account.stripe_subscription_id,
         }
     )
 
@@ -192,16 +193,12 @@ def site_organizations(request):
     serializer.is_valid(raise_exception=True)
     data = serializer.validated_data
 
-    billing_org = billing_organization_for_user(request.user)
-    plan = billing_org.plan if billing_org else Plan.get_default()
-
     try:
         with transaction.atomic():
             generated_org_email = f'org-{uuid.uuid4().hex[:20]}@org.mailcraft.dev'
             org = Organization.objects.create(
                 name=data['name'],
                 email=generated_org_email,
-                plan=plan,
                 allowed_origins=data.get('allowed_origins', []),
                 available_variables=data.get('available_variables', []),
                 show_logo=data.get('show_logo', True),
@@ -211,7 +208,7 @@ def site_organizations(request):
                 email_background_style=data.get('email_background_style', 'none'),
                 email_background_color=data.get('email_background_color', '#f4f4f4'),
             )
-            org.apply_plan_limits(save=True)
+
             UserOrganization.objects.create(user=request.user, organization=org, role='owner')
 
             raw_key, created_key = ensure_reusable_test_api_key(org, refresh=False)
@@ -348,14 +345,14 @@ def site_templates(request):
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def site_gallery(request):
-    billing_org = billing_organization_for_user(request.user)
+    account = account_for_user(request.user)
     queryset = Template.objects.shared()
 
     category = request.query_params.get('category')
     if category:
         queryset = queryset.filter(category=category)
 
-    if not billing_org or billing_org.plan_slug == 'free':
+    if not account or account.plan_slug == 'free':
         queryset = queryset.filter(is_premium=False)
 
     serializer = GalleryTemplateSerializer(queryset, many=True)
@@ -403,8 +400,8 @@ def site_template_detail(request, template_id):
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def site_subscribe(request):
-    billing_org = billing_organization_for_user(request.user)
-    if not billing_org:
+    account = account_for_user(request.user)
+    if not account:
         return Response(
             {'error': {'code': 'ORG_NOT_FOUND', 'message': 'No organization linked to this user.'}},
             status=status.HTTP_404_NOT_FOUND,
@@ -412,7 +409,7 @@ def site_subscribe(request):
 
     serializer = SubscribeRequestSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
-    payload, status_code = subscribe_org_to_plan(billing_org, serializer.validated_data['plan'])
+    payload, status_code = subscribe_account_to_plan(account, serializer.validated_data['plan'])
     return Response(payload, status=status_code)
 
 
@@ -468,18 +465,14 @@ def site_provision(request):
             status=status.HTTP_200_OK,
         )
 
-    billing_org = billing_organization_for_user(request.user)
-    plan = billing_org.plan if billing_org else Plan.get_default()
-
     try:
         with transaction.atomic():
             org_email = f'org-{uuid.uuid4().hex[:20]}@org.mailcraft.dev'
             org = Organization.objects.create(
                 name=name,
                 email=org_email,
-                plan=plan,
             )
-            org.apply_plan_limits(save=True)
+
             UserOrganization.objects.create(user=request.user, organization=org, role='owner')
 
             # Create live API key

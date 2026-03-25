@@ -31,59 +31,24 @@ class Plan(models.Model):
         return cls.objects.filter(is_default=True).first() or cls.objects.order_by('sort_order').first()
 
 
-class Organization(models.Model):
-    THEME_MODE_CHOICES = [
-        ('light', 'Light'),
-        ('dark', 'Dark'),
-        ('system', 'System'),
-    ]
-    EMAIL_BACKGROUND_STYLE_CHOICES = [
-        ('none', 'Solid'),
-        ('aurora', 'Aurora'),
-        ('sunset-glow', 'Sunset Glow'),
-        ('mint-weave', 'Mint Weave'),
-        ('midnight-grid', 'Midnight Grid'),
-        ('paper-rings', 'Paper Rings'),
-    ]
-    BUILDER_THEME_CHOICES = [
-        ('light-breeze', 'Light Breeze'),
-        ('light-paper', 'Light Paper'),
-        ('dark-slate', 'Dark Slate'),
-        ('dark-cosmos', 'Dark Cosmos'),
-    ]
-
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
-    plan = models.ForeignKey(Plan, on_delete=models.SET_NULL, null=True, blank=True, related_name='organizations')
-    allowed_origins = models.JSONField(default=list, blank=True)
-    available_variables = models.JSONField(default=list, blank=True)
+class Account(models.Model):
+    """Billing account — one per user. Holds plan, usage counters, and Stripe info."""
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='account')
+    plan = models.ForeignKey(Plan, on_delete=models.SET_NULL, null=True, blank=True, related_name='accounts')
     rendered_emails_count = models.BigIntegerField(default=0)
     rendered_emails_limit = models.BigIntegerField(default=1000)
     storage_used_bytes = models.BigIntegerField(default=0)
     storage_limit_bytes = models.BigIntegerField(default=1073741824)  # 1GB
     stripe_customer_id = models.CharField(max_length=120, blank=True, null=True)
     stripe_subscription_id = models.CharField(max_length=120, blank=True, null=True)
-    show_logo = models.BooleanField(default=True)
-    show_export_html_button = models.BooleanField(default=True)
-    theme_mode = models.CharField(max_length=10, choices=THEME_MODE_CHOICES, default='system')
-    email_background_style = models.CharField(
-        max_length=30,
-        choices=EMAIL_BACKGROUND_STYLE_CHOICES,
-        default='none',
-    )
-    email_background_color = models.CharField(max_length=20, default='#f4f4f4')
-    builder_theme = models.CharField(max_length=30, choices=BUILDER_THEME_CHOICES, default='light-breeze')
-    test_key_version = models.PositiveIntegerField(default=1)
-    is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'organizations'
+        db_table = 'accounts'
 
     def __str__(self):
-        return self.name
+        return f"{self.user.username} ({self.plan_slug})"
 
     @property
     def plan_slug(self):
@@ -108,6 +73,54 @@ class Organization(models.Model):
             self.storage_limit_bytes = p.storage_limit_bytes
         if save:
             self.save(update_fields=['rendered_emails_limit', 'storage_limit_bytes', 'updated_at'])
+
+
+class Organization(models.Model):
+    THEME_MODE_CHOICES = [
+        ('light', 'Light'),
+        ('dark', 'Dark'),
+        ('system', 'System'),
+    ]
+    EMAIL_BACKGROUND_STYLE_CHOICES = [
+        ('none', 'Solid'),
+        ('aurora', 'Aurora'),
+        ('sunset-glow', 'Sunset Glow'),
+        ('mint-weave', 'Mint Weave'),
+        ('midnight-grid', 'Midnight Grid'),
+        ('paper-rings', 'Paper Rings'),
+    ]
+    BUILDER_THEME_CHOICES = [
+        ('light-breeze', 'Light Breeze'),
+        ('light-paper', 'Light Paper'),
+        ('dark-slate', 'Dark Slate'),
+        ('dark-cosmos', 'Dark Cosmos'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=255)
+    email = models.EmailField(unique=True)
+    allowed_origins = models.JSONField(default=list, blank=True)
+    available_variables = models.JSONField(default=list, blank=True)
+    show_logo = models.BooleanField(default=True)
+    show_export_html_button = models.BooleanField(default=True)
+    theme_mode = models.CharField(max_length=10, choices=THEME_MODE_CHOICES, default='system')
+    email_background_style = models.CharField(
+        max_length=30,
+        choices=EMAIL_BACKGROUND_STYLE_CHOICES,
+        default='none',
+    )
+    email_background_color = models.CharField(max_length=20, default='#f4f4f4')
+    builder_theme = models.CharField(max_length=30, choices=BUILDER_THEME_CHOICES, default='light-breeze')
+    test_key_version = models.PositiveIntegerField(default=1)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'organizations'
+
+    def __str__(self):
+        return self.name
 
 
 class ApiKey(models.Model):
@@ -264,11 +277,24 @@ def primary_organization_for_user(user):
     return membership.organization if membership else None
 
 
-def billing_organization_for_user(user):
-    return primary_organization_for_user(user)
+def get_or_create_account(user):
+    """Get or create the billing Account for a user."""
+    account, created = Account.objects.get_or_create(
+        user=user,
+        defaults={'plan': Plan.get_default()},
+    )
+    if created:
+        account.apply_plan_limits(save=True)
+    return account
 
 
-def billing_organization_for_org(org):
+def account_for_user(user):
+    """Get the Account for a user, creating one if needed."""
+    return get_or_create_account(user)
+
+
+def account_for_org(org):
+    """Get the billing Account for an org (via its owner)."""
     owner_membership = (
         UserOrganization.objects.select_related('user')
         .filter(organization=org, role='owner')
@@ -276,7 +302,14 @@ def billing_organization_for_org(org):
         .first()
     )
     if not owner_membership:
-        return org
+        return None
+    return account_for_user(owner_membership.user)
 
-    billing_org = billing_organization_for_user(owner_membership.user)
-    return billing_org or org
+
+# Backward compat aliases
+def billing_organization_for_user(user):
+    return account_for_user(user)
+
+
+def billing_organization_for_org(org):
+    return account_for_org(org)

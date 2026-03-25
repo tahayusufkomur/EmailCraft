@@ -56,7 +56,6 @@ def _seed_plan_demo_account(account, password, default_allowed_origins, default_
         email=account['org_email'],
         defaults={
             'name': account['org_name'],
-            'plan': plan_obj,
             'allowed_origins': default_allowed_origins,
             'available_variables': default_available_variables,
         },
@@ -64,18 +63,30 @@ def _seed_plan_demo_account(account, password, default_allowed_origins, default_
 
     merged_origins = list(dict.fromkeys([*(org.allowed_origins or []), *default_allowed_origins]))
     org.name = account['org_name']
-    org.plan = plan_obj
     org.allowed_origins = merged_origins
     org.available_variables = default_available_variables
-    org.apply_plan_limits(save=False)
-    org.stripe_customer_id = org.stripe_customer_id or f'cus_demo_{org.id.hex[:14]}'
-    org.stripe_subscription_id = f"sub_demo_{account['plan']}_{org.id.hex[:10]}"
     org.save(
         update_fields=[
             'name',
-            'plan',
             'allowed_origins',
             'available_variables',
+            'updated_at',
+        ]
+    )
+
+    # Set billing on the user's Account
+    from core.models import Account as AccountModel
+    acct, _ = AccountModel.objects.get_or_create(
+        user_id=user.id,
+        defaults={'plan': plan_obj},
+    )
+    acct.plan = plan_obj
+    acct.apply_plan_limits(save=False)
+    acct.stripe_customer_id = acct.stripe_customer_id or f'cus_demo_{org.id.hex[:14]}'
+    acct.stripe_subscription_id = f"sub_demo_{account['plan']}_{org.id.hex[:10]}"
+    acct.save(
+        update_fields=[
+            'plan',
             'rendered_emails_limit',
             'storage_limit_bytes',
             'stripe_customer_id',
@@ -214,7 +225,6 @@ class Command(BaseCommand):
             email=options['org_email'],
             defaults={
                 'name': options['org_name'],
-                'plan': plan_obj,
                 'allowed_origins': default_allowed_origins,
                 'available_variables': default_available_variables,
             },
@@ -222,22 +232,13 @@ class Command(BaseCommand):
 
         merged_origins = list(dict.fromkeys([*(org.allowed_origins or []), *default_allowed_origins]))
         org.name = options['org_name']
-        org.plan = plan_obj
         org.allowed_origins = merged_origins
         org.available_variables = default_available_variables
-        org.apply_plan_limits(save=False)
-        org.stripe_customer_id = org.stripe_customer_id or f'cus_demo_{org.id.hex[:14]}'
-        org.stripe_subscription_id = f'sub_demo_{plan_obj.slug if plan_obj else "free"}_{org.id.hex[:10]}'
         org.save(
             update_fields=[
                 'name',
-                'plan',
                 'allowed_origins',
                 'available_variables',
-                'rendered_emails_limit',
-                'storage_limit_bytes',
-                'stripe_customer_id',
-                'stripe_subscription_id',
                 'updated_at',
             ]
         )
@@ -295,6 +296,23 @@ class Command(BaseCommand):
             defaults={'role': 'owner'},
         )
 
+        # Set billing on demo user's Account
+        from core.models import Account as AccountModel
+        demo_acct, _ = AccountModel.objects.get_or_create(
+            user=demo_user,
+            defaults={'plan': plan_obj},
+        )
+        demo_acct.plan = plan_obj
+        demo_acct.apply_plan_limits(save=False)
+        demo_acct.stripe_customer_id = demo_acct.stripe_customer_id or f'cus_demo_{org.id.hex[:14]}'
+        demo_acct.stripe_subscription_id = f'sub_demo_{plan_obj.slug if plan_obj else "free"}_{org.id.hex[:10]}'
+        demo_acct.save(
+            update_fields=[
+                'plan', 'rendered_emails_limit', 'storage_limit_bytes',
+                'stripe_customer_id', 'stripe_subscription_id', 'updated_at',
+            ]
+        )
+
         seeded_plan_users = []
         for account in PLAN_DEMO_ACCOUNTS:
             plan_user, plan_org = _seed_plan_demo_account(
@@ -323,11 +341,13 @@ class Command(BaseCommand):
         else:
             self.stdout.write(self.style.SUCCESS(f'Updated organization: {org.name}'))
 
+        from core.models import Account as AccountModel
+        demo_account = AccountModel.objects.filter(user=demo_user).first()
         self.stdout.write(f'ORG_ID={org.id}')
         self.stdout.write(f'ORG_EMAIL={org.email}')
-        self.stdout.write(f'PLAN={org.plan}')
-        self.stdout.write(f'RENDERED_EMAILS_LIMIT={org.rendered_emails_limit}')
-        self.stdout.write(f'STORAGE_LIMIT_BYTES={org.storage_limit_bytes}')
+        self.stdout.write(f'PLAN={demo_account.plan_slug if demo_account else "unknown"}')
+        self.stdout.write(f'RENDERED_EMAILS_LIMIT={demo_account.rendered_emails_limit if demo_account else 0}')
+        self.stdout.write(f'STORAGE_LIMIT_BYTES={demo_account.storage_limit_bytes if demo_account else 0}')
         self.stdout.write(f'DEMO_USERNAME={demo_user.username}')
         self.stdout.write(f'DEMO_USER_EMAIL={demo_user.email}')
         self.stdout.write(f'DEMO_PASSWORD={options["demo_password"]}')

@@ -34,12 +34,15 @@ class CreateDemoOrgCommandTests(TestCase):
         call_command('create_demo_org', stdout=out)
 
         org = Organization.objects.get(email='demo-enterprise@mailcraft.dev')
+        membership = UserOrganization.objects.select_related('user').get(organization=org, role='owner')
+        from core.models import Account
+        account = Account.objects.get(user=membership.user)
         highest_plan = _highest_plan()
-        self.assertEqual(org.plan, highest_plan)
-        self.assertEqual(org.rendered_emails_limit, highest_plan.rendered_emails_limit)
-        self.assertEqual(org.storage_limit_bytes, highest_plan.storage_limit_bytes)
-        self.assertTrue(org.stripe_customer_id.startswith('cus_demo_'))
-        self.assertTrue(org.stripe_subscription_id.startswith(f'sub_demo_{highest_plan.slug}_'))
+        self.assertEqual(account.plan, highest_plan)
+        self.assertEqual(account.rendered_emails_limit, highest_plan.rendered_emails_limit)
+        self.assertEqual(account.storage_limit_bytes, highest_plan.storage_limit_bytes)
+        self.assertTrue(account.stripe_customer_id.startswith('cus_demo_'))
+        self.assertTrue(account.stripe_subscription_id.startswith(f'sub_demo_{highest_plan.slug}_'))
 
         active_key = ApiKey.objects.get(org=org, environment='test', is_active=True, revoked_at__isnull=True)
         self.assertEqual(active_key.key_prefix, 'mc_test_0000')
@@ -72,12 +75,10 @@ class CreateDemoOrgCommandTests(TestCase):
         self.assertTrue(demo_pro.check_password('demo'))
         self.assertTrue(demo_enterprise.check_password('demo'))
 
-        starter_org = Organization.objects.get(email='demo-starter-org@mailcraft.dev')
-        pro_org = Organization.objects.get(email='demo-pro-org@mailcraft.dev')
-        enterprise_org = Organization.objects.get(email='demo-enterprise-org@mailcraft.dev')
-        self.assertEqual(starter_org.plan, 'starter')
-        self.assertEqual(pro_org.plan, 'pro')
-        self.assertEqual(enterprise_org.plan, 'enterprise')
+        from core.models import Account
+        self.assertEqual(Account.objects.get(user=demo_starter).plan_slug, 'starter')
+        self.assertEqual(Account.objects.get(user=demo_pro).plan_slug, 'pro')
+        self.assertEqual(Account.objects.get(user=demo_enterprise).plan_slug, 'enterprise')
         self.assertTrue(
             UserOrganization.objects.filter(user=demo_starter, organization=starter_org, role='owner').exists()
         )
@@ -109,13 +110,16 @@ class SiteOrganizationsApiTests(TestCase):
         self.billing_org = Organization.objects.create(
             name='Owner Org',
             email='owner-org@mailcraft.dev',
-            plan=_plan('pro'),
         )
-        self.billing_org.apply_plan_limits(save=True)
-        self.billing_org.rendered_emails_count = 777
-        self.billing_org.storage_used_bytes = 123456
-        self.billing_org.save(update_fields=['rendered_emails_count', 'storage_used_bytes', 'updated_at'])
         UserOrganization.objects.create(user=self.user, organization=self.billing_org, role='owner')
+        from core.models import Account
+        self.account = Account.objects.create(
+            user=self.user,
+            plan=_plan('pro'),
+            rendered_emails_count=777,
+            storage_used_bytes=123456,
+        )
+        self.account.apply_plan_limits(save=True)
 
         token, _ = Token.objects.get_or_create(user=self.user)
         self.client.credentials(HTTP_AUTHORIZATION=f'Token {token.key}')
@@ -233,21 +237,19 @@ class SiteOrganizationsApiTests(TestCase):
         secondary_org = Organization.objects.create(
             name='Secondary Org',
             email='secondary-org@mailcraft.dev',
-            plan=_plan('free'),
         )
-        secondary_org.apply_plan_limits(save=True)
         UserOrganization.objects.create(user=self.user, organization=secondary_org, role='owner')
 
         dashboard_response = self.client.get('/api/v1/site/dashboard')
         self.assertEqual(dashboard_response.status_code, 200)
-        self.assertEqual(dashboard_response.data['plan'], self.billing_org.plan)
+        self.assertEqual(dashboard_response.data['plan'], self.account.plan_slug)
         self.assertEqual(
             dashboard_response.data['rendered_emails_count'],
-            self.billing_org.rendered_emails_count,
+            self.account.rendered_emails_count,
         )
         self.assertEqual(
             dashboard_response.data['storage_used_bytes'],
-            self.billing_org.storage_used_bytes,
+            self.account.storage_used_bytes,
         )
         self.assertEqual(dashboard_response.data['organizations_count'], 2)
 
@@ -255,7 +257,6 @@ class SiteOrganizationsApiTests(TestCase):
         secondary_org = Organization.objects.create(
             name='Secondary Org',
             email='secondary-billing@mailcraft.dev',
-            plan=_plan('free'),
             allowed_origins=['http://localhost:5173'],
             available_variables=[
                 {'key': 'user_name', 'label': 'User Name', 'defaultValue': 'Guest', 'type': 'text'},
@@ -268,7 +269,6 @@ class SiteOrganizationsApiTests(TestCase):
             email_background_style='midnight-grid',
             email_background_color='#0f172a',
         )
-        secondary_org.apply_plan_limits(save=True)
         UserOrganization.objects.create(user=self.user, organization=secondary_org, role='owner')
 
         raw_key = ApiKey.generate_key('test')
@@ -287,7 +287,7 @@ class SiteOrganizationsApiTests(TestCase):
             HTTP_X_API_KEY=raw_key,
         )
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data['config']['plan'], self.billing_org.plan)
+        self.assertEqual(response.data['config']['plan'], self.account.plan_slug)
         self.assertEqual(
             response.data['config']['rendered_emails_limit'],
             self.billing_org.rendered_emails_limit,
@@ -343,9 +343,7 @@ class SiteOrganizationsApiTests(TestCase):
         other_org = Organization.objects.create(
             name='Other Org',
             email='other-org@mailcraft.dev',
-            plan=_plan('starter'),
         )
-        other_org.apply_plan_limits(save=True)
 
         UploadedImage.objects.create(
             org=self.billing_org,
@@ -473,9 +471,7 @@ class SiteOrganizationsApiTests(TestCase):
         other_org = Organization.objects.create(
             name='Other Org',
             email='other-template-org@mailcraft.dev',
-            plan=_plan('starter'),
         )
-        other_org.apply_plan_limits(save=True)
         other_template = Template.objects.create(
             org=other_org,
             name='Other Org Private Template',
@@ -543,9 +539,7 @@ class SiteOrganizationsApiTests(TestCase):
         other_org = Organization.objects.create(
             name='Other Site Org',
             email='other-site-org@mailcraft.dev',
-            plan=_plan('starter'),
         )
-        other_org.apply_plan_limits(save=True)
         other_template = Template.objects.create(
             org=other_org,
             name='Hidden Template',

@@ -45,17 +45,14 @@ def validate_organization_variables(value):
 
 
 class OrganizationSerializer(serializers.ModelSerializer):
-    plan = serializers.CharField(source='plan_slug', read_only=True)
-
     class Meta:
         model = Organization
-        fields = ['id', 'name', 'email', 'plan', 'allowed_origins',
+        fields = ['id', 'name', 'email', 'allowed_origins',
                   'available_variables',
                   'show_logo', 'show_export_html_button', 'theme_mode',
                   'builder_theme',
                   'email_background_style', 'email_background_color',
-                  'rendered_emails_count', 'rendered_emails_limit',
-                  'storage_used_bytes', 'storage_limit_bytes', 'created_at']
+                  'created_at']
         read_only_fields = ['id', 'created_at']
 
 

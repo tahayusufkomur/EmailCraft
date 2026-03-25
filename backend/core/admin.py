@@ -1,6 +1,6 @@
 from django.contrib import admin, messages
 
-from core.models import ApiKey, Organization, Plan, UserOrganization
+from core.models import Account, ApiKey, Organization, Plan, UserOrganization
 
 
 @admin.register(Plan)
@@ -19,35 +19,43 @@ class PlanAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
-@admin.register(Organization)
-class OrganizationAdmin(admin.ModelAdmin):
+@admin.register(Account)
+class AccountAdmin(admin.ModelAdmin):
     list_display = [
-        'name', 'email', 'plan',
+        'user', 'plan',
         'rendered_emails_count', 'rendered_emails_limit',
         'storage_used_bytes', 'storage_limit_bytes',
-        'is_active', 'created_at',
+        'created_at',
     ]
-    list_filter = ['plan', 'is_active']
-    search_fields = ['name', 'email']
-    readonly_fields = ['id', 'created_at', 'updated_at']
+    list_filter = ['plan']
+    search_fields = ['user__username', 'user__email']
+    readonly_fields = ['created_at', 'updated_at']
     list_editable = ['plan', 'rendered_emails_limit', 'storage_limit_bytes']
     actions = ['reset_render_count', 'reset_storage_used', 'apply_plan_limits']
 
     @admin.action(description='Reset rendered emails count to 0')
     def reset_render_count(self, request, queryset):
         count = queryset.update(rendered_emails_count=0)
-        self.message_user(request, f'Reset render count for {count} org(s).', messages.SUCCESS)
+        self.message_user(request, f'Reset render count for {count} account(s).', messages.SUCCESS)
 
     @admin.action(description='Reset storage used to 0')
     def reset_storage_used(self, request, queryset):
         count = queryset.update(storage_used_bytes=0)
-        self.message_user(request, f'Reset storage used for {count} org(s).', messages.SUCCESS)
+        self.message_user(request, f'Reset storage used for {count} account(s).', messages.SUCCESS)
 
-    @admin.action(description='Apply plan limits from settings (resets limits to plan defaults)')
+    @admin.action(description='Apply plan limits (resets limits to plan defaults)')
     def apply_plan_limits(self, request, queryset):
-        for org in queryset:
-            org.apply_plan_limits(save=True)
-        self.message_user(request, f'Applied plan limits for {queryset.count()} org(s).', messages.SUCCESS)
+        for account in queryset:
+            account.apply_plan_limits(save=True)
+        self.message_user(request, f'Applied plan limits for {queryset.count()} account(s).', messages.SUCCESS)
+
+
+@admin.register(Organization)
+class OrganizationAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'is_active', 'created_at']
+    list_filter = ['is_active']
+    search_fields = ['name', 'email']
+    readonly_fields = ['id', 'created_at', 'updated_at']
 
 
 @admin.register(ApiKey)

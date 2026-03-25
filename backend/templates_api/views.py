@@ -7,7 +7,7 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from core.models import billing_organization_for_org
+from core.models import account_for_org
 from templates_api.models import Template, UploadedImage
 from templates_api.serializers import (
     ExportRequestSerializer,
@@ -123,19 +123,20 @@ def presign_upload(request):
     serializer.is_valid(raise_exception=True)
 
     org = request.org
-    billing_org = billing_organization_for_org(org)
+    account = account_for_org(org)
     data = serializer.validated_data
     upload_kind = data.get('kind', 'original')
     upload_batch_size = data.get('upload_batch_size', 1)
 
-    if upload_kind == 'original' and upload_batch_size > billing_org.max_media_files_per_upload:
+    max_files = account.max_media_files_per_upload if account else 1
+    if upload_kind == 'original' and upload_batch_size > max_files:
         return Response(
             {
                 'error': {
                     'code': 'TOO_MANY_FILES_IN_UPLOAD',
                     'message': (
                         'Too many files selected for one upload. '
-                        f'Max is {billing_org.max_media_files_per_upload} files.'
+                        f'Max is {max_files} files.'
                     ),
                 }
             },
@@ -143,7 +144,7 @@ def presign_upload(request):
         )
 
     # Check plan-based upload size limit
-    max_size = billing_org.max_upload_size_bytes
+    max_size = account.max_upload_size_bytes if account else 5242880
     if data['file_size'] > max_size:
         return Response(
             {'error': {'code': 'FILE_TOO_LARGE', 'message': f'Max file size is {max_size} bytes.'}},
@@ -151,7 +152,9 @@ def presign_upload(request):
         )
 
     # Check storage limit
-    if billing_org.storage_used_bytes + data['file_size'] > billing_org.storage_limit_bytes:
+    storage_used = account.storage_used_bytes if account else 0
+    storage_limit = account.storage_limit_bytes if account else 1073741824
+    if storage_used + data['file_size'] > storage_limit:
         return Response(
             {'error': {'code': 'STORAGE_LIMIT_EXCEEDED', 'message': 'Organization storage limit exceeded.'}},
             status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
@@ -230,8 +233,9 @@ def presign_upload(request):
         image_id = str(image.id)
 
     # Update storage used for both original and thumbnail uploads
-    billing_org.storage_used_bytes += data['file_size']
-    billing_org.save(update_fields=['storage_used_bytes'])
+    if account:
+        account.storage_used_bytes += data['file_size']
+        account.save(update_fields=['storage_used_bytes'])
 
     return Response({
         'upload_url': upload_url,
@@ -270,10 +274,10 @@ def render_template(request):
     serializer.is_valid(raise_exception=True)
 
     org = request.org
-    billing_org = billing_organization_for_org(org)
+    account = account_for_org(org)
 
     # Rate limit check
-    if billing_org.rendered_emails_count >= billing_org.rendered_emails_limit:
+    if account and account.rendered_emails_count >= account.rendered_emails_limit:
         return Response(
             {
                 'error': {
@@ -320,8 +324,9 @@ def render_template(request):
     substituted_data = substitute_variables(json_data, variables)
     result = render_email_html(substituted_data)
 
-    billing_org.rendered_emails_count += 1
-    billing_org.save(update_fields=['rendered_emails_count', 'updated_at'])
+    if account:
+        account.rendered_emails_count += 1
+        account.save(update_fields=['rendered_emails_count', 'updated_at'])
 
     return Response({
         'html': result['html'],

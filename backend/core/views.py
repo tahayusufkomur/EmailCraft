@@ -19,7 +19,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from core.models import ApiKey, Organization, Session, UserOrganization, billing_organization_for_org
+from core.models import ApiKey, Organization, Session, UserOrganization, account_for_org
 from core.serializers import SessionRequestSerializer, SubscribeRequestSerializer
 
 
@@ -34,14 +34,14 @@ def _plan_payload(plan_obj):
     }
 
 
-def _set_org_plan(org, plan_obj, stripe_subscription_id=None, stripe_customer_id=None):
-    org.plan = plan_obj
-    org.apply_plan_limits(save=False)
+def _set_account_plan(account, plan_obj, stripe_subscription_id=None, stripe_customer_id=None):
+    account.plan = plan_obj
+    account.apply_plan_limits(save=False)
     if stripe_customer_id is not None:
-        org.stripe_customer_id = stripe_customer_id
+        account.stripe_customer_id = stripe_customer_id
     if stripe_subscription_id is not None:
-        org.stripe_subscription_id = stripe_subscription_id
-    org.save(
+        account.stripe_subscription_id = stripe_subscription_id
+    account.save(
         update_fields=[
             'plan',
             'rendered_emails_limit',
@@ -53,7 +53,7 @@ def _set_org_plan(org, plan_obj, stripe_subscription_id=None, stripe_customer_id
     )
 
 
-def subscribe_org_to_plan(org, plan_key):
+def subscribe_account_to_plan(account, plan_key):
     from core.models import Plan
     plan_obj = Plan.objects.filter(slug=plan_key).first()
     if not plan_obj:
@@ -63,7 +63,7 @@ def subscribe_org_to_plan(org, plan_key):
         )
 
     if plan_obj.monthly_price_usd == 0:
-        _set_org_plan(org, plan_obj, stripe_subscription_id=None)
+        _set_account_plan(account, plan_obj, stripe_subscription_id=None)
         return {'status': 'updated', 'plan': plan_obj.slug}, status.HTTP_200_OK
 
     if not settings.STRIPE_API_KEY:
@@ -75,23 +75,23 @@ def subscribe_org_to_plan(org, plan_key):
     stripe.api_key = settings.STRIPE_API_KEY
 
     try:
-        customer_id = org.stripe_customer_id
+        customer_id = account.stripe_customer_id
         if not customer_id:
             customer = stripe.Customer.create(
-                email=org.email,
-                name=org.name,
-                metadata={'org_id': str(org.id)},
+                email=account.user.email,
+                name=account.user.username,
+                metadata={'user_id': str(account.user.id)},
             )
             customer_id = customer.id
-            org.stripe_customer_id = customer_id
-            org.save(update_fields=['stripe_customer_id', 'updated_at'])
+            account.stripe_customer_id = customer_id
+            account.save(update_fields=['stripe_customer_id', 'updated_at'])
 
         checkout_session = stripe.checkout.Session.create(
             mode='subscription',
             customer=customer_id,
             success_url=settings.STRIPE_SUCCESS_URL,
             cancel_url=settings.STRIPE_CANCEL_URL,
-            metadata={'org_id': str(org.id), 'plan': plan_obj.slug},
+            metadata={'user_id': str(account.user.id), 'plan': plan_obj.slug},
             line_items=[
                 {
                     'quantity': 1,
@@ -121,19 +121,19 @@ def subscribe_org_to_plan(org, plan_key):
 
 
 def _build_session_config_response(org, session_token, expires_at):
-    billing_org = billing_organization_for_org(org)
+    account = account_for_org(org)
     return Response({
         'token': session_token,
         'expires_at': expires_at.isoformat(),
         'config': {
-            'plan': billing_org.plan_slug,
+            'plan': account.plan_slug if account else 'free',
             'variables': org.available_variables or [],
-            'max_upload_size_bytes': billing_org.max_upload_size_bytes,
-            'max_media_files_per_upload': billing_org.max_media_files_per_upload,
-            'storage_used_bytes': billing_org.storage_used_bytes,
-            'storage_limit_bytes': billing_org.storage_limit_bytes,
-            'rendered_emails_count': billing_org.rendered_emails_count,
-            'rendered_emails_limit': billing_org.rendered_emails_limit,
+            'max_upload_size_bytes': account.max_upload_size_bytes if account else 5242880,
+            'max_media_files_per_upload': account.max_media_files_per_upload if account else 1,
+            'storage_used_bytes': account.storage_used_bytes if account else 0,
+            'storage_limit_bytes': account.storage_limit_bytes if account else 1073741824,
+            'rendered_emails_count': account.rendered_emails_count if account else 0,
+            'rendered_emails_limit': account.rendered_emails_limit if account else 1000,
             'widget_context': {
                 'show_logo': org.show_logo,
                 'show_export_html_button': org.show_export_html_button,
@@ -268,7 +268,10 @@ def subscribe_plan(request):
     serializer.is_valid(raise_exception=True)
 
     org = request.org
-    payload, status_code = subscribe_org_to_plan(org, serializer.validated_data['plan'])
+    account = account_for_org(org)
+    if not account:
+        return Response({'error': {'code': 'NO_ACCOUNT', 'message': 'No billing account found.'}}, status=status.HTTP_404_NOT_FOUND)
+    payload, status_code = subscribe_account_to_plan(account, serializer.validated_data['plan'])
     return Response(payload, status=status_code)
 
 
@@ -291,29 +294,32 @@ def stripe_webhook(request):
 
     if event_type == 'checkout.session.completed':
         metadata = data.get('metadata', {})
-        org_id = metadata.get('org_id')
+        user_id = metadata.get('user_id')
         plan_key = metadata.get('plan')
-        from core.models import Plan
+        from core.models import Account, Plan
         plan_obj = Plan.objects.filter(slug=plan_key).first() if plan_key else None
-        if org_id and plan_obj:
+        if user_id and plan_obj:
             try:
-                org = Organization.objects.get(pk=org_id)
-                _set_org_plan(
-                    org,
+                account = Account.objects.get(user_id=user_id)
+                _set_account_plan(
+                    account,
                     plan_obj,
                     stripe_subscription_id=data.get('subscription'),
-                    stripe_customer_id=data.get('customer') or org.stripe_customer_id,
+                    stripe_customer_id=data.get('customer') or account.stripe_customer_id,
                 )
-            except Organization.DoesNotExist:
+            except Account.DoesNotExist:
                 pass
 
     if event_type == 'customer.subscription.deleted':
         customer_id = data.get('customer')
         if customer_id:
             try:
-                org = Organization.objects.get(stripe_customer_id=customer_id)
-                _set_org_plan(org, 'free', stripe_subscription_id=None)
-            except Organization.DoesNotExist:
+                from core.models import Account
+                account = Account.objects.get(stripe_customer_id=customer_id)
+                free_plan = Plan.objects.filter(slug='free').first()
+                if free_plan:
+                    _set_account_plan(account, free_plan, stripe_subscription_id=None)
+            except Account.DoesNotExist:
                 pass
 
     return Response({'received': True})
