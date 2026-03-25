@@ -451,12 +451,13 @@ def site_provision(request):
                     environment='live',
                     scope='full',
                 )
+                account = account_for_org(org)
                 return Response(
                     {
                         'organization': {
                             'id': str(org.id),
                             'name': org.name,
-                            'plan': org.plan_slug,
+                            'plan': account.plan_slug if account else 'free',
                         },
                         'api_key': {
                             'raw': raw_key,
@@ -493,12 +494,13 @@ def site_provision(request):
             status=status.HTTP_409_CONFLICT,
         )
 
+    account = account_for_org(org)
     return Response(
         {
             'organization': {
                 'id': str(org.id),
                 'name': org.name,
-                'plan': org.plan_slug,
+                'plan': account.plan_slug if account else 'free',
             },
             'api_key': {
                 'raw': raw_key,
