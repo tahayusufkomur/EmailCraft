@@ -142,6 +142,11 @@ def _extract_keys_from_blocks(blocks, keys):
             fields_to_scan = [data.get('alt', ''), data.get('link', '')]
         elif block_type == 'html':
             fields_to_scan = [data.get('html', '')]
+        elif block_type == 'hero':
+            fields_to_scan = [
+                data.get('heading', ''), data.get('subheading', ''),
+                data.get('buttonText', ''), data.get('buttonUrl', ''),
+            ]
         elif block_type == 'columns':
             for col in data.get('columns', []):
                 _extract_keys_from_blocks(col.get('blocks', []), keys)
@@ -186,6 +191,11 @@ def _substitute_in_blocks(blocks, variables):
             data['link'] = _replace_vars(data.get('link', ''), variables, escape=False)
         elif block_type == 'html':
             data['html'] = _replace_vars(data.get('html', ''), variables, escape=True)
+        elif block_type == 'hero':
+            data['heading'] = _replace_vars(data.get('heading', ''), variables, escape=False)
+            data['subheading'] = _replace_vars(data.get('subheading', ''), variables, escape=False)
+            data['buttonText'] = _replace_vars(data.get('buttonText', ''), variables, escape=False)
+            data['buttonUrl'] = _replace_vars(data.get('buttonUrl', ''), variables, escape=False)
         elif block_type == 'columns':
             for col in data.get('columns', []):
                 _substitute_in_blocks(col.get('blocks', []), variables)
