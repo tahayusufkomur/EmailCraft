@@ -431,42 +431,44 @@ def site_provision(request):
     serializer.is_valid(raise_exception=True)
     name = serializer.validated_data['name']
 
-    # Check if user already has an org with this name
-    existing_membership = (
-        UserOrganization.objects
-        .select_related('organization')
-        .filter(user=request.user, organization__name=name)
-        .first()
-    )
-    if existing_membership:
-        org = existing_membership.organization
-        # Create a fresh live API key so the caller can store it
-        raw_key = ApiKey.generate_key(environment='live')
-        api_key = ApiKey.objects.create(
-            org=org,
-            key_hash=ApiKey.hash_key(raw_key),
-            key_prefix=raw_key[:12],
-            environment='live',
-            scope='full',
-        )
-        return Response(
-            {
-                'organization': {
-                    'id': str(org.id),
-                    'name': org.name,
-                    'plan': org.plan_slug,
-                },
-                'api_key': {
-                    'raw': raw_key,
-                    'prefix': api_key.key_prefix,
-                    'environment': 'live',
-                },
-            },
-            status=status.HTTP_200_OK,
-        )
-
     try:
         with transaction.atomic():
+            # Lock the user's memberships to prevent concurrent provision creating duplicate orgs
+            existing_membership = (
+                UserOrganization.objects
+                .select_for_update()
+                .select_related('organization')
+                .filter(user=request.user, organization__name=name)
+                .first()
+            )
+
+            if existing_membership:
+                org = existing_membership.organization
+                # Create a fresh live API key so the caller can store it
+                raw_key = ApiKey.generate_key(environment='live')
+                api_key = ApiKey.objects.create(
+                    org=org,
+                    key_hash=ApiKey.hash_key(raw_key),
+                    key_prefix=raw_key[:12],
+                    environment='live',
+                    scope='full',
+                )
+                return Response(
+                    {
+                        'organization': {
+                            'id': str(org.id),
+                            'name': org.name,
+                            'plan': org.plan_slug,
+                        },
+                        'api_key': {
+                            'raw': raw_key,
+                            'prefix': api_key.key_prefix,
+                            'environment': 'live',
+                        },
+                    },
+                    status=status.HTTP_200_OK,
+                )
+
             org_email = f'org-{uuid.uuid4().hex[:20]}@org.mailcraft.dev'
             org = Organization.objects.create(
                 name=name,
@@ -498,7 +500,7 @@ def site_provision(request):
             'organization': {
                 'id': str(org.id),
                 'name': org.name,
-                'plan': org.plan,
+                'plan': org.plan_slug,
             },
             'api_key': {
                 'raw': raw_key,
