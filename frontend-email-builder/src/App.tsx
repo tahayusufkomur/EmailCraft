@@ -8,6 +8,7 @@ import { PreviewModal } from './components/Preview/PreviewModal';
 import { TemplateGallery } from './components/Gallery/TemplateGallery';
 import { SaveTemplateModal } from './components/Gallery/SaveTemplateModal';
 import { MediaLibraryModal } from './components/Media/MediaLibraryModal';
+import { VariableInserter } from './components/Panels/VariableInserter';
 import { Badge } from './components/ui/badge';
 import { Button } from './components/ui/button';
 import { useConfigStore } from './store/configStore';
@@ -577,6 +578,7 @@ function App() {
             <LayoutGrid size={16} />
             Templates
           </Button>
+          <VariableInserter />
           <Button variant="ghost" size="sm" onClick={() => setShowMedia(true)}>
             <Image size={16} />
             Media

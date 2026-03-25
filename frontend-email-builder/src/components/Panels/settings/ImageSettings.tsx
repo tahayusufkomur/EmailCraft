@@ -1,10 +1,7 @@
-import { useRef } from 'react';
 import type { ImageBlock } from '../../../types/blocks';
 import { useEditorStore } from '../../../store/editorStore';
 import { AlignmentPicker } from './AlignmentPicker';
 import { SpacingControl } from './SpacingControl';
-import { VariableInserter } from '../VariableInserter';
-import { insertAtCursor, restoreCursor } from '../../../lib/variableUtils';
 import { SliderInput } from './SliderInput';
 
 interface Props {
@@ -13,23 +10,9 @@ interface Props {
 
 export function ImageSettings({ block }: Props) {
   const updateBlock = useEditorStore((s) => s.updateBlock);
-  const altInputRef = useRef<HTMLInputElement>(null);
-  const linkInputRef = useRef<HTMLInputElement>(null);
 
   const update = (data: Partial<ImageBlock['data']>) => {
     updateBlock(block.id, { data: { ...block.data, ...data } } as Partial<ImageBlock>);
-  };
-
-  const handleInsertAltVariable = (variable: string) => {
-    const { newValue, cursorPos } = insertAtCursor(altInputRef.current, block.data.alt, variable);
-    update({ alt: newValue });
-    restoreCursor(altInputRef.current, cursorPos);
-  };
-
-  const handleInsertLinkVariable = (variable: string) => {
-    const { newValue, cursorPos } = insertAtCursor(linkInputRef.current, block.data.link || '', variable);
-    update({ link: newValue });
-    restoreCursor(linkInputRef.current, cursorPos);
   };
 
   return (
@@ -42,13 +25,11 @@ export function ImageSettings({ block }: Props) {
         </div>
         <div className="form-group">
           <label>Alt Text</label>
-          <input ref={altInputRef} type="text" value={block.data.alt} onChange={(e) => update({ alt: e.target.value })} />
-          <VariableInserter onInsert={handleInsertAltVariable} />
+          <input type="text" value={block.data.alt} onChange={(e) => update({ alt: e.target.value })} />
         </div>
         <div className="form-group">
           <label>Link URL</label>
-          <input ref={linkInputRef} type="url" value={block.data.link || ''} onChange={(e) => update({ link: e.target.value })} />
-          <VariableInserter onInsert={handleInsertLinkVariable} />
+          <input type="url" value={block.data.link || ''} onChange={(e) => update({ link: e.target.value })} />
         </div>
         <SliderInput label="Width" value={block.data.width} min={50} max={600} onChange={(v) => update({ width: v })} />
         <SliderInput label="Border Radius" value={block.style.borderRadius || 0} min={0} max={300} onChange={(v) => updateBlock(block.id, { style: { ...block.style, borderRadius: v } })} />
