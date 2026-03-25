@@ -433,10 +433,8 @@ def site_provision(request):
 
     try:
         with transaction.atomic():
-            # Lock the user's memberships to prevent concurrent provision creating duplicate orgs
             existing_membership = (
                 UserOrganization.objects
-                .select_for_update()
                 .select_related('organization')
                 .filter(user=request.user, organization__name=name)
                 .first()
