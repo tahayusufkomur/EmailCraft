@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:www.brevo.com)"
+      "WebFetch(domain:www.brevo.com)",
+      "Read(//Users/tahayusufkomur/ws/hetznerS3Manager/infrastructure/**)"
     ]
   }
 }

@@ -12,6 +12,8 @@ interface ConfigState {
   builderTheme: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
   emailBackgroundStyle: TemplateBackgroundStyle;
   emailBackgroundColor: string;
+  chromeColor: string;
+  canvasColor: string;
   plan: string;
   maxUploadSize: number;
   maxMediaFilesPerUpload: number;
@@ -31,6 +33,8 @@ export const useConfigStore = create<ConfigState>((set) => ({
   builderTheme: 'light-breeze',
   emailBackgroundStyle: 'none',
   emailBackgroundColor: '#f4f4f4',
+  chromeColor: '',
+  canvasColor: '',
   plan: 'free',
   maxUploadSize: 5 * 1024 * 1024,
   maxMediaFilesPerUpload: 5,

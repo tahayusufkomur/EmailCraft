@@ -111,16 +111,20 @@ const asOptionalBooleanFromSearchParam = (value: string | null): boolean | undef
   return undefined;
 };
 
-const normalizeUiContext = (
-  value: unknown,
-): {
+type UiContext = {
   showLogo?: boolean;
   showExportHtmlButton?: boolean;
   themeMode?: ThemeMode;
   builderTheme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
   emailBackgroundStyle?: TemplateBackgroundStyle;
   emailBackgroundColor?: string;
-} => {
+  chromeColor?: string;
+  canvasColor?: string;
+};
+
+const normalizeUiContext = (
+  value: unknown,
+): UiContext => {
   if (!value || typeof value !== 'object') return {};
 
   const maybe = value as {
@@ -132,6 +136,8 @@ const normalizeUiContext = (
       builderTheme?: unknown;
       emailBackgroundStyle?: unknown;
       emailBackgroundColor?: unknown;
+      chromeColor?: unknown;
+      canvasColor?: unknown;
     };
     showLogo?: unknown;
     hideLogo?: unknown;
@@ -140,6 +146,8 @@ const normalizeUiContext = (
     builderTheme?: unknown;
     emailBackgroundStyle?: unknown;
     emailBackgroundColor?: unknown;
+    chromeColor?: unknown;
+    canvasColor?: unknown;
   };
 
   const embeddedContext =
@@ -173,15 +181,14 @@ const normalizeUiContext = (
       ? embeddedContext.emailBackgroundColor
       : maybe.emailBackgroundColor,
   );
+  const chromeColor = asOptionalHexColor(
+    embeddedContext.chromeColor !== undefined ? embeddedContext.chromeColor : maybe.chromeColor,
+  );
+  const canvasColor = asOptionalHexColor(
+    embeddedContext.canvasColor !== undefined ? embeddedContext.canvasColor : maybe.canvasColor,
+  );
 
-  const output: {
-    showLogo?: boolean;
-    showExportHtmlButton?: boolean;
-    themeMode?: ThemeMode;
-    builderTheme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
-    emailBackgroundStyle?: TemplateBackgroundStyle;
-    emailBackgroundColor?: string;
-  } = {};
+  const output: UiContext = {};
   if (resolvedShowLogo !== undefined) output.showLogo = resolvedShowLogo;
   if (showExportHtmlButton !== undefined) output.showExportHtmlButton = showExportHtmlButton;
   if (themeMode !== undefined) output.themeMode = themeMode;
@@ -192,19 +199,14 @@ const normalizeUiContext = (
   }
   if (emailBackgroundStyle !== undefined) output.emailBackgroundStyle = emailBackgroundStyle;
   if (emailBackgroundColor !== undefined) output.emailBackgroundColor = emailBackgroundColor;
+  if (chromeColor !== undefined) output.chromeColor = chromeColor;
+  if (canvasColor !== undefined) output.canvasColor = canvasColor;
   return output;
 };
 
 const normalizeUiContextFromSession = (
   widgetContext: unknown,
-): {
-  showLogo?: boolean;
-  showExportHtmlButton?: boolean;
-  themeMode?: ThemeMode;
-  builderTheme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
-  emailBackgroundStyle?: TemplateBackgroundStyle;
-  emailBackgroundColor?: string;
-} => {
+): UiContext => {
   if (!widgetContext || typeof widgetContext !== 'object') return {};
 
   const maybe = widgetContext as {
@@ -214,22 +216,19 @@ const normalizeUiContextFromSession = (
     builder_theme?: unknown;
     email_background_style?: unknown;
     email_background_color?: unknown;
+    chrome_color?: unknown;
+    canvas_color?: unknown;
   };
 
-  const output: {
-    showLogo?: boolean;
-    showExportHtmlButton?: boolean;
-    themeMode?: ThemeMode;
-    builderTheme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
-    emailBackgroundStyle?: TemplateBackgroundStyle;
-    emailBackgroundColor?: string;
-  } = {};
+  const output: UiContext = {};
   const showLogo = asOptionalBoolean(maybe.show_logo);
   const showExportHtmlButton = asOptionalBoolean(maybe.show_export_html_button);
   const themeMode = asOptionalThemeMode(maybe.theme_mode);
   const builderTheme = asOptionalBuilderTheme(maybe.builder_theme);
   const emailBackgroundStyle = asOptionalTemplateBackgroundStyle(maybe.email_background_style);
   const emailBackgroundColor = asOptionalHexColor(maybe.email_background_color);
+  const chromeColor = asOptionalHexColor(maybe.chrome_color);
+  const canvasColor = asOptionalHexColor(maybe.canvas_color);
 
   if (showLogo !== undefined) output.showLogo = showLogo;
   if (showExportHtmlButton !== undefined) output.showExportHtmlButton = showExportHtmlButton;
@@ -241,19 +240,14 @@ const normalizeUiContextFromSession = (
   }
   if (emailBackgroundStyle !== undefined) output.emailBackgroundStyle = emailBackgroundStyle;
   if (emailBackgroundColor !== undefined) output.emailBackgroundColor = emailBackgroundColor;
+  if (chromeColor !== undefined) output.chromeColor = chromeColor;
+  if (canvasColor !== undefined) output.canvasColor = canvasColor;
   return output;
 };
 
 const normalizeUiContextFromSearch = (
   params: URLSearchParams,
-): {
-  showLogo?: boolean;
-  showExportHtmlButton?: boolean;
-  themeMode?: ThemeMode;
-  builderTheme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
-  emailBackgroundStyle?: TemplateBackgroundStyle;
-  emailBackgroundColor?: string;
-} => {
+): UiContext => {
   const showLogo = asOptionalBooleanFromSearchParam(params.get('showLogo'));
   const legacyHideLogo = asOptionalBooleanFromSearchParam(params.get('hideLogo'));
   const showExportHtmlButton = asOptionalBooleanFromSearchParam(params.get('showExportHtmlButton'));
@@ -261,15 +255,10 @@ const normalizeUiContextFromSearch = (
   const builderTheme = asOptionalBuilderTheme(params.get('builderTheme'));
   const emailBackgroundStyle = asOptionalTemplateBackgroundStyle(params.get('emailBackgroundStyle'));
   const emailBackgroundColor = asOptionalHexColor(params.get('emailBackgroundColor'));
+  const chromeColor = asOptionalHexColor(params.get('chromeColor'));
+  const canvasColor = asOptionalHexColor(params.get('canvasColor'));
 
-  const output: {
-    showLogo?: boolean;
-    showExportHtmlButton?: boolean;
-    themeMode?: ThemeMode;
-    builderTheme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
-    emailBackgroundStyle?: TemplateBackgroundStyle;
-    emailBackgroundColor?: string;
-  } = {};
+  const output: UiContext = {};
   if (showLogo !== undefined) output.showLogo = showLogo;
   if (showLogo === undefined && legacyHideLogo !== undefined) output.showLogo = !legacyHideLogo;
   if (showExportHtmlButton !== undefined) output.showExportHtmlButton = showExportHtmlButton;
@@ -281,6 +270,8 @@ const normalizeUiContextFromSearch = (
   }
   if (emailBackgroundStyle !== undefined) output.emailBackgroundStyle = emailBackgroundStyle;
   if (emailBackgroundColor !== undefined) output.emailBackgroundColor = emailBackgroundColor;
+  if (chromeColor !== undefined) output.chromeColor = chromeColor;
+  if (canvasColor !== undefined) output.canvasColor = canvasColor;
   return output;
 };
 
@@ -418,15 +409,9 @@ function App() {
         const incomingApiKey = asOptionalNonEmptyString(
           config?.apiKey ?? config?.api_key,
         );
-        const nextConfig: {
+        const nextConfig: UiContext & {
           apiKey?: string;
           variables?: Variable[];
-          showLogo?: boolean;
-          showExportHtmlButton?: boolean;
-          themeMode?: ThemeMode;
-          builderTheme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
-          emailBackgroundStyle?: TemplateBackgroundStyle;
-          emailBackgroundColor?: string;
         } = {
           ...uiContext,
         };
@@ -557,11 +542,22 @@ function App() {
     applyImageUrlToBlock(currentSelection, url, updateBlock);
   };
 
+  const chromeColor = useConfigStore((s) => s.chromeColor);
+  const canvasColor = useConfigStore((s) => s.canvasColor);
   const isDarkChrome = activeThemePreset.chromeMode === 'dark';
   const canApplySelectedMedia = Boolean(selectedBlock && selectedBlock.type === 'image');
 
+  const customColorOverrides: React.CSSProperties = {};
+  if (chromeColor) {
+    customColorOverrides['--chrome-surface' as string] = chromeColor;
+    customColorOverrides['--chrome-surface-elevated' as string] = chromeColor;
+  }
+  if (canvasColor) {
+    customColorOverrides['--canvas-bg' as string] = canvasColor;
+  }
+
   return (
-    <div className={`app-shell ${isDarkChrome ? 'theme-dark' : 'theme-light'} ${activeThemePreset.shellClassName}`}>
+    <div className={`app-shell ${isDarkChrome ? 'theme-dark' : 'theme-light'} ${activeThemePreset.shellClassName}`} style={customColorOverrides}>
       <div className="top-toolbar">
         {showLogo && (
           <div className="brand">

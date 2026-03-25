@@ -41,9 +41,15 @@ interface MailCraftConfig {
   variables?: Variable[];            // Custom variables available in the editor
   templateJson?: object;             // Pre-load a template for editing
   locale?: string;                   // UI language: "en" (default), "tr", "de"
-  theme?: {
-    primaryColor?: string;           // Brand color for editor UI
-    borderRadius?: string;           // UI border radius
+  context?: {
+    showLogo?: boolean;              // Show MailCraft branding (default: true)
+    showExportHtmlButton?: boolean;  // Show "Export HTML" button (default: true)
+    themeMode?: "light" | "dark" | "system";
+    builderTheme?: "light-breeze" | "light-paper" | "dark-slate" | "dark-cosmos";
+    emailBackgroundStyle?: "none" | "aurora" | "sunset-glow" | "mint-weave" | "midnight-grid" | "paper-rings";
+    emailBackgroundColor?: string;   // Hex color for email canvas background (e.g. "#f4f4f4")
+    chromeColor?: string;            // Hex color for builder UI (toolbar, panels). Overrides theme preset.
+    canvasColor?: string;            // Hex color for canvas area (behind the email). Overrides theme preset.
   };
   onSave?: (output: MailCraftOutput) => void;
   onAutoSave?: (output: MailCraftOutput) => void;
@@ -100,6 +106,29 @@ MailCraft.render({
 // Destroy the editor and clean up
 MailCraft.destroy();
 ```
+
+### Iframe URL Parameters
+
+When embedding via iframe directly (without the SDK loader), you can pass configuration as URL query parameters:
+
+```
+https://app.mailcraft.io/builder/?sessionToken=sess_abc123&chromeColor=%231e1e2e&canvasColor=%232d2d3f&builderTheme=dark-slate&showLogo=false
+```
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `sessionToken` | string | Session token from `/api/v1/auth/session` |
+| `apiKey` | string | API key (alternative to session token) |
+| `builderTheme` | string | `light-breeze`, `light-paper`, `dark-slate`, `dark-cosmos` |
+| `chromeColor` | string | Hex color for builder UI (toolbar, panels) |
+| `canvasColor` | string | Hex color for canvas area (behind the email) |
+| `emailBackgroundColor` | string | Hex color for the email outer background |
+| `emailBackgroundStyle` | string | Background style preset |
+| `showLogo` | boolean | Show MailCraft branding |
+| `showExportHtmlButton` | boolean | Show "Export HTML" button |
+| `themeMode` | string | `light`, `dark`, or `system` |
+
+> **Note:** `chromeColor` and `canvasColor` override the preset theme colors when provided. Hex colors must include the `#` prefix (URL-encoded as `%23`).
 
 ### Events via postMessage
 
@@ -179,12 +208,25 @@ Create a session token for iframe initialization.
   "expires_at": "2026-02-07T13:00:00Z",
   "config": {
     "plan": "pro",
+    "variables": [
+      { "key": "Name", "label": "Student Name", "defaultValue": "Student", "type": "text" }
+    ],
     "max_upload_size_bytes": 26214400,
+    "max_media_files_per_upload": 15,
     "storage_used_bytes": 52428800,
-    "storage_limit_bytes": 5368709120
+    "storage_limit_bytes": 5368709120,
+    "widget_context": {
+      "show_logo": true,
+      "show_export_html_button": true,
+      "builder_theme": "light-breeze",
+      "chrome_color": null,
+      "canvas_color": null
+    }
   }
 }
 ```
+
+The `widget_context` fields are configured per-organization. `chrome_color` and `canvas_color` accept hex color strings (e.g. `"#1e1e2e"`) and override the builder theme preset when set.
 
 ---
 
