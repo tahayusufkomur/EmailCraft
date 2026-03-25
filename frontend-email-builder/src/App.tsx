@@ -547,17 +547,17 @@ function App() {
   const isDarkChrome = activeThemePreset.chromeMode === 'dark';
   const canApplySelectedMedia = Boolean(selectedBlock && selectedBlock.type === 'image');
 
-  const customColorOverrides: React.CSSProperties = {};
+  const customColorOverrides: Record<string, string> = {};
   if (chromeColor) {
-    customColorOverrides['--chrome-surface' as string] = chromeColor;
-    customColorOverrides['--chrome-surface-elevated' as string] = chromeColor;
+    customColorOverrides['--chrome-surface'] = chromeColor;
+    customColorOverrides['--chrome-surface-elevated'] = chromeColor;
   }
   if (canvasColor) {
-    customColorOverrides['--canvas-bg' as string] = canvasColor;
+    customColorOverrides['--canvas-bg'] = canvasColor;
   }
 
   return (
-    <div className={`app-shell ${isDarkChrome ? 'theme-dark' : 'theme-light'} ${activeThemePreset.shellClassName}`} style={customColorOverrides}>
+    <div className={`app-shell ${isDarkChrome ? 'theme-dark' : 'theme-light'} ${activeThemePreset.shellClassName}`} style={customColorOverrides as React.CSSProperties}>
       <div className="top-toolbar">
         {showLogo && (
           <div className="brand">
