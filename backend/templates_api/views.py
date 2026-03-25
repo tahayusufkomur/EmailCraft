@@ -244,30 +244,18 @@ def presign_upload(request):
 
 @api_view(['POST'])
 def export_html(request):
-    """POST /api/v1/export/html — convert template JSON to email HTML."""
+    """POST /api/v1/export/html — convert template JSON to email HTML.
+
+    Used for previews and editor exports. Does not count against render quota.
+    Only /render (used for actual sending) counts against quota.
+    """
     serializer = ExportRequestSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
-
-    org = request.org
-    billing_org = billing_organization_for_org(org)
-    if billing_org.rendered_emails_count >= billing_org.rendered_emails_limit:
-        return Response(
-            {
-                'error': {
-                    'code': 'EMAIL_RENDER_LIMIT_EXCEEDED',
-                    'message': 'Monthly rendered email limit exceeded for current plan.',
-                }
-            },
-            status=status.HTTP_402_PAYMENT_REQUIRED,
-        )
 
     json_data = serializer.validated_data['json_data']
     variables_mode = serializer.validated_data['variables_mode']
 
     result = render_email_html(json_data, variables_mode)
-
-    billing_org.rendered_emails_count += 1
-    billing_org.save(update_fields=['rendered_emails_count', 'updated_at'])
 
     return Response({
         'html': result['html'],
