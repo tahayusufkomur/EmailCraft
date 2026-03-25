@@ -344,6 +344,10 @@ function App() {
       }
     }
 
+    const queryColorOverrides: Partial<{ chromeColor: string; canvasColor: string }> = {};
+    if (contextFromQuery.chromeColor) queryColorOverrides.chromeColor = contextFromQuery.chromeColor;
+    if (contextFromQuery.canvasColor) queryColorOverrides.canvasColor = contextFromQuery.canvasColor;
+
     const syncSessionConfig = async (apiKey: string) => {
       try {
         const session = await api.createSession(window.location.origin);
@@ -367,6 +371,7 @@ function App() {
           ...(hostContextAppliedRef.current ? {} : sessionUiContext),
           ...sessionThemeContext,
           ...sessionEmailBackgroundContext,
+          ...queryColorOverrides,
         });
         if (shouldApplyQueryContext && Object.keys(contextFromQuery).length > 0) {
           setConfig(contextFromQuery);
