@@ -34,16 +34,9 @@ PLAN_DEMO_ACCOUNTS = [
 ]
 
 
-def _highest_plan_key():
-    return max(
-        settings.PLAN_LIMITS.items(),
-        key=lambda item: (
-            item[1].get('monthly_price_usd', 0),
-            item[1].get('rendered_emails_limit', 0),
-            item[1].get('storage_limit_bytes', 0),
-            item[1].get('max_upload_size_bytes', 0),
-        ),
-    )[0]
+def _highest_plan():
+    from core.models import Plan
+    return Plan.objects.order_by('-monthly_price_usd', '-rendered_emails_limit').first() or Plan.get_default()
 
 
 def _seed_plan_demo_account(account, password, default_allowed_origins, default_available_variables):
@@ -56,11 +49,14 @@ def _seed_plan_demo_account(account, password, default_allowed_origins, default_
     user.set_password(password)
     user.save(update_fields=['email', 'is_active', 'password'])
 
+    from core.models import Plan
+    plan_obj = Plan.objects.filter(slug=account['plan']).first() or Plan.get_default()
+
     org, _ = Organization.objects.get_or_create(
         email=account['org_email'],
         defaults={
             'name': account['org_name'],
-            'plan': account['plan'],
+            'plan': plan_obj,
             'allowed_origins': default_allowed_origins,
             'available_variables': default_available_variables,
         },
@@ -68,7 +64,7 @@ def _seed_plan_demo_account(account, password, default_allowed_origins, default_
 
     merged_origins = list(dict.fromkeys([*(org.allowed_origins or []), *default_allowed_origins]))
     org.name = account['org_name']
-    org.plan = account['plan']
+    org.plan = plan_obj
     org.allowed_origins = merged_origins
     org.available_variables = default_available_variables
     org.apply_plan_limits(save=False)
@@ -201,7 +197,7 @@ class Command(BaseCommand):
         parser.add_argument('--iframe-src', type=str, default='https://example.com/embed')
 
     def handle(self, *args, **options):
-        plan_key = _highest_plan_key()
+        plan_obj = _highest_plan()
         default_allowed_origins = [
             'http://localhost',
             'http://127.0.0.1',
@@ -218,7 +214,7 @@ class Command(BaseCommand):
             email=options['org_email'],
             defaults={
                 'name': options['org_name'],
-                'plan': plan_key,
+                'plan': plan_obj,
                 'allowed_origins': default_allowed_origins,
                 'available_variables': default_available_variables,
             },
@@ -226,12 +222,12 @@ class Command(BaseCommand):
 
         merged_origins = list(dict.fromkeys([*(org.allowed_origins or []), *default_allowed_origins]))
         org.name = options['org_name']
-        org.plan = plan_key
+        org.plan = plan_obj
         org.allowed_origins = merged_origins
         org.available_variables = default_available_variables
         org.apply_plan_limits(save=False)
         org.stripe_customer_id = org.stripe_customer_id or f'cus_demo_{org.id.hex[:14]}'
-        org.stripe_subscription_id = f'sub_demo_{plan_key}_{org.id.hex[:10]}'
+        org.stripe_subscription_id = f'sub_demo_{plan_obj.slug if plan_obj else "free"}_{org.id.hex[:10]}'
         org.save(
             update_fields=[
                 'name',

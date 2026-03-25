@@ -12,6 +12,7 @@ from rest_framework.response import Response
 
 from core.models import (
     Organization,
+    Plan,
     UserOrganization,
     billing_organization_for_user,
     ensure_reusable_test_api_key,
@@ -109,7 +110,7 @@ def site_register(request):
             org = Organization.objects.create(
                 name=data['organization_name'],
                 email=data['email'],
-                plan='free',
+                plan=Plan.get_default(),
             )
             org.apply_plan_limits(save=True)
             UserOrganization.objects.create(user=user, organization=org, role='owner')
@@ -162,7 +163,7 @@ def site_dashboard(request):
 
     return Response(
         {
-            'plan': billing_org.plan,
+            'plan': billing_org.plan_slug,
             'rendered_emails_count': billing_org.rendered_emails_count,
             'rendered_emails_limit': billing_org.rendered_emails_limit,
             'max_media_files_per_upload': billing_org.max_media_files_per_upload,
@@ -192,7 +193,7 @@ def site_organizations(request):
     data = serializer.validated_data
 
     billing_org = billing_organization_for_user(request.user)
-    plan = billing_org.plan if billing_org else 'free'
+    plan = billing_org.plan if billing_org else Plan.get_default()
 
     try:
         with transaction.atomic():
@@ -354,7 +355,7 @@ def site_gallery(request):
     if category:
         queryset = queryset.filter(category=category)
 
-    if not billing_org or billing_org.plan == 'free':
+    if not billing_org or billing_org.plan_slug == 'free':
         queryset = queryset.filter(is_premium=False)
 
     serializer = GalleryTemplateSerializer(queryset, many=True)
@@ -456,7 +457,7 @@ def site_provision(request):
                 'organization': {
                     'id': str(org.id),
                     'name': org.name,
-                    'plan': org.plan,
+                    'plan': org.plan_slug,
                 },
                 'api_key': {
                     'raw': raw_key,
@@ -468,7 +469,7 @@ def site_provision(request):
         )
 
     billing_org = billing_organization_for_user(request.user)
-    plan = billing_org.plan if billing_org else 'free'
+    plan = billing_org.plan if billing_org else Plan.get_default()
 
     try:
         with transaction.atomic():

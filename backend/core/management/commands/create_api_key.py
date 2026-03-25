@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from core.models import ApiKey, Organization
+from core.models import ApiKey, Organization, Plan
 
 
 class Command(BaseCommand):
@@ -10,19 +10,20 @@ class Command(BaseCommand):
         parser.add_argument('--org-name', type=str, required=True)
         parser.add_argument('--org-email', type=str, required=True)
         parser.add_argument('--env', type=str, default='test', choices=['live', 'test'])
-        parser.add_argument('--plan', type=str, default='free', choices=['free', 'starter', 'pro', 'enterprise'])
+        parser.add_argument('--plan', type=str, default='free')
 
     def handle(self, *args, **options):
+        plan_obj = Plan.objects.filter(slug=options['plan']).first() or Plan.get_default()
         org, created = Organization.objects.get_or_create(
             email=options['org_email'],
-            defaults={'name': options['org_name'], 'plan': options['plan']},
+            defaults={'name': options['org_name'], 'plan': plan_obj},
         )
         if created:
             org.apply_plan_limits()
             self.stdout.write(self.style.SUCCESS(f'Created organization: {org.name}'))
         else:
-            if org.plan != options['plan']:
-                org.plan = options['plan']
+            if org.plan != plan_obj:
+                org.plan = plan_obj
                 org.apply_plan_limits()
             self.stdout.write(f'Using existing organization: {org.name}')
 

@@ -7,25 +7,39 @@ from django.test import TestCase
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient
 
-from core.management.commands.create_demo_org import _highest_plan_key
-from core.models import ApiKey, Organization, UserOrganization
+from core.management.commands.create_demo_org import _highest_plan
+from core.models import ApiKey, Organization, Plan, UserOrganization
 from templates_api.models import Template, UploadedImage
 
 
+def _plan(slug='free'):
+    """Get or create a Plan for use in tests."""
+    defaults = {
+        'free': {'name': 'Free', 'monthly_price_usd': 0, 'rendered_emails_limit': 1000, 'storage_limit_bytes': 1073741824, 'max_upload_size_bytes': 5242880, 'max_media_files_per_upload': 5, 'is_default': True, 'sort_order': 0},
+        'starter': {'name': 'Starter', 'monthly_price_usd': 5, 'rendered_emails_limit': 10000, 'storage_limit_bytes': 5368709120, 'max_upload_size_bytes': 26214400, 'max_media_files_per_upload': 15, 'sort_order': 1},
+        'pro': {'name': 'Pro', 'monthly_price_usd': 20, 'rendered_emails_limit': 50000, 'storage_limit_bytes': 21474836480, 'max_upload_size_bytes': 52428800, 'max_media_files_per_upload': 40, 'sort_order': 2},
+        'enterprise': {'name': 'Enterprise', 'monthly_price_usd': 100, 'rendered_emails_limit': 1000000, 'storage_limit_bytes': 107374182400, 'max_upload_size_bytes': 104857600, 'max_media_files_per_upload': 120, 'sort_order': 3},
+    }
+    obj, _ = Plan.objects.get_or_create(slug=slug, defaults=defaults.get(slug, defaults['free']))
+    return obj
+
+
 class CreateDemoOrgCommandTests(TestCase):
+    def setUp(self):
+        for slug in ('free', 'starter', 'pro', 'enterprise'):
+            _plan(slug)
+
     def test_creates_highest_tier_org_with_max_quotas_key_and_template(self):
         out = StringIO()
         call_command('create_demo_org', stdout=out)
 
         org = Organization.objects.get(email='demo-enterprise@mailcraft.dev')
-        highest_plan = _highest_plan_key()
-        expected_limits = settings.PLAN_LIMITS[highest_plan]
-
+        highest_plan = _highest_plan()
         self.assertEqual(org.plan, highest_plan)
-        self.assertEqual(org.rendered_emails_limit, expected_limits['rendered_emails_limit'])
-        self.assertEqual(org.storage_limit_bytes, expected_limits['storage_limit_bytes'])
+        self.assertEqual(org.rendered_emails_limit, highest_plan.rendered_emails_limit)
+        self.assertEqual(org.storage_limit_bytes, highest_plan.storage_limit_bytes)
         self.assertTrue(org.stripe_customer_id.startswith('cus_demo_'))
-        self.assertTrue(org.stripe_subscription_id.startswith(f'sub_demo_{highest_plan}_'))
+        self.assertTrue(org.stripe_subscription_id.startswith(f'sub_demo_{highest_plan.slug}_'))
 
         active_key = ApiKey.objects.get(org=org, environment='test', is_active=True, revoked_at__isnull=True)
         self.assertEqual(active_key.key_prefix, 'mc_test_0000')
@@ -95,7 +109,7 @@ class SiteOrganizationsApiTests(TestCase):
         self.billing_org = Organization.objects.create(
             name='Owner Org',
             email='owner-org@mailcraft.dev',
-            plan='pro',
+            plan=_plan('pro'),
         )
         self.billing_org.apply_plan_limits(save=True)
         self.billing_org.rendered_emails_count = 777
@@ -219,7 +233,7 @@ class SiteOrganizationsApiTests(TestCase):
         secondary_org = Organization.objects.create(
             name='Secondary Org',
             email='secondary-org@mailcraft.dev',
-            plan='free',
+            plan=_plan('free'),
         )
         secondary_org.apply_plan_limits(save=True)
         UserOrganization.objects.create(user=self.user, organization=secondary_org, role='owner')
@@ -241,7 +255,7 @@ class SiteOrganizationsApiTests(TestCase):
         secondary_org = Organization.objects.create(
             name='Secondary Org',
             email='secondary-billing@mailcraft.dev',
-            plan='free',
+            plan=_plan('free'),
             allowed_origins=['http://localhost:5173'],
             available_variables=[
                 {'key': 'user_name', 'label': 'User Name', 'defaultValue': 'Guest', 'type': 'text'},
@@ -329,7 +343,7 @@ class SiteOrganizationsApiTests(TestCase):
         other_org = Organization.objects.create(
             name='Other Org',
             email='other-org@mailcraft.dev',
-            plan='starter',
+            plan=_plan('starter'),
         )
         other_org.apply_plan_limits(save=True)
 
@@ -459,7 +473,7 @@ class SiteOrganizationsApiTests(TestCase):
         other_org = Organization.objects.create(
             name='Other Org',
             email='other-template-org@mailcraft.dev',
-            plan='starter',
+            plan=_plan('starter'),
         )
         other_org.apply_plan_limits(save=True)
         other_template = Template.objects.create(
@@ -529,7 +543,7 @@ class SiteOrganizationsApiTests(TestCase):
         other_org = Organization.objects.create(
             name='Other Site Org',
             email='other-site-org@mailcraft.dev',
-            plan='starter',
+            plan=_plan('starter'),
         )
         other_org.apply_plan_limits(save=True)
         other_template = Template.objects.create(

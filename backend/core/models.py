@@ -8,13 +8,30 @@ from django.db import models
 from django.utils import timezone
 
 
+class Plan(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
+    monthly_price_usd = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    rendered_emails_limit = models.BigIntegerField(default=1000)
+    storage_limit_bytes = models.BigIntegerField(default=1073741824)  # 1GB
+    max_upload_size_bytes = models.BigIntegerField(default=5242880)  # 5MB
+    max_media_files_per_upload = models.PositiveIntegerField(default=5)
+    is_default = models.BooleanField(default=False, help_text='New orgs get this plan when no plan is specified.')
+    sort_order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        db_table = 'plans'
+        ordering = ['sort_order', 'monthly_price_usd']
+
+    def __str__(self):
+        return self.name
+
+    @classmethod
+    def get_default(cls):
+        return cls.objects.filter(is_default=True).first() or cls.objects.order_by('sort_order').first()
+
+
 class Organization(models.Model):
-    PLAN_CHOICES = [
-        ('free', 'Free'),
-        ('starter', 'Starter'),
-        ('pro', 'Pro'),
-        ('enterprise', 'Enterprise'),
-    ]
     THEME_MODE_CHOICES = [
         ('light', 'Light'),
         ('dark', 'Dark'),
@@ -38,7 +55,7 @@ class Organization(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
-    plan = models.CharField(max_length=20, choices=PLAN_CHOICES, default='free')
+    plan = models.ForeignKey(Plan, on_delete=models.SET_NULL, null=True, blank=True, related_name='organizations')
     allowed_origins = models.JSONField(default=list, blank=True)
     available_variables = models.JSONField(default=list, blank=True)
     rendered_emails_count = models.BigIntegerField(default=0)
@@ -69,25 +86,26 @@ class Organization(models.Model):
         return self.name
 
     @property
-    def is_pro(self):
-        return self.plan in ('pro', 'enterprise')
+    def plan_slug(self):
+        return self.plan.slug if self.plan else 'free'
 
     @property
-    def plan_limits(self):
-        return settings.PLAN_LIMITS.get(self.plan, settings.PLAN_LIMITS['free'])
+    def is_pro(self):
+        return self.plan_slug in ('pro', 'enterprise')
 
     @property
     def max_upload_size_bytes(self):
-        return self.plan_limits['max_upload_size_bytes']
+        return self.plan.max_upload_size_bytes if self.plan else 5242880
 
     @property
     def max_media_files_per_upload(self):
-        return self.plan_limits.get('max_media_files_per_upload', 1)
+        return self.plan.max_media_files_per_upload if self.plan else 1
 
     def apply_plan_limits(self, save=True):
-        limits = self.plan_limits
-        self.rendered_emails_limit = limits['rendered_emails_limit']
-        self.storage_limit_bytes = limits['storage_limit_bytes']
+        p = self.plan or Plan.get_default()
+        if p:
+            self.rendered_emails_limit = p.rendered_emails_limit
+            self.storage_limit_bytes = p.storage_limit_bytes
         if save:
             self.save(update_fields=['rendered_emails_limit', 'storage_limit_bytes', 'updated_at'])
 

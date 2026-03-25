@@ -45,6 +45,8 @@ def validate_organization_variables(value):
 
 
 class OrganizationSerializer(serializers.ModelSerializer):
+    plan = serializers.CharField(source='plan_slug', read_only=True)
+
     class Meta:
         model = Organization
         fields = ['id', 'name', 'email', 'plan', 'allowed_origins',
@@ -93,7 +95,7 @@ class SessionResponseSerializer(serializers.Serializer):
 
 
 class SubscribeRequestSerializer(serializers.Serializer):
-    plan = serializers.ChoiceField(choices=[choice[0] for choice in Organization.PLAN_CHOICES])
+    plan = serializers.CharField(max_length=50)
 
 
 class SiteRegisterSerializer(serializers.Serializer):

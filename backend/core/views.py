@@ -23,20 +23,19 @@ from core.models import ApiKey, Organization, Session, UserOrganization, billing
 from core.serializers import SessionRequestSerializer, SubscribeRequestSerializer
 
 
-def _plan_payload(plan_key):
-    plan = settings.PLAN_LIMITS.get(plan_key, settings.PLAN_LIMITS['free'])
+def _plan_payload(plan_obj):
     return {
-        'plan': plan_key,
-        'monthly_price_usd': plan['monthly_price_usd'],
-        'rendered_emails_limit': plan['rendered_emails_limit'],
-        'storage_limit_bytes': plan['storage_limit_bytes'],
-        'max_upload_size_bytes': plan['max_upload_size_bytes'],
-        'max_media_files_per_upload': plan.get('max_media_files_per_upload', 1),
+        'plan': plan_obj.slug,
+        'monthly_price_usd': float(plan_obj.monthly_price_usd),
+        'rendered_emails_limit': plan_obj.rendered_emails_limit,
+        'storage_limit_bytes': plan_obj.storage_limit_bytes,
+        'max_upload_size_bytes': plan_obj.max_upload_size_bytes,
+        'max_media_files_per_upload': plan_obj.max_media_files_per_upload,
     }
 
 
-def _set_org_plan(org, plan_key, stripe_subscription_id=None, stripe_customer_id=None):
-    org.plan = plan_key
+def _set_org_plan(org, plan_obj, stripe_subscription_id=None, stripe_customer_id=None):
+    org.plan = plan_obj
     org.apply_plan_limits(save=False)
     if stripe_customer_id is not None:
         org.stripe_customer_id = stripe_customer_id
@@ -55,11 +54,17 @@ def _set_org_plan(org, plan_key, stripe_subscription_id=None, stripe_customer_id
 
 
 def subscribe_org_to_plan(org, plan_key):
-    plan = settings.PLAN_LIMITS[plan_key]
+    from core.models import Plan
+    plan_obj = Plan.objects.filter(slug=plan_key).first()
+    if not plan_obj:
+        return (
+            {'error': {'code': 'INVALID_PLAN', 'message': f'Plan "{plan_key}" not found.'}},
+            status.HTTP_400_BAD_REQUEST,
+        )
 
-    if plan['monthly_price_usd'] == 0:
-        _set_org_plan(org, 'free', stripe_subscription_id=None)
-        return {'status': 'updated', 'plan': 'free'}, status.HTTP_200_OK
+    if plan_obj.monthly_price_usd == 0:
+        _set_org_plan(org, plan_obj, stripe_subscription_id=None)
+        return {'status': 'updated', 'plan': plan_obj.slug}, status.HTTP_200_OK
 
     if not settings.STRIPE_API_KEY:
         return (
@@ -86,15 +91,15 @@ def subscribe_org_to_plan(org, plan_key):
             customer=customer_id,
             success_url=settings.STRIPE_SUCCESS_URL,
             cancel_url=settings.STRIPE_CANCEL_URL,
-            metadata={'org_id': str(org.id), 'plan': plan_key},
+            metadata={'org_id': str(org.id), 'plan': plan_obj.slug},
             line_items=[
                 {
                     'quantity': 1,
                     'price_data': {
                         'currency': 'usd',
-                        'unit_amount': int(plan['monthly_price_usd'] * 100),
+                        'unit_amount': int(plan_obj.monthly_price_usd * 100),
                         'recurring': {'interval': 'month'},
-                        'product_data': {'name': f'MailCraft {plan_key.title()} Plan'},
+                        'product_data': {'name': f'MailCraft {plan_obj.name} Plan'},
                     },
                 }
             ],
@@ -109,7 +114,7 @@ def subscribe_org_to_plan(org, plan_key):
         {
             'checkout_url': checkout_session.url,
             'session_id': checkout_session.id,
-            'plan': plan_key,
+            'plan': plan_obj.slug,
         },
         status.HTTP_200_OK,
     )
@@ -121,7 +126,7 @@ def _build_session_config_response(org, session_token, expires_at):
         'token': session_token,
         'expires_at': expires_at.isoformat(),
         'config': {
-            'plan': billing_org.plan,
+            'plan': billing_org.plan_slug,
             'variables': org.available_variables or [],
             'max_upload_size_bytes': billing_org.max_upload_size_bytes,
             'max_media_files_per_upload': billing_org.max_media_files_per_upload,
@@ -237,7 +242,8 @@ def landing_page(request):
 
 @api_view(['GET'])
 def pricing_page(request):
-    plans = [_plan_payload(plan_key) for plan_key in settings.PLAN_LIMITS.keys()]
+    from core.models import Plan
+    plans = [_plan_payload(p) for p in Plan.objects.all()]
     return Response({
         'currency': 'USD',
         'billing_cycle': 'monthly',
@@ -287,12 +293,14 @@ def stripe_webhook(request):
         metadata = data.get('metadata', {})
         org_id = metadata.get('org_id')
         plan_key = metadata.get('plan')
-        if org_id and plan_key in settings.PLAN_LIMITS:
+        from core.models import Plan
+        plan_obj = Plan.objects.filter(slug=plan_key).first() if plan_key else None
+        if org_id and plan_obj:
             try:
                 org = Organization.objects.get(pk=org_id)
                 _set_org_plan(
                     org,
-                    plan_key,
+                    plan_obj,
                     stripe_subscription_id=data.get('subscription'),
                     stripe_customer_id=data.get('customer') or org.stripe_customer_id,
                 )

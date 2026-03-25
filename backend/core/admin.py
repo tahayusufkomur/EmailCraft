@@ -1,6 +1,22 @@
 from django.contrib import admin, messages
 
-from core.models import ApiKey, Organization, UserOrganization
+from core.models import ApiKey, Organization, Plan, UserOrganization
+
+
+@admin.register(Plan)
+class PlanAdmin(admin.ModelAdmin):
+    list_display = [
+        'name', 'slug', 'monthly_price_usd',
+        'rendered_emails_limit', 'storage_limit_bytes',
+        'max_upload_size_bytes', 'max_media_files_per_upload',
+        'is_default', 'sort_order',
+    ]
+    list_editable = [
+        'monthly_price_usd', 'rendered_emails_limit', 'storage_limit_bytes',
+        'max_upload_size_bytes', 'max_media_files_per_upload',
+        'is_default', 'sort_order',
+    ]
+    prepopulated_fields = {'slug': ('name',)}
 
 
 @admin.register(Organization)
