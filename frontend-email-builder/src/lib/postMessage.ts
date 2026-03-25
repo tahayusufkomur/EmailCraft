@@ -4,6 +4,7 @@ type MessageType =
   | 'MAILCRAFT_READY'
   | 'MAILCRAFT_SAVE'
   | 'MAILCRAFT_AUTO_SAVE'
+  | 'MAILCRAFT_TEMPLATE_SAVED'
   | 'MAILCRAFT_ERROR';
 
 type IncomingMessageType =
@@ -52,6 +53,10 @@ export function sendSaveEvent(html: string, template: EmailTemplate, targetOrigi
 
 export function sendReadyEvent(targetOrigin = '*') {
   sendToParent('MAILCRAFT_READY', {}, targetOrigin);
+}
+
+export function sendTemplateSavedEvent(templateId: string, templateName: string, targetOrigin = '*') {
+  sendToParent('MAILCRAFT_TEMPLATE_SAVED', { templateId, templateName }, targetOrigin);
 }
 
 export function sendErrorEvent(code: string, message: string, targetOrigin = '*') {

@@ -16,7 +16,7 @@ import { exportToHtml } from './lib/htmlExporter';
 import { applyImageUrlToBlock } from './lib/media';
 import { api } from './lib/api';
 import { useAutoSave, loadDraft } from './hooks/useAutoSave';
-import { listenToParent, sendErrorEvent, sendReadyEvent, sendSaveEvent } from './lib/postMessage';
+import { listenToParent, sendErrorEvent, sendReadyEvent, sendSaveEvent, sendTemplateSavedEvent } from './lib/postMessage';
 import type { EmailTemplate, TemplateBackgroundStyle } from './types/blocks';
 import type { ThemeMode, Variable } from './types/editor';
 import { getBuilderThemePreset, resolveBuilderTheme } from './lib/builderTheme';
@@ -469,6 +469,7 @@ function App() {
     setIsSaving(true);
     try {
       await api.updateTemplate(savedTemplateId, { json_data: currentTemplate });
+      sendTemplateSavedEvent(savedTemplateId, '');
       useEditorStore.getState().markClean();
     } catch {
       // localStorage save already succeeded
@@ -487,6 +488,7 @@ function App() {
         category: category || undefined,
       });
       setSavedTemplateId(result.id);
+      sendTemplateSavedEvent(result.id, name);
       useEditorStore.getState().markClean();
       setShowSaveModal(false);
     } catch {
