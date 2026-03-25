@@ -419,17 +419,53 @@ def site_subscribe(request):
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def site_provision(request):
-    """Create a new organization with a live API key in one call.
+    """Create or reuse an organization with a live API key.
 
     POST /api/v1/site/provision
     Body: { "name": "My Org" }
     Auth: Token <site_token>
 
-    Returns the org details and the raw live API key (shown only once).
+    If an org with the same name already exists for this user, returns
+    the existing org and its active live API key (without the raw key).
+    Otherwise creates a new org and returns the raw key (shown only once).
     """
     serializer = SiteProvisionSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     name = serializer.validated_data['name']
+
+    # Check if user already has an org with this name
+    existing_membership = (
+        UserOrganization.objects
+        .select_related('organization')
+        .filter(user=request.user, organization__name=name)
+        .first()
+    )
+    if existing_membership:
+        org = existing_membership.organization
+        # Create a fresh live API key so the caller can store it
+        raw_key = ApiKey.generate_key(environment='live')
+        api_key = ApiKey.objects.create(
+            org=org,
+            key_hash=ApiKey.hash_key(raw_key),
+            key_prefix=raw_key[:12],
+            environment='live',
+            scope='full',
+        )
+        return Response(
+            {
+                'organization': {
+                    'id': str(org.id),
+                    'name': org.name,
+                    'plan': org.plan,
+                },
+                'api_key': {
+                    'raw': raw_key,
+                    'prefix': api_key.key_prefix,
+                    'environment': 'live',
+                },
+            },
+            status=status.HTTP_200_OK,
+        )
 
     billing_org = billing_organization_for_user(request.user)
     plan = billing_org.plan if billing_org else 'free'
