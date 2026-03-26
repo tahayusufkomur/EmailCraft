@@ -298,6 +298,8 @@ function App() {
   const [isExporting, setIsExporting] = useState(false);
   const [exportError, setExportError] = useState<string | null>(null);
   const [savedTemplateId, setSavedTemplateId] = useState<string | null>(null);
+  const savedTemplateIdRef = useRef<string | null>(null);
+  useEffect(() => { savedTemplateIdRef.current = savedTemplateId; }, [savedTemplateId]);
   const [isSaving, setIsSaving] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
   const activeThemePreset = getBuilderThemePreset(builderTheme);
@@ -441,6 +443,20 @@ function App() {
       },
       onExport: () => {
         void exportTemplateUsingApi({ shouldDownload: false, shouldSendToHost: true });
+      },
+      onRequestSave: () => {
+        // Trigger the same save flow as clicking the Save button
+        const currentTemplate = useEditorStore.getState().template;
+        localStorage.setItem('mailcraft_draft', JSON.stringify(currentTemplate));
+        emitSaveEvent(currentTemplate);
+
+        const existingId = savedTemplateIdRef.current;
+        if (existingId) {
+          void api.updateTemplate(existingId, { json_data: currentTemplate }).then(() => {
+            sendTemplateSavedEvent(existingId, '');
+            useEditorStore.getState().markClean();
+          }).catch(() => {});
+        }
       },
     });
 

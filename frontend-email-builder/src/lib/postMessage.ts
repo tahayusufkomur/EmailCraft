@@ -10,7 +10,8 @@ type MessageType =
 type IncomingMessageType =
   | 'MAILCRAFT_INIT'
   | 'MAILCRAFT_LOAD_TEMPLATE'
-  | 'MAILCRAFT_EXPORT';
+  | 'MAILCRAFT_EXPORT'
+  | 'MAILCRAFT_REQUEST_SAVE';
 
 type IncomingInitPayload = {
   apiKey?: unknown;
@@ -67,6 +68,7 @@ type IncomingHandler = {
   onInit?: (config: IncomingInitPayload) => void;
   onLoadTemplate?: (json: EmailTemplate) => void;
   onExport?: () => void;
+  onRequestSave?: () => void;
 };
 
 export function listenToParent(handlers: IncomingHandler) {
@@ -85,6 +87,9 @@ export function listenToParent(handlers: IncomingHandler) {
         break;
       case 'MAILCRAFT_EXPORT':
         handlers.onExport?.();
+        break;
+      case 'MAILCRAFT_REQUEST_SAVE':
+        handlers.onRequestSave?.();
         break;
     }
   };
