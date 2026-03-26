@@ -267,6 +267,28 @@ def export_html(request):
     })
 
 
+@api_view(['GET'])
+def template_preview(request, template_id):
+    """GET /api/v1/templates/:id/preview — render template HTML for preview.
+
+    Returns the rendered email HTML with default variable values.
+    Does not count against render quota.
+    """
+    org = request.org
+    template = Template.objects.visible_to_org(org).filter(pk=template_id).first()
+    if not template:
+        return Response(
+            {'error': {'code': 'TEMPLATE_NOT_FOUND', 'message': 'Template not found.'}},
+            status=status.HTTP_404_NOT_FOUND,
+        )
+
+    result = render_email_html(template.json_data, 'defaults')
+    return Response({
+        'html': result['html'],
+        'warnings': result.get('warnings', []),
+    })
+
+
 @api_view(['POST'])
 def render_template(request):
     """POST /api/v1/render — render a template with variable substitution."""

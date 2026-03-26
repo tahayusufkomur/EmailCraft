@@ -8,6 +8,7 @@ from templates_api.views import (
     media_list,
     presign_upload,
     render_template,
+    template_preview,
 )
 
 router = DefaultRouter()
@@ -18,6 +19,7 @@ urlpatterns = [
     path('gallery', gallery_list, name='gallery-list'),
     path('media', media_list, name='media-list'),
     path('upload/presign', presign_upload, name='upload-presign'),
+    path('templates/<uuid:template_id>/preview', template_preview, name='template-preview'),
     path('export/html', export_html, name='export-html'),
     path('render', render_template, name='render-template'),
 ]
