@@ -118,102 +118,57 @@ def validate_variable_key(key):
 
 
 def extract_variable_keys(json_data):
-    """Scan all blocks and return set of variable keys used in the template."""
+    """Recursively scan all string values in the template and return variable keys."""
     keys = set()
-    for section_name in ('header', 'body', 'footer'):
-        blocks = json_data.get(section_name, {}).get('blocks', [])
-        _extract_keys_from_blocks(blocks, keys)
+    _extract_keys_recursive(json_data, keys)
     return keys
 
 
-def _extract_keys_from_blocks(blocks, keys):
-    for block in blocks:
-        block_type = block.get('type', '')
-        data = block.get('data', {})
-
-        fields_to_scan = []
-        if block_type == 'text':
-            fields_to_scan = [data.get('html', '')]
-        elif block_type == 'heading':
-            fields_to_scan = [data.get('text', '')]
-        elif block_type == 'button':
-            fields_to_scan = [data.get('text', ''), data.get('url', '')]
-        elif block_type == 'image':
-            fields_to_scan = [data.get('alt', ''), data.get('link', '')]
-        elif block_type == 'html':
-            fields_to_scan = [data.get('html', '')]
-        elif block_type == 'hero':
-            fields_to_scan = [
-                data.get('heading', ''), data.get('subheading', ''),
-                data.get('buttonText', ''), data.get('buttonUrl', ''),
-            ]
-        elif block_type == 'columns':
-            for col in data.get('columns', []):
-                _extract_keys_from_blocks(col.get('blocks', []), keys)
-
-        for field_value in fields_to_scan:
-            if field_value:
-                keys.update(_VAR_PATTERN.findall(field_value))
+def _extract_keys_recursive(obj, keys):
+    if isinstance(obj, str):
+        keys.update(_VAR_PATTERN.findall(obj))
+    elif isinstance(obj, dict):
+        for v in obj.values():
+            _extract_keys_recursive(v, keys)
+    elif isinstance(obj, list):
+        for item in obj:
+            _extract_keys_recursive(item, keys)
 
 
 def substitute_variables(json_data, variables):
     """
-    Substitute ``{{key}}`` placeholders in all block data fields.
+    Recursively substitute ``{{key}}`` placeholders in every string value.
 
     Returns a new json_data dict with substitutions applied.
-    For ``data.html`` fields (text and html blocks) the values are HTML-escaped
-    since the export engine passes them through raw.  For other fields
-    (heading text, button text/url, image alt/link) the values are inserted raw
-    because the export engine already escapes those.
+    Variable values are HTML-escaped to prevent injection.
     """
-    result = copy.deepcopy(json_data)
-    for section_name in ('header', 'body', 'footer'):
-        section = result.get(section_name, {})
-        blocks = section.get('blocks', [])
-        _substitute_in_blocks(blocks, variables)
-    return result
+    return _substitute_recursive(copy.deepcopy(json_data), variables)
 
 
-def _substitute_in_blocks(blocks, variables):
-    for block in blocks:
-        block_type = block.get('type', '')
-        data = block.get('data', {})
-
-        if block_type == 'text':
-            data['html'] = _replace_vars(data.get('html', ''), variables, escape=True)
-        elif block_type == 'heading':
-            data['text'] = _replace_vars(data.get('text', ''), variables, escape=False)
-        elif block_type == 'button':
-            data['text'] = _replace_vars(data.get('text', ''), variables, escape=False)
-            data['url'] = _replace_vars(data.get('url', ''), variables, escape=False)
-        elif block_type == 'image':
-            data['alt'] = _replace_vars(data.get('alt', ''), variables, escape=False)
-            data['link'] = _replace_vars(data.get('link', ''), variables, escape=False)
-        elif block_type == 'html':
-            data['html'] = _replace_vars(data.get('html', ''), variables, escape=True)
-        elif block_type == 'hero':
-            data['heading'] = _replace_vars(data.get('heading', ''), variables, escape=False)
-            data['subheading'] = _replace_vars(data.get('subheading', ''), variables, escape=False)
-            data['buttonText'] = _replace_vars(data.get('buttonText', ''), variables, escape=False)
-            data['buttonUrl'] = _replace_vars(data.get('buttonUrl', ''), variables, escape=False)
-        elif block_type == 'columns':
-            for col in data.get('columns', []):
-                _substitute_in_blocks(col.get('blocks', []), variables)
+def _substitute_recursive(obj, variables):
+    if isinstance(obj, str):
+        return _replace_vars(obj, variables)
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            obj[k] = _substitute_recursive(v, variables)
+        return obj
+    if isinstance(obj, list):
+        for i, item in enumerate(obj):
+            obj[i] = _substitute_recursive(item, variables)
+        return obj
+    return obj
 
 
-def _replace_vars(text, variables, escape=True):
-    """Replace ``{{key}}`` with the variable value."""
+def _replace_vars(text, variables):
+    """Replace ``{{key}}`` with the HTML-escaped variable value."""
     if not text:
         return text
 
     def replacer(match):
         key = match.group(1)
         if key not in variables:
-            return match.group(0)  # leave unchanged if not provided
-        value = str(variables[key])
-        if escape:
-            return html_module.escape(value)
-        return value
+            return match.group(0)
+        return html_module.escape(str(variables[key]))
 
     return _VAR_PATTERN.sub(replacer, text)
 
