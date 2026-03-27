@@ -55,7 +55,7 @@ function getSnippet(tab: SnippetTab, apiKey: string): string {
   switch (tab) {
     case 'html':
       return `<iframe
-  src="https://emailcraft.contentor.app/builder/?apiKey=${apiKey}"
+  src="https://mailcraft.contentor.app/builder/?apiKey=${apiKey}"
   width="100%"
   height="800"
   frameborder="0"
@@ -82,14 +82,14 @@ export function EmailBuilder() {
   return (
     <iframe
       ref={ref}
-      src="https://emailcraft.contentor.app/builder/?apiKey=${apiKey}"
+      src="https://mailcraft.contentor.app/builder/?apiKey=${apiKey}"
       style={{ width: '100%', height: '800px', border: 'none' }}
       allow="clipboard-write"
     />
   );
 }`;
     case 'curl':
-      return `curl -X POST https://emailcraft.contentor.app/api/v1/render \\
+      return `curl -X POST https://mailcraft.contentor.app/api/v1/render \\
   -H "X-API-Key: ${apiKey}" \\
   -H "Content-Type: application/json" \\
   -d '{

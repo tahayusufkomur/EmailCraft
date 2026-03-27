@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 
-const DOMAIN = 'https://emailcraft.contentor.app';
+const DOMAIN = 'https://mailcraft.contentor.app';
 
 type SectionId =
   | 'overview'

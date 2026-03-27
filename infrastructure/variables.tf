@@ -15,7 +15,7 @@ variable "cloudflare_zone_name" {
 
 variable "domain_prefix" {
   description = "Subdomain prefix for the app"
-  default     = "emailcraft"
+  default     = "mailcraft"
 }
 
 variable "server_type" {
