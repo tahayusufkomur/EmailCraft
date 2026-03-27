@@ -443,16 +443,11 @@ def site_provision(request):
 
             if existing_membership:
                 org = existing_membership.organization
-                # Create a fresh live API key so the caller can store it
-                raw_key = ApiKey.generate_key(environment='live')
-                api_key = ApiKey.objects.create(
-                    org=org,
-                    key_hash=ApiKey.hash_key(raw_key),
-                    key_prefix=raw_key[:12],
-                    environment='live',
-                    scope='full',
-                )
                 account = account_for_org(org)
+                # Return existing org without creating a new API key.
+                # The caller should already have a key stored from the
+                # first provision call. If they lost it, they can create
+                # a new one via the API keys endpoint.
                 return Response(
                     {
                         'organization': {
@@ -460,11 +455,7 @@ def site_provision(request):
                             'name': org.name,
                             'plan': account.plan_slug if account else 'free',
                         },
-                        'api_key': {
-                            'raw': raw_key,
-                            'prefix': api_key.key_prefix,
-                            'environment': 'live',
-                        },
+                        'api_key': None,
                     },
                     status=status.HTTP_200_OK,
                 )
