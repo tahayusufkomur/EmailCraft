@@ -70,14 +70,9 @@ export function SiteLayout() {
                 </Button>
               </>
             ) : (
-              <>
-                <Button asChild variant="outline" size="sm">
-                  <Link to="/login">Log in</Link>
-                </Button>
-                <Button asChild size="sm">
-                  <Link to="/register">Get started</Link>
-                </Button>
-              </>
+              <Button asChild size="sm">
+                <Link to="/login">Sign in</Link>
+              </Button>
             )}
           </div>
         </div>

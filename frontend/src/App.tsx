@@ -14,7 +14,6 @@ import { LoginPage } from './pages/LoginPage';
 import { DocsPage } from './pages/DocsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PricingPage } from './pages/PricingPage';
-import { RegisterPage } from './pages/RegisterPage';
 import { TemplatesPage } from './pages/TemplatesPage';
 
 function App() {
@@ -35,7 +34,7 @@ function App() {
         <Route path="faq" element={<FaqPage />} />
         <Route path="impressum" element={<ImpressumPage />} />
         <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<RegisterPage />} />
+        <Route path="register" element={<Navigate to="/login" replace />} />
       </Route>
 
       <Route

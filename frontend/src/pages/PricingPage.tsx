@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { api } from '../lib/api';
 import { useAuth } from '../lib/auth';
@@ -10,6 +11,7 @@ import { formatBytes } from '../lib/utils';
 
 export function PricingPage() {
   const { token, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const [plans, setPlans] = useState<PricingPlan[]>([]);
   const [busyPlan, setBusyPlan] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -23,31 +25,51 @@ export function PricingPage() {
 
   const cards = useMemo(() => sortPlans(plans), [plans]);
 
-  const subscribe = async (plan: PricingPlan['plan']) => {
-    if (!token) {
-      setError('Log in first to subscribe to a plan.');
-      return;
-    }
-
+  const handleChoosePlan = async (plan: PricingPlan) => {
     setError(null);
-    setBusyPlan(plan);
+    setBusyPlan(plan.plan);
 
     try {
-      const result = await api.subscribe(token, plan);
-      if (result.checkout_url) {
+      if (plan.monthly_price_usd === 0) {
+        if (!isAuthenticated) {
+          navigate('/login');
+          return;
+        }
+        const result = await api.subscribe(token!, plan.plan);
+        if (result.status === 'updated') {
+          navigate('/dashboard/billing');
+        }
+        return;
+      }
+
+      if (isAuthenticated) {
+        const result = await api.subscribe(token!, plan.plan);
+        if (result.checkout_url) {
+          window.location.href = result.checkout_url;
+          return;
+        }
+        if (result.status === 'updated') {
+          navigate('/dashboard/billing');
+          return;
+        }
+        setError('Unexpected response from subscription.');
+      } else {
+        const result = await api.guestCheckout(plan.plan);
         window.location.href = result.checkout_url;
-        return;
       }
-      if (result.status === 'updated') {
-        window.location.href = '/dashboard/billing';
-        return;
-      }
-      setError('Subscription response did not include checkout details.');
     } catch (err) {
       setError((err as Error).message);
     } finally {
       setBusyPlan(null);
     }
+  };
+
+  const getButtonText = (plan: PricingPlan) => {
+    if (busyPlan === plan.plan) return 'Processing...';
+    if (plan.monthly_price_usd === 0) {
+      return isAuthenticated ? 'Switch to free' : 'Get started free';
+    }
+    return isAuthenticated ? 'Switch plan' : 'Get started';
   };
 
   return (
@@ -77,12 +99,10 @@ export function PricingPage() {
               <Button
                 className="w-full"
                 variant={plan.plan === 'free' ? 'outline' : 'default'}
-                disabled={!isAuthenticated || busyPlan === plan.plan}
-                onClick={() => {
-                  void subscribe(plan.plan);
-                }}
+                disabled={busyPlan === plan.plan}
+                onClick={() => { void handleChoosePlan(plan); }}
               >
-                {!isAuthenticated ? 'Log in to choose' : busyPlan === plan.plan ? 'Processing...' : 'Choose plan'}
+                {getButtonText(plan)}
               </Button>
             </CardFooter>
           </Card>

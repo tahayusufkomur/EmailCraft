@@ -1,19 +1,18 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { api } from '../lib/api';
 import { useAuth } from '../lib/auth';
-import { PLAN_LABELS, sortPlans } from '../lib/plans';
-import type { PricingPlan, SiteDashboardResponse } from '../types/api';
+import { PLAN_LABELS } from '../lib/plans';
+import type { SiteDashboardResponse } from '../types/api';
 import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { formatBytes } from '../lib/utils';
 
 export function DashboardBillingPage() {
   const { token } = useAuth();
   const [dashboard, setDashboard] = useState<SiteDashboardResponse | null>(null);
-  const [plans, setPlans] = useState<PricingPlan[]>([]);
-  const [busyPlan, setBusyPlan] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [portalBusy, setPortalBusy] = useState(false);
 
   useEffect(() => {
     if (!token) return;
@@ -21,31 +20,19 @@ export function DashboardBillingPage() {
       .getDashboard(token)
       .then(setDashboard)
       .catch((err: Error) => setError(err.message));
-
-    void api
-      .fetchPricing()
-      .then((res) => setPlans(sortPlans(res.plans)))
-      .catch((err: Error) => setError(err.message));
   }, [token]);
 
-  const sortedPlans = useMemo(() => sortPlans(plans), [plans]);
-
-  const handleSubscribe = async (plan: PricingPlan['plan']) => {
+  const handleManageSubscription = async () => {
     if (!token) return;
-    setBusyPlan(plan);
+    setPortalBusy(true);
     setError(null);
     try {
-      const result = await api.subscribe(token, plan);
-      if (result.checkout_url) {
-        window.location.href = result.checkout_url;
-        return;
-      }
-      const next = await api.getDashboard(token);
-      setDashboard(next);
+      const result = await api.billingPortal(token);
+      window.location.href = result.portal_url;
     } catch (err) {
       setError((err as Error).message);
     } finally {
-      setBusyPlan(null);
+      setPortalBusy(false);
     }
   };
 
@@ -54,42 +41,69 @@ export function DashboardBillingPage() {
       <div>
         <h1 className="font-heading text-3xl font-semibold tracking-tight">Billing</h1>
         <p className="text-muted-foreground">
-          Current plan: {dashboard ? PLAN_LABELS[dashboard.plan] : '-'}
+          Current plan: <span className="font-medium text-foreground">{dashboard ? PLAN_LABELS[dashboard.plan] : '-'}</span>
         </p>
       </div>
 
       {error && <p className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">{error}</p>}
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {sortedPlans.map((plan) => (
-          <Card key={plan.plan} className={dashboard?.plan === plan.plan ? 'border-primary/50' : ''}>
-            <CardHeader>
-              <CardTitle>{PLAN_LABELS[plan.plan]}</CardTitle>
-              <CardDescription>${plan.monthly_price_usd}/month</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2 text-sm text-muted-foreground">
-              <p>{plan.rendered_emails_limit.toLocaleString()} renders/month</p>
-              <p>{formatBytes(plan.storage_limit_bytes)} storage</p>
-            </CardContent>
-            <CardFooter>
+      {dashboard && (
+        <>
+          <div className="grid gap-4 md:grid-cols-3">
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">Rendered Emails</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-2xl font-semibold">
+                  {dashboard.rendered_emails_count.toLocaleString()}
+                  <span className="text-sm font-normal text-muted-foreground">
+                    {' '}/ {dashboard.rendered_emails_limit.toLocaleString()}
+                  </span>
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">Storage Used</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-2xl font-semibold">
+                  {formatBytes(dashboard.storage_used_bytes)}
+                  <span className="text-sm font-normal text-muted-foreground">
+                    {' '}/ {formatBytes(dashboard.storage_limit_bytes)}
+                  </span>
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">Organizations</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-2xl font-semibold">{dashboard.organizations_count}</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="flex gap-3">
+            {dashboard.stripe_subscription_id ? (
               <Button
-                className="w-full"
-                variant={dashboard?.plan === plan.plan ? 'secondary' : 'default'}
-                disabled={busyPlan === plan.plan}
-                onClick={() => {
-                  void handleSubscribe(plan.plan);
-                }}
+                onClick={() => { void handleManageSubscription(); }}
+                disabled={portalBusy}
               >
-                {dashboard?.plan === plan.plan
-                  ? 'Current plan'
-                  : busyPlan === plan.plan
-                    ? 'Processing...'
-                    : 'Switch'}
+                {portalBusy ? 'Opening...' : 'Manage subscription'}
               </Button>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
+            ) : (
+              <Button asChild>
+                <a href="/pricing">View plans</a>
+              </Button>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

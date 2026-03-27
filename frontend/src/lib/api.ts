@@ -13,6 +13,9 @@ import type {
   EmailBackgroundStyle,
   ThemeMode,
   GalleryTemplatesResponse,
+  GuestCheckoutResponse,
+  MagicLinkResponse,
+  BillingPortalResponse,
 } from '../types/api';
 
 const BASE_URL = import.meta.env.VITE_API_URL || '/api';
@@ -142,5 +145,22 @@ export const api = {
     request<SubscribeResponse>('/site/billing/subscribe', {
       method: 'POST',
       body: JSON.stringify({ plan }),
+    }, token),
+
+  guestCheckout: (plan: string) =>
+    request<GuestCheckoutResponse>('/billing/guest-checkout', {
+      method: 'POST',
+      body: JSON.stringify({ plan }),
+    }),
+
+  sendMagicLink: (email: string) =>
+    request<MagicLinkResponse>('/auth/magic-link', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    }),
+
+  billingPortal: (token: string) =>
+    request<BillingPortalResponse>('/site/billing/portal', {
+      method: 'POST',
     }, token),
 };

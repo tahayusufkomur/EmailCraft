@@ -18,6 +18,8 @@ class Plan(models.Model):
     max_media_files_per_upload = models.PositiveIntegerField(default=5)
     is_default = models.BooleanField(default=False, help_text='New orgs get this plan when no plan is specified.')
     sort_order = models.PositiveIntegerField(default=0)
+    stripe_price_id = models.CharField(max_length=120, blank=True, null=True)
+    stripe_product_id = models.CharField(max_length=120, blank=True, null=True)
 
     class Meta:
         db_table = 'plans'
@@ -188,6 +190,35 @@ class Session(models.Model):
     @staticmethod
     def generate_token():
         return f"sess_{secrets.token_hex(32)}"
+
+    @staticmethod
+    def hash_token(raw_token):
+        return hashlib.sha256(raw_token.encode()).hexdigest()
+
+
+class MagicLink(models.Model):
+    email = models.EmailField(db_index=True)
+    token_hash = models.CharField(max_length=64, unique=True, db_index=True)
+    expires_at = models.DateTimeField()
+    used_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'magic_links'
+        indexes = [
+            models.Index(fields=['expires_at']),
+        ]
+
+    def __str__(self):
+        return f"MagicLink {self.email} (expires {self.expires_at})"
+
+    @property
+    def is_expired(self):
+        return timezone.now() >= self.expires_at
+
+    @property
+    def is_used(self):
+        return self.used_at is not None
 
     @staticmethod
     def hash_token(raw_token):

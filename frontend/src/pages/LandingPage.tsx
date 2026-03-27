@@ -32,7 +32,7 @@ export function LandingPage() {
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Button asChild size="lg">
-              <Link to="/register">
+              <Link to="/login">
                 Start free
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>

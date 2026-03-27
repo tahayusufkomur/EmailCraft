@@ -14,6 +14,7 @@ PUBLIC_PATHS = [
     '/api/v1/pages/pricing',
     '/api/v1/pages/subscribe',
     '/api/v1/billing/stripe/webhook',
+    '/api/v1/billing/guest-checkout',
 ]
 
 # Paths that are internal Django paths

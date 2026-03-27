@@ -1,6 +1,7 @@
 from django.urls import path
 
 from core.site_views import (
+    site_billing_portal,
     site_dashboard,
     site_login,
     site_logout,
@@ -29,5 +30,6 @@ urlpatterns = [
     path('templates/', site_templates, name='site-templates'),
     path('templates/<uuid:template_id>/', site_template_detail, name='site-template-detail'),
     path('billing/subscribe', site_subscribe, name='site-billing-subscribe'),
+    path('billing/portal', site_billing_portal, name='site-billing-portal'),
     path('provision', site_provision, name='site-provision'),
 ]

@@ -161,3 +161,15 @@ export interface SubscribeResponse {
   checkout_url?: string;
   session_id?: string;
 }
+
+export interface GuestCheckoutResponse {
+  checkout_url: string;
+}
+
+export interface MagicLinkResponse {
+  status: string;
+}
+
+export interface BillingPortalResponse {
+  portal_url: string;
+}

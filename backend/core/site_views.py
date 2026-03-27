@@ -444,10 +444,18 @@ def site_provision(request):
             if existing_membership:
                 org = existing_membership.organization
                 account = account_for_org(org)
-                # Return existing org without creating a new API key.
-                # The caller should already have a key stored from the
-                # first provision call. If they lost it, they can create
-                # a new one via the API keys endpoint.
+
+                # Create a fresh live key so the caller can recover if they
+                # lost the original one (e.g. tenant DB was reset).
+                raw_key = ApiKey.generate_key(environment='live')
+                api_key = ApiKey.objects.create(
+                    org=org,
+                    key_hash=ApiKey.hash_key(raw_key),
+                    key_prefix=raw_key[:12],
+                    environment='live',
+                    scope='full',
+                )
+
                 return Response(
                     {
                         'organization': {
@@ -455,7 +463,11 @@ def site_provision(request):
                             'name': org.name,
                             'plan': account.plan_slug if account else 'free',
                         },
-                        'api_key': None,
+                        'api_key': {
+                            'raw': raw_key,
+                            'prefix': api_key.key_prefix,
+                            'environment': api_key.environment,
+                        },
                     },
                     status=status.HTTP_200_OK,
                 )
@@ -502,3 +514,48 @@ def site_provision(request):
         },
         status=status.HTTP_201_CREATED,
     )
+
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
+def site_billing_portal(request):
+    """POST /api/v1/site/billing/portal — create Stripe billing portal session."""
+    import stripe
+    from django.conf import settings
+    from core.views import _get_base_url
+
+    account = account_for_user(request.user)
+    if not account:
+        return Response(
+            {'error': {'code': 'NO_ACCOUNT', 'message': 'No billing account found.'}},
+            status=status.HTTP_404_NOT_FOUND,
+        )
+
+    if not account.stripe_customer_id:
+        return Response(
+            {'error': {'code': 'NO_STRIPE_CUSTOMER', 'message': 'No Stripe customer linked. Subscribe to a plan first.'}},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    if not settings.STRIPE_API_KEY:
+        return Response(
+            {'error': {'code': 'STRIPE_NOT_CONFIGURED', 'message': 'Stripe is not configured.'}},
+            status=status.HTTP_503_SERVICE_UNAVAILABLE,
+        )
+
+    stripe.api_key = settings.STRIPE_API_KEY
+
+    try:
+        base_url = _get_base_url()
+        portal_session = stripe.billing_portal.Session.create(
+            customer=account.stripe_customer_id,
+            return_url=f'{base_url}/dashboard/billing',
+        )
+    except stripe.error.StripeError as exc:
+        return Response(
+            {'error': {'code': 'STRIPE_PORTAL_ERROR', 'message': str(exc)}},
+            status=status.HTTP_502_BAD_GATEWAY,
+        )
+
+    return Response({'portal_url': portal_session.url})

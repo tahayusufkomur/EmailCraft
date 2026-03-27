@@ -205,3 +205,11 @@ class SiteDashboardSerializer(serializers.Serializer):
     storage_limit_bytes = serializers.IntegerField()
     organizations_count = serializers.IntegerField()
     stripe_subscription_id = serializers.CharField(allow_null=True)
+
+
+class GuestCheckoutSerializer(serializers.Serializer):
+    plan = serializers.CharField(max_length=50)
+
+
+class MagicLinkRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
