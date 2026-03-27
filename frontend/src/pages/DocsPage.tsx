@@ -179,9 +179,15 @@ Content-Type: application/json
   }
 }`}</Code>
               <p>
-                The new organization inherits the plan of your billing organization.
+                The new organization inherits the plan of your billing account.
                 A test key is also created automatically.
                 Use the returned <InlineCode>api_key.raw</InlineCode> value to embed the builder or call the REST API.
+                <strong className="text-foreground"> Store the raw key securely — it is shown only once.</strong>
+              </p>
+              <p>
+                This endpoint is <strong className="text-foreground">idempotent</strong>: if an organization with the same name already exists for your account,
+                it returns the existing org with <InlineCode>api_key: null</InlineCode> (no new key is created).
+                This prevents duplicate organizations and API keys from concurrent calls.
               </p>
             </Subsection>
 
@@ -243,39 +249,59 @@ Content-Type: application/json
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">
-                    <tr><td className="py-2 pr-4"><InlineCode>apiKey</InlineCode></td><td className="py-2 pr-4">string</td><td className="py-2">Required. Your organization API key.</td></tr>
+                    <tr><td className="py-2 pr-4"><InlineCode>apiKey</InlineCode></td><td className="py-2 pr-4">string</td><td className="py-2">Your organization API key. Required unless using sessionToken.</td></tr>
+                    <tr><td className="py-2 pr-4"><InlineCode>sessionToken</InlineCode></td><td className="py-2 pr-4">string</td><td className="py-2">Session token (recommended for production). Use instead of apiKey.</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>showLogo</InlineCode></td><td className="py-2 pr-4">boolean</td><td className="py-2">Show/hide the MailCraft logo. Default: true.</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>showExportHtmlButton</InlineCode></td><td className="py-2 pr-4">boolean</td><td className="py-2">Show/hide the Export HTML button. Default: true.</td></tr>
+                    <tr><td className="py-2 pr-4"><InlineCode>themeMode</InlineCode></td><td className="py-2 pr-4">string</td><td className="py-2">Color mode: light, dark, or system.</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>builderTheme</InlineCode></td><td className="py-2 pr-4">string</td><td className="py-2">One of: light-breeze, light-paper, dark-slate, dark-cosmos.</td></tr>
+                    <tr><td className="py-2 pr-4"><InlineCode>chromeColor</InlineCode></td><td className="py-2 pr-4">string</td><td className="py-2">Custom hex color for the builder chrome/toolbar area.</td></tr>
+                    <tr><td className="py-2 pr-4"><InlineCode>canvasColor</InlineCode></td><td className="py-2 pr-4">string</td><td className="py-2">Custom hex color for the editor canvas background.</td></tr>
                   </tbody>
                 </table>
               </div>
             </Subsection>
 
             <Subsection title="React example">
-              <Code>{`import { useEffect, useRef } from 'react';
+              <Code>{`import { useEffect, useRef, useState } from 'react';
 
-export function EmailBuilder({ apiKey, onSave }) {
-  const ref = useRef(null);
+export function EmailBuilder({ sessionToken, onTemplateSaved }) {
+  const iframeRef = useRef(null);
 
   useEffect(() => {
     const handle = (e) => {
       if (e.data?.source !== 'mailcraft') return;
-      if (e.data.type === 'MAILCRAFT_SAVE') {
-        onSave(e.data.payload.html, e.data.payload.json);
+
+      if (e.data.type === 'MAILCRAFT_TEMPLATE_SAVED') {
+        // Template was saved to backend — you now have the ID
+        onTemplateSaved({
+          templateId: e.data.payload.templateId,
+          templateName: e.data.payload.templateName,
+        });
       }
     };
     window.addEventListener('message', handle);
     return () => window.removeEventListener('message', handle);
-  }, [onSave]);
+  }, [onTemplateSaved]);
+
+  // Programmatically trigger a save (e.g., before sending an email)
+  const requestSave = () => {
+    iframeRef.current?.contentWindow?.postMessage(
+      { source: 'mailcraft-host', type: 'MAILCRAFT_REQUEST_SAVE' },
+      '${DOMAIN}'
+    );
+  };
 
   return (
-    <iframe
-      ref={ref}
-      src={\`${DOMAIN}/builder/?apiKey=\${apiKey}\`}
-      style={{ width: '100%', height: '800px', border: 'none' }}
-      allow="clipboard-write"
-    />
+    <>
+      <iframe
+        ref={iframeRef}
+        src={\`${DOMAIN}/builder/?sessionToken=\${sessionToken}\`}
+        style={{ width: '100%', height: '800px', border: 'none' }}
+        allow="clipboard-write"
+      />
+      <button onClick={requestSave}>Save & Continue</button>
+    </>
   );
 }`}</Code>
             </Subsection>
@@ -301,7 +327,8 @@ export function EmailBuilder({ apiKey, onSave }) {
                   <tbody className="divide-y divide-border">
                     <tr><td className="py-2 pr-4"><InlineCode>MAILCRAFT_READY</InlineCode></td><td className="py-2 pr-4">{'{}'}</td><td className="py-2">Builder has loaded and is ready to receive commands.</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>MAILCRAFT_SAVE</InlineCode></td><td className="py-2 pr-4">{'{ html, json }'}</td><td className="py-2">User clicked Save. Contains rendered HTML and template JSON.</td></tr>
-                    <tr><td className="py-2 pr-4"><InlineCode>MAILCRAFT_AUTO_SAVE</InlineCode></td><td className="py-2 pr-4">{'{ html, json }'}</td><td className="py-2">Periodic auto-save with current state.</td></tr>
+                    <tr><td className="py-2 pr-4"><InlineCode>MAILCRAFT_TEMPLATE_SAVED</InlineCode></td><td className="py-2 pr-4">{'{ templateId, templateName }'}</td><td className="py-2">Template was persisted to the backend (new or updated). Use this to get the template ID for the render API.</td></tr>
+                    <tr><td className="py-2 pr-4"><InlineCode>MAILCRAFT_AUTO_SAVE</InlineCode></td><td className="py-2 pr-4">{'{ json }'}</td><td className="py-2">Periodic auto-save with current template JSON (debounced).</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>MAILCRAFT_ERROR</InlineCode></td><td className="py-2 pr-4">{'{ code, message }'}</td><td className="py-2">An error occurred (e.g., export failure).</td></tr>
                   </tbody>
                 </table>
@@ -319,9 +346,10 @@ export function EmailBuilder({ apiKey, onSave }) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">
-                    <tr><td className="py-2 pr-4"><InlineCode>MAILCRAFT_INIT</InlineCode></td><td className="py-2 pr-4">{'{ apiKey, variables?, templateJson?, context? }'}</td><td className="py-2">Initialize with config. Can pass an initial template.</td></tr>
+                    <tr><td className="py-2 pr-4"><InlineCode>MAILCRAFT_INIT</InlineCode></td><td className="py-2 pr-4">{'{ apiKey, variables?, templateJson?, context? }'}</td><td className="py-2">Initialize with config. Can pass an initial template and theme overrides.</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>MAILCRAFT_LOAD_TEMPLATE</InlineCode></td><td className="py-2 pr-4">{'{ json }'}</td><td className="py-2">Load a template JSON into the editor.</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>MAILCRAFT_EXPORT</InlineCode></td><td className="py-2 pr-4">{'{}'}</td><td className="py-2">Trigger an export. Result comes back as MAILCRAFT_SAVE.</td></tr>
+                    <tr><td className="py-2 pr-4"><InlineCode>MAILCRAFT_REQUEST_SAVE</InlineCode></td><td className="py-2 pr-4">{'{}'}</td><td className="py-2">Request the builder to save the current template. Result comes back as MAILCRAFT_TEMPLATE_SAVED.</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -360,6 +388,7 @@ curl ${DOMAIN}/api/v1/templates \\
                     <tr><td className="py-2 pr-4">GET</td><td className="py-2 pr-4"><InlineCode>{'/templates/{id}'}</InlineCode></td><td className="py-2">Get a single template with full JSON data.</td></tr>
                     <tr><td className="py-2 pr-4">PUT</td><td className="py-2 pr-4"><InlineCode>{'/templates/{id}'}</InlineCode></td><td className="py-2">Update a template.</td></tr>
                     <tr><td className="py-2 pr-4">DELETE</td><td className="py-2 pr-4"><InlineCode>{'/templates/{id}'}</InlineCode></td><td className="py-2">Delete a template.</td></tr>
+                    <tr><td className="py-2 pr-4">GET</td><td className="py-2 pr-4"><InlineCode>{'/templates/{id}/preview'}</InlineCode></td><td className="py-2">Get rendered HTML preview with default variable values. Does not count against render quota.</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -521,10 +550,23 @@ Content-Type: application/json
 }`}</Code>
             </Subsection>
 
+            <Subsection title="Inserting variables in the builder">
+              <p>
+                Click the <strong className="text-foreground">{'{{ }} Variables'}</strong> button in the top toolbar to insert a variable
+                at the cursor position in any focused field — rich text editors, heading inputs, button text, URLs, or any other text field.
+                The dropdown shows all variables configured for the organization.
+              </p>
+            </Subsection>
+
             <Subsection title="Variable key rules">
               <p>
                 Keys must match <InlineCode>{'[A-Za-z_][A-Za-z0-9_]*'}</InlineCode> — letters, digits, and underscores only,
                 starting with a letter or underscore. Examples: <InlineCode>user_name</InlineCode>, <InlineCode>company_logo_url</InlineCode>.
+              </p>
+              <p>
+                Whitespace inside braces is tolerated: <InlineCode>{'{{ user_name }}'}</InlineCode> and <InlineCode>{'{{user_name}}'}</InlineCode> are
+                both valid and treated identically. Variables are substituted <strong className="text-foreground">recursively in every string field</strong> of the
+                template JSON, regardless of block type.
               </p>
             </Subsection>
 
@@ -537,7 +579,25 @@ Content-Type: application/json
     "company_name": "Acme Inc"
   }
 }
-// Missing variables → 400 error with list of missing keys`}</Code>
+// Missing variables → 400 error with list of missing keys
+// Variable values are HTML-escaped to prevent injection`}</Code>
+            </Subsection>
+
+            <Subsection title="Configuring variables via API">
+              <p>
+                Set available variables for an organization by updating its settings.
+                These appear in the builder's variable dropdown for users of that organization.
+              </p>
+              <Code>{`PATCH /api/v1/site/organizations/{id}/
+Authorization: Token <site_token>
+Content-Type: application/json
+
+{
+  "available_variables": [
+    { "key": "Name", "label": "Student Name", "defaultValue": "Student", "type": "text" },
+    { "key": "unsubscribe_url", "label": "Unsubscribe Link", "type": "url" }
+  ]
+}`}</Code>
             </Subsection>
           </Section>
 
