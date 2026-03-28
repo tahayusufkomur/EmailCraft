@@ -37,7 +37,6 @@ from core.models import ApiKey
 from core.views import subscribe_account_to_plan
 from templates_api.models import Template
 from templates_api.serializers import (
-    GalleryTemplateSerializer,
     TemplateCreateSerializer,
     TemplateDetailSerializer,
     TemplateListSerializer,
@@ -332,7 +331,7 @@ def site_templates(request):
         )
 
     if request.method == 'GET':
-        queryset = Template.objects.visible_to_org(org)
+        queryset = Template.objects.for_org(org)
         serializer = TemplateListSerializer(queryset, many=True)
         return Response({'results': serializer.data})
 
@@ -340,24 +339,6 @@ def site_templates(request):
     serializer.is_valid(raise_exception=True)
     template = serializer.save(org=org, is_gallery=False)
     return Response(TemplateDetailSerializer(template).data, status=status.HTTP_201_CREATED)
-
-
-@api_view(['GET'])
-@authentication_classes([TokenAuthentication, SessionAuthentication])
-@permission_classes([IsAuthenticated])
-def site_gallery(request):
-    account = account_for_user(request.user)
-    queryset = Template.objects.shared()
-
-    category = request.query_params.get('category')
-    if category:
-        queryset = queryset.filter(category=category)
-
-    if not account or account.plan_slug == 'free':
-        queryset = queryset.filter(is_premium=False)
-
-    serializer = GalleryTemplateSerializer(queryset, many=True)
-    return Response({'data': serializer.data})
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -371,7 +352,7 @@ def site_template_detail(request, template_id):
             status=status.HTTP_404_NOT_FOUND,
         )
 
-    template = Template.objects.visible_to_org(org).filter(id=template_id).first()
+    template = Template.objects.for_org(org).filter(id=template_id).first()
     if not template:
         return Response(
             {'error': {'code': 'TEMPLATE_NOT_FOUND', 'message': 'Template not found.'}},
@@ -381,19 +362,20 @@ def site_template_detail(request, template_id):
     if request.method == 'GET':
         return Response(TemplateDetailSerializer(template).data)
 
-    if template.org_id != org.id:
-        return Response(
-            {'error': {'code': 'FORBIDDEN', 'message': 'Provided templates are read-only.'}},
-            status=status.HTTP_403_FORBIDDEN,
-        )
-
     if request.method == 'DELETE':
         template.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+    # PUT
+    if template.is_locked:
+        return Response(
+            {'error': {'code': 'TEMPLATE_LOCKED', 'message': 'This template is locked. Upgrade your plan to edit it.'}},
+            status=status.HTTP_403_FORBIDDEN,
+        )
+
     serializer = TemplateCreateSerializer(template, data=request.data, partial=True)
     serializer.is_valid(raise_exception=True)
-    serializer.save(org=org, is_gallery=False)
+    serializer.save(org=org, is_gallery=False, is_modified=True)
     return Response(TemplateDetailSerializer(template).data)
 
 
