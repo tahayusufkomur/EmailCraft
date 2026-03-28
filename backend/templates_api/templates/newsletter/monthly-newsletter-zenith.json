@@ -1,10 +1,13 @@
 {
   "name": "Monthly Newsletter — Zenith",
   "category": "newsletter",
+  "tags": [
+    "newsletter"
+  ],
   "template": {
     "version": 1,
     "settings": {
-      "backgroundColor": "#f9faf8",
+      "backgroundColor": "#0a1a16",
       "backgroundStyle": "none",
       "bodyBackgroundStyle": "solid",
       "bodyBackgroundColor": "#ffffff",
@@ -20,7 +23,7 @@
           "id": "nl-h1",
           "type": "heading",
           "data": {
-            "text": "THE BREATHABLE CANVAS",
+            "text": "ZENITH FLOW",
             "level": 3
           },
           "style": {
@@ -31,8 +34,8 @@
               "left": 32
             },
             "alignment": "center",
-            "color": "#406660",
-            "fontSize": 14,
+            "color": "#5ee8c5",
+            "fontSize": 13,
             "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
             "fontWeight": 700,
             "letterSpacing": 4,
@@ -48,30 +51,34 @@
           "type": "hero",
           "data": {
             "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCQKETTiXno_IOiIhAd_bYgw0UKBVaWWTmq5qVR125dOJhShJbr09b9iOGy73bQD9-CErwriMXzpx3n_GYQdF49IO1Wq0WglQF14iVm79K4rjYKTBbmiAYt1Qpf-XnAZDdnn7Gk-u5DiF3WZqzJqMZR034bRoMNJOG0Y0TC_0-XB1c2X_CQ2Kvf72XgD8egqawmTfyKfy2q_ZW4EySL5RhWxGtEzIJkJBZnRXTVLEpaqS2pH2hJklta9vyhYl2EsqIPRLFafKTJhW50",
-            "heading": "Zenith Monthly: Find Your Balance",
-            "subheading": "Your monthly sanctuary exploring the delicate intersection of rest, breath, and groundedness.",
+            "heading": "The Zenith Journal",
+            "subheading": "Mindful living, monthly inspiration — March 2025",
+            "showButton": false,
             "buttonText": "",
             "buttonUrl": ""
           },
           "style": {
+            "height": 360,
+            "overlayColor": "#0a1a16",
+            "overlayOpacity": 0.55,
+            "headingColor": "#e8f5f0",
+            "headingFontSize": 36,
+            "headingFontWeight": 700,
+            "headingFontFamily": "'Noto Serif', Georgia, serif",
+            "subheadingColor": "#7a9e93",
+            "buttonBackgroundColor": "#5ee8c5",
+            "buttonTextColor": "#0a1a16",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 13,
+            "buttonFontWeight": 700,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "contentAlignment": "center",
             "padding": {
               "top": 0,
               "right": 0,
               "bottom": 0,
               "left": 0
-            },
-            "height": 500,
-            "overlayColor": "#f9faf8",
-            "overlayOpacity": 0.75,
-            "headingColor": "#2e3432",
-            "headingFontSize": 34,
-            "headingFontFamily": "'Noto Serif', Georgia, serif",
-            "subheadingColor": "#5a605e",
-            "buttonBackgroundColor": "#406660",
-            "buttonTextColor": "#e2fff9",
-            "buttonBorderRadius": 50,
-            "contentAlignment": "left",
-            "verticalAlignment": "bottom"
+            }
           }
         },
         {
@@ -84,71 +91,23 @@
         },
         {
           "id": "nl-b3",
-          "type": "columns",
+          "type": "heading",
           "data": {
-            "columnCount": 2,
-            "columnRatio": [
-              50,
-              50
-            ],
-            "columns": [
-              {
-                "id": "nl-c1",
-                "blocks": [
-                  {
-                    "id": "nl-c1b1",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0 0 8px;\"><span style=\"display:inline-block;padding:2px 8px;background:#c5ebdd;color:#24453c;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;\">Wellness</span></p><h3 style=\"margin:0 0 6px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#2e3432;\">5 Poses for Better Sleep</h3><p style=\"margin:0 0 8px;font-size:13px;color:#5a605e;line-height:1.6;\">Discover how restorative asanas can prepare your nervous system for deep rest.</p><a href=\"#\" style=\"color:#406660;font-size:13px;font-weight:600;\">Explore Poses →</a>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 12,
-                        "bottom": 16,
-                        "left": 0
-                      }
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "nl-c2",
-                "blocks": [
-                  {
-                    "id": "nl-c2b1",
-                    "type": "image",
-                    "data": {
-                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuDrdVzT0VzWV2bLjjsDJnIKiHvGmGfy5_WiNRaWi47RWJkomIA2sNZKrBLzYgexSByx4MgE-qIu1fUiervslttgDEkcDZ78gnzvZhk1IIQa5uvEy7sHK71Sy7qSgBo2ImgFWUYr8v60kZvFRB3o-J7iK1JBD-axvQo8Jz6wTr6-0LgJhXys-sNWxMXDrDfHzjQp00DFuEu6tuTxrjbRcapFMsER3qG-QbcaBhfvjGbFj1l2bRxUJgIDM08c4c42fQSV6sU-0sgAwAbN",
-                      "alt": "Sleeping yoga",
-                      "width": 260
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 0,
-                        "left": 0
-                      },
-                      "alignment": "center",
-                      "borderRadius": 12,
-                      "fullWidth": false
-                    }
-                  }
-                ]
-              }
-            ]
+            "text": "Featured This Month",
+            "level": 2
           },
           "style": {
+            "fontSize": 26,
+            "fontWeight": 700,
+            "fontFamily": "'Noto Serif', Georgia, serif",
+            "color": "#2e3432",
+            "alignment": "center",
             "padding": {
-              "top": 0,
-              "right": 24,
-              "bottom": 0,
-              "left": 24
-            },
-            "gap": 16,
-            "stackOnMobile": true
+              "top": 8,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
           }
         },
         {
@@ -156,7 +115,7 @@
           "type": "spacer",
           "data": {},
           "style": {
-            "height": 16
+            "height": 8
           }
         },
         {
@@ -164,21 +123,18 @@
           "type": "columns",
           "data": {
             "columnCount": 2,
-            "columnRatio": [
-              50,
-              50
-            ],
+            "columnRatio": [50, 50],
             "columns": [
               {
-                "id": "nl-c3",
+                "id": "nl-b5-c1",
                 "blocks": [
                   {
-                    "id": "nl-c3b1",
+                    "id": "nl-b5-c1-img",
                     "type": "image",
                     "data": {
-                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCxenewmqkyHogpeR0tQFjclo8Om3JwKA1X3j78UYINTa0wiE1r6LMl9bq3ofpnD3DVV-O8sCrVm0M3ObvIPNhBm8tIx4xA0jIJ9QE2AIZicwXeBb27RbwOpFiAJGsYxRyPE3YOZDFlBGZ_WdTMIoaIxL7qCLc1D39ru_RTWcal8ql6JO7FXHnJ6TI_reZsZbd1FePeAYpqKCN_pJtBB-LvUjer8lKgKQBhTooZA0nZMB-wLSbCH4PKHYxFbTPQJeg3NrPSbAawEQzL",
-                      "alt": "Breathwork",
-                      "width": 260
+                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuDrdVzT0VzWV2bLjjsDJnIKiHvGmGfy5_WiNRaWi47RWJkomIA2sNZKrBLzYgexSByx4MgE-qIu1fUiervslttgDEkcDZ78gnzvZhk1IIQa5uvEy7sHK71Sy7qSgBo2ImgFWUYr8v60kZvFRB3o-J7iK1JBD-axvQo8Jz6wTr6-0LgJhXys-sNWxMXDrDfHzjQp00DFuEu6tuTxrjbRcapFMsER3qG-QbcaBhfvjGbFj1l2bRxUJgIDM08c4c42fQSV6sU-0sgAwAbN",
+                      "alt": "Morning ritual",
+                      "width": 280
                     },
                     "style": {
                       "padding": {
@@ -189,27 +145,67 @@
                       },
                       "alignment": "center",
                       "borderRadius": 12,
-                      "fullWidth": false
+                      "fullWidth": true
                     }
                   }
                 ]
               },
               {
-                "id": "nl-c4",
+                "id": "nl-b5-c2",
                 "blocks": [
                   {
-                    "id": "nl-c4b1",
-                    "type": "text",
+                    "id": "nl-b5-c2-card",
+                    "type": "card",
                     "data": {
-                      "html": "<p style=\"margin:0 0 8px;\"><span style=\"display:inline-block;padding:2px 8px;background:#c5ebdd;color:#24453c;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;\">Mindfulness</span></p><h3 style=\"margin:0 0 6px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#2e3432;\">The Benefits of Breathwork</h3><p style=\"margin:0 0 8px;font-size:13px;color:#5a605e;line-height:1.6;\">Pranayama is more than breathing — it is the mastery of vital energy.</p><a href=\"#\" style=\"color:#406660;font-size:13px;font-weight:600;\">Learn the Technique →</a>",
-                      "variables": []
+                      "showIcon": false,
+                      "iconMode": "emoji",
+                      "iconEmoji": "",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "heading": "The Art of Morning Ritual",
+                      "body": "How the first 30 minutes of your day shape everything that follows.",
+                      "showButton": true,
+                      "buttonText": "Read More →",
+                      "buttonUrl": "#",
+                      "showBadge": true,
+                      "badgeText": "FEATURE"
                     },
                     "style": {
+                      "backgroundColor": "#e8f5f0",
+                      "borderRadius": 12,
+                      "borderWidth": 0,
+                      "borderColor": "#e8f5f0",
+                      "borderStyle": "solid",
+                      "headingColor": "#2e3432",
+                      "headingFontSize": 18,
+                      "headingFontWeight": 700,
+                      "headingFontFamily": "'Noto Serif', Georgia, serif",
+                      "bodyColor": "#5a605e",
+                      "bodyFontSize": 14,
+                      "bodyFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "badgeBackgroundColor": "#5ee8c5",
+                      "badgeTextColor": "#0a1a16",
+                      "badgeFontSize": 10,
+                      "badgeFontWeight": 700,
+                      "badgeLetterSpacing": 2,
+                      "buttonBackgroundColor": "#5ee8c5",
+                      "buttonTextColor": "#0a1a16",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontWeight": 700,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonPaddingX": 20,
+                      "buttonPaddingY": 10,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#5ee8c5",
+                      "buttonBorderWidth": 0,
+                      "contentAlignment": "center",
                       "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 16,
-                        "left": 12
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
                       }
                     }
                   }
@@ -218,14 +214,14 @@
             ]
           },
           "style": {
+            "gap": 16,
+            "stackOnMobile": true,
             "padding": {
               "top": 0,
-              "right": 24,
+              "right": 20,
               "bottom": 0,
-              "left": 24
-            },
-            "gap": 16,
-            "stackOnMobile": true
+              "left": 20
+            }
           }
         },
         {
@@ -238,102 +234,344 @@
         },
         {
           "id": "nl-b7",
-          "type": "card",
-          "data": {
-            "badge": "POSE OF THE MONTH",
-            "heading": "Yoga Pose of the Month: Tree Pose",
-            "body": "Vrksasana teaches us the beauty of balance. Even as the branches sway, the roots remain firm.",
-            "buttonText": "",
-            "buttonUrl": ""
-          },
+          "type": "divider",
+          "data": {},
           "style": {
+            "lineStyle": "solid",
+            "lineColor": "#5ee8c5",
+            "lineThickness": 2,
+            "spacing": 0,
             "padding": {
               "top": 0,
-              "right": 24,
+              "right": 32,
               "bottom": 0,
-              "left": 24
-            },
-            "backgroundColor": "#ebefec",
-            "borderRadius": 16,
-            "contentAlignment": "left",
-            "badgeBackgroundColor": "#ebefec",
-            "badgeTextColor": "#406660",
-            "badgeFontSize": 10,
-            "badgeFontWeight": 700,
-            "badgeLetterSpacing": 3,
-            "headingColor": "#2e3432",
-            "headingFontSize": 24,
-            "headingFontFamily": "'Noto Serif', Georgia, serif",
-            "headingFontWeight": 700,
-            "bodyColor": "#5a605e",
-            "bodyFontSize": 13,
-            "bodyFontFamily": "'Plus Jakarta Sans', Arial, sans-serif"
+              "left": 32
+            }
           }
         },
         {
-          "id": "nl-b7-list",
+          "id": "nl-b8",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 16
+          }
+        },
+        {
+          "id": "nl-b9",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [50, 50],
+            "columns": [
+              {
+                "id": "nl-b9-c1",
+                "blocks": [
+                  {
+                    "id": "nl-b9-c1-card",
+                    "type": "card",
+                    "data": {
+                      "showIcon": false,
+                      "iconMode": "emoji",
+                      "iconEmoji": "",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "heading": "Breathwork for Beginners",
+                      "body": "Simple techniques to calm your nervous system in under five minutes.",
+                      "showButton": true,
+                      "buttonText": "Read More →",
+                      "buttonUrl": "#",
+                      "showBadge": true,
+                      "badgeText": "GUIDE"
+                    },
+                    "style": {
+                      "backgroundColor": "#e8f5f0",
+                      "borderRadius": 12,
+                      "borderWidth": 0,
+                      "borderColor": "#e8f5f0",
+                      "borderStyle": "solid",
+                      "headingColor": "#2e3432",
+                      "headingFontSize": 18,
+                      "headingFontWeight": 700,
+                      "headingFontFamily": "'Noto Serif', Georgia, serif",
+                      "bodyColor": "#5a605e",
+                      "bodyFontSize": 14,
+                      "bodyFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "badgeBackgroundColor": "#5ee8c5",
+                      "badgeTextColor": "#0a1a16",
+                      "badgeFontSize": 10,
+                      "badgeFontWeight": 700,
+                      "badgeLetterSpacing": 2,
+                      "buttonBackgroundColor": "#5ee8c5",
+                      "buttonTextColor": "#0a1a16",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontWeight": 700,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonPaddingX": 20,
+                      "buttonPaddingY": 10,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#5ee8c5",
+                      "buttonBorderWidth": 0,
+                      "contentAlignment": "center",
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nl-b9-c2",
+                "blocks": [
+                  {
+                    "id": "nl-b9-c2-img",
+                    "type": "image",
+                    "data": {
+                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCxenewmqkyHogpeR0tQFjclo8Om3JwKA1X3j78UYINTa0wiE1r6LMl9bq3ofpnD3DVV-O8sCrVm0M3ObvIPNhBm8tIx4xA0jIJ9QE2AIZicwXeBb27RbwOpFiAJGsYxRyPE3YOZDFlBGZ_WdTMIoaIxL7qCLc1D39ru_RTWcal8ql6JO7FXHnJ6TI_reZsZbd1FePeAYpqKCN_pJtBB-LvUjer8lKgKQBhTooZA0nZMB-wLSbCH4PKHYxFbTPQJeg3NrPSbAawEQzL",
+                      "alt": "Breathwork",
+                      "width": 280
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "borderRadius": 12,
+                      "fullWidth": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 16,
+            "stackOnMobile": true,
+            "padding": {
+              "top": 0,
+              "right": 20,
+              "bottom": 0,
+              "left": 20
+            }
+          }
+        },
+        {
+          "id": "nl-b10",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 16
+          }
+        },
+        {
+          "id": "nl-b11",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#5ee8c5",
+            "lineThickness": 2,
+            "spacing": 0,
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 0,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "nl-b12",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 16
+          }
+        },
+        {
+          "id": "nl-b13",
+          "type": "heading",
+          "data": {
+            "text": "Pose of the Month",
+            "level": 2
+          },
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "fontFamily": "'Noto Serif', Georgia, serif",
+            "color": "#2e3432",
+            "alignment": "center",
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "nl-b14",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 8
+          }
+        },
+        {
+          "id": "nl-b15",
+          "type": "card",
+          "data": {
+            "showIcon": true,
+            "iconMode": "emoji",
+            "iconEmoji": "🧘",
+            "iconImageSrc": "",
+            "iconImageAlt": "",
+            "heading": "Warrior II — Virabhadrasana II",
+            "body": "A standing pose that builds strength, stability, and fierce concentration.",
+            "showButton": false,
+            "buttonText": "",
+            "buttonUrl": "",
+            "showBadge": true,
+            "badgeText": "INTERMEDIATE"
+          },
+          "style": {
+            "backgroundColor": "#132e27",
+            "borderRadius": 12,
+            "borderWidth": 0,
+            "borderColor": "#132e27",
+            "borderStyle": "solid",
+            "headingColor": "#e8f5f0",
+            "headingFontSize": 20,
+            "headingFontWeight": 700,
+            "headingFontFamily": "'Noto Serif', Georgia, serif",
+            "bodyColor": "#7a9e93",
+            "bodyFontSize": 14,
+            "bodyFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "badgeBackgroundColor": "#5ee8c5",
+            "badgeTextColor": "#0a1a16",
+            "badgeFontSize": 10,
+            "badgeFontWeight": 700,
+            "badgeLetterSpacing": 2,
+            "iconSize": 48,
+            "iconBorderRadius": 50,
+            "iconBackgroundColor": "#0a1a16",
+            "contentAlignment": "center",
+            "padding": {
+              "top": 32,
+              "right": 32,
+              "bottom": 32,
+              "left": 32
+            },
+            "margin": {
+              "top": 0,
+              "right": 20,
+              "bottom": 0,
+              "left": 20
+            }
+          }
+        },
+        {
+          "id": "nl-b16",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 8
+          }
+        },
+        {
+          "id": "nl-b17",
           "type": "list",
           "data": {
             "items": [
               {
-                "id": "nl-b7-list-1",
+                "id": "nl-b17-item1",
                 "icon": "✓",
-                "text": "Improves focus and concentration",
-                "subtitle": ""
+                "text": "Strengthens legs and ankles",
+                "subtitle": "Build stability from the ground up"
               },
               {
-                "id": "nl-b7-list-2",
+                "id": "nl-b17-item2",
                 "icon": "✓",
-                "text": "Strengthens thighs, calves, and ankles",
-                "subtitle": ""
+                "text": "Opens hips and chest",
+                "subtitle": "Create space and improve flexibility"
+              },
+              {
+                "id": "nl-b17-item3",
+                "icon": "✓",
+                "text": "Improves focus",
+                "subtitle": "Gaze over front hand, steady the mind"
               }
             ]
           },
           "style": {
             "padding": {
-              "top": 12,
+              "top": 24,
               "right": 24,
-              "bottom": 16,
+              "bottom": 24,
               "left": 24
             },
-            "backgroundColor": "#ebefec",
+            "backgroundColor": "#ffffff",
+            "borderRadius": 12,
             "iconSize": 14,
-            "iconColor": "#406660",
-            "textColor": "#5a605e",
-            "textFontSize": 13,
+            "iconColor": "#5ee8c5",
+            "textColor": "#2e3432",
+            "textFontSize": 14,
             "textFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "textFontWeight": 400,
+            "textFontWeight": 600,
             "subtitleColor": "#5a605e",
             "subtitleFontSize": 12,
-            "spacing": 8,
+            "subtitleFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "spacing": 12,
             "layout": "vertical",
-            "contentAlignment": "left"
+            "contentAlignment": "left",
+            "margin": {
+              "top": 0,
+              "right": 20,
+              "bottom": 0,
+              "left": 20
+            }
           }
         },
         {
-          "id": "nl-b8",
+          "id": "nl-b18",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
+          }
+        },
+        {
+          "id": "nl-b19",
           "type": "button",
           "data": {
-            "text": "Read Full Newsletter",
-            "url": "https://"
+            "text": "View Full Schedule →",
+            "url": "#"
           },
           "style": {
             "padding": {
               "top": 8,
-              "right": 32,
-              "bottom": 32,
-              "left": 32
+              "right": 24,
+              "bottom": 8,
+              "left": 24
             },
             "alignment": "center",
-            "backgroundColor": "#406660",
-            "color": "#e2fff9",
-            "borderRadius": 50,
+            "backgroundColor": "#5ee8c5",
+            "color": "#0a1a16",
+            "borderRadius": 999,
             "fullWidth": false,
-            "fontSize": 15,
+            "fontSize": 13,
             "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "fontWeight": 600,
-            "paddingX": 32,
-            "paddingY": 14
+            "fontWeight": 700,
+            "paddingX": 28,
+            "paddingY": 12
           }
         }
       ]
@@ -342,44 +580,56 @@
       "blocks": [
         {
           "id": "nl-f1",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#635f57;\"><a href=\"#\" style=\"color:#635f57;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">Privacy Policy</a></p>",
-            "variables": []
-          },
+          "type": "divider",
+          "data": {},
           "style": {
+            "lineStyle": "solid",
+            "lineColor": "#5ee8c5",
+            "lineThickness": 2,
+            "spacing": 0,
             "padding": {
               "top": 24,
               "right": 32,
               "bottom": 8,
               "left": 32
-            },
-            "alignment": "center",
-            "backgroundColor": "#f2f4f2"
+            }
           }
         },
         {
           "id": "nl-f2",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:11px;color:#5a605e;opacity:0.6;\">© 2024 The Breathable Canvas. All rights reserved.</p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;\"><a href=\"#\" style=\"color:#5a605e;text-decoration:none;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#5a605e;text-decoration:none;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#5a605e;text-decoration:underline;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#5a605e;text-decoration:underline;\">Privacy Policy</a></p>",
             "variables": []
           },
           "style": {
+            "alignment": "center",
             "padding": {
-              "top": 4,
+              "top": 8,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "nl-f3",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">© 2025 Zenith Flow. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "padding": {
+              "top": 0,
               "right": 32,
               "bottom": 24,
               "left": 32
-            },
-            "alignment": "center",
-            "backgroundColor": "#f2f4f2"
+            }
           }
         }
       ]
     }
-  },
-  "tags": [
-    "newsletter"
-  ]
+  }
 }
