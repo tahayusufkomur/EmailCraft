@@ -39,6 +39,12 @@ class Template(models.Model):
     tags = models.JSONField(default=list, blank=True)
     category = models.CharField(max_length=50, blank=True, choices=CATEGORY_CHOICES)
     is_draft = models.BooleanField(default=False)
+    source_template = models.ForeignKey(
+        'self', null=True, blank=True, on_delete=models.SET_NULL,
+        related_name='copies',
+    )
+    is_modified = models.BooleanField(default=False)
+    is_locked = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -50,6 +56,14 @@ class Template(models.Model):
             models.Index(fields=['org', 'created_at']),
             models.Index(fields=['is_gallery', 'category']),
             models.Index(fields=['is_gallery', 'is_premium'], name='tmpl_gallery_prem_idx'),
+            models.Index(fields=['org', 'source_template'], name='tmpl_org_source_idx'),
+        ]
+        constraints = [
+            models.UniqueConstraint(
+                fields=['org', 'source_template'],
+                condition=models.Q(source_template__isnull=False),
+                name='unique_org_source_template',
+            ),
         ]
         ordering = ['-updated_at']
 
