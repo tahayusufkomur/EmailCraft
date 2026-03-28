@@ -115,6 +115,8 @@ def site_register(request):
 
             UserOrganization.objects.create(user=user, organization=org, role='owner')
             Account.objects.create(user=user, plan=Plan.get_default())
+            from templates_api.services import provision_templates_for_org
+            provision_templates_for_org(org)
             token, _ = Token.objects.get_or_create(user=user)
     except IntegrityError:
         return Response(
@@ -210,6 +212,9 @@ def site_organizations(request):
             )
 
             UserOrganization.objects.create(user=request.user, organization=org, role='owner')
+
+            from templates_api.services import provision_templates_for_org
+            provision_templates_for_org(org)
 
             raw_key, created_key = ensure_reusable_test_api_key(org, refresh=False)
     except IntegrityError:
@@ -461,6 +466,9 @@ def site_provision(request):
             )
 
             UserOrganization.objects.create(user=request.user, organization=org, role='owner')
+
+            from templates_api.services import provision_templates_for_org
+            provision_templates_for_org(org)
 
             # Create live API key
             raw_key = ApiKey.generate_key(environment='live')

@@ -65,6 +65,10 @@ def _set_account_plan(account, plan_obj, stripe_subscription_id=_UNSET, stripe_c
             'updated_at',
         ]
     )
+    from core.models import UserOrganization
+    from templates_api.services import provision_templates_for_org
+    for membership in UserOrganization.objects.filter(user=account.user, role='owner').select_related('organization'):
+        provision_templates_for_org(membership.organization)
 
 
 def resolve_stripe_price_id(plan_obj):
@@ -160,6 +164,8 @@ def _ensure_user_has_org(user, email):
         email=org_email,
     )
     UserOrganization.objects.create(user=user, organization=org, role='owner')
+    from templates_api.services import provision_templates_for_org
+    provision_templates_for_org(org)
 
 
 def subscribe_account_to_plan(account, plan_key):
