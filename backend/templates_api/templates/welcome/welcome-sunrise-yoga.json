@@ -216,17 +216,88 @@
         },
         {
           "id": "sun-w-b5",
-          "type": "html",
+          "type": "columns",
           "data": {
-            "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td width=\"60%\" valign=\"top\" style=\"padding-right:8px;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#f0e6e1;border-radius:16px;overflow:hidden;\"><img src=\"https://lh3.googleusercontent.com/aida-public/AB6AXuC-GUDNRYDNOSlc_eSEPV8g7Toj_AmAH0TwSlKpEUTSdNeEAflW304Z1egdF9McW-qL8aAuDGC39jg1tKQe_3fAIOggju2ZXdOvtGpHN5QwWrDuFMkCBD1l7xajJfaSL8BLd2Ot-z-HF_iMCKbTaerU_6_N95za-fmp6y0coWdQU8c7UDtDx_SnprFrAtX7Z3yG3Awl4Mbtqmf-EkR-YWIqU2J_5OWmaFMhEOCDq4O-Ee9Iir57y6-xwrVcnBbO88OAkOeTW7fvC8Qm\" alt=\"Studio space\" width=\"100%\" style=\"display:block;width:100%;height:auto;border-radius:16px 16px 0 0;\"/><div style=\"padding:12px 16px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:14px;font-weight:700;color:#322e2b;\">Luminous Shala</div></td></tr></table></td><td width=\"40%\" valign=\"top\" style=\"padding-left:8px;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#fff1e8;border-radius:16px;padding:16px;text-align:center;font-style:italic;color:#6c5a00;font-size:13px;line-height:1.6;\">&quot;A breath of fresh air for your morning routine.&quot;</td></tr><tr><td style=\"height:12px;line-height:12px;font-size:0;\">&nbsp;</td></tr><tr><td style=\"background:#f7f1ed;border-radius:16px;overflow:hidden;\"><img src=\"https://lh3.googleusercontent.com/aida-public/AB6AXuANhUMxt61HLrteiGeNLUiP-zn2TQKPnx1FEVsgJ_u4AXTCNh9SqxMOCiBmE36OfV6uSOoeJ2sWUEcNtR9uAnYuGAF4MRu2cWY27OYCzcGUkgXfHjvhNjEMQAtikgE98eNDnEUuKBMsVKcVpQfh2cB7wkIo1LxK_up5MtSYNTFu_u7qz-l1c_bJfstuu3KhGCg46Sk-n7XtB6rGl5JoFW3dnEgXeHxk0Z26fb-TkJCtTwsBud3mPu4SzemF7_SH1qKZDX47TEoVFPvb\" alt=\"Yoga gear\" width=\"100%\" style=\"display:block;width:100%;height:auto;\"/><div style=\"padding:10px 12px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:#6a43b7;\">Sustainable Gear</div></td></tr></table></td></tr></table>"
+            "columnCount": 2,
+            "columnRatio": [60, 40],
+            "columns": [
+              {
+                "id": "sun-w-b5-c1",
+                "blocks": [
+                  {
+                    "id": "sun-w-b5-c1-img",
+                    "type": "image",
+                    "data": {
+                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuC-GUDNRYDNOSlc_eSEPV8g7Toj_AmAH0TwSlKpEUTSdNeEAflW304Z1egdF9McW-qL8aAuDGC39jg1tKQe_3fAIOggju2ZXdOvtGpHN5QwWrDuFMkCBD1l7xajJfaSL8BLd2Ot-z-HF_iMCKbTaerU_6_N95za-fmp6y0coWdQU8c7UDtDx_SnprFrAtX7Z3yG3Awl4Mbtqmf-EkR-YWIqU2J_5OWmaFMhEOCDq4O-Ee9Iir57y6-xwrVcnBbO88OAkOeTW7fvC8Qm",
+                      "alt": "Studio space"
+                    },
+                    "style": {
+                      "padding": {"top": 0, "right": 0, "bottom": 0, "left": 0},
+                      "borderRadius": 16,
+                      "maxWidth": "100%"
+                    }
+                  },
+                  {
+                    "id": "sun-w-b5-c1-label",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"margin:0;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:14px;font-weight:700;color:#322e2b;\">Luminous Shala</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {"top": 8, "right": 0, "bottom": 0, "left": 0}
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sun-w-b5-c2",
+                "blocks": [
+                  {
+                    "id": "sun-w-b5-c2-quote",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"text-align:center;font-style:italic;color:#6c5a00;font-size:13px;line-height:1.6;margin:0;\">\"A breath of fresh air for your morning routine.\"</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {"top": 16, "right": 16, "bottom": 16, "left": 16},
+                      "backgroundColor": "#fff1e8",
+                      "borderRadius": 16
+                    }
+                  },
+                  {
+                    "id": "sun-w-b5-c2-img",
+                    "type": "image",
+                    "data": {
+                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuANhUMxt61HLrteiGeNLUiP-zn2TQKPnx1FEVsgJ_u4AXTCNh9SqxMOCiBmE36OfV6uSOoeJ2sWUEcNtR9uAnYuGAF4MRu2cWY27OYCzcGUkgXfHjvhNjEMQAtikgE98eNDnEUuKBMsVKcVpQfh2cB7wkIo1LxK_up5MtSYNTFu_u7qz-l1c_bJfstuu3KhGCg46Sk-n7XtB6rGl5JoFW3dnEgXeHxk0Z26fb-TkJCtTwsBud3mPu4SzemF7_SH1qKZDX47TEoVFPvb",
+                      "alt": "Yoga gear"
+                    },
+                    "style": {
+                      "padding": {"top": 12, "right": 0, "bottom": 0, "left": 0},
+                      "borderRadius": 16,
+                      "maxWidth": "100%"
+                    }
+                  },
+                  {
+                    "id": "sun-w-b5-c2-label",
+                    "type": "text",
+                    "data": {
+                      "html": "<p style=\"margin:0;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:#6a43b7;\">Sustainable Gear</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {"top": 8, "right": 0, "bottom": 0, "left": 0}
+                    }
+                  }
+                ]
+              }
+            ]
           },
           "style": {
-            "padding": {
-              "top": 0,
-              "right": 32,
-              "bottom": 16,
-              "left": 32
-            }
+            "padding": {"top": 0, "right": 32, "bottom": 16, "left": 32},
+            "gap": 16,
+            "stackOnMobile": true
           }
         },
         {

@@ -383,22 +383,46 @@
           }
         },
         {
-          "id": "m2-b6",
+          "id": "m2-b6-label",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;font-family:'Work Sans',Arial,sans-serif;font-size:11px;color:#735c00;text-transform:uppercase;letter-spacing:2px;text-align:center;\">FEATURE ROAST</p><p style=\"margin:12px 0;font-family:'Noto Serif',Georgia,serif;font-size:22px;color:#1a1c1a;text-align:center;font-weight:700;\">Bean of the Month: Ethiopian Yirgacheffe</p><p style=\"margin:0 0 16px;font-family:'Noto Serif',Georgia,serif;font-size:15px;font-style:italic;color:#504442;text-align:center;line-height:1.6;\">\"A floral symphony with notes of jasmine, bergamot, and a whisper of dark honey.\"</p><p style=\"margin:0;font-size:13px;color:#504442;line-height:1.8;text-align:center;\">Region: Gedeo Zone, Yirgacheffe &bull; Altitude: 1,950–2,100m<br/>Process: Washed &bull; Varietal: Heirloom Ethiopian<br/>Roast: Light-Medium &bull; Cupping Score: 91</p>",
+            "html": "<p style=\"text-align:center;font-size:11px;color:#735c00;text-transform:uppercase;letter-spacing:2px;font-weight:500;\">FEATURE ROAST</p>",
             "variables": []
           },
+          "style": {"padding": {"top": 28, "right": 20, "bottom": 0, "left": 20}, "alignment": "center"}
+        },
+        {
+          "id": "m2-b6",
+          "type": "heading",
+          "data": {"text": "Bean of the Month: Ethiopian Yirgacheffe", "level": 2},
           "style": {
-            "padding": {
-              "top": 28,
-              "right": 32,
-              "bottom": 8,
-              "left": 32
-            },
+            "padding": {"top": 0, "right": 20, "bottom": 4, "left": 20},
             "alignment": "center",
-            "backgroundColor": "#faf9f6"
+            "color": "#1a1c1a",
+            "fontSize": 22,
+            "fontFamily": "'Noto Serif', Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none"
           }
+        },
+        {
+          "id": "m2-b6-quote",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"text-align:center;font-style:italic;color:#504442;font-size:15px;line-height:1.6;\">\"A floral symphony with notes of jasmine, bergamot, and a whisper of dark honey.\"</p>",
+            "variables": []
+          },
+          "style": {"padding": {"top": 0, "right": 20, "bottom": 8, "left": 20}, "alignment": "center"}
+        },
+        {
+          "id": "m2-b6-specs",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"text-align:center;font-size:13px;color:#504442;line-height:1.8;\">Region: Gedeo Zone, Yirgacheffe &bull; Altitude: 1,950–2,100m<br>Process: Washed &bull; Varietal: Heirloom Ethiopian<br>Roast: Light-Medium &bull; Cupping Score: 91</p>",
+            "variables": []
+          },
+          "style": {"padding": {"top": 0, "right": 32, "bottom": 8, "left": 32}, "alignment": "center"}
         },
         {
           "id": "m2-b7",

@@ -107,18 +107,89 @@
         },
         {
           "id": "re-b4",
-          "type": "text",
+          "type": "card",
           "data": {
-            "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding:16px 20px;background:#ebefec;border-radius:12px;\"><p style=\"margin:0 0 2px;\"><span style=\"display:inline-block;padding:2px 8px;background:#c5ebdd;color:#24453c;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;border-radius:2px;\">New Series</span></p><h4 style=\"margin:4px 0;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#406660;\">Lunar Yin &amp; Nidra</h4><p style=\"margin:0;font-size:13px;color:#5a605e;\">Restore your nervous system with candlelit deep stretching.</p></td></tr><tr><td style=\"height:8px;\"></td></tr><tr><td style=\"padding:16px 20px;background:#c2ebe3;border-radius:12px;text-align:center;\"><h4 style=\"margin:0 0 4px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#335853;\">Breathwork Foundations</h4><p style=\"margin:0;font-size:12px;color:#335853;\">Master the art of the conscious exhale.</p></td></tr><tr><td style=\"height:8px;\"></td></tr><tr><td style=\"padding:16px 20px;background:#f2f4f2;border-radius:12px;\"><h4 style=\"margin:0 0 4px;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#2e3432;\">Vinyasa Rhythm</h4><p style=\"margin:0;font-size:13px;color:#635f57;\">A fast-paced flow synchronized to melodic beats.</p></td></tr></table>",
-            "variables": []
+            "showIcon": false, "iconMode": "emoji", "iconEmoji": "✨", "iconImageSrc": "", "iconImageAlt": "",
+            "showBadge": true, "badgeText": "New Series",
+            "heading": "Lunar Yin & Nidra",
+            "body": "Restore your nervous system with candlelit deep stretching.",
+            "showButton": false, "buttonText": "", "buttonUrl": ""
           },
           "style": {
-            "padding": {
-              "top": 0,
-              "right": 24,
-              "bottom": 24,
-              "left": 24
-            }
+            "padding": {"top": 16, "right": 20, "bottom": 16, "left": 20},
+            "backgroundColor": "#ebefec",
+            "borderRadius": 12, "borderWidth": 0, "borderColor": "#e2e8f0", "borderStyle": "none",
+            "iconSize": 48, "iconBackgroundColor": "#eef2ff", "iconBorderRadius": 50,
+            "badgeBackgroundColor": "#c5ebdd", "badgeTextColor": "#24453c",
+            "headingColor": "#406660", "headingFontSize": 18, "headingFontFamily": "'Noto Serif', Georgia, serif", "headingFontWeight": 700,
+            "bodyColor": "#5a605e", "bodyFontSize": 13, "bodyFontFamily": "Arial, Helvetica, sans-serif",
+            "buttonBackgroundColor": "#4f46e5", "buttonTextColor": "#ffffff", "buttonBorderRadius": 6,
+            "buttonFontSize": 14, "buttonFontFamily": "Arial, Helvetica, sans-serif", "buttonFontWeight": 600,
+            "buttonPaddingX": 20, "buttonPaddingY": 10, "buttonFullWidth": false,
+            "buttonBorderStyle": "solid", "buttonBorderColor": "#4f46e5", "buttonBorderWidth": 0,
+            "contentAlignment": "left"
+          }
+        },
+        {
+          "id": "re-b4-s1",
+          "type": "spacer",
+          "data": {},
+          "style": {"padding": {"top": 0, "right": 0, "bottom": 0, "left": 0}, "height": 8, "backgroundColor": null}
+        },
+        {
+          "id": "re-b4-c2",
+          "type": "card",
+          "data": {
+            "showIcon": false, "iconMode": "emoji", "iconEmoji": "✨", "iconImageSrc": "", "iconImageAlt": "",
+            "showBadge": false, "badgeText": "",
+            "heading": "Breathwork Foundations",
+            "body": "Master the art of the conscious exhale.",
+            "showButton": false, "buttonText": "", "buttonUrl": ""
+          },
+          "style": {
+            "padding": {"top": 16, "right": 20, "bottom": 16, "left": 20},
+            "backgroundColor": "#c2ebe3",
+            "borderRadius": 12, "borderWidth": 0, "borderColor": "#e2e8f0", "borderStyle": "none",
+            "iconSize": 48, "iconBackgroundColor": "#eef2ff", "iconBorderRadius": 50,
+            "badgeBackgroundColor": "#eef2ff", "badgeTextColor": "#4338ca",
+            "headingColor": "#335853", "headingFontSize": 18, "headingFontFamily": "'Noto Serif', Georgia, serif", "headingFontWeight": 700,
+            "bodyColor": "#335853", "bodyFontSize": 12, "bodyFontFamily": "Arial, Helvetica, sans-serif",
+            "buttonBackgroundColor": "#4f46e5", "buttonTextColor": "#ffffff", "buttonBorderRadius": 6,
+            "buttonFontSize": 14, "buttonFontFamily": "Arial, Helvetica, sans-serif", "buttonFontWeight": 600,
+            "buttonPaddingX": 20, "buttonPaddingY": 10, "buttonFullWidth": false,
+            "buttonBorderStyle": "solid", "buttonBorderColor": "#4f46e5", "buttonBorderWidth": 0,
+            "contentAlignment": "center"
+          }
+        },
+        {
+          "id": "re-b4-s2",
+          "type": "spacer",
+          "data": {},
+          "style": {"padding": {"top": 0, "right": 0, "bottom": 0, "left": 0}, "height": 8, "backgroundColor": null}
+        },
+        {
+          "id": "re-b4-c3",
+          "type": "card",
+          "data": {
+            "showIcon": false, "iconMode": "emoji", "iconEmoji": "✨", "iconImageSrc": "", "iconImageAlt": "",
+            "showBadge": false, "badgeText": "",
+            "heading": "Vinyasa Rhythm",
+            "body": "A fast-paced flow synchronized to melodic beats.",
+            "showButton": false, "buttonText": "", "buttonUrl": ""
+          },
+          "style": {
+            "padding": {"top": 16, "right": 20, "bottom": 16, "left": 20},
+            "backgroundColor": "#f2f4f2",
+            "borderRadius": 12, "borderWidth": 0, "borderColor": "#e2e8f0", "borderStyle": "none",
+            "iconSize": 48, "iconBackgroundColor": "#eef2ff", "iconBorderRadius": 50,
+            "badgeBackgroundColor": "#eef2ff", "badgeTextColor": "#4338ca",
+            "headingColor": "#2e3432", "headingFontSize": 18, "headingFontFamily": "'Noto Serif', Georgia, serif", "headingFontWeight": 700,
+            "bodyColor": "#635f57", "bodyFontSize": 13, "bodyFontFamily": "Arial, Helvetica, sans-serif",
+            "buttonBackgroundColor": "#4f46e5", "buttonTextColor": "#ffffff", "buttonBorderRadius": 6,
+            "buttonFontSize": 14, "buttonFontFamily": "Arial, Helvetica, sans-serif", "buttonFontWeight": 600,
+            "buttonPaddingX": 20, "buttonPaddingY": 10, "buttonFullWidth": false,
+            "buttonBorderStyle": "solid", "buttonBorderColor": "#4f46e5", "buttonBorderWidth": 0,
+            "contentAlignment": "left"
           }
         },
         {
