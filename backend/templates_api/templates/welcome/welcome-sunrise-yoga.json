@@ -347,18 +347,53 @@
         },
         {
           "id": "sun-w-b11",
-          "type": "html",
+          "type": "card",
           "data": {
-            "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#f8efea;border-radius:20px;padding:24px;text-align:center;\"><div style=\"width:48px;height:48px;background:#fd8b00;border-radius:999px;line-height:48px;margin:0 auto 12px;font-size:20px;color:#fff0e7;\">❤</div><h3 style=\"margin:0 0 8px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:24px;color:#322e2b;font-weight:800;\">Ready to glow?</h3><p style=\"margin:0 0 16px;color:#605a57;font-size:15px;line-height:1.6;\">Your first sunrise session is waiting. Let's meet on the mat.</p><a href=\"https://\" style=\"display:inline-block;background:#8c4a00;color:#fff0e7;padding:12px 28px;border-radius:999px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;text-decoration:none;font-size:14px;\">Start Your Morning</a></td></tr></table>"
+            "showIcon": true,
+            "iconMode": "emoji",
+            "iconEmoji": "❤️",
+            "iconImageSrc": "",
+            "iconImageAlt": "",
+            "showBadge": false,
+            "badgeText": "New",
+            "heading": "Ready to glow?",
+            "body": "Your first sunrise session is waiting. Let's meet on the mat.",
+            "showButton": true,
+            "buttonText": "Start Your Morning",
+            "buttonUrl": "https://"
           },
           "style": {
-            "padding": {
-              "top": 0,
-              "right": 32,
-              "bottom": 24,
-              "left": 32
-            },
-            "alignment": "center"
+            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+            "backgroundColor": "#f8efea",
+            "borderRadius": 20,
+            "borderWidth": 0,
+            "borderColor": "#e2e8f0",
+            "borderStyle": "solid",
+            "iconSize": 48,
+            "iconBackgroundColor": "#fd8b00",
+            "iconBorderRadius": 50,
+            "badgeBackgroundColor": "#eef2ff",
+            "badgeTextColor": "#4338ca",
+            "headingColor": "#322e2b",
+            "headingFontSize": 24,
+            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "headingFontWeight": 800,
+            "bodyColor": "#605a57",
+            "bodyFontSize": 15,
+            "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+            "buttonBackgroundColor": "#8c4a00",
+            "buttonTextColor": "#fff0e7",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 14,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "buttonFontWeight": 700,
+            "buttonPaddingX": 28,
+            "buttonPaddingY": 12,
+            "buttonFullWidth": false,
+            "buttonBorderStyle": "solid",
+            "buttonBorderColor": "#8c4a00",
+            "buttonBorderWidth": 0,
+            "contentAlignment": "center"
           }
         }
       ]

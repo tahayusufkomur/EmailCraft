@@ -274,18 +274,53 @@
         },
         {
           "id": "cr-b4",
-          "type": "text",
+          "type": "card",
           "data": {
-            "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding:20px 24px;background:#f9faf8;border-radius:12px;\"><table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding-right:16px;vertical-align:top;\"><div style=\"width:40px;height:40px;background:#c5ebdd;border-radius:8px;text-align:center;line-height:40px;font-size:18px;\">🧘</div></td><td><strong style=\"font-size:16px;font-family:'Noto Serif',Georgia,serif;\">Preparation is Practice</strong><br><span style=\"font-size:13px;color:#635f57;\">Don't forget your mat and water bottle. Arrive 5 minutes early to ground yourself.</span></td></tr></table></td></tr></table>",
-            "variables": []
+            "showIcon": true,
+            "iconMode": "emoji",
+            "iconEmoji": "🧘",
+            "iconImageSrc": "",
+            "iconImageAlt": "",
+            "showBadge": false,
+            "badgeText": "New",
+            "heading": "Preparation is Practice",
+            "body": "Don't forget your mat and water bottle. Arrive 5 minutes early to ground yourself.",
+            "showButton": false,
+            "buttonText": "Learn More",
+            "buttonUrl": "https://"
           },
           "style": {
-            "padding": {
-              "top": 8,
-              "right": 20,
-              "bottom": 8,
-              "left": 20
-            }
+            "padding": { "top": 20, "right": 24, "bottom": 20, "left": 24 },
+            "backgroundColor": "#f9faf8",
+            "borderRadius": 12,
+            "borderWidth": 0,
+            "borderColor": "#e2e8f0",
+            "borderStyle": "solid",
+            "iconSize": 40,
+            "iconBackgroundColor": "#c5ebdd",
+            "iconBorderRadius": 8,
+            "badgeBackgroundColor": "#eef2ff",
+            "badgeTextColor": "#4338ca",
+            "headingColor": "#2e3432",
+            "headingFontSize": 16,
+            "headingFontFamily": "'Noto Serif', Georgia, serif",
+            "headingFontWeight": 700,
+            "bodyColor": "#635f57",
+            "bodyFontSize": 13,
+            "bodyFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "buttonBackgroundColor": "#406660",
+            "buttonTextColor": "#e2fff9",
+            "buttonBorderRadius": 50,
+            "buttonFontSize": 14,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "buttonFontWeight": 600,
+            "buttonPaddingX": 20,
+            "buttonPaddingY": 10,
+            "buttonFullWidth": false,
+            "buttonBorderStyle": "solid",
+            "buttonBorderColor": "#406660",
+            "buttonBorderWidth": 0,
+            "contentAlignment": "left"
           }
         },
         {

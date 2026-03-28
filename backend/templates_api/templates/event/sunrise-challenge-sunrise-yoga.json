@@ -269,17 +269,53 @@
         },
         {
           "id": "sun-e3-b4",
-          "type": "html",
+          "type": "card",
           "data": {
-            "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#ffffff;border-radius:20px;padding:22px;\"><h3 style=\"margin:0 0 10px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:22px;color:#322e2b;font-weight:800;\">Challenge rhythm</h3><p style=\"margin:0 0 12px;color:#605a57;font-size:14px;line-height:1.6;\">Each day includes a 35-minute flow, a 10-minute breath reset, and a short reflection prompt.</p><p style=\"margin:0;font-size:12px;color:#7c7672;letter-spacing:2px;text-transform:uppercase;font-weight:700;\">Begins Monday</p></td></tr></table>"
+            "showIcon": false,
+            "iconMode": "emoji",
+            "iconEmoji": "✨",
+            "iconImageSrc": "",
+            "iconImageAlt": "",
+            "showBadge": true,
+            "badgeText": "BEGINS MONDAY",
+            "heading": "Challenge rhythm",
+            "body": "Each day includes a 35-minute flow, a 10-minute breath reset, and a short reflection prompt.",
+            "showButton": false,
+            "buttonText": "Learn More",
+            "buttonUrl": "https://"
           },
           "style": {
-            "padding": {
-              "top": 0,
-              "right": 32,
-              "bottom": 20,
-              "left": 32
-            }
+            "padding": { "top": 22, "right": 22, "bottom": 22, "left": 22 },
+            "backgroundColor": "#ffffff",
+            "borderRadius": 20,
+            "borderWidth": 0,
+            "borderColor": "#e2e8f0",
+            "borderStyle": "solid",
+            "iconSize": 48,
+            "iconBackgroundColor": "#eef2ff",
+            "iconBorderRadius": 50,
+            "badgeBackgroundColor": "#f2f0ed",
+            "badgeTextColor": "#7c7672",
+            "headingColor": "#322e2b",
+            "headingFontSize": 22,
+            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "headingFontWeight": 800,
+            "bodyColor": "#605a57",
+            "bodyFontSize": 14,
+            "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+            "buttonBackgroundColor": "#8c4a00",
+            "buttonTextColor": "#fff0e7",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 14,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "buttonFontWeight": 700,
+            "buttonPaddingX": 28,
+            "buttonPaddingY": 12,
+            "buttonFullWidth": false,
+            "buttonBorderStyle": "solid",
+            "buttonBorderColor": "#8c4a00",
+            "buttonBorderWidth": 0,
+            "contentAlignment": "left"
           }
         }
       ]

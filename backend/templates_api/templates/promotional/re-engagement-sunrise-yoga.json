@@ -220,17 +220,53 @@
         },
         {
           "id": "sun-r-b4",
-          "type": "html",
+          "type": "card",
           "data": {
-            "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#ffffff;border-radius:20px;padding:24px;text-align:center;\"><h3 style=\"margin:0 0 8px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:24px;color:#322e2b;font-weight:800;\">Your Mat is Ready</h3><p style=\"margin:0 0 16px;color:#605a57;font-size:15px;line-height:1.6;\">To celebrate your return, we've added a complimentary session to your account. No strings, just pure energy.</p><a href=\"https://\" style=\"display:inline-block;background:#8c4a00;color:#fff0e7;padding:12px 28px;border-radius:999px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;text-decoration:none;font-size:14px;\">Claim Free Class</a><p style=\"margin:12px 0 0;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#7c7672;font-weight:700;\">Offer valid for 7 days</p></td></tr></table>"
+            "showIcon": false,
+            "iconMode": "emoji",
+            "iconEmoji": "✨",
+            "iconImageSrc": "",
+            "iconImageAlt": "",
+            "showBadge": true,
+            "badgeText": "OFFER VALID FOR 7 DAYS",
+            "heading": "Your Mat is Ready",
+            "body": "To celebrate your return, we've added a complimentary session to your account. No strings, just pure energy.",
+            "showButton": true,
+            "buttonText": "Claim Free Class",
+            "buttonUrl": "https://"
           },
           "style": {
-            "padding": {
-              "top": 0,
-              "right": 32,
-              "bottom": 16,
-              "left": 32
-            }
+            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+            "backgroundColor": "#ffffff",
+            "borderRadius": 20,
+            "borderWidth": 0,
+            "borderColor": "#e2e8f0",
+            "borderStyle": "solid",
+            "iconSize": 48,
+            "iconBackgroundColor": "#eef2ff",
+            "iconBorderRadius": 50,
+            "badgeBackgroundColor": "#f2f0ed",
+            "badgeTextColor": "#7c7672",
+            "headingColor": "#322e2b",
+            "headingFontSize": 24,
+            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "headingFontWeight": 800,
+            "bodyColor": "#605a57",
+            "bodyFontSize": 15,
+            "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+            "buttonBackgroundColor": "#8c4a00",
+            "buttonTextColor": "#fff0e7",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 14,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "buttonFontWeight": 700,
+            "buttonPaddingX": 28,
+            "buttonPaddingY": 12,
+            "buttonFullWidth": false,
+            "buttonBorderStyle": "solid",
+            "buttonBorderColor": "#8c4a00",
+            "buttonBorderWidth": 0,
+            "contentAlignment": "center"
           }
         },
         {
