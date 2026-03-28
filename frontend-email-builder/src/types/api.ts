@@ -29,6 +29,8 @@ export interface SessionResponse {
       builder_theme?: 'light-breeze' | 'light-paper' | 'dark-slate' | 'dark-cosmos';
       email_background_style?: 'none' | 'aurora' | 'sunset-glow' | 'mint-weave' | 'midnight-grid' | 'paper-rings';
       email_background_color?: string;
+      default_palette?: string;
+      custom_palette?: Record<string, string>;
     };
   };
 }

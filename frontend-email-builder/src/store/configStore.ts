@@ -19,6 +19,8 @@ interface ConfigState {
   maxMediaFilesPerUpload: number;
   storageUsed: number;
   storageLimit: number;
+  defaultPalette: string;
+  customPalette: Record<string, string>;
 
   setConfig: (config: Partial<ConfigState>) => void;
 }
@@ -40,6 +42,8 @@ export const useConfigStore = create<ConfigState>((set) => ({
   maxMediaFilesPerUpload: 5,
   storageUsed: 0,
   storageLimit: 100 * 1024 * 1024,
+  defaultPalette: '',
+  customPalette: {},
 
   setConfig: (config) => set(config),
 }));

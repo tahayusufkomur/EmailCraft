@@ -86,14 +86,14 @@ function recolorBlock(block: Block, palette: ColorPalette): Block {
     case 'columns':
       updated.data = {
         ...block.data,
-        columns: block.data.columns.map((col: { id: string; blocks: Block[]; style?: Record<string, unknown> }) => {
-          const colStyle = col.style ? { ...col.style } : {};
-          const colBgClass = classifyBackground(colStyle.backgroundColor as string | null | undefined);
-          if (colBgClass === 'white') colStyle.backgroundColor = palette.background;
-          else if (colBgClass === 'neutral') colStyle.backgroundColor = palette.surface;
+        columns: block.data.columns.map((col: { id: string; blocks: Block[]; backgroundColor?: string | null }) => {
+          const colBgClass = classifyBackground(col.backgroundColor);
+          let newBg = col.backgroundColor;
+          if (colBgClass === 'white') newBg = palette.background;
+          else if (colBgClass === 'neutral') newBg = palette.surface;
           return {
             ...col,
-            style: colStyle,
+            backgroundColor: newBg,
             blocks: col.blocks.map((b: Block) => recolorBlock(b, palette)),
           };
         }),

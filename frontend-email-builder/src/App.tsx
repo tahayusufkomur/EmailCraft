@@ -121,6 +121,8 @@ type UiContext = {
   emailBackgroundColor?: string;
   chromeColor?: string;
   canvasColor?: string;
+  defaultPalette?: string;
+  customPalette?: Record<string, string>;
 };
 
 const normalizeUiContext = (
@@ -219,6 +221,8 @@ const normalizeUiContextFromSession = (
     email_background_color?: unknown;
     chrome_color?: unknown;
     canvas_color?: unknown;
+    default_palette?: unknown;
+    custom_palette?: unknown;
   };
 
   const output: UiContext = {};
@@ -230,6 +234,10 @@ const normalizeUiContextFromSession = (
   const emailBackgroundColor = asOptionalHexColor(maybe.email_background_color);
   const chromeColor = asOptionalHexColor(maybe.chrome_color);
   const canvasColor = asOptionalHexColor(maybe.canvas_color);
+  const defaultPalette = typeof maybe.default_palette === 'string' ? maybe.default_palette : undefined;
+  const customPalette = (maybe.custom_palette && typeof maybe.custom_palette === 'object' && !Array.isArray(maybe.custom_palette))
+    ? maybe.custom_palette as Record<string, string>
+    : undefined;
 
   if (showLogo !== undefined) output.showLogo = showLogo;
   if (showExportHtmlButton !== undefined) output.showExportHtmlButton = showExportHtmlButton;
@@ -243,6 +251,8 @@ const normalizeUiContextFromSession = (
   if (emailBackgroundColor !== undefined) output.emailBackgroundColor = emailBackgroundColor;
   if (chromeColor !== undefined) output.chromeColor = chromeColor;
   if (canvasColor !== undefined) output.canvasColor = canvasColor;
+  if (defaultPalette !== undefined) output.defaultPalette = defaultPalette;
+  if (customPalette !== undefined) output.customPalette = customPalette;
   return output;
 };
 
