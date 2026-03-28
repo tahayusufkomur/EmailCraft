@@ -919,6 +919,104 @@ def _render_list_block(block, ctx):
 </tr>"""
 
 
+def _render_profile_block(block, ctx):
+    data = block.get('data', {})
+    style = block.get('style', {})
+    default_font = ctx['default_font']
+    padding = _resolve_padding(style)
+
+    bg = style.get('backgroundColor', '#ffffff')
+    radius = style.get('borderRadius', 12)
+    border_w = style.get('borderWidth', 1)
+    border_c = style.get('borderColor', '#e2e8f0')
+    border_s = style.get('borderStyle', 'solid')
+    border = f'{border_w}px {border_s} {border_c}' if border_w > 0 else 'none'
+
+    img_size = style.get('imageSize', 72)
+    img_radius = style.get('imageBorderRadius', 50)
+    img_pos = style.get('imagePosition', 'left')
+    align = style.get('contentAlignment', 'left')
+
+    name_color = style.get('nameColor', '#0f172a')
+    name_size = style.get('nameFontSize', 18)
+    name_font = style.get('nameFontFamily', default_font)
+    name_weight = style.get('nameFontWeight', 700)
+    role_color = style.get('roleColor', '#6366f1')
+    role_size = style.get('roleFontSize', 13)
+    bio_color = style.get('bioColor', '#64748b')
+    bio_size = style.get('bioFontSize', 14)
+    bio_font = style.get('bioFontFamily', default_font)
+
+    img_src = html_module.escape(data.get('imageSrc', ''))
+    img_alt = html_module.escape(data.get('imageAlt', ''))
+    name = html_module.escape(data.get('name', ''))
+    role_text = html_module.escape(data.get('role', ''))
+    bio_text = html_module.escape(data.get('bio', ''))
+
+    badge_html = ''
+    if data.get('showBadge') and data.get('badgeText'):
+        badge_bg = style.get('badgeBackgroundColor', '#eef2ff')
+        badge_color = style.get('badgeTextColor', '#4338ca')
+        badge_text = html_module.escape(data['badgeText'])
+        badge_html = (
+            f'<div style="margin-bottom: 4px;">'
+            f'<span style="display: inline-block; padding: 2px 8px; border-radius: 10px; '
+            f'background-color: {badge_bg}; color: {badge_color}; font-size: 10px; '
+            f'font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; '
+            f'font-family: {default_font};">{badge_text}</span></div>'
+        )
+
+    img_html = (
+        f'<img src="{img_src}" alt="{img_alt}" width="{img_size}" height="{img_size}" '
+        f'style="border-radius: {img_radius}%; display: block;" />'
+    ) if img_src else ''
+
+    role_html = (
+        f'<div style="color: {role_color}; font-size: {role_size}px; font-family: {bio_font}; '
+        f'font-weight: 600; line-height: 1.3; margin-top: 2px;">{role_text}</div>'
+    ) if role_text else ''
+
+    bio_html = (
+        f'<div style="color: {bio_color}; font-size: {bio_size}px; font-family: {bio_font}; '
+        f'line-height: 1.5; margin-top: 6px;">{bio_text}</div>'
+    ) if bio_text else ''
+
+    name_html = (
+        f'<div style="color: {name_color}; font-size: {name_size}px; font-family: {name_font}; '
+        f'font-weight: {name_weight}; line-height: 1.3;">{name}</div>'
+    )
+
+    if img_pos == 'top':
+        img_block = f'<div style="margin: 0 auto 12px; width: {img_size}px;">{img_html}</div>' if img_html else ''
+        inner = (
+            f'<td style="text-align: {align};">'
+            f'{img_block}{badge_html}{name_html}{role_html}{bio_html}</td>'
+        )
+    else:
+        img_td = f'<td style="width: {img_size}px; vertical-align: top;">{img_html}</td>'
+        text_td = (
+            f'<td style="vertical-align: top; padding-left: 16px; text-align: left;">'
+            f'{badge_html}{name_html}{role_html}{bio_html}</td>'
+        )
+        inner = (f'{text_td}{img_td}' if img_pos == 'right' else f'{img_td}{text_td}')
+
+    width_attr = '' if img_pos == 'top' else ' width="100%"'
+
+    return f"""<tr>
+  <td style="padding: {padding};">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: {bg}; border-radius: {radius}px; border: {border};">
+      <tr>
+        <td style="padding: {padding};">
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0"{width_attr}>
+            <tr>{inner}</tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>"""
+
+
 BLOCK_RENDERERS = {
     'text': _render_text_block,
     'image': _render_image_block,
@@ -932,4 +1030,5 @@ BLOCK_RENDERERS = {
     'hero': _render_hero_block,
     'card': _render_card_block,
     'list': _render_list_block,
+    'profile': _render_profile_block,
 }
