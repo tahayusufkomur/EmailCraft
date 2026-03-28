@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useEditorStore } from '../../store/editorStore';
 import { useConfigStore } from '../../store/configStore';
 import { SliderInput } from './settings/SliderInput';
@@ -9,6 +9,7 @@ import {
 } from '../../lib/backgroundStyles';
 import { PALETTES, type ColorPalette } from '../../lib/colorPalettes';
 import { recolorTemplate } from '../../lib/recolorTemplate';
+import type { EmailTemplate } from '../../types/blocks';
 
 
 function PalettePicker() {
@@ -18,11 +19,21 @@ function PalettePicker() {
   const customPalette = useConfigStore((s) => s.customPalette);
   const setConfig = useConfigStore((s) => s.setConfig);
 
+  // Store the original template (before any palette recolor) so repeated
+  // palette switches always produce the same deterministic result.
+  const originalTemplateRef = useRef<EmailTemplate | null>(null);
+
+  const getOriginal = useCallback((): EmailTemplate => {
+    if (!originalTemplateRef.current) {
+      originalTemplateRef.current = structuredClone(template);
+    }
+    return originalTemplateRef.current;
+  }, [template]);
+
   const [showCustom, setShowCustom] = useState(false);
   const [localCustom, setLocalCustom] = useState<Record<string, string>>(() => {
     const cp = customPalette;
     if (cp && cp.primary) return cp;
-    // Default to first preset values
     const first = PALETTES[0];
     return {
       primary: first.primary,
@@ -35,10 +46,10 @@ function PalettePicker() {
   });
 
   const applyPalette = useCallback((palette: ColorPalette, slug: string) => {
-    const recolored = recolorTemplate(template, palette);
+    const recolored = recolorTemplate(getOriginal(), palette);
     loadTemplate(recolored);
     setConfig({ defaultPalette: slug, customPalette: {} });
-  }, [template, loadTemplate, setConfig]);
+  }, [getOriginal, loadTemplate, setConfig]);
 
   const applyCustom = useCallback((colors: Record<string, string>) => {
     if (!colors.primary || !colors.secondary || !colors.textDark || !colors.textLight || !colors.background || !colors.surface) return;
@@ -52,10 +63,10 @@ function PalettePicker() {
       background: colors.background,
       surface: colors.surface,
     };
-    const recolored = recolorTemplate(template, palette);
+    const recolored = recolorTemplate(getOriginal(), palette);
     loadTemplate(recolored);
     setConfig({ defaultPalette: '', customPalette: colors });
-  }, [template, loadTemplate, setConfig]);
+  }, [getOriginal, loadTemplate, setConfig]);
 
   const handleCustomChange = useCallback((key: string, value: string) => {
     const updated = { ...localCustom, [key]: value };
