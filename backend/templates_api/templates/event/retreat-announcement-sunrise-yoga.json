@@ -1,10 +1,12 @@
 {
   "name": "Retreat Announcement — Sunrise Yoga",
   "category": "event",
+  "is_premium": true,
+  "tags": ["event"],
   "template": {
     "version": 1,
     "settings": {
-      "backgroundColor": "#fef5f0",
+      "backgroundColor": "#1c1008",
       "backgroundStyle": "none",
       "bodyBackgroundStyle": "solid",
       "bodyBackgroundColor": "#fef5f0",
@@ -19,22 +21,14 @@
         {
           "id": "sun-e1-h1",
           "type": "heading",
-          "data": {
-            "text": "SUNRISE YOGA",
-            "level": 3
-          },
+          "data": { "text": "SUNRISE YOGA", "level": 3 },
           "style": {
-            "padding": {
-              "top": 28,
-              "right": 32,
-              "bottom": 24,
-              "left": 32
-            },
+            "padding": { "top": 28, "right": 32, "bottom": 24, "left": 32 },
             "alignment": "center",
-            "color": "#8c4a00",
-            "fontSize": 18,
+            "color": "#e8913a",
+            "fontSize": 10,
             "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "fontWeight": 800,
+            "fontWeight": 600,
             "letterSpacing": 3,
             "textTransform": "uppercase"
           }
@@ -48,123 +42,233 @@
           "type": "hero",
           "data": {
             "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuDJ-pgF3dvI1797eAXq1yhR3_17P2bGOauQvVKKWlP9i6tGUbMlDKgijEBS5eo3Wup9dTR_AByckZ_h47Jxm89JPc1E44KRZEkQ3P--xbyHKY87I7JhGJWlApjMD9owBHlx7bfDSnC6u72iEubNEZE4oyNewhGi2kNCUvpNqhYSnKh-44zF8hYg8D-kMmiHz7Mai_8nR1WqSjs8Z6aMinVqS_UvHEBgdlMA3ZTKdobOToxe-7TaCIno67Gr66bxLdh6bEXi2eK6E3uT",
-            "heading": "Dawn Retreat Weekend",
-            "subheading": "Big Sur • June 14–16",
-            "buttonText": "Reserve Your Spot",
-            "buttonUrl": "https://"
+            "heading": "Mountain Retreat 2025",
+            "subheading": "Three days of practice, reflection, and renewal",
+            "showButton": true,
+            "buttonText": "Reserve Your Spot →",
+            "buttonUrl": "#"
           },
           "style": {
-            "height": 420,
-            "overlayColor": "#000000",
-            "overlayOpacity": 0.4,
-            "headingColor": "#ffffff",
-            "headingFontSize": 34,
+            "height": 360,
+            "headingFontSize": 32,
+            "headingFontWeight": 800,
             "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "subheadingColor": "#ffffffcc",
-            "buttonBackgroundColor": "#fd8b00",
-            "buttonTextColor": "#ffffff",
+            "headingColor": "#fef5f0",
+            "subheadingFontSize": 15,
+            "subheadingColor": "#c4a882cc",
+            "overlayColor": "#1c1008",
+            "overlayOpacity": 0.55,
+            "buttonBackgroundColor": "#e8913a",
+            "buttonTextColor": "#1c1008",
             "buttonBorderRadius": 999,
-            "contentAlignment": "left",
-            "verticalAlignment": "bottom",
-            "padding": {
-              "top": 0,
-              "right": 0,
-              "bottom": 0,
-              "left": 0
-            }
+            "buttonFontSize": 13,
+            "buttonFontWeight": 700,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "contentAlignment": "center",
+            "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }
           }
         },
         {
           "id": "sun-e1-b2",
           "type": "spacer",
           "data": {},
-          "style": {
-            "height": 16
-          }
+          "style": { "height": 24 }
         },
         {
           "id": "sun-e1-b3",
+          "type": "heading",
+          "data": { "text": "Your Journey", "level": 2 },
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 800,
+            "color": "#322e2b",
+            "textAlign": "center",
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "padding": { "top": 0, "right": 32, "bottom": 8, "left": 32 }
+          }
+        },
+        {
+          "id": "sun-e1-b4",
+          "type": "spacer",
+          "data": {},
+          "style": { "height": 8 }
+        },
+        {
+          "id": "sun-e1-b5",
           "type": "columns",
           "style": {
             "gap": 12,
             "stackOnMobile": true,
-            "padding": {
-              "top": 0,
-              "right": 24,
-              "bottom": 16,
-              "left": 24
-            }
+            "padding": { "top": 0, "right": 24, "bottom": 0, "left": 24 }
           },
           "data": {
             "columnCount": 3,
-            "columnRatio": [
-              34,
-              33,
-              33
-            ],
+            "columnRatio": [34, 33, 33],
             "columns": [
               {
-                "id": "sun-e1-c1",
-                "backgroundColor": "#fff1e8",
+                "id": "sun-e1-col1",
                 "blocks": [
                   {
-                    "id": "sun-e1-c1-t",
-                    "type": "text",
+                    "id": "sun-e1-col1-card",
+                    "type": "card",
                     "data": {
-                      "html": "<div style=\"text-align:left;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:11px;color:#8c4a00;\">Day 1</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:16px;color:#322e2b;margin-top:6px;\">Ground &amp; Flow</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;margin-top:6px;\">Sunrise Vinyasa, ocean breathwork, communal dinner.</div></div>",
-                      "variables": []
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "🌅",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "heading": "Day One",
+                      "body": "Arrival & grounding. Evening meditation and welcome ceremony.",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "",
+                      "showBadge": true,
+                      "badgeText": "FRIDAY"
                     },
                     "style": {
-                      "padding": {
-                        "top": 18,
-                        "right": 18,
-                        "bottom": 18,
-                        "left": 18
-                      }
+                      "backgroundColor": "#fef5f0",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "headingColor": "#322e2b",
+                      "headingFontSize": 18,
+                      "headingFontWeight": 700,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "bodyColor": "#605a57",
+                      "bodyFontSize": 14,
+                      "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "iconSize": 40,
+                      "iconBorderRadius": 50,
+                      "iconBackgroundColor": "#ffffff",
+                      "contentAlignment": "center",
+                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "buttonBackgroundColor": "#e8913a",
+                      "buttonTextColor": "#1c1008",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontWeight": 700,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonPaddingX": 28,
+                      "buttonPaddingY": 12,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#e8913a",
+                      "buttonBorderWidth": 0
                     }
                   }
                 ]
               },
               {
-                "id": "sun-e1-c2",
-                "backgroundColor": "#f8efea",
+                "id": "sun-e1-col2",
                 "blocks": [
                   {
-                    "id": "sun-e1-c2-t",
-                    "type": "text",
+                    "id": "sun-e1-col2-card",
+                    "type": "card",
                     "data": {
-                      "html": "<div style=\"text-align:left;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:11px;color:#6c5a00;\">Day 2</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:16px;color:#322e2b;margin-top:6px;\">Rest &amp; Restore</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;margin-top:6px;\">Forest hike, yin workshop, sound bath at dusk.</div></div>",
-                      "variables": []
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "🧘",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "heading": "Day Two",
+                      "body": "Intensive practice sessions. Partner work and breathwork exploration.",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "",
+                      "showBadge": true,
+                      "badgeText": "SATURDAY"
                     },
                     "style": {
-                      "padding": {
-                        "top": 18,
-                        "right": 18,
-                        "bottom": 18,
-                        "left": 18
-                      }
+                      "backgroundColor": "#fef5f0",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "headingColor": "#322e2b",
+                      "headingFontSize": 18,
+                      "headingFontWeight": 700,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "bodyColor": "#605a57",
+                      "bodyFontSize": 14,
+                      "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "iconSize": 40,
+                      "iconBorderRadius": 50,
+                      "iconBackgroundColor": "#ffffff",
+                      "contentAlignment": "center",
+                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "buttonBackgroundColor": "#e8913a",
+                      "buttonTextColor": "#1c1008",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontWeight": 700,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonPaddingX": 28,
+                      "buttonPaddingY": 12,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#e8913a",
+                      "buttonBorderWidth": 0
                     }
                   }
                 ]
               },
               {
-                "id": "sun-e1-c3",
-                "backgroundColor": "#ffffff",
+                "id": "sun-e1-col3",
                 "blocks": [
                   {
-                    "id": "sun-e1-c3-t",
-                    "type": "text",
+                    "id": "sun-e1-col3-card",
+                    "type": "card",
                     "data": {
-                      "html": "<div style=\"text-align:left;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:11px;color:#6a43b7;\">Day 3</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:16px;color:#322e2b;margin-top:6px;\">Renew &amp; Rise</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;margin-top:6px;\">Meditation at dawn, closing circle, take-home ritual.</div></div>",
-                      "variables": []
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "🌿",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "heading": "Day Three",
+                      "body": "Integration & closing. Take your renewed energy into the world.",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "",
+                      "showBadge": true,
+                      "badgeText": "SUNDAY"
                     },
                     "style": {
-                      "padding": {
-                        "top": 18,
-                        "right": 18,
-                        "bottom": 18,
-                        "left": 18
-                      }
+                      "backgroundColor": "#fef5f0",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "headingColor": "#322e2b",
+                      "headingFontSize": 18,
+                      "headingFontWeight": 700,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "bodyColor": "#605a57",
+                      "bodyFontSize": 14,
+                      "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "iconSize": 40,
+                      "iconBorderRadius": 50,
+                      "iconBackgroundColor": "#ffffff",
+                      "contentAlignment": "center",
+                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "buttonBackgroundColor": "#e8913a",
+                      "buttonTextColor": "#1c1008",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontWeight": 700,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonPaddingX": 28,
+                      "buttonPaddingY": 12,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#e8913a",
+                      "buttonBorderWidth": 0
                     }
                   }
                 ]
@@ -173,54 +277,116 @@
           }
         },
         {
-          "id": "sun-e1-b4",
+          "id": "sun-e1-b6",
+          "type": "spacer",
+          "data": {},
+          "style": { "height": 24 }
+        },
+        {
+          "id": "sun-e1-b7",
+          "type": "list",
+          "data": {
+            "heading": "What's Included",
+            "items": [
+              {
+                "id": "sun-e1-li1",
+                "icon": "✓",
+                "text": "All meals & accommodation",
+                "subtitle": "Farm-to-table organic dining"
+              },
+              {
+                "id": "sun-e1-li2",
+                "icon": "✓",
+                "text": "6 guided yoga sessions",
+                "subtitle": "Morning vinyasa, evening yin"
+              },
+              {
+                "id": "sun-e1-li3",
+                "icon": "✓",
+                "text": "Nature hiking trails",
+                "subtitle": "Guided mountain walks"
+              },
+              {
+                "id": "sun-e1-li4",
+                "icon": "✓",
+                "text": "Meditation workshops",
+                "subtitle": "Breathwork and mindfulness"
+              }
+            ]
+          },
+          "style": {
+            "layout": "vertical",
+            "iconColor": "#e8913a",
+            "iconSize": 20,
+            "iconBackgroundColor": "#fef5f0",
+            "iconBorderRadius": 50,
+            "textColor": "#322e2b",
+            "textFontSize": 15,
+            "textFontWeight": 600,
+            "textFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "subtitleColor": "#605a57",
+            "subtitleFontSize": 13,
+            "subtitleFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+            "backgroundColor": "#ffffff",
+            "borderRadius": 16,
+            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 }
+          }
+        },
+        {
+          "id": "sun-e1-b8",
+          "type": "spacer",
+          "data": {},
+          "style": { "height": 24 }
+        },
+        {
+          "id": "sun-e1-b9",
           "type": "card",
           "data": {
             "showIcon": false,
             "iconMode": "emoji",
-            "iconEmoji": "✨",
+            "iconEmoji": "",
             "iconImageSrc": "",
             "iconImageAlt": "",
-            "showBadge": false,
-            "badgeText": "New",
-            "heading": "What's included",
-            "body": "Lodging, all classes, two meals daily, and a retreat journal.",
+            "heading": "Limited to 20 Participants",
+            "body": "Intimate group setting for personalized attention and deep connection.",
             "showButton": true,
-            "buttonText": "View Itinerary",
-            "buttonUrl": "https://"
+            "buttonText": "Reserve Now →",
+            "buttonUrl": "#",
+            "showBadge": false,
+            "badgeText": ""
           },
           "style": {
-            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
-            "backgroundColor": "#ffffff",
-            "borderRadius": 20,
+            "backgroundColor": "#2a1a0e",
+            "borderRadius": 16,
             "borderWidth": 0,
             "borderColor": "#e2e8f0",
             "borderStyle": "solid",
-            "iconSize": 48,
-            "iconBackgroundColor": "#eef2ff",
-            "iconBorderRadius": 50,
-            "badgeBackgroundColor": "#eef2ff",
-            "badgeTextColor": "#4338ca",
-            "headingColor": "#322e2b",
-            "headingFontSize": 24,
-            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "headingColor": "#fef5f0",
+            "headingFontSize": 22,
             "headingFontWeight": 800,
-            "bodyColor": "#605a57",
+            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "bodyColor": "#c4a882",
             "bodyFontSize": 14,
             "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
-            "buttonBackgroundColor": "#8c4a00",
-            "buttonTextColor": "#fff0e7",
+            "buttonBackgroundColor": "#e8913a",
+            "buttonTextColor": "#1c1008",
             "buttonBorderRadius": 999,
-            "buttonFontSize": 14,
+            "buttonFontSize": 13,
             "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
             "buttonFontWeight": 700,
             "buttonPaddingX": 28,
             "buttonPaddingY": 12,
             "buttonFullWidth": false,
             "buttonBorderStyle": "solid",
-            "buttonBorderColor": "#8c4a00",
+            "buttonBorderColor": "#e8913a",
             "buttonBorderWidth": 0,
-            "contentAlignment": "center"
+            "iconSize": 48,
+            "iconBorderRadius": 50,
+            "iconBackgroundColor": "#1c1008",
+            "badgeBackgroundColor": "#e8913a",
+            "badgeTextColor": "#1c1008",
+            "contentAlignment": "center",
+            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 }
           }
         }
       ]
@@ -229,45 +395,41 @@
       "blocks": [
         {
           "id": "sun-e1-f1",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms of Service</a></p>",
-            "variables": []
-          },
+          "type": "divider",
+          "data": {},
           "style": {
-            "alignment": "center",
-            "backgroundColor": "#f8efea",
-            "padding": {
-              "top": 20,
-              "right": 32,
-              "bottom": 8,
-              "left": 32
-            }
+            "lineStyle": "solid",
+            "lineColor": "#e8913a",
+            "lineThickness": 2,
+            "spacing": 0,
+            "padding": { "top": 24, "right": 32, "bottom": 8, "left": 32 }
           }
         },
         {
           "id": "sun-e1-f2",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2024 Sunrise Yoga. All rights reserved.</p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms</a></p>",
             "variables": []
           },
           "style": {
             "alignment": "center",
-            "backgroundColor": "#f8efea",
-            "padding": {
-              "top": 8,
-              "right": 32,
-              "bottom": 24,
-              "left": 32
-            }
+            "padding": { "top": 8, "right": 32, "bottom": 8, "left": 32 }
+          }
+        },
+        {
+          "id": "sun-e1-f3",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2025 Sunrise Yoga. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 }
           }
         }
       ]
     }
-  },
-  "is_premium": true,
-  "tags": [
-    "event"
-  ]
+  }
 }
