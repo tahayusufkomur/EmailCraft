@@ -1,10 +1,11 @@
 {
   "name": "Order Shipped — Meridian Coffee",
   "category": "transactional",
+  "tags": ["transactional"],
   "template": {
     "version": 1,
     "settings": {
-      "backgroundColor": "#faf9f6",
+      "backgroundColor": "#0f0906",
       "backgroundStyle": "none",
       "bodyBackgroundStyle": "solid",
       "bodyBackgroundColor": "#ffffff",
@@ -32,12 +33,13 @@
               "left": 32
             },
             "alignment": "center",
-            "color": "#271310",
-            "fontSize": 13,
+            "color": "#d4a54a",
+            "fontSize": 10,
             "fontFamily": "'Work Sans', Arial, sans-serif",
-            "fontWeight": 700,
-            "letterSpacing": 4,
-            "textTransform": "uppercase"
+            "fontWeight": 600,
+            "letterSpacing": 3,
+            "textTransform": "uppercase",
+            "backgroundColor": "#0f0906"
           }
         }
       ]
@@ -49,10 +51,10 @@
           "type": "hero",
           "data": {
             "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCTvxZebb0waqH5GLWofAB07wZKqhLh1H5AUagipNuFdD6LZsu_kzxF3HNfBLkFSgxzr5JNjqX9MZbVOna41PjeKq5wTjqf8cEB3WOvIl604GweEJ67VXakhi5_Vch1jm9HMw_KfvEMzstUWH-_cBQIG3aWfetGFN61WDFVJt-6N_vLgEqXH2BudL-REWhWHnqATFdGAyB7ENsk8BNqy9z7njU25EgCqIpJKPat4fzC0UXyWX_ol6h09dy7zlWKF37XeaDbCK5omDI",
-            "heading": "Your coffee is on its way!",
-            "subheading": "",
-            "buttonText": "",
-            "buttonUrl": ""
+            "heading": "Your Order Has Shipped",
+            "subheading": "Freshly roasted and on its way to you",
+            "buttonText": "TRACK PACKAGE →",
+            "buttonUrl": "https://"
           },
           "style": {
             "padding": {
@@ -61,13 +63,20 @@
               "bottom": 0,
               "left": 0
             },
-            "height": 400,
-            "overlayColor": "#271310",
-            "overlayOpacity": 0.5,
-            "headingColor": "#ffffff",
-            "headingFontSize": 34,
+            "height": 360,
+            "overlayColor": "#0f0906",
+            "overlayOpacity": 0.55,
+            "headingColor": "#f5f0e8",
+            "headingFontSize": 32,
+            "headingFontWeight": 700,
             "headingFontFamily": "'Noto Serif', Georgia, serif",
-            "subheadingColor": "#ffffffcc",
+            "subheadingColor": "#8a7b6b",
+            "buttonBackgroundColor": "#d4a54a",
+            "buttonTextColor": "#0f0906",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 11,
+            "buttonFontWeight": 700,
+            "buttonFontFamily": "'Work Sans', Arial, sans-serif",
             "contentAlignment": "center",
             "verticalAlignment": "middle"
           }
@@ -77,7 +86,7 @@
           "type": "spacer",
           "data": {},
           "style": {
-            "height": 32
+            "height": 24
           }
         },
         {
@@ -85,171 +94,96 @@
           "type": "columns",
           "data": {
             "columnCount": 2,
-            "columnRatio": [
-              50,
-              50
-            ],
+            "columnRatio": [50, 50],
             "columns": [
               {
                 "id": "m3-c1",
-                "backgroundColor": "#f4f3f1",
+                "backgroundColor": "#f5f0e8",
+                "borderRadius": 12,
                 "blocks": [
                   {
                     "id": "m3-c1b1",
-                    "type": "heading",
+                    "type": "card",
                     "data": {
-                      "text": "Delivery Status",
-                      "level": 4
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 24,
-                        "right": 16,
-                        "bottom": 2,
-                        "left": 16
-                      },
-                      "alignment": "left",
-                      "color": "#735c00",
-                      "fontSize": 11,
-                      "fontFamily": "'Work Sans', Arial, sans-serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 2,
-                      "textTransform": "uppercase"
-                    }
-                  },
-                  {
-                    "id": "m3-c1b2",
-                    "type": "heading",
-                    "data": {
-                      "text": "Expected Friday",
-                      "level": 3
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 16,
-                        "bottom": 4,
-                        "left": 16
-                      },
-                      "alignment": "left",
-                      "color": "#1a1c1a",
-                      "fontSize": 20,
-                      "fontFamily": "'Noto Serif', Georgia, serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 0,
-                      "textTransform": "none"
-                    }
-                  },
-                  {
-                    "id": "m3-c1b3",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-size:13px;color:#504442;line-height:1.6;\">Your package has left our roastery and is in transit. Estimated delivery: <strong>Friday, March 28</strong>.</p><p style=\"margin:8px 0 0;font-size:12px;color:#827472;\">Tracking: <strong style=\"color:#1a1c1a;\">MC-2025-0328-7741</strong></p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 16,
-                        "bottom": 8,
-                        "left": 16
-                      }
-                    }
-                  },
-                  {
-                    "id": "m3-c1b4",
-                    "type": "button",
-                    "data": {
-                      "text": "TRACK SHIPMENT",
-                      "url": "https://"
+                      "icon": "📦",
+                      "heading": "Delivery Details",
+                      "body": "Estimated arrival: March 20-22\nCarrier: Express Post\nTracking: MP-2025-0847",
+                      "buttonText": "TRACK →",
+                      "buttonUrl": "https://",
+                      "badgeText": "SHIPPED"
                     },
                     "style": {
                       "padding": {
                         "top": 8,
-                        "right": 16,
-                        "bottom": 24,
-                        "left": 16
+                        "right": 8,
+                        "bottom": 8,
+                        "left": 8
                       },
-                      "alignment": "left",
-                      "backgroundColor": "#271310",
-                      "color": "#ffffff",
-                      "borderRadius": 50,
-                      "fullWidth": false,
-                      "fontSize": 11,
-                      "fontFamily": "'Work Sans', Arial, sans-serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 1,
-                      "textTransform": "uppercase",
-                      "paddingX": 16,
-                      "paddingY": 8
+                      "alignment": "center",
+                      "backgroundColor": "#f5f0e8",
+                      "borderRadius": 12,
+                      "headingColor": "#1a1c1a",
+                      "headingFontFamily": "'Noto Serif', Georgia, serif",
+                      "headingFontSize": 16,
+                      "headingFontWeight": 700,
+                      "bodyColor": "#504442",
+                      "bodyFontFamily": "'Manrope', Arial, sans-serif",
+                      "bodyFontSize": 13,
+                      "badgeBackgroundColor": "#d4a54a",
+                      "badgeColor": "#0f0906",
+                      "badgeFontFamily": "'Work Sans', Arial, sans-serif",
+                      "badgeFontSize": 10,
+                      "badgeFontWeight": 700,
+                      "badgeLetterSpacing": 1,
+                      "badgeTextTransform": "uppercase",
+                      "buttonBackgroundColor": "#d4a54a",
+                      "buttonColor": "#0f0906",
+                      "buttonBorderRadius": 999,
+                      "buttonFontFamily": "'Work Sans', Arial, sans-serif",
+                      "buttonFontSize": 11,
+                      "buttonFontWeight": 700,
+                      "buttonTextTransform": "uppercase",
+                      "buttonLetterSpacing": 1,
+                      "iconSize": 40,
+                      "iconBackgroundColor": "#ffffff",
+                      "iconColor": "#d4a54a"
                     }
                   }
                 ]
               },
               {
                 "id": "m3-c2",
-                "backgroundColor": "#fed65b",
+                "backgroundColor": "#f5f0e8",
+                "borderRadius": 12,
                 "blocks": [
                   {
                     "id": "m3-c2b1",
-                    "type": "heading",
+                    "type": "card",
                     "data": {
-                      "text": "Curated Selection",
-                      "level": 4
+                      "icon": "☕",
+                      "heading": "In Your Box",
+                      "body": "Ethiopian Yirgacheffe — 250g\nBrew guide card\nFreshness seal guaranteed"
                     },
                     "style": {
                       "padding": {
-                        "top": 24,
-                        "right": 16,
-                        "bottom": 2,
-                        "left": 16
+                        "top": 8,
+                        "right": 8,
+                        "bottom": 8,
+                        "left": 8
                       },
-                      "alignment": "left",
-                      "color": "#271310",
-                      "fontSize": 11,
-                      "fontFamily": "'Work Sans', Arial, sans-serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 2,
-                      "textTransform": "uppercase"
-                    }
-                  },
-                  {
-                    "id": "m3-c2b2",
-                    "type": "heading",
-                    "data": {
-                      "text": "Highland Reserve",
-                      "level": 3
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 16,
-                        "bottom": 4,
-                        "left": 16
-                      },
-                      "alignment": "left",
-                      "color": "#271310",
-                      "fontSize": 20,
-                      "fontFamily": "'Noto Serif', Georgia, serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 0,
-                      "textTransform": "none"
-                    }
-                  },
-                  {
-                    "id": "m3-c2b3",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-size:13px;color:#3e2723;line-height:1.6;\">A single-origin Colombian with notes of dark chocolate, toasted walnut, and a smooth caramel finish.</p><p style=\"margin:8px 0 0;font-size:12px;color:#504442;\"><strong>Tasting Notes:</strong> Chocolate &bull; Walnut &bull; Caramel</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 16,
-                        "bottom": 24,
-                        "left": 16
-                      }
+                      "alignment": "center",
+                      "backgroundColor": "#f5f0e8",
+                      "borderRadius": 12,
+                      "headingColor": "#1a1c1a",
+                      "headingFontFamily": "'Noto Serif', Georgia, serif",
+                      "headingFontSize": 16,
+                      "headingFontWeight": 700,
+                      "bodyColor": "#504442",
+                      "bodyFontFamily": "'Manrope', Arial, sans-serif",
+                      "bodyFontSize": 13,
+                      "iconSize": 40,
+                      "iconBackgroundColor": "#ffffff",
+                      "iconColor": "#d4a54a"
                     }
                   }
                 ]
@@ -263,40 +197,31 @@
               "bottom": 0,
               "left": 20
             },
-            "gap": 12,
+            "gap": 16,
             "stackOnMobile": true
           }
         },
         {
           "id": "m3-b4",
-          "type": "divider",
+          "type": "spacer",
           "data": {},
           "style": {
-            "padding": {
-              "top": 24,
-              "right": 32,
-              "bottom": 24,
-              "left": 32
-            },
-            "color": "#e9c349",
-            "thickness": 1,
-            "width": 100
+            "height": 16
           }
         },
         {
           "id": "m3-b5",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;font-family:'Noto Serif',Georgia,serif;font-size:18px;color:#1a1c1a;font-weight:700;line-height:1.4;\">Brewing tips for this blend</p><p style=\"margin:12px 0 0;font-size:14px;color:#504442;line-height:1.7;\">Highland Reserve shines with a medium-coarse grind. For pour-over, use a 1:16 coffee-to-water ratio at 200°F. Let it bloom for 30 seconds, then pour in slow concentric circles. Total brew time: 3:30–4:00 minutes. For French press, steep for 4 minutes and plunge slowly.</p>",
-            "variables": []
-          },
+          "type": "divider",
+          "data": {},
           "style": {
             "padding": {
               "top": 0,
-              "right": 32,
+              "right": 24,
               "bottom": 0,
-              "left": 32
-            }
+              "left": 24
+            },
+            "lineColor": "#d4a54a",
+            "lineThickness": 2
           }
         },
         {
@@ -304,25 +229,92 @@
           "type": "spacer",
           "data": {},
           "style": {
-            "height": 24
+            "height": 16
           }
         },
         {
           "id": "m3-b7",
-          "type": "text",
+          "type": "heading",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:18px;font-style:italic;color:#1a1c1a;line-height:1.5;\">\"The best coffee is the one you share with someone.\"</p><p style=\"margin:12px 0 0;text-align:center;font-size:13px;color:#504442;\">— Meridian Coffee Co.</p>",
-            "variables": []
+            "text": "Brewing Tips",
+            "level": 2
           },
           "style": {
             "padding": {
-              "top": 24,
-              "right": 40,
-              "bottom": 24,
-              "left": 40
+              "top": 0,
+              "right": 32,
+              "bottom": 0,
+              "left": 32
             },
             "alignment": "center",
-            "backgroundColor": "#faf9f6"
+            "color": "#1a1c1a",
+            "fontSize": 22,
+            "fontFamily": "'Noto Serif', Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "m3-b8",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 8
+          }
+        },
+        {
+          "id": "m3-b9",
+          "type": "list",
+          "data": {
+            "items": [
+              {
+                "id": "m3-li1",
+                "icon": "01",
+                "text": "Let it rest",
+                "subtitle": "Wait 3-5 days after roast date for optimal flavor"
+              },
+              {
+                "id": "m3-li2",
+                "icon": "02",
+                "text": "Grind fresh",
+                "subtitle": "Medium grind for pour-over, fine for espresso"
+              },
+              {
+                "id": "m3-li3",
+                "icon": "03",
+                "text": "Water matters",
+                "subtitle": "Use filtered water at 92-96°C"
+              },
+              {
+                "id": "m3-li4",
+                "icon": "04",
+                "text": "Taste & adjust",
+                "subtitle": "Too bitter? Coarsen the grind. Too sour? Go finer."
+              }
+            ]
+          },
+          "style": {
+            "layout": "vertical",
+            "iconColor": "#d4a54a",
+            "iconSize": 24,
+            "iconBackgroundColor": "#f5f0e8",
+            "iconBorderRadius": 50,
+            "textColor": "#1a1c1a",
+            "textFontSize": 15,
+            "textFontWeight": 600,
+            "textFontFamily": "'Manrope', Arial, sans-serif",
+            "subtitleColor": "#504442",
+            "subtitleFontSize": 13,
+            "subtitleFontFamily": "'Manrope', Arial, sans-serif",
+            "backgroundColor": "#ffffff",
+            "borderRadius": 12,
+            "padding": {
+              "top": 24,
+              "right": 24,
+              "bottom": 24,
+              "left": 24
+            }
           }
         }
       ]
@@ -331,67 +323,56 @@
       "blocks": [
         {
           "id": "m3-f1",
-          "type": "heading",
-          "data": {
-            "text": "Meridian Coffee Co.",
-            "level": 3
-          },
+          "type": "divider",
+          "data": {},
           "style": {
             "padding": {
               "top": 24,
-              "right": 32,
-              "bottom": 4,
-              "left": 32
+              "right": 24,
+              "bottom": 0,
+              "left": 24
             },
-            "alignment": "center",
-            "color": "#271310",
-            "fontSize": 16,
-            "fontFamily": "'Noto Serif', Georgia, serif",
-            "fontWeight": 700,
-            "letterSpacing": 0,
-            "textTransform": "none"
+            "lineColor": "#d4a54a",
+            "lineThickness": 2
           }
         },
         {
           "id": "m3-f2",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#504442;\"><a href=\"#\" style=\"color:#504442;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;\">Shop</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Privacy Policy</a></p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#8a7b6b;font-family:'Manrope',Arial,sans-serif;\"><a href=\"#\" style=\"color:#8a7b6b;text-decoration:none;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#8a7b6b;text-decoration:none;\">Shop</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#8a7b6b;text-decoration:underline;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#8a7b6b;text-decoration:underline;\">Privacy Policy</a></p>",
             "variables": []
           },
           "style": {
             "padding": {
-              "top": 4,
+              "top": 16,
               "right": 32,
               "bottom": 8,
               "left": 32
             },
             "alignment": "center",
-            "backgroundColor": "#f4f3f1"
+            "backgroundColor": "#1a110b"
           }
         },
         {
           "id": "m3-f3",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#827472;\">© 2025 Meridian Coffee Co. All rights reserved.</p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#8a7b6b;font-family:'Manrope',Arial,sans-serif;\">&copy; 2025 Meridian Coffee Co. All rights reserved.</p>",
             "variables": []
           },
           "style": {
             "padding": {
-              "top": 8,
+              "top": 4,
               "right": 32,
               "bottom": 24,
               "left": 32
             },
             "alignment": "center",
-            "backgroundColor": "#f4f3f1"
+            "backgroundColor": "#1a110b"
           }
         }
       ]
     }
-  },
-  "tags": [
-    "transactional"
-  ]
+  }
 }
