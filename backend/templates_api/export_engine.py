@@ -394,6 +394,7 @@ def _render_button_block(block, ctx):
     style = block.get('style', {})
     padding = _padding_str(style.get('padding', {}))
     alignment = style.get('alignment', 'center')
+    full_width = style.get('fullWidth', False)
 
     text = html_module.escape(data.get('text', 'Click here'))
     url = html_module.escape(data.get('url', '#'))
@@ -404,16 +405,22 @@ def _render_button_block(block, ctx):
     font_family = style.get('fontFamily', ctx['default_font'])
     btn_padding = _padding_str(style.get('padding', {'top': 12, 'right': 24, 'bottom': 12, 'left': 24}))
 
+    width_attr = ' width="100%"' if full_width else ''
+    table_width_style = 'width: 100%;' if full_width else ''
+    btn_display = 'block' if full_width else 'inline-block'
+    btn_width = 'width: 100%;' if full_width else ''
+    vml_width = '100%' if full_width else '200px'
+
     return f"""<tr>
   <td style="padding: {padding};" align="{alignment}">
-    <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="{alignment}">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="{alignment}"{width_attr} style="{table_width_style}">
       <tr>
         <td style="border-radius: {border_radius}px; background-color: {bg_color};" align="center">
           <!--[if mso]>
           <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml"
                        xmlns:w="urn:schemas-microsoft-com:office:word"
                        href="{url}"
-                       style="height:44px;v-text-anchor:middle;width:200px;"
+                       style="height:44px;v-text-anchor:middle;width:{vml_width};"
                        arcsize="{int(border_radius / 44 * 100)}%" fillcolor="{bg_color}" strokecolor="{bg_color}">
             <w:anchorlock/>
             <center style="color:{text_color};font-family:{font_family};font-size:{font_size}px;">{text}</center>
@@ -421,9 +428,9 @@ def _render_button_block(block, ctx):
           <![endif]-->
           <!--[if !mso]><!-->
           <a href="{url}" target="_blank"
-             style="display: inline-block; padding: {btn_padding}; background-color: {bg_color};
+             style="display: {btn_display}; {btn_width} padding: {btn_padding}; background-color: {bg_color};
                     color: {text_color}; font-family: {font_family}; font-size: {font_size}px;
-                    text-decoration: none; border-radius: {border_radius}px;">
+                    text-decoration: none; border-radius: {border_radius}px; text-align: center;">
             {text}
           </a>
           <!--<![endif]-->
