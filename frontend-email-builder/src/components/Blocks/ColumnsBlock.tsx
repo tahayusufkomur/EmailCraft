@@ -19,10 +19,13 @@ interface NestedBlockWrapperProps {
 
 function NestedBlockWrapper({ block, parentBlockId, columnId }: NestedBlockWrapperProps) {
   const selectedBlockId = useEditorStore((s) => s.selectedBlockId);
+  const hoveredBlockId = useEditorStore((s) => s.hoveredBlockId);
   const selectBlock = useEditorStore((s) => s.selectBlock);
+  const hoverBlock = useEditorStore((s) => s.hoverBlock);
   const deleteBlock = useEditorStore((s) => s.deleteBlock);
   const duplicateBlock = useEditorStore((s) => s.duplicateBlock);
   const isSelected = selectedBlockId === block.id;
+  const isHovered = hoveredBlockId === block.id;
 
   const {
     attributes,
@@ -51,10 +54,18 @@ function NestedBlockWrapper({ block, parentBlockId, columnId }: NestedBlockWrapp
     <div
       ref={setNodeRef}
       style={style}
-      className={`block-wrapper nested-block-wrapper ${isSelected ? 'selected' : ''}`}
+      className={`block-wrapper nested-block-wrapper ${isSelected ? 'selected' : ''} ${isHovered ? 'hovered' : ''}`}
       onClick={(e) => {
         e.stopPropagation();
         selectBlock(block.id);
+      }}
+      onMouseEnter={(e) => {
+        e.stopPropagation();
+        hoverBlock(block.id);
+      }}
+      onMouseLeave={(e) => {
+        e.stopPropagation();
+        if (hoveredBlockId === block.id) hoverBlock(null);
       }}
     >
       <div className="block-toolbar">
