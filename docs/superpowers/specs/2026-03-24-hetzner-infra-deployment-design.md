@@ -2,7 +2,7 @@
 
 ## Overview
 
-Deploy MailCraft to a single Hetzner CX23 VPS in fsn1, using Docker Compose with Caddy auto-TLS, Cloudflare DNS, serving `emailcraft.contentor.app`. Terraform provisions infrastructure. Manual deploy via SSH + git pull.
+Deploy MailCraft to a single Hetzner CX23 VPS in fsn1, using Docker Compose with Caddy auto-TLS, Cloudflare DNS, serving `mailcraft.contentor.app`. Terraform provisions infrastructure. Manual deploy via SSH + git pull.
 
 ## Decisions
 
@@ -12,7 +12,7 @@ Deploy MailCraft to a single Hetzner CX23 VPS in fsn1, using Docker Compose with
 | Server | CX23, Ubuntu 24.04, fsn1 | Co-located with existing Hetzner Object Storage |
 | Reverse proxy | Caddy | Auto HTTPS via Let's Encrypt, zero cert maintenance |
 | Deployment | Git pull + rebuild on server | Simple, manual, no CI/CD overhead yet |
-| Domain | emailcraft.contentor.app | Subdomain of existing contentor.app in Cloudflare |
+| Domain | mailcraft.contentor.app | Subdomain of existing contentor.app in Cloudflare |
 | Routing | Path-based | `/api/*` → backend, `/builder/*` → builder, `/*` → site frontend |
 | Static files | WhiteNoise | Serves static files from Django in production without a separate file server |
 
@@ -44,7 +44,7 @@ Deploy MailCraft to a single Hetzner CX23 VPS in fsn1, using Docker Compose with
 
 **cloudflare_record.app**
 - Zone: `contentor.app` (looked up via data source)
-- Name: `emailcraft`
+- Name: `mailcraft`
 - Type: A
 - Content: server IPv4
 - Proxied: false (Caddy handles TLS directly)
@@ -58,7 +58,7 @@ Deploy MailCraft to a single Hetzner CX23 VPS in fsn1, using Docker Compose with
 variable "hcloud_token" {}
 variable "cloudflare_api_token" {}
 variable "cloudflare_zone_name" { default = "contentor.app" }
-variable "domain_prefix" { default = "emailcraft" }
+variable "domain_prefix" { default = "mailcraft" }
 variable "server_type" { default = "cx23" }
 variable "location" { default = "fsn1" }
 ```
@@ -67,8 +67,8 @@ variable "location" { default = "fsn1" }
 
 - `server_ipv4` — server public IP
 - `ssh_command` — `ssh root@<ip>`
-- `app_url` — `https://emailcraft.contentor.app`
-- `dns_record` — `emailcraft.contentor.app`
+- `app_url` — `https://mailcraft.contentor.app`
+- `dns_record` — `mailcraft.contentor.app`
 
 ## Docker Compose Stack (Production)
 
@@ -132,7 +132,7 @@ backend (gunicorn + WhiteNoise, Django) ←→ postgres:5432
 The existing nginx dev config maps `/api/` → `/api/v1/` (proxy_pass rewrite). Caddy must replicate this. `/admin/` and `/static/` must preserve their paths.
 
 ```
-emailcraft.contentor.app {
+mailcraft.contentor.app {
     request_body {
         max_size 50MB
     }
@@ -265,7 +265,7 @@ File: `/opt/mailcraft/.env.prod` (on server, not in git)
 APP_ENV=prod
 DJANGO_DEBUG=False
 DJANGO_SECRET_KEY=<generate with: python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())">
-DJANGO_ALLOWED_HOSTS=emailcraft.contentor.app
+DJANGO_ALLOWED_HOSTS=mailcraft.contentor.app
 
 # Database
 DB_ENGINE=django.db.backends.postgresql
@@ -276,8 +276,8 @@ DB_HOST=postgres
 DB_PORT=5432
 
 # CORS & CSRF
-CORS_ALLOWED_ORIGINS=https://emailcraft.contentor.app
-CSRF_TRUSTED_ORIGINS=https://emailcraft.contentor.app
+CORS_ALLOWED_ORIGINS=https://mailcraft.contentor.app
+CSRF_TRUSTED_ORIGINS=https://mailcraft.contentor.app
 
 # S3 (existing Hetzner Object Storage)
 AWS_ACCESS_KEY_ID=<existing>
@@ -292,8 +292,8 @@ AWS_REGION=fsn1
 STRIPE_API_KEY=<prod-stripe-secret>
 STRIPE_PUBLIC_KEY=<prod-stripe-public>
 STRIPE_WEBHOOK_SECRET=<prod-webhook-secret>
-STRIPE_SUCCESS_URL=https://emailcraft.contentor.app/pricing?status=success
-STRIPE_CANCEL_URL=https://emailcraft.contentor.app/pricing?status=cancelled
+STRIPE_SUCCESS_URL=https://mailcraft.contentor.app/pricing?status=success
+STRIPE_CANCEL_URL=https://mailcraft.contentor.app/pricing?status=cancelled
 
 # Google OAuth
 GOOGLE_CLIENT_ID=<prod>
@@ -309,7 +309,7 @@ GOOGLE_CLIENT_SECRET=<prod>
 # DEFAULT_FROM_EMAIL=noreply@contentor.app
 
 # Domain
-DOMAIN=emailcraft.contentor.app
+DOMAIN=mailcraft.contentor.app
 ```
 
 ## Django Production Settings Changes

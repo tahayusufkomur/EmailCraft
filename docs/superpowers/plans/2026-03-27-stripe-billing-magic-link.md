@@ -398,7 +398,7 @@ def _get_base_url():
     origins = getattr(settings, 'CSRF_TRUSTED_ORIGINS', [])
     if origins:
         return origins[0].rstrip('/')
-    return 'https://emailcraft.contentor.app'
+    return 'https://mailcraft.contentor.app'
 ```
 
 - [ ] **Step 3: Verify backend starts**

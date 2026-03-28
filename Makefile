@@ -175,7 +175,7 @@ deploy: ## Deploy latest changes to production
 	@git push origin main
 	@echo "Deploying to production..."
 	@ssh $(PROD_HOST) "cd $(PROD_DIR) && git pull origin main && $(PROD_COMPOSE) up --build -d && $(PROD_COMPOSE) exec -T backend python manage.py migrate"
-	@echo "Deploy complete: https://emailcraft.contentor.app"
+	@echo "Deploy complete: https://mailcraft.contentor.app"
 
 deploy-logs: ## Tail production logs
 	@ssh $(PROD_HOST) "cd $(PROD_DIR) && $(PROD_COMPOSE) logs -f --tail=100"

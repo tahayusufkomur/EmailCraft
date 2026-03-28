@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Deploy MailCraft to a Hetzner CX23 VPS at `emailcraft.contentor.app` with Docker Compose, Caddy auto-TLS, and Cloudflare DNS, provisioned by Terraform.
+**Goal:** Deploy MailCraft to a Hetzner CX23 VPS at `mailcraft.contentor.app` with Docker Compose, Caddy auto-TLS, and Cloudflare DNS, provisioned by Terraform.
 
 **Architecture:** Single VPS running Docker Compose: Caddy (auto-TLS reverse proxy), Django backend (gunicorn + WhiteNoise), two Vite frontends (nginx static), Postgres. Terraform provisions the server, firewall, and DNS. Manual deploy via SSH + git pull.
 
@@ -447,7 +447,7 @@ Create `docker/.env.prod.example`:
 APP_ENV=prod
 DJANGO_DEBUG=False
 DJANGO_SECRET_KEY=  # Generate: python3 -c "import secrets; print(secrets.token_urlsafe(64))"
-DJANGO_ALLOWED_HOSTS=emailcraft.contentor.app
+DJANGO_ALLOWED_HOSTS=mailcraft.contentor.app
 
 # Database
 DB_ENGINE=django.db.backends.postgresql
@@ -458,8 +458,8 @@ DB_HOST=postgres
 DB_PORT=5432
 
 # CORS & CSRF
-CORS_ALLOWED_ORIGINS=https://emailcraft.contentor.app
-CSRF_TRUSTED_ORIGINS=https://emailcraft.contentor.app
+CORS_ALLOWED_ORIGINS=https://mailcraft.contentor.app
+CSRF_TRUSTED_ORIGINS=https://mailcraft.contentor.app
 
 # S3 (Hetzner Object Storage)
 AWS_ACCESS_KEY_ID=
@@ -474,15 +474,15 @@ AWS_REGION=fsn1
 STRIPE_API_KEY=
 STRIPE_PUBLIC_KEY=
 STRIPE_WEBHOOK_SECRET=
-STRIPE_SUCCESS_URL=https://emailcraft.contentor.app/pricing?status=success
-STRIPE_CANCEL_URL=https://emailcraft.contentor.app/pricing?status=cancelled
+STRIPE_SUCCESS_URL=https://mailcraft.contentor.app/pricing?status=success
+STRIPE_CANCEL_URL=https://mailcraft.contentor.app/pricing?status=cancelled
 
 # Google OAuth
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 
 # Domain (used by Caddyfile)
-DOMAIN=emailcraft.contentor.app
+DOMAIN=mailcraft.contentor.app
 ```
 
 - [ ] **Step 2: Update root .gitignore**
@@ -565,7 +565,7 @@ variable "cloudflare_zone_name" {
 
 variable "domain_prefix" {
   description = "Subdomain prefix for the app"
-  default     = "emailcraft"
+  default     = "mailcraft"
 }
 
 variable "server_type" {
@@ -907,10 +907,10 @@ docker compose -f docker/docker-compose.prod.yml --env-file .env.prod exec backe
 - [ ] **Step 5: Verify the site is live**
 
 Visit in browser:
-- `https://emailcraft.contentor.app` — should show the site frontend
-- `https://emailcraft.contentor.app/builder/` — should show the email builder
-- `https://emailcraft.contentor.app/api/templates/` — should return API response (or auth error)
-- `https://emailcraft.contentor.app/admin/` — should show Django admin login
+- `https://mailcraft.contentor.app` — should show the site frontend
+- `https://mailcraft.contentor.app/builder/` — should show the email builder
+- `https://mailcraft.contentor.app/api/templates/` — should return API response (or auth error)
+- `https://mailcraft.contentor.app/admin/` — should show Django admin login
 
 If any route fails, check Caddy logs:
 
@@ -921,7 +921,7 @@ docker compose -f docker/docker-compose.prod.yml logs caddy
 - [ ] **Step 6: Verify HTTPS certificate**
 
 ```bash
-curl -I https://emailcraft.contentor.app
+curl -I https://mailcraft.contentor.app
 ```
 
 Expected: `HTTP/2 200` with valid TLS (Caddy auto-provisions Let's Encrypt cert).
