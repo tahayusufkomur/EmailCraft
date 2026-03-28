@@ -52,6 +52,7 @@ class OrganizationSerializer(serializers.ModelSerializer):
                   'show_logo', 'show_export_html_button', 'theme_mode',
                   'builder_theme',
                   'email_background_style', 'email_background_color',
+                  'default_palette', 'custom_palette',
                   'created_at']
         read_only_fields = ['id', 'created_at']
 
@@ -137,6 +138,8 @@ class SiteOrganizationCreateSerializer(serializers.Serializer):
         required=False,
         default='#f4f4f4',
     )
+    default_palette = serializers.CharField(max_length=50, required=False, default='')
+    custom_palette = serializers.JSONField(required=False, default=dict)
 
     def validate_available_variables(self, value):
         return validate_organization_variables(value)
@@ -167,6 +170,8 @@ class SiteOrganizationUpdateSerializer(serializers.Serializer):
         regex=r'^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$',
         required=False,
     )
+    default_palette = serializers.CharField(max_length=50, required=False)
+    custom_palette = serializers.JSONField(required=False)
 
     def validate_available_variables(self, value):
         return validate_organization_variables(value)

@@ -251,6 +251,8 @@ def _build_session_config_response(org, session_token, expires_at):
                 'builder_theme': org.builder_theme,
                 'email_background_style': org.email_background_style,
                 'email_background_color': org.email_background_color,
+                'default_palette': org.default_palette,
+                'custom_palette': org.custom_palette,
             },
         },
     })

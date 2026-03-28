@@ -112,6 +112,8 @@ class Organization(models.Model):
         default='none',
     )
     email_background_color = models.CharField(max_length=20, default='#f4f4f4')
+    default_palette = models.CharField(max_length=50, blank=True, default='')
+    custom_palette = models.JSONField(default=dict, blank=True)
     builder_theme = models.CharField(max_length=30, choices=BUILDER_THEME_CHOICES, default='light-breeze')
     test_key_version = models.PositiveIntegerField(default=1)
     is_active = models.BooleanField(default=True)

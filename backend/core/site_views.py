@@ -272,6 +272,8 @@ def site_organization_detail(request, organization_id):
         'builder_theme',
         'email_background_style',
         'email_background_color',
+        'default_palette',
+        'custom_palette',
     ]:
         if field in data:
             setattr(org, field, data[field])
