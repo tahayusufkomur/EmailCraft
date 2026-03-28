@@ -4,7 +4,7 @@
   "template": {
     "version": 1,
     "settings": {
-      "backgroundColor": "#faf9f6",
+      "backgroundColor": "#0f0906",
       "backgroundStyle": "none",
       "bodyBackgroundStyle": "solid",
       "bodyBackgroundColor": "#ffffff",
@@ -32,7 +32,7 @@
               "left": 32
             },
             "alignment": "center",
-            "color": "#271310",
+            "color": "#d4a54a",
             "fontSize": 13,
             "fontFamily": "'Work Sans', Arial, sans-serif",
             "fontWeight": 700,
@@ -49,10 +49,10 @@
           "type": "hero",
           "data": {
             "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuDTu-2B3-ihUujuLePIHXqYFNR_DAlkNeaiYzA8S6eCTbFCw3DNjoF_jtpQRLfOANnaZbFjUp0BF0_3_LB0IszhEEZQ1TYt2cNX7vaTzH_C8O-jSSJ1W7M2rbcQyjuevk6b8FICfAUilrVLBeD0uOCvJAz77w_zRmbtDHaDZMgcXNwAtL1ZvtGyabldGrmyzQJQ5Gc84r51fsdJvS-tYNKpYnvws4yQ3Nz7-u01B9uyItRZwrZa_uuoonFK6-n-KC_2G4EWGRZN6Pk",
-            "heading": "We've saved your seat at the bar",
-            "subheading": "",
-            "buttonText": "",
-            "buttonUrl": ""
+            "heading": "A Lot Has Changed",
+            "subheading": "New roasts, new origins, same obsession with quality",
+            "buttonText": "EXPLORE NEW ARRIVALS →",
+            "buttonUrl": "https://"
           },
           "style": {
             "padding": {
@@ -61,468 +61,45 @@
               "bottom": 0,
               "left": 0
             },
-            "height": 420,
-            "overlayColor": "#271310",
+            "height": 360,
+            "overlayColor": "#0f0906",
             "overlayOpacity": 0.55,
             "headingColor": "#ffffff",
             "headingFontSize": 34,
             "headingFontFamily": "'Noto Serif', Georgia, serif",
             "subheadingColor": "#ffffffcc",
+            "buttonBackgroundColor": "#d4a54a",
+            "buttonTextColor": "#0f0906",
+            "buttonBorderRadius": 999,
             "contentAlignment": "center",
             "verticalAlignment": "middle"
           }
         },
         {
           "id": "m4-b2",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:18px;font-style:italic;color:#504442;line-height:1.6;\">The roast hasn't been the same without you.</p>",
-            "variables": []
-          },
+          "type": "spacer",
+          "data": {},
           "style": {
-            "padding": {
-              "top": 28,
-              "right": 40,
-              "bottom": 8,
-              "left": 40
-            },
-            "alignment": "center"
+            "height": 24
           }
         },
         {
           "id": "m4-b3",
-          "type": "divider",
-          "data": {},
-          "style": {
-            "padding": {
-              "top": 8,
-              "right": 180,
-              "bottom": 8,
-              "left": 180
-            },
-            "color": "#e9c349",
-            "thickness": 1,
-            "width": 100
-          }
-        },
-        {
-          "id": "m4-b4",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:14px;color:#504442;line-height:1.7;\">It's been a while since your last order, and we wanted to reach out. Our roasters have been busy crafting new blends and perfecting seasonal favorites—and we think you'd love what's new.</p>",
-            "variables": []
-          },
-          "style": {
-            "padding": {
-              "top": 8,
-              "right": 40,
-              "bottom": 24,
-              "left": 40
-            },
-            "alignment": "center"
-          }
-        },
-        {
-          "id": "m4-b5",
           "type": "heading",
           "data": {
-            "text": "WHATS NEW AT THE ROASTERY",
-            "level": 3
+            "text": "What's New",
+            "level": 2
           },
           "style": {
             "padding": {
-              "top": 16,
+              "top": 0,
               "right": 32,
-              "bottom": 16,
-              "left": 32
-            },
-            "alignment": "center",
-            "color": "#735c00",
-            "fontSize": 11,
-            "fontFamily": "'Work Sans', Arial, sans-serif",
-            "fontWeight": 700,
-            "letterSpacing": 3,
-            "textTransform": "uppercase"
-          }
-        },
-        {
-          "id": "m4-b6",
-          "type": "columns",
-          "data": {
-            "columnCount": 2,
-            "columnRatio": [
-              40,
-              60
-            ],
-            "columns": [
-              {
-                "id": "m4-c1",
-                "backgroundColor": "#faf9f6",
-                "blocks": [
-                  {
-                    "id": "m4-c1b1",
-                    "type": "image",
-                    "data": {
-                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuC6L0OOH7z0CDpah2upyR5Syq02oVKvBlVEoaXOwJPPR_xk_reMzyH9lxtLjQLt59qF3IHdZwjlAdKfrHbu14CK7wWDxoviq8S_pwFiAqdu3fzI8nZfy37QfnpQcQdIcpKL8We-9bM8VsQP4dUbeTpEzhCTwIja-LXKV2BA48y93dftpwLx-m6NXM8Zi63zdPzz61FyXdAov3itDlXZoTKlzeMwxi-Y_CdTDXiDJSh-zHnORFqRFE5qiFiJKrRUnL823_mFeTpX-6g",
-                      "alt": "Single-origin beans"
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 12,
-                        "right": 8,
-                        "bottom": 12,
-                        "left": 12
-                      },
-                      "borderRadius": 12,
-                      "maxWidth": "100%"
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "m4-c2",
-                "backgroundColor": "#faf9f6",
-                "blocks": [
-                  {
-                    "id": "m4-c2b1",
-                    "type": "heading",
-                    "data": {
-                      "text": "Single-Origin Beans",
-                      "level": 3
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 20,
-                        "right": 16,
-                        "bottom": 4,
-                        "left": 8
-                      },
-                      "alignment": "left",
-                      "color": "#1a1c1a",
-                      "fontSize": 18,
-                      "fontFamily": "'Noto Serif', Georgia, serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 0,
-                      "textTransform": "none"
-                    }
-                  },
-                  {
-                    "id": "m4-c2b2",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-size:13px;color:#504442;line-height:1.6;\">New arrivals from Guatemala and Rwanda. Bright acidity, floral notes, and a clean finish.</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 16,
-                        "bottom": 16,
-                        "left": 8
-                      }
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "style": {
-            "padding": {
-              "top": 0,
-              "right": 20,
-              "bottom": 8,
-              "left": 20
-            },
-            "gap": 0,
-            "stackOnMobile": true
-          }
-        },
-        {
-          "id": "m4-b7",
-          "type": "columns",
-          "data": {
-            "columnCount": 2,
-            "columnRatio": [
-              60,
-              40
-            ],
-            "columns": [
-              {
-                "id": "m4-c3",
-                "backgroundColor": "#fed65b",
-                "blocks": [
-                  {
-                    "id": "m4-c3b1",
-                    "type": "heading",
-                    "data": {
-                      "text": "Cold Brew Concentrate",
-                      "level": 3
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 20,
-                        "right": 8,
-                        "bottom": 4,
-                        "left": 16
-                      },
-                      "alignment": "left",
-                      "color": "#271310",
-                      "fontSize": 18,
-                      "fontFamily": "'Noto Serif', Georgia, serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 0,
-                      "textTransform": "none"
-                    }
-                  },
-                  {
-                    "id": "m4-c3b2",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-size:13px;color:#3e2723;line-height:1.6;\">Slow-steeped for 18 hours. Rich, smooth, and ready to dilute your way. Summer's favorite.</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 8,
-                        "bottom": 16,
-                        "left": 16
-                      }
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "m4-c4",
-                "backgroundColor": "#fed65b",
-                "blocks": [
-                  {
-                    "id": "m4-c4b1",
-                    "type": "image",
-                    "data": {
-                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCLudqIp2L3-oddj0y4JTXi_0psuwSNFxbU13xgUaKszh9cgSLkAs7VfrNQRtoX7gI6FYFWAu5znaTqHQTJ92cM7_4Eg9mS0PCFQUwNRrX0JyYj64iGS8112hbufjebIG2sWpNXDIYSj41lXBJADnz1OawO0k5pa2tMaYs_Ez3PKaQEw-w-6m-VJDr-YgQn5Ht93kVWI385lzGZQvjJI0Li6tJZ1W5NWR_-12ycJikYy95IxE482DlpcYH7wRSyGqOU6c8fPEql0Lg",
-                      "alt": "Cold brew concentrate"
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 12,
-                        "right": 12,
-                        "bottom": 12,
-                        "left": 8
-                      },
-                      "borderRadius": 12,
-                      "maxWidth": "100%"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "style": {
-            "padding": {
-              "top": 0,
-              "right": 20,
-              "bottom": 8,
-              "left": 20
-            },
-            "gap": 0,
-            "stackOnMobile": true
-          }
-        },
-        {
-          "id": "m4-b8",
-          "type": "columns",
-          "data": {
-            "columnCount": 2,
-            "columnRatio": [
-              40,
-              60
-            ],
-            "columns": [
-              {
-                "id": "m4-c5",
-                "backgroundColor": "#efeeeb",
-                "blocks": [
-                  {
-                    "id": "m4-c5b1",
-                    "type": "image",
-                    "data": {
-                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuAOjLKVsxFUlckI6kyxMpg_aDJ03WjkoipUWfSX5s2av7du5XSuyHCsVrFTobr-Ey8r8Uk-v6ZKnLkfkNmqNKk6wsiekD6I-KVRUhjSoNAl59E2rTzvtMOXBr1whMIj-3IiIiGiC_Xi9lVncoQn2I-VQGjEizxH475VyOwRKxWl5AiTLvUID_wEipdd-WWo2hlwC04Nz-S6N4n4Ko8YIps2zPa3iMh6wzDPm5ml5oTTqQZvO5Ig9Itn8MQg5tgG8RFEA463LwBjCNY",
-                      "alt": "Espresso blend"
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 12,
-                        "right": 8,
-                        "bottom": 12,
-                        "left": 12
-                      },
-                      "borderRadius": 12,
-                      "maxWidth": "100%"
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "m4-c6",
-                "backgroundColor": "#efeeeb",
-                "blocks": [
-                  {
-                    "id": "m4-c6b1",
-                    "type": "heading",
-                    "data": {
-                      "text": "Espresso Blend No. 7",
-                      "level": 3
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 20,
-                        "right": 16,
-                        "bottom": 4,
-                        "left": 8
-                      },
-                      "alignment": "left",
-                      "color": "#1a1c1a",
-                      "fontSize": 18,
-                      "fontFamily": "'Noto Serif', Georgia, serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 0,
-                      "textTransform": "none"
-                    }
-                  },
-                  {
-                    "id": "m4-c6b2",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-size:13px;color:#504442;line-height:1.6;\">Our darkest roast yet. Bold, syrupy body with notes of baker's chocolate and smoked walnut.</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 16,
-                        "bottom": 16,
-                        "left": 8
-                      }
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "style": {
-            "padding": {
-              "top": 0,
-              "right": 20,
               "bottom": 0,
-              "left": 20
-            },
-            "gap": 0,
-            "stackOnMobile": true
-          }
-        },
-        {
-          "id": "m4-b9",
-          "type": "spacer",
-          "data": {},
-          "style": {
-            "height": 24
-          }
-        },
-        {
-          "id": "m4-b10",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:24px;color:#ffffff;font-weight:700;line-height:1.4;\">Come back for a free bag on us</p><p style=\"margin:12px 0 0;text-align:center;font-size:14px;color:#ffffffcc;line-height:1.6;\">Use code <strong style=\"color:#fed65b;\">WELCOME-BACK</strong> at checkout for a complimentary 250g bag of any blend in our collection.</p>",
-            "variables": []
-          },
-          "style": {
-            "padding": {
-              "top": 32,
-              "right": 40,
-              "bottom": 8,
-              "left": 40
-            },
-            "alignment": "center",
-            "backgroundGradient": "linear-gradient(135deg, #271310 0%, #3e2723 100%)"
-          }
-        },
-        {
-          "id": "m4-b11",
-          "type": "button",
-          "data": {
-            "text": "RECLAIM YOUR RITUAL",
-            "url": "https://"
-          },
-          "style": {
-            "padding": {
-              "top": 8,
-              "right": 40,
-              "bottom": 32,
-              "left": 40
-            },
-            "alignment": "center",
-            "backgroundColor": "#ffffff",
-            "color": "#271310",
-            "borderRadius": 50,
-            "fullWidth": false,
-            "fontSize": 12,
-            "fontFamily": "'Work Sans', Arial, sans-serif",
-            "fontWeight": 700,
-            "letterSpacing": 1,
-            "textTransform": "uppercase",
-            "paddingX": 24,
-            "paddingY": 12,
-            "backgroundGradient": "linear-gradient(135deg, #271310 0%, #3e2723 100%)"
-          }
-        },
-        {
-          "id": "m4-b12",
-          "type": "spacer",
-          "data": {},
-          "style": {
-            "height": 24
-          }
-        },
-        {
-          "id": "m4-b13",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:18px;font-style:italic;color:#1a1c1a;line-height:1.5;\">\"Life's too short for bad coffee.\"</p><p style=\"margin:12px 0 0;text-align:center;font-size:13px;color:#504442;\">— Meridian Coffee Co.</p>",
-            "variables": []
-          },
-          "style": {
-            "padding": {
-              "top": 24,
-              "right": 40,
-              "bottom": 24,
-              "left": 40
-            },
-            "alignment": "center",
-            "backgroundColor": "#faf9f6"
-          }
-        }
-      ]
-    },
-    "footer": {
-      "blocks": [
-        {
-          "id": "m4-f1",
-          "type": "heading",
-          "data": {
-            "text": "Meridian Coffee Co.",
-            "level": 3
-          },
-          "style": {
-            "padding": {
-              "top": 24,
-              "right": 32,
-              "bottom": 4,
               "left": 32
             },
             "alignment": "center",
-            "color": "#271310",
-            "fontSize": 16,
+            "color": "#1a1c1a",
+            "fontSize": 26,
             "fontFamily": "'Noto Serif', Georgia, serif",
             "fontWeight": 700,
             "letterSpacing": 0,
@@ -530,28 +107,476 @@
           }
         },
         {
-          "id": "m4-f2",
+          "id": "m4-b4",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 8
+          }
+        },
+        {
+          "id": "m4-b5",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [50, 50],
+            "columns": [
+              {
+                "id": "m4-b5-c1",
+                "blocks": [
+                  {
+                    "id": "m4-b5-c1-img",
+                    "type": "image",
+                    "data": {
+                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuC6L0OOH7z0CDpah2upyR5Syq02oVKvBlVEoaXOwJPPR_xk_reMzyH9lxtLjQLt59qF3IHdZwjlAdKfrHbu14CK7wWDxoviq8S_pwFiAqdu3fzI8nZfy37QfnpQcQdIcpKL8We-9bM8VsQP4dUbeTpEzhCTwIja-LXKV2BA48y93dftpwLx-m6NXM8Zi63zdPzz61FyXdAov3itDlXZoTKlzeMwxi-Y_CdTDXiDJSh-zHnORFqRFE5qiFiJKrRUnL823_mFeTpX-6g",
+                      "alt": "Guatemala Antigua beans"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 8,
+                        "bottom": 8,
+                        "left": 8
+                      },
+                      "borderRadius": 12,
+                      "maxWidth": "100%"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "m4-b5-c2",
+                "blocks": [
+                  {
+                    "id": "m4-b5-c2-card",
+                    "type": "card",
+                    "data": {
+                      "showIcon": false,
+                      "iconMode": "emoji",
+                      "iconEmoji": "",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "showBadge": true,
+                      "badgeText": "NEW ARRIVAL",
+                      "heading": "Guatemala Antigua",
+                      "body": "Rich, full-bodied with notes of dark chocolate and toasted almond.",
+                      "showButton": true,
+                      "buttonText": "ORDER →",
+                      "buttonUrl": "https://"
+                    },
+                    "style": {
+                      "padding": { "top": 20, "right": 16, "bottom": 20, "left": 16 },
+                      "backgroundColor": "#f5f0e8",
+                      "borderRadius": 12,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "none",
+                      "iconSize": 48,
+                      "iconBackgroundColor": "#f5f0e8",
+                      "iconBorderRadius": 50,
+                      "badgeBackgroundColor": "#d4a54a",
+                      "badgeTextColor": "#0f0906",
+                      "headingColor": "#1a1c1a",
+                      "headingFontSize": 18,
+                      "headingFontFamily": "'Noto Serif', Georgia, serif",
+                      "headingFontWeight": 700,
+                      "bodyColor": "#504442",
+                      "bodyFontSize": 13,
+                      "bodyFontFamily": "'Manrope', Arial, sans-serif",
+                      "buttonBackgroundColor": "#d4a54a",
+                      "buttonTextColor": "#0f0906",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 11,
+                      "buttonFontFamily": "'Work Sans', Arial, sans-serif",
+                      "buttonFontWeight": 700,
+                      "buttonPaddingX": 20,
+                      "buttonPaddingY": 10,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "none",
+                      "buttonBorderColor": "#d4a54a",
+                      "buttonBorderWidth": 0,
+                      "contentAlignment": "center"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 16,
+              "bottom": 0,
+              "left": 16
+            },
+            "gap": 16,
+            "stackOnMobile": true
+          }
+        },
+        {
+          "id": "m4-b6",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 16
+          }
+        },
+        {
+          "id": "m4-b7",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 16,
+              "bottom": 0,
+              "left": 16
+            },
+            "color": "#d4a54a",
+            "thickness": 2,
+            "width": 100
+          }
+        },
+        {
+          "id": "m4-b8",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 16
+          }
+        },
+        {
+          "id": "m4-b9",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [50, 50],
+            "columns": [
+              {
+                "id": "m4-b9-c1",
+                "blocks": [
+                  {
+                    "id": "m4-b9-c1-card",
+                    "type": "card",
+                    "data": {
+                      "showIcon": false,
+                      "iconMode": "emoji",
+                      "iconEmoji": "",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "showBadge": true,
+                      "badgeText": "NEW ARRIVAL",
+                      "heading": "Sumatra Mandheling",
+                      "body": "Earthy, syrupy, with a long chocolate finish. Our darkest roast.",
+                      "showButton": true,
+                      "buttonText": "ORDER →",
+                      "buttonUrl": "https://"
+                    },
+                    "style": {
+                      "padding": { "top": 20, "right": 16, "bottom": 20, "left": 16 },
+                      "backgroundColor": "#f5f0e8",
+                      "borderRadius": 12,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "none",
+                      "iconSize": 48,
+                      "iconBackgroundColor": "#f5f0e8",
+                      "iconBorderRadius": 50,
+                      "badgeBackgroundColor": "#d4a54a",
+                      "badgeTextColor": "#0f0906",
+                      "headingColor": "#1a1c1a",
+                      "headingFontSize": 18,
+                      "headingFontFamily": "'Noto Serif', Georgia, serif",
+                      "headingFontWeight": 700,
+                      "bodyColor": "#504442",
+                      "bodyFontSize": 13,
+                      "bodyFontFamily": "'Manrope', Arial, sans-serif",
+                      "buttonBackgroundColor": "#d4a54a",
+                      "buttonTextColor": "#0f0906",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 11,
+                      "buttonFontFamily": "'Work Sans', Arial, sans-serif",
+                      "buttonFontWeight": 700,
+                      "buttonPaddingX": 20,
+                      "buttonPaddingY": 10,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "none",
+                      "buttonBorderColor": "#d4a54a",
+                      "buttonBorderWidth": 0,
+                      "contentAlignment": "center"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "m4-b9-c2",
+                "blocks": [
+                  {
+                    "id": "m4-b9-c2-img",
+                    "type": "image",
+                    "data": {
+                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCLudqIp2L3-oddj0y4JTXi_0psuwSNFxbU13xgUaKszh9cgSLkAs7VfrNQRtoX7gI6FYFWAu5znaTqHQTJ92cM7_4Eg9mS0PCFQUwNRrX0JyYj64iGS8112hbufjebIG2sWpNXDIYSj41lXBJADnz1OawO0k5pa2tMaYs_Ez3PKaQEw-w-6m-VJDr-YgQn5Ht93kVWI385lzGZQvjJI0Li6tJZ1W5NWR_-12ycJikYy95IxE482DlpcYH7wRSyGqOU6c8fPEql0Lg",
+                      "alt": "Sumatra Mandheling beans"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 8,
+                        "bottom": 8,
+                        "left": 8
+                      },
+                      "borderRadius": 12,
+                      "maxWidth": "100%"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 16,
+              "bottom": 0,
+              "left": 16
+            },
+            "gap": 16,
+            "stackOnMobile": true
+          }
+        },
+        {
+          "id": "m4-b10",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 16
+          }
+        },
+        {
+          "id": "m4-b11",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 16,
+              "bottom": 0,
+              "left": 16
+            },
+            "color": "#d4a54a",
+            "thickness": 2,
+            "width": 100
+          }
+        },
+        {
+          "id": "m4-b12",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 16
+          }
+        },
+        {
+          "id": "m4-b13",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [50, 50],
+            "columns": [
+              {
+                "id": "m4-b13-c1",
+                "blocks": [
+                  {
+                    "id": "m4-b13-c1-img",
+                    "type": "image",
+                    "data": {
+                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuAOjLKVsxFUlckI6kyxMpg_aDJ03WjkoipUWfSX5s2av7du5XSuyHCsVrFTobr-Ey8r8Uk-v6ZKnLkfkNmqNKk6wsiekD6I-KVRUhjSoNAl59E2rTzvtMOXBr1whMIj-3IiIiGiC_Xi9lVncoQn2I-VQGjEizxH475VyOwRKxWl5AiTLvUID_wEipdd-WWo2hlwC04Nz-S6N4n4Ko8YIps2zPa3iMh6wzDPm5ml5oTTqQZvO5Ig9Itn8MQg5tgG8RFEA463LwBjCNY",
+                      "alt": "Costa Rica Tarrazú beans"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 8,
+                        "bottom": 8,
+                        "left": 8
+                      },
+                      "borderRadius": 12,
+                      "maxWidth": "100%"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "m4-b13-c2",
+                "blocks": [
+                  {
+                    "id": "m4-b13-c2-card",
+                    "type": "card",
+                    "data": {
+                      "showIcon": false,
+                      "iconMode": "emoji",
+                      "iconEmoji": "",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "showBadge": true,
+                      "badgeText": "BESTSELLER",
+                      "heading": "Costa Rica Tarrazú",
+                      "body": "Honey-processed with bright acidity and caramel sweetness.",
+                      "showButton": true,
+                      "buttonText": "ORDER →",
+                      "buttonUrl": "https://"
+                    },
+                    "style": {
+                      "padding": { "top": 20, "right": 16, "bottom": 20, "left": 16 },
+                      "backgroundColor": "#f5f0e8",
+                      "borderRadius": 12,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "none",
+                      "iconSize": 48,
+                      "iconBackgroundColor": "#f5f0e8",
+                      "iconBorderRadius": 50,
+                      "badgeBackgroundColor": "#d4a54a",
+                      "badgeTextColor": "#0f0906",
+                      "headingColor": "#1a1c1a",
+                      "headingFontSize": 18,
+                      "headingFontFamily": "'Noto Serif', Georgia, serif",
+                      "headingFontWeight": 700,
+                      "bodyColor": "#504442",
+                      "bodyFontSize": 13,
+                      "bodyFontFamily": "'Manrope', Arial, sans-serif",
+                      "buttonBackgroundColor": "#d4a54a",
+                      "buttonTextColor": "#0f0906",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 11,
+                      "buttonFontFamily": "'Work Sans', Arial, sans-serif",
+                      "buttonFontWeight": 700,
+                      "buttonPaddingX": 20,
+                      "buttonPaddingY": 10,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "none",
+                      "buttonBorderColor": "#d4a54a",
+                      "buttonBorderWidth": 0,
+                      "contentAlignment": "center"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 16,
+              "bottom": 0,
+              "left": 16
+            },
+            "gap": 16,
+            "stackOnMobile": true
+          }
+        },
+        {
+          "id": "m4-b14",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
+          }
+        },
+        {
+          "id": "m4-b15",
+          "type": "card",
+          "data": {
+            "showIcon": false,
+            "iconMode": "emoji",
+            "iconEmoji": "",
+            "iconImageSrc": "",
+            "iconImageAlt": "",
+            "showBadge": true,
+            "badgeText": "EXCLUSIVE",
+            "heading": "Welcome Back",
+            "body": "15% off your next order. Because good taste deserves a second chance.",
+            "showButton": true,
+            "buttonText": "USE CODE: WELCOME15 →",
+            "buttonUrl": "https://"
+          },
+          "style": {
+            "padding": { "top": 32, "right": 24, "bottom": 32, "left": 24 },
+            "backgroundColor": "#1a110b",
+            "borderRadius": 12,
+            "borderWidth": 0,
+            "borderColor": "#d4a54a",
+            "borderStyle": "none",
+            "iconSize": 48,
+            "iconBackgroundColor": "#1a110b",
+            "iconBorderRadius": 50,
+            "badgeBackgroundColor": "#d4a54a",
+            "badgeTextColor": "#0f0906",
+            "headingColor": "#f5f0e8",
+            "headingFontSize": 22,
+            "headingFontFamily": "'Noto Serif', Georgia, serif",
+            "headingFontWeight": 700,
+            "bodyColor": "#8a7b6b",
+            "bodyFontSize": 14,
+            "bodyFontFamily": "'Manrope', Arial, sans-serif",
+            "buttonBackgroundColor": "#d4a54a",
+            "buttonTextColor": "#0f0906",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 11,
+            "buttonFontFamily": "'Work Sans', Arial, sans-serif",
+            "buttonFontWeight": 700,
+            "buttonPaddingX": 24,
+            "buttonPaddingY": 12,
+            "buttonFullWidth": false,
+            "buttonBorderStyle": "none",
+            "buttonBorderColor": "#d4a54a",
+            "buttonBorderWidth": 0,
+            "contentAlignment": "center"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": [
+        {
+          "id": "m4-f0",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 0,
+              "left": 32
+            },
+            "color": "#d4a54a",
+            "thickness": 1,
+            "width": 100
+          }
+        },
+        {
+          "id": "m4-f1",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#504442;\"><a href=\"#\" style=\"color:#504442;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;\">Shop</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#504442;text-decoration:underline;\">Privacy Policy</a></p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#8a7b6b;\"><a href=\"#\" style=\"color:#8a7b6b;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#8a7b6b;\">Shop</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#8a7b6b;text-decoration:underline;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#8a7b6b;text-decoration:underline;\">Privacy Policy</a></p>",
             "variables": []
           },
           "style": {
             "padding": {
-              "top": 4,
+              "top": 20,
               "right": 32,
               "bottom": 8,
               "left": 32
             },
             "alignment": "center",
-            "backgroundColor": "#f4f3f1"
+            "backgroundColor": "#1a110b"
           }
         },
         {
-          "id": "m4-f3",
+          "id": "m4-f2",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#827472;\">© 2025 Meridian Coffee Co. All rights reserved.</p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#504442;\">© 2025 Meridian Coffee Co. All rights reserved.</p>",
             "variables": []
           },
           "style": {
@@ -562,7 +587,7 @@
               "left": 32
             },
             "alignment": "center",
-            "backgroundColor": "#f4f3f1"
+            "backgroundColor": "#1a110b"
           }
         }
       ]
