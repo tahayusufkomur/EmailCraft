@@ -246,6 +246,8 @@ class TestTemplateBackgroundStyles(TestCase):
 
 
 from django.contrib.auth.models import User
+from django.core.management import call_command
+from io import StringIO
 from core.models import Account, Organization, Plan, UserOrganization
 from templates_api.models import Template
 
@@ -335,3 +337,56 @@ class TestProvisionTemplatesForOrg(TestCase):
         self.assertEqual(copy.is_premium, self.gallery_free.is_premium)
         self.assertFalse(copy.is_gallery)
         self.assertFalse(copy.is_draft)
+
+
+class TestSyncGalleryToOrgs(TestCase):
+    def setUp(self):
+        self.free_plan, _ = Plan.objects.get_or_create(
+            slug='free', defaults={'name': 'Free', 'monthly_price_usd': 0, 'is_default': True, 'sort_order': 0},
+        )
+        self.user = User.objects.create_user(username='syncuser', password='pass')
+        self.org = Organization.objects.create(name='Sync Org', email='sync@example.com')
+        UserOrganization.objects.create(user=self.user, organization=self.org, role='owner')
+        Account.objects.create(user=self.user, plan=self.free_plan)
+
+        self.gallery = Template.objects.create(
+            org=None, name='Gallery Template', json_data={'version': 1, 'body': 'original'},
+            is_gallery=True, is_premium=False, category='welcome',
+        )
+
+    def test_sync_creates_copies_for_orgs(self):
+        out = StringIO()
+        call_command('sync_gallery_to_orgs', stdout=out)
+        copies = Template.objects.for_org(self.org).filter(source_template=self.gallery)
+        self.assertEqual(copies.count(), 1)
+
+    def test_sync_updates_unmodified_copies(self):
+        from templates_api.services import provision_templates_for_org
+        provision_templates_for_org(self.org)
+        self.gallery.json_data = {'version': 2, 'body': 'updated'}
+        self.gallery.name = 'Updated Gallery Template'
+        self.gallery.save()
+
+        out = StringIO()
+        call_command('sync_gallery_to_orgs', stdout=out)
+
+        copy = Template.objects.for_org(self.org).get(source_template=self.gallery)
+        self.assertEqual(copy.json_data, {'version': 2, 'body': 'updated'})
+        self.assertEqual(copy.name, 'Updated Gallery Template')
+
+    def test_sync_preserves_modified_copies(self):
+        from templates_api.services import provision_templates_for_org
+        provision_templates_for_org(self.org)
+        copy = Template.objects.for_org(self.org).get(source_template=self.gallery)
+        copy.json_data = {'version': 1, 'body': 'custom'}
+        copy.is_modified = True
+        copy.save()
+
+        self.gallery.json_data = {'version': 2, 'body': 'updated'}
+        self.gallery.save()
+
+        out = StringIO()
+        call_command('sync_gallery_to_orgs', stdout=out)
+
+        copy.refresh_from_db()
+        self.assertEqual(copy.json_data, {'version': 1, 'body': 'custom'})
