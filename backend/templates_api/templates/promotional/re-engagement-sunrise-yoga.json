@@ -140,7 +140,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "✨",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -150,7 +150,8 @@
                       "body": "Fresh sequences designed to energize your day. 6:30 AM and 7:30 AM daily.",
                       "showButton": false,
                       "buttonText": "",
-                      "buttonUrl": "https://"
+                      "buttonUrl": "https://",
+                      "iconName": "sparkles"
                     },
                     "style": {
                       "padding": {
@@ -188,7 +189,8 @@
                       "buttonBorderStyle": "solid",
                       "buttonBorderColor": "#e8913a",
                       "buttonBorderWidth": 0,
-                      "contentAlignment": "center"
+                      "contentAlignment": "center",
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]
@@ -201,7 +203,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🌿",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -211,7 +213,8 @@
                       "body": "Weekly breathwork sessions to deepen your practice and calm your mind.",
                       "showButton": false,
                       "buttonText": "",
-                      "buttonUrl": "https://"
+                      "buttonUrl": "https://",
+                      "iconName": "leaf"
                     },
                     "style": {
                       "padding": {
@@ -249,7 +252,8 @@
                       "buttonBorderStyle": "solid",
                       "buttonBorderColor": "#e8913a",
                       "buttonBorderWidth": 0,
-                      "contentAlignment": "center"
+                      "contentAlignment": "center",
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]

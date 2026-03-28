@@ -135,7 +135,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🌊",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -145,7 +145,8 @@
                       "body": "Dynamic sequences that move like water. Energize your mornings.",
                       "showButton": false,
                       "buttonText": "",
-                      "buttonUrl": ""
+                      "buttonUrl": "",
+                      "iconName": "wind"
                     },
                     "style": {
                       "padding": {
@@ -183,7 +184,8 @@
                       "buttonBorderStyle": "none",
                       "buttonBorderColor": "#5ee8c5",
                       "buttonBorderWidth": 0,
-                      "contentAlignment": "center"
+                      "contentAlignment": "center",
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]
@@ -196,7 +198,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🕯️",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -206,7 +208,8 @@
                       "body": "Weekly sessions combining meditation with healing frequencies.",
                       "showButton": false,
                       "buttonText": "",
-                      "buttonUrl": ""
+                      "buttonUrl": "",
+                      "iconName": "lightbulb"
                     },
                     "style": {
                       "padding": {
@@ -244,7 +247,8 @@
                       "buttonBorderStyle": "none",
                       "buttonBorderColor": "#5ee8c5",
                       "buttonBorderWidth": 0,
-                      "contentAlignment": "center"
+                      "contentAlignment": "center",
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]
@@ -257,7 +261,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🌙",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -267,7 +271,8 @@
                       "body": "Wind down with deep stretches and guided relaxation.",
                       "showButton": false,
                       "buttonText": "",
-                      "buttonUrl": ""
+                      "buttonUrl": "",
+                      "iconName": "moon"
                     },
                     "style": {
                       "padding": {
@@ -305,7 +310,8 @@
                       "buttonBorderStyle": "none",
                       "buttonBorderColor": "#5ee8c5",
                       "buttonBorderWidth": 0,
-                      "contentAlignment": "center"
+                      "contentAlignment": "center",
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]

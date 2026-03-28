@@ -192,8 +192,9 @@ export interface CardBlock extends BaseBlock {
   type: 'card';
   data: {
     showIcon: boolean;
-    iconMode: 'emoji' | 'image';
+    iconMode: 'emoji' | 'image' | 'lucide';
     iconEmoji: string;
+    iconName: string;
     iconImageSrc: string;
     iconImageAlt: string;
     showBadge: boolean;
@@ -210,6 +211,7 @@ export interface CardBlock extends BaseBlock {
     borderColor: string;
     borderStyle: 'solid' | 'dashed' | 'dotted' | 'none';
     iconSize: number;
+    iconColor: string;
     iconBackgroundColor: string;
     iconBorderRadius: number;
     badgeBackgroundColor: string;
@@ -240,6 +242,8 @@ export interface CardBlock extends BaseBlock {
 export interface ListItem {
   id: string;
   icon: string;
+  iconMode?: 'text' | 'lucide';
+  iconName?: string;
   text: string;
   subtitle: string;
 }

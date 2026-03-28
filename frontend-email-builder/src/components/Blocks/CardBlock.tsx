@@ -3,6 +3,7 @@ import type { CardBlock as CardBlockType } from '../../types/blocks';
 import { useEditorStore } from '../../store/editorStore';
 import { useInlineEdit } from '../../hooks/useInlineEdit';
 import { highlightVariables } from '../../lib/variableUtils';
+import { lucideSvgString } from '../../lib/lucideIcons';
 
 interface Props {
   block: CardBlockType;
@@ -63,7 +64,26 @@ export function CardBlock({ block }: Props) {
       {/* Icon */}
       {data.showIcon && (
         <div style={{ marginBottom: 12 }}>
-          {data.iconMode === 'emoji' ? (
+          {data.iconMode === 'lucide' ? (
+            <span
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: style.iconSize ?? 48,
+                height: style.iconSize ?? 48,
+                borderRadius: `${style.iconBorderRadius ?? 50}%`,
+                backgroundColor: style.iconBackgroundColor ?? '#eef2ff',
+              }}
+              dangerouslySetInnerHTML={{
+                __html: lucideSvgString(
+                  data.iconName || 'sparkles',
+                  Math.round((style.iconSize ?? 48) * 0.5),
+                  style.iconColor ?? '#4f46e5',
+                ),
+              }}
+            />
+          ) : data.iconMode === 'emoji' ? (
             <span
               style={{
                 display: 'inline-flex',

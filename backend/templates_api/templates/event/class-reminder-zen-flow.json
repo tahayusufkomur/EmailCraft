@@ -107,7 +107,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🧘",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -117,7 +117,8 @@
                       "buttonText": "",
                       "buttonUrl": "",
                       "showBadge": true,
-                      "badgeText": "TOMORROW 8 AM"
+                      "badgeText": "TOMORROW 8 AM",
+                      "iconName": "yoga-pose"
                     },
                     "style": {
                       "backgroundColor": "#e8f5f0",
@@ -146,7 +147,8 @@
                         "right": 24,
                         "bottom": 24,
                         "left": 24
-                      }
+                      },
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]
@@ -159,7 +161,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "📍",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -169,7 +171,8 @@
                       "buttonText": "",
                       "buttonUrl": "",
                       "showBadge": false,
-                      "badgeText": ""
+                      "badgeText": "",
+                      "iconName": "map-pin"
                     },
                     "style": {
                       "backgroundColor": "#e8f5f0",
@@ -193,7 +196,8 @@
                         "right": 24,
                         "bottom": 24,
                         "left": 24
-                      }
+                      },
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]
@@ -224,7 +228,7 @@
           "type": "card",
           "data": {
             "showIcon": true,
-            "iconMode": "emoji",
+            "iconMode": "lucide",
             "iconEmoji": "🌿",
             "iconImageSrc": "",
             "iconImageAlt": "",
@@ -234,7 +238,8 @@
             "buttonText": "View Class Details →",
             "buttonUrl": "#",
             "showBadge": false,
-            "badgeText": ""
+            "badgeText": "",
+            "iconName": "leaf"
           },
           "style": {
             "backgroundColor": "#132e27",
@@ -276,7 +281,8 @@
               "right": 20,
               "bottom": 0,
               "left": 20
-            }
+            },
+            "iconColor": "#0a1a16"
           }
         },
         {

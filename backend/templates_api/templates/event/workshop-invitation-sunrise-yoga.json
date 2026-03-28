@@ -2,7 +2,9 @@
   "name": "Workshop Invitation — Sunrise Yoga",
   "category": "event",
   "is_premium": true,
-  "tags": ["event"],
+  "tags": [
+    "event"
+  ],
   "template": {
     "version": 1,
     "settings": {
@@ -21,9 +23,17 @@
         {
           "id": "sun-e2-h1",
           "type": "heading",
-          "data": { "text": "SUNRISE YOGA", "level": 3 },
+          "data": {
+            "text": "SUNRISE YOGA",
+            "level": 3
+          },
           "style": {
-            "padding": { "top": 28, "right": 32, "bottom": 24, "left": 32 },
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
             "alignment": "center",
             "color": "#e8913a",
             "fontSize": 10,
@@ -65,14 +75,21 @@
             "buttonFontWeight": 700,
             "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
             "contentAlignment": "center",
-            "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
           }
         },
         {
           "id": "sun-e2-b2",
           "type": "spacer",
           "data": {},
-          "style": { "height": 24 }
+          "style": {
+            "height": 24
+          }
         },
         {
           "id": "sun-e2-b3",
@@ -87,7 +104,12 @@
             "badgeText": "Special Guest"
           },
           "style": {
-            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+            "padding": {
+              "top": 24,
+              "right": 24,
+              "bottom": 24,
+              "left": 24
+            },
             "backgroundColor": "#ffffff",
             "imageSize": 96,
             "imageBorderRadius": 50,
@@ -108,14 +130,21 @@
             "borderColor": "#e2e8f0",
             "borderStyle": "solid",
             "contentAlignment": "center",
-            "outerPadding": { "top": 0, "right": 24, "bottom": 0, "left": 24 }
+            "outerPadding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 0,
+              "left": 24
+            }
           }
         },
         {
           "id": "sun-e2-b4",
           "type": "spacer",
           "data": {},
-          "style": { "height": 24 }
+          "style": {
+            "height": 24
+          }
         },
         {
           "id": "sun-e2-b5",
@@ -123,11 +152,19 @@
           "style": {
             "gap": 16,
             "stackOnMobile": true,
-            "padding": { "top": 0, "right": 24, "bottom": 0, "left": 24 }
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 0,
+              "left": 24
+            }
           },
           "data": {
             "columnCount": 2,
-            "columnRatio": [50, 50],
+            "columnRatio": [
+              50,
+              50
+            ],
             "columns": [
               {
                 "id": "sun-e2-col1",
@@ -138,7 +175,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "✨",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -148,7 +185,8 @@
                       "buttonText": "",
                       "buttonUrl": "",
                       "showBadge": false,
-                      "badgeText": ""
+                      "badgeText": "",
+                      "iconName": "sparkles"
                     },
                     "style": {
                       "backgroundColor": "#fef5f0",
@@ -167,7 +205,12 @@
                       "iconBorderRadius": 50,
                       "iconBackgroundColor": "#ffffff",
                       "contentAlignment": "center",
-                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      },
                       "badgeBackgroundColor": "#e8913a",
                       "badgeTextColor": "#1c1008",
                       "buttonBackgroundColor": "#e8913a",
@@ -181,7 +224,8 @@
                       "buttonFullWidth": false,
                       "buttonBorderStyle": "solid",
                       "buttonBorderColor": "#e8913a",
-                      "buttonBorderWidth": 0
+                      "buttonBorderWidth": 0,
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]
@@ -195,7 +239,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🎒",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -205,7 +249,8 @@
                       "buttonText": "",
                       "buttonUrl": "",
                       "showBadge": false,
-                      "badgeText": ""
+                      "badgeText": "",
+                      "iconName": "shopping-bag"
                     },
                     "style": {
                       "backgroundColor": "#fef5f0",
@@ -224,7 +269,12 @@
                       "iconBorderRadius": 50,
                       "iconBackgroundColor": "#ffffff",
                       "contentAlignment": "center",
-                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      },
                       "badgeBackgroundColor": "#e8913a",
                       "badgeTextColor": "#1c1008",
                       "buttonBackgroundColor": "#e8913a",
@@ -238,7 +288,8 @@
                       "buttonFullWidth": false,
                       "buttonBorderStyle": "solid",
                       "buttonBorderColor": "#e8913a",
-                      "buttonBorderWidth": 0
+                      "buttonBorderWidth": 0,
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]
@@ -250,7 +301,9 @@
           "id": "sun-e2-b6",
           "type": "spacer",
           "data": {},
-          "style": { "height": 24 }
+          "style": {
+            "height": 24
+          }
         },
         {
           "id": "sun-e2-b7",
@@ -300,7 +353,12 @@
             "iconBorderRadius": 50,
             "iconBackgroundColor": "#1c1008",
             "contentAlignment": "center",
-            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 }
+            "padding": {
+              "top": 24,
+              "right": 24,
+              "bottom": 24,
+              "left": 24
+            }
           }
         }
       ]
@@ -316,7 +374,12 @@
             "lineColor": "#e8913a",
             "lineThickness": 2,
             "spacing": 0,
-            "padding": { "top": 24, "right": 32, "bottom": 8, "left": 32 }
+            "padding": {
+              "top": 24,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
           }
         },
         {
@@ -328,7 +391,12 @@
           },
           "style": {
             "alignment": "center",
-            "padding": { "top": 8, "right": 32, "bottom": 8, "left": 32 }
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
           }
         },
         {
@@ -340,7 +408,12 @@
           },
           "style": {
             "alignment": "center",
-            "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 }
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            }
           }
         }
       ]

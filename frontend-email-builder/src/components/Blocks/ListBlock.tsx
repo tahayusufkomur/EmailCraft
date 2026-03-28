@@ -1,4 +1,5 @@
 import type { ListBlock as ListBlockType } from '../../types/blocks';
+import { lucideSvgString } from '../../lib/lucideIcons';
 
 interface Props {
   block: ListBlockType;
@@ -40,18 +41,39 @@ export function ListBlock({ block }: Props) {
               textAlign: 'left',
             }}
           >
-            <span
-              style={{
-                fontSize: style.iconSize ?? 20,
-                color: style.iconColor ?? '#4f46e5',
-                lineHeight: 1,
-                flexShrink: 0,
-                width: (style.iconSize ?? 20) + 4,
-                textAlign: 'center',
-              }}
-            >
-              {item.icon || '•'}
-            </span>
+            {item.iconMode === 'lucide' && item.iconName ? (
+              <span
+                style={{
+                  lineHeight: 1,
+                  flexShrink: 0,
+                  width: (style.iconSize ?? 20) + 4,
+                  textAlign: 'center',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: lucideSvgString(
+                    item.iconName,
+                    style.iconSize ?? 20,
+                    style.iconColor ?? '#4f46e5',
+                  ),
+                }}
+              />
+            ) : (
+              <span
+                style={{
+                  fontSize: style.iconSize ?? 20,
+                  color: style.iconColor ?? '#4f46e5',
+                  lineHeight: 1,
+                  flexShrink: 0,
+                  width: (style.iconSize ?? 20) + 4,
+                  textAlign: 'center',
+                }}
+              >
+                {item.icon || '•'}
+              </span>
+            )}
             <div>
               <span
                 style={{

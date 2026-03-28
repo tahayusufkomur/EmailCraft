@@ -663,6 +663,19 @@ def _render_card_block(block, ctx):
             src = html_module.escape(data['iconImageSrc'])
             alt = html_module.escape(data.get('iconImageAlt', ''))
             icon_html = f'<img src="{src}" alt="{alt}" width="{icon_size}" height="{icon_size}" style="border-radius: {icon_radius}%; display: block; margin: 0 auto 12px;" />'
+        elif data.get('iconMode') == 'lucide' and data.get('iconName'):
+            from templates_api.lucide_icons import lucide_data_uri
+            icon_color = style.get('iconColor', '#4f46e5')
+            icon_bg = style.get('iconBackgroundColor', '#eef2ff')
+            svg_size = int(icon_size * 0.5)
+            data_uri = lucide_data_uri(data['iconName'], svg_size, icon_color)
+            if data_uri:
+                icon_html = (
+                    f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 12px;">'
+                    f'<tr><td style="width: {icon_size}px; height: {icon_size}px; border-radius: {icon_radius}%; background-color: {icon_bg}; text-align: center; vertical-align: middle;">'
+                    f'<img src="{data_uri}" width="{svg_size}" height="{svg_size}" alt="" style="display: inline-block; vertical-align: middle;" />'
+                    f'</td></tr></table>'
+                )
         else:
             emoji = data.get('iconEmoji', '✨')
             icon_bg = style.get('iconBackgroundColor', '#eef2ff')
@@ -870,7 +883,6 @@ def _render_list_block(block, ctx):
     is_horiz = style.get('layout') == 'horizontal'
 
     def render_item(item, pad_bottom=True):
-        icon = html_module.escape(item.get('icon', '•'))
         text = html_module.escape(item.get('text', ''))
         subtitle = item.get('subtitle', '')
         sub_html = ''
@@ -882,10 +894,29 @@ def _render_list_block(block, ctx):
             )
         v_align = 'top' if subtitle else 'middle'
         pad_top = '2px' if subtitle else '0'
+
+        # Render icon: Lucide SVG or text/emoji
+        item_icon_mode = item.get('iconMode', 'text')
+        item_icon_name = item.get('iconName', '')
+        if item_icon_mode == 'lucide' and item_icon_name:
+            from templates_api.lucide_icons import lucide_data_uri
+            data_uri = lucide_data_uri(item_icon_name, icon_size, icon_color)
+            icon_cell = (
+                f'<td style="width: {icon_size + 4}px; text-align: center; vertical-align: {v_align}; '
+                f'line-height: 1; padding-top: {pad_top};">'
+                f'<img src="{data_uri}" width="{icon_size}" height="{icon_size}" alt="" style="display: inline-block; vertical-align: middle;" />'
+                f'</td>'
+            )
+        else:
+            icon = html_module.escape(item.get('icon', '•'))
+            icon_cell = (
+                f'<td style="width: {icon_size + 4}px; text-align: center; vertical-align: {v_align}; '
+                f'font-size: {icon_size}px; color: {icon_color}; line-height: 1; padding-top: {pad_top};">{icon}</td>'
+            )
+
         return (
             f'<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>'
-            f'<td style="width: {icon_size + 4}px; text-align: center; vertical-align: {v_align}; '
-            f'font-size: {icon_size}px; color: {icon_color}; line-height: 1; padding-top: {pad_top};">{icon}</td>'
+            f'{icon_cell}'
             f'<td style="padding-left: 10px; vertical-align: top;">'
             f'<span style="color: {txt_color}; font-size: {txt_size}px; font-family: {txt_font}; '
             f'font-weight: {txt_weight}; line-height: 1.4;">{text}</span>'

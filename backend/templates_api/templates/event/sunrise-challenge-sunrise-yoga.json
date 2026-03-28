@@ -120,7 +120,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🌅",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -130,7 +130,8 @@
                       "buttonText": "",
                       "buttonUrl": "",
                       "showBadge": false,
-                      "badgeText": ""
+                      "badgeText": "",
+                      "iconName": "sunrise"
                     },
                     "style": {
                       "backgroundColor": "#2a1a0e",
@@ -168,7 +169,8 @@
                       "buttonFullWidth": false,
                       "buttonBorderStyle": "solid",
                       "buttonBorderColor": "#e8913a",
-                      "buttonBorderWidth": 0
+                      "buttonBorderWidth": 0,
+                      "iconColor": "#1c1008"
                     }
                   }
                 ]
@@ -181,7 +183,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🔥",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -191,7 +193,8 @@
                       "buttonText": "",
                       "buttonUrl": "",
                       "showBadge": false,
-                      "badgeText": ""
+                      "badgeText": "",
+                      "iconName": "flame"
                     },
                     "style": {
                       "backgroundColor": "#2a1a0e",
@@ -229,7 +232,8 @@
                       "buttonFullWidth": false,
                       "buttonBorderStyle": "solid",
                       "buttonBorderColor": "#e8913a",
-                      "buttonBorderWidth": 0
+                      "buttonBorderWidth": 0,
+                      "iconColor": "#1c1008"
                     }
                   }
                 ]
@@ -242,7 +246,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "📱",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -252,7 +256,8 @@
                       "buttonText": "",
                       "buttonUrl": "",
                       "showBadge": false,
-                      "badgeText": ""
+                      "badgeText": "",
+                      "iconName": "smartphone"
                     },
                     "style": {
                       "backgroundColor": "#2a1a0e",
@@ -290,7 +295,8 @@
                       "buttonFullWidth": false,
                       "buttonBorderStyle": "solid",
                       "buttonBorderColor": "#e8913a",
-                      "buttonBorderWidth": 0
+                      "buttonBorderWidth": 0,
+                      "iconColor": "#1c1008"
                     }
                   }
                 ]
@@ -311,7 +317,7 @@
           "type": "card",
           "data": {
             "showIcon": true,
-            "iconMode": "emoji",
+            "iconMode": "lucide",
             "iconEmoji": "📋",
             "iconImageSrc": "",
             "iconImageAlt": "",
@@ -321,7 +327,8 @@
             "body": "Each morning builds on the last. Start with gentle sun salutations, build toward full vinyasa flows by day 7.",
             "showButton": true,
             "buttonText": "See Full Schedule →",
-            "buttonUrl": "#"
+            "buttonUrl": "#",
+            "iconName": "clipboard-list"
           },
           "style": {
             "padding": {
@@ -359,7 +366,8 @@
             "buttonBorderStyle": "solid",
             "buttonBorderColor": "#e8913a",
             "buttonBorderWidth": 0,
-            "contentAlignment": "center"
+            "contentAlignment": "center",
+            "iconColor": "#fef5f0"
           }
         },
         {

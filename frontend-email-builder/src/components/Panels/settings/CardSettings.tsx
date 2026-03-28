@@ -1,9 +1,14 @@
+import { useRef, useState, useMemo } from 'react';
 import type { CardBlock } from '../../../types/blocks';
 import { useEditorStore } from '../../../store/editorStore';
 import { SliderInput } from './SliderInput';
 import { AlignmentPicker } from './AlignmentPicker';
 import { SpacingControl } from './SpacingControl';
 import { FONT_OPTIONS } from '../../../lib/fonts';
+import { ALL_ICON_NAMES, iconLabel, lucideSvgString } from '../../../lib/lucideIcons';
+import { MediaLibraryModal } from '../../Media/MediaLibraryModal';
+import { api } from '../../../lib/api';
+import { EmojiPicker } from './EmojiPicker';
 
 interface Props {
   block: CardBlock;
@@ -36,69 +41,7 @@ export function CardSettings({ block }: Props) {
           </label>
         </div>
         {data.showIcon && (
-          <>
-            <div className="form-group">
-              <label>Mode</label>
-              <div style={{ display: 'flex', gap: 4 }}>
-                <button
-                  type="button"
-                  className={`btn btn-sm ${data.iconMode === 'emoji' ? 'btn-primary' : ''}`}
-                  onClick={() => updateData({ iconMode: 'emoji' })}
-                >
-                  Emoji
-                </button>
-                <button
-                  type="button"
-                  className={`btn btn-sm ${data.iconMode === 'image' ? 'btn-primary' : ''}`}
-                  onClick={() => updateData({ iconMode: 'image' })}
-                >
-                  Image
-                </button>
-              </div>
-            </div>
-            {data.iconMode === 'emoji' ? (
-              <div className="form-group">
-                <label>Emoji</label>
-                <input
-                  type="text"
-                  value={data.iconEmoji}
-                  onChange={(e) => updateData({ iconEmoji: e.target.value })}
-                  style={{ width: 60, fontSize: 20, textAlign: 'center' }}
-                />
-              </div>
-            ) : (
-              <>
-                <div className="form-group">
-                  <label>Image URL</label>
-                  <input
-                    type="text"
-                    value={data.iconImageSrc}
-                    onChange={(e) => updateData({ iconImageSrc: e.target.value })}
-                    placeholder="https://..."
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Alt Text</label>
-                  <input
-                    type="text"
-                    value={data.iconImageAlt}
-                    onChange={(e) => updateData({ iconImageAlt: e.target.value })}
-                  />
-                </div>
-              </>
-            )}
-            <SliderInput label="Size" value={style.iconSize} min={24} max={96} onChange={(v) => updateStyle({ iconSize: v })} />
-            <SliderInput label="Border Radius %" value={style.iconBorderRadius} min={0} max={50} onChange={(v) => updateStyle({ iconBorderRadius: v })} />
-            {data.iconMode === 'emoji' && (
-              <div className="form-group">
-                <label>Background</label>
-                <div className="color-input-row">
-                  <input type="color" value={style.iconBackgroundColor || '#eef2ff'} onChange={(e) => updateStyle({ iconBackgroundColor: e.target.value })} />
-                  <input type="text" value={style.iconBackgroundColor || '#eef2ff'} onChange={(e) => updateStyle({ iconBackgroundColor: e.target.value })} />
-                </div>
-              </div>
-            )}
-          </>
+          <CardIconSettings data={data} style={style} updateData={updateData} updateStyle={updateStyle} />
         )}
       </div>
 
@@ -288,5 +231,149 @@ export function CardSettings({ block }: Props) {
         <SpacingControl value={style.padding || { top: 24, right: 24, bottom: 24, left: 24 }} onChange={(v) => updateStyle({ padding: v })} />
       </div>
     </div>
+  );
+}
+
+/* ---- Icon sub-section extracted for clarity ---- */
+
+function CardIconSettings({ data, style, updateData, updateStyle }: {
+  data: CardBlock['data'];
+  style: CardBlock['style'];
+  updateData: (u: Partial<CardBlock['data']>) => void;
+  updateStyle: (u: Partial<CardBlock['style']>) => void;
+}) {
+  const [iconSearch, setIconSearch] = useState('');
+
+  const filteredIcons = useMemo(() => {
+    const q = iconSearch.trim().toLowerCase();
+    const names = q ? ALL_ICON_NAMES.filter((n) => n.includes(q) || iconLabel(n).toLowerCase().includes(q)) : ALL_ICON_NAMES;
+    return names.slice(0, 120);
+  }, [iconSearch]);
+
+  return (
+    <>
+      <div className="form-group">
+        <label>Mode</label>
+        <div style={{ display: 'flex', gap: 4 }}>
+          <button type="button" className={`btn btn-sm ${data.iconMode === 'lucide' ? 'btn-primary' : ''}`} onClick={() => updateData({ iconMode: 'lucide' })}>Icon</button>
+          <button type="button" className={`btn btn-sm ${data.iconMode === 'emoji' ? 'btn-primary' : ''}`} onClick={() => updateData({ iconMode: 'emoji' })}>Emoji</button>
+          <button type="button" className={`btn btn-sm ${data.iconMode === 'image' ? 'btn-primary' : ''}`} onClick={() => updateData({ iconMode: 'image' })}>Image</button>
+        </div>
+      </div>
+
+      {data.iconMode === 'lucide' && (
+        <>
+          <div className="form-group">
+            <label>Search Icons</label>
+            <input type="text" value={iconSearch} onChange={(e) => setIconSearch(e.target.value)} placeholder="Search..." style={{ fontSize: 12 }} />
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 4, maxHeight: 160, overflowY: 'auto', marginBottom: 8 }}>
+            {filteredIcons.map((name) => (
+              <button
+                key={name}
+                type="button"
+                title={iconLabel(name)}
+                onClick={() => updateData({ iconName: name })}
+                style={{
+                  padding: 6, border: data.iconName === name ? '2px solid #6366f1' : '1px solid var(--border-color, #e2e8f0)',
+                  borderRadius: 6, background: 'var(--panel-bg, #fff)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}
+                dangerouslySetInnerHTML={{ __html: lucideSvgString(name, 18, data.iconName === name ? '#6366f1' : '#64748b') }}
+              />
+            ))}
+          </div>
+          <div className="form-group">
+            <label>Icon Color</label>
+            <div className="color-input-row">
+              <input type="color" value={style.iconColor || '#4f46e5'} onChange={(e) => updateStyle({ iconColor: e.target.value })} />
+              <input type="text" value={style.iconColor || '#4f46e5'} onChange={(e) => updateStyle({ iconColor: e.target.value })} />
+            </div>
+          </div>
+        </>
+      )}
+
+      {data.iconMode === 'emoji' && (
+        <div className="form-group">
+          <label>Emoji</label>
+          <EmojiPicker value={data.iconEmoji} onChange={(emoji) => updateData({ iconEmoji: emoji })} />
+        </div>
+      )}
+
+      {data.iconMode === 'image' && (
+        <CardIconImagePicker data={data} updateData={updateData} />
+      )}
+
+      <SliderInput label="Size" value={style.iconSize} min={24} max={96} onChange={(v) => updateStyle({ iconSize: v })} />
+      <SliderInput label="Border Radius %" value={style.iconBorderRadius} min={0} max={50} onChange={(v) => updateStyle({ iconBorderRadius: v })} />
+      {data.iconMode !== 'image' && (
+        <div className="form-group">
+          <label>Background</label>
+          <div className="color-input-row">
+            <input type="color" value={style.iconBackgroundColor || '#eef2ff'} onChange={(e) => updateStyle({ iconBackgroundColor: e.target.value })} />
+            <input type="text" value={style.iconBackgroundColor || '#eef2ff'} onChange={(e) => updateStyle({ iconBackgroundColor: e.target.value })} />
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+function CardIconImagePicker({ data, updateData }: {
+  data: CardBlock['data'];
+  updateData: (u: Partial<CardBlock['data']>) => void;
+}) {
+  const [showMedia, setShowMedia] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const result = await api.uploadImage(file);
+      updateData({ iconImageSrc: result.file_url });
+    } catch {
+      // silent fail
+    } finally {
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = '';
+    }
+  };
+
+  return (
+    <>
+      {data.iconImageSrc && (
+        <div style={{ marginBottom: 8, textAlign: 'center' }}>
+          <img src={data.iconImageSrc} alt={data.iconImageAlt || ''} style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover', border: '1px solid var(--border-color, #e2e8f0)' }} />
+        </div>
+      )}
+      <div style={{ display: 'flex', gap: 4, marginBottom: 8 }}>
+        <button type="button" className="btn btn-sm" onClick={() => setShowMedia(true)} style={{ flex: 1, fontSize: 11 }}>
+          Browse Media
+        </button>
+        <button type="button" className="btn btn-sm btn-primary" onClick={() => fileRef.current?.click()} disabled={uploading} style={{ flex: 1, fontSize: 11 }}>
+          {uploading ? 'Uploading...' : 'Upload'}
+        </button>
+        <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleUpload} />
+      </div>
+      <div className="form-group">
+        <label>Image URL</label>
+        <input type="text" value={data.iconImageSrc} onChange={(e) => updateData({ iconImageSrc: e.target.value })} placeholder="https://..." style={{ fontSize: 11 }} />
+      </div>
+      <div className="form-group">
+        <label>Alt Text</label>
+        <input type="text" value={data.iconImageAlt} onChange={(e) => updateData({ iconImageAlt: e.target.value })} style={{ fontSize: 11 }} />
+      </div>
+      {showMedia && (
+        <MediaLibraryModal
+          onClose={() => setShowMedia(false)}
+          onSelectUrl={(url) => {
+            updateData({ iconImageSrc: url });
+            setShowMedia(false);
+          }}
+        />
+      )}
+    </>
   );
 }

@@ -244,8 +244,9 @@ export function createBlock(type: BlockType): Block {
         type: 'card',
         data: {
           showIcon: false,
-          iconMode: 'emoji',
+          iconMode: 'lucide',
           iconEmoji: '✨',
+          iconName: 'sparkles',
           iconImageSrc: '',
           iconImageAlt: '',
           showBadge: false,
@@ -264,6 +265,7 @@ export function createBlock(type: BlockType): Block {
           borderColor: '#e2e8f0',
           borderStyle: 'solid',
           iconSize: 48,
+          iconColor: '#4f46e5',
           iconBackgroundColor: '#eef2ff',
           iconBorderRadius: 50,
           badgeBackgroundColor: '#eef2ff',

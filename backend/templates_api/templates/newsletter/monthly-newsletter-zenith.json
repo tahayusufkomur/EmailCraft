@@ -123,7 +123,10 @@
           "type": "columns",
           "data": {
             "columnCount": 2,
-            "columnRatio": [50, 50],
+            "columnRatio": [
+              50,
+              50
+            ],
             "columns": [
               {
                 "id": "nl-b5-c1",
@@ -262,7 +265,10 @@
           "type": "columns",
           "data": {
             "columnCount": 2,
-            "columnRatio": [50, 50],
+            "columnRatio": [
+              50,
+              50
+            ],
             "columns": [
               {
                 "id": "nl-b9-c1",
@@ -430,7 +436,7 @@
           "type": "card",
           "data": {
             "showIcon": true,
-            "iconMode": "emoji",
+            "iconMode": "lucide",
             "iconEmoji": "🧘",
             "iconImageSrc": "",
             "iconImageAlt": "",
@@ -440,7 +446,8 @@
             "buttonText": "",
             "buttonUrl": "",
             "showBadge": true,
-            "badgeText": "INTERMEDIATE"
+            "badgeText": "INTERMEDIATE",
+            "iconName": "yoga-pose"
           },
           "style": {
             "backgroundColor": "#132e27",
@@ -475,7 +482,8 @@
               "right": 20,
               "bottom": 0,
               "left": 20
-            }
+            },
+            "iconColor": "#0a1a16"
           }
         },
         {
@@ -495,19 +503,25 @@
                 "id": "nl-b17-item1",
                 "icon": "✓",
                 "text": "Strengthens legs and ankles",
-                "subtitle": "Build stability from the ground up"
+                "subtitle": "Build stability from the ground up",
+                "iconMode": "lucide",
+                "iconName": "check"
               },
               {
                 "id": "nl-b17-item2",
                 "icon": "✓",
                 "text": "Opens hips and chest",
-                "subtitle": "Create space and improve flexibility"
+                "subtitle": "Create space and improve flexibility",
+                "iconMode": "lucide",
+                "iconName": "check"
               },
               {
                 "id": "nl-b17-item3",
                 "icon": "✓",
                 "text": "Improves focus",
-                "subtitle": "Gaze over front hand, steady the mind"
+                "subtitle": "Gaze over front hand, steady the mind",
+                "iconMode": "lucide",
+                "iconName": "check"
               }
             ]
           },

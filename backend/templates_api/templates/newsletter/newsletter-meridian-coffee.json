@@ -412,17 +412,23 @@
               {
                 "icon": "🌸",
                 "text": "Jasmine & Bergamot",
-                "subtitle": "Floral aromatics"
+                "subtitle": "Floral aromatics",
+                "iconMode": "lucide",
+                "iconName": "sparkles"
               },
               {
                 "icon": "🍋",
                 "text": "Bright Citrus",
-                "subtitle": "Lemon zest finish"
+                "subtitle": "Lemon zest finish",
+                "iconMode": "lucide",
+                "iconName": "zap"
               },
               {
                 "icon": "🍫",
                 "text": "Dark Chocolate",
-                "subtitle": "Rich undertone"
+                "subtitle": "Rich undertone",
+                "iconMode": "lucide",
+                "iconName": "coffee"
               }
             ],
             "direction": "vertical"

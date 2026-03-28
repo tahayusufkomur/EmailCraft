@@ -1,6 +1,7 @@
 import type { Block, EmailTemplate } from '../types/blocks';
 import { getEmailBackgroundCss, getEmailBodyBackgroundCss } from './backgroundStyles';
 import { collectTemplateFonts, getGoogleFontLinks } from './fonts';
+import { lucideSvgString } from './lucideIcons';
 
 /**
  * Client-side HTML exporter for preview purposes.
@@ -332,6 +333,13 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
         const iRadius = block.style.iconBorderRadius ?? 50;
         if (block.data.iconMode === 'image' && block.data.iconImageSrc) {
           iconHtml = `<img src="${escapeHtml(block.data.iconImageSrc)}" alt="${escapeHtml(block.data.iconImageAlt)}" width="${iSize}" height="${iSize}" style="border-radius: ${iRadius}%; display: block; margin: 0 auto 12px;" />`;
+        } else if (block.data.iconMode === 'lucide' && block.data.iconName) {
+          const iBg = block.style.iconBackgroundColor || '#eef2ff';
+          const iColor = block.style.iconColor || '#4f46e5';
+          const svgSize = Math.round(iSize * 0.5);
+          const svgStr = lucideSvgString(block.data.iconName, svgSize, iColor);
+          const dataUri = svgStr ? `data:image/svg+xml;base64,${btoa(svgStr)}` : '';
+          iconHtml = dataUri ? `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 12px;"><tr><td style="width: ${iSize}px; height: ${iSize}px; border-radius: ${iRadius}%; background-color: ${iBg}; text-align: center; vertical-align: middle;"><img src="${dataUri}" width="${svgSize}" height="${svgSize}" alt="" style="display: inline-block; vertical-align: middle;" /></td></tr></table>` : '';
         } else {
           const iBg = block.style.iconBackgroundColor || '#eef2ff';
           const emojiSize = Math.round(iSize * 0.55);
@@ -398,15 +406,28 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const gap = block.style.spacing || 12;
       const isHoriz = block.style.layout === 'horizontal';
 
+      const renderListIconCell = (item: typeof block.data.items[0], hasSub: boolean) => {
+        const vAlign = hasSub ? 'top' : 'middle';
+        const padTop = hasSub ? '2px' : '0';
+        if (item.iconMode === 'lucide' && item.iconName) {
+          const svgStr = lucideSvgString(item.iconName, iconSz, iconCol);
+          const dataUri = svgStr ? `data:image/svg+xml;base64,${btoa(svgStr)}` : '';
+          return dataUri
+            ? `<td style="width: ${iconSz + 4}px; text-align: center; vertical-align: ${vAlign}; line-height: 1; padding-top: ${padTop};"><img src="${dataUri}" width="${iconSz}" height="${iconSz}" alt="" style="display: inline-block; vertical-align: middle;" /></td>`
+            : `<td style="width: ${iconSz + 4}px; text-align: center; vertical-align: ${vAlign}; font-size: ${iconSz}px; color: ${iconCol}; line-height: 1; padding-top: ${padTop};">•</td>`;
+        }
+        const icon = escapeHtml(item.icon || '•');
+        return `<td style="width: ${iconSz + 4}px; text-align: center; vertical-align: ${vAlign}; font-size: ${iconSz}px; color: ${iconCol}; line-height: 1; padding-top: ${padTop};">${icon}</td>`;
+      };
+
       let tableContent: string;
       if (isHoriz) {
         const itemsHtml = block.data.items.map((item) => {
-          const icon = escapeHtml(item.icon || '•');
           const text = escapeHtml(item.text || '');
           const sub = item.subtitle ? `<div style="color: ${subCol}; font-size: ${subSz}px; font-family: ${txtFont}; line-height: 1.4; margin-top: 2px;">${escapeHtml(item.subtitle)}</div>` : '';
           return `<td style="padding: 0 ${gap / 2}px 0 0; vertical-align: top;">
   <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-    <td style="width: ${iconSz + 4}px; text-align: center; vertical-align: ${sub ? 'top' : 'middle'}; font-size: ${iconSz}px; color: ${iconCol}; line-height: 1; padding-top: ${sub ? '2px' : '0'};">${icon}</td>
+    ${renderListIconCell(item, !!sub)}
     <td style="padding-left: 10px; vertical-align: top;">
       <span style="color: ${txtCol}; font-size: ${txtSz}px; font-family: ${txtFont}; font-weight: ${txtWt}; line-height: 1.4;">${text}</span>
       ${sub}
@@ -417,12 +438,11 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
         tableContent = `<tr>${itemsHtml}</tr>`;
       } else {
         tableContent = block.data.items.map((item) => {
-          const icon = escapeHtml(item.icon || '•');
           const text = escapeHtml(item.text || '');
           const sub = item.subtitle ? `<div style="color: ${subCol}; font-size: ${subSz}px; font-family: ${txtFont}; line-height: 1.4; margin-top: 2px;">${escapeHtml(item.subtitle)}</div>` : '';
           return `<tr><td style="padding-bottom: ${gap}px;">
   <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-    <td style="width: ${iconSz + 4}px; text-align: center; vertical-align: ${sub ? 'top' : 'middle'}; font-size: ${iconSz}px; color: ${iconCol}; line-height: 1; padding-top: ${sub ? '2px' : '0'};">${icon}</td>
+    ${renderListIconCell(item, !!sub)}
     <td style="padding-left: 10px; vertical-align: top;">
       <span style="color: ${txtCol}; font-size: ${txtSz}px; font-family: ${txtFont}; font-weight: ${txtWt}; line-height: 1.4;">${text}</span>
       ${sub}

@@ -127,7 +127,10 @@
           },
           "data": {
             "columnCount": 2,
-            "columnRatio": [50, 50],
+            "columnRatio": [
+              50,
+              50
+            ],
             "columns": [
               {
                 "id": "sun-w-b4-c1",
@@ -237,7 +240,7 @@
           "type": "card",
           "data": {
             "showIcon": true,
-            "iconMode": "emoji",
+            "iconMode": "lucide",
             "iconEmoji": "🙏",
             "iconImageSrc": "",
             "iconImageAlt": "",
@@ -247,7 +250,8 @@
             "buttonText": "Book Now →",
             "buttonUrl": "#",
             "showBadge": false,
-            "badgeText": ""
+            "badgeText": "",
+            "iconName": "hand-heart"
           },
           "style": {
             "backgroundColor": "#2a1a0e",
@@ -285,7 +289,8 @@
               "right": 24,
               "bottom": 24,
               "left": 24
-            }
+            },
+            "iconColor": "#1c1008"
           }
         }
       ]

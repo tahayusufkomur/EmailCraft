@@ -105,7 +105,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "📍",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -115,7 +115,8 @@
                       "buttonText": "",
                       "buttonUrl": "",
                       "showBadge": true,
-                      "badgeText": "TOMORROW"
+                      "badgeText": "TOMORROW",
+                      "iconName": "map-pin"
                     },
                     "style": {
                       "backgroundColor": "#ffffff",
@@ -153,7 +154,8 @@
                       "buttonFullWidth": false,
                       "buttonBorderStyle": "solid",
                       "buttonBorderColor": "#e8913a",
-                      "buttonBorderWidth": 0
+                      "buttonBorderWidth": 0,
+                      "iconColor": "#fef5f0"
                     }
                   }
                 ]
@@ -234,19 +236,25 @@
                 "id": "sun-c-li1",
                 "icon": "✓",
                 "text": "Comfortable clothing",
-                "subtitle": "Stretchy fabrics recommended"
+                "subtitle": "Stretchy fabrics recommended",
+                "iconMode": "lucide",
+                "iconName": "check"
               },
               {
                 "id": "sun-c-li2",
                 "icon": "✓",
                 "text": "Water bottle",
-                "subtitle": "Stay hydrated throughout class"
+                "subtitle": "Stay hydrated throughout class",
+                "iconMode": "lucide",
+                "iconName": "check"
               },
               {
                 "id": "sun-c-li3",
                 "icon": "✓",
                 "text": "Open mind",
-                "subtitle": "Every practice is different"
+                "subtitle": "Every practice is different",
+                "iconMode": "lucide",
+                "iconName": "check"
               }
             ]
           },

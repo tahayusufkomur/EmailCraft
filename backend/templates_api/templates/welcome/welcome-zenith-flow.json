@@ -107,7 +107,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🏠",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -117,7 +117,8 @@
                       "buttonText": "",
                       "buttonUrl": "",
                       "showBadge": false,
-                      "badgeText": ""
+                      "badgeText": "",
+                      "iconName": "home"
                     },
                     "style": {
                       "backgroundColor": "#e8f5f0",
@@ -141,7 +142,8 @@
                         "right": 24,
                         "bottom": 24,
                         "left": 24
-                      }
+                      },
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]
@@ -154,7 +156,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "📅",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -164,7 +166,8 @@
                       "buttonText": "",
                       "buttonUrl": "",
                       "showBadge": false,
-                      "badgeText": ""
+                      "badgeText": "",
+                      "iconName": "calendar"
                     },
                     "style": {
                       "backgroundColor": "#e8f5f0",
@@ -188,7 +191,8 @@
                         "right": 24,
                         "bottom": 24,
                         "left": 24
-                      }
+                      },
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]
@@ -262,7 +266,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "📱",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -272,7 +276,8 @@
                       "buttonText": "Get App →",
                       "buttonUrl": "#",
                       "showBadge": false,
-                      "badgeText": ""
+                      "badgeText": "",
+                      "iconName": "smartphone"
                     },
                     "style": {
                       "backgroundColor": "#132e27",
@@ -308,7 +313,8 @@
                         "right": 24,
                         "bottom": 24,
                         "left": 24
-                      }
+                      },
+                      "iconColor": "#0a1a16"
                     }
                   }
                 ]
@@ -321,7 +327,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🧘",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -331,7 +337,8 @@
                       "buttonText": "Explore →",
                       "buttonUrl": "#",
                       "showBadge": false,
-                      "badgeText": ""
+                      "badgeText": "",
+                      "iconName": "yoga-pose"
                     },
                     "style": {
                       "backgroundColor": "#132e27",
@@ -367,7 +374,8 @@
                         "right": 24,
                         "bottom": 24,
                         "left": 24
-                      }
+                      },
+                      "iconColor": "#0a1a16"
                     }
                   }
                 ]
@@ -380,7 +388,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "💬",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -390,7 +398,8 @@
                       "buttonText": "Meet Them →",
                       "buttonUrl": "#",
                       "showBadge": false,
-                      "badgeText": ""
+                      "badgeText": "",
+                      "iconName": "message-circle"
                     },
                     "style": {
                       "backgroundColor": "#132e27",
@@ -426,7 +435,8 @@
                         "right": 24,
                         "bottom": 24,
                         "left": 24
-                      }
+                      },
+                      "iconColor": "#0a1a16"
                     }
                   }
                 ]

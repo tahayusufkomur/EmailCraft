@@ -88,7 +88,7 @@
           "type": "card",
           "data": {
             "showIcon": true,
-            "iconMode": "emoji",
+            "iconMode": "lucide",
             "iconEmoji": "🎫",
             "iconImageSrc": "",
             "iconImageAlt": "",
@@ -98,7 +98,8 @@
             "body": "Use this code at checkout. Valid for all membership tiers.",
             "showButton": true,
             "buttonText": "Apply Code →",
-            "buttonUrl": "https://"
+            "buttonUrl": "https://",
+            "iconName": "ticket"
           },
           "style": {
             "padding": {
@@ -136,7 +137,8 @@
             "buttonBorderStyle": "solid",
             "buttonBorderColor": "#e8913a",
             "buttonBorderWidth": 0,
-            "contentAlignment": "center"
+            "contentAlignment": "center",
+            "iconColor": "#1c1008"
           }
         },
         {
@@ -176,7 +178,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🧘",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -186,7 +188,8 @@
                       "body": "Unlimited access to every class on the schedule",
                       "showButton": false,
                       "buttonText": "",
-                      "buttonUrl": "https://"
+                      "buttonUrl": "https://",
+                      "iconName": "yoga-pose"
                     },
                     "style": {
                       "padding": {
@@ -224,7 +227,8 @@
                       "buttonBorderStyle": "solid",
                       "buttonBorderColor": "#e8913a",
                       "buttonBorderWidth": 0,
-                      "contentAlignment": "center"
+                      "contentAlignment": "center",
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]
@@ -237,7 +241,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "⏰",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -247,7 +251,8 @@
                       "body": "Morning, afternoon, and evening sessions",
                       "showButton": false,
                       "buttonText": "",
-                      "buttonUrl": "https://"
+                      "buttonUrl": "https://",
+                      "iconName": "clock"
                     },
                     "style": {
                       "padding": {
@@ -285,7 +290,8 @@
                       "buttonBorderStyle": "solid",
                       "buttonBorderColor": "#e8913a",
                       "buttonBorderWidth": 0,
-                      "contentAlignment": "center"
+                      "contentAlignment": "center",
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]
@@ -298,7 +304,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🤝",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -308,7 +314,8 @@
                       "body": "Join a supportive community of practitioners",
                       "showButton": false,
                       "buttonText": "",
-                      "buttonUrl": "https://"
+                      "buttonUrl": "https://",
+                      "iconName": "users"
                     },
                     "style": {
                       "padding": {
@@ -346,7 +353,8 @@
                       "buttonBorderStyle": "solid",
                       "buttonBorderColor": "#e8913a",
                       "buttonBorderWidth": 0,
-                      "contentAlignment": "center"
+                      "contentAlignment": "center",
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]

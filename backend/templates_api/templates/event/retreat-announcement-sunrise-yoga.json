@@ -2,7 +2,9 @@
   "name": "Retreat Announcement — Sunrise Yoga",
   "category": "event",
   "is_premium": true,
-  "tags": ["event"],
+  "tags": [
+    "event"
+  ],
   "template": {
     "version": 1,
     "settings": {
@@ -21,9 +23,17 @@
         {
           "id": "sun-e1-h1",
           "type": "heading",
-          "data": { "text": "SUNRISE YOGA", "level": 3 },
+          "data": {
+            "text": "SUNRISE YOGA",
+            "level": 3
+          },
           "style": {
-            "padding": { "top": 28, "right": 32, "bottom": 24, "left": 32 },
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
             "alignment": "center",
             "color": "#e8913a",
             "fontSize": 10,
@@ -65,33 +75,50 @@
             "buttonFontWeight": 700,
             "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
             "contentAlignment": "center",
-            "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
           }
         },
         {
           "id": "sun-e1-b2",
           "type": "spacer",
           "data": {},
-          "style": { "height": 24 }
+          "style": {
+            "height": 24
+          }
         },
         {
           "id": "sun-e1-b3",
           "type": "heading",
-          "data": { "text": "Your Journey", "level": 2 },
+          "data": {
+            "text": "Your Journey",
+            "level": 2
+          },
           "style": {
             "fontSize": 26,
             "fontWeight": 800,
             "color": "#322e2b",
             "textAlign": "center",
             "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "padding": { "top": 0, "right": 32, "bottom": 8, "left": 32 }
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
           }
         },
         {
           "id": "sun-e1-b4",
           "type": "spacer",
           "data": {},
-          "style": { "height": 8 }
+          "style": {
+            "height": 8
+          }
         },
         {
           "id": "sun-e1-b5",
@@ -99,11 +126,20 @@
           "style": {
             "gap": 12,
             "stackOnMobile": true,
-            "padding": { "top": 0, "right": 24, "bottom": 0, "left": 24 }
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 0,
+              "left": 24
+            }
           },
           "data": {
             "columnCount": 3,
-            "columnRatio": [34, 33, 33],
+            "columnRatio": [
+              34,
+              33,
+              33
+            ],
             "columns": [
               {
                 "id": "sun-e1-col1",
@@ -113,7 +149,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🌅",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -123,7 +159,8 @@
                       "buttonText": "",
                       "buttonUrl": "",
                       "showBadge": true,
-                      "badgeText": "FRIDAY"
+                      "badgeText": "FRIDAY",
+                      "iconName": "sunrise"
                     },
                     "style": {
                       "backgroundColor": "#fef5f0",
@@ -144,7 +181,12 @@
                       "iconBorderRadius": 50,
                       "iconBackgroundColor": "#ffffff",
                       "contentAlignment": "center",
-                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      },
                       "buttonBackgroundColor": "#e8913a",
                       "buttonTextColor": "#1c1008",
                       "buttonBorderRadius": 999,
@@ -156,7 +198,8 @@
                       "buttonFullWidth": false,
                       "buttonBorderStyle": "solid",
                       "buttonBorderColor": "#e8913a",
-                      "buttonBorderWidth": 0
+                      "buttonBorderWidth": 0,
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]
@@ -169,7 +212,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🧘",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -179,7 +222,8 @@
                       "buttonText": "",
                       "buttonUrl": "",
                       "showBadge": true,
-                      "badgeText": "SATURDAY"
+                      "badgeText": "SATURDAY",
+                      "iconName": "yoga-pose"
                     },
                     "style": {
                       "backgroundColor": "#fef5f0",
@@ -200,7 +244,12 @@
                       "iconBorderRadius": 50,
                       "iconBackgroundColor": "#ffffff",
                       "contentAlignment": "center",
-                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      },
                       "buttonBackgroundColor": "#e8913a",
                       "buttonTextColor": "#1c1008",
                       "buttonBorderRadius": 999,
@@ -212,7 +261,8 @@
                       "buttonFullWidth": false,
                       "buttonBorderStyle": "solid",
                       "buttonBorderColor": "#e8913a",
-                      "buttonBorderWidth": 0
+                      "buttonBorderWidth": 0,
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]
@@ -225,7 +275,7 @@
                     "type": "card",
                     "data": {
                       "showIcon": true,
-                      "iconMode": "emoji",
+                      "iconMode": "lucide",
                       "iconEmoji": "🌿",
                       "iconImageSrc": "",
                       "iconImageAlt": "",
@@ -235,7 +285,8 @@
                       "buttonText": "",
                       "buttonUrl": "",
                       "showBadge": true,
-                      "badgeText": "SUNDAY"
+                      "badgeText": "SUNDAY",
+                      "iconName": "leaf"
                     },
                     "style": {
                       "backgroundColor": "#fef5f0",
@@ -256,7 +307,12 @@
                       "iconBorderRadius": 50,
                       "iconBackgroundColor": "#ffffff",
                       "contentAlignment": "center",
-                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      },
                       "buttonBackgroundColor": "#e8913a",
                       "buttonTextColor": "#1c1008",
                       "buttonBorderRadius": 999,
@@ -268,7 +324,8 @@
                       "buttonFullWidth": false,
                       "buttonBorderStyle": "solid",
                       "buttonBorderColor": "#e8913a",
-                      "buttonBorderWidth": 0
+                      "buttonBorderWidth": 0,
+                      "iconColor": "#ffffff"
                     }
                   }
                 ]
@@ -280,7 +337,9 @@
           "id": "sun-e1-b6",
           "type": "spacer",
           "data": {},
-          "style": { "height": 24 }
+          "style": {
+            "height": 24
+          }
         },
         {
           "id": "sun-e1-b7",
@@ -292,25 +351,33 @@
                 "id": "sun-e1-li1",
                 "icon": "✓",
                 "text": "All meals & accommodation",
-                "subtitle": "Farm-to-table organic dining"
+                "subtitle": "Farm-to-table organic dining",
+                "iconMode": "lucide",
+                "iconName": "check"
               },
               {
                 "id": "sun-e1-li2",
                 "icon": "✓",
                 "text": "6 guided yoga sessions",
-                "subtitle": "Morning vinyasa, evening yin"
+                "subtitle": "Morning vinyasa, evening yin",
+                "iconMode": "lucide",
+                "iconName": "check"
               },
               {
                 "id": "sun-e1-li3",
                 "icon": "✓",
                 "text": "Nature hiking trails",
-                "subtitle": "Guided mountain walks"
+                "subtitle": "Guided mountain walks",
+                "iconMode": "lucide",
+                "iconName": "check"
               },
               {
                 "id": "sun-e1-li4",
                 "icon": "✓",
                 "text": "Meditation workshops",
-                "subtitle": "Breathwork and mindfulness"
+                "subtitle": "Breathwork and mindfulness",
+                "iconMode": "lucide",
+                "iconName": "check"
               }
             ]
           },
@@ -329,14 +396,21 @@
             "subtitleFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
             "backgroundColor": "#ffffff",
             "borderRadius": 16,
-            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 }
+            "padding": {
+              "top": 24,
+              "right": 24,
+              "bottom": 24,
+              "left": 24
+            }
           }
         },
         {
           "id": "sun-e1-b8",
           "type": "spacer",
           "data": {},
-          "style": { "height": 24 }
+          "style": {
+            "height": 24
+          }
         },
         {
           "id": "sun-e1-b9",
@@ -386,7 +460,12 @@
             "badgeBackgroundColor": "#e8913a",
             "badgeTextColor": "#1c1008",
             "contentAlignment": "center",
-            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 }
+            "padding": {
+              "top": 24,
+              "right": 24,
+              "bottom": 24,
+              "left": 24
+            }
           }
         }
       ]
@@ -402,7 +481,12 @@
             "lineColor": "#e8913a",
             "lineThickness": 2,
             "spacing": 0,
-            "padding": { "top": 24, "right": 32, "bottom": 8, "left": 32 }
+            "padding": {
+              "top": 24,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
           }
         },
         {
@@ -414,7 +498,12 @@
           },
           "style": {
             "alignment": "center",
-            "padding": { "top": 8, "right": 32, "bottom": 8, "left": 32 }
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
           }
         },
         {
@@ -426,7 +515,12 @@
           },
           "style": {
             "alignment": "center",
-            "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 }
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            }
           }
         }
       ]
