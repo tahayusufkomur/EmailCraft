@@ -101,7 +101,7 @@ function recolorBlock(block: Block, palette: ColorPalette): Block {
       break;
   }
 
-  return updated;
+  return updated as Block;
 }
 
 function recolorBlocks(blocks: Block[], palette: ColorPalette): Block[] {
