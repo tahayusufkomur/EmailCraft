@@ -3,7 +3,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { api } from '../../lib/api';
 import { exportToHtml } from '../../lib/htmlExporter';
 import { useEditorStore } from '../../store/editorStore';
-import { useConfigStore } from '../../store/configStore';
 import type { EmailTemplate } from '../../types/blocks';
 import type { TemplateListItem } from '../../types/api';
 
@@ -24,7 +23,6 @@ interface Props {
 
 export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
-  const plan = useConfigStore((s) => s.plan);
   const [activeTab, setActiveTab] = useState<Tab>('library');
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -109,8 +107,8 @@ export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
   }, [loadTemplate, onClose]);
 
   const handleSelectSaved = useCallback(async (item: TemplateListItem) => {
-    if (item.is_premium && plan === 'free') {
-      setPremiumNotice('Upgrade your plan to use premium templates');
+    if (item.is_locked) {
+      setPremiumNotice('Upgrade your plan to use this template');
       setTimeout(() => setPremiumNotice(null), 3000);
       return;
     }
@@ -119,13 +117,12 @@ export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
       if (!detail.json_data || typeof detail.json_data !== 'object') {
         throw new Error('Template payload is invalid.');
       }
-      const isUserOwned = item.template_type !== 'provided';
       handleSelect(detail.json_data as EmailTemplate);
-      onTemplateLoaded?.(isUserOwned ? item.id : null);
+      onTemplateLoaded?.(item.id);
     } catch (error) {
       setLoadError(error instanceof Error ? error.message : 'Unable to load template.');
     }
-  }, [handleSelect, onTemplateLoaded, plan]);
+  }, [handleSelect, onTemplateLoaded]);
 
   return (
     <div style={styles.overlay} onClick={onClose}>
@@ -318,6 +315,7 @@ function TemplateCard({ item, onSelect }: { item: TemplateListItem; onSelect: ()
         ...styles.card,
         borderColor: hovered ? '#6366f1' : '#e2e8f0',
         boxShadow: hovered ? '0 2px 8px rgba(99,102,241,0.15)' : 'none',
+        opacity: item.is_locked ? 0.55 : 1,
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -339,6 +337,7 @@ function TemplateCard({ item, onSelect }: { item: TemplateListItem; onSelect: ()
           </div>
         )}
         {item.is_premium && <span style={styles.premiumBadge}>Premium</span>}
+        {item.is_locked && <span style={styles.lockedBadge}>Locked</span>}
       </div>
       <div style={styles.cardBody}>
         <div style={styles.cardName}>{item.name}</div>
@@ -438,6 +437,12 @@ const styles: Record<string, React.CSSProperties> = {
   premiumBadge: {
     position: 'absolute' as const, top: 8, right: 8,
     background: 'rgba(15, 23, 42, 0.75)', color: '#ffffff',
+    fontSize: 10, fontWeight: 600, padding: '3px 8px', borderRadius: 10,
+    letterSpacing: 0.5,
+  },
+  lockedBadge: {
+    position: 'absolute' as const, top: 8, left: 8,
+    background: 'rgba(100, 116, 139, 0.85)', color: '#ffffff',
     fontSize: 10, fontWeight: 600, padding: '3px 8px', borderRadius: 10,
     letterSpacing: 0.5,
   },

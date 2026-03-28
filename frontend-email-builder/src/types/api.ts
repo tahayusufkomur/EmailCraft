@@ -40,8 +40,10 @@ export interface TemplateListItem {
   category: string;
   is_draft: boolean;
   is_premium?: boolean;
+  is_locked?: boolean;
   tags?: string[];
   template_type?: 'user' | 'provided';
+  source_template?: string | null;
   created_at: string;
   updated_at: string;
 }

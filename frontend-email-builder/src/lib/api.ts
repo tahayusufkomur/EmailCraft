@@ -146,9 +146,6 @@ export const api = {
   deleteTemplate: (id: string) =>
     request<void>(`/templates/${id}/`, { method: 'DELETE' }),
 
-  getGallery: (category?: string) =>
-    request<{ data: TemplateListItem[] }>(`/gallery${category ? `?category=${category}` : ''}`),
-
   listMedia: (params?: { q?: string; sort?: MediaSortField; order?: SortOrder; limit?: number; offset?: number }) => {
     const searchParams = new URLSearchParams();
     const query = params?.q?.trim();
