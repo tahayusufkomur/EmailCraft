@@ -1,8 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useEditorStore } from '../../store/editorStore';
-import { useConfigStore } from '../../store/configStore';
 import { exportToHtml } from '../../lib/htmlExporter';
-import { substituteVariablesClientSide } from '../../lib/variableUtils';
 
 interface Props {
   onClose: () => void;
@@ -28,30 +26,11 @@ const IconClose = () => (
   </svg>
 );
 
-const IconVariables = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M8 3H5a2 2 0 0 0-2 2v3" /><path d="M21 8V5a2 2 0 0 0-2-2h-3" /><path d="M3 16v3a2 2 0 0 0 2 2h3" /><path d="M16 21h3a2 2 0 0 0 2-2v-3" />
-    <path d="M7.5 15 10 9l2.5 6" /><path d="M8.5 13h3" /><path d="m14 9 2 6 2-6" />
-  </svg>
-);
-
 export function PreviewModal({ onClose }: Props) {
   const [viewMode, setViewMode] = useState<ViewMode>('desktop');
-  const [showDefaults, setShowDefaults] = useState(false);
   const template = useEditorStore((s) => s.template);
-  const variables = useConfigStore((s) => s.variables);
 
-  const html = useMemo(() => {
-    if (showDefaults && variables.length > 0) {
-      const defaults: Record<string, string> = {};
-      for (const v of variables) {
-        defaults[v.key] = v.defaultValue || `[${v.label}]`;
-      }
-      const substituted = substituteVariablesClientSide(template, defaults);
-      return exportToHtml(substituted, 'defaults');
-    }
-    return exportToHtml(template, 'placeholders');
-  }, [template, showDefaults, variables]);
+  const html = useMemo(() => exportToHtml(template, 'placeholders'), [template]);
 
   const width = viewMode === 'desktop' ? 640 : 375;
 
@@ -85,18 +64,6 @@ export function PreviewModal({ onClose }: Props) {
               </button>
             </div>
             <span style={styles.widthLabel}>{width}px</span>
-            {variables.length > 0 && (
-              <button
-                style={{
-                  ...styles.variableBtn,
-                  ...(showDefaults ? styles.variableBtnActive : {}),
-                }}
-                onClick={() => setShowDefaults(!showDefaults)}
-              >
-                <IconVariables />
-                {showDefaults ? 'Placeholders' : 'Sample Data'}
-              </button>
-            )}
           </div>
           <button style={styles.closeBtn} onClick={onClose} title="Close preview">
             <IconClose />
@@ -195,25 +162,6 @@ const styles: Record<string, React.CSSProperties> = {
     color: '#94a3b8',
     fontFamily: "'SF Mono', 'Fira Code', monospace",
     letterSpacing: '-0.02em',
-  },
-  variableBtn: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: 5,
-    padding: '5px 10px',
-    fontSize: 12,
-    fontWeight: 500,
-    color: '#64748b',
-    background: '#f1f5f9',
-    border: '1px solid #e2e8f0',
-    borderRadius: 6,
-    cursor: 'pointer',
-    transition: 'all 0.15s',
-  },
-  variableBtnActive: {
-    background: '#eff6ff',
-    borderColor: '#93c5fd',
-    color: '#2563eb',
   },
   closeBtn: {
     display: 'flex',
