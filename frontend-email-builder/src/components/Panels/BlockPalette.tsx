@@ -3,7 +3,7 @@ import { useDraggable } from '@dnd-kit/core';
 import {
   Heading, AlignLeft, Image, RectangleHorizontal, MoveVertical,
   Minus, Columns2, Share2, ImagePlay, Code2, LayoutList,
-  Settings, LayoutGrid, ChevronDown, Plus, X,
+  Settings, LayoutGrid, ChevronDown, Plus, X, List, UserCircle,
 } from 'lucide-react';
 import type { Block, BlockType } from '../../types/blocks';
 import { createBlock } from '../../lib/blockFactory';
@@ -23,6 +23,8 @@ const BLOCK_ICONS: Record<BlockType, React.ReactNode> = {
   hero: <ImagePlay size={20} />,
   html: <Code2 size={20} />,
   card: <LayoutList size={20} />,
+  list: <List size={20} />,
+  profile: <UserCircle size={20} />,
 };
 
 interface BlockTypeConfig {
@@ -40,6 +42,8 @@ const BLOCK_TYPES: BlockTypeConfig[] = [
   { type: 'columns', label: 'Columns' },
   { type: 'social', label: 'Social' },
   { type: 'card', label: 'Card' },
+  { type: 'list', label: 'List' },
+  { type: 'profile', label: 'Profile' },
   { type: 'hero', label: 'Hero' },
   { type: 'html', label: 'HTML' },
 ];

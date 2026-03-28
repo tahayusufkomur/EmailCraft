@@ -383,6 +383,138 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
 </tr>`;
     }
 
+    case 'list': {
+      const listPad = paddingStr(block.style.padding);
+      const listBg = block.style.backgroundColor || 'transparent';
+      const listAlign = block.style.contentAlignment || 'left';
+      const iconSz = block.style.iconSize || 20;
+      const iconCol = block.style.iconColor || '#4f46e5';
+      const txtCol = block.style.textColor || '#0f172a';
+      const txtSz = block.style.textFontSize || 15;
+      const txtFont = block.style.textFontFamily || font;
+      const txtWt = block.style.textFontWeight || 500;
+      const subCol = block.style.subtitleColor || '#64748b';
+      const subSz = block.style.subtitleFontSize || 13;
+      const gap = block.style.spacing || 12;
+      const isHoriz = block.style.layout === 'horizontal';
+
+      let tableContent: string;
+      if (isHoriz) {
+        const itemsHtml = block.data.items.map((item) => {
+          const icon = escapeHtml(item.icon || '•');
+          const text = escapeHtml(item.text || '');
+          const sub = item.subtitle ? `<div style="color: ${subCol}; font-size: ${subSz}px; font-family: ${txtFont}; line-height: 1.4; margin-top: 2px;">${escapeHtml(item.subtitle)}</div>` : '';
+          return `<td style="padding: 0 ${gap / 2}px 0 0; vertical-align: top;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+    <td style="width: ${iconSz + 4}px; text-align: center; vertical-align: ${sub ? 'top' : 'middle'}; font-size: ${iconSz}px; color: ${iconCol}; line-height: 1; padding-top: ${sub ? '2px' : '0'};">${icon}</td>
+    <td style="padding-left: 10px; vertical-align: top;">
+      <span style="color: ${txtCol}; font-size: ${txtSz}px; font-family: ${txtFont}; font-weight: ${txtWt}; line-height: 1.4;">${text}</span>
+      ${sub}
+    </td>
+  </tr></table>
+</td>`;
+        }).join('\n');
+        tableContent = `<tr>${itemsHtml}</tr>`;
+      } else {
+        tableContent = block.data.items.map((item) => {
+          const icon = escapeHtml(item.icon || '•');
+          const text = escapeHtml(item.text || '');
+          const sub = item.subtitle ? `<div style="color: ${subCol}; font-size: ${subSz}px; font-family: ${txtFont}; line-height: 1.4; margin-top: 2px;">${escapeHtml(item.subtitle)}</div>` : '';
+          return `<tr><td style="padding-bottom: ${gap}px;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+    <td style="width: ${iconSz + 4}px; text-align: center; vertical-align: ${sub ? 'top' : 'middle'}; font-size: ${iconSz}px; color: ${iconCol}; line-height: 1; padding-top: ${sub ? '2px' : '0'};">${icon}</td>
+    <td style="padding-left: 10px; vertical-align: top;">
+      <span style="color: ${txtCol}; font-size: ${txtSz}px; font-family: ${txtFont}; font-weight: ${txtWt}; line-height: 1.4;">${text}</span>
+      ${sub}
+    </td>
+  </tr></table>
+</td></tr>`;
+        }).join('\n');
+      }
+
+      return `<tr>
+  <td style="padding: ${listPad}; background-color: ${listBg}; text-align: ${listAlign};">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" ${isHoriz ? '' : 'width="100%"'} ${isHoriz ? `align="${listAlign}"` : ''}>
+      ${tableContent}
+    </table>
+  </td>
+</tr>`;
+    }
+
+    case 'profile': {
+      const profPad = paddingStr(block.style.padding);
+      const profBg = block.style.backgroundColor || '#ffffff';
+      const profRadius = block.style.borderRadius ?? 12;
+      const profBW = block.style.borderWidth ?? 1;
+      const profBC = block.style.borderColor || '#e2e8f0';
+      const profBS = block.style.borderStyle || 'solid';
+      const profBorder = profBW > 0 ? `${profBW}px ${profBS} ${profBC}` : 'none';
+      const imgSize = block.style.imageSize ?? 72;
+      const imgRadius = block.style.imageBorderRadius ?? 50;
+      const imgPos = block.style.imagePosition || 'left';
+      const profAlign = block.style.contentAlignment || 'left';
+      const nColor = block.style.nameColor || '#0f172a';
+      const nSize = block.style.nameFontSize || 18;
+      const nFont = block.style.nameFontFamily || font;
+      const nWeight = block.style.nameFontWeight || 700;
+      const rColor = block.style.roleColor || '#6366f1';
+      const rSize = block.style.roleFontSize || 13;
+      const bColor = block.style.bioColor || '#64748b';
+      const bSize = block.style.bioFontSize || 14;
+      const bFont = block.style.bioFontFamily || font;
+
+      const imgSrc = escapeHtml(block.data.imageSrc);
+      const imgAlt = escapeHtml(block.data.imageAlt);
+      const pName = escapeHtml(block.data.name);
+      const pRole = escapeHtml(block.data.role);
+      const pBio = escapeHtml(block.data.bio);
+
+      let badgeHtml = '';
+      if (block.data.showBadge && block.data.badgeText) {
+        const bdBg = block.style.badgeBackgroundColor || '#eef2ff';
+        const bdCol = block.style.badgeTextColor || '#4338ca';
+        badgeHtml = `<div style="margin-bottom: 4px;"><span style="display: inline-block; padding: 2px 8px; border-radius: 10px; background-color: ${bdBg}; color: ${bdCol}; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; font-family: ${font};">${escapeHtml(block.data.badgeText)}</span></div>`;
+      }
+
+      const roleHtml = pRole ? `<div style="color: ${rColor}; font-size: ${rSize}px; font-family: ${bFont}; font-weight: 600; line-height: 1.3; margin-top: 2px;">${pRole}</div>` : '';
+      const bioHtml = pBio ? `<div style="color: ${bColor}; font-size: ${bSize}px; font-family: ${bFont}; line-height: 1.5; margin-top: 6px;">${pBio}</div>` : '';
+      const imgHtml = imgSrc ? `<img src="${imgSrc}" alt="${imgAlt}" width="${imgSize}" height="${imgSize}" style="border-radius: ${imgRadius}%; display: block;" />` : '';
+
+      let innerHtml: string;
+      if (imgPos === 'top') {
+        innerHtml = `<td style="text-align: ${profAlign};">
+          ${imgHtml ? `<div style="margin: 0 auto 12px; width: ${imgSize}px;">${imgHtml}</div>` : ''}
+          ${badgeHtml}
+          <div style="color: ${nColor}; font-size: ${nSize}px; font-family: ${nFont}; font-weight: ${nWeight}; line-height: 1.3;">${pName}</div>
+          ${roleHtml}
+          ${bioHtml}
+        </td>`;
+      } else {
+        const imgTd = `<td style="width: ${imgSize}px; vertical-align: top;">${imgHtml}</td>`;
+        const textTd = `<td style="vertical-align: top; padding-left: 16px; text-align: left;">
+          ${badgeHtml}
+          <div style="color: ${nColor}; font-size: ${nSize}px; font-family: ${nFont}; font-weight: ${nWeight}; line-height: 1.3;">${pName}</div>
+          ${roleHtml}
+          ${bioHtml}
+        </td>`;
+        innerHtml = imgPos === 'right' ? `${textTd}${imgTd}` : `${imgTd}${textTd}`;
+      }
+
+      return `<tr>
+  <td style="padding: ${profPad};">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: ${profBg}; border-radius: ${profRadius}px; border: ${profBorder};">
+      <tr>
+        <td style="padding: ${profPad};">
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0"${imgPos === 'top' ? '' : ' width="100%"'}>
+            <tr>${innerHtml}</tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>`;
+    }
+
     default:
       return '';
   }

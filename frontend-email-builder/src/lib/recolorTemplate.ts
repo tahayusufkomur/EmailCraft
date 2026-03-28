@@ -96,6 +96,26 @@ function recolorBlock(block: Block, palette: ColorPalette): Block {
       };
       break;
 
+    case 'list':
+      updated.style = {
+        ...updated.style,
+        iconColor: palette.primary,
+        textColor: palette.textDark,
+        subtitleColor: palette.textLight,
+      };
+      break;
+
+    case 'profile':
+      updated.style = {
+        ...updated.style,
+        nameColor: palette.textDark,
+        roleColor: palette.primary,
+        bioColor: palette.textLight,
+        badgeBackgroundColor: palette.surface,
+        badgeTextColor: palette.textDark,
+      };
+      break;
+
     case 'columns':
       updated.data = {
         ...block.data,

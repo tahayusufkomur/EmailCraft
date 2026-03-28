@@ -172,6 +172,72 @@ export function createBlock(type: BlockType): Block {
         },
       };
 
+    case 'list':
+      return {
+        id,
+        type: 'list',
+        data: {
+          items: [
+            { id: crypto.randomUUID(), icon: '✓', text: 'First item', subtitle: '' },
+            { id: crypto.randomUUID(), icon: '✓', text: 'Second item', subtitle: '' },
+            { id: crypto.randomUUID(), icon: '✓', text: 'Third item', subtitle: '' },
+          ],
+        },
+        style: {
+          padding: { top: 16, right: 24, bottom: 16, left: 24 },
+          backgroundColor: null,
+          iconSize: 20,
+          iconColor: '#4f46e5',
+          textColor: '#0f172a',
+          textFontSize: 15,
+          textFontFamily: 'Arial, Helvetica, sans-serif',
+          textFontWeight: 500,
+          subtitleColor: '#64748b',
+          subtitleFontSize: 13,
+          spacing: 12,
+          layout: 'vertical',
+          contentAlignment: 'left',
+        },
+      };
+
+    case 'profile':
+      return {
+        id,
+        type: 'profile',
+        data: {
+          imageSrc: '',
+          imageAlt: 'Profile photo',
+          name: 'Jane Smith',
+          role: 'Instructor',
+          bio: 'A short bio or description goes here.',
+          showBadge: false,
+          badgeText: 'Featured',
+        },
+        style: {
+          padding: { top: 20, right: 20, bottom: 20, left: 20 },
+          backgroundColor: '#ffffff',
+          imageSize: 72,
+          imageBorderRadius: 50,
+          imagePosition: 'left',
+          nameColor: '#0f172a',
+          nameFontSize: 18,
+          nameFontFamily: 'Arial, Helvetica, sans-serif',
+          nameFontWeight: 700,
+          roleColor: '#6366f1',
+          roleFontSize: 13,
+          bioColor: '#64748b',
+          bioFontSize: 14,
+          bioFontFamily: 'Arial, Helvetica, sans-serif',
+          badgeBackgroundColor: '#eef2ff',
+          badgeTextColor: '#4338ca',
+          borderRadius: 12,
+          borderWidth: 1,
+          borderColor: '#e2e8f0',
+          borderStyle: 'solid',
+          contentAlignment: 'left',
+        },
+      };
+
     case 'card':
       return {
         id,

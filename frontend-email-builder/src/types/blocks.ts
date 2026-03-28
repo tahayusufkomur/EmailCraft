@@ -1,4 +1,4 @@
-export type BlockType = 'text' | 'image' | 'button' | 'divider' | 'columns' | 'social' | 'heading' | 'spacer' | 'html' | 'hero' | 'card';
+export type BlockType = 'text' | 'image' | 'button' | 'divider' | 'columns' | 'social' | 'heading' | 'spacer' | 'html' | 'hero' | 'card' | 'list' | 'profile';
 export type TemplateBackgroundStyle =
   | 'none'
   | 'aurora'
@@ -235,6 +235,67 @@ export interface CardBlock extends BaseBlock {
   };
 }
 
+export interface ListItem {
+  id: string;
+  icon: string;
+  text: string;
+  subtitle: string;
+}
+
+export interface ListBlock extends BaseBlock {
+  type: 'list';
+  data: {
+    items: ListItem[];
+  };
+  style: BlockStyle & {
+    iconSize: number;
+    iconColor: string;
+    textColor: string;
+    textFontSize: number;
+    textFontFamily: string;
+    textFontWeight: number;
+    subtitleColor: string;
+    subtitleFontSize: number;
+    spacing: number;
+    layout: 'vertical' | 'horizontal';
+    contentAlignment: 'left' | 'center' | 'right';
+  };
+}
+
+export interface ProfileBlock extends BaseBlock {
+  type: 'profile';
+  data: {
+    imageSrc: string;
+    imageAlt: string;
+    name: string;
+    role: string;
+    bio: string;
+    showBadge: boolean;
+    badgeText: string;
+  };
+  style: BlockStyle & {
+    imageSize: number;
+    imageBorderRadius: number;
+    imagePosition: 'left' | 'right' | 'top';
+    nameColor: string;
+    nameFontSize: number;
+    nameFontFamily: string;
+    nameFontWeight: number;
+    roleColor: string;
+    roleFontSize: number;
+    bioColor: string;
+    bioFontSize: number;
+    bioFontFamily: string;
+    badgeBackgroundColor: string;
+    badgeTextColor: string;
+    borderRadius: number;
+    borderWidth: number;
+    borderColor: string;
+    borderStyle: 'solid' | 'dashed' | 'dotted' | 'none';
+    contentAlignment: 'left' | 'center' | 'right';
+  };
+}
+
 export type Block =
   | TextBlock
   | ImageBlock
@@ -246,7 +307,9 @@ export type Block =
   | SpacerBlock
   | HtmlBlock
   | HeroBlock
-  | CardBlock;
+  | CardBlock
+  | ListBlock
+  | ProfileBlock;
 
 export interface TemplateSettings {
   backgroundColor: string;

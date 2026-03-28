@@ -12,4 +12,6 @@ export const BLOCK_DESCRIPTIONS: Record<BlockType, string> = {
   hero: 'Full-width hero section with background image and overlay',
   html: 'Raw HTML code block for custom content',
   card: 'Styled card with optional icon, badge, heading, text, and button',
+  list: 'List with custom icons, text, and optional subtitles per item',
+  profile: 'Person card with photo, name, role, and bio',
 };
