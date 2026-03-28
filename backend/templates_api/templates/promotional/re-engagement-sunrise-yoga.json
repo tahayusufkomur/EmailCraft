@@ -4,7 +4,7 @@
   "template": {
     "version": 1,
     "settings": {
-      "backgroundColor": "#fef5f0",
+      "backgroundColor": "#1c1008",
       "backgroundStyle": "none",
       "bodyBackgroundStyle": "solid",
       "bodyBackgroundColor": "#fef5f0",
@@ -31,10 +31,10 @@
               "left": 32
             },
             "alignment": "center",
-            "color": "#8c4a00",
-            "fontSize": 18,
+            "color": "#e8913a",
+            "fontSize": 10,
             "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "fontWeight": 800,
+            "fontWeight": 600,
             "letterSpacing": 3,
             "textTransform": "uppercase"
           }
@@ -45,102 +45,34 @@
       "blocks": [
         {
           "id": "sun-r-b1",
-          "type": "columns",
-          "style": {
-            "gap": 16,
-            "stackOnMobile": true,
-            "padding": {
-              "top": 8,
-              "right": 24,
-              "bottom": 16,
-              "left": 24
-            }
-          },
+          "type": "hero",
           "data": {
-            "columnCount": 2,
-            "columnRatio": [
-              55,
-              45
-            ],
-            "columns": [
-              {
-                "id": "sun-r-c1",
-                "blocks": [
-                  {
-                    "id": "sun-r-c1-label",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#8c4a00;font-weight:700;font-family:'Plus Jakarta Sans', Arial, sans-serif;\">Welcome Back</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 8,
-                        "left": 0
-                      }
-                    }
-                  },
-                  {
-                    "id": "sun-r-c1-title",
-                    "type": "text",
-                    "data": {
-                      "html": "<h1 style=\"margin:0;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:34px;line-height:1.1;font-weight:800;color:#322e2b;\">We've missed<br/><span style=\"color:#8c4a00;font-style:italic;\">your energy!</span></h1>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 12,
-                        "left": 0
-                      }
-                    }
-                  },
-                  {
-                    "id": "sun-r-c1-copy",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-size:15px;line-height:1.7;color:#605a57;\">The mat feels a little emptier without your presence. It's time to reignite that morning glow and reconnect with your flow.</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 0,
-                        "left": 0
-                      }
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "sun-r-c2",
-                "blocks": [
-                  {
-                    "id": "sun-r-c2-img",
-                    "type": "image",
-                    "data": {
-                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuBjLlyjrVH2KhlQpNYTHLXtrj46iGsA_wVMo0ZDUCq4Z8rGCSuyWjw36OkzTjO2DAhy73SMqI9F268obCF9rCItr9qAujdkwULSWzcHofv6Jzu_1WzekVQteUYPlAnWZ5dC8fRB4V4uIyRTPOrQ8NKUFqYS3u-36hkuyX46QJCftkxa1ubAjXZfMZpDinJPRGhPsrB7kb5csmmO7uKv-9Hio-8PHzBEt-isfPa20MkkysDQQ5IHwkY2dcasPKZ7d274S9x9uTY7VkKv",
-                      "alt": "Sunrise studio",
-                      "width": 240
-                    },
-                    "style": {
-                      "alignment": "center",
-                      "borderRadius": 20,
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 0,
-                        "left": 0
-                      }
-                    }
-                  }
-                ]
-              }
-            ]
+            "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuBjLlyjrVH2KhlQpNYTHLXtrj46iGsA_wVMo0ZDUCq4Z8rGCSuyWjw36OkzTjO2DAhy73SMqI9F268obCF9rCItr9qAujdkwULSWzcHofv6Jzu_1WzekVQteUYPlAnWZ5dC8fRB4V4uIyRTPOrQ8NKUFqYS3u-36hkuyX46QJCftkxa1ubAjXZfMZpDinJPRGhPsrB7kb5csmmO7uKv-9Hio-8PHzBEt-isfPa20MkkysDQQ5IHwkY2dcasPKZ7d274S9x9uTY7VkKv",
+            "heading": "We've Missed You",
+            "subheading": "Your mat is waiting. Your community is waiting.",
+            "buttonText": "Come Back →",
+            "buttonUrl": "https://"
+          },
+          "style": {
+            "height": 360,
+            "overlayColor": "#1c1008",
+            "overlayOpacity": 0.55,
+            "headingColor": "#fef5f0",
+            "headingFontSize": 36,
+            "headingFontWeight": 800,
+            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "subheadingColor": "#c4a882cc",
+            "buttonBackgroundColor": "#e8913a",
+            "buttonTextColor": "#1c1008",
+            "buttonBorderRadius": 999,
+            "contentAlignment": "center",
+            "verticalAlignment": "center",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
           }
         },
         {
@@ -148,11 +80,40 @@
           "type": "spacer",
           "data": {},
           "style": {
-            "height": 20
+            "height": 24
           }
         },
         {
           "id": "sun-r-b3",
+          "type": "heading",
+          "data": {
+            "text": "What's New",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 0,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#322e2b",
+            "fontSize": 26,
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "fontWeight": 800
+          }
+        },
+        {
+          "id": "sun-r-b4",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 8
+          }
+        },
+        {
+          "id": "sun-r-b5-cols",
           "type": "columns",
           "style": {
             "gap": 16,
@@ -160,57 +121,122 @@
             "padding": {
               "top": 0,
               "right": 24,
-              "bottom": 16,
+              "bottom": 0,
               "left": 24
             }
           },
           "data": {
             "columnCount": 2,
-            "columnRatio": [
-              50,
-              50
-            ],
+            "columnRatio": [50, 50],
             "columns": [
               {
-                "id": "sun-r-c3",
-                "backgroundColor": "#f8efea",
+                "id": "sun-r-col1",
                 "blocks": [
                   {
-                    "id": "sun-r-c3-t",
-                    "type": "text",
+                    "id": "sun-r-col1-card",
+                    "type": "card",
                     "data": {
-                      "html": "<div style=\"font-size:22px;\">✨</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">New Morning Flows</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;\">We've added 12 new Vinyasa sequences designed to energize your rhythm.</div>",
-                      "variables": []
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "✨",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "showBadge": true,
+                      "badgeText": "NEW",
+                      "heading": "New Morning Flows",
+                      "body": "Fresh sequences designed to energize your day. 6:30 AM and 7:30 AM daily.",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "https://"
                     },
                     "style": {
-                      "padding": {
-                        "top": 20,
-                        "right": 20,
-                        "bottom": 20,
-                        "left": 20
-                      }
+                      "padding": { "top": 20, "right": 16, "bottom": 20, "left": 16 },
+                      "backgroundColor": "#fef5f0",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "iconSize": 36,
+                      "iconBackgroundColor": "#ffffff",
+                      "iconBorderRadius": 50,
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "headingColor": "#322e2b",
+                      "headingFontSize": 16,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "headingFontWeight": 700,
+                      "bodyColor": "#605a57",
+                      "bodyFontSize": 13,
+                      "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "buttonBackgroundColor": "#e8913a",
+                      "buttonTextColor": "#1c1008",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonFontWeight": 700,
+                      "buttonPaddingX": 20,
+                      "buttonPaddingY": 10,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#e8913a",
+                      "buttonBorderWidth": 0,
+                      "contentAlignment": "center"
                     }
                   }
                 ]
               },
               {
-                "id": "sun-r-c4",
-                "backgroundColor": "#fff1e8",
+                "id": "sun-r-col2",
                 "blocks": [
                   {
-                    "id": "sun-r-c4-t",
-                    "type": "text",
+                    "id": "sun-r-col2-card",
+                    "type": "card",
                     "data": {
-                      "html": "<div style=\"font-size:22px;\">🌿</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">Guided Breathwork</div><div style=\"font-size:12px;color:#605a57;line-height:1.5;\">Enhanced meditation sessions to ground you before the day begins.</div>",
-                      "variables": []
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "🌿",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "showBadge": true,
+                      "badgeText": "NEW",
+                      "heading": "Guided Breathwork",
+                      "body": "Weekly breathwork sessions to deepen your practice and calm your mind.",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "https://"
                     },
                     "style": {
-                      "padding": {
-                        "top": 20,
-                        "right": 20,
-                        "bottom": 20,
-                        "left": 20
-                      }
+                      "padding": { "top": 20, "right": 16, "bottom": 20, "left": 16 },
+                      "backgroundColor": "#fef5f0",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "iconSize": 36,
+                      "iconBackgroundColor": "#ffffff",
+                      "iconBorderRadius": 50,
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "headingColor": "#322e2b",
+                      "headingFontSize": 16,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "headingFontWeight": 700,
+                      "bodyColor": "#605a57",
+                      "bodyFontSize": 13,
+                      "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "buttonBackgroundColor": "#e8913a",
+                      "buttonTextColor": "#1c1008",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonFontWeight": 700,
+                      "buttonPaddingX": 20,
+                      "buttonPaddingY": 10,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#e8913a",
+                      "buttonBorderWidth": 0,
+                      "contentAlignment": "center"
                     }
                   }
                 ]
@@ -219,43 +245,51 @@
           }
         },
         {
-          "id": "sun-r-b4",
+          "id": "sun-r-b6",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
+          }
+        },
+        {
+          "id": "sun-r-b7",
           "type": "card",
           "data": {
             "showIcon": false,
             "iconMode": "emoji",
-            "iconEmoji": "✨",
+            "iconEmoji": "",
             "iconImageSrc": "",
             "iconImageAlt": "",
             "showBadge": true,
-            "badgeText": "OFFER VALID FOR 7 DAYS",
-            "heading": "Your Mat is Ready",
-            "body": "To celebrate your return, we've added a complimentary session to your account. No strings, just pure energy.",
+            "badgeText": "EXCLUSIVE",
+            "heading": "Welcome Back Gift",
+            "body": "Enjoy a complimentary class on us. No strings attached.",
             "showButton": true,
-            "buttonText": "Claim Free Class",
+            "buttonText": "Book Free Class →",
             "buttonUrl": "https://"
           },
           "style": {
             "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
-            "backgroundColor": "#ffffff",
-            "borderRadius": 20,
+            "backgroundColor": "#2a1a0e",
+            "borderRadius": 16,
             "borderWidth": 0,
             "borderColor": "#e2e8f0",
             "borderStyle": "solid",
             "iconSize": 48,
-            "iconBackgroundColor": "#eef2ff",
+            "iconBackgroundColor": "#1c1008",
             "iconBorderRadius": 50,
-            "badgeBackgroundColor": "#f2f0ed",
-            "badgeTextColor": "#7c7672",
-            "headingColor": "#322e2b",
-            "headingFontSize": 24,
+            "badgeBackgroundColor": "#e8913a",
+            "badgeTextColor": "#1c1008",
+            "headingColor": "#fef5f0",
+            "headingFontSize": 22,
             "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
             "headingFontWeight": 800,
-            "bodyColor": "#605a57",
+            "bodyColor": "#c4a882",
             "bodyFontSize": 15,
             "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
-            "buttonBackgroundColor": "#8c4a00",
-            "buttonTextColor": "#fff0e7",
+            "buttonBackgroundColor": "#e8913a",
+            "buttonTextColor": "#1c1008",
             "buttonBorderRadius": 999,
             "buttonFontSize": 14,
             "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
@@ -264,9 +298,36 @@
             "buttonPaddingY": 12,
             "buttonFullWidth": false,
             "buttonBorderStyle": "solid",
-            "buttonBorderColor": "#8c4a00",
+            "buttonBorderColor": "#e8913a",
             "buttonBorderWidth": 0,
             "contentAlignment": "center"
+          }
+        },
+        {
+          "id": "sun-r-b8",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
+          }
+        },
+        {
+          "id": "sun-r-b9",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif', Georgia, serif;font-size:16px;font-style:italic;color:#c4a882;line-height:1.7;\">&ldquo;The hardest part is showing up. After that, the mat does the rest.&rdquo;</p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "backgroundColor": "#2a1a0e",
+            "borderRadius": 16,
+            "padding": {
+              "top": 32,
+              "right": 32,
+              "bottom": 32,
+              "left": 32
+            }
           }
         },
         {
@@ -279,27 +340,10 @@
           "style": {
             "alignment": "center",
             "padding": {
-              "top": 8,
+              "top": 16,
               "right": 32,
-              "bottom": 16,
+              "bottom": 8,
               "left": 32
-            }
-          }
-        },
-        {
-          "id": "sun-r-b6",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:18px;font-style:italic;color:#6c5a00;line-height:1.6;\">\"The morning sun is a daily invitation to start again, to breathe deeper, and to find your center.\"</p>",
-            "variables": []
-          },
-          "style": {
-            "alignment": "center",
-            "padding": {
-              "top": 0,
-              "right": 40,
-              "bottom": 24,
-              "left": 40
             }
           }
         }
@@ -307,6 +351,22 @@
     },
     "footer": {
       "blocks": [
+        {
+          "id": "sun-r-f0",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "borderColor": "#e8d5c4",
+            "borderWidth": 1,
+            "borderStyle": "solid",
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 0,
+              "left": 32
+            }
+          }
+        },
         {
           "id": "sun-r-f1",
           "type": "text",
@@ -316,7 +376,7 @@
           },
           "style": {
             "alignment": "center",
-            "backgroundColor": "#f8efea",
+            "backgroundColor": "#fef5f0",
             "padding": {
               "top": 20,
               "right": 32,
@@ -334,7 +394,7 @@
           },
           "style": {
             "alignment": "center",
-            "backgroundColor": "#f8efea",
+            "backgroundColor": "#fef5f0",
             "padding": {
               "top": 8,
               "right": 32,
