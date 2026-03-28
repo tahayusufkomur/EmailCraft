@@ -9,6 +9,7 @@ import { HeadingBlock } from '../Blocks/HeadingBlock';
 import { SpacerBlock } from '../Blocks/SpacerBlock';
 import { HtmlBlock } from '../Blocks/HtmlBlock';
 import { HeroBlock } from '../Blocks/HeroBlock';
+import { CardBlock } from '../Blocks/CardBlock';
 
 interface Props {
   block: Block;
@@ -36,6 +37,8 @@ export function BlockRenderer({ block }: Props) {
       return <HtmlBlock block={block} />;
     case 'hero':
       return <HeroBlock block={block} />;
+    case 'card':
+      return <CardBlock block={block} />;
     default:
       return <div>Unknown block type</div>;
   }

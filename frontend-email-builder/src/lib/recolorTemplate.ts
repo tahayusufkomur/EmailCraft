@@ -83,6 +83,19 @@ function recolorBlock(block: Block, palette: ColorPalette): Block {
       updated.style = { ...updated.style, lineColor: palette.surface };
       break;
 
+    case 'card':
+      updated.style = {
+        ...updated.style,
+        headingColor: palette.textDark,
+        bodyColor: palette.textLight,
+        buttonBackgroundColor: palette.primary,
+        buttonTextColor: buttonText,
+        buttonBorderColor: palette.primary,
+        badgeBackgroundColor: palette.surface,
+        badgeTextColor: palette.textDark,
+      };
+      break;
+
     case 'columns':
       updated.data = {
         ...block.data,

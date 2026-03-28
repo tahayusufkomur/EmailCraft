@@ -11,4 +11,5 @@ export const BLOCK_DESCRIPTIONS: Record<BlockType, string> = {
   social: 'Social media icon links',
   hero: 'Full-width hero section with background image and overlay',
   html: 'Raw HTML code block for custom content',
+  card: 'Styled card with optional icon, badge, heading, text, and button',
 };

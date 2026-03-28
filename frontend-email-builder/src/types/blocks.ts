@@ -1,4 +1,4 @@
-export type BlockType = 'text' | 'image' | 'button' | 'divider' | 'columns' | 'social' | 'heading' | 'spacer' | 'html' | 'hero';
+export type BlockType = 'text' | 'image' | 'button' | 'divider' | 'columns' | 'social' | 'heading' | 'spacer' | 'html' | 'hero' | 'card';
 export type TemplateBackgroundStyle =
   | 'none'
   | 'aurora'
@@ -186,6 +186,55 @@ export interface HeroBlock extends BaseBlock {
   };
 }
 
+export interface CardBlock extends BaseBlock {
+  type: 'card';
+  data: {
+    showIcon: boolean;
+    iconMode: 'emoji' | 'image';
+    iconEmoji: string;
+    iconImageSrc: string;
+    iconImageAlt: string;
+    showBadge: boolean;
+    badgeText: string;
+    heading: string;
+    body: string;
+    showButton: boolean;
+    buttonText: string;
+    buttonUrl: string;
+  };
+  style: BlockStyle & {
+    borderRadius: number;
+    borderWidth: number;
+    borderColor: string;
+    borderStyle: 'solid' | 'dashed' | 'dotted' | 'none';
+    iconSize: number;
+    iconBackgroundColor: string;
+    iconBorderRadius: number;
+    badgeBackgroundColor: string;
+    badgeTextColor: string;
+    headingColor: string;
+    headingFontSize: number;
+    headingFontFamily: string;
+    headingFontWeight: number;
+    bodyColor: string;
+    bodyFontSize: number;
+    bodyFontFamily: string;
+    buttonBackgroundColor: string;
+    buttonTextColor: string;
+    buttonBorderRadius: number;
+    buttonFontSize: number;
+    buttonFontFamily: string;
+    buttonFontWeight: number;
+    buttonPaddingX: number;
+    buttonPaddingY: number;
+    buttonFullWidth: boolean;
+    buttonBorderStyle: 'solid' | 'dashed' | 'dotted';
+    buttonBorderColor: string;
+    buttonBorderWidth: number;
+    contentAlignment: 'left' | 'center' | 'right';
+  };
+}
+
 export type Block =
   | TextBlock
   | ImageBlock
@@ -196,7 +245,8 @@ export type Block =
   | HeadingBlock
   | SpacerBlock
   | HtmlBlock
-  | HeroBlock;
+  | HeroBlock
+  | CardBlock;
 
 export interface TemplateSettings {
   backgroundColor: string;

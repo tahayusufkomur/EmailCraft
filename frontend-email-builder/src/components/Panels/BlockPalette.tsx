@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import {
   Heading, AlignLeft, Image, RectangleHorizontal, MoveVertical,
-  Minus, Columns2, Share2, ImagePlay, Code2,
+  Minus, Columns2, Share2, ImagePlay, Code2, LayoutList,
   Settings, LayoutGrid, ChevronDown, Plus, X,
 } from 'lucide-react';
 import type { Block, BlockType } from '../../types/blocks';
@@ -22,6 +22,7 @@ const BLOCK_ICONS: Record<BlockType, React.ReactNode> = {
   social: <Share2 size={20} />,
   hero: <ImagePlay size={20} />,
   html: <Code2 size={20} />,
+  card: <LayoutList size={20} />,
 };
 
 interface BlockTypeConfig {
@@ -38,6 +39,7 @@ const BLOCK_TYPES: BlockTypeConfig[] = [
   { type: 'divider', label: 'Divider' },
   { type: 'columns', label: 'Columns' },
   { type: 'social', label: 'Social' },
+  { type: 'card', label: 'Card' },
   { type: 'hero', label: 'Hero' },
   { type: 'html', label: 'HTML' },
 ];
