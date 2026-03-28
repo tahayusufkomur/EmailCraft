@@ -28,32 +28,31 @@ function withOpacity80(hex: string): string {
 }
 
 /**
- * Classify a background color by luminance.
- * - white:  very light (lum > 0.85) → palette.background
- * - neutral: light gray (lum > 0.70) → palette.surface
- * - dark:   very dark  (lum < 0.15) → palette.secondary (dark accent)
- * - custom: everything else → unchanged
+ * Classify a background color by luminance — full coverage, no gaps.
+ * Every color maps to a slot so palette changes are always reversible.
+ * - white:   lum > 0.7  → palette.background
+ * - neutral: lum > 0.4  → palette.surface
+ * - dark:    lum <= 0.4  → palette.secondary
  */
-function classifyBackground(bgColor: string | null | undefined): 'white' | 'neutral' | 'dark' | 'custom' {
+function classifyBackground(bgColor: string | null | undefined): 'white' | 'neutral' | 'dark' {
   if (!bgColor || bgColor === 'transparent') return 'white';
   try {
     const lum = luminance(bgColor);
-    if (lum > 0.85) return 'white';
-    if (lum > 0.70) return 'neutral';
-    if (lum < 0.15) return 'dark';
-    return 'custom';
+    if (lum > 0.7) return 'white';
+    if (lum > 0.4) return 'neutral';
+    return 'dark';
   } catch {
-    return 'custom';
+    return 'white';
   }
 }
 
 /**
- * Check if a background color is dark (luminance < 0.25).
+ * Check if a background color is dark (luminance < 0.4).
  */
 function isDarkBackground(bgColor: string | null | undefined): boolean {
   if (!bgColor || bgColor === 'transparent') return false;
   try {
-    return luminance(bgColor) < 0.25;
+    return luminance(bgColor) < 0.4;
   } catch {
     return false;
   }
@@ -112,7 +111,9 @@ function recolorBlock(block: Block, palette: ColorPalette): Block {
       updated.style = { ...updated.style, lineColor: onDark ? palette.primary : palette.surface };
       break;
 
-    case 'card':
+    case 'card': {
+      const iconBgClass = classifyBackground(updated.style.iconBackgroundColor as string | null);
+      const newIconBg = iconBgClass === 'dark' ? palette.secondary : iconBgClass === 'neutral' ? palette.surface : palette.background;
       updated.style = {
         ...updated.style,
         headingColor: onDark ? palette.background : palette.textDark,
@@ -122,17 +123,23 @@ function recolorBlock(block: Block, palette: ColorPalette): Block {
         buttonBorderColor: palette.primary,
         badgeBackgroundColor: onDark ? palette.primary : palette.surface,
         badgeTextColor: onDark ? palette.background : palette.textDark,
+        iconBackgroundColor: newIconBg,
       };
       break;
+    }
 
-    case 'list':
+    case 'list': {
+      const listIconBgClass = classifyBackground(updated.style.iconBackgroundColor as string | null);
+      const newListIconBg = listIconBgClass === 'dark' ? palette.secondary : listIconBgClass === 'neutral' ? palette.surface : palette.background;
       updated.style = {
         ...updated.style,
         iconColor: palette.primary,
+        iconBackgroundColor: newListIconBg,
         textColor: onDark ? palette.background : palette.textDark,
         subtitleColor: onDark ? withOpacity80(palette.background) : palette.textLight,
       };
       break;
+    }
 
     case 'profile':
       updated.style = {
