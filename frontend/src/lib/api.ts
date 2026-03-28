@@ -12,7 +12,7 @@ import type {
   SubscribeResponse,
   EmailBackgroundStyle,
   ThemeMode,
-  GalleryTemplatesResponse,
+  TemplateListItem,
   GuestCheckoutResponse,
   MagicLinkResponse,
   BillingPortalResponse,
@@ -54,7 +54,11 @@ export const api = {
 
   fetchPricing: () => request<PricingResponse>('/pages/pricing'),
 
-  fetchGalleryTemplates: (token: string) => request<GalleryTemplatesResponse>('/site/gallery', {}, token),
+  fetchTemplates: (token: string) =>
+    request<{ results: TemplateListItem[] }>('/site/templates/', {}, token),
+
+  deleteTemplate: (token: string, id: string) =>
+    request<void>(`/site/templates/${id}/`, { method: 'DELETE' }, token),
 
   register: (payload: {
     username: string;
