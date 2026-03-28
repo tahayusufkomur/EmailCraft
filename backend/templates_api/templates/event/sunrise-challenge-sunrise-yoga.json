@@ -1,10 +1,12 @@
 {
   "name": "Sunrise Challenge — Sunrise Yoga",
   "category": "event",
+  "is_premium": true,
+  "tags": ["event"],
   "template": {
     "version": 1,
     "settings": {
-      "backgroundColor": "#fef5f0",
+      "backgroundColor": "#1c1008",
       "backgroundStyle": "none",
       "bodyBackgroundStyle": "solid",
       "bodyBackgroundColor": "#fef5f0",
@@ -19,22 +21,14 @@
         {
           "id": "sun-e3-h1",
           "type": "heading",
-          "data": {
-            "text": "SUNRISE YOGA",
-            "level": 3
-          },
+          "data": { "text": "SUNRISE YOGA", "level": 3 },
           "style": {
-            "padding": {
-              "top": 28,
-              "right": 32,
-              "bottom": 24,
-              "left": 32
-            },
+            "padding": { "top": 28, "right": 32, "bottom": 24, "left": 32 },
             "alignment": "center",
-            "color": "#8c4a00",
-            "fontSize": 18,
+            "color": "#e8913a",
+            "fontSize": 10,
             "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "fontWeight": 800,
+            "fontWeight": 600,
             "letterSpacing": 3,
             "textTransform": "uppercase"
           }
@@ -45,137 +39,40 @@
       "blocks": [
         {
           "id": "sun-e3-b1",
-          "type": "columns",
-          "style": {
-            "gap": 16,
-            "stackOnMobile": true,
-            "padding": {
-              "top": 12,
-              "right": 24,
-              "bottom": 16,
-              "left": 24
-            }
-          },
+          "type": "hero",
           "data": {
-            "columnCount": 2,
-            "columnRatio": [
-              55,
-              45
-            ],
-            "columns": [
-              {
-                "id": "sun-e3-c1",
-                "blocks": [
-                  {
-                    "id": "sun-e3-c1-label",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#8c4a00;font-weight:700;font-family:'Plus Jakarta Sans', Arial, sans-serif;\">7-Day Challenge</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 8,
-                        "left": 0
-                      }
-                    }
-                  },
-                  {
-                    "id": "sun-e3-c1-title",
-                    "type": "text",
-                    "data": {
-                      "html": "<h1 style=\"margin:0;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:34px;line-height:1.1;font-weight:800;color:#322e2b;\">Rise With The Sun</h1>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 12,
-                        "left": 0
-                      }
-                    }
-                  },
-                  {
-                    "id": "sun-e3-c1-copy",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-size:15px;line-height:1.7;color:#605a57;\">Join us for seven dawn sessions designed to reset your rhythm and build a mindful morning ritual.</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 16,
-                        "left": 0
-                      }
-                    }
-                  },
-                  {
-                    "id": "sun-e3-c1-cta",
-                    "type": "button",
-                    "data": {
-                      "text": "Join the Challenge",
-                      "url": "https://"
-                    },
-                    "style": {
-                      "alignment": "left",
-                      "backgroundColor": "#8c4a00",
-                      "color": "#fff0e7",
-                      "borderRadius": 999,
-                      "fontSize": 14,
-                      "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-                      "fontWeight": 700,
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 0,
-                        "left": 0
-                      },
-                      "paddingX": 24,
-                      "paddingY": 12,
-                      "fullWidth": false
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "sun-e3-c2",
-                "blocks": [
-                  {
-                    "id": "sun-e3-c2-img",
-                    "type": "image",
-                    "data": {
-                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuBjLlyjrVH2KhlQpNYTHLXtrj46iGsA_wVMo0ZDUCq4Z8rGCSuyWjw36OkzTjO2DAhy73SMqI9F268obCF9rCItr9qAujdkwULSWzcHofv6Jzu_1WzekVQteUYPlAnWZ5dC8fRB4V4uIyRTPOrQ8NKUFqYS3u-36hkuyX46QJCftkxa1ubAjXZfMZpDinJPRGhPsrB7kb5csmmO7uKv-9Hio-8PHzBEt-isfPa20MkkysDQQ5IHwkY2dcasPKZ7d274S9x9uTY7VkKv",
-                      "alt": "Morning studio",
-                      "width": 240
-                    },
-                    "style": {
-                      "alignment": "center",
-                      "borderRadius": 20,
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 0,
-                        "left": 0
-                      }
-                    }
-                  }
-                ]
-              }
-            ]
+            "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuBjLlyjrVH2KhlQpNYTHLXtrj46iGsA_wVMo0ZDUCq4Z8rGCSuyWjw36OkzTjO2DAhy73SMqI9F268obCF9rCItr9qAujdkwULSWzcHofv6Jzu_1WzekVQteUYPlAnWZ5dC8fRB4V4uIyRTPOrQ8NKUFqYS3u-36hkuyX46QJCftkxa1ubAjXZfMZpDinJPRGhPsrB7kb5csmmO7uKv-9Hio-8PHzBEt-isfPa20MkkysDQQ5IHwkY2dcasPKZ7d274S9x9uTY7VkKv",
+            "heading": "7-Day Sunrise Challenge",
+            "subheading": "Rise with the sun. Transform your mornings.",
+            "showButton": true,
+            "buttonText": "Join the Challenge →",
+            "buttonUrl": "#"
+          },
+          "style": {
+            "height": 360,
+            "headingFontSize": 32,
+            "headingFontWeight": 800,
+            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "headingColor": "#fef5f0",
+            "subheadingFontSize": 15,
+            "subheadingColor": "#c4a882cc",
+            "overlayColor": "#1c1008",
+            "overlayOpacity": 0.55,
+            "buttonBackgroundColor": "#e8913a",
+            "buttonTextColor": "#1c1008",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 13,
+            "buttonFontWeight": 700,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "contentAlignment": "center",
+            "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }
           }
         },
         {
           "id": "sun-e3-b2",
           "type": "spacer",
           "data": {},
-          "style": {
-            "height": 16
-          }
+          "style": { "height": 24 }
         },
         {
           "id": "sun-e3-b3",
@@ -183,83 +80,176 @@
           "style": {
             "gap": 12,
             "stackOnMobile": true,
-            "padding": {
-              "top": 0,
-              "right": 24,
-              "bottom": 16,
-              "left": 24
-            }
+            "padding": { "top": 0, "right": 24, "bottom": 0, "left": 24 }
           },
           "data": {
             "columnCount": 3,
-            "columnRatio": [
-              34,
-              33,
-              33
-            ],
+            "columnRatio": [34, 33, 33],
             "columns": [
               {
-                "id": "sun-e3-c3",
-                "backgroundColor": "#ffffff",
+                "id": "sun-e3-col1",
                 "blocks": [
                   {
-                    "id": "sun-e3-c3-t",
-                    "type": "text",
+                    "id": "sun-e3-col1-card",
+                    "type": "card",
                     "data": {
-                      "html": "<div style=\"text-align:center;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:800;font-size:18px;color:#8c4a00;\">6:30 AM</div><div style=\"font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7c7672;font-weight:700;margin-top:4px;\">Daily Start</div></div>",
-                      "variables": []
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "🌅",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "heading": "6:30 AM",
+                      "body": "Every morning for 7 days",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "",
+                      "showBadge": false,
+                      "badgeText": ""
                     },
                     "style": {
-                      "padding": {
-                        "top": 16,
-                        "right": 16,
-                        "bottom": 16,
-                        "left": 16
-                      }
+                      "backgroundColor": "#2a1a0e",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "headingColor": "#fef5f0",
+                      "headingFontSize": 24,
+                      "headingFontWeight": 800,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "bodyColor": "#c4a882",
+                      "bodyFontSize": 13,
+                      "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "iconSize": 36,
+                      "iconBorderRadius": 50,
+                      "iconBackgroundColor": "#1c1008",
+                      "contentAlignment": "center",
+                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "buttonBackgroundColor": "#e8913a",
+                      "buttonTextColor": "#1c1008",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontWeight": 700,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonPaddingX": 28,
+                      "buttonPaddingY": 12,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#e8913a",
+                      "buttonBorderWidth": 0
                     }
                   }
                 ]
               },
               {
-                "id": "sun-e3-c4",
-                "backgroundColor": "#fff1e8",
+                "id": "sun-e3-col2",
                 "blocks": [
                   {
-                    "id": "sun-e3-c4-t",
-                    "type": "text",
+                    "id": "sun-e3-col2-card",
+                    "type": "card",
                     "data": {
-                      "html": "<div style=\"text-align:center;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:800;font-size:18px;color:#8c4a00;\">7 Days</div><div style=\"font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7c7672;font-weight:700;margin-top:4px;\">Full Reset</div></div>",
-                      "variables": []
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "🔥",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "heading": "7 Days",
+                      "body": "Progressive difficulty",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "",
+                      "showBadge": false,
+                      "badgeText": ""
                     },
                     "style": {
-                      "padding": {
-                        "top": 16,
-                        "right": 16,
-                        "bottom": 16,
-                        "left": 16
-                      }
+                      "backgroundColor": "#2a1a0e",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "headingColor": "#fef5f0",
+                      "headingFontSize": 24,
+                      "headingFontWeight": 800,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "bodyColor": "#c4a882",
+                      "bodyFontSize": 13,
+                      "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "iconSize": 36,
+                      "iconBorderRadius": 50,
+                      "iconBackgroundColor": "#1c1008",
+                      "contentAlignment": "center",
+                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "buttonBackgroundColor": "#e8913a",
+                      "buttonTextColor": "#1c1008",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontWeight": 700,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonPaddingX": 28,
+                      "buttonPaddingY": 12,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#e8913a",
+                      "buttonBorderWidth": 0
                     }
                   }
                 ]
               },
               {
-                "id": "sun-e3-c5",
-                "backgroundColor": "#f8efea",
+                "id": "sun-e3-col3",
                 "blocks": [
                   {
-                    "id": "sun-e3-c5-t",
-                    "type": "text",
+                    "id": "sun-e3-col3-card",
+                    "type": "card",
                     "data": {
-                      "html": "<div style=\"text-align:center;\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:800;font-size:18px;color:#8c4a00;\">Live</div><div style=\"font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7c7672;font-weight:700;margin-top:4px;\">+ Replays</div></div>",
-                      "variables": []
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "📱",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "heading": "Live + Replay",
+                      "body": "Never miss a session",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "",
+                      "showBadge": false,
+                      "badgeText": ""
                     },
                     "style": {
-                      "padding": {
-                        "top": 16,
-                        "right": 16,
-                        "bottom": 16,
-                        "left": 16
-                      }
+                      "backgroundColor": "#2a1a0e",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "headingColor": "#fef5f0",
+                      "headingFontSize": 24,
+                      "headingFontWeight": 800,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "bodyColor": "#c4a882",
+                      "bodyFontSize": 13,
+                      "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "iconSize": 36,
+                      "iconBorderRadius": 50,
+                      "iconBackgroundColor": "#1c1008",
+                      "contentAlignment": "center",
+                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "buttonBackgroundColor": "#e8913a",
+                      "buttonTextColor": "#1c1008",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontWeight": 700,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonPaddingX": 28,
+                      "buttonPaddingY": 12,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#e8913a",
+                      "buttonBorderWidth": 0
                     }
                   }
                 ]
@@ -269,33 +259,39 @@
         },
         {
           "id": "sun-e3-b4",
+          "type": "spacer",
+          "data": {},
+          "style": { "height": 24 }
+        },
+        {
+          "id": "sun-e3-b5",
           "type": "card",
           "data": {
-            "showIcon": false,
+            "showIcon": true,
             "iconMode": "emoji",
-            "iconEmoji": "✨",
+            "iconEmoji": "📋",
             "iconImageSrc": "",
             "iconImageAlt": "",
             "showBadge": true,
             "badgeText": "BEGINS MONDAY",
-            "heading": "Challenge rhythm",
-            "body": "Each day includes a 35-minute flow, a 10-minute breath reset, and a short reflection prompt.",
-            "showButton": false,
-            "buttonText": "Learn More",
-            "buttonUrl": "https://"
+            "heading": "Your Challenge Rhythm",
+            "body": "Each morning builds on the last. Start with gentle sun salutations, build toward full vinyasa flows by day 7.",
+            "showButton": true,
+            "buttonText": "See Full Schedule →",
+            "buttonUrl": "#"
           },
           "style": {
-            "padding": { "top": 22, "right": 22, "bottom": 22, "left": 22 },
+            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
             "backgroundColor": "#ffffff",
-            "borderRadius": 20,
+            "borderRadius": 16,
             "borderWidth": 0,
             "borderColor": "#e2e8f0",
             "borderStyle": "solid",
             "iconSize": 48,
-            "iconBackgroundColor": "#eef2ff",
+            "iconBackgroundColor": "#fef5f0",
             "iconBorderRadius": 50,
-            "badgeBackgroundColor": "#f2f0ed",
-            "badgeTextColor": "#7c7672",
+            "badgeBackgroundColor": "#e8913a",
+            "badgeTextColor": "#1c1008",
             "headingColor": "#322e2b",
             "headingFontSize": 22,
             "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
@@ -303,8 +299,8 @@
             "bodyColor": "#605a57",
             "bodyFontSize": 14,
             "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
-            "buttonBackgroundColor": "#8c4a00",
-            "buttonTextColor": "#fff0e7",
+            "buttonBackgroundColor": "#e8913a",
+            "buttonTextColor": "#1c1008",
             "buttonBorderRadius": 999,
             "buttonFontSize": 14,
             "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
@@ -313,9 +309,28 @@
             "buttonPaddingY": 12,
             "buttonFullWidth": false,
             "buttonBorderStyle": "solid",
-            "buttonBorderColor": "#8c4a00",
+            "buttonBorderColor": "#e8913a",
             "buttonBorderWidth": 0,
-            "contentAlignment": "left"
+            "contentAlignment": "center"
+          }
+        },
+        {
+          "id": "sun-e3-b6",
+          "type": "spacer",
+          "data": {},
+          "style": { "height": 24 }
+        },
+        {
+          "id": "sun-e3-b7",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;font-size:16px;line-height:1.7;color:#c4a882;font-family:'Noto Serif', Georgia, serif;font-style:italic;text-align:center;\">&ldquo;The sun doesn&rsquo;t wait. Neither should your practice.&rdquo;</p>",
+            "variables": []
+          },
+          "style": {
+            "backgroundColor": "#2a1a0e",
+            "borderRadius": 16,
+            "padding": { "top": 32, "right": 32, "bottom": 32, "left": 32 }
           }
         }
       ]
@@ -324,45 +339,41 @@
       "blocks": [
         {
           "id": "sun-e3-f1",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms of Service</a></p>",
-            "variables": []
-          },
+          "type": "divider",
+          "data": {},
           "style": {
-            "alignment": "center",
-            "backgroundColor": "#f8efea",
-            "padding": {
-              "top": 20,
-              "right": 32,
-              "bottom": 8,
-              "left": 32
-            }
+            "lineStyle": "solid",
+            "lineColor": "#e8913a",
+            "lineThickness": 2,
+            "spacing": 0,
+            "padding": { "top": 24, "right": 32, "bottom": 8, "left": 32 }
           }
         },
         {
           "id": "sun-e3-f2",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2024 Sunrise Yoga. All rights reserved.</p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms</a></p>",
             "variables": []
           },
           "style": {
             "alignment": "center",
-            "backgroundColor": "#f8efea",
-            "padding": {
-              "top": 8,
-              "right": 32,
-              "bottom": 24,
-              "left": 32
-            }
+            "padding": { "top": 8, "right": 32, "bottom": 8, "left": 32 }
+          }
+        },
+        {
+          "id": "sun-e3-f3",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2025 Sunrise Yoga. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 }
           }
         }
       ]
     }
-  },
-  "is_premium": true,
-  "tags": [
-    "event"
-  ]
+  }
 }
