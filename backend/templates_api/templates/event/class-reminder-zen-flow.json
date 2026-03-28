@@ -1,10 +1,13 @@
 {
   "name": "Class Reminder — Zen Flow",
   "category": "event",
+  "tags": [
+    "event"
+  ],
   "template": {
     "version": 1,
     "settings": {
-      "backgroundColor": "#f9faf8",
+      "backgroundColor": "#0a1a16",
       "backgroundStyle": "none",
       "bodyBackgroundStyle": "solid",
       "bodyBackgroundColor": "#ffffff",
@@ -20,7 +23,7 @@
           "id": "cr-h1",
           "type": "heading",
           "data": {
-            "text": "THE BREATHABLE CANVAS",
+            "text": "ZENITH FLOW",
             "level": 3
           },
           "style": {
@@ -31,8 +34,8 @@
               "left": 32
             },
             "alignment": "center",
-            "color": "#406660",
-            "fontSize": 14,
+            "color": "#5ee8c5",
+            "fontSize": 13,
             "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
             "fontWeight": 700,
             "letterSpacing": 4,
@@ -48,204 +51,145 @@
           "type": "hero",
           "data": {
             "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuDv_4XompXgdieKDYX5BKdA9kz4LQPLNEZH8Se0nCilk13GTA6Yp3gM-FqiGUYw_P_fUOQjVVC_v11jd9aDd3IaTrFw7lgsoFwFMW8uvBZQCYkdk-OKGx0rczvSEKpOxOR99se1fqgLEiu3B3kOuuF6fXxyBYfiBpeIuCmqkrdtVIphtPfEgJB2paAt5uyjtO6Sak1-XswX3tumhZ6ZNQGmnXTXochchYptxgvYoa6_qawVjuzUa-bRS0UGlnT6xuQZ1N58Kba_gu9b",
-            "heading": "Your Zen Flow session is coming up soon!",
-            "subheading": "",
-            "buttonText": "",
-            "buttonUrl": ""
+            "heading": "Your Class Tomorrow",
+            "subheading": "Yin & Restore with Maya — 8:00 AM",
+            "showButton": true,
+            "buttonText": "Confirm Attendance →",
+            "buttonUrl": "#"
           },
           "style": {
+            "height": 360,
+            "overlayColor": "#0a1a16",
+            "overlayOpacity": 0.55,
+            "headingColor": "#e8f5f0",
+            "headingFontSize": 32,
+            "headingFontWeight": 700,
+            "headingFontFamily": "'Noto Serif', Georgia, serif",
+            "subheadingColor": "#7a9e93",
+            "buttonBackgroundColor": "#5ee8c5",
+            "buttonTextColor": "#0a1a16",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 13,
+            "buttonFontWeight": 700,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "contentAlignment": "center",
             "padding": {
               "top": 0,
               "right": 0,
               "bottom": 0,
               "left": 0
-            },
-            "height": 360,
-            "overlayColor": "#f9faf8",
-            "overlayOpacity": 0.7,
-            "headingColor": "#406660",
-            "headingFontSize": 30,
-            "headingFontFamily": "'Noto Serif', Georgia, serif",
-            "subheadingColor": "#5a605e",
-            "buttonBackgroundColor": "#406660",
-            "buttonTextColor": "#e2fff9",
-            "buttonBorderRadius": 50,
-            "contentAlignment": "center",
-            "verticalAlignment": "bottom"
+            }
           }
         },
         {
           "id": "cr-b2",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
+          }
+        },
+        {
+          "id": "cr-b3",
           "type": "columns",
           "data": {
             "columnCount": 2,
-            "columnRatio": [
-              50,
-              50
-            ],
+            "columnRatio": [50, 50],
             "columns": [
               {
-                "id": "cr-c1",
-                "backgroundColor": "#f2f4f2",
+                "id": "cr-b3-c1",
                 "blocks": [
                   {
-                    "id": "cr-c1b1",
-                    "type": "heading",
+                    "id": "cr-b3-c1-card",
+                    "type": "card",
                     "data": {
-                      "text": "TIME",
-                      "level": 4
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "🧘",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "heading": "Yin & Restore",
+                      "body": "60 minutes of deep holds and gentle movement. All levels.",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "",
+                      "showBadge": true,
+                      "badgeText": "TOMORROW 8 AM"
                     },
                     "style": {
+                      "backgroundColor": "#e8f5f0",
+                      "borderRadius": 12,
+                      "borderWidth": 0,
+                      "borderColor": "#e8f5f0",
+                      "borderStyle": "solid",
+                      "headingColor": "#2e3432",
+                      "headingFontSize": 18,
+                      "headingFontWeight": 700,
+                      "headingFontFamily": "'Noto Serif', Georgia, serif",
+                      "bodyColor": "#5a605e",
+                      "bodyFontSize": 14,
+                      "bodyFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "badgeBackgroundColor": "#5ee8c5",
+                      "badgeTextColor": "#0a1a16",
+                      "badgeFontSize": 10,
+                      "badgeFontWeight": 700,
+                      "badgeLetterSpacing": 2,
+                      "iconSize": 40,
+                      "iconBorderRadius": 50,
+                      "iconBackgroundColor": "#ffffff",
+                      "contentAlignment": "center",
                       "padding": {
                         "top": 24,
-                        "right": 16,
-                        "bottom": 0,
-                        "left": 16
-                      },
-                      "alignment": "left",
-                      "color": "#635f57",
-                      "fontSize": 11,
-                      "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 3,
-                      "textTransform": "uppercase"
-                    }
-                  },
-                  {
-                    "id": "cr-c1b2",
-                    "type": "heading",
-                    "data": {
-                      "text": "9:00 AM",
-                      "level": 2
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 4,
-                        "right": 16,
-                        "bottom": 16,
-                        "left": 16
-                      },
-                      "alignment": "left",
-                      "color": "#2e3432",
-                      "fontSize": 26,
-                      "fontFamily": "'Noto Serif', Georgia, serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 0,
-                      "textTransform": "none"
-                    }
-                  },
-                  {
-                    "id": "cr-c1b3",
-                    "type": "button",
-                    "data": {
-                      "text": "Add to Calendar",
-                      "url": "https://"
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 16,
+                        "right": 24,
                         "bottom": 24,
-                        "left": 16
-                      },
-                      "alignment": "center",
-                      "backgroundColor": "#406660",
-                      "color": "#e2fff9",
-                      "borderRadius": 50,
-                      "fullWidth": true,
-                      "fontSize": 13,
-                      "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-                      "fontWeight": 700,
-                      "paddingX": 16,
-                      "paddingY": 12
+                        "left": 24
+                      }
                     }
                   }
                 ]
               },
               {
-                "id": "cr-c2",
-                "backgroundColor": "#c2ebe3",
+                "id": "cr-b3-c2",
                 "blocks": [
                   {
-                    "id": "cr-c2b1",
-                    "type": "heading",
+                    "id": "cr-b3-c2-card",
+                    "type": "card",
                     "data": {
-                      "text": "INSTRUCTOR",
-                      "level": 4
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "📍",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "heading": "Studio One",
+                      "body": "Ground floor, enter through the garden courtyard. Arrive 10 minutes early.",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "",
+                      "showBadge": false,
+                      "badgeText": ""
                     },
                     "style": {
+                      "backgroundColor": "#e8f5f0",
+                      "borderRadius": 12,
+                      "borderWidth": 0,
+                      "borderColor": "#e8f5f0",
+                      "borderStyle": "solid",
+                      "headingColor": "#2e3432",
+                      "headingFontSize": 18,
+                      "headingFontWeight": 700,
+                      "headingFontFamily": "'Noto Serif', Georgia, serif",
+                      "bodyColor": "#5a605e",
+                      "bodyFontSize": 14,
+                      "bodyFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "iconSize": 40,
+                      "iconBorderRadius": 50,
+                      "iconBackgroundColor": "#ffffff",
+                      "contentAlignment": "center",
                       "padding": {
                         "top": 24,
-                        "right": 16,
-                        "bottom": 0,
-                        "left": 16
-                      },
-                      "alignment": "left",
-                      "color": "#335853",
-                      "fontSize": 11,
-                      "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 3,
-                      "textTransform": "uppercase"
-                    }
-                  },
-                  {
-                    "id": "cr-c2b2",
-                    "type": "image",
-                    "data": {
-                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuDo6GcVwxFvkQVA9m15xLNg0ek5weHEZdaMWwj-cLAG4u73XN9V1tenlFXZbpmlKxo9VNKHD7dKz9lwy-x-tI0MKeVGBO740TqddKtLgMuYWFOImqg_r2OLxI5-41bJNHo9bI_WpKew6bvKktUUnXRQy_fZf9oUs8GJsEr1lRh7l8nQ971YFHE0lkCOZ2y7dRD4doXjVK5gzGoCQsD47oH5mRFLYA4hQiYHpJ-Dn1G24s7mA4Ka6tf2j-uj_PBs6z0IOdW76m2XJ22I",
-                      "alt": "Instructor Sarah",
-                      "width": 56,
-                      "height": 56
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 8,
-                        "right": 16,
-                        "bottom": 4,
-                        "left": 16
-                      },
-                      "alignment": "left",
-                      "borderRadius": 50,
-                      "fullWidth": false
-                    }
-                  },
-                  {
-                    "id": "cr-c2b3",
-                    "type": "heading",
-                    "data": {
-                      "text": "Sarah",
-                      "level": 2
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 16,
-                        "bottom": 4,
-                        "left": 16
-                      },
-                      "alignment": "left",
-                      "color": "#335853",
-                      "fontSize": 22,
-                      "fontFamily": "'Noto Serif', Georgia, serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 0,
-                      "textTransform": "none"
-                    }
-                  },
-                  {
-                    "id": "cr-c2b4",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-size:12px;color:#335853;line-height:1.5;\">Guiding your morning flow with mindfulness and grace.</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 16,
+                        "right": 24,
                         "bottom": 24,
-                        "left": 16
+                        "left": 24
                       }
                     }
                   }
@@ -254,115 +198,115 @@
             ]
           },
           "style": {
+            "gap": 16,
+            "stackOnMobile": true,
             "padding": {
-              "top": 20,
+              "top": 0,
               "right": 20,
               "bottom": 0,
               "left": 20
-            },
-            "gap": 12,
-            "stackOnMobile": true
-          }
-        },
-        {
-          "id": "cr-b3",
-          "type": "spacer",
-          "data": {},
-          "style": {
-            "height": 16
+            }
           }
         },
         {
           "id": "cr-b4",
-          "type": "card",
-          "data": {
-            "showIcon": true,
-            "iconMode": "emoji",
-            "iconEmoji": "🧘",
-            "iconImageSrc": "",
-            "iconImageAlt": "",
-            "showBadge": false,
-            "badgeText": "New",
-            "heading": "Preparation is Practice",
-            "body": "Don't forget your mat and water bottle. Arrive 5 minutes early to ground yourself.",
-            "showButton": false,
-            "buttonText": "Learn More",
-            "buttonUrl": "https://"
-          },
+          "type": "spacer",
+          "data": {},
           "style": {
-            "padding": { "top": 20, "right": 24, "bottom": 20, "left": 24 },
-            "backgroundColor": "#f9faf8",
-            "borderRadius": 12,
-            "borderWidth": 0,
-            "borderColor": "#e2e8f0",
-            "borderStyle": "solid",
-            "iconSize": 40,
-            "iconBackgroundColor": "#c5ebdd",
-            "iconBorderRadius": 8,
-            "badgeBackgroundColor": "#eef2ff",
-            "badgeTextColor": "#4338ca",
-            "headingColor": "#2e3432",
-            "headingFontSize": 16,
-            "headingFontFamily": "'Noto Serif', Georgia, serif",
-            "headingFontWeight": 700,
-            "bodyColor": "#635f57",
-            "bodyFontSize": 13,
-            "bodyFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "buttonBackgroundColor": "#406660",
-            "buttonTextColor": "#e2fff9",
-            "buttonBorderRadius": 50,
-            "buttonFontSize": 14,
-            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "buttonFontWeight": 600,
-            "buttonPaddingX": 20,
-            "buttonPaddingY": 10,
-            "buttonFullWidth": false,
-            "buttonBorderStyle": "solid",
-            "buttonBorderColor": "#406660",
-            "buttonBorderWidth": 0,
-            "contentAlignment": "left"
+            "height": 24
           }
         },
         {
           "id": "cr-b5",
-          "type": "spacer",
-          "data": {},
+          "type": "card",
+          "data": {
+            "showIcon": true,
+            "iconMode": "emoji",
+            "iconEmoji": "🌿",
+            "iconImageSrc": "",
+            "iconImageAlt": "",
+            "heading": "Preparation is Practice",
+            "body": "Bring layers for warmth during longer holds. Props provided, or bring your own bolster.",
+            "showButton": true,
+            "buttonText": "View Class Details →",
+            "buttonUrl": "#",
+            "showBadge": false,
+            "badgeText": ""
+          },
           "style": {
-            "height": 16
+            "backgroundColor": "#132e27",
+            "borderRadius": 12,
+            "borderWidth": 0,
+            "borderColor": "#132e27",
+            "borderStyle": "solid",
+            "headingColor": "#e8f5f0",
+            "headingFontSize": 20,
+            "headingFontWeight": 700,
+            "headingFontFamily": "'Noto Serif', Georgia, serif",
+            "bodyColor": "#7a9e93",
+            "bodyFontSize": 14,
+            "bodyFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "buttonBackgroundColor": "#5ee8c5",
+            "buttonTextColor": "#0a1a16",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 13,
+            "buttonFontWeight": 700,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "buttonPaddingX": 20,
+            "buttonPaddingY": 10,
+            "buttonFullWidth": false,
+            "buttonBorderStyle": "solid",
+            "buttonBorderColor": "#5ee8c5",
+            "buttonBorderWidth": 0,
+            "iconSize": 40,
+            "iconBorderRadius": 50,
+            "iconBackgroundColor": "#0a1a16",
+            "contentAlignment": "center",
+            "padding": {
+              "top": 32,
+              "right": 32,
+              "bottom": 32,
+              "left": 32
+            },
+            "margin": {
+              "top": 0,
+              "right": 20,
+              "bottom": 0,
+              "left": 20
+            }
           }
         },
         {
           "id": "cr-b6",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:20px;font-style:italic;color:#44665c;line-height:1.5;\">\"Yoga is not about touching your toes, it's about what you learn on the way down.\"</p>",
-            "variables": []
-          },
+          "type": "spacer",
+          "data": {},
           "style": {
-            "padding": {
-              "top": 16,
-              "right": 40,
-              "bottom": 24,
-              "left": 40
-            },
-            "alignment": "center"
+            "height": 24
           }
         },
         {
           "id": "cr-b7",
-          "type": "divider",
-          "data": {},
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:16px;font-style:italic;color:#7a9e93;line-height:1.7;\">&ldquo;In the midst of movement and chaos, keep stillness inside of you.&rdquo;</p>",
+            "variables": []
+          },
           "style": {
+            "backgroundColor": "#132e27",
+            "borderRadius": 12,
             "padding": {
-              "top": 0,
-              "right": 0,
-              "bottom": 0,
-              "left": 0
+              "top": 32,
+              "right": 32,
+              "bottom": 32,
+              "left": 32
             },
-            "lineStyle": "solid",
-            "lineColor": "#b4ddd5",
-            "lineThickness": 2,
-            "spacing": 4
+            "alignment": "center",
+            "margin": {
+              "top": 0,
+              "right": 20,
+              "bottom": 0,
+              "left": 20
+            }
           }
         }
       ]
@@ -371,44 +315,56 @@
       "blocks": [
         {
           "id": "cr-f1",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#635f57;\"><a href=\"#\" style=\"color:#635f57;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">Privacy Policy</a></p>",
-            "variables": []
-          },
+          "type": "divider",
+          "data": {},
           "style": {
+            "lineStyle": "solid",
+            "lineColor": "#5ee8c5",
+            "lineThickness": 2,
+            "spacing": 0,
             "padding": {
-              "top": 20,
+              "top": 24,
               "right": 32,
               "bottom": 8,
               "left": 32
-            },
-            "alignment": "center",
-            "backgroundColor": "#f2f4f2"
+            }
           }
         },
         {
           "id": "cr-f2",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">© 2024 The Breathable Canvas. All rights reserved.</p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;\"><a href=\"#\" style=\"color:#5a605e;text-decoration:none;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#5a605e;text-decoration:none;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#5a605e;text-decoration:underline;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#5a605e;text-decoration:underline;\">Privacy Policy</a></p>",
             "variables": []
           },
           "style": {
+            "alignment": "center",
             "padding": {
               "top": 8,
               "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "cr-f3",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">© 2025 Zenith Flow. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "padding": {
+              "top": 0,
+              "right": 32,
               "bottom": 24,
               "left": 32
-            },
-            "alignment": "center",
-            "backgroundColor": "#f2f4f2"
+            }
           }
         }
       ]
     }
-  },
-  "tags": [
-    "event"
-  ]
+  }
 }
