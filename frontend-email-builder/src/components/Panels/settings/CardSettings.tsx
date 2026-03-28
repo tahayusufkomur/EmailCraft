@@ -1,4 +1,4 @@
-import { useRef, useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import type { CardBlock } from '../../../types/blocks';
 import { useEditorStore } from '../../../store/editorStore';
 import { SliderInput } from './SliderInput';
@@ -6,9 +6,8 @@ import { AlignmentPicker } from './AlignmentPicker';
 import { SpacingControl } from './SpacingControl';
 import { FONT_OPTIONS } from '../../../lib/fonts';
 import { ALL_ICON_NAMES, iconLabel, lucideSvgString } from '../../../lib/lucideIcons';
-import { MediaLibraryModal } from '../../Media/MediaLibraryModal';
-import { api } from '../../../lib/api';
 import { EmojiPicker } from './EmojiPicker';
+import { ImageUrlPicker } from './ImageUrlPicker';
 
 interface Props {
   block: CardBlock;
@@ -300,7 +299,18 @@ function CardIconSettings({ data, style, updateData, updateStyle }: {
       )}
 
       {data.iconMode === 'image' && (
-        <CardIconImagePicker data={data} updateData={updateData} />
+        <>
+          <ImageUrlPicker
+            value={data.iconImageSrc}
+            onChange={(url) => updateData({ iconImageSrc: url })}
+            label="Image URL"
+            previewRounded
+          />
+          <div className="form-group">
+            <label>Alt Text</label>
+            <input type="text" value={data.iconImageAlt} onChange={(e) => updateData({ iconImageAlt: e.target.value })} style={{ fontSize: 11 }} />
+          </div>
+        </>
       )}
 
       <SliderInput label="Size" value={style.iconSize} min={24} max={96} onChange={(v) => updateStyle({ iconSize: v })} />
@@ -313,66 +323,6 @@ function CardIconSettings({ data, style, updateData, updateStyle }: {
             <input type="text" value={style.iconBackgroundColor || '#eef2ff'} onChange={(e) => updateStyle({ iconBackgroundColor: e.target.value })} />
           </div>
         </div>
-      )}
-    </>
-  );
-}
-
-function CardIconImagePicker({ data, updateData }: {
-  data: CardBlock['data'];
-  updateData: (u: Partial<CardBlock['data']>) => void;
-}) {
-  const [showMedia, setShowMedia] = useState(false);
-  const [uploading, setUploading] = useState(false);
-  const fileRef = useRef<HTMLInputElement>(null);
-
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    try {
-      const result = await api.uploadImage(file);
-      updateData({ iconImageSrc: result.file_url });
-    } catch {
-      // silent fail
-    } finally {
-      setUploading(false);
-      if (fileRef.current) fileRef.current.value = '';
-    }
-  };
-
-  return (
-    <>
-      {data.iconImageSrc && (
-        <div style={{ marginBottom: 8, textAlign: 'center' }}>
-          <img src={data.iconImageSrc} alt={data.iconImageAlt || ''} style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover', border: '1px solid var(--border-color, #e2e8f0)' }} />
-        </div>
-      )}
-      <div style={{ display: 'flex', gap: 4, marginBottom: 8 }}>
-        <button type="button" className="btn btn-sm" onClick={() => setShowMedia(true)} style={{ flex: 1, fontSize: 11 }}>
-          Browse Media
-        </button>
-        <button type="button" className="btn btn-sm btn-primary" onClick={() => fileRef.current?.click()} disabled={uploading} style={{ flex: 1, fontSize: 11 }}>
-          {uploading ? 'Uploading...' : 'Upload'}
-        </button>
-        <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleUpload} />
-      </div>
-      <div className="form-group">
-        <label>Image URL</label>
-        <input type="text" value={data.iconImageSrc} onChange={(e) => updateData({ iconImageSrc: e.target.value })} placeholder="https://..." style={{ fontSize: 11 }} />
-      </div>
-      <div className="form-group">
-        <label>Alt Text</label>
-        <input type="text" value={data.iconImageAlt} onChange={(e) => updateData({ iconImageAlt: e.target.value })} style={{ fontSize: 11 }} />
-      </div>
-      {showMedia && (
-        <MediaLibraryModal
-          onClose={() => setShowMedia(false)}
-          onSelectUrl={(url) => {
-            updateData({ iconImageSrc: url });
-            setShowMedia(false);
-          }}
-        />
       )}
     </>
   );

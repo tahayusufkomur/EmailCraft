@@ -3,6 +3,7 @@ import { useEditorStore } from '../../../store/editorStore';
 import { AlignmentPicker } from './AlignmentPicker';
 import { FONT_OPTIONS } from '../../../lib/fonts';
 import { SliderInput } from './SliderInput';
+import { ImageUrlPicker } from './ImageUrlPicker';
 
 interface Props {
   block: HeroBlock;
@@ -23,10 +24,7 @@ export function HeroSettings({ block }: Props) {
     <div>
       <div className="panel-section">
         <div className="panel-section-title">Hero Content</div>
-        <div className="form-group">
-          <label>Background Image URL</label>
-          <input type="url" value={block.data.backgroundImage} onChange={(e) => updateData({ backgroundImage: e.target.value })} />
-        </div>
+        <ImageUrlPicker value={block.data.backgroundImage} onChange={(url) => updateData({ backgroundImage: url })} label="Background Image URL" showPreview={false} />
         <div className="form-group">
           <label>Heading</label>
           <input type="text" value={block.data.heading} onChange={(e) => updateData({ heading: e.target.value })} />

@@ -3,6 +3,7 @@ import { useEditorStore } from '../../../store/editorStore';
 import { AlignmentPicker } from './AlignmentPicker';
 import { SpacingControl } from './SpacingControl';
 import { SliderInput } from './SliderInput';
+import { ImageUrlPicker } from './ImageUrlPicker';
 
 interface Props {
   block: ImageBlock;
@@ -19,10 +20,7 @@ export function ImageSettings({ block }: Props) {
     <div>
       <div className="panel-section">
         <div className="panel-section-title">Image</div>
-        <div className="form-group">
-          <label>Image URL</label>
-          <input type="url" value={block.data.src} onChange={(e) => update({ src: e.target.value })} />
-        </div>
+        <ImageUrlPicker value={block.data.src} onChange={(url) => update({ src: url })} label="Image URL" showPreview={false} />
         <div className="form-group">
           <label>Alt Text</label>
           <input type="text" value={block.data.alt} onChange={(e) => update({ alt: e.target.value })} />

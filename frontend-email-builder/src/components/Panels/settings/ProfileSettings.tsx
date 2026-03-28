@@ -4,6 +4,7 @@ import { SliderInput } from './SliderInput';
 import { AlignmentPicker } from './AlignmentPicker';
 import { SpacingControl } from './SpacingControl';
 import { FONT_OPTIONS } from '../../../lib/fonts';
+import { ImageUrlPicker } from './ImageUrlPicker';
 
 interface Props {
   block: ProfileBlock;
@@ -25,10 +26,7 @@ export function ProfileSettings({ block }: Props) {
       {/* Image */}
       <div className="panel-section">
         <div className="panel-section-title">Image</div>
-        <div className="form-group">
-          <label>Image URL</label>
-          <input type="text" value={data.imageSrc} onChange={(e) => updateData({ imageSrc: e.target.value })} placeholder="https://..." />
-        </div>
+        <ImageUrlPicker value={data.imageSrc} onChange={(url) => updateData({ imageSrc: url })} label="Image URL" previewRounded />
         <div className="form-group">
           <label>Alt Text</label>
           <input type="text" value={data.imageAlt} onChange={(e) => updateData({ imageAlt: e.target.value })} />
