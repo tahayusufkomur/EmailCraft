@@ -28,17 +28,34 @@ function withOpacity80(hex: string): string {
 }
 
 /**
- * Classify a background color and return the palette slot to apply.
+ * Classify a background color by luminance.
+ * - white:  very light (lum > 0.85) → palette.background
+ * - neutral: light gray (lum > 0.70) → palette.surface
+ * - dark:   very dark  (lum < 0.15) → palette.secondary (dark accent)
+ * - custom: everything else → unchanged
  */
-function classifyBackground(bgColor: string | null | undefined): 'white' | 'neutral' | 'custom' {
+function classifyBackground(bgColor: string | null | undefined): 'white' | 'neutral' | 'dark' | 'custom' {
   if (!bgColor || bgColor === 'transparent') return 'white';
   try {
     const lum = luminance(bgColor);
-    if (lum > 0.95) return 'white';
-    if (lum > 0.85) return 'neutral';
+    if (lum > 0.85) return 'white';
+    if (lum > 0.70) return 'neutral';
+    if (lum < 0.15) return 'dark';
     return 'custom';
   } catch {
     return 'custom';
+  }
+}
+
+/**
+ * Check if a background color is dark (luminance < 0.25).
+ */
+function isDarkBackground(bgColor: string | null | undefined): boolean {
+  if (!bgColor || bgColor === 'transparent') return false;
+  try {
+    return luminance(bgColor) < 0.25;
+  } catch {
+    return false;
   }
 }
 
@@ -52,11 +69,23 @@ function recolorBlock(block: Block, palette: ColorPalette): Block {
     updated.style = { ...updated.style, backgroundColor: palette.background };
   } else if (bgClass === 'neutral') {
     updated.style = { ...updated.style, backgroundColor: palette.surface };
+  } else if (bgClass === 'dark') {
+    updated.style = { ...updated.style, backgroundColor: palette.secondary };
   }
+
+  // After recoloring, determine if this block sits on a dark background
+  const onDark = isDarkBackground(updated.style.backgroundColor as string | null);
 
   switch (block.type) {
     case 'heading':
-      updated.style = { ...updated.style, color: palette.textDark };
+      updated.style = { ...updated.style, color: onDark ? palette.background : palette.textDark };
+      break;
+
+    case 'text':
+      // Text blocks on dark backgrounds need light text color
+      if (onDark) {
+        updated.style = { ...updated.style, color: palette.background };
+      }
       break;
 
     case 'button':
@@ -80,19 +109,19 @@ function recolorBlock(block: Block, palette: ColorPalette): Block {
       break;
 
     case 'divider':
-      updated.style = { ...updated.style, lineColor: palette.surface };
+      updated.style = { ...updated.style, lineColor: onDark ? palette.primary : palette.surface };
       break;
 
     case 'card':
       updated.style = {
         ...updated.style,
-        headingColor: palette.textDark,
-        bodyColor: palette.textLight,
+        headingColor: onDark ? palette.background : palette.textDark,
+        bodyColor: onDark ? withOpacity80(palette.background) : palette.textLight,
         buttonBackgroundColor: palette.primary,
         buttonTextColor: buttonText,
         buttonBorderColor: palette.primary,
-        badgeBackgroundColor: palette.surface,
-        badgeTextColor: palette.textDark,
+        badgeBackgroundColor: onDark ? palette.primary : palette.surface,
+        badgeTextColor: onDark ? palette.background : palette.textDark,
       };
       break;
 
@@ -100,19 +129,19 @@ function recolorBlock(block: Block, palette: ColorPalette): Block {
       updated.style = {
         ...updated.style,
         iconColor: palette.primary,
-        textColor: palette.textDark,
-        subtitleColor: palette.textLight,
+        textColor: onDark ? palette.background : palette.textDark,
+        subtitleColor: onDark ? withOpacity80(palette.background) : palette.textLight,
       };
       break;
 
     case 'profile':
       updated.style = {
         ...updated.style,
-        nameColor: palette.textDark,
+        nameColor: onDark ? palette.background : palette.textDark,
         roleColor: palette.primary,
-        bioColor: palette.textLight,
-        badgeBackgroundColor: palette.surface,
-        badgeTextColor: palette.textDark,
+        bioColor: onDark ? withOpacity80(palette.background) : palette.textLight,
+        badgeBackgroundColor: onDark ? palette.primary : palette.surface,
+        badgeTextColor: onDark ? palette.background : palette.textDark,
       };
       break;
 
@@ -124,6 +153,7 @@ function recolorBlock(block: Block, palette: ColorPalette): Block {
           let newBg = col.backgroundColor;
           if (colBgClass === 'white') newBg = palette.background;
           else if (colBgClass === 'neutral') newBg = palette.surface;
+          else if (colBgClass === 'dark') newBg = palette.secondary;
           return {
             ...col,
             backgroundColor: newBg,
@@ -142,10 +172,16 @@ function recolorBlocks(blocks: Block[], palette: ColorPalette): Block[] {
 }
 
 export function recolorTemplate(template: EmailTemplate, palette: ColorPalette): EmailTemplate {
+  // Determine outer background: if template had a dark outer bg, use palette.secondary
+  const outerBgClass = classifyBackground(template.settings.backgroundColor);
+  let newOuterBg = palette.background;
+  if (outerBgClass === 'dark') newOuterBg = palette.secondary;
+
   return {
     ...template,
     settings: {
       ...template.settings,
+      backgroundColor: newOuterBg,
       defaultColor: palette.textDark,
       bodyBackgroundColor: palette.background,
     },
