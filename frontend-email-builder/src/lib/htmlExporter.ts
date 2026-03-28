@@ -367,10 +367,10 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
 
       const border = borderW > 0 ? `${borderW}px ${borderS} ${borderC}` : 'none';
       return `<tr>
-  <td style="padding: ${pad};">
+  <td style="padding: ${paddingStr(block.style.padding)};">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: ${bg}; border-radius: ${radius}px; border: ${border};">
       <tr>
-        <td style="padding: ${pad}; text-align: ${cardAlign};">
+        <td style="padding: ${paddingStr(block.style.padding)}; text-align: ${cardAlign};">
           ${iconHtml}
           ${badgeHtml}
           <h3 style="margin: 0 0 8px; font-family: ${hFont}; font-size: ${hSize}px; font-weight: ${hWeight}; color: ${hColor}; line-height: 1.3;">${escapeHtml(block.data.heading)}</h3>

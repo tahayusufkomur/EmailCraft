@@ -285,7 +285,7 @@ export function CardSettings({ block }: Props) {
           </>
         )}
         <AlignmentPicker value={style.contentAlignment || 'center'} onChange={(v) => updateStyle({ contentAlignment: v })} />
-        <SpacingControl label="Padding" value={style.padding || { top: 24, right: 24, bottom: 24, left: 24 }} onChange={(v) => updateStyle({ padding: v })} />
+        <SpacingControl value={style.padding || { top: 24, right: 24, bottom: 24, left: 24 }} onChange={(v) => updateStyle({ padding: v })} />
       </div>
     </div>
   );
