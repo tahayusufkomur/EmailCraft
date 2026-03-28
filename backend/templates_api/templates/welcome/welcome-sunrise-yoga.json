@@ -1,10 +1,14 @@
 {
   "name": "Welcome — Sunrise Yoga",
   "category": "welcome",
+  "is_premium": true,
+  "tags": [
+    "welcome"
+  ],
   "template": {
     "version": 1,
     "settings": {
-      "backgroundColor": "#fef5f0",
+      "backgroundColor": "#1c1008",
       "backgroundStyle": "none",
       "bodyBackgroundStyle": "solid",
       "bodyBackgroundColor": "#fef5f0",
@@ -24,19 +28,19 @@
             "level": 3
           },
           "style": {
+            "fontSize": 10,
+            "fontWeight": 600,
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "color": "#e8913a",
+            "textAlign": "center",
+            "letterSpacing": 3,
+            "textTransform": "uppercase",
             "padding": {
               "top": 28,
               "right": 32,
               "bottom": 24,
               "left": 32
-            },
-            "alignment": "center",
-            "color": "#8c4a00",
-            "fontSize": 18,
-            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "fontWeight": 800,
-            "letterSpacing": 3,
-            "textTransform": "uppercase"
+            }
           }
         }
       ]
@@ -45,128 +49,38 @@
       "blocks": [
         {
           "id": "sun-w-b1",
-          "type": "columns",
-          "style": {
-            "gap": 16,
-            "stackOnMobile": true,
-            "padding": {
-              "top": 8,
-              "right": 24,
-              "bottom": 16,
-              "left": 24
-            }
-          },
+          "type": "hero",
           "data": {
-            "columnCount": 2,
-            "columnRatio": [
-              55,
-              45
-            ],
-            "columns": [
-              {
-                "id": "sun-w-c1",
-                "blocks": [
-                  {
-                    "id": "sun-w-c1-tag",
-                    "type": "text",
-                    "data": {
-                      "html": "<span style=\"display:inline-block;padding:6px 12px;border-radius:999px;background:#ffd709;color:#5b4b00;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-family:'Plus Jakarta Sans', Arial, sans-serif;\">New Beginnings</span>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 8,
-                        "left": 0
-                      }
-                    }
-                  },
-                  {
-                    "id": "sun-w-c1-title",
-                    "type": "text",
-                    "data": {
-                      "html": "<h1 style=\"margin:0;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:34px;line-height:1.1;font-weight:800;color:#322e2b;\">Your Journey<br/><span style=\"color:#8c4a00;font-style:italic;\">Starts at Dawn</span></h1>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 12,
-                        "left": 0
-                      }
-                    }
-                  },
-                  {
-                    "id": "sun-w-c1-copy",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-size:15px;line-height:1.7;color:#605a57;\">Welcome to a sanctuary where movement meets mindfulness. We're honored to have you join our collective of morning energy seekers.</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 16,
-                        "left": 0
-                      }
-                    }
-                  },
-                  {
-                    "id": "sun-w-c1-cta",
-                    "type": "button",
-                    "data": {
-                      "text": "Book Your First Class",
-                      "url": "https://"
-                    },
-                    "style": {
-                      "alignment": "left",
-                      "backgroundColor": "#8c4a00",
-                      "color": "#fff0e7",
-                      "borderRadius": 999,
-                      "fontSize": 14,
-                      "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-                      "fontWeight": 700,
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 0,
-                        "left": 0
-                      },
-                      "paddingX": 24,
-                      "paddingY": 12,
-                      "fullWidth": false
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "sun-w-c2",
-                "blocks": [
-                  {
-                    "id": "sun-w-c2-img",
-                    "type": "image",
-                    "data": {
-                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuArUl2TSJhruFAqZr76TXFt54t9k2OuM7sweYJoMU3G3-mMaau14fr9jeAiXMahD6vswRmrdYK4rM81g8w193YJpZeFg09L4wQYFI49JBU6NMoISBhU1xZT_d5CTWNjXVfCuzImu0RZyOxRA1KmuzhmN75iupZe64RU7hXacScwIan-KOWpecedHgkulBQ_rRcD1slCxjfhLxrUnQg6wLsRJ9VWkOP4UaslA2XCWpXDcMHg_lxQ99u1Whr1JPDZ5qpCuTougN2n48hO",
-                      "alt": "Yoga practice",
-                      "width": 240
-                    },
-                    "style": {
-                      "alignment": "center",
-                      "borderRadius": 20,
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 0,
-                        "left": 0
-                      }
-                    }
-                  }
-                ]
-              }
-            ]
+            "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuArUl2TSJhruFAqZr76TXFt54t9k2OuM7sweYJoMU3G3-mMaau14fr9jeAiXMahD6vswRmrdYK4rM81g8w193YJpZeFg09L4wQYFI49JBU6NMoISBhU1xZT_d5CTWNjXVfCuzImu0RZyOxRA1KmuzhmN75iupZe64RU7hXacScwIan-KOWpecedHgkulBQ_rRcD1slCxjfhLxrUnQg6wLsRJ9VWkOP4UaslA2XCWpXDcMHg_lxQ99u1Whr1JPDZ5qpCuTougN2n48hO",
+            "heading": "Welcome to Your Practice",
+            "subheading": "Your journey to balance and strength starts here",
+            "showButton": true,
+            "buttonText": "Explore Classes →",
+            "buttonUrl": "#"
+          },
+          "style": {
+            "height": 360,
+            "headingFontSize": 32,
+            "headingFontWeight": 800,
+            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "headingColor": "#fef5f0",
+            "subheadingFontSize": 15,
+            "subheadingColor": "#c4a882cc",
+            "overlayColor": "#1c1008",
+            "overlayOpacity": 0.55,
+            "buttonBackgroundColor": "#e8913a",
+            "buttonTextColor": "#1c1008",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 13,
+            "buttonFontWeight": 700,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "contentAlignment": "center",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
           }
         },
         {
@@ -174,179 +88,32 @@
           "type": "spacer",
           "data": {},
           "style": {
-            "height": 20
+            "height": 24
           }
         },
         {
           "id": "sun-w-b3",
           "type": "heading",
           "data": {
-            "text": "Studio Vibes",
-            "level": 2
-          },
-          "style": {
-            "padding": {
-              "top": 0,
-              "right": 32,
-              "bottom": 4,
-              "left": 32
-            },
-            "alignment": "left",
-            "color": "#322e2b",
-            "fontSize": 24,
-            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "fontWeight": 700
-          }
-        },
-        {
-          "id": "sun-w-b4",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#7c7672;font-weight:700;font-family:'Plus Jakarta Sans', Arial, sans-serif;\">Our Space</p>",
-            "variables": []
-          },
-          "style": {
-            "padding": {
-              "top": 0,
-              "right": 32,
-              "bottom": 16,
-              "left": 32
-            }
-          }
-        },
-        {
-          "id": "sun-w-b5",
-          "type": "columns",
-          "data": {
-            "columnCount": 2,
-            "columnRatio": [60, 40],
-            "columns": [
-              {
-                "id": "sun-w-b5-c1",
-                "blocks": [
-                  {
-                    "id": "sun-w-b5-c1-img",
-                    "type": "image",
-                    "data": {
-                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuC-GUDNRYDNOSlc_eSEPV8g7Toj_AmAH0TwSlKpEUTSdNeEAflW304Z1egdF9McW-qL8aAuDGC39jg1tKQe_3fAIOggju2ZXdOvtGpHN5QwWrDuFMkCBD1l7xajJfaSL8BLd2Ot-z-HF_iMCKbTaerU_6_N95za-fmp6y0coWdQU8c7UDtDx_SnprFrAtX7Z3yG3Awl4Mbtqmf-EkR-YWIqU2J_5OWmaFMhEOCDq4O-Ee9Iir57y6-xwrVcnBbO88OAkOeTW7fvC8Qm",
-                      "alt": "Studio space"
-                    },
-                    "style": {
-                      "padding": {"top": 0, "right": 0, "bottom": 0, "left": 0},
-                      "borderRadius": 16,
-                      "maxWidth": "100%"
-                    }
-                  },
-                  {
-                    "id": "sun-w-b5-c1-label",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:14px;font-weight:700;color:#322e2b;\">Luminous Shala</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {"top": 8, "right": 0, "bottom": 0, "left": 0}
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "sun-w-b5-c2",
-                "blocks": [
-                  {
-                    "id": "sun-w-b5-c2-quote",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"text-align:center;font-style:italic;color:#6c5a00;font-size:13px;line-height:1.6;margin:0;\">\"A breath of fresh air for your morning routine.\"</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {"top": 16, "right": 16, "bottom": 16, "left": 16},
-                      "backgroundColor": "#fff1e8",
-                      "borderRadius": 16
-                    }
-                  },
-                  {
-                    "id": "sun-w-b5-c2-img",
-                    "type": "image",
-                    "data": {
-                      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuANhUMxt61HLrteiGeNLUiP-zn2TQKPnx1FEVsgJ_u4AXTCNh9SqxMOCiBmE36OfV6uSOoeJ2sWUEcNtR9uAnYuGAF4MRu2cWY27OYCzcGUkgXfHjvhNjEMQAtikgE98eNDnEUuKBMsVKcVpQfh2cB7wkIo1LxK_up5MtSYNTFu_u7qz-l1c_bJfstuu3KhGCg46Sk-n7XtB6rGl5JoFW3dnEgXeHxk0Z26fb-TkJCtTwsBud3mPu4SzemF7_SH1qKZDX47TEoVFPvb",
-                      "alt": "Yoga gear"
-                    },
-                    "style": {
-                      "padding": {"top": 12, "right": 0, "bottom": 0, "left": 0},
-                      "borderRadius": 16,
-                      "maxWidth": "100%"
-                    }
-                  },
-                  {
-                    "id": "sun-w-b5-c2-label",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:#6a43b7;\">Sustainable Gear</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {"top": 8, "right": 0, "bottom": 0, "left": 0}
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "style": {
-            "padding": {"top": 0, "right": 32, "bottom": 16, "left": 32},
-            "gap": 16,
-            "stackOnMobile": true
-          }
-        },
-        {
-          "id": "sun-w-b6",
-          "type": "spacer",
-          "data": {},
-          "style": {
-            "height": 20
-          }
-        },
-        {
-          "id": "sun-w-b7",
-          "type": "heading",
-          "data": {
             "text": "Meet Your Guides",
             "level": 2
           },
           "style": {
-            "padding": {
-              "top": 0,
-              "right": 32,
-              "bottom": 4,
-              "left": 32
-            },
-            "alignment": "left",
+            "fontSize": 26,
+            "fontWeight": 800,
             "color": "#322e2b",
-            "fontSize": 24,
+            "textAlign": "center",
             "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "fontWeight": 700
-          }
-        },
-        {
-          "id": "sun-w-b8",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;font-size:14px;color:#605a57;line-height:1.6;\">Our instructors are here to light your path and support your unique flow.</p>",
-            "variables": []
-          },
-          "style": {
             "padding": {
-              "top": 0,
+              "top": 24,
               "right": 32,
-              "bottom": 16,
+              "bottom": 8,
               "left": 32
             }
           }
         },
         {
-          "id": "sun-w-b9",
+          "id": "sun-w-b4",
           "type": "columns",
           "style": {
             "gap": 16,
@@ -360,99 +127,96 @@
           },
           "data": {
             "columnCount": 2,
-            "columnRatio": [
-              50,
-              50
-            ],
+            "columnRatio": [50, 50],
             "columns": [
               {
-                "id": "sun-w-c3",
+                "id": "sun-w-b4-c1",
                 "blocks": [
                   {
-                    "id": "sun-w-c3-card",
+                    "id": "sun-w-b4-c1-profile",
                     "type": "profile",
                     "data": {
                       "imageSrc": "https://lh3.googleusercontent.com/aida-public/AB6AXuAEPNUjp-5hQ1cRO4fvH0RWj02UcCG_dxomMHYfXiEbjbBz4uyLoiZ2E9EkcPbSIRqEXNRRFEsuoMgbozRi4x-lzRRRPgyt7sFvCpaYa3kD4fXLoSKm39tyy-BDDX6-1Pdwm8NTyLGUjtXPJTl1Cwf4h_YASTpYg5uiuCgTqoDZm_RwLD9AkZQnGqxPJ_fobMp-MXc6_b_ua5mGZzp6Ghr0u8jC66zMvOskBrGQi4UCBygMcSlAMzzu45SGeloEVG_PloLieHxAx4DX",
                       "imageAlt": "Instructor Elena",
                       "name": "Elena Rivers",
-                      "role": "Vinyasa",
+                      "role": "Vinyasa & Flow",
                       "bio": "Specializing in fluid movements that synchronize with your natural rhythm.",
                       "showBadge": true,
-                      "badgeText": "Vinyasa"
+                      "badgeText": "Lead Instructor",
+                      "imagePosition": "top"
                     },
                     "style": {
-                      "padding": {
-                        "top": 16,
-                        "right": 16,
-                        "bottom": 16,
-                        "left": 16
-                      },
-                      "backgroundColor": "#ffffff",
-                      "imageSize": 72,
+                      "imageSize": 96,
                       "imageBorderRadius": 50,
-                      "imagePosition": "left",
                       "nameColor": "#322e2b",
-                      "nameFontSize": 16,
-                      "nameFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "nameFontSize": 18,
                       "nameFontWeight": 700,
-                      "roleColor": "#6a43b7",
-                      "roleFontSize": 11,
+                      "nameFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "roleColor": "#e8913a",
+                      "roleFontSize": 13,
                       "bioColor": "#605a57",
-                      "bioFontSize": 13,
-                      "bioFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-                      "badgeBackgroundColor": "#efe7ff",
-                      "badgeTextColor": "#6a43b7",
+                      "bioFontSize": 14,
+                      "bioFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "backgroundColor": "#ffffff",
                       "borderRadius": 16,
                       "borderWidth": 0,
                       "borderColor": "#e2e8f0",
                       "borderStyle": "solid",
-                      "contentAlignment": "left"
+                      "contentAlignment": "center",
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      }
                     }
                   }
                 ]
               },
               {
-                "id": "sun-w-c4",
+                "id": "sun-w-b4-c2",
                 "blocks": [
                   {
-                    "id": "sun-w-c4-card",
+                    "id": "sun-w-b4-c2-profile",
                     "type": "profile",
                     "data": {
                       "imageSrc": "https://lh3.googleusercontent.com/aida-public/AB6AXuAQY34ZAiflwlKmTWVe3C66qc09j3JWThz00Wk0VD-3EVTgSC2K3xqBjkN-4WcQWicIasr4e5z1ixq0yASMGfA9EUKuTjrB2CZdSVLJt5IY0YbtRBJO-3gCoUxWQKiSSb4qNwd6OtbuHmxVPGEhn3upOZXs2I21jzHG-o345xa6B7ytvqcYNnBgozh_QZc-50eanAlzZZ2Jnz8jcTbQRS9uBdIkHlw-mbq1x2Vm-iMaPeJO9qOS1F8j5kV_-cwr3q2Xy8inhN0JeJAu",
                       "imageAlt": "Instructor Marcus",
                       "name": "Marcus Thorne",
-                      "role": "Ashtanga",
+                      "role": "Ashtanga & Strength",
                       "bio": "Focusing on strength, alignment, and the power of controlled breath.",
                       "showBadge": true,
-                      "badgeText": "Ashtanga"
+                      "badgeText": "Senior Teacher",
+                      "imagePosition": "top"
                     },
                     "style": {
-                      "padding": {
-                        "top": 16,
-                        "right": 16,
-                        "bottom": 16,
-                        "left": 16
-                      },
-                      "backgroundColor": "#ffffff",
-                      "imageSize": 72,
+                      "imageSize": 96,
                       "imageBorderRadius": 50,
-                      "imagePosition": "left",
                       "nameColor": "#322e2b",
-                      "nameFontSize": 16,
-                      "nameFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "nameFontSize": 18,
                       "nameFontWeight": 700,
-                      "roleColor": "#8c4a00",
-                      "roleFontSize": 11,
+                      "nameFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "roleColor": "#e8913a",
+                      "roleFontSize": 13,
                       "bioColor": "#605a57",
-                      "bioFontSize": 13,
-                      "bioFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-                      "badgeBackgroundColor": "#ffe9cc",
-                      "badgeTextColor": "#8c4a00",
+                      "bioFontSize": 14,
+                      "bioFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "backgroundColor": "#ffffff",
                       "borderRadius": 16,
                       "borderWidth": 0,
                       "borderColor": "#e2e8f0",
                       "borderStyle": "solid",
-                      "contentAlignment": "left"
+                      "contentAlignment": "center",
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      }
                     }
                   }
                 ]
@@ -461,62 +225,67 @@
           }
         },
         {
-          "id": "sun-w-b10",
+          "id": "sun-w-b5",
           "type": "spacer",
           "data": {},
           "style": {
-            "height": 20
+            "height": 24
           }
         },
         {
-          "id": "sun-w-b11",
+          "id": "sun-w-b6",
           "type": "card",
           "data": {
             "showIcon": true,
             "iconMode": "emoji",
-            "iconEmoji": "❤️",
+            "iconEmoji": "🙏",
             "iconImageSrc": "",
             "iconImageAlt": "",
-            "showBadge": false,
-            "badgeText": "New",
-            "heading": "Ready to glow?",
-            "body": "Your first sunrise session is waiting. Let's meet on the mat.",
+            "heading": "Your First Class",
+            "body": "Everything you need is already inside you. We just help you find it. Book your first session and feel the difference.",
             "showButton": true,
-            "buttonText": "Start Your Morning",
-            "buttonUrl": "https://"
+            "buttonText": "Book Now →",
+            "buttonUrl": "#",
+            "showBadge": false,
+            "badgeText": ""
           },
           "style": {
-            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
-            "backgroundColor": "#f8efea",
-            "borderRadius": 20,
+            "backgroundColor": "#2a1a0e",
+            "borderRadius": 16,
             "borderWidth": 0,
             "borderColor": "#e2e8f0",
             "borderStyle": "solid",
-            "iconSize": 48,
-            "iconBackgroundColor": "#fd8b00",
-            "iconBorderRadius": 50,
-            "badgeBackgroundColor": "#eef2ff",
-            "badgeTextColor": "#4338ca",
-            "headingColor": "#322e2b",
-            "headingFontSize": 24,
-            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "headingColor": "#fef5f0",
+            "headingFontSize": 22,
             "headingFontWeight": 800,
-            "bodyColor": "#605a57",
-            "bodyFontSize": 15,
+            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "bodyColor": "#c4a882",
+            "bodyFontSize": 14,
             "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
-            "buttonBackgroundColor": "#8c4a00",
-            "buttonTextColor": "#fff0e7",
+            "buttonBackgroundColor": "#e8913a",
+            "buttonTextColor": "#1c1008",
             "buttonBorderRadius": 999,
-            "buttonFontSize": 14,
+            "buttonFontSize": 13,
             "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
             "buttonFontWeight": 700,
             "buttonPaddingX": 28,
             "buttonPaddingY": 12,
             "buttonFullWidth": false,
             "buttonBorderStyle": "solid",
-            "buttonBorderColor": "#8c4a00",
+            "buttonBorderColor": "#e8913a",
             "buttonBorderWidth": 0,
-            "contentAlignment": "center"
+            "iconSize": 48,
+            "iconBorderRadius": 50,
+            "iconBackgroundColor": "#1c1008",
+            "badgeBackgroundColor": "#e8913a",
+            "badgeTextColor": "#1c1008",
+            "contentAlignment": "center",
+            "padding": {
+              "top": 24,
+              "right": 24,
+              "bottom": 24,
+              "left": 24
+            }
           }
         }
       ]
@@ -525,16 +294,15 @@
       "blocks": [
         {
           "id": "sun-w-f1",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms of Service</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Manage Preferences</a></p>",
-            "variables": []
-          },
+          "type": "divider",
+          "data": {},
           "style": {
-            "alignment": "center",
-            "backgroundColor": "#f8efea",
+            "lineStyle": "solid",
+            "lineColor": "#e8913a",
+            "lineThickness": 2,
+            "spacing": 0,
             "padding": {
-              "top": 20,
+              "top": 24,
               "right": 32,
               "bottom": 8,
               "left": 32
@@ -545,14 +313,30 @@
           "id": "sun-w-f2",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2024 Sunrise Yoga. All rights reserved.</p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms</a></p>",
             "variables": []
           },
           "style": {
             "alignment": "center",
-            "backgroundColor": "#f8efea",
             "padding": {
               "top": 8,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "sun-w-f3",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2025 Sunrise Yoga. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "padding": {
+              "top": 0,
               "right": 32,
               "bottom": 24,
               "left": 32
@@ -561,9 +345,5 @@
         }
       ]
     }
-  },
-  "is_premium": true,
-  "tags": [
-    "welcome"
-  ]
+  }
 }
