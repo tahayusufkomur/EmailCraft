@@ -403,7 +403,15 @@ def _render_button_block(block, ctx):
     border_radius = style.get('borderRadius', 4)
     font_size = style.get('fontSize', 16)
     font_family = style.get('fontFamily', ctx['default_font'])
-    btn_padding = _padding_str(style.get('padding', {'top': 12, 'right': 24, 'bottom': 12, 'left': 24}))
+    font_weight = style.get('fontWeight', 600)
+    letter_spacing = style.get('letterSpacing', 0)
+    text_transform = style.get('textTransform', 'none')
+    border_width = style.get('borderWidth', 0)
+    border_style = style.get('borderStyle', 'solid')
+    border_color = style.get('borderColor', bg_color)
+    padding_y = style.get('paddingY', 12)
+    padding_x = style.get('paddingX', 24)
+    btn_padding = f'{padding_y}px {padding_x}px'
 
     width_attr = ' width="100%"' if full_width else ''
     table_width_style = 'width: 100%;' if full_width else ''
@@ -415,7 +423,7 @@ def _render_button_block(block, ctx):
   <td style="padding: {padding};" align="{alignment}">
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="{alignment}"{width_attr} style="{table_width_style}">
       <tr>
-        <td style="border-radius: {border_radius}px; background-color: {bg_color};" align="center">
+        <td style="border-radius: {border_radius}px; background-color: {bg_color}; border: {border_width}px {border_style} {border_color};" align="center">
           <!--[if mso]>
           <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml"
                        xmlns:w="urn:schemas-microsoft-com:office:word"
@@ -428,9 +436,10 @@ def _render_button_block(block, ctx):
           <![endif]-->
           <!--[if !mso]><!-->
           <a href="{url}" target="_blank"
-             style="display: {btn_display}; {btn_width} padding: {btn_padding}; background-color: {bg_color};
+             style="display: {btn_display}; {btn_width} box-sizing: border-box; padding: {btn_padding}; background-color: {bg_color};
                     color: {text_color}; font-family: {font_family}; font-size: {font_size}px;
-                    text-decoration: none; border-radius: {border_radius}px; text-align: center;">
+                    font-weight: {font_weight}; letter-spacing: {letter_spacing}px; text-transform: {text_transform};
+                    text-decoration: none; border-radius: {border_radius}px; border: {border_width}px {border_style} {border_color}; text-align: center;">
             {text}
           </a>
           <!--<![endif]-->
