@@ -847,6 +847,78 @@ def _collect_google_font_links(json_data):
     return f'<link href="https://fonts.googleapis.com/css2?family={families}&display=swap" rel="stylesheet">'
 
 
+def _render_list_block(block, ctx):
+    data = block.get('data', {})
+    style = block.get('style', {})
+    default_font = ctx['default_font']
+    items = data.get('items', [])
+    if not items:
+        return ''
+
+    padding = _resolve_padding(style)
+    bg = style.get('backgroundColor', 'transparent')
+    align = style.get('contentAlignment', 'left')
+    icon_size = style.get('iconSize', 20)
+    icon_color = style.get('iconColor', '#4f46e5')
+    txt_color = style.get('textColor', '#0f172a')
+    txt_size = style.get('textFontSize', 15)
+    txt_font = style.get('textFontFamily', default_font)
+    txt_weight = style.get('textFontWeight', 500)
+    sub_color = style.get('subtitleColor', '#64748b')
+    sub_size = style.get('subtitleFontSize', 13)
+    gap = style.get('spacing', 12)
+    is_horiz = style.get('layout') == 'horizontal'
+
+    def render_item(item, pad_bottom=True):
+        icon = html_module.escape(item.get('icon', '•'))
+        text = html_module.escape(item.get('text', ''))
+        subtitle = item.get('subtitle', '')
+        sub_html = ''
+        if subtitle:
+            sub_html = (
+                f'<div style="color: {sub_color}; font-size: {sub_size}px; '
+                f'font-family: {txt_font}; line-height: 1.4; margin-top: 2px;">'
+                f'{html_module.escape(subtitle)}</div>'
+            )
+        v_align = 'top' if subtitle else 'middle'
+        pad_top = '2px' if subtitle else '0'
+        return (
+            f'<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>'
+            f'<td style="width: {icon_size + 4}px; text-align: center; vertical-align: {v_align}; '
+            f'font-size: {icon_size}px; color: {icon_color}; line-height: 1; padding-top: {pad_top};">{icon}</td>'
+            f'<td style="padding-left: 10px; vertical-align: top;">'
+            f'<span style="color: {txt_color}; font-size: {txt_size}px; font-family: {txt_font}; '
+            f'font-weight: {txt_weight}; line-height: 1.4;">{text}</span>'
+            f'{sub_html}</td>'
+            f'</tr></table>'
+        )
+
+    if is_horiz:
+        cells = ''.join(
+            f'<td style="padding: 0 {gap // 2}px 0 0; vertical-align: top;">{render_item(item, False)}</td>'
+            for item in items
+        )
+        table_content = f'<tr>{cells}</tr>'
+        width_attr = ''
+        align_attr = f' align="{align}"'
+    else:
+        rows = ''.join(
+            f'<tr><td style="padding-bottom: {gap}px;">{render_item(item)}</td></tr>'
+            for item in items
+        )
+        table_content = rows
+        width_attr = ' width="100%"'
+        align_attr = ''
+
+    return f"""<tr>
+  <td style="padding: {padding}; background-color: {bg}; text-align: {align};">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0"{width_attr}{align_attr}>
+      {table_content}
+    </table>
+  </td>
+</tr>"""
+
+
 BLOCK_RENDERERS = {
     'text': _render_text_block,
     'image': _render_image_block,
@@ -859,4 +931,5 @@ BLOCK_RENDERERS = {
     'html': _render_html_block,
     'hero': _render_hero_block,
     'card': _render_card_block,
+    'list': _render_list_block,
 }
