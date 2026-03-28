@@ -15,11 +15,14 @@ interface Props {
 
 export function BlockWrapper({ block, children }: Props) {
   const selectedBlockId = useEditorStore((s) => s.selectedBlockId);
+  const hoveredBlockId = useEditorStore((s) => s.hoveredBlockId);
   const selectBlock = useEditorStore((s) => s.selectBlock);
+  const hoverBlock = useEditorStore((s) => s.hoverBlock);
   const deleteBlock = useEditorStore((s) => s.deleteBlock);
   const duplicateBlock = useEditorStore((s) => s.duplicateBlock);
   const blocks = useEditorStore((s) => s.template.body.blocks);
   const isSelected = selectedBlockId === block.id;
+  const isHovered = hoveredBlockId === block.id;
   const [showSaveInput, setShowSaveInput] = useState(false);
   const [presetName, setPresetName] = useState('');
 
@@ -48,6 +51,19 @@ export function BlockWrapper({ block, children }: Props) {
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     selectBlock(block.id);
+  };
+
+  const handleMouseEnter = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    hoverBlock(block.id);
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // Only clear if we're still the hovered block
+    if (hoveredBlockId === block.id) {
+      hoverBlock(null);
+    }
   };
 
   const handleDelete = (e: React.MouseEvent) => {
@@ -85,8 +101,10 @@ export function BlockWrapper({ block, children }: Props) {
     <div
       ref={setNodeRef}
       style={style}
-      className={`block-wrapper ${isSelected ? 'selected' : ''} ${showInsertionIndicator ? 'insertion-indicator' : ''}`}
+      className={`block-wrapper ${isSelected ? 'selected' : ''} ${isHovered ? 'hovered' : ''} ${showInsertionIndicator ? 'insertion-indicator' : ''}`}
       onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <div className="block-toolbar">
         <button className="block-toolbar-btn drag-handle" {...attributes} {...listeners} title="Drag to reorder">

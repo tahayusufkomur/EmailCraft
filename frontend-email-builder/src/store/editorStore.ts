@@ -142,11 +142,13 @@ function duplicateBlockInList(
 interface EditorState {
   template: EmailTemplate;
   selectedBlockId: string | null;
+  hoveredBlockId: string | null;
   isDirty: boolean;
   activeSection: 'header' | 'body' | 'footer';
   tiptapEditor: Editor | null;
 
   // Actions
+  hoverBlock: (id: string | null) => void;
   addBlock: (block: Block, index?: number) => void;
   addBlockToColumn: (parentBlockId: string, columnId: string, block: Block, index?: number) => void;
   updateBlock: (id: string, updates: Partial<Block>) => void;
@@ -175,6 +177,7 @@ interface EditorState {
 export const useEditorStore = create<EditorState>((set, get) => ({
   template: EMPTY_TEMPLATE,
   selectedBlockId: null,
+  hoveredBlockId: null,
   isDirty: false,
   activeSection: 'body',
   tiptapEditor: null,
@@ -433,6 +436,7 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   setTiptapEditor: (editor) => set({ tiptapEditor: editor }),
 
   selectBlock: (id) => set({ selectedBlockId: id }),
+  hoverBlock: (id) => set({ hoveredBlockId: id }),
 
   duplicateBlock: (id) => {
     set((state) => {
