@@ -27,6 +27,8 @@ export interface BlockStyle {
   backgroundColor?: string | null;
   backgroundGradient?: string | null;
   alignment?: 'left' | 'center' | 'right';
+  color?: string | null;
+  borderRadius?: number;
 }
 
 export interface BaseBlock {

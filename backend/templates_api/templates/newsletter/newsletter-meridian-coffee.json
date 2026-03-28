@@ -1,7 +1,9 @@
 {
   "name": "Newsletter — Meridian Coffee",
   "category": "newsletter",
-  "tags": ["newsletter"],
+  "tags": [
+    "newsletter"
+  ],
   "template": {
     "version": 1,
     "settings": {
@@ -120,7 +122,10 @@
           "type": "columns",
           "data": {
             "columnCount": 2,
-            "columnRatio": [60, 40],
+            "columnRatio": [
+              60,
+              40
+            ],
             "columns": [
               {
                 "id": "m2-c1",
@@ -217,7 +222,10 @@
           "type": "columns",
           "data": {
             "columnCount": 2,
-            "columnRatio": [40, 60],
+            "columnRatio": [
+              40,
+              60
+            ],
             "columns": [
               {
                 "id": "m2-c3",
@@ -473,7 +481,8 @@
               "left": 32
             },
             "alignment": "center",
-            "backgroundColor": "#1a110b"
+            "backgroundColor": "#1a110b",
+            "color": "#8a7b6b"
           }
         },
         {
@@ -491,7 +500,8 @@
               "left": 32
             },
             "alignment": "center",
-            "backgroundColor": "#1a110b"
+            "backgroundColor": "#1a110b",
+            "color": "#8a7b6b"
           }
         }
       ]

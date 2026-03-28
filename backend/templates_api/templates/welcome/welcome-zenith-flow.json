@@ -94,7 +94,10 @@
           "type": "columns",
           "data": {
             "columnCount": 2,
-            "columnRatio": [50, 50],
+            "columnRatio": [
+              50,
+              50
+            ],
             "columns": [
               {
                 "id": "zw-b3-c1",
@@ -245,7 +248,11 @@
           "type": "columns",
           "data": {
             "columnCount": 3,
-            "columnRatio": [33, 33, 34],
+            "columnRatio": [
+              33,
+              33,
+              34
+            ],
             "columns": [
               {
                 "id": "zw-b7-c1",
@@ -467,7 +474,8 @@
               "right": 20,
               "bottom": 0,
               "left": 20
-            }
+            },
+            "color": "#7a9e93"
           }
         }
       ]

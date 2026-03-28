@@ -57,6 +57,8 @@ export function TextBlock({ block }: Props) {
         padding: `${block.style.padding?.top ?? 10}px ${block.style.padding?.right ?? 20}px ${block.style.padding?.bottom ?? 10}px ${block.style.padding?.left ?? 20}px`,
         textAlign: block.style.alignment || 'left',
         backgroundColor: block.style.backgroundColor ?? 'transparent',
+        color: block.style.color || undefined,
+        borderRadius: block.style.borderRadius ?? undefined,
       }}
     >
       <EditorContent editor={editor} />

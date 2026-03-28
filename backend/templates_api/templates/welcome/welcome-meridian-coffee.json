@@ -432,7 +432,8 @@
               "right": 20,
               "bottom": 0,
               "left": 20
-            }
+            },
+            "color": "#8a7b6b"
           }
         }
       ]

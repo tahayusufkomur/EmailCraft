@@ -19,8 +19,25 @@
         {
           "id": "sun-c-h1",
           "type": "heading",
-          "data": { "text": "SUNRISE YOGA", "level": 3 },
-          "style": { "padding": { "top": 28, "right": 32, "bottom": 24, "left": 32 }, "alignment": "center", "color": "#e8913a", "fontSize": 10, "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "fontWeight": 600, "letterSpacing": 3, "textTransform": "uppercase" }
+          "data": {
+            "text": "SUNRISE YOGA",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#e8913a",
+            "fontSize": 10,
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "fontWeight": 600,
+            "letterSpacing": 3,
+            "textTransform": "uppercase"
+          }
         }
       ]
     },
@@ -29,16 +46,56 @@
         {
           "id": "sun-c-b1",
           "type": "hero",
-          "data": { "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCVfAYFH-v3BaXiFvgtAnEk2IT2EjWsilf9B-w5w7OIvifimGOK4ivMB83jlO0LU1Q5Z59ROCdpmZLRbEEc8PeJqXoy6Ci3H0u-I07RvMxraQR5i17OG4DlOssRTan4s6tOsVWEaKfGVqggDX9l7d24XsuJSlhNsDVS02mfH1FNMWHKVdaBbkoO0Mt8pQ24XvD3rDaq1nXMueas_hFrrt2fExCC1wZzDQ76p1LeSvUvtGY3U4zHEN84IXNlZd-KSTT4KgdiY8B0pMha", "heading": "Your Class Awaits", "subheading": "Vinyasa Flow with Sarah Chen — Tomorrow at 7:00 AM", "showButton": true, "buttonText": "Confirm Attendance →", "buttonUrl": "#" },
-          "style": { "height": 360, "headingFontSize": 32, "headingFontWeight": 800, "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "headingColor": "#fef5f0", "subheadingFontSize": 15, "subheadingColor": "#c4a882cc", "overlayColor": "#1c1008", "overlayOpacity": 0.55, "buttonBackgroundColor": "#e8913a", "buttonTextColor": "#1c1008", "buttonBorderRadius": 999, "buttonFontSize": 13, "buttonFontWeight": 700, "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "contentAlignment": "center", "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 } }
+          "data": {
+            "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCVfAYFH-v3BaXiFvgtAnEk2IT2EjWsilf9B-w5w7OIvifimGOK4ivMB83jlO0LU1Q5Z59ROCdpmZLRbEEc8PeJqXoy6Ci3H0u-I07RvMxraQR5i17OG4DlOssRTan4s6tOsVWEaKfGVqggDX9l7d24XsuJSlhNsDVS02mfH1FNMWHKVdaBbkoO0Mt8pQ24XvD3rDaq1nXMueas_hFrrt2fExCC1wZzDQ76p1LeSvUvtGY3U4zHEN84IXNlZd-KSTT4KgdiY8B0pMha",
+            "heading": "Your Class Awaits",
+            "subheading": "Vinyasa Flow with Sarah Chen — Tomorrow at 7:00 AM",
+            "showButton": true,
+            "buttonText": "Confirm Attendance →",
+            "buttonUrl": "#"
+          },
+          "style": {
+            "height": 360,
+            "headingFontSize": 32,
+            "headingFontWeight": 800,
+            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "headingColor": "#fef5f0",
+            "subheadingFontSize": 15,
+            "subheadingColor": "#c4a882cc",
+            "overlayColor": "#1c1008",
+            "overlayOpacity": 0.55,
+            "buttonBackgroundColor": "#e8913a",
+            "buttonTextColor": "#1c1008",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 13,
+            "buttonFontWeight": 700,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "contentAlignment": "center",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
         },
-        { "id": "sun-c-b2", "type": "spacer", "data": {}, "style": { "height": 24 } },
+        {
+          "id": "sun-c-b2",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
+          }
+        },
         {
           "id": "sun-c-b3",
           "type": "columns",
           "data": {
             "columnCount": 2,
-            "columnRatio": [50, 50],
+            "columnRatio": [
+              50,
+              50
+            ],
             "columns": [
               {
                 "id": "sun-c-col1",
@@ -46,8 +103,58 @@
                   {
                     "id": "sun-c-col1-card",
                     "type": "card",
-                    "data": { "showIcon": true, "iconMode": "emoji", "iconEmoji": "📍", "iconImageSrc": "", "iconImageAlt": "", "heading": "Studio B — Main Floor", "body": "45 minutes · All levels welcome\nBring your own mat or rent one at reception", "showButton": false, "buttonText": "", "buttonUrl": "", "showBadge": true, "badgeText": "TOMORROW" },
-                    "style": { "backgroundColor": "#ffffff", "borderRadius": 16, "borderWidth": 0, "borderColor": "#e2e8f0", "borderStyle": "solid", "headingColor": "#322e2b", "headingFontSize": 18, "headingFontWeight": 700, "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "bodyColor": "#605a57", "bodyFontSize": 14, "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif", "badgeBackgroundColor": "#e8913a", "badgeTextColor": "#1c1008", "iconSize": 40, "iconBorderRadius": 50, "iconBackgroundColor": "#fef5f0", "contentAlignment": "center", "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 }, "buttonBackgroundColor": "#e8913a", "buttonTextColor": "#1c1008", "buttonBorderRadius": 999, "buttonFontSize": 13, "buttonFontWeight": 700, "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "buttonPaddingX": 28, "buttonPaddingY": 12, "buttonFullWidth": false, "buttonBorderStyle": "solid", "buttonBorderColor": "#e8913a", "buttonBorderWidth": 0 }
+                    "data": {
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "📍",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "heading": "Studio B — Main Floor",
+                      "body": "45 minutes · All levels welcome\nBring your own mat or rent one at reception",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "",
+                      "showBadge": true,
+                      "badgeText": "TOMORROW"
+                    },
+                    "style": {
+                      "backgroundColor": "#ffffff",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "headingColor": "#322e2b",
+                      "headingFontSize": 18,
+                      "headingFontWeight": 700,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "bodyColor": "#605a57",
+                      "bodyFontSize": 14,
+                      "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "iconSize": 40,
+                      "iconBorderRadius": 50,
+                      "iconBackgroundColor": "#fef5f0",
+                      "contentAlignment": "center",
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      },
+                      "buttonBackgroundColor": "#e8913a",
+                      "buttonTextColor": "#1c1008",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontWeight": 700,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonPaddingX": 28,
+                      "buttonPaddingY": 12,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#e8913a",
+                      "buttonBorderWidth": 0
+                    }
                   }
                 ]
               },
@@ -57,45 +164,208 @@
                   {
                     "id": "sun-c-col2-profile",
                     "type": "profile",
-                    "data": { "imageSrc": "https://lh3.googleusercontent.com/aida-public/AB6AXuBiDK-xYpj5m76BU-E9XbHhyjJawLzxWq3JUiy3xy6J3OylRzieiDMXcBevQzFt_rk23U9i-s_0JKl2icQyDXsYUxOpop3PpfYOzvAdxLR3v8ExHQSDidegYgLSPH1HwVfCL7rn4uKQLWKwSRKsl1Gj13QZwu47l8akAX9waWrPEIW0k_96UmMncpoZilf-TbU3FIYhw-jZsTkD5gYRPXSXI0LV9gTtwKhzCSbP4abIl7ZWjVHP3dy3rKLovzMCdFoKBZoz62VyGkKb", "imageAlt": "Instructor Sarah", "name": "Sarah Chen", "role": "Vinyasa Instructor", "bio": "Flowing sequences to build strength and find your breath.", "showBadge": false, "badgeText": "", "imagePosition": "top" },
-                    "style": { "imageSize": 80, "imageBorderRadius": 50, "nameColor": "#322e2b", "nameFontSize": 18, "nameFontWeight": 700, "nameFontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "roleColor": "#e8913a", "roleFontSize": 13, "bioColor": "#605a57", "bioFontSize": 14, "bioFontFamily": "'Be Vietnam Pro', Arial, sans-serif", "backgroundColor": "#ffffff", "borderRadius": 16, "borderWidth": 0, "borderColor": "#e2e8f0", "borderStyle": "solid", "contentAlignment": "center", "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 }, "badgeBackgroundColor": "#e8913a", "badgeTextColor": "#1c1008" }
+                    "data": {
+                      "imageSrc": "https://lh3.googleusercontent.com/aida-public/AB6AXuBiDK-xYpj5m76BU-E9XbHhyjJawLzxWq3JUiy3xy6J3OylRzieiDMXcBevQzFt_rk23U9i-s_0JKl2icQyDXsYUxOpop3PpfYOzvAdxLR3v8ExHQSDidegYgLSPH1HwVfCL7rn4uKQLWKwSRKsl1Gj13QZwu47l8akAX9waWrPEIW0k_96UmMncpoZilf-TbU3FIYhw-jZsTkD5gYRPXSXI0LV9gTtwKhzCSbP4abIl7ZWjVHP3dy3rKLovzMCdFoKBZoz62VyGkKb",
+                      "imageAlt": "Instructor Sarah",
+                      "name": "Sarah Chen",
+                      "role": "Vinyasa Instructor",
+                      "bio": "Flowing sequences to build strength and find your breath.",
+                      "showBadge": false,
+                      "badgeText": "",
+                      "imagePosition": "top"
+                    },
+                    "style": {
+                      "imageSize": 80,
+                      "imageBorderRadius": 50,
+                      "nameColor": "#322e2b",
+                      "nameFontSize": 18,
+                      "nameFontWeight": 700,
+                      "nameFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "roleColor": "#e8913a",
+                      "roleFontSize": 13,
+                      "bioColor": "#605a57",
+                      "bioFontSize": 14,
+                      "bioFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "backgroundColor": "#ffffff",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "contentAlignment": "center",
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      },
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008"
+                    }
                   }
                 ]
               }
             ]
           },
-          "style": { "gap": 16, "stackOnMobile": true, "padding": { "top": 0, "right": 24, "bottom": 0, "left": 24 } }
+          "style": {
+            "gap": 16,
+            "stackOnMobile": true,
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 0,
+              "left": 24
+            }
+          }
         },
-        { "id": "sun-c-b4", "type": "spacer", "data": {}, "style": { "height": 24 } },
+        {
+          "id": "sun-c-b4",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
+          }
+        },
         {
           "id": "sun-c-b5",
           "type": "list",
           "data": {
             "items": [
-              { "id": "sun-c-li1", "icon": "✓", "text": "Comfortable clothing", "subtitle": "Stretchy fabrics recommended" },
-              { "id": "sun-c-li2", "icon": "✓", "text": "Water bottle", "subtitle": "Stay hydrated throughout class" },
-              { "id": "sun-c-li3", "icon": "✓", "text": "Open mind", "subtitle": "Every practice is different" }
+              {
+                "id": "sun-c-li1",
+                "icon": "✓",
+                "text": "Comfortable clothing",
+                "subtitle": "Stretchy fabrics recommended"
+              },
+              {
+                "id": "sun-c-li2",
+                "icon": "✓",
+                "text": "Water bottle",
+                "subtitle": "Stay hydrated throughout class"
+              },
+              {
+                "id": "sun-c-li3",
+                "icon": "✓",
+                "text": "Open mind",
+                "subtitle": "Every practice is different"
+              }
             ]
           },
-          "style": { "layout": "vertical", "iconColor": "#e8913a", "iconSize": 20, "iconBackgroundColor": "#fef5f0", "iconBorderRadius": 50, "textColor": "#322e2b", "textFontSize": 15, "textFontWeight": 600, "textFontFamily": "'Plus Jakarta Sans', Arial, sans-serif", "subtitleColor": "#605a57", "subtitleFontSize": 13, "subtitleFontFamily": "'Be Vietnam Pro', Arial, sans-serif", "backgroundColor": "#ffffff", "borderRadius": 16, "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 } }
+          "style": {
+            "layout": "vertical",
+            "iconColor": "#e8913a",
+            "iconSize": 20,
+            "iconBackgroundColor": "#fef5f0",
+            "iconBorderRadius": 50,
+            "textColor": "#322e2b",
+            "textFontSize": 15,
+            "textFontWeight": 600,
+            "textFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "subtitleColor": "#605a57",
+            "subtitleFontSize": 13,
+            "subtitleFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+            "backgroundColor": "#ffffff",
+            "borderRadius": 16,
+            "padding": {
+              "top": 24,
+              "right": 24,
+              "bottom": 24,
+              "left": 24
+            }
+          }
         },
-        { "id": "sun-c-b6", "type": "spacer", "data": {}, "style": { "height": 24 } },
+        {
+          "id": "sun-c-b6",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
+          }
+        },
         {
           "id": "sun-c-b7",
           "type": "text",
-          "data": { "html": "<p style=\"margin:0;text-align:center;font-style:italic;font-family:'Noto Serif', Georgia, serif;font-size:16px;line-height:1.7;color:#c4a882;\">\"The body benefits from movement, and the mind benefits from stillness.\"</p>", "variables": [] },
-          "style": { "textAlign": "center", "backgroundColor": "#2a1a0e", "borderRadius": 16, "padding": { "top": 32, "right": 32, "bottom": 32, "left": 32 } }
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-style:italic;font-family:'Noto Serif', Georgia, serif;font-size:16px;line-height:1.7;color:#c4a882;\">\"The body benefits from movement, and the mind benefits from stillness.\"</p>",
+            "variables": []
+          },
+          "style": {
+            "textAlign": "center",
+            "backgroundColor": "#2a1a0e",
+            "borderRadius": 16,
+            "padding": {
+              "top": 32,
+              "right": 32,
+              "bottom": 32,
+              "left": 32
+            },
+            "color": "#c4a882"
+          }
         }
       ]
     },
     "footer": {
       "blocks": [
-        { "id": "sun-c-f1", "type": "divider", "data": { "lineStyle": "solid", "lineColor": "#e8913a", "lineThickness": 2, "spacing": 0 }, "style": { "padding": { "top": 24, "right": 32, "bottom": 8, "left": 32 }, "lineStyle": "solid", "lineColor": "#e8913a", "lineThickness": 2, "spacing": 0 } },
-        { "id": "sun-c-f2", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms</a></p>", "variables": [] }, "style": { "alignment": "center", "padding": { "top": 8, "right": 32, "bottom": 8, "left": 32 } } },
-        { "id": "sun-c-f3", "type": "text", "data": { "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2025 Sunrise Yoga. All rights reserved.</p>", "variables": [] }, "style": { "alignment": "center", "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 } } }
+        {
+          "id": "sun-c-f1",
+          "type": "divider",
+          "data": {
+            "lineStyle": "solid",
+            "lineColor": "#e8913a",
+            "lineThickness": 2,
+            "spacing": 0
+          },
+          "style": {
+            "padding": {
+              "top": 24,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            },
+            "lineStyle": "solid",
+            "lineColor": "#e8913a",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "sun-c-f2",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms</a></p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "sun-c-f3",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2025 Sunrise Yoga. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            }
+          }
+        }
       ]
     }
   },
   "is_premium": true,
-  "tags": ["event"]
+  "tags": [
+    "event"
+  ]
 }

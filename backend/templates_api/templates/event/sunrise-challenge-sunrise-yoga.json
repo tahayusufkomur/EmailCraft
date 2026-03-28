@@ -2,7 +2,9 @@
   "name": "Sunrise Challenge — Sunrise Yoga",
   "category": "event",
   "is_premium": true,
-  "tags": ["event"],
+  "tags": [
+    "event"
+  ],
   "template": {
     "version": 1,
     "settings": {
@@ -21,9 +23,17 @@
         {
           "id": "sun-e3-h1",
           "type": "heading",
-          "data": { "text": "SUNRISE YOGA", "level": 3 },
+          "data": {
+            "text": "SUNRISE YOGA",
+            "level": 3
+          },
           "style": {
-            "padding": { "top": 28, "right": 32, "bottom": 24, "left": 32 },
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
             "alignment": "center",
             "color": "#e8913a",
             "fontSize": 10,
@@ -65,14 +75,21 @@
             "buttonFontWeight": 700,
             "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
             "contentAlignment": "center",
-            "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
           }
         },
         {
           "id": "sun-e3-b2",
           "type": "spacer",
           "data": {},
-          "style": { "height": 24 }
+          "style": {
+            "height": 24
+          }
         },
         {
           "id": "sun-e3-b3",
@@ -80,11 +97,20 @@
           "style": {
             "gap": 12,
             "stackOnMobile": true,
-            "padding": { "top": 0, "right": 24, "bottom": 0, "left": 24 }
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 0,
+              "left": 24
+            }
           },
           "data": {
             "columnCount": 3,
-            "columnRatio": [34, 33, 33],
+            "columnRatio": [
+              34,
+              33,
+              33
+            ],
             "columns": [
               {
                 "id": "sun-e3-col1",
@@ -123,7 +149,12 @@
                       "iconBorderRadius": 50,
                       "iconBackgroundColor": "#1c1008",
                       "contentAlignment": "center",
-                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      },
                       "badgeBackgroundColor": "#e8913a",
                       "badgeTextColor": "#1c1008",
                       "buttonBackgroundColor": "#e8913a",
@@ -179,7 +210,12 @@
                       "iconBorderRadius": 50,
                       "iconBackgroundColor": "#1c1008",
                       "contentAlignment": "center",
-                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      },
                       "badgeBackgroundColor": "#e8913a",
                       "badgeTextColor": "#1c1008",
                       "buttonBackgroundColor": "#e8913a",
@@ -235,7 +271,12 @@
                       "iconBorderRadius": 50,
                       "iconBackgroundColor": "#1c1008",
                       "contentAlignment": "center",
-                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      },
                       "badgeBackgroundColor": "#e8913a",
                       "badgeTextColor": "#1c1008",
                       "buttonBackgroundColor": "#e8913a",
@@ -261,7 +302,9 @@
           "id": "sun-e3-b4",
           "type": "spacer",
           "data": {},
-          "style": { "height": 24 }
+          "style": {
+            "height": 24
+          }
         },
         {
           "id": "sun-e3-b5",
@@ -281,7 +324,12 @@
             "buttonUrl": "#"
           },
           "style": {
-            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+            "padding": {
+              "top": 24,
+              "right": 24,
+              "bottom": 24,
+              "left": 24
+            },
             "backgroundColor": "#ffffff",
             "borderRadius": 16,
             "borderWidth": 0,
@@ -318,7 +366,9 @@
           "id": "sun-e3-b6",
           "type": "spacer",
           "data": {},
-          "style": { "height": 24 }
+          "style": {
+            "height": 24
+          }
         },
         {
           "id": "sun-e3-b7",
@@ -330,7 +380,13 @@
           "style": {
             "backgroundColor": "#2a1a0e",
             "borderRadius": 16,
-            "padding": { "top": 32, "right": 32, "bottom": 32, "left": 32 }
+            "padding": {
+              "top": 32,
+              "right": 32,
+              "bottom": 32,
+              "left": 32
+            },
+            "color": "#c4a882"
           }
         }
       ]
@@ -346,7 +402,12 @@
             "lineColor": "#e8913a",
             "lineThickness": 2,
             "spacing": 0,
-            "padding": { "top": 24, "right": 32, "bottom": 8, "left": 32 }
+            "padding": {
+              "top": 24,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
           }
         },
         {
@@ -358,7 +419,12 @@
           },
           "style": {
             "alignment": "center",
-            "padding": { "top": 8, "right": 32, "bottom": 8, "left": 32 }
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            }
           }
         },
         {
@@ -370,7 +436,12 @@
           },
           "style": {
             "alignment": "center",
-            "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 }
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            }
           }
         }
       ]

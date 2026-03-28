@@ -90,9 +90,9 @@ lint-frontend-builder: ## Type-check builder frontend
 
 # ─── Utilities ────────────────────────────────────────────
 
-seed: ## Create demo org + seed gallery templates + plan demo users
-	@$(MANAGE) create_demo_org
+seed: ## Seed gallery templates + create demo org with provisioned templates
 	@$(MANAGE) seed_gallery
+	@$(MANAGE) create_demo_org
 
 seed-gallery: ## Seed/update 20 gallery templates from templates.json
 	@$(MANAGE) seed_gallery
@@ -138,8 +138,8 @@ setup: ## Build/start stack, migrate DB, create superuser, seed demo org/templat
 	@$(MANAGE) migrate
 	@$(COMPOSE) exec -e DJANGO_SUPERUSER_USERNAME=t -e DJANGO_SUPERUSER_EMAIL=t@example.com -e DJANGO_SUPERUSER_PASSWORD=t \
 		backend python manage.py createsuperuser --noinput || true
-	@$(MANAGE) create_demo_org
 	@$(MANAGE) seed_gallery
+	@$(MANAGE) create_demo_org
 	@cd $(FRONTEND_SITE) && npm install
 	@cd $(FRONTEND_BUILDER) && npm install
 

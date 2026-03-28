@@ -127,7 +127,10 @@
           },
           "data": {
             "columnCount": 2,
-            "columnRatio": [50, 50],
+            "columnRatio": [
+              50,
+              50
+            ],
             "columns": [
               {
                 "id": "sun-r-col1",
@@ -150,7 +153,12 @@
                       "buttonUrl": "https://"
                     },
                     "style": {
-                      "padding": { "top": 20, "right": 16, "bottom": 20, "left": 16 },
+                      "padding": {
+                        "top": 20,
+                        "right": 16,
+                        "bottom": 20,
+                        "left": 16
+                      },
                       "backgroundColor": "#fef5f0",
                       "borderRadius": 16,
                       "borderWidth": 0,
@@ -206,7 +214,12 @@
                       "buttonUrl": "https://"
                     },
                     "style": {
-                      "padding": { "top": 20, "right": 16, "bottom": 20, "left": 16 },
+                      "padding": {
+                        "top": 20,
+                        "right": 16,
+                        "bottom": 20,
+                        "left": 16
+                      },
                       "backgroundColor": "#fef5f0",
                       "borderRadius": 16,
                       "borderWidth": 0,
@@ -270,7 +283,12 @@
             "buttonUrl": "https://"
           },
           "style": {
-            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+            "padding": {
+              "top": 24,
+              "right": 24,
+              "bottom": 24,
+              "left": 24
+            },
             "backgroundColor": "#2a1a0e",
             "borderRadius": 16,
             "borderWidth": 0,
@@ -327,7 +345,8 @@
               "right": 32,
               "bottom": 32,
               "left": 32
-            }
+            },
+            "color": "#c4a882"
           }
         },
         {
@@ -382,7 +401,8 @@
               "right": 32,
               "bottom": 8,
               "left": 32
-            }
+            },
+            "color": "#605a57"
           }
         },
         {
@@ -400,7 +420,8 @@
               "right": 32,
               "bottom": 24,
               "left": 32
-            }
+            },
+            "color": "#7c7672"
           }
         }
       ]

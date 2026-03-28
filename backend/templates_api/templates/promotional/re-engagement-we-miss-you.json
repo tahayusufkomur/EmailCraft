@@ -121,7 +121,11 @@
           "type": "columns",
           "data": {
             "columnCount": 3,
-            "columnRatio": [34, 33, 33],
+            "columnRatio": [
+              34,
+              33,
+              33
+            ],
             "columns": [
               {
                 "id": "re-b5-c1",
@@ -144,7 +148,12 @@
                       "buttonUrl": ""
                     },
                     "style": {
-                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      },
                       "backgroundColor": "#e8f5f0",
                       "borderRadius": 12,
                       "borderWidth": 0,
@@ -200,7 +209,12 @@
                       "buttonUrl": ""
                     },
                     "style": {
-                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      },
                       "backgroundColor": "#e8f5f0",
                       "borderRadius": 12,
                       "borderWidth": 0,
@@ -256,7 +270,12 @@
                       "buttonUrl": ""
                     },
                     "style": {
-                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "padding": {
+                        "top": 24,
+                        "right": 24,
+                        "bottom": 24,
+                        "left": 24
+                      },
                       "backgroundColor": "#e8f5f0",
                       "borderRadius": 12,
                       "borderWidth": 0,
@@ -330,7 +349,12 @@
             "buttonUrl": "https://"
           },
           "style": {
-            "padding": { "top": 32, "right": 24, "bottom": 32, "left": 24 },
+            "padding": {
+              "top": 32,
+              "right": 24,
+              "bottom": 32,
+              "left": 24
+            },
             "backgroundColor": "#132e27",
             "borderRadius": 12,
             "borderWidth": 0,
@@ -387,7 +411,8 @@
             },
             "alignment": "center",
             "backgroundColor": "#132e27",
-            "borderRadius": 12
+            "borderRadius": 12,
+            "color": "#7a9e93"
           }
         }
       ]

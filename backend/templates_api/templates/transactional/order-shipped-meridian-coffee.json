@@ -1,7 +1,9 @@
 {
   "name": "Order Shipped — Meridian Coffee",
   "category": "transactional",
-  "tags": ["transactional"],
+  "tags": [
+    "transactional"
+  ],
   "template": {
     "version": 1,
     "settings": {
@@ -94,7 +96,10 @@
           "type": "columns",
           "data": {
             "columnCount": 2,
-            "columnRatio": [50, 50],
+            "columnRatio": [
+              50,
+              50
+            ],
             "columns": [
               {
                 "id": "m3-c1",
@@ -351,7 +356,8 @@
               "left": 32
             },
             "alignment": "center",
-            "backgroundColor": "#1a110b"
+            "backgroundColor": "#1a110b",
+            "color": "#8a7b6b"
           }
         },
         {
@@ -369,7 +375,8 @@
               "left": 32
             },
             "alignment": "center",
-            "backgroundColor": "#1a110b"
+            "backgroundColor": "#1a110b",
+            "color": "#8a7b6b"
           }
         }
       ]

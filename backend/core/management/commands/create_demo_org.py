@@ -323,6 +323,12 @@ class Command(BaseCommand):
             )
             seeded_plan_users.append((account['plan'], plan_user, plan_org))
 
+        # Provision gallery templates to this org (and all plan demo orgs)
+        from templates_api.services import provision_templates_for_org
+        provision_templates_for_org(org)
+        for _, _, plan_org in seeded_plan_users:
+            provision_templates_for_org(plan_org)
+
         template = None
         if not options['skip_template']:
             template, _ = Template.objects.update_or_create(
