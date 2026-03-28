@@ -311,6 +311,78 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
 </tr>`;
     }
 
+    case 'card': {
+      const bg = block.style.backgroundColor || '#ffffff';
+      const radius = block.style.borderRadius ?? 12;
+      const borderW = block.style.borderWidth ?? 1;
+      const borderC = block.style.borderColor || '#e2e8f0';
+      const borderS = block.style.borderStyle || 'solid';
+      const cardAlign = block.style.contentAlignment || 'center';
+      const hColor = block.style.headingColor || '#0f172a';
+      const hSize = block.style.headingFontSize || 22;
+      const hFont = block.style.headingFontFamily || font;
+      const hWeight = block.style.headingFontWeight || 700;
+      const bColor = block.style.bodyColor || '#475569';
+      const bSize = block.style.bodyFontSize || 15;
+      const bFont = block.style.bodyFontFamily || font;
+
+      let iconHtml = '';
+      if (block.data.showIcon) {
+        const iSize = block.style.iconSize ?? 48;
+        const iRadius = block.style.iconBorderRadius ?? 50;
+        if (block.data.iconMode === 'image' && block.data.iconImageSrc) {
+          iconHtml = `<img src="${escapeHtml(block.data.iconImageSrc)}" alt="${escapeHtml(block.data.iconImageAlt)}" width="${iSize}" height="${iSize}" style="border-radius: ${iRadius}%; display: block; margin: 0 auto 12px;" />`;
+        } else {
+          const iBg = block.style.iconBackgroundColor || '#eef2ff';
+          const emojiSize = Math.round(iSize * 0.55);
+          iconHtml = `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 12px;"><tr><td style="width: ${iSize}px; height: ${iSize}px; border-radius: ${iRadius}%; background-color: ${iBg}; text-align: center; vertical-align: middle; font-size: ${emojiSize}px; line-height: ${iSize}px;">${block.data.iconEmoji || '✨'}</td></tr></table>`;
+        }
+      }
+
+      let badgeHtml = '';
+      if (block.data.showBadge) {
+        const bdBg = block.style.badgeBackgroundColor || '#eef2ff';
+        const bdColor = block.style.badgeTextColor || '#4338ca';
+        badgeHtml = `<div style="margin-bottom: 8px;"><span style="display: inline-block; padding: 3px 10px; border-radius: 12px; background-color: ${bdBg}; color: ${bdColor}; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; font-family: ${font};">${escapeHtml(block.data.badgeText)}</span></div>`;
+      }
+
+      let btnHtml = '';
+      if (block.data.showButton) {
+        const btnBg = block.style.buttonBackgroundColor || '#4f46e5';
+        const btnCol = block.style.buttonTextColor || '#ffffff';
+        const btnRad = block.style.buttonBorderRadius ?? 6;
+        const btnFSize = block.style.buttonFontSize || 14;
+        const btnFFont = block.style.buttonFontFamily || font;
+        const btnFW = block.style.buttonFontWeight || 600;
+        const btnPx = block.style.buttonPaddingX ?? 20;
+        const btnPy = block.style.buttonPaddingY ?? 10;
+        const btnFull = block.style.buttonFullWidth;
+        const btnBW = block.style.buttonBorderWidth ?? 0;
+        const btnBC = block.style.buttonBorderColor || btnBg;
+        const btnBS = block.style.buttonBorderStyle || 'solid';
+        const disp = btnFull ? 'block' : 'inline-block';
+        const w = btnFull ? 'width: 100%; box-sizing: border-box;' : '';
+        btnHtml = `<div style="margin-top: 16px;"><a href="${escapeHtml(block.data.buttonUrl)}" target="_blank" style="display: ${disp}; ${w} padding: ${btnPy}px ${btnPx}px; background-color: ${btnBg}; color: ${btnCol}; font-family: ${btnFFont}; font-size: ${btnFSize}px; font-weight: ${btnFW}; text-decoration: none; text-align: center; border-radius: ${btnRad}px; border: ${btnBW}px ${btnBS} ${btnBC};">${escapeHtml(block.data.buttonText)}</a></div>`;
+      }
+
+      const border = borderW > 0 ? `${borderW}px ${borderS} ${borderC}` : 'none';
+      return `<tr>
+  <td style="padding: ${pad};">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: ${bg}; border-radius: ${radius}px; border: ${border};">
+      <tr>
+        <td style="padding: ${pad}; text-align: ${cardAlign};">
+          ${iconHtml}
+          ${badgeHtml}
+          <h3 style="margin: 0 0 8px; font-family: ${hFont}; font-size: ${hSize}px; font-weight: ${hWeight}; color: ${hColor}; line-height: 1.3;">${escapeHtml(block.data.heading)}</h3>
+          <p style="margin: 0 0 16px; font-family: ${bFont}; font-size: ${bSize}px; color: ${bColor}; line-height: 1.5;">${escapeHtml(block.data.body)}</p>
+          ${btnHtml}
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>`;
+    }
+
     default:
       return '';
   }

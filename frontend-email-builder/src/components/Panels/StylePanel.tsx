@@ -9,6 +9,7 @@ import { HeadingSettings } from './settings/HeadingSettings';
 import { SpacerSettings } from './settings/SpacerSettings';
 import { HtmlSettings } from './settings/HtmlSettings';
 import { HeroSettings } from './settings/HeroSettings';
+import { CardSettings } from './settings/CardSettings';
 
 export function StylePanel() {
   const selectedBlock = useEditorStore((s) => s.getSelectedBlock());
@@ -30,6 +31,7 @@ export function StylePanel() {
           {selectedBlock.type === 'spacer' && <SpacerSettings block={selectedBlock} />}
           {selectedBlock.type === 'html' && <HtmlSettings block={selectedBlock} />}
           {selectedBlock.type === 'hero' && <HeroSettings block={selectedBlock} />}
+          {selectedBlock.type === 'card' && <CardSettings block={selectedBlock} />}
         </>
       ) : (
         <div className="style-panel-empty">

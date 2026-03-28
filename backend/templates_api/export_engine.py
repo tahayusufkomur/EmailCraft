@@ -631,6 +631,108 @@ def _padding_str(padding):
     return f'{top}px {right}px {bottom}px {left}px'
 
 
+def _render_card_block(block, ctx):
+    data = block.get('data', {})
+    style = block.get('style', {})
+    default_font = ctx['default_font']
+
+    bg = style.get('backgroundColor', '#ffffff')
+    radius = style.get('borderRadius', 12)
+    border_w = style.get('borderWidth', 1)
+    border_c = style.get('borderColor', '#e2e8f0')
+    border_s = style.get('borderStyle', 'solid')
+    align = style.get('contentAlignment', 'center')
+    padding = _resolve_padding(style)
+
+    heading_color = style.get('headingColor', '#0f172a')
+    heading_size = style.get('headingFontSize', 22)
+    heading_font = style.get('headingFontFamily', default_font)
+    heading_weight = style.get('headingFontWeight', 700)
+    body_color = style.get('bodyColor', '#475569')
+    body_size = style.get('bodyFontSize', 15)
+    body_font = style.get('bodyFontFamily', default_font)
+
+    heading = html_module.escape(data.get('heading', ''))
+    body_text = html_module.escape(data.get('body', ''))
+
+    icon_html = ''
+    if data.get('showIcon'):
+        icon_size = style.get('iconSize', 48)
+        icon_radius = style.get('iconBorderRadius', 50)
+        if data.get('iconMode') == 'image' and data.get('iconImageSrc'):
+            src = html_module.escape(data['iconImageSrc'])
+            alt = html_module.escape(data.get('iconImageAlt', ''))
+            icon_html = f'<img src="{src}" alt="{alt}" width="{icon_size}" height="{icon_size}" style="border-radius: {icon_radius}%; display: block; margin: 0 auto 12px;" />'
+        else:
+            emoji = data.get('iconEmoji', '✨')
+            icon_bg = style.get('iconBackgroundColor', '#eef2ff')
+            emoji_size = int(icon_size * 0.55)
+            icon_html = (
+                f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 12px;">'
+                f'<tr><td style="width: {icon_size}px; height: {icon_size}px; border-radius: {icon_radius}%; background-color: {icon_bg}; text-align: center; vertical-align: middle; font-size: {emoji_size}px; line-height: {icon_size}px;">'
+                f'{emoji}</td></tr></table>'
+            )
+
+    badge_html = ''
+    if data.get('showBadge'):
+        badge_bg = style.get('badgeBackgroundColor', '#eef2ff')
+        badge_color = style.get('badgeTextColor', '#4338ca')
+        badge_text = html_module.escape(data.get('badgeText', ''))
+        badge_html = (
+            f'<span style="display: inline-block; padding: 3px 10px; border-radius: 12px; '
+            f'background-color: {badge_bg}; color: {badge_color}; font-size: 11px; '
+            f'font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; '
+            f'font-family: {default_font};">{badge_text}</span>'
+        )
+        badge_html = f'<div style="margin-bottom: 8px;">{badge_html}</div>'
+
+    btn_html = ''
+    if data.get('showButton'):
+        btn_bg = style.get('buttonBackgroundColor', '#4f46e5')
+        btn_color = style.get('buttonTextColor', '#ffffff')
+        btn_radius = style.get('buttonBorderRadius', 6)
+        btn_size = style.get('buttonFontSize', 14)
+        btn_font = style.get('buttonFontFamily', default_font)
+        btn_weight = style.get('buttonFontWeight', 600)
+        btn_px = style.get('buttonPaddingX', 20)
+        btn_py = style.get('buttonPaddingY', 10)
+        btn_full = style.get('buttonFullWidth', False)
+        btn_border_w = style.get('buttonBorderWidth', 0)
+        btn_border_c = style.get('buttonBorderColor', btn_bg)
+        btn_border_s = style.get('buttonBorderStyle', 'solid')
+        btn_text = html_module.escape(data.get('buttonText', ''))
+        btn_url = html_module.escape(data.get('buttonUrl', '#'))
+        display = 'block' if btn_full else 'inline-block'
+        width = 'width: 100%; box-sizing: border-box;' if btn_full else ''
+        btn_html = (
+            f'<div style="margin-top: 16px;">'
+            f'<a href="{btn_url}" target="_blank" style="display: {display}; {width} '
+            f'padding: {btn_py}px {btn_px}px; background-color: {btn_bg}; color: {btn_color}; '
+            f'font-family: {btn_font}; font-size: {btn_size}px; font-weight: {btn_weight}; '
+            f'text-decoration: none; text-align: center; border-radius: {btn_radius}px; '
+            f'border: {btn_border_w}px {btn_border_s} {btn_border_c};">'
+            f'{btn_text}</a></div>'
+        )
+
+    border = f'{border_w}px {border_s} {border_c}' if border_w > 0 else 'none'
+
+    return f"""<tr>
+  <td style="padding: {padding};">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: {bg}; border-radius: {radius}px; border: {border};">
+      <tr>
+        <td style="padding: {padding}; text-align: {align};">
+          {icon_html}
+          {badge_html}
+          <h3 style="margin: 0 0 8px; font-family: {heading_font}; font-size: {heading_size}px; font-weight: {heading_weight}; color: {heading_color}; line-height: 1.3;">{heading}</h3>
+          <p style="margin: 0 0 16px; font-family: {body_font}; font-size: {body_size}px; color: {body_color}; line-height: 1.5;">{body_text}</p>
+          {btn_html}
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>"""
+
+
 def _render_hero_block(block, ctx):
     data = block.get('data', {})
     style = block.get('style', {})
@@ -756,4 +858,5 @@ BLOCK_RENDERERS = {
     'spacer': _render_spacer_block,
     'html': _render_html_block,
     'hero': _render_hero_block,
+    'card': _render_card_block,
 }
