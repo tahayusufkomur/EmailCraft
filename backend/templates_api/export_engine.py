@@ -642,7 +642,7 @@ def _render_card_block(block, ctx):
     border_c = style.get('borderColor', '#e2e8f0')
     border_s = style.get('borderStyle', 'solid')
     align = style.get('contentAlignment', 'center')
-    padding = _resolve_padding(style)
+    padding = _padding_str(style.get('padding', {}))
 
     heading_color = style.get('headingColor', '#0f172a')
     heading_size = style.get('headingFontSize', 22)
@@ -855,7 +855,7 @@ def _render_list_block(block, ctx):
     if not items:
         return ''
 
-    padding = _resolve_padding(style)
+    padding = _padding_str(style.get('padding', {}))
     bg = style.get('backgroundColor', 'transparent')
     align = style.get('contentAlignment', 'left')
     icon_size = style.get('iconSize', 20)
@@ -923,7 +923,7 @@ def _render_profile_block(block, ctx):
     data = block.get('data', {})
     style = block.get('style', {})
     default_font = ctx['default_font']
-    padding = _resolve_padding(style)
+    padding = _padding_str(style.get('padding', {}))
 
     bg = style.get('backgroundColor', '#ffffff')
     radius = style.get('borderRadius', 12)
