@@ -1,10 +1,12 @@
 {
   "name": "Workshop Invitation — Sunrise Yoga",
   "category": "event",
+  "is_premium": true,
+  "tags": ["event"],
   "template": {
     "version": 1,
     "settings": {
-      "backgroundColor": "#fef5f0",
+      "backgroundColor": "#1c1008",
       "backgroundStyle": "none",
       "bodyBackgroundStyle": "solid",
       "bodyBackgroundColor": "#fef5f0",
@@ -19,22 +21,14 @@
         {
           "id": "sun-e2-h1",
           "type": "heading",
-          "data": {
-            "text": "SUNRISE YOGA",
-            "level": 3
-          },
+          "data": { "text": "SUNRISE YOGA", "level": 3 },
           "style": {
-            "padding": {
-              "top": 28,
-              "right": 32,
-              "bottom": 24,
-              "left": 32
-            },
+            "padding": { "top": 28, "right": 32, "bottom": 24, "left": 32 },
             "alignment": "center",
-            "color": "#8c4a00",
-            "fontSize": 18,
+            "color": "#e8913a",
+            "fontSize": 10,
             "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "fontWeight": 800,
+            "fontWeight": 600,
             "letterSpacing": 3,
             "textTransform": "uppercase"
           }
@@ -48,146 +42,203 @@
           "type": "hero",
           "data": {
             "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCVfAYFH-v3BaXiFvgtAnEk2IT2EjWsilf9B-w5w7OIvifimGOK4ivMB83jlO0LU1Q5Z59ROCdpmZLRbEEc8PeJqXoy6Ci3H0u-I07RvMxraQR5i17OG4DlOssRTan4s6tOsVWEaKfGVqggDX9l7d24XsuJSlhNsDVS02mfH1FNMWHKVdaBbkoO0Mt8pQ24XvD3rDaq1nXMueas_hFrrt2fExCC1wZzDQ76p1LeSvUvtGY3U4zHEN84IXNlZd-KSTT4KgdiY8B0pMha",
-            "heading": "Breathwork & Sound Bath",
-            "subheading": "Friday, 7:00 PM • Studio B",
-            "buttonText": "Save Your Cushion",
-            "buttonUrl": "https://"
+            "heading": "Breathwork & Beyond",
+            "subheading": "A special workshop with guest instructor Kai Nakamura",
+            "showButton": true,
+            "buttonText": "Reserve Your Mat →",
+            "buttonUrl": "#"
           },
           "style": {
-            "height": 380,
-            "overlayColor": "#322e2b",
-            "overlayOpacity": 0.5,
-            "headingColor": "#ffffff",
+            "height": 360,
             "headingFontSize": 32,
+            "headingFontWeight": 800,
             "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "subheadingColor": "#ffffffcc",
-            "buttonBackgroundColor": "#fd8b00",
-            "buttonTextColor": "#ffffff",
+            "headingColor": "#fef5f0",
+            "subheadingFontSize": 15,
+            "subheadingColor": "#c4a882cc",
+            "overlayColor": "#1c1008",
+            "overlayOpacity": 0.55,
+            "buttonBackgroundColor": "#e8913a",
+            "buttonTextColor": "#1c1008",
             "buttonBorderRadius": 999,
-            "contentAlignment": "left",
-            "verticalAlignment": "bottom",
-            "padding": {
-              "top": 0,
-              "right": 0,
-              "bottom": 0,
-              "left": 0
-            }
+            "buttonFontSize": 13,
+            "buttonFontWeight": 700,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "contentAlignment": "center",
+            "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }
           }
         },
         {
           "id": "sun-e2-b2",
           "type": "spacer",
           "data": {},
-          "style": {
-            "height": 16
-          }
+          "style": { "height": 24 }
         },
         {
           "id": "sun-e2-b3",
+          "type": "profile",
+          "data": {
+            "imageSrc": "https://lh3.googleusercontent.com/aida-public/AB6AXuBiDK-xYpj5m76BU-E9XbHhyjJawLzxWq3JUiy3xy6J3OylRzieiDMXcBevQzFt_rk23U9i-s_0JKl2icQyDXsYUxOpop3PpfYOzvAdxLR3v8ExHQSDidegYgLSPH1HwVfCL7rn4uKQLWKwSRKsl1Gj13QZwu47l8akAX9waWrPEIW0k_96UmMncpoZilf-TbU3FIYhw-jZsTkD5gYRPXSXI0LV9gTtwKhzCSbP4abIl7ZWjVHP3dy3rKLovzMCdFoKBZoz62VyGkKb",
+            "imageAlt": "Kai Nakamura",
+            "name": "Kai Nakamura",
+            "role": "Guest Instructor",
+            "bio": "Internationally recognized breathwork specialist with 15 years of experience in pranayama and holistic wellness.",
+            "showBadge": true,
+            "badgeText": "Special Guest"
+          },
+          "style": {
+            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+            "backgroundColor": "#ffffff",
+            "imageSize": 96,
+            "imageBorderRadius": 50,
+            "imagePosition": "top",
+            "nameColor": "#322e2b",
+            "nameFontSize": 20,
+            "nameFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "nameFontWeight": 800,
+            "roleColor": "#e8913a",
+            "roleFontSize": 13,
+            "bioColor": "#605a57",
+            "bioFontSize": 14,
+            "bioFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+            "badgeBackgroundColor": "#e8913a",
+            "badgeTextColor": "#1c1008",
+            "borderRadius": 16,
+            "borderWidth": 0,
+            "borderColor": "#e2e8f0",
+            "borderStyle": "solid",
+            "contentAlignment": "center",
+            "outerPadding": { "top": 0, "right": 24, "bottom": 0, "left": 24 }
+          }
+        },
+        {
+          "id": "sun-e2-b4",
+          "type": "spacer",
+          "data": {},
+          "style": { "height": 24 }
+        },
+        {
+          "id": "sun-e2-b5",
           "type": "columns",
           "style": {
             "gap": 16,
             "stackOnMobile": true,
-            "padding": {
-              "top": 0,
-              "right": 24,
-              "bottom": 16,
-              "left": 24
-            }
+            "padding": { "top": 0, "right": 24, "bottom": 0, "left": 24 }
           },
           "data": {
             "columnCount": 2,
-            "columnRatio": [
-              50,
-              50
-            ],
+            "columnRatio": [50, 50],
             "columns": [
               {
-                "id": "sun-e2-c1",
-                "backgroundColor": "#ffffff",
+                "id": "sun-e2-col1",
+                "backgroundColor": "#fef5f0",
                 "blocks": [
                   {
-                    "id": "sun-e2-c1-label",
-                    "type": "heading",
+                    "id": "sun-e2-col1-card",
+                    "type": "card",
                     "data": {
-                      "text": "WHAT YOU'LL EXPERIENCE",
-                      "level": 4
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "✨",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "heading": "What You'll Experience",
+                      "body": "Advanced pranayama techniques\nBreath-movement integration\nDeep relaxation practices",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "",
+                      "showBadge": false,
+                      "badgeText": ""
                     },
                     "style": {
-                      "padding": {
-                        "top": 18,
-                        "right": 18,
-                        "bottom": 6,
-                        "left": 18
-                      },
-                      "alignment": "left",
-                      "color": "#7c7672",
-                      "fontSize": 11,
-                      "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 2,
-                      "textTransform": "uppercase"
-                    }
-                  },
-                  {
-                    "id": "sun-e2-c1-text",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-size:13px;color:#605a57;line-height:1.6;\">Guided pranayama, crystal bowl immersion, and a deep-release meditation to close the week.</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 18,
-                        "bottom": 18,
-                        "left": 18
-                      }
+                      "backgroundColor": "#fef5f0",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "headingColor": "#322e2b",
+                      "headingFontSize": 16,
+                      "headingFontWeight": 700,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "bodyColor": "#605a57",
+                      "bodyFontSize": 14,
+                      "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "iconSize": 40,
+                      "iconBorderRadius": 50,
+                      "iconBackgroundColor": "#ffffff",
+                      "contentAlignment": "center",
+                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "buttonBackgroundColor": "#e8913a",
+                      "buttonTextColor": "#1c1008",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontWeight": 700,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonPaddingX": 28,
+                      "buttonPaddingY": 12,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#e8913a",
+                      "buttonBorderWidth": 0
                     }
                   }
                 ]
               },
               {
-                "id": "sun-e2-c2",
-                "backgroundColor": "#fff1e8",
+                "id": "sun-e2-col2",
+                "backgroundColor": "#fef5f0",
                 "blocks": [
                   {
-                    "id": "sun-e2-c2-label",
-                    "type": "heading",
+                    "id": "sun-e2-col2-card",
+                    "type": "card",
                     "data": {
-                      "text": "WHAT TO BRING",
-                      "level": 4
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "🎒",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "heading": "What to Bring",
+                      "body": "Comfortable loose clothing\nYour favorite blanket\nWater bottle\nOpen heart, open mind",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "",
+                      "showBadge": false,
+                      "badgeText": ""
                     },
                     "style": {
-                      "padding": {
-                        "top": 18,
-                        "right": 18,
-                        "bottom": 6,
-                        "left": 18
-                      },
-                      "alignment": "left",
-                      "color": "#8c4a00",
-                      "fontSize": 11,
-                      "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 2,
-                      "textTransform": "uppercase"
-                    }
-                  },
-                  {
-                    "id": "sun-e2-c2-text",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;font-size:13px;color:#605a57;line-height:1.6;\">A blanket, a journal, and your favorite grounding scent. We provide bolsters and tea.</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 18,
-                        "bottom": 18,
-                        "left": 18
-                      }
+                      "backgroundColor": "#fef5f0",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "headingColor": "#322e2b",
+                      "headingFontSize": 16,
+                      "headingFontWeight": 700,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "bodyColor": "#605a57",
+                      "bodyFontSize": 14,
+                      "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "iconSize": 40,
+                      "iconBorderRadius": 50,
+                      "iconBackgroundColor": "#ffffff",
+                      "contentAlignment": "center",
+                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "buttonBackgroundColor": "#e8913a",
+                      "buttonTextColor": "#1c1008",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontWeight": 700,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonPaddingX": 28,
+                      "buttonPaddingY": 12,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#e8913a",
+                      "buttonBorderWidth": 0
                     }
                   }
                 ]
@@ -196,76 +247,60 @@
           }
         },
         {
-          "id": "sun-e2-b4",
-          "type": "profile",
+          "id": "sun-e2-b6",
+          "type": "spacer",
+          "data": {},
+          "style": { "height": 24 }
+        },
+        {
+          "id": "sun-e2-b7",
+          "type": "card",
           "data": {
-            "imageSrc": "https://lh3.googleusercontent.com/aida-public/AB6AXuBiDK-xYpj5m76BU-E9XbHhyjJawLzxWq3JUiy3xy6J3OylRzieiDMXcBevQzFt_rk23U9i-s_0JKl2icQyDXsYUxOpop3PpfYOzvAdxLR3v8ExHQSDidegYgLSPH1HwVfCL7rn4uKQLWKwSRKsl1Gj13QZwu47l8akAX9waWrPEIW0k_96UmMncpoZilf-TbU3FIYhw-jZsTkD5gYRPXSXI0LV9gTtwKhzCSbP4abIl7ZWjVHP3dy3rKLovzMCdFoKBZoz62VyGkKb",
-            "imageAlt": "Guest Instructor",
-            "name": "Elena Rivers",
-            "role": "Guest facilitator",
-            "bio": "Breathwork & meditation",
-            "showBadge": false,
-            "badgeText": ""
+            "showIcon": false,
+            "iconMode": "emoji",
+            "iconEmoji": "",
+            "iconImageSrc": "",
+            "iconImageAlt": "",
+            "showBadge": true,
+            "badgeText": "2 HOURS",
+            "heading": "Saturday, March 15 — 9:00 AM",
+            "body": "Limited to 15 participants for personalized guidance.",
+            "showButton": true,
+            "buttonText": "Reserve Your Spot →",
+            "buttonUrl": "#"
           },
           "style": {
-            "padding": {
-              "top": 20,
-              "right": 20,
-              "bottom": 20,
-              "left": 20
-            },
-            "backgroundColor": "#f8efea",
-            "imageSize": 80,
-            "imageBorderRadius": 50,
-            "imagePosition": "left",
-            "nameColor": "#322e2b",
-            "nameFontSize": 18,
-            "nameFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "nameFontWeight": 700,
-            "roleColor": "#605a57",
-            "roleFontSize": 13,
-            "bioColor": "#605a57",
-            "bioFontSize": 13,
-            "bioFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "badgeBackgroundColor": "#eef2ff",
-            "badgeTextColor": "#4338ca",
-            "borderRadius": 20,
+            "backgroundColor": "#2a1a0e",
+            "borderRadius": 16,
             "borderWidth": 0,
             "borderColor": "#e2e8f0",
             "borderStyle": "solid",
-            "contentAlignment": "left",
-            "outerPadding": {
-              "top": 0,
-              "right": 32,
-              "bottom": 0,
-              "left": 32
-            }
-          }
-        },
-        {
-          "id": "sun-e2-b4-cta",
-          "type": "button",
-          "data": {
-            "text": "Reserve Seat",
-            "url": "https://"
-          },
-          "style": {
-            "alignment": "left",
-            "backgroundColor": "#8c4a00",
-            "color": "#fff0e7",
-            "borderRadius": 999,
-            "fontSize": 13,
-            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "fontWeight": 700,
-            "padding": {
-              "top": 0,
-              "right": 32,
-              "bottom": 20,
-              "left": 32
-            },
-            "paddingX": 20,
-            "paddingY": 10,
-            "fullWidth": false
+            "headingColor": "#fef5f0",
+            "headingFontSize": 22,
+            "headingFontWeight": 800,
+            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "bodyColor": "#c4a882",
+            "bodyFontSize": 14,
+            "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+            "badgeBackgroundColor": "#e8913a",
+            "badgeTextColor": "#1c1008",
+            "buttonBackgroundColor": "#e8913a",
+            "buttonTextColor": "#1c1008",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 13,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "buttonFontWeight": 700,
+            "buttonPaddingX": 28,
+            "buttonPaddingY": 12,
+            "buttonFullWidth": false,
+            "buttonBorderStyle": "solid",
+            "buttonBorderColor": "#e8913a",
+            "buttonBorderWidth": 0,
+            "iconSize": 48,
+            "iconBorderRadius": 50,
+            "iconBackgroundColor": "#1c1008",
+            "contentAlignment": "center",
+            "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 }
           }
         }
       ]
@@ -274,45 +309,41 @@
       "blocks": [
         {
           "id": "sun-e2-f1",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms of Service</a></p>",
-            "variables": []
-          },
+          "type": "divider",
+          "data": {},
           "style": {
-            "alignment": "center",
-            "backgroundColor": "#f8efea",
-            "padding": {
-              "top": 20,
-              "right": 32,
-              "bottom": 8,
-              "left": 32
-            }
+            "lineStyle": "solid",
+            "lineColor": "#e8913a",
+            "lineThickness": 2,
+            "spacing": 0,
+            "padding": { "top": 24, "right": 32, "bottom": 8, "left": 32 }
           }
         },
         {
           "id": "sun-e2-f2",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2024 Sunrise Yoga. All rights reserved.</p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\"><a href=\"#\" style=\"color:#605a57;\">Unsubscribe</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Privacy Policy</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#605a57;\">Terms</a></p>",
             "variables": []
           },
           "style": {
             "alignment": "center",
-            "backgroundColor": "#f8efea",
-            "padding": {
-              "top": 8,
-              "right": 32,
-              "bottom": 24,
-              "left": 32
-            }
+            "padding": { "top": 8, "right": 32, "bottom": 8, "left": 32 }
+          }
+        },
+        {
+          "id": "sun-e2-f3",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2025 Sunrise Yoga. All rights reserved.</p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "padding": { "top": 0, "right": 32, "bottom": 24, "left": 32 }
           }
         }
       ]
     }
-  },
-  "is_premium": true,
-  "tags": [
-    "event"
-  ]
+  }
 }
