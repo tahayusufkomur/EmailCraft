@@ -4,7 +4,7 @@
   "template": {
     "version": 1,
     "settings": {
-      "backgroundColor": "#f9faf8",
+      "backgroundColor": "#0a1a16",
       "backgroundStyle": "none",
       "bodyBackgroundStyle": "solid",
       "bodyBackgroundColor": "#ffffff",
@@ -20,7 +20,7 @@
           "id": "re-h1",
           "type": "heading",
           "data": {
-            "text": "THE BREATHABLE CANVAS",
+            "text": "ZENITH WELLNESS",
             "level": 3
           },
           "style": {
@@ -31,8 +31,8 @@
               "left": 32
             },
             "alignment": "center",
-            "color": "#406660",
-            "fontSize": 14,
+            "color": "#5ee8c5",
+            "fontSize": 13,
             "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
             "fontWeight": 700,
             "letterSpacing": 4,
@@ -48,10 +48,10 @@
           "type": "hero",
           "data": {
             "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCoyD7eYIGn0brhyR1J_KSUDsnqmrXdhM7Urt2vWlnA1J_JzfOidQiCIRO5pmP7_kPMf2IWE1T_0aliJmOOcMYCb0VP_CqPmNcZepAyuPRq4NRMwDZe3mGluLGeHKi8PIV3Tio7b-yYUL_QVOHfEEVmviHuMZ6-l2PRYP63tkb0ldRhj16V99y7GGumFCJ3Up1mH3ZQ338CDEZ7kxfxp8KCU0f_s8YH1OSM4MocLRsXvObjVr9FsfoyDhaqIDwk7Fz-jY8QNoAL2j2J",
-            "heading": "We've missed you on the mat!",
-            "subheading": "Come back and flow with us. We've added new classes designed to ground your practice.",
-            "buttonText": "",
-            "buttonUrl": ""
+            "heading": "We Miss You",
+            "subheading": "Your practice is always here, whenever you're ready",
+            "buttonText": "Come Back →",
+            "buttonUrl": "https://"
           },
           "style": {
             "padding": {
@@ -60,18 +60,21 @@
               "bottom": 0,
               "left": 0
             },
-            "height": 420,
-            "overlayColor": "#1c1917",
-            "overlayOpacity": 0.5,
+            "height": 360,
+            "overlayColor": "#0a1a16",
+            "overlayOpacity": 0.55,
             "headingColor": "#ffffff",
-            "headingFontSize": 32,
+            "headingFontSize": 36,
             "headingFontFamily": "'Noto Serif', Georgia, serif",
+            "headingFontWeight": 700,
             "subheadingColor": "#ffffffcc",
-            "buttonBackgroundColor": "#406660",
-            "buttonTextColor": "#e2fff9",
-            "buttonBorderRadius": 50,
-            "contentAlignment": "left",
-            "verticalAlignment": "bottom"
+            "buttonBackgroundColor": "#5ee8c5",
+            "buttonTextColor": "#0a1a16",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 13,
+            "buttonFontWeight": 700,
+            "contentAlignment": "center",
+            "verticalAlignment": "middle"
           }
         },
         {
@@ -86,19 +89,19 @@
           "id": "re-b3",
           "type": "heading",
           "data": {
-            "text": "Fresh Flows for Your Return",
+            "text": "What's New at Zenith",
             "level": 2
           },
           "style": {
             "padding": {
               "top": 0,
               "right": 32,
-              "bottom": 16,
+              "bottom": 0,
               "left": 32
             },
-            "alignment": "left",
+            "alignment": "center",
             "color": "#2e3432",
-            "fontSize": 22,
+            "fontSize": 26,
             "fontFamily": "'Noto Serif', Georgia, serif",
             "fontWeight": 700,
             "letterSpacing": 0,
@@ -107,107 +110,198 @@
         },
         {
           "id": "re-b4",
-          "type": "card",
-          "data": {
-            "showIcon": false, "iconMode": "emoji", "iconEmoji": "✨", "iconImageSrc": "", "iconImageAlt": "",
-            "showBadge": true, "badgeText": "New Series",
-            "heading": "Lunar Yin & Nidra",
-            "body": "Restore your nervous system with candlelit deep stretching.",
-            "showButton": false, "buttonText": "", "buttonUrl": ""
-          },
-          "style": {
-            "padding": {"top": 16, "right": 20, "bottom": 16, "left": 20},
-            "backgroundColor": "#ebefec",
-            "borderRadius": 12, "borderWidth": 0, "borderColor": "#e2e8f0", "borderStyle": "none",
-            "iconSize": 48, "iconBackgroundColor": "#eef2ff", "iconBorderRadius": 50,
-            "badgeBackgroundColor": "#c5ebdd", "badgeTextColor": "#24453c",
-            "headingColor": "#406660", "headingFontSize": 18, "headingFontFamily": "'Noto Serif', Georgia, serif", "headingFontWeight": 700,
-            "bodyColor": "#5a605e", "bodyFontSize": 13, "bodyFontFamily": "Arial, Helvetica, sans-serif",
-            "buttonBackgroundColor": "#4f46e5", "buttonTextColor": "#ffffff", "buttonBorderRadius": 6,
-            "buttonFontSize": 14, "buttonFontFamily": "Arial, Helvetica, sans-serif", "buttonFontWeight": 600,
-            "buttonPaddingX": 20, "buttonPaddingY": 10, "buttonFullWidth": false,
-            "buttonBorderStyle": "solid", "buttonBorderColor": "#4f46e5", "buttonBorderWidth": 0,
-            "contentAlignment": "left"
-          }
-        },
-        {
-          "id": "re-b4-s1",
           "type": "spacer",
           "data": {},
-          "style": {"padding": {"top": 0, "right": 0, "bottom": 0, "left": 0}, "height": 8, "backgroundColor": null}
-        },
-        {
-          "id": "re-b4-c2",
-          "type": "card",
-          "data": {
-            "showIcon": false, "iconMode": "emoji", "iconEmoji": "✨", "iconImageSrc": "", "iconImageAlt": "",
-            "showBadge": false, "badgeText": "",
-            "heading": "Breathwork Foundations",
-            "body": "Master the art of the conscious exhale.",
-            "showButton": false, "buttonText": "", "buttonUrl": ""
-          },
           "style": {
-            "padding": {"top": 16, "right": 20, "bottom": 16, "left": 20},
-            "backgroundColor": "#c2ebe3",
-            "borderRadius": 12, "borderWidth": 0, "borderColor": "#e2e8f0", "borderStyle": "none",
-            "iconSize": 48, "iconBackgroundColor": "#eef2ff", "iconBorderRadius": 50,
-            "badgeBackgroundColor": "#eef2ff", "badgeTextColor": "#4338ca",
-            "headingColor": "#335853", "headingFontSize": 18, "headingFontFamily": "'Noto Serif', Georgia, serif", "headingFontWeight": 700,
-            "bodyColor": "#335853", "bodyFontSize": 12, "bodyFontFamily": "Arial, Helvetica, sans-serif",
-            "buttonBackgroundColor": "#4f46e5", "buttonTextColor": "#ffffff", "buttonBorderRadius": 6,
-            "buttonFontSize": 14, "buttonFontFamily": "Arial, Helvetica, sans-serif", "buttonFontWeight": 600,
-            "buttonPaddingX": 20, "buttonPaddingY": 10, "buttonFullWidth": false,
-            "buttonBorderStyle": "solid", "buttonBorderColor": "#4f46e5", "buttonBorderWidth": 0,
-            "contentAlignment": "center"
-          }
-        },
-        {
-          "id": "re-b4-s2",
-          "type": "spacer",
-          "data": {},
-          "style": {"padding": {"top": 0, "right": 0, "bottom": 0, "left": 0}, "height": 8, "backgroundColor": null}
-        },
-        {
-          "id": "re-b4-c3",
-          "type": "card",
-          "data": {
-            "showIcon": false, "iconMode": "emoji", "iconEmoji": "✨", "iconImageSrc": "", "iconImageAlt": "",
-            "showBadge": false, "badgeText": "",
-            "heading": "Vinyasa Rhythm",
-            "body": "A fast-paced flow synchronized to melodic beats.",
-            "showButton": false, "buttonText": "", "buttonUrl": ""
-          },
-          "style": {
-            "padding": {"top": 16, "right": 20, "bottom": 16, "left": 20},
-            "backgroundColor": "#f2f4f2",
-            "borderRadius": 12, "borderWidth": 0, "borderColor": "#e2e8f0", "borderStyle": "none",
-            "iconSize": 48, "iconBackgroundColor": "#eef2ff", "iconBorderRadius": 50,
-            "badgeBackgroundColor": "#eef2ff", "badgeTextColor": "#4338ca",
-            "headingColor": "#2e3432", "headingFontSize": 18, "headingFontFamily": "'Noto Serif', Georgia, serif", "headingFontWeight": 700,
-            "bodyColor": "#635f57", "bodyFontSize": 13, "bodyFontFamily": "Arial, Helvetica, sans-serif",
-            "buttonBackgroundColor": "#4f46e5", "buttonTextColor": "#ffffff", "buttonBorderRadius": 6,
-            "buttonFontSize": 14, "buttonFontFamily": "Arial, Helvetica, sans-serif", "buttonFontWeight": 600,
-            "buttonPaddingX": 20, "buttonPaddingY": 10, "buttonFullWidth": false,
-            "buttonBorderStyle": "solid", "buttonBorderColor": "#4f46e5", "buttonBorderWidth": 0,
-            "contentAlignment": "left"
+            "height": 8
           }
         },
         {
           "id": "re-b5",
-          "type": "text",
+          "type": "columns",
           "data": {
-            "html": "<h3 style=\"margin:0 0 8px;font-family:'Noto Serif',Georgia,serif;font-size:24px;font-style:italic;color:#e2fff9;text-align:center;\">Exclusive offer: A free class on us.</h3><p style=\"margin:0 0 20px;font-size:14px;color:#e2fff9cc;text-align:center;\">We believe your practice is waiting for you. Use this gift to reconnect with your center today.</p><p style=\"margin:0;text-align:center;\"><a href=\"#\" style=\"display:inline-block;padding:14px 32px;background:#ffffff;color:#406660;font-weight:700;font-size:14px;text-decoration:none;border-radius:50px;\">Claim Your Free Class</a></p><p style=\"margin:16px 0 0;text-align:center;font-size:10px;color:#e2fff980;text-transform:uppercase;letter-spacing:2px;\">Valid for 14 days • Single class credit</p>",
-            "variables": []
+            "columnCount": 3,
+            "columnRatio": [34, 33, 33],
+            "columns": [
+              {
+                "id": "re-b5-c1",
+                "blocks": [
+                  {
+                    "id": "re-b5-c1-card",
+                    "type": "card",
+                    "data": {
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "🌊",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "showBadge": true,
+                      "badgeText": "NEW",
+                      "heading": "New Flow Classes",
+                      "body": "Dynamic sequences that move like water. Energize your mornings.",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": ""
+                    },
+                    "style": {
+                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "backgroundColor": "#e8f5f0",
+                      "borderRadius": 12,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "none",
+                      "iconSize": 36,
+                      "iconBackgroundColor": "#ffffff",
+                      "iconBorderRadius": 50,
+                      "badgeBackgroundColor": "#5ee8c5",
+                      "badgeTextColor": "#0a1a16",
+                      "headingColor": "#2e3432",
+                      "headingFontSize": 16,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "headingFontWeight": 700,
+                      "bodyColor": "#5a605e",
+                      "bodyFontSize": 13,
+                      "bodyFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonBackgroundColor": "#5ee8c5",
+                      "buttonTextColor": "#0a1a16",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonFontWeight": 700,
+                      "buttonPaddingX": 20,
+                      "buttonPaddingY": 10,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "none",
+                      "buttonBorderColor": "#5ee8c5",
+                      "buttonBorderWidth": 0,
+                      "contentAlignment": "center"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "re-b5-c2",
+                "blocks": [
+                  {
+                    "id": "re-b5-c2-card",
+                    "type": "card",
+                    "data": {
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "🕯️",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "showBadge": true,
+                      "badgeText": "NEW",
+                      "heading": "Sound Healing",
+                      "body": "Weekly sessions combining meditation with healing frequencies.",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": ""
+                    },
+                    "style": {
+                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "backgroundColor": "#e8f5f0",
+                      "borderRadius": 12,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "none",
+                      "iconSize": 36,
+                      "iconBackgroundColor": "#ffffff",
+                      "iconBorderRadius": 50,
+                      "badgeBackgroundColor": "#5ee8c5",
+                      "badgeTextColor": "#0a1a16",
+                      "headingColor": "#2e3432",
+                      "headingFontSize": 16,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "headingFontWeight": 700,
+                      "bodyColor": "#5a605e",
+                      "bodyFontSize": 13,
+                      "bodyFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonBackgroundColor": "#5ee8c5",
+                      "buttonTextColor": "#0a1a16",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonFontWeight": 700,
+                      "buttonPaddingX": 20,
+                      "buttonPaddingY": 10,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "none",
+                      "buttonBorderColor": "#5ee8c5",
+                      "buttonBorderWidth": 0,
+                      "contentAlignment": "center"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "re-b5-c3",
+                "blocks": [
+                  {
+                    "id": "re-b5-c3-card",
+                    "type": "card",
+                    "data": {
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "🌙",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "showBadge": true,
+                      "badgeText": "POPULAR",
+                      "heading": "Evening Yin",
+                      "body": "Wind down with deep stretches and guided relaxation.",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": ""
+                    },
+                    "style": {
+                      "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
+                      "backgroundColor": "#e8f5f0",
+                      "borderRadius": 12,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "none",
+                      "iconSize": 36,
+                      "iconBackgroundColor": "#ffffff",
+                      "iconBorderRadius": 50,
+                      "badgeBackgroundColor": "#5ee8c5",
+                      "badgeTextColor": "#0a1a16",
+                      "headingColor": "#2e3432",
+                      "headingFontSize": 16,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "headingFontWeight": 700,
+                      "bodyColor": "#5a605e",
+                      "bodyFontSize": 13,
+                      "bodyFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonBackgroundColor": "#5ee8c5",
+                      "buttonTextColor": "#0a1a16",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonFontWeight": 700,
+                      "buttonPaddingX": 20,
+                      "buttonPaddingY": 10,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "none",
+                      "buttonBorderColor": "#5ee8c5",
+                      "buttonBorderWidth": 0,
+                      "contentAlignment": "center"
+                    }
+                  }
+                ]
+              }
+            ]
           },
           "style": {
             "padding": {
-              "top": 32,
-              "right": 32,
-              "bottom": 32,
-              "left": 32
+              "top": 0,
+              "right": 16,
+              "bottom": 0,
+              "left": 16
             },
-            "alignment": "center",
-            "backgroundGradient": "linear-gradient(145deg, #406660 0%, #345a54 100%)"
+            "gap": 12,
+            "stackOnMobile": true
           }
         },
         {
@@ -220,19 +314,80 @@
         },
         {
           "id": "re-b7",
+          "type": "card",
+          "data": {
+            "showIcon": false,
+            "iconMode": "emoji",
+            "iconEmoji": "",
+            "iconImageSrc": "",
+            "iconImageAlt": "",
+            "showBadge": true,
+            "badgeText": "GIFT",
+            "heading": "Welcome Back Gift",
+            "body": "Your first class back is on us. No expiration, no pressure.",
+            "showButton": true,
+            "buttonText": "Book Free Class →",
+            "buttonUrl": "https://"
+          },
+          "style": {
+            "padding": { "top": 32, "right": 24, "bottom": 32, "left": 24 },
+            "backgroundColor": "#132e27",
+            "borderRadius": 12,
+            "borderWidth": 0,
+            "borderColor": "#5ee8c5",
+            "borderStyle": "none",
+            "iconSize": 48,
+            "iconBackgroundColor": "#132e27",
+            "iconBorderRadius": 50,
+            "badgeBackgroundColor": "#5ee8c5",
+            "badgeTextColor": "#0a1a16",
+            "headingColor": "#e8f5f0",
+            "headingFontSize": 22,
+            "headingFontFamily": "'Noto Serif', Georgia, serif",
+            "headingFontWeight": 700,
+            "bodyColor": "#7a9e93",
+            "bodyFontSize": 14,
+            "bodyFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "buttonBackgroundColor": "#5ee8c5",
+            "buttonTextColor": "#0a1a16",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 13,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "buttonFontWeight": 700,
+            "buttonPaddingX": 24,
+            "buttonPaddingY": 12,
+            "buttonFullWidth": false,
+            "buttonBorderStyle": "none",
+            "buttonBorderColor": "#5ee8c5",
+            "buttonBorderWidth": 0,
+            "contentAlignment": "center"
+          }
+        },
+        {
+          "id": "re-b8",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
+          }
+        },
+        {
+          "id": "re-b9",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:20px;font-style:italic;color:#57534b;line-height:1.5;\">\"Yoga is not about touching your toes, it's about what you learn on the way down.\"</p>",
+            "html": "<p style=\"margin:0 0 12px;text-align:center;font-family:'Noto Serif',Georgia,serif;font-size:16px;font-style:italic;color:#7a9e93;line-height:1.6;\">&ldquo;You can&rsquo;t stop the waves, but you can learn to surf.&rdquo;</p><p style=\"margin:0;text-align:center;font-family:'Plus Jakarta Sans',Arial,sans-serif;font-size:13px;color:#7a9e93;letter-spacing:1px;\">— Jon Kabat-Zinn</p>",
             "variables": []
           },
           "style": {
             "padding": {
-              "top": 8,
-              "right": 40,
+              "top": 32,
+              "right": 32,
               "bottom": 32,
-              "left": 40
+              "left": 32
             },
-            "alignment": "center"
+            "alignment": "center",
+            "backgroundColor": "#132e27",
+            "borderRadius": 12
           }
         }
       ]
@@ -240,57 +395,53 @@
     "footer": {
       "blocks": [
         {
+          "id": "re-f0",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 0,
+              "left": 32
+            },
+            "color": "#5ee8c5",
+            "thickness": 2,
+            "width": 100
+          }
+        },
+        {
           "id": "re-f1",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#635f57;\"><a href=\"#\" style=\"color:#635f57;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#635f57;\">Privacy Policy</a></p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#7a9e93;\"><a href=\"#\" style=\"color:#7a9e93;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#7a9e93;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#7a9e93;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#7a9e93;text-decoration:underline;\">Unsubscribe</a></p>",
             "variables": []
           },
           "style": {
             "padding": {
-              "top": 24,
+              "top": 20,
               "right": 32,
               "bottom": 8,
               "left": 32
             },
-            "alignment": "center",
-            "backgroundColor": "#f2f4f2"
+            "alignment": "center"
           }
         },
         {
           "id": "re-f2",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#5a605e;\">© 2024 The Breathable Canvas. All rights reserved.</p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7a9e93;\">© 2025 Zenith Wellness. All rights reserved.</p>",
             "variables": []
           },
           "style": {
             "padding": {
-              "top": 4,
-              "right": 32,
-              "bottom": 8,
-              "left": 32
-            },
-            "alignment": "center",
-            "backgroundColor": "#f2f4f2"
-          }
-        },
-        {
-          "id": "re-f3",
-          "type": "text",
-          "data": {
-            "html": "<p style=\"margin:0;text-align:center;\"><a href=\"#\" style=\"font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#635f57;\">Unsubscribe</a></p>",
-            "variables": []
-          },
-          "style": {
-            "padding": {
-              "top": 4,
+              "top": 8,
               "right": 32,
               "bottom": 24,
               "left": 32
             },
-            "alignment": "center",
-            "backgroundColor": "#f2f4f2"
+            "alignment": "center"
           }
         }
       ]
