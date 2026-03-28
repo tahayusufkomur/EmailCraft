@@ -4,7 +4,7 @@
   "template": {
     "version": 1,
     "settings": {
-      "backgroundColor": "#fef5f0",
+      "backgroundColor": "#1c1008",
       "backgroundStyle": "none",
       "bodyBackgroundStyle": "solid",
       "bodyBackgroundColor": "#fef5f0",
@@ -31,10 +31,10 @@
               "left": 32
             },
             "alignment": "center",
-            "color": "#8c4a00",
-            "fontSize": 18,
+            "color": "#e8913a",
+            "fontSize": 10,
             "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "fontWeight": 800,
+            "fontWeight": 600,
             "letterSpacing": 3,
             "textTransform": "uppercase"
           }
@@ -48,24 +48,25 @@
           "type": "hero",
           "data": {
             "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuDJ-pgF3dvI1797eAXq1yhR3_17P2bGOauQvVKKWlP9i6tGUbMlDKgijEBS5eo3Wup9dTR_AByckZ_h47Jxm89JPc1E44KRZEkQ3P--xbyHKY87I7JhGJWlApjMD9owBHlx7bfDSnC6u72iEubNEZE4oyNewhGi2kNCUvpNqhYSnKh-44zF8hYg8D-kMmiHz7Mai_8nR1WqSjs8Z6aMinVqS_UvHEBgdlMA3ZTKdobOToxe-7TaCIno67Gr66bxLdh6bEXi2eK6E3uT",
-            "heading": "Awaken Your Inner Glow",
-            "subheading": "Embrace the rhythm of the sunrise with our exclusive seasonal membership event.",
-            "buttonText": "Claim Offer",
+            "heading": "20% Off All Memberships",
+            "subheading": "Your practice shouldn't wait. Neither should this offer.",
+            "buttonText": "Claim Your Discount →",
             "buttonUrl": "https://"
           },
           "style": {
-            "height": 420,
-            "overlayColor": "#000000",
-            "overlayOpacity": 0.35,
+            "height": 360,
+            "overlayColor": "#1c1008",
+            "overlayOpacity": 0.5,
             "headingColor": "#ffffff",
-            "headingFontSize": 34,
+            "headingFontSize": 36,
+            "headingFontWeight": 800,
             "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-            "subheadingColor": "#ffffffcc",
-            "buttonBackgroundColor": "#fd8b00",
-            "buttonTextColor": "#ffffff",
+            "subheadingColor": "#fef5f0cc",
+            "buttonBackgroundColor": "#e8913a",
+            "buttonTextColor": "#1c1008",
             "buttonBorderRadius": 999,
-            "contentAlignment": "left",
-            "verticalAlignment": "bottom",
+            "contentAlignment": "center",
+            "verticalAlignment": "center",
             "padding": {
               "top": 0,
               "right": 0,
@@ -79,154 +80,47 @@
           "type": "spacer",
           "data": {},
           "style": {
-            "height": 16
+            "height": 24
           }
         },
         {
           "id": "sun-p-b3",
-          "type": "columns",
-          "style": {
-            "gap": 16,
-            "stackOnMobile": true,
-            "padding": {
-              "top": 0,
-              "right": 24,
-              "bottom": 16,
-              "left": 24
-            }
-          },
-          "data": {
-            "columnCount": 2,
-            "columnRatio": [
-              50,
-              50
-            ],
-            "columns": [
-              {
-                "id": "sun-p-c1",
-                "backgroundColor": "#ffd709",
-                "blocks": [
-                  {
-                    "id": "sun-p-c1-label",
-                    "type": "heading",
-                    "data": {
-                      "text": "OFFER DETAILS",
-                      "level": 4
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 20,
-                        "right": 20,
-                        "bottom": 4,
-                        "left": 20
-                      },
-                      "alignment": "center",
-                      "color": "#5b4b00",
-                      "fontSize": 11,
-                      "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-                      "fontWeight": 700,
-                      "letterSpacing": 3,
-                      "textTransform": "uppercase"
-                    }
-                  },
-                  {
-                    "id": "sun-p-c1-main",
-                    "type": "text",
-                    "data": {
-                      "html": "<div style=\"text-align:center;\"><span style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:56px;font-weight:800;color:#5b4b00;\">20</span><span style=\"font-size:28px;font-weight:700;color:#5b4b00;\">% OFF</span></div>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 20,
-                        "bottom": 8,
-                        "left": 20
-                      }
-                    }
-                  },
-                  {
-                    "id": "sun-p-c1-sub",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0;text-align:center;font-size:14px;color:#5b4b00;font-weight:600;\">All Monthly &amp; Yearly Memberships</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 20,
-                        "bottom": 20,
-                        "left": 20
-                      }
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "sun-p-c2",
-                "backgroundColor": "#f8efea",
-                "blocks": [
-                  {
-                    "id": "sun-p-c2-code",
-                    "type": "text",
-                    "data": {
-                      "html": "<p style=\"margin:0 0 12px;text-align:center;font-size:13px;color:#605a57;font-style:italic;\">Use code at checkout to redeem</p><div style=\"border:2px dashed #fd8b00;border-radius:999px;padding:10px 16px;text-align:center;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:800;font-size:20px;letter-spacing:3px;color:#8c4a00;\">SUNRISE20</div><p style=\"margin:12px 0 0;text-align:center;font-size:11px;color:#7c7672;\">Valid until the end of the month</p>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 20,
-                        "right": 20,
-                        "bottom": 20,
-                        "left": 20
-                      },
-                      "alignment": "center"
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "id": "sun-p-b4",
           "type": "card",
           "data": {
-            "showIcon": false,
+            "showIcon": true,
             "iconMode": "emoji",
-            "iconEmoji": "✨",
+            "iconEmoji": "🎫",
             "iconImageSrc": "",
             "iconImageAlt": "",
-            "showBadge": false,
-            "badgeText": "New",
-            "heading": "Ready to find your flow?",
-            "body": "Join our community of mindful practitioners and gain unlimited access to vinyasa, hatha, and meditation sessions.",
+            "showBadge": true,
+            "badgeText": "LIMITED TIME",
+            "heading": "SUNRISE20",
+            "body": "Use this code at checkout. Valid for all membership tiers.",
             "showButton": true,
-            "buttonText": "Claim Offer",
+            "buttonText": "Apply Code →",
             "buttonUrl": "https://"
           },
           "style": {
             "padding": { "top": 24, "right": 24, "bottom": 24, "left": 24 },
-            "backgroundColor": "#ffffff",
-            "borderRadius": 20,
+            "backgroundColor": "#2a1a0e",
+            "borderRadius": 16,
             "borderWidth": 0,
             "borderColor": "#e2e8f0",
             "borderStyle": "solid",
             "iconSize": 48,
-            "iconBackgroundColor": "#eef2ff",
+            "iconBackgroundColor": "#1c1008",
             "iconBorderRadius": 50,
-            "badgeBackgroundColor": "#eef2ff",
-            "badgeTextColor": "#4338ca",
-            "headingColor": "#322e2b",
-            "headingFontSize": 24,
+            "badgeBackgroundColor": "#e8913a",
+            "badgeTextColor": "#1c1008",
+            "headingColor": "#e8913a",
+            "headingFontSize": 32,
             "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
             "headingFontWeight": 800,
-            "bodyColor": "#605a57",
+            "bodyColor": "#c4a882",
             "bodyFontSize": 15,
             "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
-            "buttonBackgroundColor": "#8c4a00",
-            "buttonTextColor": "#fff0e7",
+            "buttonBackgroundColor": "#e8913a",
+            "buttonTextColor": "#1c1008",
             "buttonBorderRadius": 999,
             "buttonFontSize": 14,
             "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
@@ -235,9 +129,17 @@
             "buttonPaddingY": 12,
             "buttonFullWidth": false,
             "buttonBorderStyle": "solid",
-            "buttonBorderColor": "#8c4a00",
+            "buttonBorderColor": "#e8913a",
             "buttonBorderWidth": 0,
             "contentAlignment": "center"
+          }
+        },
+        {
+          "id": "sun-p-b4",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
           }
         },
         {
@@ -249,91 +151,230 @@
             "padding": {
               "top": 0,
               "right": 24,
-              "bottom": 16,
+              "bottom": 0,
               "left": 24
             }
           },
           "data": {
             "columnCount": 3,
-            "columnRatio": [
-              34,
-              33,
-              33
-            ],
+            "columnRatio": [34, 33, 33],
             "columns": [
+              {
+                "id": "sun-p-c1",
+                "blocks": [
+                  {
+                    "id": "sun-p-c1-card",
+                    "type": "card",
+                    "data": {
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "🧘",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "showBadge": false,
+                      "badgeText": "",
+                      "heading": "All Classes",
+                      "body": "Unlimited access to every class on the schedule",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "https://"
+                    },
+                    "style": {
+                      "padding": { "top": 20, "right": 16, "bottom": 20, "left": 16 },
+                      "backgroundColor": "#fef5f0",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "iconSize": 36,
+                      "iconBackgroundColor": "#ffffff",
+                      "iconBorderRadius": 50,
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "headingColor": "#322e2b",
+                      "headingFontSize": 16,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "headingFontWeight": 700,
+                      "bodyColor": "#605a57",
+                      "bodyFontSize": 13,
+                      "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "buttonBackgroundColor": "#e8913a",
+                      "buttonTextColor": "#1c1008",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonFontWeight": 700,
+                      "buttonPaddingX": 20,
+                      "buttonPaddingY": 10,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#e8913a",
+                      "buttonBorderWidth": 0,
+                      "contentAlignment": "center"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sun-p-c2",
+                "blocks": [
+                  {
+                    "id": "sun-p-c2-card",
+                    "type": "card",
+                    "data": {
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "⏰",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "showBadge": false,
+                      "badgeText": "",
+                      "heading": "Flexible Times",
+                      "body": "Morning, afternoon, and evening sessions",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "https://"
+                    },
+                    "style": {
+                      "padding": { "top": 20, "right": 16, "bottom": 20, "left": 16 },
+                      "backgroundColor": "#fef5f0",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "iconSize": 36,
+                      "iconBackgroundColor": "#ffffff",
+                      "iconBorderRadius": 50,
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "headingColor": "#322e2b",
+                      "headingFontSize": 16,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "headingFontWeight": 700,
+                      "bodyColor": "#605a57",
+                      "bodyFontSize": 13,
+                      "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "buttonBackgroundColor": "#e8913a",
+                      "buttonTextColor": "#1c1008",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonFontWeight": 700,
+                      "buttonPaddingX": 20,
+                      "buttonPaddingY": 10,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#e8913a",
+                      "buttonBorderWidth": 0,
+                      "contentAlignment": "center"
+                    }
+                  }
+                ]
+              },
               {
                 "id": "sun-p-c3",
                 "blocks": [
                   {
-                    "id": "sun-p-c3-t",
-                    "type": "text",
+                    "id": "sun-p-c3-card",
+                    "type": "card",
                     "data": {
-                      "html": "<div style=\"text-align:center;\"><div style=\"font-size:24px;\">🧘</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">Expert Guides</div><div style=\"font-size:12px;color:#605a57;\">World-class instructors for every level.</div></div>",
-                      "variables": []
+                      "showIcon": true,
+                      "iconMode": "emoji",
+                      "iconEmoji": "🤝",
+                      "iconImageSrc": "",
+                      "iconImageAlt": "",
+                      "showBadge": false,
+                      "badgeText": "",
+                      "heading": "Community",
+                      "body": "Join a supportive community of practitioners",
+                      "showButton": false,
+                      "buttonText": "",
+                      "buttonUrl": "https://"
                     },
                     "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 0,
-                        "left": 0
-                      },
-                      "alignment": "center"
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "sun-p-c4",
-                "blocks": [
-                  {
-                    "id": "sun-p-c4-t",
-                    "type": "text",
-                    "data": {
-                      "html": "<div style=\"text-align:center;\"><div style=\"font-size:24px;\">⏰</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">Flexible Access</div><div style=\"font-size:12px;color:#605a57;\">Live streaming and on-demand library.</div></div>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 0,
-                        "left": 0
-                      },
-                      "alignment": "center"
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "sun-p-c5",
-                "blocks": [
-                  {
-                    "id": "sun-p-c5-t",
-                    "type": "text",
-                    "data": {
-                      "html": "<div style=\"text-align:center;\"><div style=\"font-size:24px;\">🤝</div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;margin:6px 0;color:#322e2b;\">Community</div><div style=\"font-size:12px;color:#605a57;\">Connect with a global wellness family.</div></div>",
-                      "variables": []
-                    },
-                    "style": {
-                      "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 0,
-                        "left": 0
-                      },
-                      "alignment": "center"
+                      "padding": { "top": 20, "right": 16, "bottom": 20, "left": 16 },
+                      "backgroundColor": "#fef5f0",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "iconSize": 36,
+                      "iconBackgroundColor": "#ffffff",
+                      "iconBorderRadius": 50,
+                      "badgeBackgroundColor": "#e8913a",
+                      "badgeTextColor": "#1c1008",
+                      "headingColor": "#322e2b",
+                      "headingFontSize": 16,
+                      "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "headingFontWeight": 700,
+                      "bodyColor": "#605a57",
+                      "bodyFontSize": 13,
+                      "bodyFontFamily": "'Be Vietnam Pro', Arial, sans-serif",
+                      "buttonBackgroundColor": "#e8913a",
+                      "buttonTextColor": "#1c1008",
+                      "buttonBorderRadius": 999,
+                      "buttonFontSize": 13,
+                      "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "buttonFontWeight": 700,
+                      "buttonPaddingX": 20,
+                      "buttonPaddingY": 10,
+                      "buttonFullWidth": false,
+                      "buttonBorderStyle": "solid",
+                      "buttonBorderColor": "#e8913a",
+                      "buttonBorderWidth": 0,
+                      "contentAlignment": "center"
                     }
                   }
                 ]
               }
             ]
           }
+        },
+        {
+          "id": "sun-p-b6",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
+          }
+        },
+        {
+          "id": "sun-p-b7",
+          "type": "text",
+          "data": {
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#605a57;\">Offer expires March 31, 2025. New members only.</p>",
+            "variables": []
+          },
+          "style": {
+            "alignment": "center",
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            }
+          }
         }
       ]
     },
     "footer": {
       "blocks": [
+        {
+          "id": "sun-p-f0",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "borderColor": "#e8d5c4",
+            "borderWidth": 1,
+            "borderStyle": "solid",
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 0,
+              "left": 32
+            }
+          }
+        },
         {
           "id": "sun-p-f1",
           "type": "text",
@@ -343,7 +384,7 @@
           },
           "style": {
             "alignment": "center",
-            "backgroundColor": "#f8efea",
+            "backgroundColor": "#fef5f0",
             "padding": {
               "top": 20,
               "right": 32,
@@ -361,7 +402,7 @@
           },
           "style": {
             "alignment": "center",
-            "backgroundColor": "#f8efea",
+            "backgroundColor": "#fef5f0",
             "padding": {
               "top": 8,
               "right": 32,
