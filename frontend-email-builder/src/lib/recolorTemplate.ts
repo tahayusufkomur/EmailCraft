@@ -112,7 +112,8 @@ function recolorBlock(block: Block, palette: ColorPalette): Block {
       break;
 
     case 'card': {
-      const iconBgClass = classifyBackground(updated.style.iconBackgroundColor as string | null);
+      const cardStyle = updated.style as Record<string, unknown>;
+      const iconBgClass = classifyBackground(cardStyle.iconBackgroundColor as string | null);
       const newIconBg = iconBgClass === 'dark' ? palette.secondary : iconBgClass === 'neutral' ? palette.surface : palette.background;
       updated.style = {
         ...updated.style,
@@ -129,7 +130,8 @@ function recolorBlock(block: Block, palette: ColorPalette): Block {
     }
 
     case 'list': {
-      const listIconBgClass = classifyBackground(updated.style.iconBackgroundColor as string | null);
+      const listStyle = updated.style as Record<string, unknown>;
+      const listIconBgClass = classifyBackground(listStyle.iconBackgroundColor as string | null);
       const newListIconBg = listIconBgClass === 'dark' ? palette.secondary : listIconBgClass === 'neutral' ? palette.surface : palette.background;
       updated.style = {
         ...updated.style,
