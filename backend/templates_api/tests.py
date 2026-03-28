@@ -390,3 +390,76 @@ class TestSyncGalleryToOrgs(TestCase):
 
         copy.refresh_from_db()
         self.assertEqual(copy.json_data, {'version': 1, 'body': 'custom'})
+
+
+from rest_framework.test import APIClient
+from core.models import ApiKey
+
+
+class TestTemplateViewSetLocking(TestCase):
+    def setUp(self):
+        self.free_plan, _ = Plan.objects.get_or_create(
+            slug='free', defaults={'name': 'Free', 'monthly_price_usd': 0, 'is_default': True, 'sort_order': 0},
+        )
+        self.user = User.objects.create_user(username='apiuser', password='pass')
+        self.org = Organization.objects.create(name='API Org', email='api@example.com')
+        UserOrganization.objects.create(user=self.user, organization=self.org, role='owner')
+        Account.objects.create(user=self.user, plan=self.free_plan)
+
+        raw_key = ApiKey.generate_key('test')
+        self.api_key = ApiKey.objects.create(
+            org=self.org,
+            key_hash=ApiKey.hash_key(raw_key),
+            key_prefix=raw_key[:12],
+            environment='test',
+        )
+        self.raw_key = raw_key
+        self.client = APIClient()
+
+    def _auth_headers(self):
+        return {'HTTP_X_API_KEY': self.raw_key}
+
+    def test_update_locked_template_returns_403(self):
+        template = Template.objects.create(
+            org=self.org, name='Locked', json_data={'version': 1},
+            is_locked=True, source_template=None,
+        )
+        response = self.client.put(
+            f'/api/v1/templates/{template.id}/',
+            {'name': 'Updated', 'json_data': {'version': 2}},
+            format='json',
+            **self._auth_headers(),
+        )
+        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.data['error']['code'], 'TEMPLATE_LOCKED')
+
+    def test_update_sets_is_modified(self):
+        gallery = Template.objects.create(
+            org=None, name='Gallery', json_data={'version': 1}, is_gallery=True,
+        )
+        template = Template.objects.create(
+            org=self.org, name='Copy', json_data={'version': 1},
+            source_template=gallery, is_modified=False,
+        )
+        response = self.client.put(
+            f'/api/v1/templates/{template.id}/',
+            {'name': 'Copy', 'json_data': {'version': 2}},
+            format='json',
+            **self._auth_headers(),
+        )
+        self.assertEqual(response.status_code, 200)
+        template.refresh_from_db()
+        self.assertTrue(template.is_modified)
+
+    def test_list_returns_only_org_templates(self):
+        Template.objects.create(
+            org=self.org, name='My Template', json_data={'version': 1},
+        )
+        Template.objects.create(
+            org=None, name='Gallery', json_data={'version': 1}, is_gallery=True,
+        )
+        response = self.client.get('/api/v1/templates/', **self._auth_headers())
+        self.assertEqual(response.status_code, 200)
+        names = [t['name'] for t in response.data['results']]
+        self.assertIn('My Template', names)
+        self.assertNotIn('Gallery', names)

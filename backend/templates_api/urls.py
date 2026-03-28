@@ -4,7 +4,6 @@ from rest_framework.routers import DefaultRouter
 from templates_api.views import (
     TemplateViewSet,
     export_html,
-    gallery_list,
     media_list,
     presign_upload,
     render_template,
@@ -16,7 +15,6 @@ router.register('templates', TemplateViewSet, basename='template')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('gallery', gallery_list, name='gallery-list'),
     path('media', media_list, name='media-list'),
     path('upload/presign', presign_upload, name='upload-presign'),
     path('templates/<uuid:template_id>/preview', template_preview, name='template-preview'),

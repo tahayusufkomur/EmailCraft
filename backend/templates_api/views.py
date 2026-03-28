@@ -1,3 +1,4 @@
+import re
 import secrets
 
 import boto3
@@ -11,7 +12,6 @@ from core.models import account_for_org
 from templates_api.models import Template, UploadedImage
 from templates_api.serializers import (
     ExportRequestSerializer,
-    GalleryTemplateSerializer,
     PresignRequestSerializer,
     RenderRequestSerializer,
     TemplateCreateSerializer,
@@ -37,29 +37,22 @@ class TemplateViewSet(viewsets.ModelViewSet):
         return TemplateDetailSerializer
 
     def get_queryset(self):
-        if self.action in ('list', 'retrieve'):
-            return Template.objects.visible_to_org(self.request.org)
         return Template.objects.for_org(self.request.org)
 
     def perform_create(self, serializer):
         serializer.save(org=self.request.org, is_gallery=False)
 
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.is_locked:
+            return Response(
+                {'error': {'code': 'TEMPLATE_LOCKED', 'message': 'This template is locked. Upgrade your plan to edit it.'}},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+        return super().update(request, *args, **kwargs)
+
     def perform_update(self, serializer):
-        serializer.save(org=self.request.org, is_gallery=False)
-
-
-@api_view(['GET'])
-def gallery_list(request):
-    """GET /api/v1/gallery — list prebuilt gallery templates."""
-    queryset = Template.objects.shared()
-
-    category = request.query_params.get('category')
-    if category:
-        queryset = queryset.filter(category=category)
-
-    serializer = GalleryTemplateSerializer(queryset, many=True)
-    return Response({'data': serializer.data})
-
+        serializer.save(org=self.request.org, is_gallery=False, is_modified=True)
 
 
 @api_view(['GET'])
@@ -275,7 +268,7 @@ def template_preview(request, template_id):
     Does not count against render quota.
     """
     org = request.org
-    template = Template.objects.visible_to_org(org).filter(pk=template_id).first()
+    template = Template.objects.for_org(org).filter(pk=template_id).first()
     if not template:
         return Response(
             {'error': {'code': 'TEMPLATE_NOT_FOUND', 'message': 'Template not found.'}},
