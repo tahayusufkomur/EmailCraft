@@ -461,12 +461,19 @@ class SiteOrganizationsApiTests(TestCase):
             json_data=template_json,
             category='welcome',
         )
-        shared_template = Template.objects.create(
+        gallery_base = Template.objects.create(
             org=None,
-            name='Provided Template',
+            name='Gallery Base Template',
             json_data=template_json,
             category='newsletter',
             is_gallery=True,
+        )
+        shared_template = Template.objects.create(
+            org=self.billing_org,
+            name='Provided Template',
+            json_data=template_json,
+            category='newsletter',
+            source_template=gallery_base,
         )
         other_org = Organization.objects.create(
             name='Other Org',
@@ -510,10 +517,10 @@ class SiteOrganizationsApiTests(TestCase):
             format='json',
             HTTP_X_API_KEY=raw_key,
         )
-        self.assertEqual(update_shared.status_code, 404)
+        self.assertEqual(update_shared.status_code, 200)
 
         delete_shared = self.client.delete(f'/api/v1/templates/{shared_template.id}/', HTTP_X_API_KEY=raw_key)
-        self.assertEqual(delete_shared.status_code, 404)
+        self.assertEqual(delete_shared.status_code, 204)
 
     def test_site_templates_include_provided_templates_as_read_only(self):
         template_json = {
@@ -529,12 +536,20 @@ class SiteOrganizationsApiTests(TestCase):
             json_data=template_json,
             category='welcome',
         )
+        gallery_base = Template.objects.create(
+            org=None,
+            name='Gallery Base Template',
+            json_data=template_json,
+            category='newsletter',
+            is_gallery=True,
+        )
         shared_template = Template.objects.create(
             org=None,
             name='Site Shared Template',
             json_data=template_json,
             category='newsletter',
             is_gallery=True,
+            source_template=gallery_base,
         )
         other_org = Organization.objects.create(
             name='Other Site Org',

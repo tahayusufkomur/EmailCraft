@@ -21,13 +21,15 @@ class TemplateListSerializer(serializers.ModelSerializer):
             'is_premium',
             'tags',
             'template_type',
+            'is_locked',
+            'source_template',
             'created_at',
             'updated_at',
         ]
         read_only_fields = ['id', 'created_at', 'updated_at']
 
     def get_template_type(self, obj):
-        return 'provided' if obj.org_id is None and obj.is_gallery else 'user'
+        return 'provided' if obj.source_template_id is not None else 'user'
 
 
 class TemplateDetailSerializer(serializers.ModelSerializer):
@@ -36,11 +38,12 @@ class TemplateDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Template
         fields = ['id', 'name', 'json_data', 'thumbnail_url', 'category',
-                  'is_draft', 'is_premium', 'tags', 'template_type', 'created_at', 'updated_at']
+                  'is_draft', 'is_premium', 'tags', 'template_type', 'is_locked',
+                  'source_template', 'created_at', 'updated_at']
         read_only_fields = ['id', 'created_at', 'updated_at']
 
     def get_template_type(self, obj):
-        return 'provided' if obj.org_id is None and obj.is_gallery else 'user'
+        return 'provided' if obj.source_template_id is not None else 'user'
 
     def validate_json_data(self, value):
         size = sys.getsizeof(json.dumps(value))
