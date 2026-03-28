@@ -68,17 +68,6 @@ class TemplateCreateSerializer(serializers.ModelSerializer):
         return value
 
 
-class GalleryTemplateSerializer(serializers.ModelSerializer):
-    template_type = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Template
-        fields = ['id', 'name', 'category', 'thumbnail_url', 'json_data', 'is_premium', 'tags', 'template_type']
-
-    def get_template_type(self, _obj):
-        return 'provided'
-
-
 class PresignRequestSerializer(serializers.Serializer):
     filename = serializers.CharField(max_length=255)
     content_type = serializers.CharField(max_length=50)
