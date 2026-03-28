@@ -299,17 +299,43 @@
                 "blocks": [
                   {
                     "id": "sun-w-c3-card",
-                    "type": "html",
+                    "type": "profile",
                     "data": {
-                      "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#ffffff;border-radius:16px;padding:16px;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td width=\"72\" valign=\"top\" style=\"padding-right:12px;\"><img src=\"https://lh3.googleusercontent.com/aida-public/AB6AXuAEPNUjp-5hQ1cRO4fvH0RWj02UcCG_dxomMHYfXiEbjbBz4uyLoiZ2E9EkcPbSIRqEXNRRFEsuoMgbozRi4x-lzRRRPgyt7sFvCpaYa3kD4fXLoSKm39tyy-BDDX6-1Pdwm8NTyLGUjtXPJTl1Cwf4h_YASTpYg5uiuCgTqoDZm_RwLD9AkZQnGqxPJ_fobMp-MXc6_b_ua5mGZzp6Ghr0u8jC66zMvOskBrGQi4UCBygMcSlAMzzu45SGeloEVG_PloLieHxAx4DX\" alt=\"Instructor Elena\" width=\"72\" height=\"72\" style=\"display:block;border-radius:999px;\"/></td><td valign=\"top\"><div style=\"margin-bottom:6px;\"><span style=\"display:inline-block;padding:6px 12px;border-radius:999px;background:#efe7ff;color:#6a43b7;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-family:'Plus Jakarta Sans', Arial, sans-serif;\">Vinyasa</span></div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:16px;color:#322e2b;margin-bottom:4px;\">Elena Rivers</div><div style=\"font-size:13px;color:#605a57;line-height:1.5;\">Specializing in fluid movements that synchronize with your natural rhythm.</div></td></tr></table></td></tr></table>"
+                      "imageSrc": "https://lh3.googleusercontent.com/aida-public/AB6AXuAEPNUjp-5hQ1cRO4fvH0RWj02UcCG_dxomMHYfXiEbjbBz4uyLoiZ2E9EkcPbSIRqEXNRRFEsuoMgbozRi4x-lzRRRPgyt7sFvCpaYa3kD4fXLoSKm39tyy-BDDX6-1Pdwm8NTyLGUjtXPJTl1Cwf4h_YASTpYg5uiuCgTqoDZm_RwLD9AkZQnGqxPJ_fobMp-MXc6_b_ua5mGZzp6Ghr0u8jC66zMvOskBrGQi4UCBygMcSlAMzzu45SGeloEVG_PloLieHxAx4DX",
+                      "imageAlt": "Instructor Elena",
+                      "name": "Elena Rivers",
+                      "role": "Vinyasa",
+                      "bio": "Specializing in fluid movements that synchronize with your natural rhythm.",
+                      "showBadge": true,
+                      "badgeText": "Vinyasa"
                     },
                     "style": {
                       "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 0,
-                        "left": 0
-                      }
+                        "top": 16,
+                        "right": 16,
+                        "bottom": 16,
+                        "left": 16
+                      },
+                      "backgroundColor": "#ffffff",
+                      "imageSize": 72,
+                      "imageBorderRadius": 50,
+                      "imagePosition": "left",
+                      "nameColor": "#322e2b",
+                      "nameFontSize": 16,
+                      "nameFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "nameFontWeight": 700,
+                      "roleColor": "#6a43b7",
+                      "roleFontSize": 11,
+                      "bioColor": "#605a57",
+                      "bioFontSize": 13,
+                      "bioFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "badgeBackgroundColor": "#efe7ff",
+                      "badgeTextColor": "#6a43b7",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "contentAlignment": "left"
                     }
                   }
                 ]
@@ -319,17 +345,43 @@
                 "blocks": [
                   {
                     "id": "sun-w-c4-card",
-                    "type": "html",
+                    "type": "profile",
                     "data": {
-                      "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#ffffff;border-radius:16px;padding:16px;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td width=\"72\" valign=\"top\" style=\"padding-right:12px;\"><img src=\"https://lh3.googleusercontent.com/aida-public/AB6AXuAQY34ZAiflwlKmTWVe3C66qc09j3JWThz00Wk0VD-3EVTgSC2K3xqBjkN-4WcQWicIasr4e5z1ixq0yASMGfA9EUKuTjrB2CZdSVLJt5IY0YbtRBJO-3gCoUxWQKiSSb4qNwd6OtbuHmxVPGEhn3upOZXs2I21jzHG-o345xa6B7ytvqcYNnBgozh_QZc-50eanAlzZZ2Jnz8jcTbQRS9uBdIkHlw-mbq1x2Vm-iMaPeJO9qOS1F8j5kV_-cwr3q2Xy8inhN0JeJAu\" alt=\"Instructor Marcus\" width=\"72\" height=\"72\" style=\"display:block;border-radius:999px;\"/></td><td valign=\"top\"><div style=\"margin-bottom:6px;\"><span style=\"display:inline-block;padding:6px 12px;border-radius:999px;background:#ffe9cc;color:#8c4a00;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-family:'Plus Jakarta Sans', Arial, sans-serif;\">Ashtanga</span></div><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:16px;color:#322e2b;margin-bottom:4px;\">Marcus Thorne</div><div style=\"font-size:13px;color:#605a57;line-height:1.5;\">Focusing on strength, alignment, and the power of controlled breath.</div></td></tr></table></td></tr></table>"
+                      "imageSrc": "https://lh3.googleusercontent.com/aida-public/AB6AXuAQY34ZAiflwlKmTWVe3C66qc09j3JWThz00Wk0VD-3EVTgSC2K3xqBjkN-4WcQWicIasr4e5z1ixq0yASMGfA9EUKuTjrB2CZdSVLJt5IY0YbtRBJO-3gCoUxWQKiSSb4qNwd6OtbuHmxVPGEhn3upOZXs2I21jzHG-o345xa6B7ytvqcYNnBgozh_QZc-50eanAlzZZ2Jnz8jcTbQRS9uBdIkHlw-mbq1x2Vm-iMaPeJO9qOS1F8j5kV_-cwr3q2Xy8inhN0JeJAu",
+                      "imageAlt": "Instructor Marcus",
+                      "name": "Marcus Thorne",
+                      "role": "Ashtanga",
+                      "bio": "Focusing on strength, alignment, and the power of controlled breath.",
+                      "showBadge": true,
+                      "badgeText": "Ashtanga"
                     },
                     "style": {
                       "padding": {
-                        "top": 0,
-                        "right": 0,
-                        "bottom": 0,
-                        "left": 0
-                      }
+                        "top": 16,
+                        "right": 16,
+                        "bottom": 16,
+                        "left": 16
+                      },
+                      "backgroundColor": "#ffffff",
+                      "imageSize": 72,
+                      "imageBorderRadius": 50,
+                      "imagePosition": "left",
+                      "nameColor": "#322e2b",
+                      "nameFontSize": 16,
+                      "nameFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "nameFontWeight": 700,
+                      "roleColor": "#8c4a00",
+                      "roleFontSize": 11,
+                      "bioColor": "#605a57",
+                      "bioFontSize": 13,
+                      "bioFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+                      "badgeBackgroundColor": "#ffe9cc",
+                      "badgeTextColor": "#8c4a00",
+                      "borderRadius": 16,
+                      "borderWidth": 0,
+                      "borderColor": "#e2e8f0",
+                      "borderStyle": "solid",
+                      "contentAlignment": "left"
                     }
                   }
                 ]

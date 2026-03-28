@@ -197,17 +197,75 @@
         },
         {
           "id": "sun-e2-b4",
-          "type": "html",
+          "type": "profile",
           "data": {
-            "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#f8efea;border-radius:20px;padding:20px;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td width=\"80\" valign=\"top\" style=\"padding-right:16px;\"><img src=\"https://lh3.googleusercontent.com/aida-public/AB6AXuBiDK-xYpj5m76BU-E9XbHhyjJawLzxWq3JUiy3xy6J3OylRzieiDMXcBevQzFt_rk23U9i-s_0JKl2icQyDXsYUxOpop3PpfYOzvAdxLR3v8ExHQSDidegYgLSPH1HwVfCL7rn4uKQLWKwSRKsl1Gj13QZwu47l8akAX9waWrPEIW0k_96UmMncpoZilf-TbU3FIYhw-jZsTkD5gYRPXSXI0LV9gTtwKhzCSbP4abIl7ZWjVHP3dy3rKLovzMCdFoKBZoz62VyGkKb\" alt=\"Guest Instructor\" width=\"80\" height=\"80\" style=\"display:block;border-radius:999px;\"/></td><td valign=\"top\"><div style=\"font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;font-size:18px;color:#322e2b;\">Elena Rivers</div><div style=\"font-size:13px;color:#605a57;margin-top:4px;\">Guest facilitator • Breathwork &amp; meditation</div><div style=\"margin-top:10px;\"><a href=\"https://\" style=\"display:inline-block;background:#8c4a00;color:#fff0e7;padding:10px 20px;border-radius:999px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;text-decoration:none;font-size:13px;\">Reserve Seat</a></div></td></tr></table></td></tr></table>"
+            "imageSrc": "https://lh3.googleusercontent.com/aida-public/AB6AXuBiDK-xYpj5m76BU-E9XbHhyjJawLzxWq3JUiy3xy6J3OylRzieiDMXcBevQzFt_rk23U9i-s_0JKl2icQyDXsYUxOpop3PpfYOzvAdxLR3v8ExHQSDidegYgLSPH1HwVfCL7rn4uKQLWKwSRKsl1Gj13QZwu47l8akAX9waWrPEIW0k_96UmMncpoZilf-TbU3FIYhw-jZsTkD5gYRPXSXI0LV9gTtwKhzCSbP4abIl7ZWjVHP3dy3rKLovzMCdFoKBZoz62VyGkKb",
+            "imageAlt": "Guest Instructor",
+            "name": "Elena Rivers",
+            "role": "Guest facilitator",
+            "bio": "Breathwork & meditation",
+            "showBadge": false,
+            "badgeText": ""
           },
           "style": {
+            "padding": {
+              "top": 20,
+              "right": 20,
+              "bottom": 20,
+              "left": 20
+            },
+            "backgroundColor": "#f8efea",
+            "imageSize": 80,
+            "imageBorderRadius": 50,
+            "imagePosition": "left",
+            "nameColor": "#322e2b",
+            "nameFontSize": 18,
+            "nameFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "nameFontWeight": 700,
+            "roleColor": "#605a57",
+            "roleFontSize": 13,
+            "bioColor": "#605a57",
+            "bioFontSize": 13,
+            "bioFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "badgeBackgroundColor": "#eef2ff",
+            "badgeTextColor": "#4338ca",
+            "borderRadius": 20,
+            "borderWidth": 0,
+            "borderColor": "#e2e8f0",
+            "borderStyle": "solid",
+            "contentAlignment": "left",
+            "outerPadding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 0,
+              "left": 32
+            }
+          }
+        },
+        {
+          "id": "sun-e2-b4-cta",
+          "type": "button",
+          "data": {
+            "text": "Reserve Seat",
+            "url": "https://"
+          },
+          "style": {
+            "alignment": "left",
+            "backgroundColor": "#8c4a00",
+            "color": "#fff0e7",
+            "borderRadius": 999,
+            "fontSize": 13,
+            "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "fontWeight": 700,
             "padding": {
               "top": 0,
               "right": 32,
               "bottom": 20,
               "left": 32
-            }
+            },
+            "paddingX": 20,
+            "paddingY": 10,
+            "fullWidth": false
           }
         }
       ]
