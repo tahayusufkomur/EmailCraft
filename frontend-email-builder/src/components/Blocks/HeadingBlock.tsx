@@ -1,5 +1,8 @@
+import { useCallback } from 'react';
 import type { HeadingBlock as HeadingBlockType } from '../../types/blocks';
 import { highlightVariables } from '../../lib/variableUtils';
+import { useEditorStore } from '../../store/editorStore';
+import { useInlineEdit } from '../../hooks/useInlineEdit';
 
 interface Props {
   block: HeadingBlockType;
@@ -9,6 +12,14 @@ export function HeadingBlock({ block }: Props) {
   const { level, text } = block.data;
   const Tag = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4';
   const style = block.style;
+  const updateBlock = useEditorStore((s) => s.updateBlock);
+
+  const { ref, isEditing, handleDoubleClick, suppressDrag } = useInlineEdit({
+    getValue: useCallback(() => text || '', [text]),
+    onCommit: useCallback((value: string) => {
+      updateBlock(block.id, { data: { ...block.data, text: value } } as Partial<HeadingBlockType>);
+    }, [updateBlock, block.id, block.data]),
+  });
 
   return (
     <div
@@ -20,6 +31,11 @@ export function HeadingBlock({ block }: Props) {
       }}
     >
       <Tag
+        ref={ref as React.RefObject<HTMLHeadingElement>}
+        onDoubleClick={handleDoubleClick}
+        onPointerDown={isEditing ? suppressDrag : undefined}
+        onMouseDown={isEditing ? suppressDrag : undefined}
+        suppressContentEditableWarning
         style={{
           margin: 0,
           color: style.color || '#0f172a',
@@ -29,9 +45,14 @@ export function HeadingBlock({ block }: Props) {
           lineHeight: 1.2,
           letterSpacing: style.letterSpacing ? `${style.letterSpacing}px` : undefined,
           textTransform: style.textTransform !== 'none' ? style.textTransform : undefined,
+          outline: isEditing ? '2px solid #6366f1' : undefined,
+          outlineOffset: 2,
+          borderRadius: isEditing ? 2 : undefined,
+          cursor: isEditing ? 'text' : undefined,
+          minHeight: '1em',
         }}
       >
-        {highlightVariables(text || 'Your heading goes here')}
+        {isEditing ? (text || '') : highlightVariables(text || 'Your heading goes here')}
       </Tag>
     </div>
   );

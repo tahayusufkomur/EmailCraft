@@ -1,5 +1,8 @@
+import { useCallback } from 'react';
 import type { ButtonBlock as ButtonBlockType } from '../../types/blocks';
 import { highlightVariables } from '../../lib/variableUtils';
+import { useEditorStore } from '../../store/editorStore';
+import { useInlineEdit } from '../../hooks/useInlineEdit';
 
 interface Props {
   block: ButtonBlockType;
@@ -10,6 +13,14 @@ export function ButtonBlock({ block }: Props) {
   const style = block.style;
   const paddingX = style.paddingX ?? 24;
   const paddingY = style.paddingY ?? 12;
+  const updateBlock = useEditorStore((s) => s.updateBlock);
+
+  const { ref, isEditing, handleDoubleClick, suppressDrag } = useInlineEdit({
+    getValue: useCallback(() => text || '', [text]),
+    onCommit: useCallback((value: string) => {
+      updateBlock(block.id, { data: { ...block.data, text: value } } as Partial<ButtonBlockType>);
+    }, [updateBlock, block.id, block.data]),
+  });
 
   return (
     <div
@@ -21,7 +32,7 @@ export function ButtonBlock({ block }: Props) {
         target="_blank"
         rel="noopener noreferrer"
         className="button-block-preview"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
         style={{
           backgroundColor: style.backgroundColor || '#007bff',
           color: style.color || '#ffffff',
@@ -39,11 +50,21 @@ export function ButtonBlock({ block }: Props) {
           display: style.fullWidth ? 'block' : 'inline-block',
           textAlign: 'center',
           textDecoration: 'none',
-          cursor: 'pointer',
+          cursor: isEditing ? 'text' : 'pointer',
           boxSizing: 'border-box',
+          outline: isEditing ? '2px solid #6366f1' : undefined,
+          outlineOffset: 2,
         }}
       >
-        {highlightVariables(text || 'Click Here')}
+        <span
+          ref={ref as React.RefObject<HTMLSpanElement>}
+          onDoubleClick={handleDoubleClick}
+          onPointerDown={isEditing ? suppressDrag : undefined}
+          onMouseDown={isEditing ? suppressDrag : undefined}
+          suppressContentEditableWarning
+        >
+          {isEditing ? (text || '') : highlightVariables(text || 'Click Here')}
+        </span>
       </a>
     </div>
   );
