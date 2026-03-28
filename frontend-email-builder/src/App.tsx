@@ -21,7 +21,7 @@ import { listenToParent, sendErrorEvent, sendReadyEvent, sendSaveEvent, sendTemp
 import type { EmailTemplate, TemplateBackgroundStyle } from './types/blocks';
 import type { ThemeMode, Variable } from './types/editor';
 import { getBuilderThemePreset, resolveBuilderTheme } from './lib/builderTheme';
-import { LayoutGrid, Image, Eye, Save, Download } from 'lucide-react';
+import { LayoutGrid, Image, Eye, Save, SaveAll, Download } from 'lucide-react';
 
 const isEmailTemplate = (value: unknown): value is EmailTemplate => {
   if (!value || typeof value !== 'object') return false;
@@ -302,6 +302,7 @@ function App() {
   useEffect(() => { savedTemplateIdRef.current = savedTemplateId; }, [savedTemplateId]);
   const [isSaving, setIsSaving] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
+  const [saveModalMode, setSaveModalMode] = useState<'save' | 'saveAs'>('save');
   const activeThemePreset = getBuilderThemePreset(builderTheme);
 
   useAutoSave();
@@ -445,15 +446,26 @@ function App() {
         void exportTemplateUsingApi({ shouldDownload: false, shouldSendToHost: true });
       },
       onRequestSave: () => {
-        // Trigger the same save flow as clicking the Save button
         const currentTemplate = useEditorStore.getState().template;
         localStorage.setItem('mailcraft_draft', JSON.stringify(currentTemplate));
         emitSaveEvent(currentTemplate);
 
         const existingId = savedTemplateIdRef.current;
         if (existingId) {
+          // Update existing template
           void api.updateTemplate(existingId, { json_data: currentTemplate }).then(() => {
             sendTemplateSavedEvent(existingId, '');
+            useEditorStore.getState().markClean();
+          }).catch(() => {});
+        } else {
+          // Auto-create a new template so the parent gets an ID
+          void api.saveTemplate({
+            name: 'Untitled Email',
+            json_data: currentTemplate,
+          }).then((result) => {
+            savedTemplateIdRef.current = result.id;
+            setSavedTemplateId(result.id);
+            sendTemplateSavedEvent(result.id, 'Untitled Email');
             useEditorStore.getState().markClean();
           }).catch(() => {});
         }
@@ -479,6 +491,8 @@ function App() {
     emitSaveEvent(currentTemplate);
 
     if (!savedTemplateId) {
+      // No existing template — show the save modal to create one
+      setSaveModalMode('save');
       setShowSaveModal(true);
       return;
     }
@@ -493,6 +507,11 @@ function App() {
     } finally {
       setIsSaving(false);
     }
+  };
+
+  const handleSaveAs = () => {
+    setSaveModalMode('saveAs');
+    setShowSaveModal(true);
   };
 
   const handleSaveNew = async (name: string, category: string) => {
@@ -609,6 +628,10 @@ function App() {
             <Save size={16} />
             {isSaving ? 'Saving...' : 'Save'}
           </Button>
+          <Button variant="ghost" size="sm" className="toolbar-action-btn" onClick={handleSaveAs} disabled={isSaving}>
+            <SaveAll size={16} />
+            Save As
+          </Button>
           {showExportHtmlButton && (
             <Button variant="ghost" size="sm" className="toolbar-action-btn" onClick={() => void handleExport()} disabled={isExporting}>
               <Download size={16} />
@@ -641,6 +664,7 @@ function App() {
       )}
       {showSaveModal && (
         <SaveTemplateModal
+          title={saveModalMode === 'saveAs' ? 'Save As New Template' : 'Save Template'}
           onSave={(name, category) => void handleSaveNew(name, category)}
           onClose={() => setShowSaveModal(false)}
           isSaving={isSaving}

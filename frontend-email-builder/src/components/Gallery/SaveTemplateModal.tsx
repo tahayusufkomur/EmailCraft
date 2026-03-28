@@ -10,12 +10,13 @@ const CATEGORIES = [
 ];
 
 interface Props {
+  title?: string;
   onSave: (name: string, category: string) => void;
   onClose: () => void;
   isSaving: boolean;
 }
 
-export function SaveTemplateModal({ onSave, onClose, isSaving }: Props) {
+export function SaveTemplateModal({ title = 'Save Template', onSave, onClose, isSaving }: Props) {
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
 
@@ -29,7 +30,7 @@ export function SaveTemplateModal({ onSave, onClose, isSaving }: Props) {
   return (
     <div style={styles.overlay} onClick={onClose}>
       <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <h3 style={{ margin: '0 0 16px', fontSize: 16 }}>Save Template</h3>
+        <h3 style={{ margin: '0 0 16px', fontSize: 16 }}>{title}</h3>
         <form onSubmit={handleSubmit}>
           <div style={styles.field}>
             <label style={styles.label}>Name</label>
