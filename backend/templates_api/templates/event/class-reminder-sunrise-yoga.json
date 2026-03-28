@@ -269,17 +269,76 @@
         },
         {
           "id": "sun-c-b4",
-          "type": "html",
+          "type": "card",
           "data": {
-            "html": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"background:#f8efea;border-radius:20px;padding:24px;text-align:center;\"><h3 style=\"margin:0 0 8px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-size:22px;color:#322e2b;font-weight:800;\">Ready to find your flow?</h3><p style=\"margin:0 0 16px;color:#605a57;font-size:14px;line-height:1.6;\">Don't forget your mat and a bottle of water. We recommend logging in 5 minutes early to ground yourself.</p><a href=\"https://\" style=\"display:inline-block;background:#8c4a00;color:#fff0e7;padding:12px 28px;border-radius:999px;font-family:'Plus Jakarta Sans', Arial, sans-serif;font-weight:700;text-decoration:none;font-size:14px;\">Get Ready to Flow</a><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-top:16px;\"><tr><td align=\"center\" style=\"font-size:12px;color:#605a57;\">✔ Calendar Synced</td><td align=\"center\" style=\"font-size:12px;color:#605a57;\">✔ Reminder Set</td></tr></table></td></tr></table>"
+            "heading": "Ready to find your flow?",
+            "body": "Don't forget your mat and a bottle of water. We recommend logging in 5 minutes early to ground yourself.",
+            "buttonText": "Get Ready to Flow",
+            "buttonUrl": "https://"
           },
           "style": {
             "padding": {
               "top": 0,
               "right": 32,
+              "bottom": 8,
+              "left": 32
+            },
+            "backgroundColor": "#f8efea",
+            "borderRadius": 20,
+            "contentAlignment": "center",
+            "headingColor": "#322e2b",
+            "headingFontSize": 22,
+            "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "headingFontWeight": 800,
+            "bodyColor": "#605a57",
+            "bodyFontSize": 14,
+            "bodyFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "buttonBackgroundColor": "#8c4a00",
+            "buttonTextColor": "#fff0e7",
+            "buttonBorderRadius": 999,
+            "buttonFontSize": 14,
+            "buttonFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "buttonFontWeight": 700
+          }
+        },
+        {
+          "id": "sun-c-b4-status",
+          "type": "list",
+          "data": {
+            "items": [
+              {
+                "id": "sun-c-b4-status-1",
+                "icon": "✔",
+                "text": "Calendar Synced",
+                "subtitle": ""
+              },
+              {
+                "id": "sun-c-b4-status-2",
+                "icon": "✔",
+                "text": "Reminder Set",
+                "subtitle": ""
+              }
+            ]
+          },
+          "style": {
+            "padding": {
+              "top": 12,
+              "right": 32,
               "bottom": 20,
               "left": 32
-            }
+            },
+            "backgroundColor": "#f8efea",
+            "iconSize": 12,
+            "iconColor": "#605a57",
+            "textColor": "#605a57",
+            "textFontSize": 12,
+            "textFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
+            "textFontWeight": 400,
+            "subtitleColor": "#605a57",
+            "subtitleFontSize": 12,
+            "spacing": 0,
+            "layout": "horizontal",
+            "contentAlignment": "center"
           }
         },
         {
