@@ -125,11 +125,23 @@ export const api = {
       body: JSON.stringify({ origin }),
     }),
 
-  listTemplates: () =>
-    request<{ results: TemplateListItem[] }>('/templates/'),
+  listTemplates: async (): Promise<{ results: TemplateListItem[] }> => {
+    try {
+      return await request<{ results: TemplateListItem[] }>('/templates/');
+    } catch {
+      // Fallback to public gallery when not authenticated (demo mode)
+      return request<{ results: TemplateListItem[] }>('/gallery/');
+    }
+  },
 
-  getTemplate: (id: string) =>
-    request<TemplateListItem & { json_data: object }>(`/templates/${id}/`),
+  getTemplate: async (id: string): Promise<TemplateListItem & { json_data: object }> => {
+    try {
+      return await request<TemplateListItem & { json_data: object }>(`/templates/${id}/`);
+    } catch {
+      // Fallback to public gallery detail
+      return request<TemplateListItem & { json_data: object }>(`/gallery/${id}/`);
+    }
+  },
 
   saveTemplate: (data: { name: string; json_data: object; category?: string; is_draft?: boolean }) =>
     request<{ id: string }>('/templates/', {

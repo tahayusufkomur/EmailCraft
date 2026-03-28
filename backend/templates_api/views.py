@@ -56,6 +56,25 @@ class TemplateViewSet(viewsets.ModelViewSet):
 
 
 @api_view(['GET'])
+def gallery_list(request):
+    """GET /api/v1/gallery/ — public read-only list of gallery templates (no auth required)."""
+    templates = Template.objects.filter(org__isnull=True, is_gallery=True)
+    serializer = TemplateListSerializer(templates, many=True)
+    return Response({'results': serializer.data})
+
+
+@api_view(['GET'])
+def gallery_detail(request, pk):
+    """GET /api/v1/gallery/<pk>/ — public read-only detail of a gallery template."""
+    try:
+        template = Template.objects.get(pk=pk, org__isnull=True, is_gallery=True)
+    except Template.DoesNotExist:
+        return Response({'error': {'message': 'Template not found.'}}, status=status.HTTP_404_NOT_FOUND)
+    serializer = TemplateDetailSerializer(template)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
 def media_list(request):
     """GET /api/v1/media — list uploaded media for the current organization."""
     queryset = UploadedImage.objects.for_org(request.org)
