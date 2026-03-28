@@ -243,3 +243,95 @@ class TestTemplateBackgroundStyles(TestCase):
 
         self.assertIn('background-color: #fafafa;', html)
         self.assertIn('background: #fafafa;', html)
+
+
+from django.contrib.auth.models import User
+from core.models import Account, Organization, Plan, UserOrganization
+from templates_api.models import Template
+
+
+class TestProvisionTemplatesForOrg(TestCase):
+    def setUp(self):
+        self.free_plan, _ = Plan.objects.get_or_create(
+            slug='free',
+            defaults={'name': 'Free', 'monthly_price_usd': 0, 'is_default': True, 'sort_order': 0},
+        )
+        self.pro_plan, _ = Plan.objects.get_or_create(
+            slug='pro',
+            defaults={'name': 'Pro', 'monthly_price_usd': 29, 'sort_order': 1},
+        )
+        self.user = User.objects.create_user(username='testuser', password='pass')
+        self.org = Organization.objects.create(name='Test Org', email='test@example.com')
+        UserOrganization.objects.create(user=self.user, organization=self.org, role='owner')
+        self.account = Account.objects.create(user=self.user, plan=self.free_plan)
+
+        self.gallery_free = Template.objects.create(
+            org=None, name='Free Welcome', json_data={'version': 1},
+            is_gallery=True, is_premium=False, category='welcome',
+        )
+        self.gallery_premium = Template.objects.create(
+            org=None, name='Premium Newsletter', json_data={'version': 1},
+            is_gallery=True, is_premium=True, category='newsletter',
+        )
+
+    def test_provisions_free_templates_for_free_plan(self):
+        from templates_api.services import provision_templates_for_org
+        provision_templates_for_org(self.org)
+        copies = Template.objects.for_org(self.org).filter(source_template__isnull=False)
+        self.assertEqual(copies.count(), 2)
+        free_copy = copies.get(source_template=self.gallery_free)
+        self.assertFalse(free_copy.is_locked)
+        self.assertFalse(free_copy.is_modified)
+        premium_copy = copies.get(source_template=self.gallery_premium)
+        self.assertTrue(premium_copy.is_locked)
+
+    def test_provisions_all_templates_for_pro_plan(self):
+        from templates_api.services import provision_templates_for_org
+        self.account.plan = self.pro_plan
+        self.account.save()
+        provision_templates_for_org(self.org)
+        copies = Template.objects.for_org(self.org).filter(source_template__isnull=False)
+        self.assertEqual(copies.count(), 2)
+        self.assertFalse(copies.filter(is_locked=True).exists())
+
+    def test_upgrade_unlocks_premium_copies(self):
+        from templates_api.services import provision_templates_for_org
+        provision_templates_for_org(self.org)
+        premium_copy = Template.objects.for_org(self.org).get(source_template=self.gallery_premium)
+        self.assertTrue(premium_copy.is_locked)
+        self.account.plan = self.pro_plan
+        self.account.save()
+        provision_templates_for_org(self.org)
+        premium_copy.refresh_from_db()
+        self.assertFalse(premium_copy.is_locked)
+
+    def test_downgrade_locks_premium_copies(self):
+        from templates_api.services import provision_templates_for_org
+        self.account.plan = self.pro_plan
+        self.account.save()
+        provision_templates_for_org(self.org)
+        premium_copy = Template.objects.for_org(self.org).get(source_template=self.gallery_premium)
+        self.assertFalse(premium_copy.is_locked)
+        self.account.plan = self.free_plan
+        self.account.save()
+        provision_templates_for_org(self.org)
+        premium_copy.refresh_from_db()
+        self.assertTrue(premium_copy.is_locked)
+
+    def test_idempotent_no_duplicates(self):
+        from templates_api.services import provision_templates_for_org
+        provision_templates_for_org(self.org)
+        provision_templates_for_org(self.org)
+        copies = Template.objects.for_org(self.org).filter(source_template__isnull=False)
+        self.assertEqual(copies.count(), 2)
+
+    def test_cloned_fields_match_gallery_original(self):
+        from templates_api.services import provision_templates_for_org
+        provision_templates_for_org(self.org)
+        copy = Template.objects.for_org(self.org).get(source_template=self.gallery_free)
+        self.assertEqual(copy.name, self.gallery_free.name)
+        self.assertEqual(copy.json_data, self.gallery_free.json_data)
+        self.assertEqual(copy.category, self.gallery_free.category)
+        self.assertEqual(copy.is_premium, self.gallery_free.is_premium)
+        self.assertFalse(copy.is_gallery)
+        self.assertFalse(copy.is_draft)
