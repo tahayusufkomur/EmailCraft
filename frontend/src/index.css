@@ -64,3 +64,19 @@ body {
 .font-mono {
   font-family: 'IBM Plex Mono', monospace;
 }
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-gradient { animation: gradient-shift 8s ease infinite; background-size: 200% 200%; }
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+.shadow-soft { box-shadow: 0 8px 30px -12px hsl(var(--foreground) / 0.12); }
+.shadow-glow { box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.3); }

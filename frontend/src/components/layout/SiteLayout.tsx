@@ -83,12 +83,42 @@ export function SiteLayout() {
       </main>
 
       <footer className="border-t border-border/60 bg-muted/20">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
-          <p>MailCraft © {new Date().getFullYear()}.</p>
-          <div className="flex items-center gap-4">
-            <Link to="/impressum" className="hover:text-foreground">Impressum</Link>
-            <Link to="/faq" className="hover:text-foreground">FAQ</Link>
-            <a href="/builder/" className="hover:text-foreground">Email Builder</a>
+        <div className="mx-auto w-full max-w-6xl px-4 py-12">
+          <div className="grid gap-8 md:grid-cols-4">
+            <div>
+              <span className="font-heading text-lg font-bold text-foreground">MailCraft</span>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Embeddable email template builder for product teams. Drag, drop, ship.
+              </p>
+            </div>
+            <div>
+              <h4 className="mb-3 text-sm font-semibold text-foreground">Product</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><a href="/builder/" className="transition hover:text-foreground">Builder</a></li>
+                <li><Link to="/templates" className="transition hover:text-foreground">Templates</Link></li>
+                <li><Link to="/pricing" className="transition hover:text-foreground">Pricing</Link></li>
+                <li><Link to="/docs" className="transition hover:text-foreground">Documentation</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="mb-3 text-sm font-semibold text-foreground">Company</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link to="/faq" className="transition hover:text-foreground">FAQ</Link></li>
+                <li><Link to="/impressum" className="transition hover:text-foreground">Impressum</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="mb-3 text-sm font-semibold text-foreground">Developers</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link to="/docs#api-reference" className="transition hover:text-foreground">API Reference</Link></li>
+                <li><Link to="/docs#embedding" className="transition hover:text-foreground">Embedding Guide</Link></li>
+                <li><Link to="/docs#postmessage" className="transition hover:text-foreground">postMessage API</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border/60 pt-6 text-sm text-muted-foreground md:flex-row">
+            <p>MailCraft © {new Date().getFullYear()}. All rights reserved.</p>
+            <p>Built with care for email developers.</p>
           </div>
         </div>
       </footer>
