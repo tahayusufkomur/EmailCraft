@@ -59,7 +59,7 @@ def _set_account_plan(account, plan_obj, stripe_subscription_id=_UNSET, stripe_c
         update_fields=[
             'plan',
             'rendered_emails_limit',
-            'storage_limit_bytes',
+            'storage_limit_mb',
             'stripe_customer_id',
             'stripe_subscription_id',
             'updated_at',

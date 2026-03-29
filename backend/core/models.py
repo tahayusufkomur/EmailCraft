@@ -9,12 +9,14 @@ from django.utils import timezone
 
 
 class Plan(models.Model):
+    MB = 1024 * 1024
+
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=50, unique=True)
     monthly_price_usd = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     rendered_emails_limit = models.BigIntegerField(default=1000)
-    storage_limit_bytes = models.BigIntegerField(default=1073741824)  # 1GB
-    max_upload_size_bytes = models.BigIntegerField(default=5242880)  # 5MB
+    storage_limit_mb = models.PositiveIntegerField(default=1024)  # 1 GB
+    max_upload_size_mb = models.PositiveIntegerField(default=5)
     max_media_files_per_upload = models.PositiveIntegerField(default=5)
     is_default = models.BooleanField(default=False, help_text='New orgs get this plan when no plan is specified.')
     sort_order = models.PositiveIntegerField(default=0)
@@ -28,6 +30,14 @@ class Plan(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def storage_limit_bytes(self):
+        return self.storage_limit_mb * self.MB
+
+    @property
+    def max_upload_size_bytes(self):
+        return self.max_upload_size_mb * self.MB
+
     @classmethod
     def get_default(cls):
         return cls.objects.filter(is_default=True).first() or cls.objects.order_by('sort_order').first()
@@ -40,7 +50,7 @@ class Account(models.Model):
     rendered_emails_count = models.BigIntegerField(default=0)
     rendered_emails_limit = models.BigIntegerField(default=1000)
     storage_used_bytes = models.BigIntegerField(default=0)
-    storage_limit_bytes = models.BigIntegerField(default=1073741824)  # 1GB
+    storage_limit_mb = models.PositiveIntegerField(default=1024)  # 1 GB
     stripe_customer_id = models.CharField(max_length=120, blank=True, null=True)
     stripe_subscription_id = models.CharField(max_length=120, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -61,8 +71,12 @@ class Account(models.Model):
         return self.plan_slug in ('pro', 'enterprise')
 
     @property
+    def storage_limit_bytes(self):
+        return self.storage_limit_mb * Plan.MB
+
+    @property
     def max_upload_size_bytes(self):
-        return self.plan.max_upload_size_bytes if self.plan else 5242880
+        return self.plan.max_upload_size_bytes if self.plan else 5 * Plan.MB
 
     @property
     def max_media_files_per_upload(self):
@@ -72,9 +86,9 @@ class Account(models.Model):
         p = self.plan or Plan.get_default()
         if p:
             self.rendered_emails_limit = p.rendered_emails_limit
-            self.storage_limit_bytes = p.storage_limit_bytes
+            self.storage_limit_mb = p.storage_limit_mb
         if save:
-            self.save(update_fields=['rendered_emails_limit', 'storage_limit_bytes', 'updated_at'])
+            self.save(update_fields=['rendered_emails_limit', 'storage_limit_mb', 'updated_at'])
 
 
 class Organization(models.Model):

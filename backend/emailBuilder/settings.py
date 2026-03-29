@@ -213,46 +213,43 @@ AWS_S3_PRIVATE_BUCKET = AWS_BUCKET_NAME_DEV_PRIVATE if DEBUG else AWS_BUCKET_NAM
 AWS_STORAGE_BUCKET_NAME = AWS_S3_PUBLIC_BUCKET
 
 
+MB = 1024 * 1024
+
 PLAN_LIMITS = {
     'free': {
         'monthly_price_usd': 0,
         'rendered_emails_limit': 1000,
-        'storage_limit_bytes': 1 * 1024 * 1024 * 1024,
-        'max_upload_size_bytes': 5 * 1024 * 1024,
+        'storage_limit_mb': 1024,       # 1 GB
+        'max_upload_size_mb': 5,
         'max_media_files_per_upload': 5,
     },
     'starter': {
         'monthly_price_usd': 5,
         'rendered_emails_limit': 10000,
-        'storage_limit_bytes': 5 * 1024 * 1024 * 1024,
-        'max_upload_size_bytes': 25 * 1024 * 1024,
+        'storage_limit_mb': 5 * 1024,   # 5 GB
+        'max_upload_size_mb': 25,
         'max_media_files_per_upload': 15,
     },
     'pro': {
         'monthly_price_usd': 20,
         'rendered_emails_limit': 50000,
-        'storage_limit_bytes': 20 * 1024 * 1024 * 1024,
-        'max_upload_size_bytes': 50 * 1024 * 1024,
+        'storage_limit_mb': 20 * 1024,  # 20 GB
+        'max_upload_size_mb': 50,
         'max_media_files_per_upload': 40,
     },
     'enterprise': {
         'monthly_price_usd': 100,
         'rendered_emails_limit': 1000000,
-        'storage_limit_bytes': 100 * 1024 * 1024 * 1024,
-        'max_upload_size_bytes': 100 * 1024 * 1024,
+        'storage_limit_mb': 100 * 1024,  # 100 GB
+        'max_upload_size_mb': 100,
         'max_media_files_per_upload': 120,
     },
 }
 
-MAX_UPLOAD_SIZE_FREE = PLAN_LIMITS['free']['max_upload_size_bytes']
-MAX_UPLOAD_SIZE_PRO = PLAN_LIMITS['pro']['max_upload_size_bytes']
-STORAGE_LIMIT_FREE = PLAN_LIMITS['free']['storage_limit_bytes']
-STORAGE_LIMIT_PRO = PLAN_LIMITS['pro']['storage_limit_bytes']
-
 ALLOWED_UPLOAD_TYPES = ['image/png', 'image/jpeg', 'image/gif', 'image/webp']
 PRESIGNED_URL_EXPIRY = 900
 
-MAX_TEMPLATE_SIZE = 2 * 1024 * 1024
+MAX_TEMPLATE_SIZE = 2 * MB
 
 
 STRIPE_API_KEY = os.environ.get('STRIPE_API_KEY', '')

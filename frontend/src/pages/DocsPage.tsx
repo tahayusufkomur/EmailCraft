@@ -251,6 +251,7 @@ Content-Type: application/json
                   <tbody className="divide-y divide-border">
                     <tr><td className="py-2 pr-4"><InlineCode>apiKey</InlineCode></td><td className="py-2 pr-4">string</td><td className="py-2">Your organization API key. Required unless using sessionToken.</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>sessionToken</InlineCode></td><td className="py-2 pr-4">string</td><td className="py-2">Session token (recommended for production). Use instead of apiKey.</td></tr>
+                    <tr><td className="py-2 pr-4"><InlineCode>variables</InlineCode></td><td className="py-2 pr-4">string</td><td className="py-2">Comma-separated variable keys (e.g. <InlineCode>first_name,email</InlineCode>) or a JSON array of variable objects. Overrides organization variables from the session.</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>showLogo</InlineCode></td><td className="py-2 pr-4">boolean</td><td className="py-2">Show/hide the MailCraft logo. Default: true.</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>showExportHtmlButton</InlineCode></td><td className="py-2 pr-4">boolean</td><td className="py-2">Show/hide the Export HTML button. Default: true.</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>themeMode</InlineCode></td><td className="py-2 pr-4">string</td><td className="py-2">Color mode: light, dark, or system.</td></tr>
@@ -364,7 +365,7 @@ iframe.contentWindow.postMessage({
           </Section>
 
           <Section id="api-reference" title="REST API Reference">
-            <p>All API endpoints require the <InlineCode>X-API-Key</InlineCode> header (except session creation). Base URL: <InlineCode>{`${DOMAIN}/api/v1`}</InlineCode></p>
+            <p>All API endpoints require the <InlineCode>X-API-Key</InlineCode> header (or <InlineCode>X-Session-Token</InlineCode> once you have a session). Base URL: <InlineCode>{`${DOMAIN}/api/v1`}</InlineCode></p>
 
             <Subsection title="Authentication">
               <Code>{`# Every request needs your API key
@@ -515,6 +516,9 @@ Content-Type: application/json
                     <tr><td className="py-2 pr-4"><InlineCode>divider</InlineCode></td><td className="py-2">Horizontal line separator.</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>columns</InlineCode></td><td className="py-2">Multi-column layout. Each column can contain nested blocks.</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>social</InlineCode></td><td className="py-2">Social media icon links (Facebook, Twitter, LinkedIn, etc.).</td></tr>
+                    <tr><td className="py-2 pr-4"><InlineCode>card</InlineCode></td><td className="py-2">Card with image, heading, body text, badge, and CTA button.</td></tr>
+                    <tr><td className="py-2 pr-4"><InlineCode>list</InlineCode></td><td className="py-2">Ordered or unordered list with customizable items.</td></tr>
+                    <tr><td className="py-2 pr-4"><InlineCode>profile</InlineCode></td><td className="py-2">Profile card with avatar, name, title, and bio.</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>hero</InlineCode></td><td className="py-2">Full-width section with background image and text overlay.</td></tr>
                     <tr><td className="py-2 pr-4"><InlineCode>html</InlineCode></td><td className="py-2">Raw HTML code block for custom content.</td></tr>
                   </tbody>
@@ -635,27 +639,10 @@ Content-Type: image/jpeg
           </Section>
 
           <Section id="plans" title="Plans & Limits">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="py-2 pr-4 font-semibold text-foreground">Feature</th>
-                    <th className="py-2 pr-4 font-semibold text-foreground">Free</th>
-                    <th className="py-2 pr-4 font-semibold text-foreground">Starter</th>
-                    <th className="py-2 pr-4 font-semibold text-foreground">Pro</th>
-                    <th className="py-2 font-semibold text-foreground">Enterprise</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  <tr><td className="py-2 pr-4">Gallery templates</td><td className="py-2 pr-4">Free only</td><td className="py-2 pr-4">All</td><td className="py-2 pr-4">All</td><td className="py-2">All</td></tr>
-                  <tr><td className="py-2 pr-4">Monthly renders</td><td className="py-2 pr-4">1,000</td><td className="py-2 pr-4">10,000</td><td className="py-2 pr-4">100,000</td><td className="py-2">Unlimited</td></tr>
-                  <tr><td className="py-2 pr-4">Storage</td><td className="py-2 pr-4">1 GB</td><td className="py-2 pr-4">5 GB</td><td className="py-2 pr-4">25 GB</td><td className="py-2">100 GB</td></tr>
-                  <tr><td className="py-2 pr-4">Max upload size</td><td className="py-2 pr-4">5 MB</td><td className="py-2 pr-4">10 MB</td><td className="py-2 pr-4">25 MB</td><td className="py-2">50 MB</td></tr>
-                  <tr><td className="py-2 pr-4">Builder themes</td><td className="py-2 pr-4">All</td><td className="py-2 pr-4">All</td><td className="py-2 pr-4">All</td><td className="py-2">All + custom</td></tr>
-                  <tr><td className="py-2 pr-4">Hide MailCraft logo</td><td className="py-2 pr-4">No</td><td className="py-2 pr-4">Yes</td><td className="py-2 pr-4">Yes</td><td className="py-2">Yes</td></tr>
-                </tbody>
-              </table>
-            </div>
+            <p>
+              See the <a href="/pricing" className="text-primary underline underline-offset-4 hover:text-primary/80">pricing page</a> for
+              up-to-date plan details, features, and limits.
+            </p>
             <p>
               Plan limits are enforced server-side. When a limit is reached (e.g., render count or storage), the API returns
               a <InlineCode>402</InlineCode> or <InlineCode>413</InlineCode> error with a descriptive message.

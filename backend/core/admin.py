@@ -7,13 +7,13 @@ from core.models import Account, ApiKey, Organization, Plan, UserOrganization
 class PlanAdmin(admin.ModelAdmin):
     list_display = [
         'name', 'slug', 'monthly_price_usd',
-        'rendered_emails_limit', 'storage_limit_bytes',
-        'max_upload_size_bytes', 'max_media_files_per_upload',
+        'rendered_emails_limit', 'storage_limit_mb',
+        'max_upload_size_mb', 'max_media_files_per_upload',
         'is_default', 'sort_order',
     ]
     list_editable = [
-        'monthly_price_usd', 'rendered_emails_limit', 'storage_limit_bytes',
-        'max_upload_size_bytes', 'max_media_files_per_upload',
+        'monthly_price_usd', 'rendered_emails_limit', 'storage_limit_mb',
+        'max_upload_size_mb', 'max_media_files_per_upload',
         'is_default', 'sort_order',
     ]
     prepopulated_fields = {'slug': ('name',)}
@@ -24,13 +24,13 @@ class AccountAdmin(admin.ModelAdmin):
     list_display = [
         'user', 'plan',
         'rendered_emails_count', 'rendered_emails_limit',
-        'storage_used_bytes', 'storage_limit_bytes',
+        'storage_used_bytes', 'storage_limit_mb',
         'created_at',
     ]
     list_filter = ['plan']
     search_fields = ['user__username', 'user__email']
     readonly_fields = ['created_at', 'updated_at']
-    list_editable = ['plan', 'rendered_emails_limit', 'storage_limit_bytes']
+    list_editable = ['plan', 'rendered_emails_limit', 'storage_limit_mb']
     actions = ['reset_render_count', 'reset_storage_used', 'apply_plan_limits']
 
     @admin.action(description='Reset rendered emails count to 0')

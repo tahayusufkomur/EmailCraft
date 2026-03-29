@@ -88,7 +88,7 @@ def _seed_plan_demo_account(account, password, default_allowed_origins, default_
         update_fields=[
             'plan',
             'rendered_emails_limit',
-            'storage_limit_bytes',
+            'storage_limit_mb',
             'stripe_customer_id',
             'stripe_subscription_id',
             'updated_at',
@@ -308,7 +308,7 @@ class Command(BaseCommand):
         demo_acct.stripe_subscription_id = f'sub_demo_{plan_obj.slug if plan_obj else "free"}_{org.id.hex[:10]}'
         demo_acct.save(
             update_fields=[
-                'plan', 'rendered_emails_limit', 'storage_limit_bytes',
+                'plan', 'rendered_emails_limit', 'storage_limit_mb',
                 'stripe_customer_id', 'stripe_subscription_id', 'updated_at',
             ]
         )

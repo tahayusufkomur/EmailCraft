@@ -15,10 +15,10 @@ from templates_api.models import Template, UploadedImage
 def _plan(slug='free'):
     """Get or create a Plan for use in tests."""
     defaults = {
-        'free': {'name': 'Free', 'monthly_price_usd': 0, 'rendered_emails_limit': 1000, 'storage_limit_bytes': 1073741824, 'max_upload_size_bytes': 5242880, 'max_media_files_per_upload': 5, 'is_default': True, 'sort_order': 0},
-        'starter': {'name': 'Starter', 'monthly_price_usd': 5, 'rendered_emails_limit': 10000, 'storage_limit_bytes': 5368709120, 'max_upload_size_bytes': 26214400, 'max_media_files_per_upload': 15, 'sort_order': 1},
-        'pro': {'name': 'Pro', 'monthly_price_usd': 20, 'rendered_emails_limit': 50000, 'storage_limit_bytes': 21474836480, 'max_upload_size_bytes': 52428800, 'max_media_files_per_upload': 40, 'sort_order': 2},
-        'enterprise': {'name': 'Enterprise', 'monthly_price_usd': 100, 'rendered_emails_limit': 1000000, 'storage_limit_bytes': 107374182400, 'max_upload_size_bytes': 104857600, 'max_media_files_per_upload': 120, 'sort_order': 3},
+        'free': {'name': 'Free', 'monthly_price_usd': 0, 'rendered_emails_limit': 1000, 'storage_limit_mb': 1024, 'max_upload_size_mb': 5, 'max_media_files_per_upload': 5, 'is_default': True, 'sort_order': 0},
+        'starter': {'name': 'Starter', 'monthly_price_usd': 5, 'rendered_emails_limit': 10000, 'storage_limit_mb': 5120, 'max_upload_size_mb': 25, 'max_media_files_per_upload': 15, 'sort_order': 1},
+        'pro': {'name': 'Pro', 'monthly_price_usd': 20, 'rendered_emails_limit': 50000, 'storage_limit_mb': 20480, 'max_upload_size_mb': 50, 'max_media_files_per_upload': 40, 'sort_order': 2},
+        'enterprise': {'name': 'Enterprise', 'monthly_price_usd': 100, 'rendered_emails_limit': 1000000, 'storage_limit_mb': 102400, 'max_upload_size_mb': 100, 'max_media_files_per_upload': 120, 'sort_order': 3},
     }
     obj, _ = Plan.objects.get_or_create(slug=slug, defaults=defaults.get(slug, defaults['free']))
     return obj
