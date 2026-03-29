@@ -23,7 +23,6 @@ const navItems = [
   { to: '/docs', label: 'Docs' },
   { to: '/pricing', label: 'Pricing' },
   { to: '/faq', label: 'FAQ' },
-  { to: '/impressum', label: 'Impressum' },
 ];
 
 export function SiteLayout() {
@@ -104,7 +103,6 @@ export function SiteLayout() {
               <h4 className="mb-3 text-sm font-semibold text-foreground">Company</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><Link to="/faq" className="transition hover:text-foreground">FAQ</Link></li>
-                <li><Link to="/impressum" className="transition hover:text-foreground">Impressum</Link></li>
               </ul>
             </div>
             <div>

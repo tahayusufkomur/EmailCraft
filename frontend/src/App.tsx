@@ -8,7 +8,6 @@ import { DashboardOrganizationsPage } from './pages/DashboardOrganizationsPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { DashboardWidgetBuilderPage } from './pages/DashboardWidgetBuilderPage';
 import { FaqPage } from './pages/FaqPage';
-import { ImpressumPage } from './pages/ImpressumPage';
 import { LandingPage } from './pages/LandingPage';
 import { LoginPage } from './pages/LoginPage';
 import { DocsPage } from './pages/DocsPage';
@@ -32,7 +31,6 @@ function App() {
         />
         <Route path="docs" element={<DocsPage />} />
         <Route path="faq" element={<FaqPage />} />
-        <Route path="impressum" element={<ImpressumPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<Navigate to="/login" replace />} />
       </Route>
