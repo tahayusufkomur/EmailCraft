@@ -6,7 +6,6 @@ import { AnimateIn } from '../ui/AnimateIn';
 const tabs = [
   { id: 'builder', label: 'Drag & Drop Builder' },
   { id: 'gallery', label: 'Template Gallery' },
-  { id: 'export', label: 'HTML Export' },
 ] as const;
 
 type TabId = (typeof tabs)[number]['id'];
@@ -14,7 +13,6 @@ type TabId = (typeof tabs)[number]['id'];
 const screenshots: Record<TabId, string> = {
   builder: '/screenshots/builder.avif',
   gallery: '/screenshots/gallery.avif',
-  export: '/screenshots/export.png',
 };
 
 export function ShowcaseSection() {
