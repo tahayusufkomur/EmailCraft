@@ -3,6 +3,7 @@ from django.urls import include, path
 from core.views import (
     GoogleLoginView,
     create_session,
+    email_setup,
     google_callback,
     google_login_redirect,
     guest_checkout,
@@ -31,4 +32,5 @@ urlpatterns = [
     path('auth/subscribe-callback', subscribe_callback, name='auth-subscribe-callback'),
     path('auth/magic-link', magic_link_send, name='auth-magic-link'),
     path('auth/magic-link/verify', magic_link_verify, name='auth-magic-link-verify'),
+    path('email/setup', email_setup, name='email-setup'),
 ]

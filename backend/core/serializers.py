@@ -44,6 +44,31 @@ def validate_organization_variables(value):
     return value
 
 
+class SetupVariableSerializer(OrganizationVariableSerializer):
+    """Extends OrganizationVariableSerializer to make label optional.
+    When label is omitted, it's auto-generated from the key (title-cased)."""
+
+    label = serializers.CharField(max_length=100, required=False, default='')
+    defaultValue = serializers.CharField(required=False, allow_blank=True, default='')
+
+    def validate_label(self, value):
+        # Allow empty — will be auto-filled in to_internal_value
+        return value.strip() if value else ''
+
+    def to_internal_value(self, data):
+        result = super().to_internal_value(data)
+        if not result.get('label'):
+            result['label'] = result['key'].replace('_', ' ').title()
+        return result
+
+
+class EmailSetupSerializer(serializers.Serializer):
+    available_variables = SetupVariableSerializer(many=True, required=True)
+
+    def validate_available_variables(self, value):
+        return validate_organization_variables(value)
+
+
 class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organization

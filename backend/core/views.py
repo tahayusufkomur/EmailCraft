@@ -21,7 +21,7 @@ from rest_framework.response import Response
 
 from core.models import ApiKey, Organization, Session, UserOrganization, account_for_org
 from core.rate_limit import rate_limit_by_ip
-from core.serializers import SessionRequestSerializer, SubscribeRequestSerializer
+from core.serializers import EmailSetupSerializer, SessionRequestSerializer, SubscribeRequestSerializer
 
 
 def _get_base_url():
@@ -831,3 +831,29 @@ def magic_link_verify(request):
     auth_token, _ = Token.objects.get_or_create(user=user)
 
     return HttpResponseRedirect(f'{base_url}/dashboard?token={auth_token.key}')
+
+
+@api_view(['PATCH'])
+def email_setup(request):
+    # Require API key auth with 'full' scope — reject session tokens and readonly keys
+    api_key = getattr(request, 'api_key', None)
+    if not api_key:
+        return Response(
+            {'error': {'code': 'API_KEY_REQUIRED', 'message': 'This endpoint requires API key authentication (not session tokens).'}},
+            status=status.HTTP_403_FORBIDDEN,
+        )
+    if api_key.scope != 'full':
+        return Response(
+            {'error': {'code': 'INSUFFICIENT_SCOPE', 'message': 'This API key has readonly scope.'}},
+            status=status.HTTP_403_FORBIDDEN,
+        )
+
+    serializer = EmailSetupSerializer(data=request.data)
+    if not serializer.is_valid():
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    org = request.org
+    org.available_variables = serializer.validated_data['available_variables']
+    org.save(update_fields=['available_variables'])
+
+    return Response({'available_variables': org.available_variables})

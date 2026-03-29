@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.core.management import call_command
 from django.test import TestCase
 from rest_framework.authtoken.models import Token
-from rest_framework.test import APIClient
+from rest_framework.test import APIClient, APITestCase
 
 from core.management.commands.create_demo_org import _highest_plan
 from core.models import ApiKey, Organization, Plan, UserOrganization
@@ -587,3 +587,128 @@ class SiteOrganizationsApiTests(TestCase):
 
         delete_response = self.client.delete(f'/api/v1/site/templates/{shared_template.id}/')
         self.assertEqual(delete_response.status_code, 403)
+
+
+class EmailSetupSerializerTests(TestCase):
+    def test_valid_variables(self):
+        from core.serializers import EmailSetupSerializer
+
+        data = {
+            'available_variables': [
+                {'key': 'first_name', 'label': 'First Name', 'type': 'text', 'defaultValue': ''},
+                {'key': 'email'},
+            ]
+        }
+        s = EmailSetupSerializer(data=data)
+        self.assertTrue(s.is_valid(), s.errors)
+        # Second variable should get auto-generated label (title-cased)
+        vars_list = s.validated_data['available_variables']
+        self.assertEqual(vars_list[1]['label'], 'Email')
+        self.assertEqual(vars_list[1]['type'], 'text')
+        self.assertEqual(vars_list[1]['defaultValue'], '')
+
+    def test_missing_key_is_invalid(self):
+        from core.serializers import EmailSetupSerializer
+
+        data = {'available_variables': [{'label': 'No Key'}]}
+        s = EmailSetupSerializer(data=data)
+        self.assertFalse(s.is_valid())
+
+    def test_empty_variables_list_is_valid(self):
+        from core.serializers import EmailSetupSerializer
+
+        data = {'available_variables': []}
+        s = EmailSetupSerializer(data=data)
+        self.assertTrue(s.is_valid(), s.errors)
+
+    def test_missing_available_variables_is_invalid(self):
+        from core.serializers import EmailSetupSerializer
+
+        data = {}
+        s = EmailSetupSerializer(data=data)
+        self.assertFalse(s.is_valid())
+
+    def test_duplicate_keys_rejected(self):
+        from core.serializers import EmailSetupSerializer
+
+        data = {
+            'available_variables': [
+                {'key': 'name', 'label': 'Name'},
+                {'key': 'name', 'label': 'Name Again'},
+            ]
+        }
+        s = EmailSetupSerializer(data=data)
+        self.assertFalse(s.is_valid())
+
+
+class EmailSetupEndpointTests(APITestCase):
+    def setUp(self):
+        self.org = Organization.objects.create(
+            name='Test Org',
+            email='test@mailcraft.dev',
+        )
+        self.raw_key = ApiKey.generate_key('test')
+        ApiKey.objects.create(
+            org=self.org,
+            key_hash=ApiKey.hash_key(self.raw_key),
+            key_prefix=self.raw_key[:12],
+            environment='test',
+            scope='full',
+        )
+
+    def test_patch_sets_available_variables(self):
+        response = self.client.patch(
+            '/api/v1/email/setup',
+            data={
+                'available_variables': [
+                    {'key': 'first_name', 'label': 'First Name', 'type': 'text', 'defaultValue': ''},
+                    {'key': 'company'},
+                ]
+            },
+            format='json',
+            HTTP_X_API_KEY=self.raw_key,
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.data['available_variables']), 2)
+        self.assertEqual(response.data['available_variables'][1]['label'], 'Company')
+        # Verify it persisted
+        self.org.refresh_from_db()
+        self.assertEqual(len(self.org.available_variables), 2)
+
+    def test_readonly_key_gets_403(self):
+        readonly_key = ApiKey.generate_key('test')
+        ApiKey.objects.create(
+            org=self.org,
+            key_hash=ApiKey.hash_key(readonly_key),
+            key_prefix=readonly_key[:12],
+            environment='test',
+            scope='readonly',
+        )
+        response = self.client.patch(
+            '/api/v1/email/setup',
+            data={'available_variables': []},
+            format='json',
+            HTTP_X_API_KEY=readonly_key,
+        )
+        self.assertEqual(response.status_code, 403)
+
+    def test_no_auth_gets_401(self):
+        response = self.client.patch(
+            '/api/v1/email/setup',
+            data={'available_variables': []},
+            format='json',
+        )
+        self.assertEqual(response.status_code, 401)
+
+    def test_invalid_variable_key_gets_400(self):
+        response = self.client.patch(
+            '/api/v1/email/setup',
+            data={
+                'available_variables': [
+                    {'key': '123-invalid'},
+                ]
+            },
+            format='json',
+            HTTP_X_API_KEY=self.raw_key,
+        )
+        self.assertEqual(response.status_code, 400)
