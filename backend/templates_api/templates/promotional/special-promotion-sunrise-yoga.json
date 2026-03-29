@@ -138,7 +138,7 @@
             "buttonBorderColor": "#e8913a",
             "buttonBorderWidth": 0,
             "contentAlignment": "center",
-            "iconColor": "#1c1008"
+            "iconColor": "#ffffff"
           }
         },
         {
@@ -228,7 +228,7 @@
                       "buttonBorderColor": "#e8913a",
                       "buttonBorderWidth": 0,
                       "contentAlignment": "center",
-                      "iconColor": "#ffffff"
+                      "iconColor": "#1c1008"
                     }
                   }
                 ]
@@ -291,7 +291,7 @@
                       "buttonBorderColor": "#e8913a",
                       "buttonBorderWidth": 0,
                       "contentAlignment": "center",
-                      "iconColor": "#ffffff"
+                      "iconColor": "#1c1008"
                     }
                   }
                 ]
@@ -354,7 +354,7 @@
                       "buttonBorderColor": "#e8913a",
                       "buttonBorderWidth": 0,
                       "contentAlignment": "center",
-                      "iconColor": "#ffffff"
+                      "iconColor": "#1c1008"
                     }
                   }
                 ]
