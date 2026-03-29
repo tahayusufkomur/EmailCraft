@@ -79,7 +79,7 @@ export function HeroSection() {
           >
             <div className="animate-float shadow-glow overflow-hidden rounded-xl border border-border/60">
               <img
-                src="/screenshots/builder.png"
+                src="/screenshots/builder.avif"
                 alt="MailCraft email builder with drag-and-drop template editor"
                 className="w-full"
               />

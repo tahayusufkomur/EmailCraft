@@ -12,8 +12,8 @@ const tabs = [
 type TabId = (typeof tabs)[number]['id'];
 
 const screenshots: Record<TabId, string> = {
-  builder: '/screenshots/builder.png',
-  gallery: '/screenshots/gallery.png',
+  builder: '/screenshots/builder.avif',
+  gallery: '/screenshots/gallery.avif',
   export: '/screenshots/export.png',
 };
 
