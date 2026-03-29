@@ -676,6 +676,14 @@ def _render_card_block(block, ctx):
                     f'<img src="{data_uri}" width="{svg_size}" height="{svg_size}" alt="" style="display: inline-block; vertical-align: middle;" />'
                     f'</td></tr></table>'
                 )
+            else:
+                emoji = data.get('iconEmoji', '✨')
+                emoji_size = int(icon_size * 0.55)
+                icon_html = (
+                    f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 12px;">'
+                    f'<tr><td style="width: {icon_size}px; height: {icon_size}px; border-radius: {icon_radius}%; background-color: {icon_bg}; text-align: center; vertical-align: middle; font-size: {emoji_size}px; line-height: {icon_size}px;">'
+                    f'{emoji}</td></tr></table>'
+                )
         else:
             emoji = data.get('iconEmoji', '✨')
             icon_bg = style.get('iconBackgroundColor', '#eef2ff')

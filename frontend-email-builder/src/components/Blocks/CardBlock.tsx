@@ -49,6 +49,15 @@ export function CardBlock({ block }: Props) {
     minHeight: '1em',
   });
 
+  const iconSize = style.iconSize ?? 48;
+  const iconRadius = style.iconBorderRadius ?? 50;
+  const iconBg = style.iconBackgroundColor ?? '#eef2ff';
+  const lucideIconSvg = lucideSvgString(
+    data.iconName || 'sparkles',
+    Math.round(iconSize * 0.5),
+    style.iconColor ?? '#4f46e5',
+  );
+
   return (
     <div
       style={{
@@ -65,35 +74,49 @@ export function CardBlock({ block }: Props) {
       {data.showIcon && (
         <div style={{ marginBottom: 12 }}>
           {data.iconMode === 'lucide' ? (
-            <span
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: style.iconSize ?? 48,
-                height: style.iconSize ?? 48,
-                borderRadius: `${style.iconBorderRadius ?? 50}%`,
-                backgroundColor: style.iconBackgroundColor ?? '#eef2ff',
-              }}
-              dangerouslySetInnerHTML={{
-                __html: lucideSvgString(
-                  data.iconName || 'sparkles',
-                  Math.round((style.iconSize ?? 48) * 0.5),
-                  style.iconColor ?? '#4f46e5',
-                ),
-              }}
-            />
+            lucideIconSvg ? (
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: iconSize,
+                  height: iconSize,
+                  borderRadius: `${iconRadius}%`,
+                  backgroundColor: iconBg,
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: lucideIconSvg,
+                }}
+              />
+            ) : (
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: iconSize,
+                  height: iconSize,
+                  borderRadius: `${iconRadius}%`,
+                  backgroundColor: iconBg,
+                  fontSize: iconSize * 0.55,
+                  lineHeight: 1,
+                }}
+              >
+                {data.iconEmoji || '✨'}
+              </span>
+            )
           ) : data.iconMode === 'emoji' ? (
             <span
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: style.iconSize ?? 48,
-                height: style.iconSize ?? 48,
-                borderRadius: `${style.iconBorderRadius ?? 50}%`,
-                backgroundColor: style.iconBackgroundColor ?? '#eef2ff',
-                fontSize: (style.iconSize ?? 48) * 0.55,
+                width: iconSize,
+                height: iconSize,
+                borderRadius: `${iconRadius}%`,
+                backgroundColor: iconBg,
+                fontSize: iconSize * 0.55,
                 lineHeight: 1,
               }}
             >
@@ -104,9 +127,9 @@ export function CardBlock({ block }: Props) {
               src={data.iconImageSrc}
               alt={data.iconImageAlt || ''}
               style={{
-                width: style.iconSize ?? 48,
-                height: style.iconSize ?? 48,
-                borderRadius: `${style.iconBorderRadius ?? 50}%`,
+                width: iconSize,
+                height: iconSize,
+                borderRadius: `${iconRadius}%`,
                 objectFit: 'cover',
                 display: 'inline-block',
               }}
@@ -117,10 +140,10 @@ export function CardBlock({ block }: Props) {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: style.iconSize ?? 48,
-                height: style.iconSize ?? 48,
-                borderRadius: `${style.iconBorderRadius ?? 50}%`,
-                backgroundColor: style.iconBackgroundColor ?? '#eef2ff',
+                width: iconSize,
+                height: iconSize,
+                borderRadius: `${iconRadius}%`,
+                backgroundColor: iconBg,
                 fontSize: 14,
                 color: '#94a3b8',
               }}

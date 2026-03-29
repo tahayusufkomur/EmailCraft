@@ -1741,6 +1741,10 @@ const CUSTOM_ICON_NAMES = [
 /** All icon names: custom first, then Lucide originals. */
 export const ALL_ICON_NAMES: string[] = [...CUSTOM_ICON_NAMES, ...LUCIDE_ICON_NAMES];
 
+const ICON_NAME_ALIASES: Record<string, string> = {
+  home: 'house',
+};
+
 /** Convert kebab-case icon name to a readable label. */
 export function iconLabel(name: string): string {
   return name.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
@@ -1753,7 +1757,8 @@ export function lucideSvgString(
   color: string,
   strokeWidth = 2,
 ): string {
-  const paths = LUCIDE_ICON_MAP[name];
+  const resolvedName = ICON_NAME_ALIASES[name] ?? name;
+  const paths = LUCIDE_ICON_MAP[resolvedName];
   if (!paths) return '';
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
 }

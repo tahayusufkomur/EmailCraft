@@ -5,7 +5,7 @@
        test test-backend lint-frontend lint-frontend-site lint-frontend-builder \
        seed seed-gallery sync-gallery demo-org create-key logs-backend shell dbshell superuser clean reset setup \
        install-frontend-local install-frontend-site-local install-frontend-builder-local \
-       deploy deploy-shell deploy-superuser deploy-migrate deploy-seed deploy-logs
+       deploy deploy-shell deploy-superuser deploy-migrate deploy-seed deploy-seed-force deploy-sync-gallery deploy-logs
 
 COMPOSE := docker compose
 BACKEND := backend
@@ -173,6 +173,13 @@ deploy-migrate: ## Run migrations on production
 deploy-seed: ## Pull latest code, rebuild backend, seed gallery templates, and sync org copies (set INCLUDE_MODIFIED=1 to overwrite modified provided templates)
 	@ssh $(PROD_HOST) "cd $(PROD_DIR) && git pull origin main && $(PROD_COMPOSE) up --build -d backend && $(PROD_COMPOSE) exec -T backend python manage.py seed_gallery && $(PROD_COMPOSE) exec -T backend python manage.py sync_gallery_to_orgs $(SYNC_GALLERY_FLAGS)"
 	@echo "Gallery templates refreshed and synced on production."
+
+deploy-seed-force: ## Same as deploy-seed, but always overwrites modified provided template copies
+	@$(MAKE) deploy-seed INCLUDE_MODIFIED=1
+
+deploy-sync-gallery: ## Pull latest code, rebuild backend, and sync gallery copies on production (set INCLUDE_MODIFIED=1 to overwrite modified provided templates)
+	@ssh $(PROD_HOST) "cd $(PROD_DIR) && git pull origin main && $(PROD_COMPOSE) up --build -d backend && $(PROD_COMPOSE) exec -T backend python manage.py sync_gallery_to_orgs $(SYNC_GALLERY_FLAGS)"
+	@echo "Gallery template copies synced on production."
 
 deploy: ## Deploy latest changes to production
 	@echo "Pushing to origin..."

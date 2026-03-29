@@ -339,7 +339,12 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
           const svgSize = Math.round(iSize * 0.5);
           const svgStr = lucideSvgString(block.data.iconName, svgSize, iColor);
           const dataUri = svgStr ? `data:image/svg+xml;base64,${btoa(svgStr)}` : '';
-          iconHtml = dataUri ? `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 12px;"><tr><td style="width: ${iSize}px; height: ${iSize}px; border-radius: ${iRadius}%; background-color: ${iBg}; text-align: center; vertical-align: middle;"><img src="${dataUri}" width="${svgSize}" height="${svgSize}" alt="" style="display: inline-block; vertical-align: middle;" /></td></tr></table>` : '';
+          if (dataUri) {
+            iconHtml = `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 12px;"><tr><td style="width: ${iSize}px; height: ${iSize}px; border-radius: ${iRadius}%; background-color: ${iBg}; text-align: center; vertical-align: middle;"><img src="${dataUri}" width="${svgSize}" height="${svgSize}" alt="" style="display: inline-block; vertical-align: middle;" /></td></tr></table>`;
+          } else {
+            const emojiSize = Math.round(iSize * 0.55);
+            iconHtml = `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 12px;"><tr><td style="width: ${iSize}px; height: ${iSize}px; border-radius: ${iRadius}%; background-color: ${iBg}; text-align: center; vertical-align: middle; font-size: ${emojiSize}px; line-height: ${iSize}px;">${block.data.iconEmoji || '✨'}</td></tr></table>`;
+          }
         } else {
           const iBg = block.style.iconBackgroundColor || '#eef2ff';
           const emojiSize = Math.round(iSize * 0.55);

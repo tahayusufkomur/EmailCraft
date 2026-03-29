@@ -1724,10 +1724,15 @@ LUCIDE_PATHS: dict[str, str] = {
     'writing': '<path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="M15 5l4 4"/>',
 }
 
+ICON_NAME_ALIASES: dict[str, str] = {
+    'home': 'house',
+}
+
 
 def lucide_svg_string(name: str, size: int, color: str, stroke_width: float = 2) -> str:
     """Generate a complete SVG string for a Lucide icon."""
-    paths = LUCIDE_PATHS.get(name, '')
+    icon_name = ICON_NAME_ALIASES.get(name, name)
+    paths = LUCIDE_PATHS.get(icon_name, '')
     if not paths:
         return ''
     color_safe = html_module.escape(color)
