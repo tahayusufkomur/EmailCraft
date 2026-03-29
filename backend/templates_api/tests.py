@@ -391,6 +391,23 @@ class TestSyncGalleryToOrgs(TestCase):
         copy.refresh_from_db()
         self.assertEqual(copy.json_data, {'version': 1, 'body': 'custom'})
 
+    def test_sync_updates_modified_copies_when_include_modified(self):
+        from templates_api.services import provision_templates_for_org
+        provision_templates_for_org(self.org)
+        copy = Template.objects.for_org(self.org).get(source_template=self.gallery)
+        copy.json_data = {'version': 1, 'body': 'custom'}
+        copy.is_modified = True
+        copy.save()
+
+        self.gallery.json_data = {'version': 2, 'body': 'updated'}
+        self.gallery.save()
+
+        out = StringIO()
+        call_command('sync_gallery_to_orgs', include_modified=True, stdout=out)
+
+        copy.refresh_from_db()
+        self.assertEqual(copy.json_data, {'version': 2, 'body': 'updated'})
+
 
 from rest_framework.test import APIClient
 from core.models import ApiKey

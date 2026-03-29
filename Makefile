@@ -3,7 +3,7 @@
        build build-frontend-site build-frontend-builder \
        migrate makemigrations \
        test test-backend lint-frontend lint-frontend-site lint-frontend-builder \
-       seed demo-org create-key logs-backend shell dbshell superuser clean reset setup \
+       seed seed-gallery sync-gallery demo-org create-key logs-backend shell dbshell superuser clean reset setup \
        install-frontend-local install-frontend-site-local install-frontend-builder-local \
        deploy deploy-shell deploy-superuser deploy-migrate deploy-seed deploy-logs
 
@@ -94,8 +94,11 @@ seed: ## Seed gallery templates + create demo org with provisioned templates
 	@$(MANAGE) seed_gallery
 	@$(MANAGE) create_demo_org
 
-seed-gallery: ## Seed/update 20 gallery templates from templates.json
+seed-gallery: ## Seed/update gallery templates
 	@$(MANAGE) seed_gallery
+
+sync-gallery: ## Sync gallery template updates to organization-provided copies
+	@$(MANAGE) sync_gallery_to_orgs $(SYNC_GALLERY_FLAGS)
 
 demo-org: ## Create demo org (usage: make demo-org ORG="Name" EMAIL="a@b.com" ENV=test API_KEY=mc_test_... USERNAME=demo USER_EMAIL=demo-user@mailcraft.dev PASSWORD=demo12345)
 	@$(MANAGE) create_demo_org \
@@ -156,6 +159,7 @@ install-frontend-builder-local: ## Install builder deps on host
 PROD_HOST := root@46.224.76.186
 PROD_DIR := /opt/mailcraft
 PROD_COMPOSE := docker compose -f docker/docker-compose.prod.yml --env-file .env.prod
+SYNC_GALLERY_FLAGS := $(if $(INCLUDE_MODIFIED),--include-modified,)
 
 deploy-shell: ## Open Django shell on production
 	@ssh $(PROD_HOST) -t "cd $(PROD_DIR) && $(PROD_COMPOSE) exec backend python manage.py shell"
@@ -166,9 +170,9 @@ deploy-superuser: ## Create superuser on production
 deploy-migrate: ## Run migrations on production
 	@ssh $(PROD_HOST) "cd $(PROD_DIR) && $(PROD_COMPOSE) exec -T backend python manage.py migrate"
 
-deploy-seed: ## Seed gallery templates on production
-	@ssh $(PROD_HOST) "cd $(PROD_DIR) && $(PROD_COMPOSE) exec -T backend python manage.py seed_gallery"
-	@echo "Gallery templates seeded on production."
+deploy-seed: ## Pull latest code, rebuild backend, seed gallery templates, and sync org copies (set INCLUDE_MODIFIED=1 to overwrite modified provided templates)
+	@ssh $(PROD_HOST) "cd $(PROD_DIR) && git pull origin main && $(PROD_COMPOSE) up --build -d backend && $(PROD_COMPOSE) exec -T backend python manage.py seed_gallery && $(PROD_COMPOSE) exec -T backend python manage.py sync_gallery_to_orgs $(SYNC_GALLERY_FLAGS)"
+	@echo "Gallery templates refreshed and synced on production."
 
 deploy: ## Deploy latest changes to production
 	@echo "Pushing to origin..."
