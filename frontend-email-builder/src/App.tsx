@@ -50,6 +50,38 @@ const normalizeVariables = (value: unknown): Variable[] => {
     }));
 };
 
+/**
+ * Parse variables from URL query param.
+ * Supports two formats:
+ *   ?variables=first_name,last_name,email  (simple: keys only, labels auto-generated)
+ *   ?variables=[{"key":"first_name","label":"First Name"}]  (JSON: full control)
+ */
+const parseVariablesFromParam = (param: string | null): Variable[] => {
+  if (!param) return [];
+  const trimmed = param.trim();
+
+  // JSON array format
+  if (trimmed.startsWith('[')) {
+    try {
+      const parsed = JSON.parse(trimmed);
+      return normalizeVariables(parsed);
+    } catch {
+      return [];
+    }
+  }
+
+  // Simple comma-separated keys
+  return trimmed
+    .split(',')
+    .map((k) => k.trim())
+    .filter(Boolean)
+    .map((key) => ({
+      key,
+      label: key.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+      type: 'text' as const,
+    }));
+};
+
 const asOptionalBoolean = (value: unknown): boolean | undefined => {
   if (typeof value === 'boolean') return value;
   return undefined;
@@ -362,6 +394,12 @@ function App() {
     if (contextFromQuery.chromeColor) queryColorOverrides.chromeColor = contextFromQuery.chromeColor;
     if (contextFromQuery.canvasColor) queryColorOverrides.canvasColor = contextFromQuery.canvasColor;
 
+    // Parse variables from URL param — these override session/org variables
+    const variablesFromQuery = parseVariablesFromParam(params.get('variables'));
+    if (variablesFromQuery.length > 0) {
+      setConfig({ variables: variablesFromQuery });
+    }
+
     const syncSessionConfig = async (apiKey: string) => {
       try {
         const session = await api.createSession(window.location.origin);
@@ -377,7 +415,10 @@ function App() {
           apiKey,
           sessionToken: session.token,
           plan: session.config.plan,
-          variables: normalizeVariables(session.config.variables),
+          // URL variables take priority over session/org variables
+          variables: variablesFromQuery.length > 0
+            ? variablesFromQuery
+            : normalizeVariables(session.config.variables),
           maxUploadSize: session.config.max_upload_size_bytes,
           maxMediaFilesPerUpload: session.config.max_media_files_per_upload,
           storageUsed: session.config.storage_used_bytes,
