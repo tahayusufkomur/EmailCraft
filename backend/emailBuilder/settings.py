@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'core',
     'templates_api',
+    'django_email_builder',
 ]
 
 MIDDLEWARE = [
@@ -281,3 +282,13 @@ DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@contentor.app
 ADMIN_OTP_EXPIRY_SECONDS = 300  # 5 minutes
 ADMIN_LOGIN_MAX_ATTEMPTS = 5
 ADMIN_LOGIN_RATE_WINDOW_MINUTES = 15
+
+# --- Email Builder (campaign emails via admin) ---
+EMAIL_BUILDER_API_KEY = os.environ.get('EMAIL_BUILDER_API_KEY', '')
+EMAIL_BUILDER_URL = os.environ.get('EMAIL_BUILDER_URL', 'https://mailcraft.contentor.app')
+EMAIL_BUILDER_VARIABLES = {
+    'first_name': 'first_name',
+    'last_name': 'last_name',
+    'email': 'email',
+    'username': 'username',
+}
