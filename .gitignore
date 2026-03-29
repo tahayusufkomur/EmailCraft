@@ -19,3 +19,4 @@ stitch/
 infrastructure/.env
 infrastructure/.terraform/
 infrastructure/*.tfstate*
+superpowers/
