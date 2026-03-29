@@ -3,6 +3,10 @@
         max_size 50MB
     }
 
+    handle /api/v1/* {
+        reverse_proxy backend:8000
+    }
+
     handle_path /api/* {
         rewrite * /api/v1{uri}
         reverse_proxy backend:8000
