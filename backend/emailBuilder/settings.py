@@ -288,8 +288,5 @@ EMAIL_BUILDER_API_KEY = os.environ.get('EMAIL_BUILDER_API_KEY', '')
 EMAIL_BUILDER_URL = os.environ.get('EMAIL_BUILDER_URL', 'https://mailcraft.contentor.app')
 EMAIL_BUILDER_API_URL = os.environ.get('EMAIL_BUILDER_API_URL', EMAIL_BUILDER_URL)
 EMAIL_BUILDER_VARIABLES = {
-    'first_name': 'first_name',
-    'last_name': 'last_name',
-    'email': 'email',
-    'username': 'username',
+    'email': 'email'
 }
