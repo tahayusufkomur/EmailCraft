@@ -77,78 +77,12 @@ export function HeroSection() {
             variants={fadeUp}
             className="mt-16 w-full max-w-4xl"
           >
-            <div className="animate-float shadow-glow rounded-xl border border-border/60 bg-background/80 backdrop-blur-sm">
-              <div className="flex items-center gap-2 border-b border-border/60 px-4 py-3">
-                <div className="flex gap-1.5">
-                  <span className="h-3 w-3 rounded-full bg-[#FF5F56]" />
-                  <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
-                  <span className="h-3 w-3 rounded-full bg-[#27C93F]" />
-                </div>
-                <div className="mx-auto flex-1 max-w-sm">
-                  <div className="rounded-md bg-muted/60 px-3 py-1 text-center text-xs text-muted-foreground">
-                    mailcraft.contentor.app/builder
-                  </div>
-                </div>
-                <div className="w-[52px]" />
-              </div>
-
-              <div className="p-3">
-                <div className="grid h-64 grid-cols-[180px_1fr_200px] gap-3 sm:h-72 md:h-80">
-                  <div className="hidden rounded-lg bg-white/[0.07] p-3 dark:bg-white/[0.04] sm:block">
-                    <div className="mb-3 h-2 w-16 rounded bg-white/10" />
-                    <div className="space-y-2">
-                      {['Text', 'Image', 'Button', 'Divider', 'Columns', 'Social'].map((label) => (
-                        <div
-                          key={label}
-                          className="flex items-center gap-2 rounded-md bg-white/[0.06] px-2 py-1.5 text-[10px] text-muted-foreground dark:bg-white/[0.03]"
-                        >
-                          <div className="h-3 w-3 rounded bg-primary/30" />
-                          {label}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col items-center justify-center rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10">
-                    <div className="mb-4 h-3 w-2/3 rounded bg-white/10" />
-                    <div className="mb-2 h-2 w-1/2 rounded bg-white/[0.07]" />
-                    <div className="mb-6 h-2 w-1/3 rounded bg-white/[0.07]" />
-                    <p className="text-sm font-medium text-muted-foreground/70">
-                      Email Builder Preview
-                    </p>
-                    <div className="mt-4 flex gap-2">
-                      <div className="h-6 w-20 rounded bg-primary/20" />
-                      <div className="h-6 w-16 rounded bg-white/[0.06]" />
-                    </div>
-                  </div>
-
-                  <div className="hidden rounded-lg bg-white/[0.07] p-3 dark:bg-white/[0.04] md:block">
-                    <div className="mb-3 h-2 w-12 rounded bg-white/10" />
-                    <div className="space-y-3">
-                      <div>
-                        <div className="mb-1 h-1.5 w-10 rounded bg-white/10" />
-                        <div className="h-6 rounded bg-white/[0.06]" />
-                      </div>
-                      <div>
-                        <div className="mb-1 h-1.5 w-14 rounded bg-white/10" />
-                        <div className="h-6 rounded bg-white/[0.06]" />
-                      </div>
-                      <div>
-                        <div className="mb-1 h-1.5 w-8 rounded bg-white/10" />
-                        <div className="flex gap-1">
-                          <div className="h-5 w-5 rounded bg-primary/20" />
-                          <div className="h-5 w-5 rounded bg-secondary/20" />
-                          <div className="h-5 w-5 rounded bg-white/[0.06]" />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="mb-1 h-1.5 w-12 rounded bg-white/10" />
-                        <div className="h-6 rounded bg-white/[0.06]" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="animate-float shadow-glow overflow-hidden rounded-xl border border-border/60">
+              <img
+                src="/screenshots/builder.png"
+                alt="MailCraft email builder with drag-and-drop template editor"
+                className="w-full"
+              />
             </div>
           </motion.div>
         </motion.div>
