@@ -71,6 +71,12 @@ export function BlockWrapper({ block, children }: Props) {
     deleteBlock(block.id);
   };
 
+  const handleFocus = (e: React.FocusEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      selectBlock(block.id);
+    }
+  };
+
   const handleDuplicate = (e: React.MouseEvent) => {
     e.stopPropagation();
     duplicateBlock(block.id);
@@ -101,8 +107,11 @@ export function BlockWrapper({ block, children }: Props) {
     <div
       ref={setNodeRef}
       style={style}
+      data-block-id={block.id}
+      tabIndex={0}
       className={`block-wrapper ${isSelected ? 'selected' : ''} ${isHovered ? 'hovered' : ''} ${showInsertionIndicator ? 'insertion-indicator' : ''}`}
       onClick={handleClick}
+      onFocus={handleFocus}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

@@ -21,6 +21,8 @@ const EMPTY_TEMPLATE: EmailTemplate = {
   footer: { blocks: [] },
 };
 
+const MAX_HISTORY_SIZE = 100;
+
 function findBlockById(blocks: Block[], id: string): Block | null {
   for (const block of blocks) {
     if (block.id === id) return block;
@@ -139,6 +141,42 @@ function duplicateBlockInList(
   return { blocks: changed ? output : blocks, duplicatedId, changed };
 }
 
+function cloneTemplate(template: EmailTemplate): EmailTemplate {
+  return structuredClone(template);
+}
+
+function trimPastHistory(history: EmailTemplate[]): EmailTemplate[] {
+  if (history.length <= MAX_HISTORY_SIZE) return history;
+  return history.slice(history.length - MAX_HISTORY_SIZE);
+}
+
+function trimFutureHistory(history: EmailTemplate[]): EmailTemplate[] {
+  if (history.length <= MAX_HISTORY_SIZE) return history;
+  return history.slice(0, MAX_HISTORY_SIZE);
+}
+
+function templateHasBlock(template: EmailTemplate, id: string | null): boolean {
+  if (!id) return false;
+  return Boolean(
+    findBlockById(template.header.blocks, id)
+    || findBlockById(template.body.blocks, id)
+    || findBlockById(template.footer.blocks, id),
+  );
+}
+
+function flattenBlockIds(blocks: Block[]): string[] {
+  const ids: string[] = [];
+  for (const block of blocks) {
+    ids.push(block.id);
+    if (block.type === 'columns') {
+      for (const column of block.data.columns) {
+        ids.push(...flattenBlockIds(column.blocks));
+      }
+    }
+  }
+  return ids;
+}
+
 interface EditorState {
   template: EmailTemplate;
   selectedBlockId: string | null;
@@ -146,6 +184,8 @@ interface EditorState {
   isDirty: boolean;
   activeSection: 'header' | 'body' | 'footer';
   tiptapEditor: Editor | null;
+  historyPast: EmailTemplate[];
+  historyFuture: EmailTemplate[];
 
   // Actions
   hoverBlock: (id: string | null) => void;
@@ -168,10 +208,13 @@ interface EditorState {
   resetTemplate: () => void;
   setActiveSection: (section: 'header' | 'body' | 'footer') => void;
   markClean: () => void;
+  undo: () => void;
+  redo: () => void;
 
   // Getters
   getSelectedBlock: () => Block | null;
   getBodyBlocks: () => Block[];
+  getSelectableBlockIds: () => string[];
 }
 
 export const useEditorStore = create<EditorState>((set, get) => ({
@@ -181,6 +224,8 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   isDirty: false,
   activeSection: 'body',
   tiptapEditor: null,
+  historyPast: [],
+  historyFuture: [],
 
   addBlock: (block, index) => {
     set((state) => {
@@ -191,13 +236,17 @@ export const useEditorStore = create<EditorState>((set, get) => ({
       } else {
         blocks.push(block);
       }
+      const nextTemplate = {
+        ...state.template,
+        [section]: { blocks },
+      };
+      const nextSelectedBlockId = block.id;
       return {
-        template: {
-          ...state.template,
-          [section]: { blocks },
-        },
+        template: nextTemplate,
         isDirty: true,
-        selectedBlockId: block.id,
+        selectedBlockId: nextSelectedBlockId,
+        historyPast: trimPastHistory([...state.historyPast, cloneTemplate(state.template)]),
+        historyFuture: [],
       };
     });
   },
@@ -211,15 +260,19 @@ export const useEditorStore = create<EditorState>((set, get) => ({
 
       if (!inserted) return state;
 
+      const nextTemplate = {
+        ...state.template,
+        header: { blocks: headerResult.blocks },
+        body: { blocks: bodyResult.blocks },
+        footer: { blocks: footerResult.blocks },
+      };
+
       return {
-        template: {
-          ...state.template,
-          header: { blocks: headerResult.blocks },
-          body: { blocks: bodyResult.blocks },
-          footer: { blocks: footerResult.blocks },
-        },
+        template: nextTemplate,
         isDirty: true,
         selectedBlockId: block.id,
+        historyPast: trimPastHistory([...state.historyPast, cloneTemplate(state.template)]),
+        historyFuture: [],
       };
     });
   },
@@ -246,14 +299,17 @@ export const useEditorStore = create<EditorState>((set, get) => ({
           return b;
         });
 
+      const nextTemplate = {
+        ...state.template,
+        header: { blocks: updateInBlocks(state.template.header.blocks) },
+        body: { blocks: updateInBlocks(state.template.body.blocks) },
+        footer: { blocks: updateInBlocks(state.template.footer.blocks) },
+      };
       return {
-        template: {
-          ...state.template,
-          header: { blocks: updateInBlocks(state.template.header.blocks) },
-          body: { blocks: updateInBlocks(state.template.body.blocks) },
-          footer: { blocks: updateInBlocks(state.template.footer.blocks) },
-        },
+        template: nextTemplate,
         isDirty: true,
+        historyPast: trimPastHistory([...state.historyPast, cloneTemplate(state.template)]),
+        historyFuture: [],
       };
     });
   },
@@ -302,22 +358,29 @@ export const useEditorStore = create<EditorState>((set, get) => ({
         },
         isDirty: true,
         selectedBlockId: stillSelected ? state.selectedBlockId : null,
+        historyPast: trimPastHistory([...state.historyPast, cloneTemplate(state.template)]),
+        historyFuture: [],
       };
     });
   },
 
   moveBlock: (fromIndex, toIndex) => {
     set((state) => {
+      if (fromIndex === toIndex) return state;
       const section = state.activeSection;
       const blocks = [...state.template[section].blocks];
       const [moved] = blocks.splice(fromIndex, 1);
+      if (!moved) return state;
       blocks.splice(toIndex, 0, moved);
+      const nextTemplate = {
+        ...state.template,
+        [section]: { blocks },
+      };
       return {
-        template: {
-          ...state.template,
-          [section]: { blocks },
-        },
+        template: nextTemplate,
         isDirty: true,
+        historyPast: trimPastHistory([...state.historyPast, cloneTemplate(state.template)]),
+        historyFuture: [],
       };
     });
   },
@@ -344,14 +407,18 @@ export const useEditorStore = create<EditorState>((set, get) => ({
           return { ...b, data: { ...b.data, columns: updatedColumns } };
         });
 
+      if (fromIndex === toIndex) return state;
+      const nextTemplate = {
+        ...state.template,
+        header: { blocks: moveInBlocks(state.template.header.blocks) },
+        body: { blocks: moveInBlocks(state.template.body.blocks) },
+        footer: { blocks: moveInBlocks(state.template.footer.blocks) },
+      };
       return {
-        template: {
-          ...state.template,
-          header: { blocks: moveInBlocks(state.template.header.blocks) },
-          body: { blocks: moveInBlocks(state.template.body.blocks) },
-          footer: { blocks: moveInBlocks(state.template.footer.blocks) },
-        },
+        template: nextTemplate,
         isDirty: true,
+        historyPast: trimPastHistory([...state.historyPast, cloneTemplate(state.template)]),
+        historyFuture: [],
       };
     });
   },
@@ -421,14 +488,20 @@ export const useEditorStore = create<EditorState>((set, get) => ({
         footerBlocks = addToColumn(footerBlocks);
       }
 
+      if (!movedBlock) return state;
+
+      const nextTemplate = {
+        ...state.template,
+        header: { blocks: headerBlocks },
+        body: { blocks: bodyBlocks },
+        footer: { blocks: footerBlocks },
+      };
+
       return {
-        template: {
-          ...state.template,
-          header: { blocks: headerBlocks },
-          body: { blocks: bodyBlocks },
-          footer: { blocks: footerBlocks },
-        },
+        template: nextTemplate,
         isDirty: true,
+        historyPast: trimPastHistory([...state.historyPast, cloneTemplate(state.template)]),
+        historyFuture: [],
       };
     });
   },
@@ -447,15 +520,19 @@ export const useEditorStore = create<EditorState>((set, get) => ({
 
       if (!duplicatedId) return state;
 
+      const nextTemplate = {
+        ...state.template,
+        header: { blocks: header.blocks },
+        body: { blocks: body.blocks },
+        footer: { blocks: footer.blocks },
+      };
+
       return {
-        template: {
-          ...state.template,
-          header: { blocks: header.blocks },
-          body: { blocks: body.blocks },
-          footer: { blocks: footer.blocks },
-        },
+        template: nextTemplate,
         isDirty: true,
         selectedBlockId: duplicatedId,
+        historyPast: trimPastHistory([...state.historyPast, cloneTemplate(state.template)]),
+        historyFuture: [],
       };
     });
   },
@@ -467,6 +544,8 @@ export const useEditorStore = create<EditorState>((set, get) => ({
         settings: { ...state.template.settings, ...settings },
       },
       isDirty: true,
+      historyPast: trimPastHistory([...state.historyPast, cloneTemplate(state.template)]),
+      historyFuture: [],
     }));
   },
 
@@ -504,10 +583,58 @@ export const useEditorStore = create<EditorState>((set, get) => ({
     },
     isDirty: false,
     selectedBlockId: null,
+    historyPast: [],
+    historyFuture: [],
   })),
-  resetTemplate: () => set({ template: EMPTY_TEMPLATE, isDirty: false, selectedBlockId: null }),
+  resetTemplate: () => set({
+    template: EMPTY_TEMPLATE,
+    isDirty: false,
+    selectedBlockId: null,
+    historyPast: [],
+    historyFuture: [],
+  }),
   setActiveSection: (section) => set({ activeSection: section }),
   markClean: () => set({ isDirty: false }),
+
+  undo: () => {
+    set((state) => {
+      if (state.historyPast.length === 0) return state;
+      const previousTemplate = state.historyPast[state.historyPast.length - 1];
+      if (!previousTemplate) return state;
+
+      const nextPast = state.historyPast.slice(0, -1);
+      const nextFuture = trimFutureHistory([cloneTemplate(state.template), ...state.historyFuture]);
+      const nextTemplate = cloneTemplate(previousTemplate);
+      const nextSelected = templateHasBlock(nextTemplate, state.selectedBlockId) ? state.selectedBlockId : null;
+
+      return {
+        template: nextTemplate,
+        selectedBlockId: nextSelected,
+        isDirty: true,
+        historyPast: nextPast,
+        historyFuture: nextFuture,
+      };
+    });
+  },
+
+  redo: () => {
+    set((state) => {
+      if (state.historyFuture.length === 0) return state;
+      const [nextTemplateRaw, ...remainingFuture] = state.historyFuture;
+      if (!nextTemplateRaw) return state;
+
+      const nextTemplate = cloneTemplate(nextTemplateRaw);
+      const nextSelected = templateHasBlock(nextTemplate, state.selectedBlockId) ? state.selectedBlockId : null;
+
+      return {
+        template: nextTemplate,
+        selectedBlockId: nextSelected,
+        isDirty: true,
+        historyPast: trimPastHistory([...state.historyPast, cloneTemplate(state.template)]),
+        historyFuture: remainingFuture,
+      };
+    });
+  },
 
   getSelectedBlock: () => {
     const state = get();
@@ -521,4 +648,9 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   },
 
   getBodyBlocks: () => get().template.body.blocks,
+
+  getSelectableBlockIds: () => {
+    const state = get();
+    return flattenBlockIds(state.template.body.blocks);
+  },
 }));

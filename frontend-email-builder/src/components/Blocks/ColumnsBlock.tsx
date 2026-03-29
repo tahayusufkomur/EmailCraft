@@ -54,9 +54,15 @@ function NestedBlockWrapper({ block, parentBlockId, columnId }: NestedBlockWrapp
     <div
       ref={setNodeRef}
       style={style}
+      data-block-id={block.id}
+      tabIndex={0}
       className={`block-wrapper nested-block-wrapper ${isSelected ? 'selected' : ''} ${isHovered ? 'hovered' : ''}`}
       onClick={(e) => {
         e.stopPropagation();
+        selectBlock(block.id);
+      }}
+      onFocus={(e) => {
+        if (e.target !== e.currentTarget) return;
         selectBlock(block.id);
       }}
       onMouseEnter={(e) => {

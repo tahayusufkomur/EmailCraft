@@ -323,11 +323,39 @@ function emitSaveEvent(template: EmailTemplate) {
   sendSaveEvent(html, template);
 }
 
+const EDITABLE_TARGET_SELECTOR = 'input, textarea, select, button, [contenteditable="true"], .ProseMirror';
+
+function isEditableTarget(target: EventTarget | null): boolean {
+  if (!(target instanceof HTMLElement)) return false;
+  if (target.isContentEditable) return true;
+  return Boolean(target.closest(EDITABLE_TARGET_SELECTOR));
+}
+
+function isCanvasNavigationTarget(target: EventTarget | null): boolean {
+  if (!(target instanceof HTMLElement)) {
+    return target === document;
+  }
+  if (target === document.body) return true;
+  return Boolean(target.closest('.canvas-area'));
+}
+
+function focusBlockWrapper(blockId: string) {
+  const blockEl = document.querySelector<HTMLElement>(`.block-wrapper[data-block-id="${blockId}"]`);
+  blockEl?.focus();
+}
+
 function App() {
   const isDirty = useEditorStore((s) => s.isDirty);
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
+  const selectedBlockId = useEditorStore((s) => s.selectedBlockId);
   const selectedBlock = useEditorStore((s) => s.getSelectedBlock());
+  const selectBlock = useEditorStore((s) => s.selectBlock);
   const updateBlock = useEditorStore((s) => s.updateBlock);
+  const undo = useEditorStore((s) => s.undo);
+  const redo = useEditorStore((s) => s.redo);
+  const getSelectableBlockIds = useEditorStore((s) => s.getSelectableBlockIds);
+  const canUndo = useEditorStore((s) => s.historyPast.length > 0);
+  const canRedo = useEditorStore((s) => s.historyFuture.length > 0);
   const applyOrganizationBackground = useEditorStore((s) => s.applyOrganizationBackground);
   const showLogo = useConfigStore((s) => s.showLogo);
   const showExportHtmlButton = useConfigStore((s) => s.showExportHtmlButton);
@@ -348,6 +376,56 @@ function App() {
   const activeThemePreset = getBuilderThemePreset(builderTheme);
 
   useAutoSave();
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const hasPrimaryModifier = event.metaKey || event.ctrlKey;
+      const key = event.key.toLowerCase();
+      const editableTarget = isEditableTarget(event.target);
+
+      if (hasPrimaryModifier && !event.altKey && key === 'z') {
+        if (editableTarget) return;
+        event.preventDefault();
+        if (event.shiftKey) {
+          if (canRedo) redo();
+          return;
+        }
+        if (canUndo) undo();
+        return;
+      }
+
+      if (hasPrimaryModifier && !event.altKey && key === 'y') {
+        if (editableTarget) return;
+        event.preventDefault();
+        if (canRedo) redo();
+        return;
+      }
+
+      if (event.key !== 'Tab' || hasPrimaryModifier || event.altKey) return;
+      if (editableTarget) return;
+      if (!isCanvasNavigationTarget(event.target)) return;
+
+      const orderedBlockIds = getSelectableBlockIds();
+      if (orderedBlockIds.length === 0) return;
+
+      event.preventDefault();
+
+      const currentIndex = selectedBlockId ? orderedBlockIds.indexOf(selectedBlockId) : -1;
+      const nextIndex = event.shiftKey
+        ? (currentIndex <= 0 ? orderedBlockIds.length - 1 : currentIndex - 1)
+        : (currentIndex === -1 || currentIndex >= orderedBlockIds.length - 1 ? 0 : currentIndex + 1);
+      const nextBlockId = orderedBlockIds[nextIndex];
+      if (!nextBlockId) return;
+
+      selectBlock(nextBlockId);
+      window.requestAnimationFrame(() => focusBlockWrapper(nextBlockId));
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [canRedo, canUndo, getSelectableBlockIds, redo, selectBlock, selectedBlockId, undo]);
 
   useEffect(() => {
     applyOrganizationBackground(
