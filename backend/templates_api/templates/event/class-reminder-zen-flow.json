@@ -34,7 +34,7 @@
               "left": 32
             },
             "alignment": "center",
-            "color": "#5ee8c5",
+            "color": "#137a62",
             "fontSize": 13,
             "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
             "fontWeight": 700,
@@ -60,12 +60,12 @@
           "style": {
             "height": 360,
             "overlayColor": "#0a1a16",
-            "overlayOpacity": 0.55,
+            "overlayOpacity": 0.6,
             "headingColor": "#e8f5f0",
             "headingFontSize": 32,
             "headingFontWeight": 700,
             "headingFontFamily": "'Noto Serif', Georgia, serif",
-            "subheadingColor": "#7a9e93",
+            "subheadingColor": "#ffffff",
             "buttonBackgroundColor": "#5ee8c5",
             "buttonTextColor": "#0a1a16",
             "buttonBorderRadius": 999,

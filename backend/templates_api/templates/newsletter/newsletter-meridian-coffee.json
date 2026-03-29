@@ -68,12 +68,12 @@
             },
             "height": 360,
             "overlayColor": "#0f0906",
-            "overlayOpacity": 0.55,
+            "overlayOpacity": 0.6,
             "headingColor": "#ffffff",
             "headingFontSize": 34,
             "headingFontFamily": "'Noto Serif', Georgia, serif",
             "headingFontWeight": 700,
-            "subheadingColor": "#8a7b6b",
+            "subheadingColor": "#ffffff",
             "contentAlignment": "center",
             "verticalAlignment": "center"
           }
@@ -259,7 +259,7 @@
                     "id": "m2-c4b1",
                     "type": "text",
                     "data": {
-                      "html": "<h4 style=\"margin:0 0 6px 0;font-size:11px;color:#d4a54a;text-transform:uppercase;letter-spacing:2px;font-weight:700;font-family:'Work Sans',Arial,sans-serif;\">Processing</h4><h3 style=\"margin:0 0 10px 0;font-size:18px;color:#1a1c1a;font-weight:700;font-family:'Noto Serif',Georgia,serif;line-height:1.3;\">The Washed Method</h3><p style=\"margin:0;font-size:13px;color:#504442;line-height:1.75;font-family:'Manrope',Arial,sans-serif;\">After harvest, the coffee cherry is depulped within hours, then fermented in clean water tanks for 36–48 hours. This careful washed process strips away the fruit mucilage, allowing the natural characteristics of the bean to shine through with exceptional clarity.</p><p style=\"margin:12px 0 0 0;font-size:13px;color:#504442;line-height:1.75;font-family:'Manrope',Arial,sans-serif;\">The result is a cup that is clean, bright, and unmistakably Ethiopian — every sip a direct expression of place, soil, and skill.</p>",
+                      "html": "<h4 style=\"margin:0 0 6px 0;font-size:11px;color:#8b5e1a;text-transform:uppercase;letter-spacing:2px;font-weight:700;font-family:'Work Sans',Arial,sans-serif;\">Processing</h4><h3 style=\"margin:0 0 10px 0;font-size:18px;color:#1a1c1a;font-weight:700;font-family:'Noto Serif',Georgia,serif;line-height:1.3;\">The Washed Method</h3><p style=\"margin:0;font-size:13px;color:#504442;line-height:1.75;font-family:'Manrope',Arial,sans-serif;\">After harvest, the coffee cherry is depulped within hours, then fermented in clean water tanks for 36–48 hours. This careful washed process strips away the fruit mucilage, allowing the natural characteristics of the bean to shine through with exceptional clarity.</p><p style=\"margin:12px 0 0 0;font-size:13px;color:#504442;line-height:1.75;font-family:'Manrope',Arial,sans-serif;\">The result is a cup that is clean, bright, and unmistakably Ethiopian — every sip a direct expression of place, soil, and skill.</p>",
                       "variables": []
                     },
                     "style": {
@@ -393,7 +393,9 @@
             "buttonLetterSpacing": 1,
             "iconSize": 48,
             "iconBackgroundColor": "#ffffff",
-            "iconColor": "#d4a54a"
+            "iconColor": "#d4a54a",
+            "buttonTextColor": "#1a110b",
+            "badgeTextColor": "#1a110b"
           }
         },
         {
@@ -443,7 +445,7 @@
             "innerPadding": 24,
             "backgroundColor": "#ffffff",
             "borderRadius": 12,
-            "iconColor": "#d4a54a",
+            "iconColor": "#8b5e1a",
             "textColor": "#1a1c1a",
             "textFontFamily": "'Manrope', Arial, sans-serif",
             "textFontSize": 15,

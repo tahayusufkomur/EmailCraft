@@ -31,7 +31,7 @@
               "left": 32
             },
             "alignment": "center",
-            "color": "#5ee8c5",
+            "color": "#1f2937",
             "fontSize": 13,
             "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
             "fontWeight": 700,
@@ -62,12 +62,12 @@
             },
             "height": 360,
             "overlayColor": "#0a1a16",
-            "overlayOpacity": 0.55,
+            "overlayOpacity": 0.6,
             "headingColor": "#ffffff",
             "headingFontSize": 36,
             "headingFontFamily": "'Noto Serif', Georgia, serif",
             "headingFontWeight": 700,
-            "subheadingColor": "#ffffffcc",
+            "subheadingColor": "#ffffff",
             "buttonBackgroundColor": "#5ee8c5",
             "buttonTextColor": "#0a1a16",
             "buttonBorderRadius": 999,
@@ -445,7 +445,7 @@
           "id": "re-f1",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#7a9e93;\"><a href=\"#\" style=\"color:#7a9e93;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#7a9e93;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#7a9e93;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#7a9e93;text-decoration:underline;\">Unsubscribe</a></p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:13px;color:#2f6f62;\"><a href=\"#\" style=\"color:#2f6f62;\">Instagram</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#2f6f62;\">YouTube</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#2f6f62;\">Privacy Policy</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href=\"#\" style=\"color:#2f6f62;text-decoration:underline;\">Unsubscribe</a></p>",
             "variables": []
           },
           "style": {
@@ -462,7 +462,7 @@
           "id": "re-f2",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7a9e93;\">© 2025 Zenith Wellness. All rights reserved.</p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#2f6f62;\">© 2025 Zenith Wellness. All rights reserved.</p>",
             "variables": []
           },
           "style": {

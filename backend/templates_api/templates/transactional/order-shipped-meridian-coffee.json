@@ -67,12 +67,12 @@
             },
             "height": 360,
             "overlayColor": "#0f0906",
-            "overlayOpacity": 0.55,
+            "overlayOpacity": 0.6,
             "headingColor": "#f5f0e8",
             "headingFontSize": 32,
             "headingFontWeight": 700,
             "headingFontFamily": "'Noto Serif', Georgia, serif",
-            "subheadingColor": "#8a7b6b",
+            "subheadingColor": "#ffffff",
             "buttonBackgroundColor": "#d4a54a",
             "buttonTextColor": "#0f0906",
             "buttonBorderRadius": 999,
@@ -151,7 +151,9 @@
                       "buttonLetterSpacing": 1,
                       "iconSize": 40,
                       "iconBackgroundColor": "#ffffff",
-                      "iconColor": "#d4a54a"
+                      "iconColor": "#d4a54a",
+                      "buttonTextColor": "#1a110b",
+                      "badgeTextColor": "#1a110b"
                     }
                   }
                 ]
@@ -301,7 +303,7 @@
           },
           "style": {
             "layout": "vertical",
-            "iconColor": "#d4a54a",
+            "iconColor": "#8b5e1a",
             "iconSize": 24,
             "iconBackgroundColor": "#f5f0e8",
             "iconBorderRadius": 50,

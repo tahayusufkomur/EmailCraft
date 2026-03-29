@@ -31,7 +31,7 @@
               "left": 32
             },
             "alignment": "center",
-            "color": "#e8913a",
+            "color": "#915f15",
             "fontSize": 10,
             "fontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
             "fontWeight": 600,
@@ -61,9 +61,9 @@
             "headingFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
             "headingColor": "#fef5f0",
             "subheadingFontSize": 15,
-            "subheadingColor": "#c4a882cc",
+            "subheadingColor": "#ffffff",
             "overlayColor": "#1c1008",
-            "overlayOpacity": 0.55,
+            "overlayOpacity": 0.6,
             "buttonBackgroundColor": "#e8913a",
             "buttonTextColor": "#1c1008",
             "buttonBorderRadius": 999,
@@ -183,7 +183,7 @@
                       "nameFontSize": 18,
                       "nameFontWeight": 700,
                       "nameFontFamily": "'Plus Jakarta Sans', Arial, sans-serif",
-                      "roleColor": "#e8913a",
+                      "roleColor": "#915f15",
                       "roleFontSize": 13,
                       "bioColor": "#605a57",
                       "bioFontSize": 14,
@@ -260,7 +260,7 @@
           },
           "style": {
             "layout": "vertical",
-            "iconColor": "#e8913a",
+            "iconColor": "#915f15",
             "iconSize": 20,
             "iconBackgroundColor": "#fef5f0",
             "iconBorderRadius": 50,
@@ -356,7 +356,7 @@
           "id": "sun-c-f3",
           "type": "text",
           "data": {
-            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#7c7672;\">© 2025 Sunrise Yoga. All rights reserved.</p>",
+            "html": "<p style=\"margin:0;text-align:center;font-size:12px;color:#6e5a56;\">© 2025 Sunrise Yoga. All rights reserved.</p>",
             "variables": []
           },
           "style": {
