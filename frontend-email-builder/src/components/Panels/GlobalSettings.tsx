@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef } from 'react';
 import { useEditorStore } from '../../store/editorStore';
 import { useConfigStore } from '../../store/configStore';
 import { SliderInput } from './settings/SliderInput';
@@ -16,7 +16,6 @@ function PalettePicker() {
   const template = useEditorStore((s) => s.template);
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
   const defaultPalette = useConfigStore((s) => s.defaultPalette);
-  const customPalette = useConfigStore((s) => s.customPalette);
   const setConfig = useConfigStore((s) => s.setConfig);
 
   // Store the original template (before any palette recolor) so repeated
@@ -30,58 +29,11 @@ function PalettePicker() {
     return originalTemplateRef.current;
   }, [template]);
 
-  const [showCustom, setShowCustom] = useState(false);
-  const [localCustom, setLocalCustom] = useState<Record<string, string>>(() => {
-    const cp = customPalette;
-    if (cp && cp.primary) return cp;
-    const first = PALETTES[0];
-    return {
-      primary: first.primary,
-      secondary: first.secondary,
-      textDark: first.textDark,
-      textLight: first.textLight,
-      background: first.background,
-      surface: first.surface,
-    };
-  });
-
   const applyPalette = useCallback((palette: ColorPalette, slug: string) => {
     const recolored = recolorTemplate(getOriginal(), palette);
     loadTemplate(recolored);
     setConfig({ defaultPalette: slug, customPalette: {} });
   }, [getOriginal, loadTemplate, setConfig]);
-
-  const applyCustom = useCallback((colors: Record<string, string>) => {
-    if (!colors.primary || !colors.secondary || !colors.textDark || !colors.textLight || !colors.background || !colors.surface) return;
-    const palette: ColorPalette = {
-      slug: 'custom',
-      name: 'Custom',
-      primary: colors.primary,
-      secondary: colors.secondary,
-      textDark: colors.textDark,
-      textLight: colors.textLight,
-      background: colors.background,
-      surface: colors.surface,
-    };
-    const recolored = recolorTemplate(getOriginal(), palette);
-    loadTemplate(recolored);
-    setConfig({ defaultPalette: '', customPalette: colors });
-  }, [getOriginal, loadTemplate, setConfig]);
-
-  const handleCustomChange = useCallback((key: string, value: string) => {
-    const updated = { ...localCustom, [key]: value };
-    setLocalCustom(updated);
-    applyCustom(updated);
-  }, [localCustom, applyCustom]);
-
-  const SLOT_LABELS: Record<string, string> = {
-    primary: 'Primary',
-    secondary: 'Secondary',
-    textDark: 'Text Dark',
-    textLight: 'Text Light',
-    background: 'Background',
-    surface: 'Surface',
-  };
 
   return (
     <div className="panel-section">
@@ -126,44 +78,6 @@ function PalettePicker() {
         ))}
       </div>
 
-      {/* Customize toggle */}
-      <button
-        type="button"
-        onClick={() => setShowCustom(!showCustom)}
-        style={{
-          background: 'none', border: 'none', cursor: 'pointer',
-          fontSize: 12, color: 'var(--text-secondary, #6366f1)', padding: '4px 0',
-          marginTop: 4,
-        }}
-      >
-        {showCustom ? '▾ Hide custom palette' : '▸ Customize palette'}
-      </button>
-
-      {/* Custom palette editor */}
-      {showCustom && (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 8 }}>
-          {(['primary', 'secondary', 'textDark', 'textLight', 'background', 'surface'] as const).map((key) => (
-            <div key={key}>
-              <label style={{ fontSize: 11, color: 'var(--text-secondary, #64748b)', marginBottom: 2, display: 'block' }}>
-                {SLOT_LABELS[key]}
-              </label>
-              <div className="color-input-row">
-                <input
-                  type="color"
-                  value={localCustom[key] || '#000000'}
-                  onChange={(e) => handleCustomChange(key, e.target.value)}
-                />
-                <input
-                  type="text"
-                  value={localCustom[key] || ''}
-                  onChange={(e) => handleCustomChange(key, e.target.value)}
-                  style={{ fontSize: 11 }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
