@@ -10,8 +10,8 @@ export function LandingPage() {
     <div>
       <HeroSection />
       <FeaturesSection />
-      <ShowcaseSection />
       <HowItWorksSection />
+      <ShowcaseSection />
       <StatsBar />
       <CtaSection />
     </div>

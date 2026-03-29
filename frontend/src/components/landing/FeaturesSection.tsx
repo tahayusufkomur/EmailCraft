@@ -1,4 +1,4 @@
-import { Code2, LayoutGrid, Image as ImageIcon, Shield } from 'lucide-react';
+import { Code2, Variable, Building2, Palette } from 'lucide-react';
 
 import { AnimateIn } from '../ui/AnimateIn';
 import { Card, CardHeader, CardTitle, CardDescription } from '../ui/card';
@@ -7,30 +7,34 @@ const features = [
   {
     icon: Code2,
     accent: 'bg-primary',
-    title: 'Email-safe HTML export',
+    title: 'Programmable HTML export',
     description:
-      'Table-based layout, inline CSS, and VML for Outlook. Your templates render perfectly in every email client.',
+      'Get production-ready email HTML via REST API. Table-based layout, inline CSS, VML for Outlook — renders perfectly in every client.',
+    code: 'POST /api/v1/render\n{ "template_id": "...", "variables": { "name": "Jane" } }',
   },
   {
-    icon: LayoutGrid,
+    icon: Variable,
     accent: 'bg-secondary',
-    title: 'Template gallery',
+    title: 'Dynamic variables',
     description:
-      'Pre-built templates your users start from. 13 block types with drag-and-drop customization.',
+      'Define variables per org — your users insert them via the builder. Render with real values at send time through the API.',
+    code: 'PATCH /api/v1/email/setup\n{ "available_variables": [\n  { "key": "customer_name", "label": "Name" }\n] }',
   },
   {
-    icon: ImageIcon,
+    icon: Building2,
     accent: 'bg-[#22c55e]',
-    title: 'Media management',
+    title: 'Multi-project orgs',
     description:
-      'S3-backed uploads with presigned URLs. Per-organization storage isolation and CDN delivery.',
+      'Spin up isolated orgs programmatically. Each gets its own templates, media storage, API keys, and variable config.',
+    code: 'POST /api/site/organizations/\n{ "name": "Acme Corp",\n  "allowed_origins": ["https://acme.com"] }',
   },
   {
-    icon: Shield,
+    icon: Palette,
     accent: 'bg-[#a855f7]',
-    title: 'Multi-tenant API',
+    title: 'White-label themes',
     description:
-      'API key auth with SHA-256 hashing. Org-scoped data, session tokens, and origin validation.',
+      'Configure builder theme, email backgrounds, color palettes, and logo visibility per org. Make it look like yours.',
+    code: 'PATCH /api/site/organizations/:id/\n{ "builder_theme": "dark-cosmos",\n  "theme_mode": "dark" }',
   },
 ] as const;
 
@@ -40,10 +44,10 @@ export function FeaturesSection() {
       <div className="mx-auto max-w-5xl">
         <AnimateIn direction="up" className="text-center">
           <h2 className="font-heading text-3xl tracking-tight text-foreground sm:text-4xl">
-            Everything you need to ship email
+            Everything is an API call
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Production-ready email building, embedded in your product.
+            Embed the builder, configure it, and export HTML — all programmatically.
           </p>
         </AnimateIn>
 
@@ -61,6 +65,11 @@ export function FeaturesSection() {
                     <CardDescription className="text-sm leading-relaxed">
                       {feature.description}
                     </CardDescription>
+                    <div className="mt-3 rounded-lg bg-foreground/[0.04] p-3 dark:bg-foreground/[0.08]">
+                      <pre className="overflow-x-auto font-mono text-[11px] leading-relaxed text-muted-foreground">
+                        <code>{feature.code}</code>
+                      </pre>
+                    </div>
                   </CardHeader>
                 </Card>
               </AnimateIn>

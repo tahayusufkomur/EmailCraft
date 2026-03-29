@@ -30,7 +30,7 @@ export function HeroSection() {
             variants={fadeUp}
             className="mb-6 inline-flex rounded-full border border-border bg-background/80 px-4 py-1.5 text-xs font-medium tracking-wide text-muted-foreground backdrop-blur-sm"
           >
-            Built for product teams shipping email at scale
+            API-first email builder for developers
           </motion.p>
 
           <motion.h1
@@ -38,10 +38,11 @@ export function HeroSection() {
             variants={fadeUp}
             className="max-w-4xl font-heading text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Build and ship email templates{' '}
+            The{' '}
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              quickly
-            </span>
+              programmable
+            </span>{' '}
+            email builder
           </motion.h1>
 
           <motion.p
@@ -49,8 +50,8 @@ export function HeroSection() {
             variants={fadeUp}
             className="mt-6 max-w-2xl text-base text-muted-foreground md:text-lg"
           >
-            Drag, drop, and export production-safe email HTML. Embed the builder in your app with one
-            iframe.
+            Embed a full email builder in your product. Configure orgs, variables, and themes via
+            API. Export production-ready HTML programmatically.
           </motion.p>
 
           <motion.div

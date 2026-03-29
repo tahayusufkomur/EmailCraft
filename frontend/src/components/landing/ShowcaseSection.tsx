@@ -25,10 +25,11 @@ export function ShowcaseSection() {
       <div className="mx-auto w-full max-w-6xl px-4 py-16 md:py-24">
         <AnimateIn direction="up" className="text-center">
           <h2 className="font-heading text-3xl font-semibold tracking-tight md:text-4xl">
-            See it in action
+            Your users get a full email editor
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-base text-muted-foreground md:text-lg">
-            From drag-and-drop to production HTML in minutes.
+            Drag-and-drop builder, template gallery, and one-click HTML export — embedded in your
+            product.
           </p>
         </AnimateIn>
 

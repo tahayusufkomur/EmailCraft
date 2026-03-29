@@ -1,10 +1,10 @@
 import { AnimateIn } from '../ui/AnimateIn';
 
 const stats = [
+  { value: '3', label: 'API calls to go live' },
   { value: '13', label: 'Block types' },
-  { value: '4h', label: 'Session duration' },
-  { value: '\u221E', label: 'Templates' },
-  { value: '<5min', label: 'Integration time' },
+  { value: 'REST', label: 'Programmable API' },
+  { value: '∞', label: 'Orgs & projects' },
 ] as const;
 
 export function StatsBar() {

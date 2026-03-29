@@ -10,13 +10,13 @@ export function CtaSection() {
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
         <AnimateIn>
           <h2 className="font-heading text-3xl font-semibold tracking-tight text-white md:text-5xl">
-            Ready to build?
+            Ship email from your product
           </h2>
         </AnimateIn>
 
         <AnimateIn delay={0.1}>
           <p className="mt-4 text-base text-white/80 md:text-lg">
-            Start free &mdash; no credit card required.
+            Get your API key and start building &mdash; free tier included.
           </p>
         </AnimateIn>
 
