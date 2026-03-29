@@ -15,7 +15,7 @@ from django.http import HttpResponseRedirect
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
@@ -259,6 +259,7 @@ def _build_session_config_response(org, session_token, expires_at):
 
 
 @api_view(['POST'])
+@authentication_classes([])
 def create_session(request):
     """
     POST /api/v1/auth/session
