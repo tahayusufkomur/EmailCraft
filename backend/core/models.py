@@ -53,6 +53,11 @@ class Account(models.Model):
     storage_limit_mb = models.PositiveIntegerField(default=1024)  # 1 GB
     stripe_customer_id = models.CharField(max_length=120, blank=True, null=True)
     stripe_subscription_id = models.CharField(max_length=120, blank=True, null=True)
+    pending_plan = models.ForeignKey(
+        'Plan', on_delete=models.SET_NULL, null=True, blank=True,
+        related_name='pending_accounts',
+        help_text='Plan to activate after current subscription period ends (downgrade).',
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

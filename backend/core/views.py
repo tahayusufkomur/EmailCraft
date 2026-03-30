@@ -58,6 +58,7 @@ def _set_account_plan(account, plan_obj, stripe_subscription_id=_UNSET, stripe_c
     account.save(
         update_fields=[
             'plan',
+            'pending_plan',
             'rendered_emails_limit',
             'storage_limit_mb',
             'stripe_customer_id',
@@ -168,6 +169,106 @@ def _ensure_user_has_org(user, email):
     provision_templates_for_org(org)
 
 
+def _ensure_stripe_customer(account):
+    """Ensure the account has a Stripe customer ID, creating one if needed."""
+    if account.stripe_customer_id:
+        return account.stripe_customer_id
+    customer = stripe.Customer.create(
+        email=account.user.email,
+        name=account.user.username,
+        metadata={'user_id': str(account.user.id)},
+    )
+    account.stripe_customer_id = customer.id
+    account.save(update_fields=['stripe_customer_id', 'updated_at'])
+    return customer.id
+
+
+def _create_checkout_session(account, plan_obj, stripe_price_id):
+    """Create a Stripe Checkout Session for first-time subscription."""
+    customer_id = _ensure_stripe_customer(account)
+    base_url = _get_base_url()
+    checkout_session = stripe.checkout.Session.create(
+        mode='subscription',
+        customer=customer_id,
+        success_url=f'{base_url}/api/auth/subscribe-callback?session_id={{CHECKOUT_SESSION_ID}}',
+        cancel_url=settings.STRIPE_CANCEL_URL,
+        metadata={
+            'user_id': str(account.user.id),
+            'plan': plan_obj.slug,
+        },
+        line_items=[{'price': stripe_price_id, 'quantity': 1}],
+    )
+    return {
+        'checkout_url': checkout_session.url,
+        'session_id': checkout_session.id,
+        'plan': plan_obj.slug,
+    }, status.HTTP_200_OK
+
+
+def _handle_upgrade(account, plan_obj, stripe_price_id):
+    """Upgrade: Stripe Checkout with prorated credit for remaining current plan time."""
+    import time as _time
+
+    sub = stripe.Subscription.retrieve(account.stripe_subscription_id)
+    period_start = sub['current_period_start']
+    period_end = sub['current_period_end']
+    now = int(_time.time())
+    total_period = period_end - period_start
+    remaining = max(0, period_end - now)
+
+    # Credit for unused time on current plan
+    credit_cents = 0
+    if total_period > 0 and remaining > 0:
+        current_amount = sub['items']['data'][0]['price']['unit_amount']
+        credit_cents = int((remaining / total_period) * current_amount)
+
+    base_url = _get_base_url()
+    session_params = {
+        'mode': 'subscription',
+        'customer': account.stripe_customer_id,
+        'success_url': f'{base_url}/api/auth/subscribe-callback?session_id={{CHECKOUT_SESSION_ID}}',
+        'cancel_url': f'{base_url}/dashboard/billing',
+        'metadata': {
+            'user_id': str(account.user.id),
+            'plan': plan_obj.slug,
+            'previous_subscription_id': account.stripe_subscription_id,
+        },
+        'line_items': [{'price': stripe_price_id, 'quantity': 1}],
+    }
+
+    if credit_cents > 0:
+        coupon = stripe.Coupon.create(
+            amount_off=credit_cents,
+            currency='usd',
+            duration='once',
+            name=f'Unused {account.plan.name} credit',
+        )
+        session_params['discounts'] = [{'coupon': coupon.id}]
+
+    checkout_session = stripe.checkout.Session.create(**session_params)
+    return {
+        'checkout_url': checkout_session.url,
+        'session_id': checkout_session.id,
+        'plan': plan_obj.slug,
+    }, status.HTTP_200_OK
+
+
+def _handle_downgrade(account, plan_obj):
+    """Downgrade: cancel current subscription at period end, store pending plan."""
+    sub = stripe.Subscription.modify(
+        account.stripe_subscription_id,
+        cancel_at_period_end=True,
+    )
+    account.pending_plan = plan_obj
+    account.save(update_fields=['pending_plan', 'updated_at'])
+    return {
+        'status': 'downgrade_scheduled',
+        'plan': account.plan_slug,
+        'pending_plan': plan_obj.slug,
+        'current_period_end': sub['current_period_end'],
+    }, status.HTTP_200_OK
+
+
 def subscribe_account_to_plan(account, plan_key):
     from core.models import Plan
     plan_obj = Plan.objects.filter(slug=plan_key).first()
@@ -177,9 +278,37 @@ def subscribe_account_to_plan(account, plan_key):
             status.HTTP_400_BAD_REQUEST,
         )
 
-    if plan_obj.monthly_price_usd == 0:
+    # Same plan — no-op (unless there's a pending downgrade to cancel)
+    if account.plan_id == plan_obj.id and not account.pending_plan:
+        return {'status': 'unchanged', 'plan': plan_obj.slug}, status.HTTP_200_OK
+
+    # Cancel a pending downgrade (stay on current plan)
+    if account.plan_id == plan_obj.id and account.pending_plan:
+        stripe.api_key = settings.STRIPE_API_KEY
+        try:
+            stripe.Subscription.modify(account.stripe_subscription_id, cancel_at_period_end=False)
+        except stripe.error.StripeError:
+            pass
+        account.pending_plan = None
+        account.save(update_fields=['pending_plan', 'updated_at'])
+        return {'status': 'downgrade_cancelled', 'plan': plan_obj.slug}, status.HTTP_200_OK
+
+    # Switch to free — immediate only if no active subscription
+    if plan_obj.monthly_price_usd == 0 and not account.stripe_subscription_id:
+        account.pending_plan = None
         _set_account_plan(account, plan_obj, stripe_subscription_id=None)
         return {'status': 'updated', 'plan': plan_obj.slug}, status.HTTP_200_OK
+
+    # Downgrade to free with active subscription — schedule like any other downgrade
+    if plan_obj.monthly_price_usd == 0 and account.stripe_subscription_id:
+        stripe.api_key = settings.STRIPE_API_KEY
+        try:
+            return _handle_downgrade(account, plan_obj)
+        except stripe.error.StripeError as exc:
+            return (
+                {'error': {'code': 'STRIPE_ERROR', 'message': str(exc)}},
+                status.HTTP_502_BAD_GATEWAY,
+            )
 
     stripe_price_id = resolve_stripe_price_id(plan_obj)
     if not stripe_price_id:
@@ -191,43 +320,23 @@ def subscribe_account_to_plan(account, plan_key):
     stripe.api_key = settings.STRIPE_API_KEY
 
     try:
-        customer_id = account.stripe_customer_id
-        if not customer_id:
-            customer = stripe.Customer.create(
-                email=account.user.email,
-                name=account.user.username,
-                metadata={'user_id': str(account.user.id)},
-            )
-            customer_id = customer.id
-            account.stripe_customer_id = customer_id
-            account.save(update_fields=['stripe_customer_id', 'updated_at'])
+        # No existing subscription — first-time checkout
+        if not account.stripe_subscription_id:
+            return _create_checkout_session(account, plan_obj, stripe_price_id)
 
-        base_url = _get_base_url()
-        checkout_session = stripe.checkout.Session.create(
-            mode='subscription',
-            customer=customer_id,
-            success_url=f'{base_url}/api/auth/subscribe-callback?session_id={{CHECKOUT_SESSION_ID}}',
-            cancel_url=settings.STRIPE_CANCEL_URL,
-            metadata={
-                'user_id': str(account.user.id),
-                'plan': plan_obj.slug,
-            },
-            line_items=[{'price': stripe_price_id, 'quantity': 1}],
-        )
+        current_price = float(account.plan.monthly_price_usd) if account.plan else 0
+        new_price = float(plan_obj.monthly_price_usd)
+
+        if new_price > current_price:
+            return _handle_upgrade(account, plan_obj, stripe_price_id)
+        else:
+            return _handle_downgrade(account, plan_obj)
+
     except stripe.error.StripeError as exc:
         return (
-            {'error': {'code': 'STRIPE_CHECKOUT_ERROR', 'message': str(exc)}},
+            {'error': {'code': 'STRIPE_ERROR', 'message': str(exc)}},
             status.HTTP_502_BAD_GATEWAY,
         )
-
-    return (
-        {
-            'checkout_url': checkout_session.url,
-            'session_id': checkout_session.id,
-            'plan': plan_obj.slug,
-        },
-        status.HTTP_200_OK,
-    )
 
 
 def _build_session_config_response(org, session_token, expires_at):
@@ -451,6 +560,16 @@ def _handle_checkout_completed(data):
     _ensure_user_has_org(user, user.email)
 
     account = get_or_create_account(user)
+
+    # Cancel previous subscription if this was an upgrade
+    previous_sub = metadata.get('previous_subscription_id')
+    if previous_sub:
+        try:
+            stripe.Subscription.cancel(previous_sub)
+        except stripe.error.StripeError:
+            pass
+
+    account.pending_plan = None
     _set_account_plan(
         account,
         plan_obj,
@@ -467,9 +586,14 @@ def _handle_subscription_updated(data):
         return
 
     try:
-        account = Account.objects.get(stripe_subscription_id=stripe_sub_id)
+        account = Account.objects.select_related('pending_plan').get(stripe_subscription_id=stripe_sub_id)
     except Account.DoesNotExist:
         return
+
+    # If cancel_at_period_end was reverted (user cancelled a pending downgrade)
+    if not data.get('cancel_at_period_end', False) and account.pending_plan:
+        account.pending_plan = None
+        account.save(update_fields=['pending_plan', 'updated_at'])
 
     items = data.get('items', {}).get('data', [])
     if items:
@@ -477,10 +601,12 @@ def _handle_subscription_updated(data):
         if price_id:
             new_plan = Plan.objects.filter(stripe_price_id=price_id).first()
             if new_plan and new_plan.id != account.plan_id:
+                account.pending_plan = None
                 _set_account_plan(account, new_plan)
 
     sub_status = data.get('status', '')
     if sub_status in ('canceled', 'unpaid'):
+        account.pending_plan = None
         free_plan = Plan.objects.filter(slug='free').first()
         if free_plan:
             _set_account_plan(account, free_plan, stripe_subscription_id=None)
@@ -494,10 +620,39 @@ def _handle_subscription_deleted(data):
         return
 
     try:
-        account = Account.objects.get(stripe_customer_id=customer_id)
+        account = Account.objects.select_related('pending_plan').get(stripe_customer_id=customer_id)
     except Account.DoesNotExist:
         return
 
+    if account.pending_plan:
+        pending = account.pending_plan
+
+        # Pending plan is free — just switch directly
+        if pending.monthly_price_usd == 0:
+            account.pending_plan = None
+            _set_account_plan(account, pending, stripe_subscription_id=None)
+            return
+
+        # Pending plan is paid — create a new subscription
+        stripe_price_id = resolve_stripe_price_id(pending)
+        if stripe_price_id:
+            try:
+                new_sub = stripe.Subscription.create(
+                    customer=customer_id,
+                    items=[{'price': stripe_price_id}],
+                    metadata={
+                        'user_id': str(account.user_id),
+                        'plan': pending.slug,
+                    },
+                )
+                account.pending_plan = None
+                _set_account_plan(account, pending, stripe_subscription_id=new_sub.id)
+                return
+            except stripe.error.StripeError:
+                pass
+
+    # Fallback: downgrade to free
+    account.pending_plan = None
     free_plan = Plan.objects.filter(slug='free').first()
     if free_plan:
         _set_account_plan(account, free_plan, stripe_subscription_id=None)
@@ -723,6 +878,16 @@ def subscribe_callback(request):
     _ensure_user_has_org(user, customer_email or user.email)
 
     account = get_or_create_account(user)
+
+    # Cancel previous subscription if this was an upgrade
+    previous_sub = metadata.get('previous_subscription_id')
+    if previous_sub:
+        try:
+            stripe.Subscription.cancel(previous_sub)
+        except stripe.error.StripeError:
+            pass
+
+    account.pending_plan = None
     _set_account_plan(
         account,
         plan_obj,
@@ -732,7 +897,7 @@ def subscribe_callback(request):
 
     token, _ = Token.objects.get_or_create(user=user)
 
-    return HttpResponseRedirect(f'{base_url}/dashboard?token={token.key}')
+    return HttpResponseRedirect(f'{base_url}/dashboard/billing?token={token.key}')
 
 
 @api_view(['POST'])

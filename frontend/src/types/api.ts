@@ -96,6 +96,7 @@ export interface SiteMeResponse {
 
 export interface SiteDashboardResponse {
   plan: PlanKey;
+  pending_plan: PlanKey | null;
   rendered_emails_count: number;
   rendered_emails_limit: number;
   max_media_files_per_upload: number;
@@ -103,6 +104,7 @@ export interface SiteDashboardResponse {
   storage_limit_bytes: number;
   organizations_count: number;
   stripe_subscription_id: string | null;
+  available_plans: PricingPlan[];
 }
 
 export interface SiteOrganizationsResponse {
@@ -145,6 +147,8 @@ export interface TemplateDetail extends TemplateListItem {
 export interface SubscribeResponse {
   status?: string;
   plan?: PlanKey;
+  pending_plan?: PlanKey;
+  current_period_end?: number;
   checkout_url?: string;
   session_id?: string;
 }

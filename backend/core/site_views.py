@@ -157,6 +157,9 @@ def site_me(request):
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def site_dashboard(request):
+    from core.models import Plan
+    from core.views import _plan_payload
+
     account = account_for_user(request.user)
     if not account:
         return Response(
@@ -167,6 +170,7 @@ def site_dashboard(request):
     return Response(
         {
             'plan': account.plan_slug,
+            'pending_plan': account.pending_plan.slug if account.pending_plan else None,
             'rendered_emails_count': account.rendered_emails_count,
             'rendered_emails_limit': account.rendered_emails_limit,
             'max_media_files_per_upload': account.max_media_files_per_upload,
@@ -174,6 +178,7 @@ def site_dashboard(request):
             'storage_limit_bytes': account.storage_limit_bytes,
             'organizations_count': organizations_for_user(request.user).count(),
             'stripe_subscription_id': account.stripe_subscription_id,
+            'available_plans': [_plan_payload(p) for p in Plan.objects.all()],
         }
     )
 
