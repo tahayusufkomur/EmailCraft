@@ -1,0 +1,25 @@
+{% extends "emails/base.html" %}
+
+{% block subject %}Downgrade to {{ pending_plan_name }} scheduled{% endblock %}
+
+{% block preheader_text %}Your plan change is scheduled for the end of your billing period.{% endblock %}
+
+{% block content %}
+<h1 style="margin:0 0 16px;font-size:24px;font-weight:600;color:#191e2b;">Plan Downgrade Scheduled</h1>
+<p style="margin:0 0 24px;font-size:16px;color:#575c65;line-height:1.5;">
+  Your request to switch to the <strong>{{ pending_plan_name }}</strong> plan has been received and scheduled.
+</p>
+<p style="margin:0 0 24px;font-size:16px;color:#575c65;line-height:1.5;">
+  Your current <strong>{{ current_plan_name }}</strong> plan stays active until the end of your billing period. Once it expires, your account will automatically switch to the <strong>{{ pending_plan_name }}</strong> plan.
+</p>
+<p style="margin:0 0 32px;font-size:16px;color:#575c65;line-height:1.5;">
+  If you change your mind, you can cancel the scheduled downgrade at any time from your billing settings.
+</p>
+<table role="presentation" cellpadding="0" cellspacing="0">
+  <tr>
+    <td style="border-radius:6px;background-color:#0c6fc2;">
+      <a href="{{ billing_url }}" style="display:inline-block;padding:12px 24px;color:#ffffff;text-decoration:none;font-weight:500;font-size:14px;">Manage Billing</a>
+    </td>
+  </tr>
+</table>
+{% endblock %}

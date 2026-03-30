@@ -1,0 +1,33 @@
+{% extends "emails/base.html" %}
+
+{% block subject %}Your plan has been upgraded to {{ plan_name }}{% endblock %}
+
+{% block preheader_text %}Your new plan is now active with expanded limits.{% endblock %}
+
+{% block content %}
+<h1 style="margin:0 0 16px;font-size:24px;font-weight:600;color:#191e2b;">Plan Upgraded to {{ plan_name }}</h1>
+<p style="margin:0 0 24px;font-size:16px;color:#575c65;line-height:1.5;">
+  Your plan has been successfully upgraded. Here's a summary of your new limits:
+</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 32px;border:1px solid #e5e5e5;border-radius:6px;overflow:hidden;">
+  <tr style="background-color:#f9f9f9;">
+    <td style="padding:12px 16px;font-size:14px;font-weight:600;color:#575c65;border-bottom:1px solid #e5e5e5;">Feature</td>
+    <td style="padding:12px 16px;font-size:14px;font-weight:600;color:#575c65;border-bottom:1px solid #e5e5e5;">Limit</td>
+  </tr>
+  <tr>
+    <td style="padding:12px 16px;font-size:14px;color:#575c65;border-bottom:1px solid #e5e5e5;">Monthly Rendered Emails</td>
+    <td style="padding:12px 16px;font-size:14px;color:#191e2b;font-weight:500;border-bottom:1px solid #e5e5e5;">{{ rendered_emails_limit }}</td>
+  </tr>
+  <tr>
+    <td style="padding:12px 16px;font-size:14px;color:#575c65;">Storage</td>
+    <td style="padding:12px 16px;font-size:14px;color:#191e2b;font-weight:500;">{{ storage_limit }}</td>
+  </tr>
+</table>
+<table role="presentation" cellpadding="0" cellspacing="0">
+  <tr>
+    <td style="border-radius:6px;background-color:#0c6fc2;">
+      <a href="{{ billing_url }}" style="display:inline-block;padding:12px 24px;color:#ffffff;text-decoration:none;font-weight:500;font-size:14px;">View Billing</a>
+    </td>
+  </tr>
+</table>
+{% endblock %}

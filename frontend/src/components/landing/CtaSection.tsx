@@ -6,16 +6,16 @@ import { Button } from '../ui/button';
 
 export function CtaSection() {
   return (
-    <section className="animate-gradient bg-gradient-to-br from-[hsl(205_89%_44%)] via-[hsl(205_89%_50%)] to-[hsl(24_85%_58%)] px-4 py-20 md:py-28">
+    <section className="relative overflow-hidden border-y border-border/60 bg-[radial-gradient(ellipse_at_top,_hsl(33_95%_57%_/_0.25),transparent_50%),radial-gradient(ellipse_at_80%_60%,_hsl(205_90%_58%_/_0.2),transparent_50%),radial-gradient(ellipse_at_20%_80%,_hsl(33_95%_57%_/_0.12),transparent_40%)] dark:bg-[radial-gradient(ellipse_at_top,_hsl(33_95%_57%_/_0.12),transparent_50%),radial-gradient(ellipse_at_80%_60%,_hsl(205_90%_58%_/_0.08),transparent_50%),radial-gradient(ellipse_at_20%_80%,_hsl(33_95%_57%_/_0.05),transparent_40%)] px-4 py-20 md:py-28">
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
         <AnimateIn>
-          <h2 className="font-heading text-3xl font-semibold tracking-tight text-white md:text-5xl">
+          <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground md:text-5xl">
             Ship email from your product
           </h2>
         </AnimateIn>
 
         <AnimateIn delay={0.1}>
-          <p className="mt-4 text-base text-white/80 md:text-lg">
+          <p className="mt-4 text-base text-muted-foreground md:text-lg">
             Get your API key and start building &mdash; free tier included.
           </p>
         </AnimateIn>
@@ -24,7 +24,6 @@ export function CtaSection() {
           <Button
             asChild
             size="lg"
-            className="mt-8 bg-white text-foreground hover:bg-white/90"
           >
             <Link to="/login">
               Get started

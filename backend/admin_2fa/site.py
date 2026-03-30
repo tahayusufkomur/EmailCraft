@@ -1,8 +1,6 @@
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin import AdminSite
 from django.contrib.auth import get_user_model, login as auth_login
-from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.urls import path, reverse
 from django.views.decorators.csrf import csrf_protect
@@ -24,18 +22,24 @@ def _mask_email(email):
 
 
 def _send_otp_email(user, raw_code):
+    from django.conf import settings
+    from django.core.mail import send_mail
+    from django.template.loader import render_to_string
+    from django.utils.html import strip_tags
+
     subject = getattr(settings, 'ADMIN_2FA_EMAIL_SUBJECT', 'Admin Login Code')
-    from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@example.com')
     expiry_minutes = getattr(settings, 'ADMIN_OTP_EXPIRY_SECONDS', 300) // 60
+    context = {
+        'code': raw_code,
+        'expiry_minutes': expiry_minutes,
+    }
+    html = render_to_string('emails/admin_otp.html', context)
     send_mail(
         subject=subject,
-        message=(
-            f'Your admin login code is: {raw_code}\n\n'
-            f'This code expires in {expiry_minutes} minutes.\n'
-            f'If you did not request this, please ignore this email.'
-        ),
-        from_email=from_email,
+        message=strip_tags(html),
+        from_email=settings.DEFAULT_FROM_EMAIL,
         recipient_list=[user.email],
+        html_message=html,
         fail_silently=False,
     )
 

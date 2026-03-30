@@ -1,0 +1,25 @@
+{% extends "emails/base.html" %}
+
+{% block subject %}Monthly email limit reached{% endblock %}
+
+{% block preheader_text %}You've reached your monthly email rendering limit.{% endblock %}
+
+{% block content %}
+<h1 style="margin:0 0 16px;font-size:24px;font-weight:600;color:#191e2b;">Monthly Email Limit Reached</h1>
+<p style="margin:0 0 24px;font-size:16px;color:#575c65;line-height:1.5;">
+  You've reached your monthly limit of <strong>{{ rendered_limit }}</strong> rendered emails. Email rendering is currently paused for your account.
+</p>
+<p style="margin:0 0 24px;font-size:16px;color:#575c65;line-height:1.5;">
+  Your limit will reset at the start of your next billing cycle. To continue rendering emails immediately, upgrade to a higher plan.
+</p>
+<p style="margin:0 0 32px;font-size:16px;color:#575c65;line-height:1.5;">
+  Need more capacity? Visit your billing page to explore available plans and find the right fit for your usage.
+</p>
+<table role="presentation" cellpadding="0" cellspacing="0">
+  <tr>
+    <td style="border-radius:6px;background-color:#0c6fc2;">
+      <a href="{{ billing_url }}" style="display:inline-block;padding:12px 24px;color:#ffffff;text-decoration:none;font-weight:500;font-size:14px;">Upgrade Plan</a>
+    </td>
+  </tr>
+</table>
+{% endblock %}

@@ -362,6 +362,20 @@ def render_template(request):
         account.rendered_emails_count += 1
         account.save(update_fields=['rendered_emails_count', 'updated_at'])
 
+        # Usage warning emails
+        if account.rendered_emails_limit > 0:
+            usage_pct = account.rendered_emails_count / account.rendered_emails_limit
+            if usage_pct >= 1.0 and not account.usage_limit_sent:
+                account.usage_limit_sent = True
+                account.save(update_fields=['usage_limit_sent', 'updated_at'])
+                from core.emails import send_usage_limit_reached_email
+                send_usage_limit_reached_email(account.user, account.rendered_emails_limit)
+            elif usage_pct >= 0.8 and not account.usage_warning_sent:
+                account.usage_warning_sent = True
+                account.save(update_fields=['usage_warning_sent', 'updated_at'])
+                from core.emails import send_usage_warning_email
+                send_usage_warning_email(account.user, account.rendered_emails_count, account.rendered_emails_limit)
+
     return Response({
         'html': result['html'],
         'warnings': result.get('warnings', []),

@@ -1,0 +1,26 @@
+{% extends "emails/base.html" %}
+
+{% block subject %}New API key created for {{ org_name }}{% endblock %}
+
+{% block preheader_text %}A new API key has been created for your organization.{% endblock %}
+
+{% block content %}
+<h1 style="margin:0 0 16px;font-size:24px;font-weight:600;color:#191e2b;">New API Key Created</h1>
+<p style="margin:0 0 24px;font-size:16px;color:#575c65;line-height:1.5;">
+  A new API key has been created for your organization <strong>{{ org_name }}</strong>.
+</p>
+<div style="background-color:#f9f9f9;border:1px solid #e5e5e5;border-radius:6px;padding:16px;margin:0 0 24px;">
+  <p style="margin:0 0 4px;font-size:12px;color:#888;text-transform:uppercase;letter-spacing:0.5px;">Key Prefix</p>
+  <code style="font-size:16px;font-weight:600;color:#191e2b;font-family:monospace;">{{ key_prefix }}...</code>
+</div>
+<p style="margin:0 0 32px;font-size:14px;color:#e05c3a;line-height:1.5;">
+  <strong>Security notice:</strong> The full API key was only shown once at creation time. If you did not create this key, revoke it immediately from your dashboard and contact support.
+</p>
+<table role="presentation" cellpadding="0" cellspacing="0">
+  <tr>
+    <td style="border-radius:6px;background-color:#0c6fc2;">
+      <a href="{{ dashboard_url }}" style="display:inline-block;padding:12px 24px;color:#ffffff;text-decoration:none;font-weight:500;font-size:14px;">Manage API Keys</a>
+    </td>
+  </tr>
+</table>
+{% endblock %}

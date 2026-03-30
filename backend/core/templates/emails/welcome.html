@@ -1,0 +1,22 @@
+{% extends "emails/base.html" %}
+
+{% block subject %}Welcome to MailCraft{% endblock %}
+
+{% block preheader_text %}You're all set — start building beautiful emails today.{% endblock %}
+
+{% block content %}
+<h1 style="margin:0 0 16px;font-size:24px;font-weight:600;color:#191e2b;">Welcome to MailCraft, {{ username }}!</h1>
+<p style="margin:0 0 24px;font-size:16px;color:#575c65;line-height:1.5;">
+  We're thrilled to have you on board. MailCraft helps you render and deliver beautiful, reliable emails — without the infrastructure headaches.
+</p>
+<p style="margin:0 0 32px;font-size:16px;color:#575c65;line-height:1.5;">
+  Get started by visiting your dashboard and exploring your first API key, templates, and usage stats.
+</p>
+<table role="presentation" cellpadding="0" cellspacing="0">
+  <tr>
+    <td style="border-radius:6px;background-color:#0c6fc2;">
+      <a href="{{ dashboard_url }}" style="display:inline-block;padding:12px 24px;color:#ffffff;text-decoration:none;font-weight:500;font-size:14px;">Go to Dashboard</a>
+    </td>
+  </tr>
+</table>
+{% endblock %}

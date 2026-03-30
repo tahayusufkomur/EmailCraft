@@ -124,6 +124,9 @@ def site_register(request):
             status=status.HTTP_409_CONFLICT,
         )
 
+    from core.emails import send_welcome_email
+    send_welcome_email(user)
+
     return Response(
         {
             'token': token.key,
@@ -167,6 +170,13 @@ def site_dashboard(request):
             status=status.HTTP_404_NOT_FOUND,
         )
 
+    orgs_count = organizations_for_user(request.user).count()
+    active_keys_count = ApiKey.objects.filter(
+        org__memberships__user=request.user,
+        is_active=True,
+        revoked_at__isnull=True,
+    ).count()
+
     return Response(
         {
             'plan': account.plan_slug,
@@ -176,7 +186,8 @@ def site_dashboard(request):
             'max_media_files_per_upload': account.max_media_files_per_upload,
             'storage_used_bytes': account.storage_used_bytes,
             'storage_limit_bytes': account.storage_limit_bytes,
-            'organizations_count': organizations_for_user(request.user).count(),
+            'organizations_count': orgs_count,
+            'active_api_keys_count': active_keys_count,
             'stripe_subscription_id': account.stripe_subscription_id,
             'available_plans': [_plan_payload(p) for p in Plan.objects.all()],
         }
@@ -199,6 +210,17 @@ def site_organizations(request):
     serializer = SiteOrganizationCreateSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     data = serializer.validated_data
+
+    # Enforce org limit
+    account = account_for_user(request.user)
+    plan = account.plan if account else None
+    max_orgs = plan.max_organizations if plan else 1
+    current_orgs = organizations_for_user(request.user).count()
+    if current_orgs >= max_orgs:
+        return Response(
+            {'error': {'code': 'ORG_LIMIT_REACHED', 'message': f'Your plan allows a maximum of {max_orgs} organization(s).'}},
+            status=status.HTTP_403_FORBIDDEN,
+        )
 
     try:
         with transaction.atomic():
@@ -241,6 +263,9 @@ def site_organizations(request):
             'raw': raw_key,
             'item': ApiKeySummarySerializer(created_key).data,
         }
+
+    from core.emails import send_org_created_email
+    send_org_created_email(request.user, data['name'])
 
     return Response(payload, status=status.HTTP_201_CREATED)
 
@@ -306,6 +331,17 @@ def site_organization_api_keys(request, organization_id):
             status=status.HTTP_403_FORBIDDEN,
         )
 
+    # Enforce API key limit
+    account = account_for_user(request.user)
+    plan = account.plan if account else None
+    max_keys = plan.max_api_keys_per_org if plan else 1
+    current_keys = ApiKey.objects.filter(org=membership.organization, is_active=True, revoked_at__isnull=True).count()
+    if current_keys >= max_keys:
+        return Response(
+            {'error': {'code': 'API_KEY_LIMIT_REACHED', 'message': f'Your plan allows a maximum of {max_keys} API key(s) per organization.'}},
+            status=status.HTTP_403_FORBIDDEN,
+        )
+
     serializer = SiteApiKeyCreateSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     refresh = serializer.validated_data['refresh']
@@ -320,6 +356,9 @@ def site_organization_api_keys(request, organization_id):
             {'error': {'code': 'API_KEY_CREATE_FAILED', 'message': str(exc)}},
             status=status.HTTP_409_CONFLICT,
         )
+
+    from core.emails import send_api_key_created_email
+    send_api_key_created_email(request.user, membership.organization.name, api_key.key_prefix)
 
     return Response(
         {
@@ -426,6 +465,11 @@ def site_provision(request):
     serializer.is_valid(raise_exception=True)
     name = serializer.validated_data['name']
 
+    # Enforce org limit (only for new orgs, not reuse)
+    account = account_for_user(request.user)
+    plan = account.plan if account else None
+    max_orgs = plan.max_organizations if plan else 1
+
     try:
         with transaction.atomic():
             existing_membership = (
@@ -466,6 +510,13 @@ def site_provision(request):
                     status=status.HTTP_200_OK,
                 )
 
+            current_orgs = organizations_for_user(request.user).count()
+            if current_orgs >= max_orgs:
+                return Response(
+                    {'error': {'code': 'ORG_LIMIT_REACHED', 'message': f'Your plan allows a maximum of {max_orgs} organization(s).'}},
+                    status=status.HTTP_403_FORBIDDEN,
+                )
+
             org_email = f'org-{uuid.uuid4().hex[:20]}@org.mailcraft.dev'
             org = Organization.objects.create(
                 name=name,
@@ -496,6 +547,10 @@ def site_provision(request):
         )
 
     account = account_for_org(org)
+
+    from core.emails import send_org_created_email
+    send_org_created_email(request.user, name)
+
     return Response(
         {
             'organization': {

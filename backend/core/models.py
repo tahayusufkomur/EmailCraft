@@ -18,6 +18,8 @@ class Plan(models.Model):
     storage_limit_mb = models.PositiveIntegerField(default=1024)  # 1 GB
     max_upload_size_mb = models.PositiveIntegerField(default=5)
     max_media_files_per_upload = models.PositiveIntegerField(default=5)
+    max_organizations = models.PositiveIntegerField(default=100)
+    max_api_keys_per_org = models.PositiveIntegerField(default=100)
     is_default = models.BooleanField(default=False, help_text='New orgs get this plan when no plan is specified.')
     sort_order = models.PositiveIntegerField(default=0)
     stripe_price_id = models.CharField(max_length=120, blank=True, null=True)
@@ -58,6 +60,8 @@ class Account(models.Model):
         related_name='pending_accounts',
         help_text='Plan to activate after current subscription period ends (downgrade).',
     )
+    usage_warning_sent = models.BooleanField(default=False)
+    usage_limit_sent = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

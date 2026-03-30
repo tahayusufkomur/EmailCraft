@@ -42,6 +42,8 @@ def _plan_payload(plan_obj):
         'storage_limit_bytes': plan_obj.storage_limit_bytes,
         'max_upload_size_bytes': plan_obj.max_upload_size_bytes,
         'max_media_files_per_upload': plan_obj.max_media_files_per_upload,
+        'max_organizations': plan_obj.max_organizations,
+        'max_api_keys_per_org': plan_obj.max_api_keys_per_org,
     }
 
 
@@ -55,6 +57,8 @@ def _set_account_plan(account, plan_obj, stripe_subscription_id=_UNSET, stripe_c
         account.stripe_customer_id = stripe_customer_id
     if stripe_subscription_id is not _UNSET:
         account.stripe_subscription_id = stripe_subscription_id
+    account.usage_warning_sent = False
+    account.usage_limit_sent = False
     account.save(
         update_fields=[
             'plan',
@@ -63,13 +67,43 @@ def _set_account_plan(account, plan_obj, stripe_subscription_id=_UNSET, stripe_c
             'storage_limit_mb',
             'stripe_customer_id',
             'stripe_subscription_id',
+            'usage_warning_sent',
+            'usage_limit_sent',
             'updated_at',
         ]
     )
-    from core.models import UserOrganization
+    from core.models import UserOrganization, ApiKey
     from templates_api.services import provision_templates_for_org
-    for membership in UserOrganization.objects.filter(user=account.user, role='owner').select_related('organization'):
+
+    memberships = list(
+        UserOrganization.objects.filter(user=account.user, role='owner')
+        .select_related('organization')
+        .order_by('created_at')
+    )
+
+    # Enforce org limit: deactivate orgs beyond the plan's max
+    max_orgs = plan_obj.max_organizations if plan_obj else 1
+    for membership in memberships:
         provision_templates_for_org(membership.organization)
+    if len(memberships) > max_orgs:
+        keep = {m.organization_id for m in memberships[:max_orgs]}
+        for membership in memberships[max_orgs:]:
+            membership.organization.is_active = False
+            membership.organization.save(update_fields=['is_active', 'updated_at'])
+
+    # Enforce API key limit per org: revoke keys beyond the plan's max
+    max_keys = plan_obj.max_api_keys_per_org if plan_obj else 1
+    from django.utils import timezone as _tz
+    for membership in memberships[:max_orgs]:
+        active_keys = list(
+            ApiKey.objects.filter(org=membership.organization, is_active=True, revoked_at__isnull=True)
+            .order_by('created_at')
+        )
+        if len(active_keys) > max_keys:
+            for key in active_keys[max_keys:]:
+                key.is_active = False
+                key.revoked_at = _tz.now()
+                key.save(update_fields=['is_active', 'revoked_at'])
 
 
 def resolve_stripe_price_id(plan_obj):
@@ -261,6 +295,9 @@ def _handle_downgrade(account, plan_obj):
     )
     account.pending_plan = plan_obj
     account.save(update_fields=['pending_plan', 'updated_at'])
+    from core.emails import send_downgrade_scheduled_email
+    current_plan_name = account.plan.name if account.plan else 'Free'
+    send_downgrade_scheduled_email(account.user, current_plan_name, plan_obj.name)
     return {
         'status': 'downgrade_scheduled',
         'plan': account.plan_slug,
@@ -497,6 +534,44 @@ def subscribe_plan(request):
     return Response(payload, status=status_code)
 
 
+def _handle_payment_failed(data):
+    from core.models import Account
+    from core.emails import send_payment_failed_email
+
+    customer_id = data.get('customer')
+    if not customer_id:
+        return
+
+    try:
+        account = Account.objects.select_related('plan', 'user').get(stripe_customer_id=customer_id)
+    except Account.DoesNotExist:
+        return
+
+    send_payment_failed_email(
+        account.user,
+        account.plan.name if account.plan else 'Unknown',
+        data.get('attempt_count', 1),
+    )
+
+
+def _handle_invoice_paid(data):
+    """Reset usage email flags at the start of a new billing cycle."""
+    from core.models import Account
+
+    customer_id = data.get('customer')
+    if not customer_id:
+        return
+
+    try:
+        account = Account.objects.get(stripe_customer_id=customer_id)
+    except Account.DoesNotExist:
+        return
+
+    account.usage_warning_sent = False
+    account.usage_limit_sent = False
+    account.save(update_fields=['usage_warning_sent', 'usage_limit_sent', 'updated_at'])
+
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def stripe_webhook(request):
@@ -521,6 +596,10 @@ def stripe_webhook(request):
         _handle_subscription_updated(data)
     elif event_type == 'customer.subscription.deleted':
         _handle_subscription_deleted(data)
+    elif event_type == 'invoice.payment_failed':
+        _handle_payment_failed(data)
+    elif event_type == 'invoice.paid':
+        _handle_invoice_paid(data)
 
     return Response({'received': True})
 
@@ -577,6 +656,14 @@ def _handle_checkout_completed(data):
         stripe_customer_id=data.get('customer') or account.stripe_customer_id,
     )
 
+    from core.emails import send_plan_upgraded_email
+    send_plan_upgraded_email(
+        account.user,
+        plan_obj.name,
+        plan_obj.rendered_emails_limit,
+        f'{plan_obj.storage_limit_mb // 1024} GB' if plan_obj.storage_limit_mb >= 1024 else f'{plan_obj.storage_limit_mb} MB',
+    )
+
 
 def _handle_subscription_updated(data):
     from core.models import Account, Plan
@@ -631,6 +718,8 @@ def _handle_subscription_deleted(data):
         if pending.monthly_price_usd == 0:
             account.pending_plan = None
             _set_account_plan(account, pending, stripe_subscription_id=None)
+            from core.emails import send_plan_activated_email
+            send_plan_activated_email(account.user, pending.name)
             return
 
         # Pending plan is paid — create a new subscription
@@ -647,6 +736,8 @@ def _handle_subscription_deleted(data):
                 )
                 account.pending_plan = None
                 _set_account_plan(account, pending, stripe_subscription_id=new_sub.id)
+                from core.emails import send_plan_activated_email
+                send_plan_activated_email(account.user, pending.name)
                 return
             except stripe.error.StripeError:
                 pass
@@ -756,6 +847,12 @@ def google_callback(request):
 
     # Ensure user has an organization
     _ensure_user_has_org(user, email)
+
+    if created:
+        from core.models import get_or_create_account
+        get_or_create_account(user)
+        from core.emails import send_welcome_email
+        send_welcome_email(user)
 
     # Generate DRF token
     token, _ = Token.objects.get_or_create(user=user)
@@ -895,6 +992,14 @@ def subscribe_callback(request):
         stripe_customer_id=stripe_customer_id or account.stripe_customer_id,
     )
 
+    from core.emails import send_plan_upgraded_email
+    send_plan_upgraded_email(
+        account.user,
+        plan_obj.name,
+        plan_obj.rendered_emails_limit,
+        f'{plan_obj.storage_limit_mb // 1024} GB' if plan_obj.storage_limit_mb >= 1024 else f'{plan_obj.storage_limit_mb} MB',
+    )
+
     token, _ = Token.objects.get_or_create(user=user)
 
     return HttpResponseRedirect(f'{base_url}/dashboard/billing?token={token.key}')
@@ -933,23 +1038,8 @@ def magic_link_send(request):
     base_url = _get_base_url()
     verify_url = f'{base_url}/api/auth/magic-link/verify?token={raw_token}'
 
-    from django.core.mail import send_mail
-    send_mail(
-        subject='Sign in to MailCraft',
-        message=f'Click the link below to sign in to MailCraft. This link expires in 15 minutes.\n\n{verify_url}',
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[email],
-        fail_silently=True,
-        html_message=(
-            f'<div style="font-family: sans-serif; max-width: 480px; margin: 0 auto; padding: 24px;">'
-            f'<h2 style="margin-bottom: 16px;">Sign in to MailCraft</h2>'
-            f'<p style="margin-bottom: 24px; color: #555;">Click the button below to sign in. This link expires in 15 minutes.</p>'
-            f'<a href="{verify_url}" style="display: inline-block; padding: 12px 24px; background: #111; color: #fff; '
-            f'text-decoration: none; border-radius: 6px; font-weight: 500;">Sign in to MailCraft</a>'
-            f'<p style="margin-top: 24px; font-size: 12px; color: #999;">If you didn\'t request this link, you can safely ignore this email.</p>'
-            f'</div>'
-        ),
-    )
+    from core.emails import send_magic_link_email
+    send_magic_link_email(email, verify_url)
 
     return Response({'status': 'ok'})
 
@@ -993,6 +1083,8 @@ def magic_link_verify(request):
     if created:
         _ensure_user_has_org(user, link.email)
         get_or_create_account(user)
+        from core.emails import send_welcome_email
+        send_welcome_email(user)
 
     auth_token, _ = Token.objects.get_or_create(user=user)
 

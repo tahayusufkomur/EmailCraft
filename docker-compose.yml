@@ -12,6 +12,10 @@ services:
     ports:
       - "5432:5432"
 
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+
   backend:
     build: ./backend
     command: python manage.py runserver 0.0.0.0:8000
@@ -30,8 +34,30 @@ services:
       DB_PORT: ${DB_PORT:-5432}
     depends_on:
       - postgres
+      - redis
     expose:
       - "8000"
+
+  celery-worker:
+    build: ./backend
+    command: celery -A emailBuilder worker --loglevel=info
+    volumes:
+      - ./backend:/app
+    env_file:
+      - .env
+    environment:
+      DJANGO_DEBUG: "True"
+      DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1"
+      DB_ENGINE: ${DB_ENGINE:-django.db.backends.postgresql}
+      DB_NAME: ${DB_NAME:-mailcraft}
+      DB_USER: ${DB_USER:-mailcraft}
+      DB_PASSWORD: ${DB_PASSWORD:-mailcraft}
+      DB_HOST: ${DB_HOST:-postgres}
+      DB_PORT: ${DB_PORT:-5432}
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
 
   frontend:
     build: ./frontend

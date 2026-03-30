@@ -1,0 +1,26 @@
+{% extends "emails/base.html" %}
+
+{% block subject %}You've used 80% of your monthly emails{% endblock %}
+
+{% block preheader_text %}You're approaching your monthly email rendering limit.{% endblock %}
+
+{% block content %}
+<h1 style="margin:0 0 16px;font-size:24px;font-weight:600;color:#191e2b;">You've Used 80% of Your Monthly Emails</h1>
+<p style="margin:0 0 24px;font-size:16px;color:#575c65;line-height:1.5;">
+  You're approaching your monthly email rendering limit. Here's your current usage:
+</p>
+<div style="background-color:#f9f9f9;border:1px solid #e5e5e5;border-radius:6px;padding:24px;margin:0 0 24px;text-align:center;">
+  <p style="margin:0 0 8px;font-size:32px;font-weight:700;color:#191e2b;">{{ rendered_count }} / {{ rendered_limit }}</p>
+  <p style="margin:0;font-size:14px;color:#888;">emails rendered this month &mdash; <strong style="color:#e09c1a;">{{ percentage }}% used</strong></p>
+</div>
+<p style="margin:0 0 32px;font-size:16px;color:#575c65;line-height:1.5;">
+  Once you reach your limit, email rendering will be paused until the next billing cycle. Upgrade your plan to increase your limit and keep sending without interruption.
+</p>
+<table role="presentation" cellpadding="0" cellspacing="0">
+  <tr>
+    <td style="border-radius:6px;background-color:#0c6fc2;">
+      <a href="{{ billing_url }}" style="display:inline-block;padding:12px 24px;color:#ffffff;text-decoration:none;font-weight:500;font-size:14px;">Upgrade Plan</a>
+    </td>
+  </tr>
+</table>
+{% endblock %}

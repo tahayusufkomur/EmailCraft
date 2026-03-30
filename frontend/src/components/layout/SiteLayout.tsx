@@ -29,7 +29,7 @@ export function SiteLayout() {
   const { isAuthenticated, logout } = useAuth();
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
       <header className="sticky top-0 z-40 border-b border-border/60 bg-background/90 backdrop-blur">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4">
           <Link to="/" className="font-heading text-xl font-bold tracking-tight text-foreground">
@@ -77,7 +77,7 @@ export function SiteLayout() {
         </div>
       </header>
 
-      <main>
+      <main className="flex-1">
         <Outlet />
       </main>
 

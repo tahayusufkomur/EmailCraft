@@ -1,0 +1,18 @@
+{% extends "emails/base.html" %}
+
+{% block subject %}Admin Login Code{% endblock %}
+
+{% block preheader_text %}Your one-time admin login code.{% endblock %}
+
+{% block content %}
+<h1 style="margin:0 0 16px;font-size:24px;font-weight:600;color:#191e2b;">Admin Login Code</h1>
+<p style="margin:0 0 24px;font-size:16px;color:#575c65;line-height:1.5;">
+  Use the code below to complete your admin login. Do not share this code with anyone.
+</p>
+<div style="text-align:center;margin:0 0 24px;">
+  <span style="display:inline-block;font-size:40px;font-weight:700;letter-spacing:8px;color:#191e2b;background-color:#f4f4f4;padding:16px 32px;border-radius:8px;border:1px solid #e5e5e5;">{{ code }}</span>
+</div>
+<p style="margin:0;font-size:14px;color:#888;line-height:1.5;">
+  This code expires in <strong>{{ expiry_minutes }} minutes</strong>. If you did not attempt to log in as an admin, please contact support immediately.
+</p>
+{% endblock %}

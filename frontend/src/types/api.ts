@@ -18,6 +18,8 @@ export interface PricingPlan {
   storage_limit_bytes: number;
   max_upload_size_bytes: number;
   max_media_files_per_upload: number;
+  max_organizations: number;
+  max_api_keys_per_org: number;
 }
 
 export interface PricingResponse {
@@ -103,6 +105,7 @@ export interface SiteDashboardResponse {
   storage_used_bytes: number;
   storage_limit_bytes: number;
   organizations_count: number;
+  active_api_keys_count: number;
   stripe_subscription_id: string | null;
   available_plans: PricingPlan[];
 }
