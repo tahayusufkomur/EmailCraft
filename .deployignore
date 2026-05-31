@@ -1,0 +1,11 @@
+# rsync excludes for home-server deploy.sh (--exclude-from).
+# Project-specific only; .git/node_modules/.next/caches live in deploy.sh BASE_EXCLUDES.
+# Leading "/" anchors to repo root. NEVER list .env.prod (compose needs it on the server).
+
+# runtime data on the server — must survive rsync --delete
+/postgres_data
+/backend/db.sqlite3
+# don't ship to the server
+/docs
+/infrastructure
+/.env

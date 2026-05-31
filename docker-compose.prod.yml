@@ -1,0 +1,144 @@
+# Explicit compose project name — pins volume/network namespacing to `emailbuilder_*`
+# regardless of where this file lives (it moved from docker/ to the repo root; without
+# this the project name would follow the file's directory and orphan the data volume).
+name: emailbuilder
+
+# Shared json-file log cap so container logs can't fill the disk on the old MacBook.
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: emailbuilder-postgres
+    logging: *default-logging
+    mem_limit: 256m
+    mem_reservation: 64m
+    environment:
+      POSTGRES_DB: ${DB_NAME:-mailcraft}
+      POSTGRES_USER: ${DB_USER:-mailcraft}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-mailcraft} -d ${DB_NAME:-mailcraft}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: emailbuilder-redis
+    logging: *default-logging
+    mem_limit: 96m
+    mem_reservation: 16m
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend.prod.Dockerfile
+    container_name: emailbuilder-backend
+    logging: *default-logging
+    mem_limit: 512m
+    mem_reservation: 256m
+    env_file:
+      - .env.prod
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+    expose:
+      - "8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+
+  celery-worker:
+    build:
+      context: .
+      dockerfile: docker/backend.prod.Dockerfile
+    container_name: emailbuilder-celery
+    logging: *default-logging
+    mem_limit: 640m
+    mem_reservation: 256m
+    # Recycle workers periodically to bound Celery's gradual memory growth.
+    command: celery -A emailBuilder worker --loglevel=info --max-tasks-per-child=200
+    env_file:
+      - .env.prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend.prod.Dockerfile
+    container_name: emailbuilder-frontend
+    logging: *default-logging
+    mem_limit: 48m
+    mem_reservation: 12m
+    expose:
+      - "80"
+    restart: unless-stopped
+
+  builder:
+    build:
+      context: .
+      dockerfile: docker/builder.prod.Dockerfile
+    container_name: emailbuilder-builder
+    logging: *default-logging
+    mem_limit: 48m
+    mem_reservation: 12m
+    expose:
+      - "80"
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: emailbuilder-caddy
+    logging: *default-logging
+    mem_limit: 64m
+    mem_reservation: 16m
+    # No host ports: cloudflared reaches this proxy over the shared `edge` network.
+    # TLS terminates at the Cloudflare edge; this serves plain HTTP on :80.
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - backend
+      - frontend
+      - builder
+    networks:
+      - default
+      - edge
+    restart: unless-stopped
+    healthcheck:
+      # Liveness via Caddy's localhost admin API (host-independent). A failure only
+      # marks the container unhealthy in `docker ps`; it does not trigger a restart.
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:2019/config/ >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  pgdata:
+  caddy_data:
+  caddy_config:
+
+networks:
+  default:
+  # Shared with the cloudflared edge stack; created once: `docker network create edge`
+  edge:
+    external: true

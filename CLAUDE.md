@@ -4,7 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**MailCraft** — an embeddable email template builder SaaS. Developers integrate it via iframe + JS SDK, end users design email templates via drag-and-drop. Output is email-compatible HTML + JSON.
+**MailCraft** — an embeddable email template builder SaaS. Developers integrate it via iframe + JS SDK, end users design email templates via drag-and-drop. Output is email-compatible HTML + JSON. Live at https://mailcraft.contentor.app.
+
+## Deploy (home-server fleet — identical block across all four projects)
+
+Deployment is driven from the central home-server repo, NOT from this repo. Never edit prod by hand or run docker compose on the server directly. (Migrated off the old Hetzner VPS, which is gone — the `deploy*`/`prod*` Make targets were removed.)
+
+```bash
+cd ~/ws/home-server && make deploy PROJECT=emailbuilder
+```
+
+Rsyncs the working tree to `taha@192.168.178.70:/opt/stacks/emailBuilder`, runs `docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build` (the prod compose lives at the repo root; `docker/` holds the Dockerfiles + Caddyfile), and health-probes `mailcraft.contentor.app` via the Cloudflare-tunnel `edge` network (HTTP-only Caddy proxy; TLS at the edge). Fleet model + registry: `~/ws/home-server/AGENTS.md`.
 
 ## Commands
 
@@ -34,7 +44,7 @@ make clean              # Remove caches, build artifacts, db
 - **`emailBuilder/`** — Django project config (settings, urls, wsgi/asgi)
 - **API prefix**: `/api/v1/` — all endpoints require `X-API-Key` header except `/api/v1/auth/session`
 - **Multi-tenancy**: Shared DB + `org_id` filtering via `TenantManager.for_org(org)` on all queries
-- **Database**: SQLite3 (dev), PostgreSQL (prod via env vars: `DB_ENGINE`, `DB_NAME`, etc.)
+- **Database**: PostgreSQL in both dev and prod (the dev compose runs Postgres too), via `DB_*` env vars (`DB_ENGINE`, `DB_NAME`, etc.)
 
 ### Frontend (React + TypeScript + Vite)
 - **`frontend/src/store/`** — Zustand stores: `editorStore` (template state, block CRUD) and `configStore` (API config)

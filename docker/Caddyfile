@@ -1,23 +1,35 @@
-{$DOMAIN:localhost} {
+# Served behind Cloudflare Tunnel: plain HTTP on :80, no TLS here.
+# Cloudflare terminates TLS at the edge; cloudflared reaches this container over
+# the private `edge` docker network. Because that hop is HTTP, we tell the Django
+# backend the original scheme via X-Forwarded-Proto so SECURE_PROXY_SSL_HEADER,
+# CSRF, and secure cookies behave as if the request were HTTPS (which it is, at
+# the edge). www -> apex and HTTPS are handled by Cloudflare.
+(to_backend) {
+    reverse_proxy backend:8000 {
+        header_up X-Forwarded-Proto https
+    }
+}
+
+:80 {
     request_body {
         max_size 50MB
     }
 
     handle /api/v1/* {
-        reverse_proxy backend:8000
+        import to_backend
     }
 
     handle_path /api/* {
         rewrite * /api/v1{uri}
-        reverse_proxy backend:8000
+        import to_backend
     }
 
     handle /admin/* {
-        reverse_proxy backend:8000
+        import to_backend
     }
 
     handle /static/* {
-        reverse_proxy backend:8000
+        import to_backend
     }
 
     handle_path /builder/* {

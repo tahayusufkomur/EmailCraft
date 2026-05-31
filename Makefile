@@ -1,17 +1,13 @@
-.PHONY: help install install-backend install-frontends install-frontend install-frontend-site install-frontend-builder \
-       dev dev-backend dev-frontend dev-frontend-site dev-frontend-builder \
-       build build-frontend-site build-frontend-builder \
-       migrate makemigrations \
-       test test-backend lint-frontend lint-frontend-site lint-frontend-builder \
-       seed seed-gallery sync-gallery demo-org create-key logs-backend shell dbshell superuser clean reset setup \
-       install-frontend-local install-frontend-site-local install-frontend-builder-local \
-       deploy deploy-shell deploy-superuser deploy-migrate deploy-seed deploy-seed-force deploy-sync-gallery deploy-logs
+.PHONY: help dev up down restart dev-restart reset dev-reset logs dev-logs dev-shell \
+       build migrate makemigrations test check seed seed-gallery sync-gallery create-key superuser
+
+# Deployment lives in the home-server ops repo, not here:
+#   cd ~/ws/home-server && make deploy PROJECT=emailbuilder
+# (Migrated off Hetzner; the VPS deploy/prod Make targets were removed.)
 
 COMPOSE := docker compose
-BACKEND := backend
-FRONTEND_SITE := frontend
-FRONTEND_BUILDER := frontend-email-builder
 MANAGE := $(COMPOSE) exec backend python manage.py
+SYNC_GALLERY_FLAGS := $(if $(INCLUDE_MODIFIED),--include-modified,)
 
 help: ## Show this help
 	@echo ""
@@ -21,51 +17,48 @@ help: ## Show this help
 		/^[a-zA-Z_-]+:.*?## /{split($$0,a,":.*?## "); printf "  %-28s %s\n", a[1], a[2]}' $(MAKEFILE_LIST)
 	@echo ""
 
-# ─── Install ──────────────────────────────────────────────
-
-install: install-backend install-frontends ## Build all containers
-
-install-backend: ## Build backend container
-	@$(COMPOSE) build backend
-
-install-frontends: install-frontend-site install-frontend-builder ## Install both frontend deps in containers
-
-install-frontend: install-frontends ## Backward-compatible alias for both frontends
-
-install-frontend-site: ## Install website frontend deps in container
-	@$(COMPOSE) run --rm frontend npm install
-
-install-frontend-builder: ## Install email-builder frontend deps in container
-	@$(COMPOSE) run --rm frontend_email_builder npm install
-
 # ─── Development ──────────────────────────────────────────
 
-dev: ## Run backend + both frontends + proxy
+dev: ## Start all services (foreground)
 	@$(COMPOSE) up
 
-dev-backend: ## Run Django dev server on :8000
-	@$(COMPOSE) up backend postgres
+up: ## Start all services (detached)
+	@$(COMPOSE) up -d
 
-dev-frontend: ## Run both Vite dev servers
-	@$(COMPOSE) up frontend frontend_email_builder
+down: ## Stop all services
+	@$(COMPOSE) down
 
-dev-frontend-site: ## Run website Vite dev server on :5173
-	@$(COMPOSE) up frontend
+restart: dev-restart ## alias for dev-restart
+logs: dev-logs       ## alias for dev-logs
+reset: dev-reset     ## alias for dev-reset
 
-dev-frontend-builder: ## Run builder Vite dev server on :5174
-	@$(COMPOSE) up frontend_email_builder
+dev-restart: ## Restart all services without rebuilding or resetting data
+	@$(COMPOSE) restart
 
-# ─── Build ────────────────────────────────────────────────
+dev-reset: ## Full reset: tear down, rebuild, migrate, seed
+	@$(COMPOSE) down -v --remove-orphans --rmi local
+	@find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
+	@rm -rf frontend/dist frontend/node_modules/.vite
+	@rm -rf frontend-email-builder/dist frontend-email-builder/node_modules/.vite
+	@$(COMPOSE) up -d --build
+	@$(MANAGE) migrate
+	@$(COMPOSE) exec -e DJANGO_SUPERUSER_USERNAME=t -e DJANGO_SUPERUSER_EMAIL=t@example.com -e DJANGO_SUPERUSER_PASSWORD=t \
+		backend python manage.py createsuperuser --noinput || true
+	@$(MANAGE) seed_gallery
+	@$(MANAGE) create_demo_org
+	@echo "Dev reset complete."
 
-build: build-frontend-site build-frontend-builder ## Production build of both frontends
+dev-logs: ## Tail all dev logs
+	@$(COMPOSE) logs -f --tail=100
 
-build-frontend-site: ## Production build of website frontend
+dev-shell: ## Open Django shell
+	@$(MANAGE) shell
+
+# ─── Build & Database ────────────────────────────────────
+
+build: ## Production build of both frontends
 	@$(COMPOSE) run --rm frontend npm run build
-
-build-frontend-builder: ## Production build of builder frontend
 	@$(COMPOSE) run --rm frontend_email_builder npm run build
-
-# ─── Database ─────────────────────────────────────────────
 
 migrate: ## Apply database migrations
 	@$(MANAGE) migrate
@@ -73,120 +66,30 @@ migrate: ## Apply database migrations
 makemigrations: ## Create new migrations after model changes
 	@$(MANAGE) makemigrations
 
-# ─── Testing & Linting ───────────────────────────────────
+# ─── Testing ─────────────────────────────────────────────
 
-test: test-backend lint-frontend ## Run all tests and linting
-
-test-backend: ## Run Django tests
+test: ## Run backend tests + frontend type-check
 	@$(MANAGE) test
-
-lint-frontend: lint-frontend-site lint-frontend-builder ## Type-check both frontends
-
-lint-frontend-site: ## Type-check website frontend
 	@$(COMPOSE) run --rm frontend npx tsc --noEmit
-
-lint-frontend-builder: ## Type-check builder frontend
 	@$(COMPOSE) run --rm frontend_email_builder npx tsc --noEmit
+
+check: test ## alias for `test` (backend tests + frontend type-check)
 
 # ─── Utilities ────────────────────────────────────────────
 
-seed: ## Seed gallery templates + create demo org with provisioned templates
+seed: ## Seed gallery templates + create demo org
 	@$(MANAGE) seed_gallery
 	@$(MANAGE) create_demo_org
 
-seed-gallery: ## Seed/update gallery templates
+seed-gallery: ## Seed/update gallery templates only
 	@$(MANAGE) seed_gallery
 
-sync-gallery: ## Sync gallery template updates to organization-provided copies
+sync-gallery: ## Sync gallery updates to org copies
 	@$(MANAGE) sync_gallery_to_orgs $(SYNC_GALLERY_FLAGS)
-
-demo-org: ## Create demo org (usage: make demo-org ORG="Name" EMAIL="a@b.com" ENV=test API_KEY=mc_test_... USERNAME=demo USER_EMAIL=demo-user@mailcraft.dev PASSWORD=demo12345)
-	@$(MANAGE) create_demo_org \
-		--org-name "$(or $(ORG),MailCraft Demo Enterprise)" \
-		--org-email "$(or $(EMAIL),demo-enterprise@mailcraft.dev)" \
-		--env $(or $(ENV),test) \
-		$(if $(API_KEY),--api-key "$(API_KEY)",) \
-		$(if $(USERNAME),--demo-username "$(USERNAME)",) \
-		$(if $(USER_EMAIL),--demo-user-email "$(USER_EMAIL)",) \
-		$(if $(PASSWORD),--demo-password "$(PASSWORD)",)
 
 create-key: ## Create API key (usage: make create-key ORG="Name" EMAIL="a@b.com" ENV=live PLAN=starter)
 	@$(MANAGE) create_api_key --org-name "$(ORG)" --org-email "$(EMAIL)" --env $(or $(ENV),test) --plan $(or $(PLAN),free)
 
-logs-backend: ## Tail backend container logs
-	@$(COMPOSE) logs -f backend
-
-shell: ## Open Django shell
-	@$(MANAGE) shell
-
-dbshell: ## Open database shell
-	@$(MANAGE) dbshell
-
 superuser: ## Create Django superuser
 	@$(MANAGE) createsuperuser
 
-clean: ## Stop containers and remove volumes
-	@$(COMPOSE) down -v --remove-orphans
-
-reset: ## Full reset: tear down everything, rebuild, migrate, seed, and install deps
-	@$(COMPOSE) down -v --remove-orphans --rmi local
-	@find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
-	@rm -rf $(FRONTEND_SITE)/dist $(FRONTEND_SITE)/node_modules/.vite $(FRONTEND_SITE)/node_modules
-	@rm -rf $(FRONTEND_BUILDER)/dist $(FRONTEND_BUILDER)/node_modules/.vite $(FRONTEND_BUILDER)/node_modules
-	@rm -rf venv
-	@$(MAKE) setup
-
-setup: ## Build/start stack, migrate DB, create superuser, seed demo org/template/key, and install frontend deps locally
-	@$(COMPOSE) up -d --build
-	@$(MANAGE) migrate
-	@$(COMPOSE) exec -e DJANGO_SUPERUSER_USERNAME=t -e DJANGO_SUPERUSER_EMAIL=t@example.com -e DJANGO_SUPERUSER_PASSWORD=t \
-		backend python manage.py createsuperuser --noinput || true
-	@$(MANAGE) seed_gallery
-	@$(MANAGE) create_demo_org
-	@cd $(FRONTEND_SITE) && npm install
-	@cd $(FRONTEND_BUILDER) && npm install
-
-install-frontend-local: install-frontend-site-local install-frontend-builder-local ## Install both frontend deps on host (for VS Code/TS)
-
-install-frontend-site-local: ## Install website deps on host
-	@cd $(FRONTEND_SITE) && npm install
-
-install-frontend-builder-local: ## Install builder deps on host
-	@cd $(FRONTEND_BUILDER) && npm install
-
-# ─── Production ──────────────────────────────────────────
-
-PROD_HOST := root@46.224.76.186
-PROD_DIR := /opt/mailcraft
-PROD_COMPOSE := docker compose -f docker/docker-compose.prod.yml --env-file .env.prod
-SYNC_GALLERY_FLAGS := $(if $(INCLUDE_MODIFIED),--include-modified,)
-
-deploy-shell: ## Open Django shell on production
-	@ssh $(PROD_HOST) -t "cd $(PROD_DIR) && $(PROD_COMPOSE) exec backend python manage.py shell"
-
-deploy-superuser: ## Create superuser on production
-	@ssh $(PROD_HOST) -t "cd $(PROD_DIR) && $(PROD_COMPOSE) exec backend python manage.py createsuperuser"
-
-deploy-migrate: ## Run migrations on production
-	@ssh $(PROD_HOST) "cd $(PROD_DIR) && $(PROD_COMPOSE) exec -T backend python manage.py migrate"
-
-deploy-seed: ## Pull latest code, rebuild backend, seed gallery templates, and sync org copies (set INCLUDE_MODIFIED=1 to overwrite modified provided templates)
-	@ssh $(PROD_HOST) "cd $(PROD_DIR) && git pull origin main && $(PROD_COMPOSE) up --build -d backend && $(PROD_COMPOSE) exec -T backend python manage.py seed_gallery && $(PROD_COMPOSE) exec -T backend python manage.py sync_gallery_to_orgs $(SYNC_GALLERY_FLAGS)"
-	@echo "Gallery templates refreshed and synced on production."
-
-deploy-seed-force: ## Same as deploy-seed, but always overwrites modified provided template copies
-	@$(MAKE) deploy-seed INCLUDE_MODIFIED=1
-
-deploy-sync-gallery: ## Pull latest code, rebuild backend, and sync gallery copies on production (set INCLUDE_MODIFIED=1 to overwrite modified provided templates)
-	@ssh $(PROD_HOST) "cd $(PROD_DIR) && git pull origin main && $(PROD_COMPOSE) up --build -d backend && $(PROD_COMPOSE) exec -T backend python manage.py sync_gallery_to_orgs $(SYNC_GALLERY_FLAGS)"
-	@echo "Gallery template copies synced on production."
-
-deploy: ## Deploy latest changes to production
-	@echo "Pushing to origin..."
-	@git push origin main
-	@echo "Deploying to production..."
-	@ssh $(PROD_HOST) "cd $(PROD_DIR) && git pull origin main && $(PROD_COMPOSE) up --build -d && $(PROD_COMPOSE) exec -T backend python manage.py migrate"
-	@echo "Deploy complete: https://mailcraft.contentor.app"
-
-deploy-logs: ## Tail production logs
-	@ssh $(PROD_HOST) "cd $(PROD_DIR) && $(PROD_COMPOSE) logs -f --tail=100"
