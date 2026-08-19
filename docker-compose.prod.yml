@@ -13,6 +13,10 @@ x-logging: &default-logging
 services:
   postgres:
     image: postgres:16-alpine
+    # Tuned to this container's mem_limit: shared_buffers ~25%, effective_cache_size
+    # ~70%. Stock defaults (128MB / 4GB) ignore the cgroup entirely -- the 4GB cache
+    # hint in particular skews the planner toward index scans no real cache backs.
+    command: ["postgres", "-c", "shared_buffers=64MB", "-c", "effective_cache_size=176MB"]
     container_name: emailbuilder-postgres
     logging: *default-logging
     mem_limit: 256m
@@ -69,7 +73,10 @@ services:
     mem_limit: 640m
     mem_reservation: 256m
     # Recycle workers periodically to bound Celery's gradual memory growth.
-    command: celery -A emailBuilder worker --loglevel=info --max-tasks-per-child=200
+    # --concurrency is pinned: Celery otherwise defaults to os.cpu_count(), which is
+    # 16 on this host and forks 16 prefork children into a mem_limit sized for far
+    # fewer -- the worker was OOM-looping after the move to the 8-core/16-thread box.
+    command: celery -A emailBuilder worker --loglevel=info --max-tasks-per-child=200 --concurrency=2
     env_file:
       - .env.prod
     depends_on:
