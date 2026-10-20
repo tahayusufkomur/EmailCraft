@@ -20,6 +20,8 @@ class Plan(models.Model):
     max_media_files_per_upload = models.PositiveIntegerField(default=5)
     max_organizations = models.PositiveIntegerField(default=100)
     max_api_keys_per_org = models.PositiveIntegerField(default=100)
+    ai_generations_limit = models.PositiveIntegerField(default=5)
+    allow_ai_image_generation = models.BooleanField(default=False)
     is_default = models.BooleanField(default=False, help_text='New orgs get this plan when no plan is specified.')
     sort_order = models.PositiveIntegerField(default=0)
     stripe_price_id = models.CharField(max_length=120, blank=True, null=True)
@@ -53,6 +55,8 @@ class Account(models.Model):
     rendered_emails_limit = models.BigIntegerField(default=1000)
     storage_used_bytes = models.BigIntegerField(default=0)
     storage_limit_mb = models.PositiveIntegerField(default=1024)  # 1 GB
+    ai_generations_count = models.BigIntegerField(default=0)
+    ai_generations_limit = models.PositiveIntegerField(default=5)
     stripe_customer_id = models.CharField(max_length=120, blank=True, null=True)
     stripe_subscription_id = models.CharField(max_length=120, blank=True, null=True)
     pending_plan = models.ForeignKey(
@@ -96,8 +100,11 @@ class Account(models.Model):
         if p:
             self.rendered_emails_limit = p.rendered_emails_limit
             self.storage_limit_mb = p.storage_limit_mb
+            self.ai_generations_limit = p.ai_generations_limit
         if save:
-            self.save(update_fields=['rendered_emails_limit', 'storage_limit_mb', 'updated_at'])
+            self.save(update_fields=[
+                'rendered_emails_limit', 'storage_limit_mb', 'ai_generations_limit', 'updated_at',
+            ])
 
 
 class Organization(models.Model):

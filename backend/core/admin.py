@@ -9,11 +9,13 @@ class PlanAdmin(admin.ModelAdmin):
         'name', 'slug', 'monthly_price_usd',
         'rendered_emails_limit', 'storage_limit_mb',
         'max_upload_size_mb', 'max_media_files_per_upload',
+        'ai_generations_limit', 'allow_ai_image_generation',
         'is_default', 'sort_order',
     ]
     list_editable = [
         'monthly_price_usd', 'rendered_emails_limit', 'storage_limit_mb',
         'max_upload_size_mb', 'max_media_files_per_upload',
+        'ai_generations_limit', 'allow_ai_image_generation',
         'is_default', 'sort_order',
     ]
     prepopulated_fields = {'slug': ('name',)}
@@ -25,18 +27,24 @@ class AccountAdmin(admin.ModelAdmin):
         'user', 'plan',
         'rendered_emails_count', 'rendered_emails_limit',
         'storage_used_bytes', 'storage_limit_mb',
+        'ai_generations_count', 'ai_generations_limit',
         'created_at',
     ]
     list_filter = ['plan']
     search_fields = ['user__username', 'user__email']
     readonly_fields = ['created_at', 'updated_at']
-    list_editable = ['plan', 'rendered_emails_limit', 'storage_limit_mb']
-    actions = ['reset_render_count', 'reset_storage_used', 'apply_plan_limits']
+    list_editable = ['plan', 'rendered_emails_limit', 'storage_limit_mb', 'ai_generations_limit']
+    actions = ['reset_render_count', 'reset_ai_count', 'reset_storage_used', 'apply_plan_limits']
 
     @admin.action(description='Reset rendered emails count to 0')
     def reset_render_count(self, request, queryset):
         count = queryset.update(rendered_emails_count=0)
         self.message_user(request, f'Reset render count for {count} account(s).', messages.SUCCESS)
+
+    @admin.action(description='Reset AI generations count to 0')
+    def reset_ai_count(self, request, queryset):
+        count = queryset.update(ai_generations_count=0)
+        self.message_user(request, f'Reset AI generations count for {count} account(s).', messages.SUCCESS)
 
     @admin.action(description='Reset storage used to 0')
     def reset_storage_used(self, request, queryset):

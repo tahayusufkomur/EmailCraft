@@ -6,18 +6,22 @@ from pathlib import Path
 from io import StringIO
 from unittest.mock import MagicMock, patch
 
+from celery.exceptions import Retry
+from django.contrib.auth.models import User
 from django.core.management import call_command
 from django.test import TestCase, override_settings
 
 import templates_api
 from core.agent_hub import HubHold
-from core.models import Organization
+from core.agent_hub import HubError
+from core.models import Account, Organization, Plan, UserOrganization
 from core.pix4less import Pix4LessError
 from templates_api.generation import (
     build_prompt, generate_template, parse_model_json, resolve_images, sanitize_links,
     store_remote_image, validate_template,
 )
-from templates_api.models import Template, UploadedImage
+from templates_api.models import GenerationJob, Template, UploadedImage
+from templates_api.tasks import run_generation_job
 from templates_api.services import provision_templates_for_org
 
 PKG = Path(templates_api.__file__).parent
@@ -474,3 +478,88 @@ class TestFoundryAndDrafts(TestCase):
             call_command('foundry', '--category', 'welcome', '--count', '2', stdout=out)
         self.assertEqual(list(Template.objects.values_list('name', flat=True)), ['Ok'])
         self.assertIn('boom', out.getvalue())
+
+
+class TestGenerationJob(TestCase):
+    def setUp(self):
+        self.plan = Plan.objects.create(name='AI Test', slug='ai-test', ai_generations_limit=7)
+        self.org = Organization.objects.create(name='O', email='ai-job@example.com')
+        user = User.objects.create(username='ai-owner')
+        self.account = Account.objects.create(user=user, plan=self.plan)
+        UserOrganization.objects.create(user=user, organization=self.org, role='owner')
+        self.job = GenerationJob.objects.create(org=self.org, brief='secret brief', category='welcome')
+
+    def _run(self):
+        run_generation_job.apply(args=[str(self.job.id)])
+        self.job.refresh_from_db()
+        self.account.refresh_from_db()
+
+    def test_done_creates_template_and_increments_count(self):
+        def fake(brief, category, org, *, allow_generation, on_step=None, **kw):
+            on_step('copy')
+            return 'Hello', {'version': 1}, ['warn']
+        with patch('templates_api.tasks.generate_template', side_effect=fake):
+            self._run()
+        self.assertEqual(self.job.status, 'done')
+        self.assertEqual(self.job.warnings, ['warn'])
+        self.assertEqual(self.job.step, 'copy')
+        t = self.job.template
+        self.assertEqual((t.org, t.name, t.json_data, t.category, t.is_draft, t.is_gallery),
+                         (self.org, 'Hello', {'version': 1}, 'welcome', False, False))
+        self.assertEqual(self.account.ai_generations_count, 1)
+
+    def test_failed_sets_error_and_leaves_count(self):
+        with patch('templates_api.tasks.generate_template', side_effect=ValueError('bad')):
+            self._run()
+        self.assertEqual((self.job.status, self.job.error), ('failed', 'bad'))
+        self.assertIsNone(self.job.template)
+        self.assertEqual(self.account.ai_generations_count, 0)
+
+    def test_hub_error_fails(self):
+        with patch('templates_api.tasks.generate_template', side_effect=HubError('x' * 900)):
+            self._run()
+        self.assertEqual(self.job.status, 'failed')
+        self.assertEqual(len(self.job.error), 500)
+
+    def test_hub_hold_sets_queued_and_retries(self):
+        with patch('templates_api.tasks.generate_template', side_effect=HubHold('floor')), \
+                patch('templates_api.tasks.run_generation_job.retry', side_effect=Retry()) as retry:
+            run_generation_job.apply(args=[str(self.job.id)])
+        self.job.refresh_from_db()
+        self.account.refresh_from_db()
+        self.assertEqual((self.job.status, self.job.error), ('queued', 'floor'))
+        self.assertEqual(retry.call_args.kwargs['countdown'], 30)
+        self.assertEqual(self.account.ai_generations_count, 0)
+
+    def test_hub_hold_retries_exhausted_fails(self):
+        from celery.exceptions import MaxRetriesExceededError
+        with patch('templates_api.tasks.generate_template', side_effect=HubHold('floor')), \
+                patch('templates_api.tasks.run_generation_job.retry', side_effect=MaxRetriesExceededError()):
+            self._run()
+        self.assertEqual((self.job.status, self.job.error), ('failed', 'AI workers unavailable, try again later'))
+
+    def test_allow_generation_follows_plan_flag(self):
+        for flag in (True, False):
+            self.plan.allow_ai_image_generation = flag
+            self.plan.save()
+            self.job.status = 'queued'
+            self.job.save()
+            with patch('templates_api.tasks.generate_template', return_value=('N', {}, [])) as gen:
+                self._run()
+            self.assertIs(gen.call_args.kwargs['allow_generation'], flag)
+
+    def test_no_account_disables_images_and_skips_quota(self):
+        org = Organization.objects.create(name='NoOwner', email='noowner@example.com')
+        job = GenerationJob.objects.create(org=org, brief='b', category='event')
+        with patch('templates_api.tasks.generate_template', return_value=('N', {}, [])) as gen:
+            run_generation_job.apply(args=[str(job.id)])
+        job.refresh_from_db()
+        self.assertEqual(job.status, 'done')
+        self.assertIs(gen.call_args.kwargs['allow_generation'], False)
+
+    def test_apply_plan_limits_copies_ai_limit(self):
+        self.account.ai_generations_limit = 1
+        self.account.save()
+        self.account.apply_plan_limits(save=True)
+        self.account.refresh_from_db()
+        self.assertEqual(self.account.ai_generations_limit, 7)

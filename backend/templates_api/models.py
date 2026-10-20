@@ -97,3 +97,29 @@ class UploadedImage(models.Model):
 
     def __str__(self):
         return self.s3_key
+
+
+class GenerationJob(models.Model):
+    STATUS_CHOICES = [
+        ('queued', 'Queued'),
+        ('running', 'Running'),
+        ('done', 'Done'),
+        ('failed', 'Failed'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    org = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='generation_jobs')
+    brief = models.TextField()
+    category = models.CharField(max_length=50, choices=Template.CATEGORY_CHOICES)
+    status = models.CharField(max_length=16, choices=STATUS_CHOICES, default='queued')
+    step = models.CharField(max_length=16, blank=True, default='')
+    template = models.ForeignKey(Template, on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
+    error = models.TextField(blank=True)
+    warnings = models.JSONField(default=list)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    objects = TenantManager()
+
+    class Meta:
+        db_table = 'generation_jobs'
