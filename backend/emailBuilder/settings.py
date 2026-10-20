@@ -294,3 +294,13 @@ CELERY_RESULT_BACKEND = None
 CELERY_TASK_ACKS_LATE = True
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_ACCEPT_CONTENT = ['json']
+
+# --- AI generation (agent-container hub + pix4less) ---
+AGENTC_HUB = os.environ.get('AGENTC_HUB', 'http://agent-container-hub:39300')
+AGENTC_LANE = os.environ.get('AGENTC_LANE', 'mailcraft')
+AGENTC_MODEL = os.environ.get('AGENTC_MODEL', 'gemini-3.8-flash-high')
+AGENTC_RUNS_DIR = os.environ.get('AGENTC_RUNS_DIR', '/Users/tahayusufkomur/ws/agent-studio-runs')
+AGENTC_TIMEOUT_S = int(os.environ.get('AGENTC_TIMEOUT_S', '180'))
+PIX4LESS_API_URL = os.environ.get('PIX4LESS_API_URL', 'https://pix4less.com')
+PIX4LESS_API_KEY = os.environ.get('PIX4LESS_API_KEY', '')
+AI_PLACEHOLDER_IMAGE_URL = os.environ.get('AI_PLACEHOLDER_IMAGE_URL', 'https://placehold.co/1200x600/e5e7eb/9ca3af?text=Image')
