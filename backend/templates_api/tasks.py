@@ -25,7 +25,7 @@ def _user_error(exc) -> str:
     return 'Generation failed'
 
 
-@shared_task(bind=True, max_retries=10, soft_time_limit=600, time_limit=660)
+@shared_task(bind=True, max_retries=10, soft_time_limit=900, time_limit=960)
 def run_generation_job(self, job_id):
     job = GenerationJob.objects.select_related('org').get(pk=job_id)
     if job.status == 'done':  # redelivery: don't create a second template or double-count
