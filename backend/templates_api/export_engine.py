@@ -332,14 +332,75 @@ def _sanitize_css_color(value, default):
     return default
 
 
+FRAME_KEYS = ('backgroundImage', 'backgroundGradient', 'backgroundOverlay', 'borderWidth', 'borderRadius')
+# Card and profile blocks already draw their own border/radius.
+_OWN_BORDER_TYPES = ('card', 'profile')
+_HEX_COLOR_PATTERN = re.compile(r'^#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$')
+
+
 def _render_blocks(blocks, ctx):
     parts = []
     for block in blocks:
         block_type = block.get('type', '')
         renderer = BLOCK_RENDERERS.get(block_type)
         if renderer:
-            parts.append(renderer(block, ctx))
+            html = renderer(block, ctx)
+            style = block.get('style', {})
+            if block_type in _OWN_BORDER_TYPES:
+                style = {k: v for k, v in style.items() if k not in ('borderWidth', 'borderRadius')}
+            if any(style.get(k) for k in FRAME_KEYS):
+                html = _frame(html, style, ctx)
+            parts.append(html)
     return '\n'.join(parts)
+
+
+def _vml_bg_open(img, width):
+    return (f'<!--[if gte mso 9]><v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" '
+            f'style="width:{width}px;"><v:fill type="tile" src="{img}" />'
+            f'<v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0"><![endif]-->')
+
+
+_VML_BG_CLOSE = '<!--[if gte mso 9]></v:textbox></v:rect><![endif]-->'
+
+
+def _frame(block_html, style, ctx):
+    """Wrap a rendered block row in a bordered / rounded / background-image row."""
+    img = html_module.escape(style.get('backgroundImage') or '')
+    gradient = html_module.escape(style.get('backgroundGradient') or '')
+    overlay = style.get('backgroundOverlay')
+    css = ['padding: 0']
+    border_w = style.get('borderWidth') or 0
+    if border_w > 0:
+        border_c = _sanitize_css_color(style.get('borderColor'), '#000000')
+        border_s = style.get('borderStyle') if style.get('borderStyle') in ('solid', 'dashed', 'dotted') else 'solid'
+        css.append(f'border: {border_w}px {border_s} {border_c}')
+    if style.get('borderRadius'):
+        css.append(f"border-radius: {int(style['borderRadius'])}px")
+    if img:
+        css.append(f"background-image: url('{img}'); background-size: cover; background-position: center")
+    elif gradient:
+        css.append(f'background: {gradient}')
+    td_attrs = f' background="{img}"' if img else ''
+    vml_open, vml_close = (_vml_bg_open(img, ctx['content_width']), _VML_BG_CLOSE) if img else ('', '')
+
+    inner = block_html
+    if overlay:
+        if not _HEX_COLOR_PATTERN.match(str(overlay)):
+            overlay = '#000000'
+        opacity = style.get('backgroundOverlayOpacity', 0.4)
+        inner = (f'<tr><td style="background: {_hex_to_rgba(overlay, opacity)};">'
+                 f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">'
+                 f'{block_html}</table></td></tr>')
+
+    return f"""<tr>
+  <td{td_attrs} style="{'; '.join(css)};" valign="top">
+    {vml_open}
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+      {inner}
+    </table>
+    {vml_close}
+  </td>
+</tr>"""
 
 
 def _render_text_block(block, ctx):
@@ -352,7 +413,7 @@ def _render_text_block(block, ctx):
 
     return f"""<tr>
   <td style="padding: {padding}; font-family: {ctx['default_font']}; font-size: {ctx['default_font_size']}px;
-             line-height: {int(ctx['default_font_size'] * 1.6)}px; color: {ctx['default_color']};
+             line-height: {int(ctx['default_font_size'] * (style.get('lineHeight') or 1.6))}px; color: {ctx['default_color']};
              text-align: {alignment};">
     {text_html}
   </td>
@@ -476,6 +537,9 @@ def _render_columns_block(block, ctx):
     column_count = data.get('columnCount', 2)
     columns = data.get('columns', [])
     gap = style.get('gap', 10)
+    min_height = style.get('minHeight')
+    height_style = f' style="height: {int(min_height)}px;"' if min_height else ''
+    v_align = {'center': 'middle', 'bottom': 'bottom'}.get(style.get('verticalAlignment'), 'top')
 
     col_width = int((ctx['content_width'] - gap * (column_count - 1)) / column_count)
 
@@ -492,12 +556,21 @@ def _render_columns_block(block, ctx):
 
         col_bg = col.get('backgroundColor')
         col_bg_style = f' background-color: {col_bg};' if col_bg else ''
+        col_padding = _padding_str(col['padding']) if col.get('padding') else f'0 {gap // 2}px'
+        if col.get('borderRadius'):
+            col_bg_style += f" border-radius: {int(col['borderRadius'])}px;"
+        col_img = html_module.escape(col.get('backgroundImage') or '')
+        col_bg_attr = ''
+        if col_img:
+            col_bg_attr = f' background="{col_img}"'
+            col_bg_style += f" background-image: url('{col_img}'); background-size: cover; background-position: center;"
+            col_inner = f'{_vml_bg_open(col_img, col_width)}{col_inner}{_VML_BG_CLOSE}'
 
         cols_html.append(f"""{mso_start}
       <div style="display: inline-block; width: 100%; max-width: {col_width}px; vertical-align: top;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
-            <td style="padding: 0 {gap // 2}px;{col_bg_style}">
+            <td{col_bg_attr} style="padding: {col_padding};{col_bg_style}" valign="top">
               {col_inner}
             </td>
           </tr>
@@ -506,7 +579,7 @@ def _render_columns_block(block, ctx):
       {mso_end}""")
 
     return f"""<tr>
-  <td>
+  <td valign="{v_align}"{height_style}>
     {''.join(cols_html)}
   </td>
 </tr>"""
@@ -584,7 +657,7 @@ def _render_heading_block(block, ctx):
 
     return f"""<tr>
   <td style="padding: {padding}; text-align: {alignment};{bg_style}">
-    <{tag} style="margin: 0; font-family: {font_family}; font-size: {font_size}px; line-height: {int(font_size * 1.2)}px; color: {color}; font-weight: {font_weight};{ls_style}{tt_style}">
+    <{tag} style="margin: 0; font-family: {font_family}; font-size: {font_size}px; line-height: {int(font_size * (style.get('lineHeight') or 1.2))}px; color: {color}; font-weight: {font_weight};{ls_style}{tt_style}">
       {text}
     </{tag}>
   </td>
@@ -745,7 +818,7 @@ def _render_card_block(block, ctx):
           {icon_html}
           {badge_html}
           <h3 style="margin: 0 0 8px; font-family: {heading_font}; font-size: {heading_size}px; font-weight: {heading_weight}; color: {heading_color}; line-height: 1.3;">{heading}</h3>
-          <p style="margin: 0 0 16px; font-family: {body_font}; font-size: {body_size}px; color: {body_color}; line-height: 1.5;">{body_text}</p>
+          <p style="margin: 0 0 16px; font-family: {body_font}; font-size: {body_size}px; color: {body_color}; line-height: {style.get('lineHeight') or 1.5};">{body_text}</p>
           {btn_html}
         </td>
       </tr>
@@ -781,7 +854,7 @@ def _render_hero_block(block, ctx):
     default_font = ctx['default_font']
     default_font_size = ctx['default_font_size']
 
-    sub_html = f'<p style="margin: 0 0 20px; font-family: {default_font}; font-size: {default_font_size}px; color: {sub_color}; line-height: 1.5;">{sub}</p>' if sub else ''
+    sub_html = f'<p style="margin: 0 0 20px; font-family: {default_font}; font-size: {default_font_size}px; color: {sub_color}; line-height: {style.get('lineHeight') or 1.5};">{sub}</p>' if sub else ''
     btn_html = f'<a href="{btn_url}" target="_blank" style="display: inline-block; padding: 14px 32px; background-color: {btn_bg}; color: {btn_color}; font-family: {default_font}; font-size: 15px; font-weight: 600; text-decoration: none; border-radius: {btn_radius}px;">{btn_text}</a>' if btn_text else ''
 
     return f"""<tr>
@@ -795,7 +868,7 @@ def _render_hero_block(block, ctx):
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="height: {height}px;">
       <tr>
         <td style="background: linear-gradient({grad_dir}, {overlay_rgba} 60%, transparent 100%); padding: 32px; text-align: {align};" valign="{valign_attr}">
-          <h1 style="margin: 0 0 8px; font-family: {heading_font}; font-size: {heading_size}px; line-height: {int(heading_size * 1.15)}px; color: {heading_color}; font-weight: 700;">{heading}</h1>
+          <h1 style="margin: 0 0 8px; font-family: {heading_font}; font-size: {heading_size}px; line-height: {int(heading_size * (style.get('lineHeight') or 1.15))}px; color: {heading_color}; font-weight: 700;">{heading}</h1>
           {sub_html}
           {btn_html}
         </td>
@@ -1017,7 +1090,7 @@ def _render_profile_block(block, ctx):
 
     bio_html = (
         f'<div style="color: {bio_color}; font-size: {bio_size}px; font-family: {bio_font}; '
-        f'line-height: 1.5; margin-top: 6px;">{bio_text}</div>'
+        f'line-height: {style.get("lineHeight") or 1.5}; margin-top: 6px;">{bio_text}</div>'
     ) if bio_text else ''
 
     name_html = (
