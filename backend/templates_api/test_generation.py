@@ -563,3 +563,20 @@ class TestGenerationJob(TestCase):
         self.account.apply_plan_limits(save=True)
         self.account.refresh_from_db()
         self.assertEqual(self.account.ai_generations_limit, 7)
+
+    def test_post_generation_db_error_fails_job(self):
+        with patch('templates_api.tasks.generate_template', return_value=('N', {}, [])), \
+                patch('templates_api.tasks.Template.objects.create', side_effect=Exception('db down')):
+            self._run()
+        self.assertEqual((self.job.status, self.job.error), ('failed', 'db down'))
+        self.assertEqual(self.account.ai_generations_count, 0)
+        self.assertEqual(Template.objects.filter(org=self.org).count(), 0)
+
+    def test_done_job_redelivery_is_noop(self):
+        self.job.status = 'done'
+        self.job.save()
+        with patch('templates_api.tasks.generate_template') as gen:
+            self._run()
+        gen.assert_not_called()
+        self.assertEqual(self.job.status, 'done')
+        self.assertEqual(self.account.ai_generations_count, 0)
