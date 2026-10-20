@@ -1,3 +1,4 @@
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -234,7 +235,8 @@ class TestResolveImages(TestCase):
                 patch(G + 'store_remote_image', return_value=self.stored):
             self.assertEqual(resolve_images(t, self.org, allow_generation=True), [])
         self.assertEqual(gen.call_args.args, ('canoe', '4:3'))  # pix4less generate has no 3:2
-        self.assertTrue(gen.call_args.kwargs['idempotency_key'].startswith(f'{self.org.id}:'))
+        want = hashlib.sha1(b'4:3|canoe').hexdigest()
+        self.assertEqual(gen.call_args.kwargs['idempotency_key'], f'{self.org.id}:{want}')
         dl.assert_called_with('gen1')
         self.assertEqual(t['body']['blocks'][0]['data']['src'], 'https://cdn/x.jpg')
 
@@ -257,6 +259,17 @@ class TestResolveImages(TestCase):
             resolve_images(t, self.org, allow_generation=False)
         self.assertEqual(search.call_count, 1)
         self.assertEqual([b['data']['src'] for b in t['body']['blocks']], ['https://cdn/x.jpg'] * 2)
+
+    @override_settings(AI_PLACEHOLDER_IMAGE_URL='https://ph/x.png')
+    def test_ref_cap_uses_placeholder_after_limit(self):
+        t = _img_tpl(*[f'pix4less://16:9/q{i}' for i in range(13)])
+        with patch(G + 'search', return_value={'id': 'i'}) as search, patch(G + 'download_url', return_value='u'), \
+                patch(G + 'store_remote_image', return_value=self.stored):
+            warnings = resolve_images(t, self.org, allow_generation=True)
+        self.assertEqual(search.call_count, 12)
+        self.assertEqual(t['body']['blocks'][12]['data']['src'], 'https://ph/x.png')
+        self.assertEqual(t['body']['blocks'][11]['data']['src'], 'https://cdn/x.jpg')
+        self.assertEqual(warnings, ['image: q12: too many images (limit 12)'])
 
     def test_store_failure_falls_back(self):
         t = _img_tpl('pix4less://16:9/a')
@@ -341,6 +354,25 @@ class TestStoreRemoteImage(TestCase):
         self.assertFalse(row.is_orphaned)
         self.assertEqual((row.filename, row.file_size, row.content_type), ('A canoe', 5, 'image/png'))
         self.assertEqual(row.url, f'https://cdn.test/{kw["Key"]}')
+
+    def test_non_image_content_type_coerced_to_jpeg(self):
+        with patch(G + 'requests.get', return_value=self._resp(ctype='Text/HTML; charset=utf-8')), \
+                patch(G + 'boto3.client') as client:
+            img = store_remote_image('https://signed', self.org, alt='x')
+        kw = client.return_value.put_object.call_args.kwargs
+        self.assertEqual(kw['ContentType'], 'image/jpeg')
+        self.assertTrue(kw['Key'].endswith('.jpg'))
+        self.assertEqual(img.content_type, 'image/jpeg')
+
+    def test_failures_raise_fixed_messages(self):
+        import requests as rq
+        with patch(G + 'requests.get', side_effect=rq.ConnectionError('https://secret?sig=1')):
+            with self.assertRaisesRegex(Pix4LessError, r'^image download failed$'):
+                store_remote_image('https://signed', self.org, alt='x')
+        with patch(G + 'requests.get', return_value=self._resp()), patch(G + 'boto3.client') as client:
+            client.return_value.put_object.side_effect = RuntimeError('http://s3.internal')
+            with self.assertRaisesRegex(Pix4LessError, r'^s3 upload failed$'):
+                store_remote_image('https://signed', self.org, alt='x')
 
     def test_http_error_raises(self):
         with patch(G + 'requests.get', return_value=self._resp(status=403)), patch(G + 'boto3.client'):

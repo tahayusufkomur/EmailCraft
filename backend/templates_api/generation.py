@@ -213,6 +213,7 @@ def parse_model_json(text: str) -> dict:
 IMAGE_REF_RE = re.compile(r'^pix4less://(16:9|1:1|4:3|3:2|9:16|4:5)/(.+)$')
 _EXT = {'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp'}
 _MAX_MODEL_TEXT = 400_000
+MAX_IMAGE_REFS = 12
 
 
 def store_remote_image(url: str, org, *, alt: str) -> UploadedImage:
@@ -223,11 +224,13 @@ def store_remote_image(url: str, org, *, alt: str) -> UploadedImage:
     try:
         r = requests.get(url, timeout=30)
     except requests.RequestException as e:
-        raise Pix4LessError(str(e)) from e
+        raise Pix4LessError('image download failed') from e
     if not 200 <= r.status_code < 300:
-        raise Pix4LessError(f'image download HTTP {r.status_code}')
+        raise Pix4LessError('image download failed')
     ctype = r.headers.get('Content-Type', '').split(';')[0].strip().lower()
-    key = f"{settings.AWS_S3_KEY_PREFIX}/{org.id}/ai/{uuid4().hex}.{_EXT.get(ctype, 'jpg')}"
+    if ctype not in _EXT:
+        ctype = 'image/jpeg'
+    key = f"{settings.AWS_S3_KEY_PREFIX}/{org.id}/ai/{uuid4().hex}.{_EXT[ctype]}"
     try:
         boto3.client(
             's3',
@@ -235,9 +238,9 @@ def store_remote_image(url: str, org, *, alt: str) -> UploadedImage:
             aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
             endpoint_url=settings.AWS_S3_ENDPOINT_URL,
             region_name=settings.AWS_S3_REGION_NAME,
-        ).put_object(Bucket=bucket, Key=key, Body=r.content, ContentType=ctype or 'image/jpeg')
+        ).put_object(Bucket=bucket, Key=key, Body=r.content, ContentType=ctype)
     except Exception as e:
-        raise Pix4LessError(f's3 upload failed: {e}') from e
+        raise Pix4LessError('s3 upload failed') from e
     if settings.AWS_CLOUDFRONT_DOMAIN:
         file_url = f"{settings.AWS_CLOUDFRONT_DOMAIN.rstrip('/')}/{key}"
     elif settings.AWS_S3_ENDPOINT_URL:
@@ -246,7 +249,7 @@ def store_remote_image(url: str, org, *, alt: str) -> UploadedImage:
         file_url = f"https://{bucket}.s3.{settings.AWS_S3_REGION_NAME}.amazonaws.com/{key}"
     image = UploadedImage.objects.create(
         org=org, s3_key=key, url=file_url, filename=alt[:255] or key.rsplit('/', 1)[-1],
-        file_size=len(r.content), content_type=ctype or 'image/jpeg', is_orphaned=False,
+        file_size=len(r.content), content_type=ctype, is_orphaned=False,
     )
     account = account_for_org(org)
     if account:
@@ -262,8 +265,9 @@ def _fetch_image(query: str, aspect: str, org, allow_generation: bool) -> tuple[
         image_id, desc = hit['id'], hit.get('description') or ''
     elif allow_generation:
         # pix4less generate does not accept 3:2
-        image_id = generate(query, '4:3' if aspect == '3:2' else aspect,
-                            idempotency_key=f"{org.id}:{hashlib.sha1(query.encode()).hexdigest()}")
+        aspect = '4:3' if aspect == '3:2' else aspect
+        key = hashlib.sha1(f'{aspect}|{query}'.encode()).hexdigest()
+        image_id = generate(query, aspect, idempotency_key=f'{org.id}:{key}')
         desc = ''
     else:
         raise Pix4LessError('no matching image')
@@ -293,6 +297,10 @@ def resolve_images(template: dict, org, *, allow_generation: bool) -> list[str]:
 
     def resolve(ref, query, aspect):
         if ref not in cache:
+            if len(cache) >= MAX_IMAGE_REFS:
+                warnings.append(f'image: {query}: too many images (limit {MAX_IMAGE_REFS})')
+                cache[ref] = (settings.AI_PLACEHOLDER_IMAGE_URL, '')
+                return cache[ref]
             try:
                 cache[ref] = _fetch_image(query, aspect, org, allow_generation)
             except Pix4LessError as e:
