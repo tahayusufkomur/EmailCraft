@@ -38,11 +38,11 @@ export function HeroSection() {
             variants={fadeUp}
             className="max-w-4xl font-heading text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            The{' '}
+            Describe your email. Get a{' '}
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              programmable
-            </span>{' '}
-            email builder
+              finished template
+            </span>
+            .
           </motion.h1>
 
           <motion.p
@@ -50,8 +50,8 @@ export function HeroSection() {
             variants={fadeUp}
             className="mt-6 max-w-2xl text-base text-muted-foreground md:text-lg"
           >
-            Embed a full email builder in your product. Configure orgs, variables, and themes via
-            API. Export production-ready HTML programmatically.
+            MailCraft writes the copy, lays out the design and picks the images. You fine-tune in the
+            editor and export email-safe HTML.
           </motion.p>
 
           <motion.div

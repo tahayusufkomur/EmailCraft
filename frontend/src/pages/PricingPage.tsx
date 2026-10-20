@@ -147,6 +147,7 @@ export function PricingPage() {
               </CardHeader>
               <CardContent className="space-y-2 text-sm text-muted-foreground">
                 <p>{plan.rendered_emails_limit.toLocaleString()} rendered emails / month</p>
+                <p>{plan.ai_generations_limit.toLocaleString()} AI generations / month</p>
                 <p>{formatBytes(plan.storage_limit_bytes)} media storage</p>
                 <p>{formatBytes(plan.max_upload_size_bytes)} max upload size</p>
               </CardContent>

@@ -15,6 +15,7 @@ export interface PricingPlan {
   plan: PlanKey;
   monthly_price_usd: number;
   rendered_emails_limit: number;
+  ai_generations_limit: number;
   storage_limit_bytes: number;
   max_upload_size_bytes: number;
   max_media_files_per_upload: number;

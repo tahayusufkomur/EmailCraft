@@ -39,6 +39,7 @@ def _plan_payload(plan_obj):
         'plan': plan_obj.slug,
         'monthly_price_usd': float(plan_obj.monthly_price_usd),
         'rendered_emails_limit': plan_obj.rendered_emails_limit,
+        'ai_generations_limit': plan_obj.ai_generations_limit,
         'storage_limit_bytes': plan_obj.storage_limit_bytes,
         'max_upload_size_bytes': plan_obj.max_upload_size_bytes,
         'max_media_files_per_upload': plan_obj.max_media_files_per_upload,
@@ -483,8 +484,8 @@ def create_session(request):
 def landing_page(request):
     return Response({
         'hero': {
-            'title': 'MailCraft: Build and ship email templates quickly',
-            'subtitle': 'Drag, drop, and export production-safe email HTML with usage-based plans.',
+            'title': 'Describe your email. Get a finished template.',
+            'subtitle': 'MailCraft writes the copy, lays out the design and picks the images. You fine-tune in the editor and export email-safe HTML.',
         },
         'features': [
             'Email-safe HTML export',
