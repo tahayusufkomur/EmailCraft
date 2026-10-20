@@ -387,7 +387,8 @@ def _frame(block_html, style, ctx):
     if overlay:
         if not _HEX_COLOR_PATTERN.match(str(overlay)):
             overlay = '#000000'
-        opacity = style.get('backgroundOverlayOpacity', 0.4)
+        opacity = style.get('backgroundOverlayOpacity')
+        opacity = 0.4 if opacity is None else opacity
         inner = (f'<tr><td style="background: {_hex_to_rgba(overlay, opacity)};">'
                  f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">'
                  f'{block_html}</table></td></tr>')

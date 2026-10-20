@@ -46,6 +46,8 @@ def search(query: str, aspect_ratio: str) -> dict | None:
     body = {'query': query, 'aspect_ratio': aspect_ratio, 'per_page': 1,
             'search_type': 'fast', 'safe_search': True}
     hits = _call(requests.post, '/v1/images/search', json=body)
+    if not isinstance(hits, list):
+        raise Pix4LessError(MALFORMED)
     return hits[0] if hits else None
 
 

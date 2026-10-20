@@ -52,6 +52,7 @@ _COLUMN = {
         'id': {'type': 'string'},
         'blocks': {'type': 'array', 'items': {'$ref': '#/$defs/block'}},
         'backgroundImage': {'$ref': '#/$defs/imageRef'},
+        'borderRadius': {'type': ['number', 'null']},
     },
 }
 
@@ -65,7 +66,16 @@ _BLOCK = {
         'style': {
             'type': 'object',
             'additionalProperties': True,
-            'properties': {'backgroundImage': {'$ref': '#/$defs/imageRef'}},
+            'properties': {
+                'backgroundImage': {'$ref': '#/$defs/imageRef'},
+                'borderWidth': {'type': ['number', 'null']},
+                'borderRadius': {'type': ['number', 'null']},
+                'lineHeight': {'type': ['number', 'null']},
+                'minHeight': {'type': ['number', 'null']},
+                'backgroundOverlayOpacity': {'type': ['number', 'null'], 'minimum': 0, 'maximum': 1},
+                'backgroundOverlay': {'type': ['string', 'null']},
+                'backgroundGradient': {'type': ['string', 'null']},
+            },
         },
     },
     'allOf': [
@@ -215,6 +225,7 @@ IMAGE_REF_RE = re.compile(r'^pix4less://(16:9|1:1|4:3|3:2|9:16|4:5)/(.+)$')
 _EXT = {'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp'}
 _MAX_MODEL_TEXT = 400_000
 MAX_IMAGE_REFS = 12
+MAX_GENERATED_IMAGES = 3
 
 
 def store_remote_image(url: str, org, *, alt: str):
@@ -265,12 +276,17 @@ def store_remote_image(url: str, org, *, alt: str):
     return image
 
 
-def _fetch_image(query: str, aspect: str, org, allow_generation: bool) -> tuple[str, str]:
-    """Returns (stored_url, description); raises Pix4LessError."""
+def _fetch_image(query: str, aspect: str, org, allow_generation: bool,
+                 gen_budget: list | None = None) -> tuple[str, str]:
+    """Returns (stored_url, description); raises Pix4LessError. gen_budget=[n] caps generate() calls."""
     hit = search(query, aspect)
     if hit:
         image_id, desc = hit['id'], hit.get('description') or ''
+    elif allow_generation and gen_budget is not None and gen_budget[0] <= 0:
+        raise Pix4LessError(f'no catalog match (generation limit {MAX_GENERATED_IMAGES})')
     elif allow_generation:
+        if gen_budget is not None:
+            gen_budget[0] -= 1
         # pix4less generate does not accept 3:2
         aspect = '4:3' if aspect == '3:2' else aspect
         key = hashlib.sha1(f'{aspect}|{query}'.encode()).hexdigest()
@@ -300,7 +316,7 @@ def _replace_refs(node, resolve):
 
 def resolve_images(template: dict, org, *, allow_generation: bool) -> list[str]:
     """Replace every pix4less:// ref in place; returns warnings for refs that fell back to the placeholder."""
-    warnings, cache = [], {}
+    warnings, cache, gen_budget = [], {}, [MAX_GENERATED_IMAGES]
 
     def resolve(ref, query, aspect):
         if ref not in cache:
@@ -309,7 +325,7 @@ def resolve_images(template: dict, org, *, allow_generation: bool) -> list[str]:
                 cache[ref] = (settings.AI_PLACEHOLDER_IMAGE_URL, '')
                 return cache[ref]
             try:
-                cache[ref] = _fetch_image(query, aspect, org, allow_generation)
+                cache[ref] = _fetch_image(query, aspect, org, allow_generation, gen_budget)
             except Pix4LessError as e:
                 warnings.append(f'image: {query}: {e}')
                 cache[ref] = (settings.AI_PLACEHOLDER_IMAGE_URL, '')

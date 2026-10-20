@@ -37,6 +37,7 @@ def run_prompt(prompt: str, *, label: str, timeout_s: int | None = None,
         'timeoutSec': timeout_s, 'worktree': False, 'requireSyncFresh': False,
         'priority': priority, 'label': label,
     }
+    run_id = None
     try:
         r = requests.post(f'{hub}/lanes/{settings.AGENTC_LANE}/runs', json=body, timeout=REQUEST_TIMEOUT)
         if not 200 <= r.status_code < 300:
@@ -58,6 +59,8 @@ def run_prompt(prompt: str, *, label: str, timeout_s: int | None = None,
                 raise HubError(run.get('error') or (run.get('resultText') or '')[:300] or f'hub run {state}')
             time.sleep(POLL_INTERVAL)
     except requests.RequestException as e:
+        if run_id is not None:
+            _cancel(run_id)
         raise HubError(str(e)) from e
     _cancel(run_id)
     raise HubError('hub run timed out')

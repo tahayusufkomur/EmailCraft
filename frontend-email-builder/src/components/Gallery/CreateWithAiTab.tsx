@@ -16,6 +16,7 @@ const TIMEOUT_MS = 10 * 60 * 1000;
 
 const ERROR_COPY: Record<string, string> = {
   AI_GENERATION_LIMIT_EXCEEDED: "You've used all AI generations on your plan.",
+  AI_GENERATION_IN_PROGRESS: "A generation is already running. Wait for it to finish.",
   AI_NOT_CONFIGURED: "AI generation isn't available right now.",
   RATE_LIMITED: 'Too many requests, try again in a minute.',
 };
@@ -65,7 +66,7 @@ export function CreateWithAiTab({ onGenerated }: { onGenerated: (templateId: str
     timer.current = setTimeout(async () => {
       if (!alive.current) return;
       if (Date.now() - startedAt > TIMEOUT_MS) {
-        fail('Timed out waiting for the AI worker.');
+        fail('Timed out. If it finished later, it will appear under Your templates.');
         return;
       }
       try {

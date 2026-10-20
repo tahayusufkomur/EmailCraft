@@ -401,6 +401,13 @@ def ai_generate(request):
             status=status.HTTP_503_SERVICE_UNAVAILABLE,
         )
 
+    if GenerationJob.objects.for_org(request.org).filter(status__in=('queued', 'running')).exists():
+        return Response(
+            {'error': {'code': 'AI_GENERATION_IN_PROGRESS',
+                       'message': 'A generation is already running for this account.'}},
+            status=status.HTTP_409_CONFLICT,
+        )
+
     account = account_for_org(request.org)
     if account and account.ai_generations_count >= account.ai_generations_limit:
         return Response(

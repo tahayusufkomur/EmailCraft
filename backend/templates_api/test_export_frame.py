@@ -17,6 +17,11 @@ class TestFrameStyles(TestCase):
         self.assertIn('<v:fill type="tile" src="https://x/i.jpg"', html)
         self.assertIn('rgba(0, 0, 0, 0.5)', html)
 
+    def test_null_overlay_opacity_defaults(self):
+        html = render_email_html(tpl({'id': 'a', 'type': 'text', 'data': {'html': 'hi', 'variables': []},
+            'style': {'backgroundImage': 'https://x/i.jpg', 'backgroundOverlay': '#000000', 'backgroundOverlayOpacity': None}}))
+        self.assertIn('rgba(0, 0, 0, 0.4)', html)
+
     def test_gradient_renders_on_server(self):
         html = render_email_html(tpl({'id': 'a', 'type': 'heading', 'data': {'text': 'T', 'level': 2},
             'style': {'backgroundGradient': 'linear-gradient(90deg, #000, #fff)'}}))

@@ -1,15 +1,31 @@
+import logging
+
 from celery import shared_task
-from celery.exceptions import MaxRetriesExceededError
+from celery.exceptions import MaxRetriesExceededError, SoftTimeLimitExceeded
 from django.db import transaction
 from django.db.models import F
 
-from core.agent_hub import HubHold
+from core.agent_hub import HubError, HubHold
 from core.models import Account, Plan, account_for_org
 from templates_api.generation import generate_template
 from templates_api.models import GenerationJob, Template
 
 
-@shared_task(bind=True, max_retries=10)
+logger = logging.getLogger(__name__)
+
+
+def _user_error(exc) -> str:
+    """Fixed, user-safe message per failure class; never echo exception text to the client."""
+    if isinstance(exc, HubError):
+        return 'AI worker error, try again'
+    if isinstance(exc, ValueError):
+        return 'The AI reply was not a valid template, try again'
+    if isinstance(exc, SoftTimeLimitExceeded):
+        return 'Generation took too long, try again'
+    return 'Generation failed'
+
+
+@shared_task(bind=True, max_retries=10, soft_time_limit=600, time_limit=660)
 def run_generation_job(self, job_id):
     job = GenerationJob.objects.select_related('org').get(pk=job_id)
     if job.status == 'done':  # redelivery: don't create a second template or double-count
@@ -55,6 +71,7 @@ def run_generation_job(self, job_id):
             job.save(update_fields=['status', 'error', 'updated_at'])
     except Exception as exc:
         job.status = 'failed'
-        job.error = str(exc)[:500]
+        logger.exception('generation job %s failed', job.id)
+        job.error = _user_error(exc)
         job.template = None
         job.save(update_fields=['status', 'error', 'template', 'updated_at'])

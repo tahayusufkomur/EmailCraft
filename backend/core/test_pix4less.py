@@ -82,6 +82,11 @@ class TestPix4Less(SimpleTestCase):
         with self.assertRaisesMessage(Pix4LessError, 'malformed'):
             search('canoe', '16:9')
 
+    def test_search_non_list_data_raises(self, post, get):
+        post.return_value = resp({'data': {'x': 1}})
+        with self.assertRaises(Pix4LessError):
+            search('canoe', '16:9')
+
     def test_download_response_with_null_data_raises(self, post, get):
         post.return_value = resp({'data': None})
         with self.assertRaisesMessage(Pix4LessError, 'malformed'):

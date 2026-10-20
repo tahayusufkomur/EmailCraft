@@ -94,6 +94,16 @@ class TestRunPrompt(SimpleTestCase):
         with self.assertRaisesMessage(HubError, 'down'):
             run_prompt('p', label='t')
 
+    @patch('core.agent_hub.requests.get')
+    @patch('core.agent_hub.requests.post')
+    def test_poll_network_error_cancels_run(self, post, get, sleep):
+        import requests
+        post.return_value = resp({'id': 'r1', 'state': 'running'})
+        get.side_effect = requests.ConnectionError('down')
+        with self.assertRaises(HubError):
+            run_prompt('p', label='t')
+        self.assertIn('/runs/r1/cancel', post.call_args_list[-1].args[0])
+
     @patch('core.agent_hub.time.monotonic')
     @patch('core.agent_hub.requests.get')
     @patch('core.agent_hub.requests.post')

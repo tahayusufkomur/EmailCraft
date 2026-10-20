@@ -86,6 +86,18 @@ class TestSchema(TestCase):
         self.assertEqual(validate_template(p), ['body/blocks/0/data/columns/0/blocks/0: html blocks are not allowed'])
         self.assertEqual(validate_template(p, allow_html=True), [])
 
+    def test_frame_style_types_and_bounds(self):
+        for k in ('borderWidth', 'borderRadius', 'lineHeight', 'minHeight'):
+            self.assertTrue(validate_template(_tpl(style={k: '2'})), k)
+            self.assertEqual(validate_template(_tpl(style={k: 2})), [], k)
+            self.assertEqual(validate_template(_tpl(style={k: None})), [], k)
+        for v in (1.5, -0.1, '0.5'):
+            self.assertTrue(validate_template(_tpl(style={'backgroundOverlayOpacity': v})), v)
+        self.assertEqual(validate_template(_tpl(style={'backgroundOverlayOpacity': 0.5, 'backgroundOverlay': '#000'})), [])
+        self.assertTrue(validate_template(_tpl(style={'backgroundGradient': 5})))
+        col = {'id': 'c', 'blocks': [], 'borderRadius': '8'}
+        self.assertTrue(validate_template(_tpl(type='columns', data={'columns': [col]})))
+
     def test_missing_keys_and_name(self):
         self.assertTrue(validate_template({'name': 'x'}))
         p = _tpl()
@@ -280,6 +292,17 @@ class TestResolveImages(TestCase):
         self.assertEqual(t['body']['blocks'][12]['data']['src'], 'https://ph/x.png')
         self.assertEqual(t['body']['blocks'][11]['data']['src'], 'https://cdn/x.jpg')
         self.assertEqual(warnings, ['image: q12: too many images (limit 12)'])
+
+    @override_settings(AI_PLACEHOLDER_IMAGE_URL='https://ph/x.png')
+    def test_generation_cap_places_placeholder_after_three(self):
+        t = _img_tpl(*[f'pix4less://16:9/q{i}' for i in range(4)])
+        with patch(G + 'search', return_value=None), patch(G + 'generate', return_value='g') as gen, \
+                patch(G + 'download_url', return_value='u'), \
+                patch(G + 'store_remote_image', return_value=self.stored):
+            warnings = resolve_images(t, self.org, allow_generation=True)
+        self.assertEqual(gen.call_count, 3)
+        self.assertEqual(t['body']['blocks'][3]['data']['src'], 'https://ph/x.png')
+        self.assertEqual(warnings, ['image: q3: no catalog match (generation limit 3)'])
 
     def test_store_failure_falls_back(self):
         t = _img_tpl('pix4less://16:9/a')
@@ -511,17 +534,24 @@ class TestGenerationJob(TestCase):
         self.assertEqual(self.account.ai_generations_count, 1)
 
     def test_failed_sets_error_and_leaves_count(self):
-        with patch('templates_api.tasks.generate_template', side_effect=ValueError('bad')):
+        with patch('templates_api.tasks.generate_template', side_effect=ValueError('secret-detail')):
             self._run()
-        self.assertEqual((self.job.status, self.job.error), ('failed', 'bad'))
+        self.assertEqual((self.job.status, self.job.error),
+                         ('failed', 'The AI reply was not a valid template, try again'))
+        self.assertNotIn('secret-detail', self.job.error)
         self.assertIsNone(self.job.template)
         self.assertEqual(self.account.ai_generations_count, 0)
 
     def test_hub_error_fails(self):
         with patch('templates_api.tasks.generate_template', side_effect=HubError('x' * 900)):
             self._run()
-        self.assertEqual(self.job.status, 'failed')
-        self.assertEqual(len(self.job.error), 500)
+        self.assertEqual((self.job.status, self.job.error), ('failed', 'AI worker error, try again'))
+
+    def test_soft_time_limit_fails_job(self):
+        from celery.exceptions import SoftTimeLimitExceeded
+        with patch('templates_api.tasks.generate_template', side_effect=SoftTimeLimitExceeded()):
+            self._run()
+        self.assertEqual((self.job.status, self.job.error), ('failed', 'Generation took too long, try again'))
 
     def test_hub_hold_sets_queued_and_retries(self):
         with patch('templates_api.tasks.generate_template', side_effect=HubHold('floor')), \
@@ -570,7 +600,7 @@ class TestGenerationJob(TestCase):
         with patch('templates_api.tasks.generate_template', return_value=('N', {}, [])), \
                 patch('templates_api.tasks.Template.objects.create', side_effect=Exception('db down')):
             self._run()
-        self.assertEqual((self.job.status, self.job.error), ('failed', 'db down'))
+        self.assertEqual((self.job.status, self.job.error), ('failed', 'Generation failed'))
         self.assertEqual(self.account.ai_generations_count, 0)
         self.assertEqual(Template.objects.filter(org=self.org).count(), 0)
 
@@ -628,6 +658,16 @@ class TestAiEndpoints(TestCase):
         self.assertEqual(r.data['error']['code'], 'AI_GENERATION_LIMIT_EXCEEDED')
         delay.assert_not_called()
         self.assertFalse(GenerationJob.objects.exists())
+
+    @override_settings(AGENTC_LANE='mailcraft')
+    def test_generate_in_flight_returns_409(self):
+        GenerationJob.objects.create(org=self.org, brief='b', category='event', status='queued')
+        with patch('templates_api.views.run_generation_job.delay') as delay:
+            r = self._post(brief='x', category='welcome')
+        self.assertEqual(r.status_code, 409)
+        self.assertEqual(r.data['error']['code'], 'AI_GENERATION_IN_PROGRESS')
+        delay.assert_not_called()
+        self.assertEqual(GenerationJob.objects.count(), 1)
 
     @override_settings(AGENTC_LANE='')
     def test_generate_not_configured_returns_503(self):
