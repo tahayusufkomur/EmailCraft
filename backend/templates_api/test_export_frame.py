@@ -45,3 +45,17 @@ class TestFrameStyles(TestCase):
         self.assertIn('valign="middle"', html)
         self.assertIn('padding: 8px 8px 8px 8px', html)
         self.assertIn('border-radius: 10px', html)
+
+    def test_button_border_not_duplicated_by_frame(self):
+        html = render_email_html(tpl({'id': 'a', 'type': 'button', 'data': {'text': 'Go', 'url': 'https://x'},
+            'style': {'borderWidth': 2, 'borderColor': '#ff0000', 'borderStyle': 'solid'}}))
+        # the button renderer itself emits the border on its <td> and its <a>; the frame must add none
+        self.assertEqual(html.count('border: 2px solid #ff0000'), 2)
+
+    def test_image_radius_gets_no_frame_wrapper(self):
+        base = render_email_html(tpl({'id': 'a', 'type': 'image', 'data': {'src': 'https://x/i.jpg', 'alt': ''}, 'style': {}}))
+        html = render_email_html(tpl({'id': 'a', 'type': 'image', 'data': {'src': 'https://x/i.jpg', 'alt': ''},
+            'style': {'borderRadius': 8}}))
+        self.assertNotIn('<v:rect', html)
+        self.assertIn('border-radius: 8px', html)
+        self.assertEqual(html.count('<table'), base.count('<table'))

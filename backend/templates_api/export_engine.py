@@ -333,8 +333,8 @@ def _sanitize_css_color(value, default):
 
 
 FRAME_KEYS = ('backgroundImage', 'backgroundGradient', 'backgroundOverlay', 'borderWidth', 'borderRadius')
-# Card and profile blocks already draw their own border/radius.
-_OWN_BORDER_TYPES = ('card', 'profile')
+# These blocks already draw their own border/radius.
+_OWN_BORDER_TYPES = ('card', 'profile', 'button', 'image')
 _HEX_COLOR_PATTERN = re.compile(r'^#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$')
 
 
