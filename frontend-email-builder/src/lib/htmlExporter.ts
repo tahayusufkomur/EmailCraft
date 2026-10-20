@@ -244,7 +244,7 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
 
     case 'columns': {
       const colCount = block.data.columnCount || 2;
-      const gap = block.style.gap || 10;
+      const gap = block.style.gap ?? 10;
       const minHeight = block.style.minHeight;
       const heightStyle = minHeight ? ` style="height: ${Math.trunc(minHeight)}px;"` : '';
       const vAlign = block.style.verticalAlignment === 'center' ? 'middle' : block.style.verticalAlignment === 'bottom' ? 'bottom' : 'top';
@@ -261,7 +261,7 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
         let inner = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${colContent}</table>`;
         const stackClass = block.style.stackOnMobile === false ? '' : 'stack-column';
         let colBg = col.backgroundColor ? ` background-color: ${col.backgroundColor};` : '';
-        const colPadding = col.padding ? paddingStr(col.padding) : `0 ${gap / 2}px`;
+        const colPadding = col.padding ? paddingStr(col.padding) : `0 ${Math.floor(gap / 2)}px`;
         if (col.borderRadius) colBg += ` border-radius: ${Math.trunc(col.borderRadius)}px;`;
         const colImg = escapeAttr(col.backgroundImage || '');
         let colBgAttr = '';

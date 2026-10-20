@@ -177,7 +177,7 @@ function ColumnSlot({
 
 export function ColumnsBlock({ block }: Props) {
   const { columns } = block.data;
-  const gap = block.style.gap || 10;
+  const gap = block.style.gap ?? 10;
   const equalRatio = Math.floor(100 / Math.max(columns.length, 1));
 
   return (
