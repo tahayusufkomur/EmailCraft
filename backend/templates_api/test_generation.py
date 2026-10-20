@@ -2,11 +2,18 @@ import json
 import re
 from pathlib import Path
 
-from django.test import TestCase
+from unittest.mock import MagicMock, patch
+
+from django.test import TestCase, override_settings
 
 import templates_api
 from core.models import Organization
-from templates_api.generation import build_prompt, parse_model_json, validate_template
+from core.pix4less import Pix4LessError
+from templates_api.generation import (
+    build_prompt, generate_template, parse_model_json, resolve_images, sanitize_links,
+    store_remote_image, validate_template,
+)
+from templates_api.models import UploadedImage
 
 PKG = Path(templates_api.__file__).parent
 
@@ -169,3 +176,178 @@ class TestParse(TestCase):
         for bad in ('nope', '', '{not json}', '```json\n[1]\n```', '[1,2]', '{"a":1'):
             with self.assertRaises(ValueError, msg=bad):
                 parse_model_json(bad)
+
+
+G = 'templates_api.generation.'
+
+
+def _img_tpl(*refs):
+    blocks = [{'id': f'b{i}', 'type': 'image', 'data': {'src': r, 'alt': ''}, 'style': {}}
+              for i, r in enumerate(refs)]
+    return {'body': {'blocks': blocks}}
+
+
+class TestResolveImages(TestCase):
+    def setUp(self):
+        self.org = Organization.objects.create(name='Acme', email='a@acme.test')
+        self.stored = MagicMock(url='https://cdn/x.jpg')
+
+    def test_replaces_ref_via_search_and_store(self):
+        t = {'body': {'blocks': [{'type': 'image', 'data': {'src': 'pix4less://16:9/canoe', 'alt': ''},
+                                  'style': {'backgroundImage': 'pix4less://1:1/leaf'}}]}}
+        with patch(G + 'search', return_value={'id': 'i1', 'description': 'a canoe'}) as search, \
+                patch(G + 'download_url', return_value='https://s') as dl, \
+                patch(G + 'store_remote_image', return_value=self.stored) as store:
+            self.assertEqual(resolve_images(t, self.org, allow_generation=False), [])
+        blk = t['body']['blocks'][0]
+        self.assertEqual(blk['data']['src'], 'https://cdn/x.jpg')
+        self.assertEqual(blk['style']['backgroundImage'], 'https://cdn/x.jpg')
+        self.assertEqual(blk['data']['alt'], 'a canoe')
+        self.assertEqual(search.call_args_list[0].args, ('canoe', '16:9'))
+        dl.assert_called_with('i1')
+        self.assertEqual(store.call_args.args[:2], ('https://s', self.org))
+
+    def test_alt_not_overwritten(self):
+        t = _img_tpl('pix4less://16:9/canoe')
+        t['body']['blocks'][0]['data']['alt'] = 'mine'
+        with patch(G + 'search', return_value={'id': 'i1', 'description': 'd'}), \
+                patch(G + 'download_url', return_value='u'), \
+                patch(G + 'store_remote_image', return_value=self.stored):
+            resolve_images(t, self.org, allow_generation=False)
+        self.assertEqual(t['body']['blocks'][0]['data']['alt'], 'mine')
+
+    @override_settings(AI_PLACEHOLDER_IMAGE_URL='https://ph/x.png')
+    def test_no_hit_without_generation_uses_placeholder_with_warning(self):
+        t = _img_tpl('pix4less://16:9/canoe')
+        with patch(G + 'search', return_value=None), patch(G + 'generate') as gen:
+            warnings = resolve_images(t, self.org, allow_generation=False)
+        gen.assert_not_called()
+        self.assertEqual(t['body']['blocks'][0]['data']['src'], 'https://ph/x.png')
+        self.assertEqual(len(warnings), 1)
+        self.assertTrue(warnings[0].startswith('image: canoe: '))
+
+    def test_no_hit_with_generation_generates(self):
+        t = _img_tpl('pix4less://3:2/canoe')
+        with patch(G + 'search', return_value=None), \
+                patch(G + 'generate', return_value='gen1') as gen, \
+                patch(G + 'download_url', return_value='https://s') as dl, \
+                patch(G + 'store_remote_image', return_value=self.stored):
+            self.assertEqual(resolve_images(t, self.org, allow_generation=True), [])
+        self.assertEqual(gen.call_args.args, ('canoe', '4:3'))  # pix4less generate has no 3:2
+        self.assertTrue(gen.call_args.kwargs['idempotency_key'].startswith(f'{self.org.id}:'))
+        dl.assert_called_with('gen1')
+        self.assertEqual(t['body']['blocks'][0]['data']['src'], 'https://cdn/x.jpg')
+
+    @override_settings(AI_PLACEHOLDER_IMAGE_URL='https://ph/x.png')
+    def test_one_failure_does_not_abort_others(self):
+        t = _img_tpl('pix4less://16:9/a', 'pix4less://16:9/b')
+        with patch(G + 'search', side_effect=[Pix4LessError('boom'), {'id': 'i2'}]), \
+                patch(G + 'download_url', return_value='u'), \
+                patch(G + 'store_remote_image', return_value=self.stored):
+            warnings = resolve_images(t, self.org, allow_generation=False)
+        self.assertEqual(warnings, ['image: a: boom'])
+        srcs = [b['data']['src'] for b in t['body']['blocks']]
+        self.assertEqual(srcs, ['https://ph/x.png', 'https://cdn/x.jpg'])
+
+    def test_identical_refs_resolve_once(self):
+        t = _img_tpl('pix4less://16:9/a', 'pix4less://16:9/a')
+        with patch(G + 'search', return_value={'id': 'i'}) as search, \
+                patch(G + 'download_url', return_value='u'), \
+                patch(G + 'store_remote_image', return_value=self.stored):
+            resolve_images(t, self.org, allow_generation=False)
+        self.assertEqual(search.call_count, 1)
+        self.assertEqual([b['data']['src'] for b in t['body']['blocks']], ['https://cdn/x.jpg'] * 2)
+
+    def test_store_failure_falls_back(self):
+        t = _img_tpl('pix4less://16:9/a')
+        with patch(G + 'search', return_value={'id': 'i'}), patch(G + 'download_url', return_value='u'), \
+                patch(G + 'store_remote_image', side_effect=Pix4LessError('s3 not configured')):
+            warnings = resolve_images(t, self.org, allow_generation=False)
+        self.assertEqual(warnings, ['image: a: s3 not configured'])
+
+
+class TestSanitizeLinks(TestCase):
+    def test_bad_links_replaced_good_kept(self):
+        t = {'body': {'blocks': [
+            {'type': 'button', 'data': {'url': 'javascript:alert(1)'}},
+            {'type': 'button', 'data': {'url': 'https://ok'}},
+            {'type': 'button', 'data': {'url': '{{cta_url}}'}},
+            {'type': 'text', 'data': {'link': 'mailto:a@b.c', 'href': 'data:text/html,x'}},
+            {'type': 'social', 'data': {'platforms': [{'url': 'vbscript:x'}, {'url': 'http://t'}]}},
+            {'type': 'columns', 'data': {'columns': [{'blocks': [
+                {'type': 'button', 'data': {'buttonUrl': 'JAVASCRIPT:x'}}]}]}},
+        ]}}
+        self.assertEqual(sanitize_links(t), 4)
+        b = t['body']['blocks']
+        self.assertEqual(b[0]['data']['url'], 'https://')
+        self.assertEqual(b[1]['data']['url'], 'https://ok')
+        self.assertEqual(b[2]['data']['url'], '{{cta_url}}')
+        self.assertEqual((b[3]['data']['link'], b[3]['data']['href']), ('mailto:a@b.c', 'https://'))
+        self.assertEqual([p['url'] for p in b[4]['data']['platforms']], ['https://', 'http://t'])
+        self.assertEqual(b[5]['data']['columns'][0]['blocks'][0]['data']['buttonUrl'], 'https://')
+
+
+class TestGenerateTemplate(TestCase):
+    def setUp(self):
+        self.org = Organization.objects.create(name='Acme', email='a@acme.test')
+        self.valid = json.dumps(_tpl(data={'src': ''}))
+
+    def test_happy_path_steps_and_sanitize(self):
+        payload = _tpl(type='button', data={'url': 'javascript:alert(1)'})
+        steps = []
+        with patch(G + 'run_prompt', return_value=json.dumps(payload)) as run, \
+                patch(G + 'resolve_images', return_value=['w']) as res:
+            name, tpl, warnings = generate_template(
+                'brief', 'welcome', self.org, allow_generation=False, on_step=steps.append)
+        self.assertEqual((name, warnings, steps), ('T', ['w'], ['writing', 'images']))
+        self.assertEqual(run.call_args.kwargs['label'], 'MailCraft generate: welcome')
+        self.assertEqual(tpl['body']['blocks'][0]['data']['url'], 'https://')
+        self.assertIs(res.call_args.args[0], tpl)
+
+    def test_retries_once_on_invalid_json(self):
+        with patch(G + 'run_prompt', side_effect=['garbage', self.valid]) as run, \
+                patch(G + 'resolve_images', return_value=[]):
+            name, _, _ = generate_template('b', 'welcome', self.org, allow_generation=False)
+        self.assertEqual(name, 'T')
+        self.assertEqual(run.call_count, 2)
+        self.assertIn('failed validation', run.call_args_list[1].args[0])
+
+    def test_raises_after_second_invalid(self):
+        with patch(G + 'run_prompt', side_effect=['garbage', '{"a": 1}']) as run:
+            with self.assertRaisesRegex(ValueError, 'model output failed validation'):
+                generate_template('b', 'welcome', self.org, allow_generation=False)
+        self.assertEqual(run.call_count, 2)
+
+
+@override_settings(AWS_S3_PUBLIC_BUCKET='bkt', AWS_S3_KEY_PREFIX='pfx', AWS_CLOUDFRONT_DOMAIN='https://cdn.test',
+                   AWS_S3_ENDPOINT_URL=None)
+class TestStoreRemoteImage(TestCase):
+    def setUp(self):
+        self.org = Organization.objects.create(name='Acme', email='a@acme.test')
+
+    def _resp(self, status=200, ctype='image/png', content=b'12345'):
+        return MagicMock(status_code=status, content=content, headers={'Content-Type': ctype})
+
+    def test_uploads_and_creates_row(self):
+        with patch(G + 'requests.get', return_value=self._resp()) as get, patch(G + 'boto3.client') as client:
+            img = store_remote_image('https://signed', self.org, alt='A canoe')
+        get.assert_called_once_with('https://signed', timeout=30)
+        kw = client.return_value.put_object.call_args.kwargs
+        self.assertEqual(kw['Bucket'], 'bkt')
+        self.assertEqual(kw['ContentType'], 'image/png')
+        self.assertEqual(kw['Body'], b'12345')
+        self.assertRegex(kw['Key'], rf'^pfx/{self.org.id}/ai/[0-9a-f]{{32}}\.png$')
+        row = UploadedImage.objects.get(id=img.id)
+        self.assertFalse(row.is_orphaned)
+        self.assertEqual((row.filename, row.file_size, row.content_type), ('A canoe', 5, 'image/png'))
+        self.assertEqual(row.url, f'https://cdn.test/{kw["Key"]}')
+
+    def test_http_error_raises(self):
+        with patch(G + 'requests.get', return_value=self._resp(status=403)), patch(G + 'boto3.client'):
+            with self.assertRaises(Pix4LessError):
+                store_remote_image('https://signed', self.org, alt='x')
+
+    @override_settings(AWS_S3_PUBLIC_BUCKET='')
+    def test_unconfigured_bucket_raises(self):
+        with self.assertRaisesRegex(Pix4LessError, 's3 not configured'):
+            store_remote_image('https://signed', self.org, alt='x')

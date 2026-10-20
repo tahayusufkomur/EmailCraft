@@ -3,12 +3,22 @@
 Trust boundary: model output is only trusted after `validate_template` passes,
 and the customer brief only ever reaches the model as nonce-fenced JSON data.
 """
+import hashlib
 import json
 import re
 import secrets
 import unicodedata
+from uuid import uuid4
 
+import boto3
+import requests
+from django.conf import settings
 from jsonschema import Draft202012Validator
+
+from core.agent_hub import run_prompt
+from core.models import account_for_org
+from core.pix4less import Pix4LessError, download_url, generate, search
+from templates_api.models import Template, UploadedImage
 
 IMAGE_REF_PATTERN = r'^(https://\S+|pix4less://(16:9|1:1|4:3|3:2|9:16|4:5)/.+)$'
 
@@ -198,3 +208,160 @@ def parse_model_json(text: str) -> dict:
     if not isinstance(data, dict):
         raise ValueError('model output JSON is not an object')
     return data
+
+
+IMAGE_REF_RE = re.compile(r'^pix4less://(16:9|1:1|4:3|3:2|9:16|4:5)/(.+)$')
+_EXT = {'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp'}
+_MAX_MODEL_TEXT = 400_000
+
+
+def store_remote_image(url: str, org, *, alt: str) -> UploadedImage:
+    """Copy a signed pix4less URL into the public bucket and record it as an in-use UploadedImage."""
+    bucket = settings.AWS_S3_PUBLIC_BUCKET
+    if not bucket:
+        raise Pix4LessError('s3 not configured')
+    try:
+        r = requests.get(url, timeout=30)
+    except requests.RequestException as e:
+        raise Pix4LessError(str(e)) from e
+    if not 200 <= r.status_code < 300:
+        raise Pix4LessError(f'image download HTTP {r.status_code}')
+    ctype = r.headers.get('Content-Type', '').split(';')[0].strip().lower()
+    key = f"{settings.AWS_S3_KEY_PREFIX}/{org.id}/ai/{uuid4().hex}.{_EXT.get(ctype, 'jpg')}"
+    try:
+        boto3.client(
+            's3',
+            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+            endpoint_url=settings.AWS_S3_ENDPOINT_URL,
+            region_name=settings.AWS_S3_REGION_NAME,
+        ).put_object(Bucket=bucket, Key=key, Body=r.content, ContentType=ctype or 'image/jpeg')
+    except Exception as e:
+        raise Pix4LessError(f's3 upload failed: {e}') from e
+    if settings.AWS_CLOUDFRONT_DOMAIN:
+        file_url = f"{settings.AWS_CLOUDFRONT_DOMAIN.rstrip('/')}/{key}"
+    elif settings.AWS_S3_ENDPOINT_URL:
+        file_url = f"{settings.AWS_S3_ENDPOINT_URL.rstrip('/')}/{bucket}/{key}"
+    else:
+        file_url = f"https://{bucket}.s3.{settings.AWS_S3_REGION_NAME}.amazonaws.com/{key}"
+    image = UploadedImage.objects.create(
+        org=org, s3_key=key, url=file_url, filename=alt[:255] or key.rsplit('/', 1)[-1],
+        file_size=len(r.content), content_type=ctype or 'image/jpeg', is_orphaned=False,
+    )
+    account = account_for_org(org)
+    if account:
+        account.storage_used_bytes += len(r.content)
+        account.save(update_fields=['storage_used_bytes'])
+    return image
+
+
+def _fetch_image(query: str, aspect: str, org, allow_generation: bool) -> tuple[str, str]:
+    """Returns (stored_url, description); raises Pix4LessError."""
+    hit = search(query, aspect)
+    if hit:
+        image_id, desc = hit['id'], hit.get('description') or ''
+    elif allow_generation:
+        # pix4less generate does not accept 3:2
+        image_id = generate(query, '4:3' if aspect == '3:2' else aspect,
+                            idempotency_key=f"{org.id}:{hashlib.sha1(query.encode()).hexdigest()}")
+        desc = ''
+    else:
+        raise Pix4LessError('no matching image')
+    return store_remote_image(download_url(image_id), org, alt=desc or query).url, desc
+
+
+def _replace_refs(node, resolve):
+    if isinstance(node, dict):
+        for k, v in node.items():
+            if isinstance(v, str):
+                m = IMAGE_REF_RE.match(v)
+                if m:
+                    url, desc = resolve(v, m.group(2), m.group(1))
+                    node[k] = url
+                    if desc and k != 'alt' and 'alt' in node and not node['alt']:
+                        node['alt'] = desc
+            else:
+                _replace_refs(v, resolve)
+    elif isinstance(node, list):
+        for v in node:
+            _replace_refs(v, resolve)
+
+
+def resolve_images(template: dict, org, *, allow_generation: bool) -> list[str]:
+    """Replace every pix4less:// ref in place; returns warnings for refs that fell back to the placeholder."""
+    warnings, cache = [], {}
+
+    def resolve(ref, query, aspect):
+        if ref not in cache:
+            try:
+                cache[ref] = _fetch_image(query, aspect, org, allow_generation)
+            except Pix4LessError as e:
+                warnings.append(f'image: {query}: {e}')
+                cache[ref] = (settings.AI_PLACEHOLDER_IMAGE_URL, '')
+        return cache[ref]
+
+    _replace_refs(template, resolve)
+    return warnings
+
+
+_SAFE_LINK = ('https://', 'http://', 'mailto:', '{{')
+_LINK_FIELDS = ('url', 'buttonUrl', 'link', 'href')
+
+
+def _fix_link(d, key):
+    v = d.get(key)
+    if isinstance(v, str) and not v.startswith(_SAFE_LINK):
+        d[key] = 'https://'
+        return 1
+    return 0
+
+
+def _sanitize_blocks(blocks) -> int:
+    n = 0
+    for b in blocks if isinstance(blocks, list) else []:
+        data = b.get('data') if isinstance(b, dict) else None
+        if not isinstance(data, dict):
+            continue
+        n += sum(_fix_link(data, f) for f in _LINK_FIELDS)
+        for p in data.get('platforms') or []:
+            if isinstance(p, dict):
+                n += _fix_link(p, 'url')
+        for col in data.get('columns') or []:
+            if isinstance(col, dict):
+                n += _sanitize_blocks(col.get('blocks'))
+    return n
+
+
+def sanitize_links(template: dict) -> int:
+    """Neutralise non-http(s)/mailto/merge-tag link targets in place; returns how many were replaced."""
+    return sum(_sanitize_blocks(template.get(r, {}).get('blocks')) for r in ('header', 'body', 'footer'))
+
+
+def _parse_and_validate(text: str) -> tuple[dict | None, list[str]]:
+    try:
+        payload = parse_model_json(text[:_MAX_MODEL_TEXT])
+        errors = validate_template(payload)
+    except (ValueError, RecursionError) as e:
+        return None, [str(e) or type(e).__name__]
+    return (None if errors else payload), [e[:200] for e in errors]
+
+
+def generate_template(brief: str, category: str, org, *, allow_generation: bool,
+                      exemplar_count: int = 2, on_step=None) -> tuple[str, dict, list[str]]:
+    step = on_step or (lambda _s: None)
+    exemplars = list(Template.objects.shared().filter(category=category)
+                     .order_by('?').values_list('json_data', flat=True)[:exemplar_count])
+    step('writing')
+    prompt = build_prompt(brief, category, exemplars, org)
+    label = f'MailCraft generate: {category}'
+    payload, errors = _parse_and_validate(run_prompt(prompt, label=label))
+    if payload is None:
+        retry = (prompt + '\n\nYour previous reply failed validation:\n' + '\n'.join(errors)
+                 + '\nReply again with corrected JSON only.')
+        payload, errors = _parse_and_validate(run_prompt(retry, label=label))
+        if payload is None:
+            raise ValueError('model output failed validation: ' + '; '.join(errors))
+    template = payload['template']
+    sanitize_links(template)
+    step('images')
+    return payload['name'], template, resolve_images(template, org, allow_generation=allow_generation)
