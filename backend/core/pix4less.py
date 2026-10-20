@@ -9,8 +9,18 @@ LONG_POLL_S = 25
 LONG_POLL_TIMEOUT = LONG_POLL_S + 5
 
 
+MALFORMED = 'pix4less malformed response'
+
+
 class Pix4LessError(Exception):
     pass
+
+
+def _field(obj, key):
+    try:
+        return obj[key]
+    except (KeyError, TypeError, IndexError) as e:
+        raise Pix4LessError(MALFORMED) from e
 
 
 def _call(method, path: str, *, timeout: int = REQUEST_TIMEOUT, headers: dict | None = None, **kwargs) -> dict:
@@ -24,9 +34,12 @@ def _call(method, path: str, *, timeout: int = REQUEST_TIMEOUT, headers: dict | 
             raise Pix4LessError('payment_required')
         if not 200 <= r.status_code < 300:
             raise Pix4LessError(f'pix4less HTTP {r.status_code}: {r.text[:300]}')
-        return r.json()['data']
-    except requests.RequestException as e:
+        data = _field(r.json(), 'data')
+    except (requests.RequestException, ValueError) as e:
         raise Pix4LessError(str(e)) from e
+    if data is None:
+        raise Pix4LessError(MALFORMED)
+    return data
 
 
 def search(query: str, aspect_ratio: str) -> dict | None:
@@ -37,18 +50,21 @@ def search(query: str, aspect_ratio: str) -> dict | None:
 
 
 def download_url(image_id: str) -> str:
-    return _call(requests.post, f'/v1/images/{image_id}/download')['url']
+    return _field(_call(requests.post, f'/v1/images/{image_id}/download'), 'url')
 
 
 def generate(prompt: str, aspect_ratio: str, idempotency_key: str, timeout_s: int = 120) -> str:
     deadline = time.monotonic() + timeout_s
     data = _call(requests.post, '/v1/images/generate', headers={'Idempotency-Key': idempotency_key},
                  json={'query': prompt, 'aspect_ratio': aspect_ratio, 'resolution': '1K'})
-    gen_id = data['id']
+    gen_id = _field(data, 'id')
     while True:
         status = data.get('status')
         if status == 'fulfilled':
-            return data['image_id']
+            image_id = data.get('image_id')
+            if not image_id:
+                raise Pix4LessError('pix4less fulfilled without image_id')
+            return image_id
         if status in ('failed', 'rejected'):
             raise Pix4LessError(data.get('error') or status)
         if time.monotonic() >= deadline:
