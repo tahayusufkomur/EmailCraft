@@ -3,18 +3,22 @@ import json
 import re
 from pathlib import Path
 
+from io import StringIO
 from unittest.mock import MagicMock, patch
 
+from django.core.management import call_command
 from django.test import TestCase, override_settings
 
 import templates_api
+from core.agent_hub import HubHold
 from core.models import Organization
 from core.pix4less import Pix4LessError
 from templates_api.generation import (
     build_prompt, generate_template, parse_model_json, resolve_images, sanitize_links,
     store_remote_image, validate_template,
 )
-from templates_api.models import UploadedImage
+from templates_api.models import Template, UploadedImage
+from templates_api.services import provision_templates_for_org
 
 PKG = Path(templates_api.__file__).parent
 
@@ -383,3 +387,90 @@ class TestStoreRemoteImage(TestCase):
     def test_unconfigured_bucket_raises(self):
         with self.assertRaisesRegex(Pix4LessError, 's3 not configured'):
             store_remote_image('https://signed', self.org, alt='x')
+
+
+    @override_settings(AWS_S3_PUBLIC_BUCKET='bkt', AWS_S3_KEY_PREFIX='pfx', AWS_CLOUDFRONT_DOMAIN='https://cdn.test')
+    def test_org_none_stores_under_gallery_prefix_without_row(self):
+        with patch(G + 'requests.get', return_value=self._resp()), patch(G + 'boto3.client') as client:
+            img = store_remote_image('https://signed', None, alt='x')
+        key = client.return_value.put_object.call_args.kwargs['Key']
+        self.assertRegex(key, r'^pfx/gallery/ai/[0-9a-f]{32}\.png$')
+        self.assertEqual(img.url, f'https://cdn.test/{key}')
+        self.assertEqual(UploadedImage.objects.count(), 0)
+
+    def test_resolve_images_org_none_uses_gallery_in_idempotency_key(self):
+        t = _img_tpl('pix4less://16:9/canoe')
+        with patch(G + 'search', return_value=None), \
+                patch(G + 'generate', return_value='gen1') as gen, \
+                patch(G + 'download_url', return_value='u'), \
+                patch(G + 'store_remote_image', return_value=MagicMock(url='https://cdn/x.jpg')):
+            resolve_images(t, None, allow_generation=True)
+        want = hashlib.sha1(b'16:9|canoe').hexdigest()
+        self.assertEqual(gen.call_args.kwargs['idempotency_key'], f'gallery:{want}')
+
+
+def _gallery(name, **kw):
+    return Template.objects.create(org=None, is_gallery=True, name=name, json_data={}, **kw)
+
+
+class TestFoundryAndDrafts(TestCase):
+    def test_shared_excludes_drafts(self):
+        pub, _ = _gallery('pub'), _gallery('draft', is_draft=True)
+        self.assertEqual(list(Template.objects.shared()), [pub])
+
+    def test_visible_to_org_excludes_gallery_drafts(self):
+        org = Organization.objects.create(name='Acme', email='a@acme.test')
+        pub, _ = _gallery('pub'), _gallery('draft', is_draft=True)
+        self.assertEqual(list(Template.objects.visible_to_org(org)), [pub])
+
+    def test_provisioning_skips_drafts(self):
+        org = Organization.objects.create(name='Acme', email='a@acme.test')
+        _gallery('pub')
+        draft = _gallery('draft', is_draft=True)
+        provision_templates_for_org(org)
+        self.assertEqual(Template.objects.for_org(org).count(), 1)
+        self.assertFalse(Template.objects.for_org(org).filter(source_template=draft).exists())
+
+    def test_gallery_endpoints_hide_drafts(self):
+        pub, draft = _gallery('pub'), _gallery('draft', is_draft=True)
+        r = self.client.get('/api/v1/gallery/')
+        self.assertEqual([t['id'] for t in r.json()['results']], [str(pub.id)])
+        self.assertEqual(self.client.get(f'/api/v1/gallery/{pub.id}/').status_code, 200)
+        self.assertEqual(self.client.get(f'/api/v1/gallery/{draft.id}/').status_code, 404)
+
+    def test_foundry_saves_draft_gallery_template(self):
+        out = StringIO()
+        with patch('templates_api.management.commands.foundry.generate_template',
+                   return_value=('Name', {'version': 1}, ['w'])) as gen:
+            call_command('foundry', '--category', 'welcome', '--count', '1', stdout=out)
+        t = Template.objects.get()
+        self.assertEqual((t.org, t.is_gallery, t.is_draft, t.category, t.name, t.tags, t.json_data),
+                         (None, True, True, 'welcome', 'Name', ['welcome', 'foundry'], {'version': 1}))
+        self.assertEqual(gen.call_args.args[1], 'welcome')
+        self.assertIsNone(gen.call_args.args[2])
+        self.assertTrue(gen.call_args.kwargs['allow_generation'])
+        self.assertIn('Name', out.getvalue())
+        self.assertIn('w', out.getvalue())
+
+    def test_foundry_no_generate_flag(self):
+        with patch('templates_api.management.commands.foundry.generate_template',
+                   return_value=('N', {}, [])) as gen:
+            call_command('foundry', '--category', 'event', '--count', '1', '--no-generate', stdout=StringIO())
+        self.assertFalse(gen.call_args.kwargs['allow_generation'])
+
+    def test_foundry_hub_hold_stops(self):
+        out = StringIO()
+        with patch('templates_api.management.commands.foundry.generate_template',
+                   side_effect=HubHold('quota')) as gen:
+            call_command('foundry', '--category', 'welcome', '--count', '3', stdout=out)
+        self.assertEqual(gen.call_count, 1)
+        self.assertIn('Hub is holding the lane: quota', out.getvalue())
+        self.assertEqual(Template.objects.count(), 0)
+
+    def test_foundry_error_continues(self):
+        out = StringIO()
+        with patch('templates_api.management.commands.foundry.generate_template',
+                   side_effect=[RuntimeError('boom'), ('Ok', {}, [])]):
+            call_command('foundry', '--category', 'welcome', '--count', '2', stdout=out)
+        self.assertEqual(list(Template.objects.values_list('name', flat=True)), ['Ok'])
+        self.assertIn('boom', out.getvalue())

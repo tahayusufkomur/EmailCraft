@@ -11,10 +11,10 @@ class TenantManager(models.Manager):
         return self.filter(org=org)
 
     def shared(self):
-        return self.filter(org__isnull=True, is_gallery=True)
+        return self.filter(org__isnull=True, is_gallery=True, is_draft=False)
 
     def visible_to_org(self, org):
-        return self.filter(Q(org=org) | Q(org__isnull=True, is_gallery=True))
+        return self.filter(Q(org=org) | Q(org__isnull=True, is_gallery=True, is_draft=False))
 
 
 class Template(models.Model):

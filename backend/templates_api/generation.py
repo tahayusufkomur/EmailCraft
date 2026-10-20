@@ -8,6 +8,7 @@ import json
 import re
 import secrets
 import unicodedata
+from types import SimpleNamespace
 from uuid import uuid4
 
 import boto3
@@ -216,8 +217,11 @@ _MAX_MODEL_TEXT = 400_000
 MAX_IMAGE_REFS = 12
 
 
-def store_remote_image(url: str, org, *, alt: str) -> UploadedImage:
-    """Copy a signed pix4less URL into the public bucket and record it as an in-use UploadedImage."""
+def store_remote_image(url: str, org, *, alt: str):
+    """Copy a signed pix4less URL into the public bucket and record it as an in-use UploadedImage.
+
+    With org=None (foundry gallery drafts) nothing is recorded; returns an object with only .url.
+    """
     bucket = settings.AWS_S3_PUBLIC_BUCKET
     if not bucket:
         raise Pix4LessError('s3 not configured')
@@ -230,7 +234,8 @@ def store_remote_image(url: str, org, *, alt: str) -> UploadedImage:
     ctype = r.headers.get('Content-Type', '').split(';')[0].strip().lower()
     if ctype not in _EXT:
         ctype = 'image/jpeg'
-    key = f"{settings.AWS_S3_KEY_PREFIX}/{org.id}/ai/{uuid4().hex}.{_EXT[ctype]}"
+    owner = org.id if org else 'gallery'
+    key = f"{settings.AWS_S3_KEY_PREFIX}/{owner}/ai/{uuid4().hex}.{_EXT[ctype]}"
     try:
         boto3.client(
             's3',
@@ -247,6 +252,8 @@ def store_remote_image(url: str, org, *, alt: str) -> UploadedImage:
         file_url = f"{settings.AWS_S3_ENDPOINT_URL.rstrip('/')}/{bucket}/{key}"
     else:
         file_url = f"https://{bucket}.s3.{settings.AWS_S3_REGION_NAME}.amazonaws.com/{key}"
+    if org is None:
+        return SimpleNamespace(url=file_url)
     image = UploadedImage.objects.create(
         org=org, s3_key=key, url=file_url, filename=alt[:255] or key.rsplit('/', 1)[-1],
         file_size=len(r.content), content_type=ctype, is_orphaned=False,
@@ -267,7 +274,7 @@ def _fetch_image(query: str, aspect: str, org, allow_generation: bool) -> tuple[
         # pix4less generate does not accept 3:2
         aspect = '4:3' if aspect == '3:2' else aspect
         key = hashlib.sha1(f'{aspect}|{query}'.encode()).hexdigest()
-        image_id = generate(query, aspect, idempotency_key=f'{org.id}:{key}')
+        image_id = generate(query, aspect, idempotency_key=f"{org.id if org else 'gallery'}:{key}")
         desc = ''
     else:
         raise Pix4LessError('no matching image')
