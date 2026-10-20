@@ -42,6 +42,26 @@ services:
     mem_reservation: 16m
     restart: unless-stopped
 
+  migrate:
+    # One-shot: applies Django migrations before backend/celery start (new code must
+    # never run against an old schema). Same image as backend; the build is cached.
+    build:
+      context: .
+      dockerfile: docker/backend.prod.Dockerfile
+    container_name: emailbuilder-migrate
+    logging: *default-logging
+    mem_limit: 256m
+    command: ["python", "manage.py", "migrate", "--noinput"]
+    env_file:
+      - .env.prod
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
   backend:
     build:
       context: .
@@ -61,6 +81,8 @@ services:
     expose:
       - "8000"
     depends_on:
+      migrate:
+        condition: service_completed_successfully
       postgres:
         condition: service_healthy
       redis:
@@ -86,6 +108,8 @@ services:
       - default
       - agent-container
     depends_on:
+      migrate:
+        condition: service_completed_successfully
       postgres:
         condition: service_healthy
       redis:
