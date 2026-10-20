@@ -63,6 +63,7 @@ export function HeadingSettings({ block }: Props) {
         </div>
         <SliderInput label="Font Size" value={block.style.fontSize || 28} min={12} max={72} onChange={(v) => updateStyle({ fontSize: v })} />
         <SliderInput label="Font Weight" value={block.style.fontWeight || 700} min={300} max={900} step={100} unit="" onChange={(v) => updateStyle({ fontWeight: v })} />
+        <SliderInput label="Line Height" value={block.style.lineHeight ?? 1.2} min={1} max={2.2} step={0.05} unit="" onChange={(v) => updateStyle({ lineHeight: v })} />
         <SliderInput label="Letter Spacing" value={block.style.letterSpacing || 0} min={-2} max={20} step={0.5} onChange={(v) => updateStyle({ letterSpacing: v })} />
         <div className="form-group">
           <label>Text Transform</label>

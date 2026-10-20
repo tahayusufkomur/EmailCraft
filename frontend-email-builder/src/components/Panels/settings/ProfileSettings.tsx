@@ -123,6 +123,7 @@ export function ProfileSettings({ block }: Props) {
             <input type="text" value={style.bioColor || '#64748b'} onChange={(e) => updateStyle({ bioColor: e.target.value })} />
           </div>
         </div>
+        <SliderInput label="Line Height" value={style.lineHeight ?? 1.5} min={1} max={2.2} step={0.05} unit="" onChange={(v) => updateStyle({ lineHeight: v })} />
         <SliderInput label="Bio Size" value={style.bioFontSize} min={10} max={20} onChange={(v) => updateStyle({ bioFontSize: v })} />
         <div className="form-group">
           <label>Bio Font</label>

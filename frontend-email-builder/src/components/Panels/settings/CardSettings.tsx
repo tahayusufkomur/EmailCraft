@@ -123,6 +123,7 @@ export function CardSettings({ block }: Props) {
             <input type="text" value={style.bodyColor || '#475569'} onChange={(e) => updateStyle({ bodyColor: e.target.value })} />
           </div>
         </div>
+        <SliderInput label="Line Height" value={style.lineHeight ?? 1.5} min={1} max={2.2} step={0.05} unit="" onChange={(v) => updateStyle({ lineHeight: v })} />
         <SliderInput label="Font Size" value={style.bodyFontSize} min={10} max={24} onChange={(v) => updateStyle({ bodyFontSize: v })} />
         <div className="form-group">
           <label>Font</label>

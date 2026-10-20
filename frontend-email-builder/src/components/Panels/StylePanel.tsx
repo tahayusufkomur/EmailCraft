@@ -12,9 +12,14 @@ import { HeroSettings } from './settings/HeroSettings';
 import { CardSettings } from './settings/CardSettings';
 import { ListSettings } from './settings/ListSettings';
 import { ProfileSettings } from './settings/ProfileSettings';
+import { FrameSettings } from './settings/FrameSettings';
+
+// These block types render their own border and radius; the exporter ignores the frame's.
+const OWN_BORDER_TYPES = ['card', 'profile', 'button', 'image'];
 
 export function StylePanel() {
   const selectedBlock = useEditorStore((s) => s.getSelectedBlock());
+  const updateBlock = useEditorStore((s) => s.updateBlock);
 
   return (
     <div className="style-panel">
@@ -36,6 +41,11 @@ export function StylePanel() {
           {selectedBlock.type === 'card' && <CardSettings block={selectedBlock} />}
           {selectedBlock.type === 'list' && <ListSettings block={selectedBlock} />}
           {selectedBlock.type === 'profile' && <ProfileSettings block={selectedBlock} />}
+          <FrameSettings
+            style={selectedBlock.style}
+            showBorder={!OWN_BORDER_TYPES.includes(selectedBlock.type)}
+            onChange={(patch) => updateBlock(selectedBlock.id, { style: { ...selectedBlock.style, ...patch } })}
+          />
         </>
       ) : (
         <div className="style-panel-empty">

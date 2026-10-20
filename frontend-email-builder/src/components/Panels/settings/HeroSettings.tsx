@@ -84,6 +84,7 @@ export function HeroSettings({ block }: Props) {
             ))}
           </select>
         </div>
+        <SliderInput label="Line Height" value={block.style.lineHeight ?? 1.15} min={1} max={2.2} step={0.05} unit="" onChange={(v) => updateStyle({ lineHeight: v })} />
         <SliderInput label="Heading Size" value={block.style.headingFontSize || 36} min={16} max={72} onChange={(v) => updateStyle({ headingFontSize: v })} />
         <div className="form-group">
           <label>Heading Color</label>
