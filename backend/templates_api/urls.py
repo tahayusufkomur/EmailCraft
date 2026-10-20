@@ -2,6 +2,8 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from templates_api.views import (
+    ai_generate,
+    ai_job_detail,
     TemplateViewSet,
     export_html,
     gallery_detail,
@@ -24,4 +26,6 @@ urlpatterns = [
     path('templates/<uuid:template_id>/preview', template_preview, name='template-preview'),
     path('export/html', export_html, name='export-html'),
     path('render', render_template, name='render-template'),
+    path('ai/generate', ai_generate, name='ai-generate'),
+    path('ai/jobs/<uuid:pk>', ai_job_detail, name='ai-job-detail'),
 ]

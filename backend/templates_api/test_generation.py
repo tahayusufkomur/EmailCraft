@@ -8,13 +8,15 @@ from unittest.mock import MagicMock, patch
 
 from celery.exceptions import Retry
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.core.management import call_command
 from django.test import TestCase, override_settings
+from rest_framework.test import APIClient
 
 import templates_api
 from core.agent_hub import HubHold
 from core.agent_hub import HubError
-from core.models import Account, Organization, Plan, UserOrganization
+from core.models import Account, ApiKey, Organization, Plan, UserOrganization
 from core.pix4less import Pix4LessError
 from templates_api.generation import (
     build_prompt, generate_template, parse_model_json, resolve_images, sanitize_links,
@@ -580,3 +582,84 @@ class TestGenerationJob(TestCase):
         gen.assert_not_called()
         self.assertEqual(self.job.status, 'done')
         self.assertEqual(self.account.ai_generations_count, 0)
+
+
+class TestAiEndpoints(TestCase):
+    def setUp(self):
+        cache.clear()
+        self.plan = Plan.objects.create(name='AI API', slug='ai-api', ai_generations_limit=2)
+        self.org = Organization.objects.create(name='O', email='ai-api@example.com')
+        user = User.objects.create(username='ai-api-owner')
+        self.account = Account.objects.create(user=user, plan=self.plan)
+        UserOrganization.objects.create(user=user, organization=self.org, role='owner')
+        self.key = self._key(self.org)
+        self.client = APIClient()
+
+    @staticmethod
+    def _key(org):
+        raw_key = ApiKey.generate_key('test')
+        ApiKey.objects.create(
+            org=org, key_hash=ApiKey.hash_key(raw_key), key_prefix=raw_key[:12],
+            environment='test', scope='full',
+        )
+        return raw_key
+
+    def _post(self, **body):
+        return self.client.post('/api/v1/ai/generate', body, format='json', HTTP_X_API_KEY=self.key)
+
+    @override_settings(AGENTC_LANE='mailcraft')
+    def test_generate_enqueues_and_returns_202(self):
+        with patch('templates_api.views.run_generation_job.delay') as delay, \
+                self.captureOnCommitCallbacks(execute=True):
+            r = self._post(brief='  A launch email  ', category='welcome')
+        self.assertEqual(r.status_code, 202)
+        job = GenerationJob.objects.get(org=self.org)
+        self.assertEqual(r.data, {'job_id': str(job.id)})
+        self.assertEqual((job.brief, job.category, job.status), ('A launch email', 'welcome', 'queued'))
+        delay.assert_called_once_with(str(job.id))
+
+    @override_settings(AGENTC_LANE='mailcraft')
+    def test_generate_over_quota_returns_402(self):
+        self.account.ai_generations_count = self.account.ai_generations_limit = 2
+        self.account.save()
+        with patch('templates_api.views.run_generation_job.delay') as delay:
+            r = self._post(brief='x', category='welcome')
+        self.assertEqual(r.status_code, 402)
+        self.assertEqual(r.data['error']['code'], 'AI_GENERATION_LIMIT_EXCEEDED')
+        delay.assert_not_called()
+        self.assertFalse(GenerationJob.objects.exists())
+
+    @override_settings(AGENTC_LANE='')
+    def test_generate_not_configured_returns_503(self):
+        r = self._post(brief='x', category='welcome')
+        self.assertEqual(r.status_code, 503)
+        self.assertEqual(r.data['error']['code'], 'AI_NOT_CONFIGURED')
+        self.assertFalse(GenerationJob.objects.exists())
+
+    @override_settings(AGENTC_LANE='mailcraft')
+    def test_generate_invalid_category_400(self):
+        self.assertEqual(self._post(brief='x', category='nope').status_code, 400)
+        self.assertEqual(self._post(brief='   ', category='welcome').status_code, 400)
+        self.assertFalse(GenerationJob.objects.exists())
+
+    def _get(self, job):
+        return self.client.get(f'/api/v1/ai/jobs/{job.id}', HTTP_X_API_KEY=self.key)
+
+    def test_job_detail_scoped_to_org(self):
+        other = Organization.objects.create(name='Other', email='other-ai@example.com')
+        job = GenerationJob.objects.create(org=other, brief='b', category='event')
+        self.assertEqual(self._get(job).status_code, 404)
+
+    def test_job_detail_returns_template_id_when_done(self):
+        t = Template.objects.create(org=self.org, name='T', json_data={})
+        job = GenerationJob.objects.create(
+            org=self.org, brief='secret', category='event', status='done', step='images',
+            template=t, warnings=['w'],
+        )
+        r = self._get(job)
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(set(r.data), {'id', 'status', 'step', 'template_id', 'error', 'warnings', 'created_at'})
+        self.assertEqual(str(r.data['template_id']), str(t.id))
+        self.assertEqual((r.data['status'], r.data['warnings']), ('done', ['w']))
+        pending = GenerationJob.objects.create(org=self.org, brief='b', category='event')
+        self.assertIsNone(self._get(pending).data['template_id'])

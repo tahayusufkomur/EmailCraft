@@ -3,14 +3,18 @@ import secrets
 
 import boto3
 from django.conf import settings
+from django.db import transaction
 from django.db.models import Q
 from rest_framework import status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from core.models import account_for_org
-from templates_api.models import Template, UploadedImage
+from core.rate_limit import rate_limit_by_ip
+from templates_api.models import GenerationJob, Template, UploadedImage
 from templates_api.serializers import (
+    GenerateRequestSerializer,
+    GenerationJobSerializer,
     ExportRequestSerializer,
     PresignRequestSerializer,
     RenderRequestSerializer,
@@ -19,6 +23,7 @@ from templates_api.serializers import (
     TemplateListSerializer,
     UploadedImageListSerializer,
 )
+from templates_api.tasks import run_generation_job
 from templates_api.export_engine import (
     extract_variable_keys,
     render_email_html,
@@ -381,3 +386,45 @@ def render_template(request):
         'warnings': result.get('warnings', []),
         'variables_used': sorted(used_keys),
     })
+
+
+@api_view(['POST'])
+@rate_limit_by_ip('ai_generate', max_requests=10, window_seconds=60)
+def ai_generate(request):
+    """POST /api/v1/ai/generate — queue an AI template generation job."""
+    serializer = GenerateRequestSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+
+    if not settings.AGENTC_LANE:
+        return Response(
+            {'error': {'code': 'AI_NOT_CONFIGURED', 'message': 'AI generation is not configured.'}},
+            status=status.HTTP_503_SERVICE_UNAVAILABLE,
+        )
+
+    account = account_for_org(request.org)
+    if account and account.ai_generations_count >= account.ai_generations_limit:
+        return Response(
+            {
+                'error': {
+                    'code': 'AI_GENERATION_LIMIT_EXCEEDED',
+                    'message': 'AI generation limit reached for current plan.',
+                }
+            },
+            status=status.HTTP_402_PAYMENT_REQUIRED,
+        )
+
+    job = GenerationJob.objects.create(org=request.org, **serializer.validated_data)
+    transaction.on_commit(lambda: run_generation_job.delay(str(job.id)))
+    return Response({'job_id': str(job.id)}, status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['GET'])
+def ai_job_detail(request, pk):
+    """GET /api/v1/ai/jobs/<id> — poll a generation job."""
+    job = GenerationJob.objects.for_org(request.org).filter(pk=pk).first()
+    if not job:
+        return Response(
+            {'error': {'code': 'JOB_NOT_FOUND', 'message': 'Job not found.'}},
+            status=status.HTTP_404_NOT_FOUND,
+        )
+    return Response(GenerationJobSerializer(job).data)

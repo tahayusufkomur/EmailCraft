@@ -4,7 +4,7 @@ import sys
 from django.conf import settings
 from rest_framework import serializers
 
-from templates_api.models import Template, UploadedImage
+from templates_api.models import GenerationJob, Template, UploadedImage
 
 
 class TemplateListSerializer(serializers.ModelSerializer):
@@ -160,3 +160,16 @@ class RenderRequestSerializer(serializers.Serializer):
                 "Provide either 'template_id' or 'json_data', not both."
             )
         return attrs
+
+
+class GenerateRequestSerializer(serializers.Serializer):
+    brief = serializers.CharField(min_length=1, max_length=2000, trim_whitespace=True)
+    category = serializers.ChoiceField(choices=Template.CATEGORY_CHOICES)
+
+
+class GenerationJobSerializer(serializers.ModelSerializer):
+    template_id = serializers.UUIDField(read_only=True, allow_null=True)
+
+    class Meta:
+        model = GenerationJob
+        fields = ['id', 'status', 'step', 'template_id', 'error', 'warnings', 'created_at']
