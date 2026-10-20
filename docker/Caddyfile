@@ -7,6 +7,9 @@
 (to_backend) {
     reverse_proxy backend:8000 {
         header_up X-Forwarded-Proto https
+        # Caddy won't forward the XFF cloudflared sends (peer isn't a
+        # trusted_proxy) — rebuild it from the unspoofable CF edge header.
+        header_up X-Forwarded-For {header.Cf-Connecting-Ip}
     }
 }
 

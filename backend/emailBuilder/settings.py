@@ -260,14 +260,8 @@ STRIPE_CANCEL_URL = os.environ.get('STRIPE_CANCEL_URL', 'http://localhost/pricin
 
 
 # --- Email ---
-# Provider priority: Cloudflare Email Sending (CF_EMAIL_TOKEN set) > Resend
-# (RESEND_API_KEY set) > explicit EMAIL_BACKEND env > console.
-CF_ACCOUNT_ID = os.environ.get('CF_ACCOUNT_ID', '')
-CF_EMAIL_TOKEN = os.environ.get('CF_EMAIL_TOKEN', '')
 RESEND_API_KEY = os.environ.get('RESEND_API_KEY', '')
-if CF_EMAIL_TOKEN:
-    EMAIL_BACKEND = 'core.cloudflare_backend.CloudflareEmailBackend'
-elif RESEND_API_KEY:
+if RESEND_API_KEY:
     EMAIL_BACKEND = 'core.email_backend.ResendEmailBackend'
 else:
     EMAIL_BACKEND = os.environ.get(
