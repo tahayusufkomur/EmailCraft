@@ -6,7 +6,7 @@ import {
   Settings, LayoutGrid, ChevronDown, Plus, X, List, UserCircle,
 } from 'lucide-react';
 import type { Block, BlockType } from '../../types/blocks';
-import { createBlock } from '../../lib/blockFactory';
+import { createBlock, createSectionBlock } from '../../lib/blockFactory';
 import { getPresetsForType, deleteCustomPreset } from '../../lib/blockPresets';
 import { useEditorStore } from '../../store/editorStore';
 import { GlobalSettings } from './GlobalSettings';
@@ -30,6 +30,7 @@ const BLOCK_ICONS: Record<BlockType, React.ReactNode> = {
 interface BlockTypeConfig {
   type: BlockType;
   label: string;
+  factory?: () => Block;
 }
 
 const BLOCK_TYPES: BlockTypeConfig[] = [
@@ -40,6 +41,7 @@ const BLOCK_TYPES: BlockTypeConfig[] = [
   { type: 'spacer', label: 'Spacer' },
   { type: 'divider', label: 'Divider' },
   { type: 'columns', label: 'Columns' },
+  { type: 'columns', label: 'Section', factory: createSectionBlock },
   { type: 'social', label: 'Social' },
   { type: 'card', label: 'Card' },
   { type: 'list', label: 'List' },
@@ -48,14 +50,15 @@ const BLOCK_TYPES: BlockTypeConfig[] = [
   { type: 'html', label: 'HTML' },
 ];
 
-function DraggableBlockItem({ blockType, children, id }: {
+function DraggableBlockItem({ blockType, factory, children, id }: {
   blockType: BlockType;
+  factory?: () => Block;
   children: React.ReactNode;
   id: string;
 }) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id,
-    data: { fromPalette: true, blockType },
+    data: { fromPalette: true, blockType, factory },
   });
 
   return (
@@ -70,12 +73,12 @@ function BlockTypeRow({ config, refreshKey }: { config: BlockTypeConfig; refresh
   const addBlock = useEditorStore((s) => s.addBlock);
   // refreshKey triggers re-read of presets when custom presets change
   void refreshKey;
-  const presets = getPresetsForType(config.type);
+  const presets = config.factory ? [] : getPresetsForType(config.type);
   const hasPresets = presets.length > 0;
 
   const handleAddDefault = (e: React.MouseEvent) => {
     e.stopPropagation();
-    addBlock(createBlock(config.type));
+    addBlock(config.factory?.() ?? createBlock(config.type));
   };
 
   const handleAddPreset = (block: Block) => {
@@ -89,7 +92,7 @@ function BlockTypeRow({ config, refreshKey }: { config: BlockTypeConfig; refresh
 
   return (
     <div className="block-type-row">
-      <DraggableBlockItem blockType={config.type} id={`palette-${config.type}`}>
+      <DraggableBlockItem blockType={config.type} factory={config.factory} id={`palette-${config.label}`}>
         <button
           type="button"
           className={`block-type-header ${expanded ? 'expanded' : ''}`}
@@ -204,7 +207,7 @@ export function BlockPalette() {
       >
         <div className="block-type-list">
           {BLOCK_TYPES.map((config) => (
-            <BlockTypeRow key={config.type} config={config} refreshKey={refreshKey} />
+            <BlockTypeRow key={config.label} config={config} refreshKey={refreshKey} />
           ))}
         </div>
       </CollapsibleSection>

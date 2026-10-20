@@ -3,7 +3,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { useDndContext } from '@dnd-kit/core';
 import { GripVertical, Copy, Trash2, Star, Info } from 'lucide-react';
-import type { Block } from '../../types/blocks';
+import type { Block, BlockStyle } from '../../types/blocks';
 import { useEditorStore } from '../../store/editorStore';
 import { saveCustomPreset } from '../../lib/blockPresets';
 import { BLOCK_DESCRIPTIONS } from '../../lib/blockDescriptions';
@@ -11,6 +11,36 @@ import { BLOCK_DESCRIPTIONS } from '../../lib/blockDescriptions';
 interface Props {
   block: Block;
   children: React.ReactNode;
+}
+
+// Same blocks as OWN_BORDER_TYPES in lib/htmlExporter.ts: they draw their own border/radius.
+const OWN_BORDER_TYPES: Block['type'][] = ['card', 'profile', 'button', 'image'];
+
+/** Canvas CSS for the frame style keys, matching frameHtml() in lib/htmlExporter.ts. */
+export function frameCss(block: Block): React.CSSProperties {
+  const s: BlockStyle = block.style;
+  const css: React.CSSProperties = {};
+  if (s.backgroundImage) {
+    const img = `url(${s.backgroundImage})`;
+    if (s.backgroundOverlay) {
+      const h = s.backgroundOverlay.replace('#', '');
+      const rgba = `rgba(${parseInt(h.substring(0, 2), 16)}, ${parseInt(h.substring(2, 4), 16)}, ${parseInt(h.substring(4, 6), 16)}, ${s.backgroundOverlayOpacity ?? 0.4})`;
+      css.backgroundImage = `linear-gradient(${rgba}, ${rgba}), ${img}`;
+    } else {
+      css.backgroundImage = img;
+    }
+    css.backgroundSize = 'cover';
+    css.backgroundPosition = 'center';
+  } else if (s.backgroundGradient) {
+    css.background = s.backgroundGradient;
+  }
+  if (!OWN_BORDER_TYPES.includes(block.type)) {
+    if (s.borderWidth && s.borderWidth > 0) {
+      css.border = `${s.borderWidth}px ${s.borderStyle && s.borderStyle !== 'none' ? s.borderStyle : 'solid'} ${s.borderColor || '#000000'}`;
+    }
+    if (s.borderRadius) css.borderRadius = `${s.borderRadius}px`;
+  }
+  return css;
 }
 
 export function BlockWrapper({ block, children }: Props) {
@@ -43,6 +73,7 @@ export function BlockWrapper({ block, children }: Props) {
   const showInsertionIndicator = isDraggingFromPalette && isOverThisBlock && !isLastBlock;
 
   const style = {
+    ...frameCss(block),
     transform: CSS.Transform.toString(transform),
     transition,
     opacity: isDragging ? 0.3 : 1,

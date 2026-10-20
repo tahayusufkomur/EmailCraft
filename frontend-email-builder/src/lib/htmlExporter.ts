@@ -1,4 +1,4 @@
-import type { Block, EmailTemplate } from '../types/blocks';
+import type { Block, BlockStyle, EmailTemplate } from '../types/blocks';
 import { getEmailBackgroundCss, getEmailBodyBackgroundCss } from './backgroundStyles';
 import { collectTemplateFonts, getGoogleFontLinks } from './fonts';
 import { lucideSvgString } from './lucideIcons';
@@ -63,8 +63,80 @@ export function exportToHtml(template: EmailTemplate, variablesMode: 'placeholde
 </html>`;
 }
 
+// Mirrors FRAME_KEYS / _OWN_BORDER_TYPES / _render_blocks / _frame in backend/templates_api/export_engine.py.
+const FRAME_KEYS = ['backgroundImage', 'backgroundGradient', 'backgroundOverlay', 'borderWidth', 'borderRadius'] as const;
+// These blocks already draw their own border/radius.
+const OWN_BORDER_TYPES = ['card', 'profile', 'button', 'image'];
+const HEX_COLOR_PATTERN = /^#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
+const CSS_COLOR_PATTERN = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
+
 function renderBlocks(blocks: Block[], settings: EmailTemplate['settings']): string {
-  return blocks.map((block) => renderBlock(block, settings)).join('\n');
+  return blocks.map((block) => {
+    const html = renderBlock(block, settings);
+    let style: BlockStyle = block.style;
+    if (OWN_BORDER_TYPES.includes(block.type)) {
+      style = { ...style, borderWidth: undefined, borderRadius: undefined };
+    }
+    return FRAME_KEYS.some((k) => style[k]) ? frameHtml(html, style, settings.contentWidth || 600) : html;
+  }).join('\n');
+}
+
+// Python html.escape also escapes the single quote.
+function escapeAttr(str: string): string {
+  return escapeHtml(str).replace(/'/g, '&#x27;');
+}
+
+function vmlBgOpen(img: string, width: number): string {
+  return `<!--[if gte mso 9]><v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:${width}px;"><v:fill type="tile" src="${img}" /><v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0"><![endif]-->`;
+}
+
+const VML_BG_CLOSE = '<!--[if gte mso 9]></v:textbox></v:rect><![endif]-->';
+
+/** Wrap a rendered block row in a bordered / rounded / background-image row. Mirrors `_frame` on the server. */
+export function frameHtml(inner: string, style: BlockStyle, contentWidth = 600): string {
+  const img = escapeAttr(style.backgroundImage || '');
+  const gradient = escapeAttr(style.backgroundGradient || '');
+  let overlay = style.backgroundOverlay;
+  const css = ['padding: 0'];
+  const borderW = style.borderWidth || 0;
+  if (borderW > 0) {
+    const borderC = style.borderColor && CSS_COLOR_PATTERN.test(style.borderColor.trim()) ? style.borderColor.trim() : '#000000';
+    const borderS = style.borderStyle === 'solid' || style.borderStyle === 'dashed' || style.borderStyle === 'dotted' ? style.borderStyle : 'solid';
+    css.push(`border: ${borderW}px ${borderS} ${borderC}`);
+  }
+  if (style.borderRadius) css.push(`border-radius: ${Math.trunc(style.borderRadius)}px`);
+  if (img) {
+    css.push(`background-image: url('${img}'); background-size: cover; background-position: center`);
+  } else if (gradient) {
+    css.push(`background: ${gradient}`);
+  }
+  const tdAttrs = img ? ` background="${img}"` : '';
+  const vmlOpen = img ? vmlBgOpen(img, contentWidth) : '';
+  const vmlClose = img ? VML_BG_CLOSE : '';
+
+  let body = inner;
+  if (overlay) {
+    if (!HEX_COLOR_PATTERN.test(String(overlay))) overlay = '#000000';
+    const opacity = style.backgroundOverlayOpacity ?? 0.4;
+    body = `<tr><td style="background: ${hexToRgba(overlay, opacity)};">`
+      + `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">`
+      + `${inner}</table></td></tr>`;
+  }
+
+  return `<tr>
+  <td${tdAttrs} style="${css.join('; ')};" valign="top">
+    ${vmlOpen}
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+      ${body}
+    </table>
+    ${vmlClose}
+  </td>
+</tr>`;
+}
+
+/** Line-height multiplier from the block style, or the default when unset / not positive. */
+function lineHeightOf(style: BlockStyle, fallback: number): number {
+  return style.lineHeight && style.lineHeight > 0 ? style.lineHeight : fallback;
 }
 
 function renderBlock(block: Block, settings: EmailTemplate['settings']): string {
@@ -77,10 +149,9 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const padding = paddingStr(block.style.padding);
       const align = block.style.alignment || 'left';
       const background = block.style.backgroundColor;
-      const gradient = block.style.backgroundGradient;
       return `<tr>
   <td style="padding: ${padding}; font-family: ${font}; font-size: ${fontSize}px;
-             line-height: ${Math.round(fontSize * 1.6)}px; color: ${color}; text-align: ${align};${background ? ` background-color: ${background};` : ''}${gradient ? ` background: ${gradient};` : ''}">
+             line-height: ${Math.round(fontSize * lineHeightOf(block.style, 1.6))}px; color: ${color}; text-align: ${align};${background ? ` background-color: ${background};` : ''}">
     ${block.data.html}
   </td>
 </tr>`;
@@ -174,6 +245,9 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
     case 'columns': {
       const colCount = block.data.columnCount || 2;
       const gap = block.style.gap || 10;
+      const minHeight = block.style.minHeight;
+      const heightStyle = minHeight ? ` style="height: ${Math.trunc(minHeight)}px;"` : '';
+      const vAlign = block.style.verticalAlignment === 'center' ? 'middle' : block.style.verticalAlignment === 'bottom' ? 'bottom' : 'top';
       const contentWidth = settings.contentWidth || 600;
       const defaultRatio = Math.floor(100 / colCount);
       const ratios = block.data.columnRatio.length === colCount
@@ -184,18 +258,27 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
         const ratio = ratios[index] || defaultRatio;
         const colWidth = Math.floor((contentWidth - gap * (colCount - 1)) * (ratio / 100));
         const colContent = renderBlocks(col.blocks, settings);
-        const inner = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${colContent}</table>`;
+        let inner = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${colContent}</table>`;
         const stackClass = block.style.stackOnMobile === false ? '' : 'stack-column';
-        const colBg = col.backgroundColor ? ` background-color: ${col.backgroundColor};` : '';
+        let colBg = col.backgroundColor ? ` background-color: ${col.backgroundColor};` : '';
+        const colPadding = col.padding ? paddingStr(col.padding) : `0 ${gap / 2}px`;
+        if (col.borderRadius) colBg += ` border-radius: ${Math.trunc(col.borderRadius)}px;`;
+        const colImg = escapeAttr(col.backgroundImage || '');
+        let colBgAttr = '';
+        if (colImg) {
+          colBgAttr = ` background="${colImg}"`;
+          colBg += ` background-image: url('${colImg}'); background-size: cover; background-position: center;`;
+          inner = `${vmlBgOpen(colImg, colWidth)}${inner}${VML_BG_CLOSE}`;
+        }
 
         return `<div class="${stackClass}" style="display: inline-block; width: 100%; max-width: ${colWidth}px; vertical-align: top;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-          <tr><td style="padding: 0 ${gap / 2}px;${colBg}">${inner}</td></tr>
+          <tr><td${colBgAttr} style="padding: ${colPadding};${colBg}" valign="top">${inner}</td></tr>
         </table>
       </div>`;
       }).join('\n');
 
-      return `<tr><td>${colsHtml}</td></tr>`;
+      return `<tr><td valign="${vAlign}"${heightStyle}>${colsHtml}</td></tr>`;
     }
 
     case 'social': {
@@ -236,7 +319,7 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const background = block.style.backgroundColor;
       return `<tr>
   <td style="padding: ${padding}; text-align: ${align};${background ? ` background-color: ${background};` : ''}">
-    <${headingTag} style="margin: 0; font-family: ${headingFont}; font-size: ${headingSize}px; line-height: ${Math.round(headingSize * 1.2)}px; color: ${headingColor}; font-weight: ${headingWeight};${headingLetterSpacing ? ` letter-spacing: ${headingLetterSpacing}px;` : ''}${headingTextTransform !== 'none' ? ` text-transform: ${headingTextTransform};` : ''}">
+    <${headingTag} style="margin: 0; font-family: ${headingFont}; font-size: ${headingSize}px; line-height: ${Math.round(headingSize * lineHeightOf(block.style, 1.2))}px; color: ${headingColor}; font-weight: ${headingWeight};${headingLetterSpacing ? ` letter-spacing: ${headingLetterSpacing}px;` : ''}${headingTextTransform !== 'none' ? ` text-transform: ${headingTextTransform};` : ''}">
       ${headingText}
     </${headingTag}>
   </td>
@@ -257,9 +340,8 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const padding = paddingStr(block.style.padding);
       const align = block.style.alignment || 'left';
       const background = block.style.backgroundColor;
-      const gradient = block.style.backgroundGradient;
       return `<tr>
-  <td style="padding: ${padding}; text-align: ${align};${background ? ` background-color: ${background};` : ''}${gradient ? ` background: ${gradient};` : ''}">
+  <td style="padding: ${padding}; text-align: ${align};${background ? ` background-color: ${background};` : ''}">
     ${block.data.html}
   </td>
 </tr>`;
@@ -298,8 +380,8 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="height: ${h}px;">
       <tr>
         <td style="background: linear-gradient(${gradDir}, ${overlayRgba} 60%, transparent 100%); padding: 32px; text-align: ${align};" valign="${valignAttr}">
-          <h1 style="margin: 0 0 8px; font-family: ${headingFont}; font-size: ${headingSize}px; line-height: ${Math.round(headingSize * 1.15)}px; color: ${headingColor}; font-weight: 700;">${heading}</h1>
-          ${sub ? `<p style="margin: 0 0 20px; font-family: ${font}; font-size: ${fontSize}px; color: ${subColor}; line-height: 1.5;">${sub}</p>` : ''}
+          <h1 style="margin: 0 0 8px; font-family: ${headingFont}; font-size: ${headingSize}px; line-height: ${Math.round(headingSize * lineHeightOf(block.style, 1.15))}px; color: ${headingColor}; font-weight: 700;">${heading}</h1>
+          ${sub ? `<p style="margin: 0 0 20px; font-family: ${font}; font-size: ${fontSize}px; color: ${subColor}; line-height: ${lineHeightOf(block.style, 1.5)};">${sub}</p>` : ''}
           ${btnText ? `<a href="${btnUrl}" target="_blank" style="display: inline-block; padding: 14px 32px; background-color: ${btnBg}; color: ${btnColor}; font-family: ${font}; font-size: 15px; font-weight: 600; text-decoration: none; border-radius: ${btnRadius}px;">${btnText}</a>` : ''}
         </td>
       </tr>
@@ -387,7 +469,7 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
           ${iconHtml}
           ${badgeHtml}
           <h3 style="margin: 0 0 8px; font-family: ${hFont}; font-size: ${hSize}px; font-weight: ${hWeight}; color: ${hColor}; line-height: 1.3;">${escapeHtml(block.data.heading)}</h3>
-          <p style="margin: 0 0 16px; font-family: ${bFont}; font-size: ${bSize}px; color: ${bColor}; line-height: 1.5;">${escapeHtml(block.data.body)}</p>
+          <p style="margin: 0 0 16px; font-family: ${bFont}; font-size: ${bSize}px; color: ${bColor}; line-height: ${lineHeightOf(block.style, 1.5)};">${escapeHtml(block.data.body)}</p>
           ${btnHtml}
         </td>
       </tr>
@@ -502,7 +584,7 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       }
 
       const roleHtml = pRole ? `<div style="color: ${rColor}; font-size: ${rSize}px; font-family: ${bFont}; font-weight: 600; line-height: 1.3; margin-top: 2px;">${pRole}</div>` : '';
-      const bioHtml = pBio ? `<div style="color: ${bColor}; font-size: ${bSize}px; font-family: ${bFont}; line-height: 1.5; margin-top: 6px;">${pBio}</div>` : '';
+      const bioHtml = pBio ? `<div style="color: ${bColor}; font-size: ${bSize}px; font-family: ${bFont}; line-height: ${lineHeightOf(block.style, 1.5)}; margin-top: 6px;">${pBio}</div>` : '';
       const imgHtml = imgSrc ? `<img src="${imgSrc}" alt="${imgAlt}" width="${imgSize}" height="${imgSize}" style="border-radius: ${imgRadius}%; display: block;" />` : '';
 
       let innerHtml: string;

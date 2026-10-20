@@ -1,6 +1,26 @@
-import type { Block, BlockType } from '../types/blocks';
+import type { Block, BlockType, ColumnsBlock } from '../types/blocks';
 
 const DEFAULT_PADDING = { top: 10, right: 20, bottom: 10, left: 20 };
+
+/** One full-width column with a minimum height and vertically centred content, meant to carry a background image. */
+export function createSectionBlock(): ColumnsBlock {
+  return {
+    id: crypto.randomUUID(),
+    type: 'columns',
+    data: {
+      columnCount: 1,
+      columnRatio: [100],
+      columns: [{ id: crypto.randomUUID(), blocks: [] }],
+    },
+    style: {
+      gap: 0,
+      stackOnMobile: true,
+      minHeight: 320,
+      verticalAlignment: 'center',
+      padding: { top: 0, right: 0, bottom: 0, left: 0 },
+    },
+  };
+}
 
 export function createBlock(type: BlockType): Block {
   const id = crypto.randomUUID();

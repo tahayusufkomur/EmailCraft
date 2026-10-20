@@ -42,7 +42,7 @@ export function EditorDndContext({ children }: Props) {
     // If dragging from palette, create a temporary block for the overlay
     if (event.active.data.current?.fromPalette) {
       const blockType = event.active.data.current.blockType as BlockType;
-      const tempBlock = createBlock(blockType);
+      const tempBlock = (event.active.data.current.factory as (() => Block) | undefined)?.() ?? createBlock(blockType);
       setActiveBlock(tempBlock);
     }
   };
@@ -81,7 +81,7 @@ export function EditorDndContext({ children }: Props) {
     // Dragging from palette (new block)
     if (active.data.current?.fromPalette) {
       const blockType = active.data.current.blockType as BlockType;
-      const newBlock = createBlock(blockType);
+      const newBlock = (active.data.current.factory as (() => Block) | undefined)?.() ?? createBlock(blockType);
       const overData = over.data.current;
 
       if (overData?.dropType === 'column') {

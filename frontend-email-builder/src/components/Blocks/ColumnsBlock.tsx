@@ -2,9 +2,10 @@ import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical, Copy, Trash2, Info } from 'lucide-react';
-import type { Block, ColumnsBlock as ColumnsBlockType } from '../../types/blocks';
+import type { Block, Column, ColumnsBlock as ColumnsBlockType } from '../../types/blocks';
 import { useEditorStore } from '../../store/editorStore';
 import { BlockRenderer } from '../Editor/BlockRenderer';
+import { frameCss } from '../Editor/BlockWrapper';
 import { BLOCK_DESCRIPTIONS } from '../../lib/blockDescriptions';
 
 interface Props {
@@ -53,7 +54,7 @@ function NestedBlockWrapper({ block, parentBlockId, columnId }: NestedBlockWrapp
   return (
     <div
       ref={setNodeRef}
-      style={style}
+      style={{ ...frameCss(block), ...style }}
       data-block-id={block.id}
       tabIndex={0}
       className={`block-wrapper nested-block-wrapper ${isSelected ? 'selected' : ''} ${isHovered ? 'hovered' : ''}`}
@@ -116,12 +117,14 @@ function ColumnSlot({
   columnBlocks,
   columnIndex,
   ratio,
+  column,
 }: {
   parentBlockId: string;
   columnId: string;
   columnBlocks: Block[];
   columnIndex: number;
   ratio: number;
+  column: Column;
 }) {
   const { isOver, setNodeRef } = useDroppable({
     id: `column-drop-${parentBlockId}-${columnId}`,
@@ -136,7 +139,15 @@ function ColumnSlot({
     <div
       ref={setNodeRef}
       className={`column-slot ${isOver ? 'column-slot-over' : ''}`}
-      style={{ flex: `${ratio} 1 0` }}
+      style={{
+        flex: `${ratio} 1 0`,
+        ...(column.backgroundColor ? { backgroundColor: column.backgroundColor } : {}),
+        ...(column.padding ? { padding: `${column.padding.top}px ${column.padding.right}px ${column.padding.bottom}px ${column.padding.left}px` } : {}),
+        ...(column.borderRadius ? { borderRadius: `${column.borderRadius}px` } : {}),
+        ...(column.backgroundImage
+          ? { backgroundImage: `url(${column.backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+          : {}),
+      }}
     >
       {columnBlocks.length === 0 ? (
         <div className="column-slot-empty">
@@ -172,7 +183,11 @@ export function ColumnsBlock({ block }: Props) {
   return (
     <div
       className={`columns-block-content ${block.style.stackOnMobile === false ? '' : 'columns-stack-mobile'}`}
-      style={{ gap: `${gap}px` }}
+      style={{
+        gap: `${gap}px`,
+        ...(block.style.minHeight ? { minHeight: `${block.style.minHeight}px` } : {}),
+        alignItems: block.style.verticalAlignment === 'center' ? 'center' : block.style.verticalAlignment === 'bottom' ? 'flex-end' : 'flex-start',
+      }}
     >
       {columns.map((col, i) => (
         <ColumnSlot
@@ -182,6 +197,7 @@ export function ColumnsBlock({ block }: Props) {
           columnBlocks={col.blocks}
           columnIndex={i}
           ratio={block.data.columnRatio[i] || equalRatio}
+          column={col}
         />
       ))}
     </div>

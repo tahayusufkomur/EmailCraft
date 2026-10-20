@@ -29,6 +29,13 @@ export interface BlockStyle {
   alignment?: 'left' | 'center' | 'right';
   color?: string | null;
   borderRadius?: number;
+  backgroundImage?: string | null;
+  backgroundOverlay?: string | null;
+  backgroundOverlayOpacity?: number;
+  borderWidth?: number;
+  borderColor?: string;
+  borderStyle?: 'solid' | 'dashed' | 'dotted' | 'none'; // 'none' is used by card/profile, which draw their own border
+  lineHeight?: number;
 }
 
 export interface BaseBlock {
@@ -98,13 +105,15 @@ export interface DividerBlock extends BaseBlock {
 export interface ColumnsBlock extends BaseBlock {
   type: 'columns';
   data: {
-    columnCount: 2 | 3;
+    columnCount: 1 | 2 | 3;
     columnRatio: number[];
     columns: Column[];
   };
   style: BlockStyle & {
     gap: number;
     stackOnMobile: boolean;
+    minHeight?: number;
+    verticalAlignment?: 'top' | 'center' | 'bottom';
   };
 }
 
@@ -112,6 +121,9 @@ export interface Column {
   id: string;
   blocks: Block[];
   backgroundColor?: string | null;
+  padding?: Spacing;
+  borderRadius?: number;
+  backgroundImage?: string | null;
 }
 
 export interface SocialPlatform {
