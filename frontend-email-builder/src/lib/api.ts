@@ -1,5 +1,6 @@
 import type {
   ExportResponse,
+  GenerationJob,
   MediaListResponse,
   PresignResponse,
   RenderRequest,
@@ -90,6 +91,16 @@ async function createThumbnailBlob(file: File): Promise<Blob | null> {
   }
 }
 
+export class ApiError extends Error {
+  status: number;
+  code: string;
+  constructor(message: string, status: number, code: string) {
+    super(message);
+    this.status = status;
+    this.code = code;
+  }
+}
+
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const sessionToken = resolveSessionToken();
   const apiKey = resolveApiKey();
@@ -112,7 +123,7 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
 
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
-    throw new Error(body?.error?.message || `HTTP ${res.status}`);
+    throw new ApiError(body?.error?.message || `HTTP ${res.status}`, res.status, body?.error?.code || '');
   }
 
   return res.json();
@@ -228,6 +239,14 @@ export const api = {
       method: 'POST',
       body: JSON.stringify(data),
     }),
+
+  generateTemplate: (brief: string, category: string) =>
+    request<{ job_id: string }>('/ai/generate', {
+      method: 'POST',
+      body: JSON.stringify({ brief, category }),
+    }),
+
+  getGenerationJob: (id: string) => request<GenerationJob>(`/ai/jobs/${id}`),
 
   renderTemplate: (data: RenderRequest) =>
     request<RenderResponse>('/render', {

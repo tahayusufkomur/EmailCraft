@@ -50,6 +50,15 @@ export interface TemplateListItem {
   updated_at: string;
 }
 
+export interface GenerationJob {
+  id: string;
+  status: 'queued' | 'running' | 'done' | 'failed';
+  step: '' | 'writing' | 'images';
+  template_id: string | null;
+  error: string;
+  warnings: string[];
+}
+
 export interface PresignResponse {
   upload_url: string;
   file_url: string;

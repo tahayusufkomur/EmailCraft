@@ -57,9 +57,9 @@ The embeddable editor lives in `frontend-email-builder/`.
 - **`frontend-email-builder/src/components/Blocks/`** — 6 block types: Text (Tiptap), Image, Button, Divider, Columns, Social
 - **`frontend-email-builder/src/components/Panels/`** — BlockPalette (left), StylePanel (right), GlobalSettings, per-block settings
 - **`frontend-email-builder/src/components/Preview/`** — PreviewModal with desktop/mobile toggle
-- **`frontend-email-builder/src/components/Gallery/`** — TemplateGallery with pre-built templates; `CreateWithAiTab.tsx` is the AI entry point (added in Task 13)
+- **`frontend-email-builder/src/components/Gallery/`** — TemplateGallery with pre-built templates; `CreateWithAiTab.tsx` is the AI entry point
 - **`frontend-email-builder/src/lib/`** — `htmlExporter.ts` (client-side preview), `api.ts` (fetch wrapper), `blockFactory.ts`, `postMessage.ts`
-- **`frontend/public/loader.js`** — SDK loader script for iframe embed (`MailCraft.init()`)
+- **`frontend-email-builder/public/loader.js`** — SDK loader script for iframe embed (`MailCraft.init()`)
 
 ### Key Design Decisions
 - Email HTML uses **table-based layout + inline CSS** (no div/flex) for client compatibility
