@@ -41,19 +41,24 @@ make clean              # Remove caches, build artifacts, db
 - **`core/`** — Organization, ApiKey models; API key auth middleware; session endpoint
 - **`templates_api/`** — Template, UploadedImage models; CRUD ViewSet; gallery, upload, HTML export endpoints
 - **`templates_api/export_engine.py`** — Server-side JSON→email HTML converter (table layout, inline CSS, VML)
+- **`templates_api/generation.py`** — AI pipeline: JSON schema, guarded prompt, image resolution, link sanitizing, `generate_template`
+- **`core/agent_hub.py`** — agent-container hub client (lane `mailcraft`)
+- **`core/pix4less.py`** — pix4less REST client: search, download, generate
+- AI settings: `AGENTC_HUB`, `AGENTC_LANE`, `AGENTC_MODEL`, `AGENTC_RUNS_DIR`, `AGENTC_TIMEOUT_S`, `PIX4LESS_API_URL`, `PIX4LESS_API_KEY`, `AI_PLACEHOLDER_IMAGE_URL`
 - **`emailBuilder/`** — Django project config (settings, urls, wsgi/asgi)
 - **API prefix**: `/api/v1/` — all endpoints require `X-API-Key` header except `/api/v1/auth/session`
 - **Multi-tenancy**: Shared DB + `org_id` filtering via `TenantManager.for_org(org)` on all queries
 - **Database**: PostgreSQL in both dev and prod (the dev compose runs Postgres too), via `DB_*` env vars (`DB_ENGINE`, `DB_NAME`, etc.)
 
 ### Frontend (React + TypeScript + Vite)
-- **`frontend/src/store/`** — Zustand stores: `editorStore` (template state, block CRUD) and `configStore` (API config)
-- **`frontend/src/components/Editor/`** — Canvas, BlockWrapper (sortable DnD), BlockRenderer
-- **`frontend/src/components/Blocks/`** — 6 block types: Text (Tiptap), Image, Button, Divider, Columns, Social
-- **`frontend/src/components/Panels/`** — BlockPalette (left), StylePanel (right), GlobalSettings, per-block settings
-- **`frontend/src/components/Preview/`** — PreviewModal with desktop/mobile toggle
-- **`frontend/src/components/Gallery/`** — TemplateGallery with pre-built templates
-- **`frontend/src/lib/`** — `htmlExporter.ts` (client-side preview), `api.ts` (fetch wrapper), `blockFactory.ts`, `postMessage.ts`
+The embeddable editor lives in `frontend-email-builder/`.
+- **`frontend-email-builder/src/store/`** — Zustand stores: `editorStore` (template state, block CRUD) and `configStore` (API config)
+- **`frontend-email-builder/src/components/Editor/`** — Canvas, BlockWrapper (sortable DnD), BlockRenderer
+- **`frontend-email-builder/src/components/Blocks/`** — 6 block types: Text (Tiptap), Image, Button, Divider, Columns, Social
+- **`frontend-email-builder/src/components/Panels/`** — BlockPalette (left), StylePanel (right), GlobalSettings, per-block settings
+- **`frontend-email-builder/src/components/Preview/`** — PreviewModal with desktop/mobile toggle
+- **`frontend-email-builder/src/components/Gallery/`** — TemplateGallery with pre-built templates; `CreateWithAiTab.tsx` is the AI entry point (added in Task 13)
+- **`frontend-email-builder/src/lib/`** — `htmlExporter.ts` (client-side preview), `api.ts` (fetch wrapper), `blockFactory.ts`, `postMessage.ts`
 - **`frontend/public/loader.js`** — SDK loader script for iframe embed (`MailCraft.init()`)
 
 ### Key Design Decisions
@@ -62,6 +67,10 @@ make clean              # Remove caches, build artifacts, db
 - Template data stored as JSON in `json_data` field, versioned with `version` key
 - Blocks: Text, Image, Button, Divider, Columns (nested), Social — each has data + style
 - postMessage bridge: iframe↔host communication with `source: "mailcraft"` / `"mailcraft-host"` identifiers
+- AI output is MailCraft block JSON validated against `TEMPLATE_SCHEMA` (never HTML)
+- The customer brief and brand data are fenced as data in the prompt (nonce markers), never interpolated into instructions
+- Images come from pix4less and are copied into the org's S3, so templates never hold signed URLs
+- `foundry` management command generates draft gallery templates for curation
 
 ## Rules
 

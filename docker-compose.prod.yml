@@ -55,6 +55,9 @@ services:
     environment:
       DB_HOST: postgres
       DB_PORT: 5432
+    networks:
+      - default
+      - agent-container
     expose:
       - "8000"
     depends_on:
@@ -79,6 +82,9 @@ services:
     command: celery -A emailBuilder worker --loglevel=info --max-tasks-per-child=200 --concurrency=2
     env_file:
       - .env.prod
+    networks:
+      - default
+      - agent-container
     depends_on:
       postgres:
         condition: service_healthy
@@ -149,3 +155,7 @@ networks:
   # Shared with the cloudflared edge stack; created once: `docker network create edge`
   edge:
     external: true
+  # Fleet agent-container hub (AI template generation); owned by the agent-container stack
+  agent-container:
+    external: true
+    name: agent-container_default
