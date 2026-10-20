@@ -260,8 +260,14 @@ STRIPE_CANCEL_URL = os.environ.get('STRIPE_CANCEL_URL', 'http://localhost/pricin
 
 
 # --- Email ---
+# Provider priority: Cloudflare Email Sending (CF_EMAIL_TOKEN set) > Resend
+# (RESEND_API_KEY set) > explicit EMAIL_BACKEND env > console.
+CF_ACCOUNT_ID = os.environ.get('CF_ACCOUNT_ID', '')
+CF_EMAIL_TOKEN = os.environ.get('CF_EMAIL_TOKEN', '')
 RESEND_API_KEY = os.environ.get('RESEND_API_KEY', '')
-if RESEND_API_KEY:
+if CF_EMAIL_TOKEN:
+    EMAIL_BACKEND = 'core.cloudflare_backend.CloudflareEmailBackend'
+elif RESEND_API_KEY:
     EMAIL_BACKEND = 'core.email_backend.ResendEmailBackend'
 else:
     EMAIL_BACKEND = os.environ.get(
@@ -297,7 +303,7 @@ CELERY_ACCEPT_CONTENT = ['json']
 
 # --- AI generation (agent-container hub + pix4less) ---
 AGENTC_HUB = os.environ.get('AGENTC_HUB', 'http://agent-container-hub:39300')
-AGENTC_LANE = os.environ.get('AGENTC_LANE', 'mailcraft')
+AGENTC_LANE = os.environ.get('AGENTC_LANE', '')  # empty = AI generation disabled (503) until the operator names the hub lane
 AGENTC_MODEL = os.environ.get('AGENTC_MODEL', 'gemini-3.8-flash-high')
 AGENTC_RUNS_DIR = os.environ.get('AGENTC_RUNS_DIR', '/Users/tahayusufkomur/ws/agent-studio-runs')
 AGENTC_TIMEOUT_S = int(os.environ.get('AGENTC_TIMEOUT_S', '180'))
