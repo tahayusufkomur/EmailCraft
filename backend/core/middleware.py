@@ -139,6 +139,7 @@ class ApiKeyAuthMiddleware:
         # Attach to request (no api_key in session-based auth)
         request.org = session.org
         request.api_key = None
+        request.host_context = session.context
 
         return self.get_response(request)
 

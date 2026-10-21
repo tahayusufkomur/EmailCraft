@@ -130,6 +130,8 @@ class Organization(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
+    # The host's own stable id for this org (e.g. its tenant), so provisioning never matches by display name.
+    external_id = models.CharField(max_length=255, blank=True, default='', db_index=True)
     email = models.EmailField(unique=True)
     allowed_origins = models.JSONField(default=list, blank=True)
     available_variables = models.JSONField(default=list, blank=True)
@@ -204,6 +206,8 @@ class Session(models.Model):
     org = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='sessions')
     token_hash = models.CharField(max_length=64, unique=True, db_index=True)
     expires_at = models.DateTimeField()
+    # What the host told us about this customer for the AI: brand, items, photos (templates_api.generation).
+    context = models.JSONField(default=dict, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

@@ -1,3 +1,5 @@
+import json
+
 from rest_framework import serializers
 
 from core.models import ApiKey, Organization, UserOrganization
@@ -107,8 +109,19 @@ class OrganizationWithApiKeysSerializer(OrganizationSerializer):
         return ApiKeySummarySerializer(keys, many=True).data
 
 
+MAX_CONTEXT_CHARS = 64_000  # URLs included; the prompt only sees a trimmed copy without them
+
+
 class SessionRequestSerializer(serializers.Serializer):
     origin = serializers.URLField(required=True)
+    context = serializers.JSONField(required=False, default=dict)
+
+    def validate_context(self, value):
+        if not isinstance(value, dict):
+            raise serializers.ValidationError('Expected an object.')
+        if len(json.dumps(value)) > MAX_CONTEXT_CHARS:
+            raise serializers.ValidationError(f'Keep the context under {MAX_CONTEXT_CHARS} characters of JSON.')
+        return value
 
 
 class SessionResponseSerializer(serializers.Serializer):
@@ -208,6 +221,7 @@ class SiteApiKeyCreateSerializer(serializers.Serializer):
 
 class SiteProvisionSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=255)
+    external_id = serializers.CharField(max_length=255, required=False, allow_blank=True, default='')
 
 
 class UserOrganizationSerializer(serializers.ModelSerializer):

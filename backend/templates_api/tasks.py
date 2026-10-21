@@ -51,7 +51,7 @@ def run_generation_job(self, job_id):
         if job.kind == 'edit':  # edits are free: they return the email and touch no quota or template row
             job.result, job.warnings = edit_template(
                 job.source, job.brief, job.org, block_id=job.block_id,
-                allow_generation=allow_images, on_progress=on_progress,
+                allow_generation=allow_images, on_progress=on_progress, context=job.context,
             )
             job.status, job.partial = 'done', None
             job.save(update_fields=['result', 'warnings', 'status', 'partial', 'updated_at'])
@@ -59,6 +59,7 @@ def run_generation_job(self, job_id):
 
         name, template, warnings, category = generate_template(
             job.brief, job.category, job.org, allow_generation=allow_images, on_progress=on_progress,
+            context=job.context,
         )
         with transaction.atomic():
             job.template = Template.objects.create(

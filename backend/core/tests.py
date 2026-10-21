@@ -1,4 +1,5 @@
 from io import StringIO
+from unittest.mock import patch
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -588,6 +589,54 @@ class SiteOrganizationsApiTests(TestCase):
 
         delete_response = self.client.delete(f'/api/v1/site/templates/{shared_template.id}/')
         self.assertEqual(delete_response.status_code, 403)
+
+
+class SiteProvisionTests(TestCase):
+    def setUp(self):
+        patcher = patch('core.emails.send_transactional_email.delay')  # the org-created email needs a broker
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        from core.models import Account
+        self.user = User.objects.create_user(username='host', email='host@example.com', password='x')
+        Account.objects.create(user=self.user, plan=Plan.objects.create(name='Host', slug='host', max_organizations=10))
+        self.client = APIClient()
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {Token.objects.create(user=self.user).key}')
+
+    def _provision(self, client=None, **body):
+        r = (client or self.client).post('/api/v1/site/provision', body, format='json')
+        self.assertIn(r.status_code, (200, 201), r.data)
+        return r.data['organization']['id'], r.data['api_key']['raw']
+
+    def _org_of(self, raw_key):
+        return str(ApiKey.objects.get(key_hash=ApiKey.hash_key(raw_key)).org_id)
+
+    def test_same_name_with_different_external_ids_gets_two_orgs(self):
+        a, key_a = self._provision(name='Yoga Studio', external_id='host:a')
+        b, key_b = self._provision(name='Yoga Studio', external_id='host:b')
+        self.assertNotEqual(a, b)
+        self.assertEqual((self._org_of(key_a), self._org_of(key_b)), (a, b))
+
+    def test_same_external_id_reuses_the_org_with_a_fresh_key_and_the_new_name(self):
+        a, key_1 = self._provision(name='Old Name', external_id='host:a')
+        again, key_2 = self._provision(name='New Name', external_id='host:a')
+        self.assertEqual(again, a)
+        self.assertNotEqual(key_1, key_2)
+        self.assertEqual(self._org_of(key_2), a)
+        self.assertEqual(Organization.objects.get(pk=a).name, 'New Name')
+
+    def test_external_id_never_reaches_another_users_org(self):
+        other = User.objects.create_user(username='other', email='other@example.com', password='x')
+        other_client = APIClient()
+        other_client.credentials(HTTP_AUTHORIZATION=f'Token {Token.objects.create(user=other).key}')
+        theirs, _ = self._provision(other_client, name='Theirs', external_id='host:a')
+        mine, _ = self._provision(name='Mine', external_id='host:a')
+        self.assertNotEqual(mine, theirs)
+
+    def test_without_external_id_the_name_is_reused_but_never_an_org_with_one(self):
+        named, _ = self._provision(name='Shop')
+        self.assertEqual(self._provision(name='Shop')[0], named)
+        external, _ = self._provision(name='Contentor', external_id='host:a')
+        self.assertNotEqual(self._provision(name='Contentor')[0], external)
 
 
 class EmailSetupSerializerTests(TestCase):

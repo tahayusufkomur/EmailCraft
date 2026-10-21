@@ -459,16 +459,18 @@ def site_provision(request):
     """Create or reuse an organization with a live API key.
 
     POST /api/v1/site/provision
-    Body: { "name": "My Org" }
+    Body: { "name": "My Org", "external_id": "<the host's own id for it>" }
     Auth: Token <site_token>
 
-    If an org with the same name already exists for this user, returns
-    the existing org and its active live API key (without the raw key).
-    Otherwise creates a new org and returns the raw key (shown only once).
+    The org is matched by external_id when one is given (its name is then only
+    for display and is updated), else by name among this user's orgs that have
+    no external_id. A matched org gets a fresh live API key; otherwise a new org
+    is created. The raw key is returned once either way.
     """
     serializer = SiteProvisionSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     name = serializer.validated_data['name']
+    external_id = serializer.validated_data['external_id']
 
     # Enforce org limit (only for new orgs, not reuse)
     account = account_for_user(request.user)
@@ -477,15 +479,19 @@ def site_provision(request):
 
     try:
         with transaction.atomic():
+            # One provision at a time per user, so two first visits can't both create the org.
+            Account.objects.select_for_update().filter(user=request.user).first()
+            memberships = UserOrganization.objects.select_related('organization').filter(user=request.user)
             existing_membership = (
-                UserOrganization.objects
-                .select_related('organization')
-                .filter(user=request.user, organization__name=name)
-                .first()
-            )
+                memberships.filter(organization__external_id=external_id) if external_id
+                else memberships.filter(organization__name=name, organization__external_id='')
+            ).first()
 
             if existing_membership:
                 org = existing_membership.organization
+                if org.name != name:
+                    org.name = name
+                    org.save(update_fields=['name', 'updated_at'])
                 account = account_for_org(org)
 
                 # Create a fresh live key so the caller can recover if they
@@ -525,6 +531,7 @@ def site_provision(request):
             org_email = f'org-{uuid.uuid4().hex[:20]}@org.mailcraft.dev'
             org = Organization.objects.create(
                 name=name,
+                external_id=external_id,
                 email=org_email,
             )
 

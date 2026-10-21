@@ -433,7 +433,8 @@ def ai_generate(request):
             status=status.HTTP_402_PAYMENT_REQUIRED,
         )
 
-    job = GenerationJob.objects.create(org=request.org, **serializer.validated_data)
+    job = GenerationJob.objects.create(org=request.org, context=getattr(request, 'host_context', {}),
+                                       **serializer.validated_data)
     transaction.on_commit(lambda: run_generation_job.delay(str(job.id)))
     return Response({'job_id': str(job.id)}, status=status.HTTP_202_ACCEPTED)
 
@@ -452,7 +453,7 @@ def ai_edit(request):
     data = serializer.validated_data
     job = GenerationJob.objects.create(
         org=request.org, kind='edit', brief=data['instruction'], source=data['template'],
-        block_id=data['block_id'],
+        block_id=data['block_id'], context=getattr(request, 'host_context', {}),
     )
     transaction.on_commit(lambda: run_generation_job.delay(str(job.id)))
     return Response({'job_id': str(job.id)}, status=status.HTTP_202_ACCEPTED)

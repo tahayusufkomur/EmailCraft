@@ -116,6 +116,7 @@ class GenerationJob(models.Model):
     category = models.CharField(max_length=50, choices=Template.CATEGORY_CHOICES, blank=True)
     source = models.JSONField(null=True, blank=True)  # edit: the email as it was
     block_id = models.CharField(max_length=64, blank=True)  # edit: the block the customer selected
+    context = models.JSONField(default=dict, blank=True)  # the session's host context, for the prompt and refs
     status = models.CharField(max_length=16, choices=STATUS_CHOICES, default='queued')
     step = models.CharField(max_length=16, blank=True, default='')
     activity = models.CharField(max_length=80, blank=True)  # status line signed by the role at work

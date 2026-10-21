@@ -477,10 +477,12 @@ def create_session(request):
     token_hash = Session.hash_token(new_token)
     expires_at = timezone.now() + timedelta(hours=4)
 
+    Session.objects.filter(org=org, expires_at__lte=timezone.now()).delete()  # they carry the host's context
     Session.objects.create(
         org=org,
         token_hash=token_hash,
         expires_at=expires_at,
+        context=serializer.validated_data['context'],
     )
 
     return _build_session_config_response(org, new_token, expires_at)
