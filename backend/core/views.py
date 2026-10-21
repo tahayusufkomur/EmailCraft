@@ -394,8 +394,7 @@ def _build_session_config_response(org, session_token, expires_at):
             # The editor opens on the AI start screen when this is enabled; None means no quota applies.
             'ai': {
                 'enabled': bool(settings.AGENTC_LANE),
-                'generations_left': (max(account.ai_generations_limit - account.ai_generations_count, 0)
-                                     if account else None),
+                'generations_left': account.ai_generations_left if account else None,
             },
             'widget_context': {
                 'show_logo': org.show_logo,

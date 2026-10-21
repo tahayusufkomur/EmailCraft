@@ -422,7 +422,7 @@ def ai_generate(request):
         return refusal
 
     account = account_for_org(request.org)
-    if account and account.ai_generations_count >= account.ai_generations_limit:
+    if account and account.ai_generations_left == 0:
         return Response(
             {
                 'error': {

@@ -56,7 +56,7 @@ class Account(models.Model):
     storage_used_bytes = models.BigIntegerField(default=0)
     storage_limit_mb = models.PositiveIntegerField(default=1024)  # 1 GB
     ai_generations_count = models.BigIntegerField(default=0)
-    ai_generations_limit = models.PositiveIntegerField(default=5)
+    ai_generations_limit = models.PositiveIntegerField(default=5, null=True, blank=True, help_text='Empty = unlimited.')
     stripe_customer_id = models.CharField(max_length=120, blank=True, null=True)
     stripe_subscription_id = models.CharField(max_length=120, blank=True, null=True)
     pending_plan = models.ForeignKey(
@@ -86,6 +86,13 @@ class Account(models.Model):
     @property
     def storage_limit_bytes(self):
         return self.storage_limit_mb * Plan.MB
+
+    @property
+    def ai_generations_left(self):
+        """How many AI emails are left, or None for an account without a limit."""
+        if self.ai_generations_limit is None:
+            return None
+        return max(self.ai_generations_limit - self.ai_generations_count, 0)
 
     @property
     def max_upload_size_bytes(self):
