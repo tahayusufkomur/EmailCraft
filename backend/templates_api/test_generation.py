@@ -1187,6 +1187,15 @@ class TestAiEndpoints(TestCase):
         self.assertEqual(r.data['config']['ai'], {'enabled': True, 'generations_left': 1})
 
     @override_settings(AGENTC_LANE='mailcraft')
+    def test_last_months_ai_emails_do_not_count_this_month(self):
+        self.account.ai_generations_count = self.account.ai_generations_limit
+        self.account.usage_period_start = timezone.localdate().replace(day=1) - timedelta(days=1)
+        self.account.save()
+        self.assertEqual(self._session().data['config']['ai']['generations_left'], self.account.ai_generations_limit)
+        with patch('templates_api.views.run_generation_job.delay'):
+            self.assertEqual(self._post(brief='x').status_code, 202)
+
+    @override_settings(AGENTC_LANE='mailcraft')
     def test_an_account_without_a_limit_has_no_quota(self):
         self.account.ai_generations_count, self.account.ai_generations_limit = 999, None
         self.account.save()

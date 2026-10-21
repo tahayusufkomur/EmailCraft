@@ -66,6 +66,7 @@ def _set_account_plan(account, plan_obj, stripe_subscription_id=_UNSET, stripe_c
             'pending_plan',
             'rendered_emails_limit',
             'storage_limit_mb',
+            'ai_generations_limit',
             'stripe_customer_id',
             'stripe_subscription_id',
             'usage_warning_sent',
@@ -562,24 +563,6 @@ def _handle_payment_failed(data):
     )
 
 
-def _handle_invoice_paid(data):
-    """Reset usage email flags at the start of a new billing cycle."""
-    from core.models import Account
-
-    customer_id = data.get('customer')
-    if not customer_id:
-        return
-
-    try:
-        account = Account.objects.get(stripe_customer_id=customer_id)
-    except Account.DoesNotExist:
-        return
-
-    account.usage_warning_sent = False
-    account.usage_limit_sent = False
-    account.save(update_fields=['usage_warning_sent', 'usage_limit_sent', 'updated_at'])
-
-
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def stripe_webhook(request):
@@ -606,8 +589,7 @@ def stripe_webhook(request):
         _handle_subscription_deleted(data)
     elif event_type == 'invoice.payment_failed':
         _handle_payment_failed(data)
-    elif event_type == 'invoice.paid':
-        _handle_invoice_paid(data)
+    # invoice.paid needs nothing: usage starts over on the 1st of each month (Account.roll_usage_period).
 
     return Response({'received': True})
 

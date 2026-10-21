@@ -47,6 +47,11 @@ class Plan(models.Model):
         return cls.objects.filter(is_default=True).first() or cls.objects.order_by('sort_order').first()
 
 
+def month_start():
+    """The month usage is counted in: its first day (UTC), the same for every account."""
+    return timezone.localdate().replace(day=1)
+
+
 class Account(models.Model):
     """Billing account — one per user. Holds plan, usage counters, and Stripe info."""
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='account')
@@ -66,11 +71,25 @@ class Account(models.Model):
     )
     usage_warning_sent = models.BooleanField(default=False)
     usage_limit_sent = models.BooleanField(default=False)
+    # The month the two counters and the usage emails above belong to (see roll_usage_period).
+    usage_period_start = models.DateField(null=True, blank=True, default=month_start)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'accounts'
+
+    def roll_usage_period(self):
+        """On the first visit of a new month, start the usage counters and usage emails over: the plans
+        promise rendered emails and AI emails "per month". An empty period (an account from before) starts now."""
+        month = month_start()
+        if self.usage_period_start == month:
+            return
+        fresh = {'usage_period_start': month, 'rendered_emails_count': 0, 'ai_generations_count': 0,
+                 'usage_warning_sent': False, 'usage_limit_sent': False}
+        # Conditional, so two first visits at once start the month only once.
+        Account.objects.filter(pk=self.pk).exclude(usage_period_start=month).update(**fresh)
+        self.refresh_from_db(fields=list(fresh))
 
     def __str__(self):
         return f"{self.user.username} ({self.plan_slug})"
@@ -359,6 +378,7 @@ def get_or_create_account(user):
     )
     if created:
         account.apply_plan_limits(save=True)
+    account.roll_usage_period()
     return account
 
 

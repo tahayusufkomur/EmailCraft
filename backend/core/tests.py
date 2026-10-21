@@ -1,3 +1,4 @@
+from datetime import date
 from io import StringIO
 from unittest.mock import patch
 
@@ -5,11 +6,12 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.management import call_command
 from django.test import TestCase
+from django.utils import timezone
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient, APITestCase
 
 from core.management.commands.create_demo_org import _highest_plan
-from core.models import ApiKey, Organization, Plan, UserOrganization
+from core.models import Account, ApiKey, Organization, Plan, UserOrganization, get_or_create_account
 from templates_api.models import Template, UploadedImage
 
 
@@ -637,6 +639,45 @@ class SiteProvisionTests(TestCase):
         self.assertEqual(self._provision(name='Shop')[0], named)
         external, _ = self._provision(name='Contentor', external_id='host:a')
         self.assertNotEqual(self._provision(name='Contentor')[0], external)
+
+
+class MonthlyUsageTests(TestCase):
+    """The plans promise "per month": the counters start over on the 1st (UTC)."""
+
+    def setUp(self):
+        self.user = User.objects.create_user(username='monthly', email='monthly@example.com', password='x')
+        self.this_month = timezone.localdate().replace(day=1)
+        self.account = Account.objects.create(
+            user=self.user, plan=Plan.objects.create(name='Monthly', slug='monthly', ai_generations_limit=5),
+            rendered_emails_count=90, ai_generations_count=5, usage_warning_sent=True, usage_limit_sent=True,
+            usage_period_start=date(2026, 9, 1),
+        )
+
+    def _usage(self, account):
+        return (account.rendered_emails_count, account.ai_generations_count, account.usage_warning_sent,
+                account.usage_limit_sent, account.usage_period_start)
+
+    def test_a_new_month_starts_the_counters_and_usage_emails_over(self):
+        self.assertEqual(self._usage(get_or_create_account(self.user)), (0, 0, False, False, self.this_month))
+        self.assertEqual(self._usage(Account.objects.get(pk=self.account.pk)), (0, 0, False, False, self.this_month))
+
+    def test_within_the_month_the_counters_keep_counting(self):
+        Account.objects.filter(pk=self.account.pk).update(usage_period_start=self.this_month)
+        self.assertEqual(self._usage(get_or_create_account(self.user)), (90, 5, True, True, self.this_month))
+
+    def test_an_account_from_before_monthly_usage_starts_fresh(self):
+        Account.objects.filter(pk=self.account.pk).update(usage_period_start=None)
+        self.assertEqual(self._usage(get_or_create_account(self.user)), (0, 0, False, False, self.this_month))
+
+    def test_a_new_account_counts_from_this_month(self):
+        other = User.objects.create_user(username='fresh', email='fresh@example.com', password='x')
+        self.assertEqual(get_or_create_account(other).usage_period_start, self.this_month)
+
+    def test_changing_plan_takes_its_ai_limit(self):
+        from core.views import _set_account_plan
+
+        _set_account_plan(self.account, Plan.objects.create(name='Bigger', slug='bigger', ai_generations_limit=50))
+        self.assertEqual(Account.objects.get(pk=self.account.pk).ai_generations_limit, 50)
 
 
 class EmailSetupSerializerTests(TestCase):
