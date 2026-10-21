@@ -1931,9 +1931,9 @@
 }
 
 .view-tab.is-active {
-  background: var(--chrome-surface);
-  color: var(--chrome-text-primary);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
 }
 
 .view-tab:focus-visible {
