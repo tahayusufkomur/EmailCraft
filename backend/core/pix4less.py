@@ -42,13 +42,37 @@ def _call(method, path: str, *, timeout: int = REQUEST_TIMEOUT, headers: dict | 
     return data
 
 
-def search(query: str, aspect_ratio: str) -> dict | None:
-    body = {'query': query, 'aspect_ratio': aspect_ratio, 'per_page': 1,
-            'search_type': 'fast', 'safe_search': True}
+# The aspect filter can leave a poor top hit, or none: a 4:3 search for a group yoga class returned one
+# wheelchair dance photo at 0.47 while 3:2 had a 0.90 match, and tree-pose photos (0.92) exist only in
+# 16:9. Confidence alone can't reject a poor hit (on-topic ones also score 0.4-0.5), so a weak hit (below
+# pix4less's own "low" bucket) gives way to a clearly better one of the same orientation.
+LOW_CONFIDENCE = 0.5
+CLEARLY_BETTER = 0.1
+ORIENTATION = {'16:9': 'landscape', '3:2': 'landscape', '4:3': 'landscape',
+               '1:1': 'square', '4:5': 'portrait', '9:16': 'portrait'}
+
+
+def _confidence(hit: dict) -> float:
+    return hit.get('match_confidence') or 0
+
+
+def _top_hit(query: str, **shape) -> dict | None:
+    body = {'query': query, **shape, 'per_page': 1, 'search_type': 'fast', 'safe_search': True}
     hits = _call(requests.post, '/v1/images/search', json=body)
     if not isinstance(hits, list):
         raise Pix4LessError(MALFORMED)
     return hits[0] if hits else None
+
+
+def search(query: str, aspect_ratio: str) -> dict | None:
+    """The asked aspect's top hit, unless it is weak and the same orientation has a clearly better one."""
+    asked = _top_hit(query, aspect_ratio=aspect_ratio)
+    if asked and _confidence(asked) >= LOW_CONFIDENCE:
+        return asked
+    wider = _top_hit(query, filters={'orientation': ORIENTATION[aspect_ratio]})
+    if asked is None or (wider and _confidence(wider) >= _confidence(asked) + CLEARLY_BETTER):
+        return wider
+    return asked
 
 
 def download_url(image_id: str) -> str:

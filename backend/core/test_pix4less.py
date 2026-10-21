@@ -15,7 +15,7 @@ def resp(data, status=200):
 @patch('core.pix4less.requests.post')
 class TestPix4Less(SimpleTestCase):
     def test_search_sends_api_key_and_returns_first_hit(self, post, get):
-        post.return_value = resp({'data': [{'id': 'i1', 'description': 'd'}]})
+        post.return_value = resp({'data': [{'id': 'i1', 'description': 'd', 'match_confidence': 0.9}]})
         self.assertEqual(search('canoe', '16:9')['id'], 'i1')
         self.assertEqual(post.call_args.args[0], 'https://px/v1/images/search')
         self.assertEqual(post.call_args.kwargs['headers']['X-API-Key'], 'k')
@@ -25,10 +25,32 @@ class TestPix4Less(SimpleTestCase):
         self.assertEqual(body['per_page'], 1)
         self.assertEqual(body['search_type'], 'fast')
         self.assertIs(body['safe_search'], True)
+        self.assertEqual(post.call_count, 1)  # a confident hit needs no near-aspect search
 
     def test_search_empty_returns_none(self, post, get):
         post.return_value = resp({'data': []})
         self.assertIsNone(search('canoe', '16:9'))
+
+    def test_search_weak_hit_gives_way_to_a_clearly_better_one_of_the_same_orientation(self, post, get):
+        # A 4:3 search for a group yoga class once returned only a wheelchair dance photo (0.47);
+        # 3:2 had a 0.90 match.
+        post.side_effect = [resp({'data': [{'id': 'weak', 'match_confidence': 0.47}]}),
+                            resp({'data': [{'id': 'good', 'match_confidence': 0.9}]})]
+        self.assertEqual(search('group yoga class', '4:3')['id'], 'good')
+        wider = post.call_args_list[1].kwargs['json']
+        self.assertEqual(wider['filters'], {'orientation': 'landscape'})
+        self.assertNotIn('aspect_ratio', wider)
+
+    def test_search_keeps_a_weak_hit_that_is_not_clearly_beaten(self, post, get):
+        post.side_effect = [resp({'data': [{'id': 'asked', 'match_confidence': 0.49}]}),
+                            resp({'data': [{'id': 'wider', 'match_confidence': 0.52}]})]
+        self.assertEqual(search('singing bowls', '4:3')['id'], 'asked')
+
+    def test_search_without_hits_in_the_asked_aspect_takes_the_same_orientation(self, post, get):
+        # Tree-pose photos existed only in 16:9 when the model asked for 4:3.
+        post.side_effect = [resp({'data': []}),
+                            resp({'data': [{'id': 'tree', 'match_confidence': 0.925}]})]
+        self.assertEqual(search('tree pose outdoors', '4:3')['id'], 'tree')
 
     def test_download_url(self, post, get):
         post.return_value = resp({'data': {'url': 'https://signed'}})
