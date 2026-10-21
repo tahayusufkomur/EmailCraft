@@ -4,7 +4,7 @@ import { EditorDndContext } from './components/Editor/EditorDndContext';
 import { Canvas } from './components/Editor/Canvas';
 import { BlockPalette } from './components/Panels/BlockPalette';
 import { StylePanel } from './components/Panels/StylePanel';
-import { PreviewModal } from './components/Preview/PreviewModal';
+import { PreviewPane } from './components/Preview/PreviewPane';
 import { TemplateGallery } from './components/Gallery/TemplateGallery';
 import { SaveTemplateModal } from './components/Gallery/SaveTemplateModal';
 import { MediaLibraryModal } from './components/Media/MediaLibraryModal';
@@ -26,7 +26,7 @@ import { listenToParent, sendErrorEvent, sendReadyEvent, sendSaveEvent, sendTemp
 import type { EmailTemplate, TemplateBackgroundStyle } from './types/blocks';
 import type { ThemeMode, Variable } from './types/editor';
 import { getBuilderThemePreset, resolveBuilderTheme } from './lib/builderTheme';
-import { LayoutGrid, Image, Eye, Save, SaveAll, Download, Sparkles } from 'lucide-react';
+import { LayoutGrid, Image, Save, SaveAll, Download, Sparkles } from 'lucide-react';
 
 const isEmailTemplate = (value: unknown): value is EmailTemplate => {
   if (!value || typeof value !== 'object') return false;
@@ -377,7 +377,7 @@ function App() {
   const builderTheme = useConfigStore((s) => s.builderTheme);
   const setConfig = useConfigStore((s) => s.setConfig);
   const hostContextAppliedRef = useRef(false);
-  const [showPreview, setShowPreview] = useState(false);
+  const [view, setView] = useState<'editor' | 'split' | 'preview'>('editor');
   const [showGallery, setShowGallery] = useState(false);
   const [showMedia, setShowMedia] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
@@ -861,11 +861,6 @@ function App() {
             Media
           </Button>
           <div className="toolbar-separator" />
-          <Button variant="default" size="sm" onClick={() => setShowPreview(true)}>
-            <Eye size={16} />
-            Preview
-          </Button>
-          <div className="toolbar-separator" />
           <Button variant="ghost" size="sm" className="toolbar-action-btn" onClick={() => void handleSave()} disabled={isSaving}>
             <Save size={16} />
             {isSaving ? 'Saving...' : 'Save'}
@@ -912,8 +907,29 @@ function App() {
             <>
               {!generating && <div className="ai-inert-group" inert={ai.busy}><BlockPalette /></div>}
               <div className={`canvas-column${showAskBar ? ' has-askbar' : ''}`}>
-                <div className="ai-inert-group" inert={ai.busy}>
-                  <Canvas empty={generating ? <AiSkeleton /> : undefined} />
+                {!generating && (
+                  <div className="view-tabs" role="tablist" aria-label="View" inert={ai.busy}>
+                    {(['editor', 'split', 'preview'] as const).map((v) => (
+                      <button
+                        key={v}
+                        type="button"
+                        role="tab"
+                        aria-selected={view === v}
+                        className={`view-tab${view === v ? ' is-active' : ''}`}
+                        onClick={() => setView(v)}
+                      >
+                        {{ editor: 'Editor', split: 'Editor + Preview', preview: 'Preview' }[v]}
+                      </button>
+                    ))}
+                  </div>
+                )}
+                <div className={`canvas-panes${view === 'split' && !generating ? ' is-split' : ''}`}>
+                  {(view !== 'preview' || generating) && (
+                    <div className="ai-inert-group" inert={ai.busy}>
+                      <Canvas empty={generating ? <AiSkeleton /> : undefined} />
+                    </div>
+                  )}
+                  {view !== 'editor' && !generating && <PreviewPane lockScroll={view === 'split'} />}
                 </div>
                 {generating && <AiBuilding activity={aiActivity} />}
                 {showAskBar && (
@@ -940,7 +956,6 @@ function App() {
           )}
         </div>
       </EditorDndContext>
-      {showPreview && <PreviewModal onClose={() => setShowPreview(false)} />}
       {showGallery && (
         <TemplateGallery
           onClose={() => setShowGallery(false)}

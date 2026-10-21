@@ -1853,3 +1853,63 @@
 .theme-dark .ai-note.is-error {
   color: #fca5a5;
 }
+
+/* Editor / Editor + Preview / Preview switch above the canvas. */
+.canvas-column {
+  flex-direction: column;
+}
+
+.canvas-panes {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.canvas-panes.is-split .canvas-area {
+  flex: 1 1 50%;
+  min-width: 0;
+  border-right: 1px solid var(--chrome-border);
+}
+
+.canvas-panes.is-split .canvas-container {
+  max-width: 100%;
+}
+
+.view-tabs {
+  align-self: center;
+  display: flex;
+  gap: 2px;
+  margin: 12px 0 0;
+  padding: 3px;
+  background: var(--chrome-surface-elevated);
+  border: 1px solid var(--chrome-border);
+  border-radius: 10px;
+}
+
+.view-tab {
+  height: 30px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--chrome-text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.view-tab:hover {
+  color: var(--chrome-text-primary);
+}
+
+.view-tab.is-active {
+  background: var(--chrome-surface);
+  color: var(--chrome-text-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.view-tab:focus-visible {
+  outline: 3px solid var(--accent-border);
+  outline-offset: 1px;
+}
