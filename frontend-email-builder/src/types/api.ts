@@ -1,3 +1,5 @@
+import type { EmailTemplate } from './blocks';
+
 export interface ApiError {
   error: {
     code: string;
@@ -22,6 +24,11 @@ export interface SessionResponse {
     storage_limit_bytes: number;
     rendered_emails_count: number;
     rendered_emails_limit: number;
+    ai?: {
+      enabled: boolean;
+      /** null when no generation quota applies. */
+      generations_left: number | null;
+    };
     widget_context?: {
       show_logo?: boolean;
       show_export_html_button?: boolean;
@@ -52,9 +59,16 @@ export interface TemplateListItem {
 
 export interface GenerationJob {
   id: string;
+  kind: 'generate' | 'edit';
   status: 'queued' | 'running' | 'done' | 'failed';
   step: '' | 'writing' | 'images';
+  /** Status line signed by the role at work, e.g. "Designer · laying out the hero". */
+  activity: string;
+  /** The email so far, while the model is still writing it. */
+  partial: EmailTemplate | null;
   template_id: string | null;
+  /** An edit's changed email. */
+  result: EmailTemplate | null;
   error: string;
   warnings: string[];
 }

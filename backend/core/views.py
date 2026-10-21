@@ -391,6 +391,12 @@ def _build_session_config_response(org, session_token, expires_at):
             'storage_limit_bytes': account.storage_limit_bytes if account else 1073741824,
             'rendered_emails_count': account.rendered_emails_count if account else 0,
             'rendered_emails_limit': account.rendered_emails_limit if account else 1000,
+            # The editor opens on the AI start screen when this is enabled; None means no quota applies.
+            'ai': {
+                'enabled': bool(settings.AGENTC_LANE),
+                'generations_left': (max(account.ai_generations_limit - account.ai_generations_count, 0)
+                                     if account else None),
+            },
             'widget_context': {
                 'show_logo': org.show_logo,
                 'show_export_html_button': org.show_export_html_button,

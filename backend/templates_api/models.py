@@ -107,13 +107,21 @@ class GenerationJob(models.Model):
         ('failed', 'Failed'),
     ]
 
+    KIND_CHOICES = [('generate', 'Generate'), ('edit', 'Edit')]
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     org = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='generation_jobs')
-    brief = models.TextField()
-    category = models.CharField(max_length=50, choices=Template.CATEGORY_CHOICES)
+    kind = models.CharField(max_length=10, choices=KIND_CHOICES, default='generate')
+    brief = models.TextField()  # an edit's requested change
+    category = models.CharField(max_length=50, choices=Template.CATEGORY_CHOICES, blank=True)
+    source = models.JSONField(null=True, blank=True)  # edit: the email as it was
+    block_id = models.CharField(max_length=64, blank=True)  # edit: the block the customer selected
     status = models.CharField(max_length=16, choices=STATUS_CHOICES, default='queued')
     step = models.CharField(max_length=16, blank=True, default='')
+    activity = models.CharField(max_length=80, blank=True)  # status line signed by the role at work
+    partial = models.JSONField(null=True, blank=True)  # live preview while the model writes
     template = models.ForeignKey(Template, on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
+    result = models.JSONField(null=True, blank=True)  # edit: the changed email
     error = models.TextField(blank=True)
     warnings = models.JSONField(default=list)
     created_at = models.DateTimeField(auto_now_add=True)

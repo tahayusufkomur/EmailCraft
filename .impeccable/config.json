@@ -1,0 +1,20 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "geist",
+        "createdAt": "2026-10-21T11:25:09.259Z",
+        "reason": "Editor chrome font from the builder redesign (commit b3eaf29); DESIGN.md documents the gallery email templates, not the builder UI"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "geist mono",
+        "createdAt": "2026-10-21T11:25:09.283Z",
+        "reason": "Editor chrome mono font from the builder redesign (commit b3eaf29); DESIGN.md documents the gallery email templates, not the builder UI"
+      }
+    ]
+  }
+}

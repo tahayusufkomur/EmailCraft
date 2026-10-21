@@ -9,17 +9,19 @@ export function HeroSection() {
       <div className="mx-auto max-w-text px-6 text-center sm:px-8">
         <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted px-3.5 py-1.5 text-caption text-muted-foreground">
           <Sparkles className="h-3.5 w-3.5 text-marketing-accent" />
-          <span>Embeddable visual email builder + REST render API</span>
+          <span>An AI email designer you embed in your product</span>
         </div>
 
         <h1 className="mt-8 text-display font-bold tracking-tight text-foreground text-balance">
-          Build, preview, and ship{' '}
-          <span className="text-marketing-accent">production emails.</span>
+          Describe the email.{' '}
+          <span className="text-marketing-accent">MailCraft designs it.</span>
         </h1>
 
         <p className="mx-auto mt-6 max-w-2xl text-body-lg text-muted-foreground text-pretty">
-          Give your users a studio-grade drag-and-drop email editor inside your product, or generate
-          and render responsive HTML emails via API — without building a custom editor from scratch.
+          Your users say what they want to send. The AI writes the copy, lays out the design and picks
+          the photos while they watch, then makes changes they ask for in plain words. Every email is
+          editable blocks that render in Gmail and Outlook, with a drag-and-drop editor and a render
+          API around it.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">

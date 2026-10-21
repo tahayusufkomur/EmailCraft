@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { useDroppable, useDndContext } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useEditorStore } from '../../store/editorStore';
@@ -5,7 +6,8 @@ import { BlockWrapper } from './BlockWrapper';
 import { BlockRenderer } from './BlockRenderer';
 import { getCanvasBackgroundStyle, getCanvasBodyBackgroundStyle } from '../../lib/backgroundStyles';
 
-export function Canvas() {
+/** `empty` replaces the drag-and-drop hint shown while the email has no blocks. */
+export function Canvas({ empty }: { empty?: ReactNode }) {
   const blocks = useEditorStore((s) => s.template.body.blocks);
   const settings = useEditorStore((s) => s.template.settings);
   const selectBlock = useEditorStore((s) => s.selectBlock);
@@ -43,9 +45,11 @@ export function Canvas() {
         }}
       >
         {blocks.length === 0 ? (
-          <div className="canvas-empty">
-            Drag blocks here to start building your email
-          </div>
+          empty ?? (
+            <div className="canvas-empty">
+              Drag blocks here to start building your email
+            </div>
+          )
         ) : (
           <SortableContext
             items={blocks.map((b) => b.id)}

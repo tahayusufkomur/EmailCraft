@@ -13,6 +13,9 @@
 
     /**
      * Initialize the MailCraft editor.
+     * Without a templateJson (or a saved draft) the editor opens on its AI start screen, where the
+     * user describes the email and watches it build; it then takes changes in plain words. Orgs
+     * without AI get the drag-and-drop canvas as before.
      * @param {Object} config
      * @param {string} config.apiKey - API key (mc_live_* or mc_test_*)
      * @param {string|HTMLElement} config.container - CSS selector or DOM element

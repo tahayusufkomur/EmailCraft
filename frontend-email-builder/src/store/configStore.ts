@@ -21,6 +21,10 @@ interface ConfigState {
   storageLimit: number;
   defaultPalette: string;
   customPalette: Record<string, string>;
+  /** undefined until the session says; the editor opens on the AI start screen when true. */
+  aiEnabled: boolean | undefined;
+  /** null when no generation quota applies. */
+  aiGenerationsLeft: number | null;
 
   setConfig: (config: Partial<ConfigState>) => void;
 }
@@ -44,6 +48,8 @@ export const useConfigStore = create<ConfigState>((set) => ({
   storageLimit: 100 * 1024 * 1024,
   defaultPalette: '',
   customPalette: {},
+  aiEnabled: undefined,
+  aiGenerationsLeft: null,
 
   setConfig: (config) => set(config),
 }));

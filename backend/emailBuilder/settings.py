@@ -304,7 +304,10 @@ CELERY_ACCEPT_CONTENT = ['json']
 # --- AI generation (agent-container hub + pix4less) ---
 AGENTC_HUB = os.environ.get('AGENTC_HUB', 'http://agent-container-hub:39300')
 AGENTC_LANE = os.environ.get('AGENTC_LANE', '')  # empty = AI generation disabled (503) until the operator names the hub lane
-AGENTC_MODEL = os.environ.get('AGENTC_MODEL', 'gemini-3.8-flash-high')
+# Live runs on 2026-10-21: -low streams its first block in ~7 s and a whole email in ~40 s; -high
+# thinks ~40 s before writing anything, and once ran a shell command after its reply.
+AGENTC_MODEL = os.environ.get('AGENTC_MODEL', 'gemini-3.8-flash-low')
+AGENTC_MODEL_EDIT = os.environ.get('AGENTC_MODEL_EDIT', 'gemini-3.8-flash-low')
 AGENTC_RUNS_DIR = os.environ.get('AGENTC_RUNS_DIR', '/Users/tahayusufkomur/ws/agent-studio-runs')
 AGENTC_TIMEOUT_S = int(os.environ.get('AGENTC_TIMEOUT_S', '180'))
 PIX4LESS_API_URL = os.environ.get('PIX4LESS_API_URL', 'https://pix4less.com')

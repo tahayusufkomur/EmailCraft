@@ -1,10 +1,12 @@
 import re
 import secrets
+from datetime import timedelta
 
 import boto3
 from django.conf import settings
 from django.db import transaction
 from django.db.models import Q
+from django.utils import timezone
 from rest_framework import status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -13,6 +15,7 @@ from core.models import account_for_org
 from core.rate_limit import rate_limit_by_ip
 from templates_api.models import GenerationJob, Template, UploadedImage
 from templates_api.serializers import (
+    EditRequestSerializer,
     GenerateRequestSerializer,
     GenerationJobSerializer,
     ExportRequestSerializer,
@@ -23,7 +26,7 @@ from templates_api.serializers import (
     TemplateListSerializer,
     UploadedImageListSerializer,
 )
-from templates_api.tasks import run_generation_job
+from templates_api.tasks import JOB_TIME_LIMIT_S, run_generation_job
 from templates_api.export_engine import (
     extract_variable_keys,
     render_email_html,
@@ -388,6 +391,25 @@ def render_template(request):
     })
 
 
+def _ai_refusal(org):
+    """Why an AI job cannot start for this org right now, as a Response, or None."""
+    if not settings.AGENTC_LANE:
+        return Response(
+            {'error': {'code': 'AI_NOT_CONFIGURED', 'message': 'AI generation is not configured.'}},
+            status=status.HTTP_503_SERVICE_UNAVAILABLE,
+        )
+    # A job its worker stopped updating (a hard crash) no longer blocks the org.
+    alive_since = timezone.now() - timedelta(seconds=JOB_TIME_LIMIT_S)
+    if GenerationJob.objects.for_org(org).filter(status__in=('queued', 'running'),
+                                                 updated_at__gte=alive_since).exists():
+        return Response(
+            {'error': {'code': 'AI_GENERATION_IN_PROGRESS',
+                       'message': 'A generation is already running for this account.'}},
+            status=status.HTTP_409_CONFLICT,
+        )
+    return None
+
+
 @api_view(['POST'])
 @rate_limit_by_ip('ai_generate', max_requests=10, window_seconds=60)
 def ai_generate(request):
@@ -395,18 +417,9 @@ def ai_generate(request):
     serializer = GenerateRequestSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
 
-    if not settings.AGENTC_LANE:
-        return Response(
-            {'error': {'code': 'AI_NOT_CONFIGURED', 'message': 'AI generation is not configured.'}},
-            status=status.HTTP_503_SERVICE_UNAVAILABLE,
-        )
-
-    if GenerationJob.objects.for_org(request.org).filter(status__in=('queued', 'running')).exists():
-        return Response(
-            {'error': {'code': 'AI_GENERATION_IN_PROGRESS',
-                       'message': 'A generation is already running for this account.'}},
-            status=status.HTTP_409_CONFLICT,
-        )
+    refusal = _ai_refusal(request.org)
+    if refusal:
+        return refusal
 
     account = account_for_org(request.org)
     if account and account.ai_generations_count >= account.ai_generations_limit:
@@ -421,6 +434,26 @@ def ai_generate(request):
         )
 
     job = GenerationJob.objects.create(org=request.org, **serializer.validated_data)
+    transaction.on_commit(lambda: run_generation_job.delay(str(job.id)))
+    return Response({'job_id': str(job.id)}, status=status.HTTP_202_ACCEPTED)
+
+
+@api_view(['POST'])
+@rate_limit_by_ip('ai_edit', max_requests=30, window_seconds=60)
+def ai_edit(request):
+    """POST /api/v1/ai/edit — queue an AI change to the email being edited (not counted as a generation)."""
+    serializer = EditRequestSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+
+    refusal = _ai_refusal(request.org)
+    if refusal:
+        return refusal
+
+    data = serializer.validated_data
+    job = GenerationJob.objects.create(
+        org=request.org, kind='edit', brief=data['instruction'], source=data['template'],
+        block_id=data['block_id'],
+    )
     transaction.on_commit(lambda: run_generation_job.delay(str(job.id)))
     return Response({'job_id': str(job.id)}, status=status.HTTP_202_ACCEPTED)
 

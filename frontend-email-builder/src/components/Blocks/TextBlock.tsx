@@ -39,6 +39,14 @@ export function TextBlock({ block }: Props) {
     },
   });
 
+  // The store can change this block's text without the editor (undo, redo, an AI edit): show it.
+  // No update event, so it does not come back to the store as a new edit.
+  useEffect(() => {
+    if (editor && !editor.isDestroyed && editor.getHTML() !== block.data.html) {
+      editor.commands.setContent(block.data.html, { emitUpdate: false });
+    }
+  }, [editor, block.data.html]);
+
   // Bridge the tiptap editor to the store so TextSettings can use it
   useEffect(() => {
     if (editor && selectedBlockId === block.id) {

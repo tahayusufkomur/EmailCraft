@@ -2,12 +2,12 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { api } from '../../lib/api';
 import { exportToHtml } from '../../lib/htmlExporter';
+import { CATEGORY_LABELS, withFreshIds } from '../../lib/templates';
 import { useEditorStore } from '../../store/editorStore';
 import type { EmailTemplate } from '../../types/blocks';
 import type { TemplateListItem } from '../../types/api';
-import { CATEGORY_LABELS, CreateWithAiTab } from './CreateWithAiTab';
 
-type Tab = 'ai' | 'yours' | 'library';
+type Tab = 'yours' | 'library';
 
 interface Props {
   onClose: () => void;
@@ -16,7 +16,7 @@ interface Props {
 
 export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
-  const [activeTab, setActiveTab] = useState<Tab>('ai');
+  const [activeTab, setActiveTab] = useState<Tab>('library');
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [premiumNotice, setPremiumNotice] = useState<string | null>(null);
@@ -79,38 +79,9 @@ export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
   }, [filteredLibrary]);
 
   const handleSelect = useCallback(
-    (template: EmailTemplate, close = true) => {
-      const cloned: EmailTemplate = JSON.parse(JSON.stringify(template));
-      const reId = (
-        blocks: EmailTemplate['body']['blocks'],
-      ): EmailTemplate['body']['blocks'] =>
-        blocks.map((b) => ({
-          ...b,
-          id: crypto.randomUUID(),
-          ...(b.type === 'columns'
-            ? {
-                data: {
-                  ...b.data,
-                  columns: (
-                    b.data as {
-                      columns: { id: string; blocks: EmailTemplate['body']['blocks'] }[];
-                    }
-                  ).columns.map(
-                    (col: { id: string; blocks: EmailTemplate['body']['blocks'] }) => ({
-                      ...col,
-                      id: crypto.randomUUID(),
-                      blocks: reId(col.blocks),
-                    }),
-                  ),
-                },
-              }
-            : {}),
-        })) as EmailTemplate['body']['blocks'];
-      cloned.header.blocks = reId(cloned.header.blocks);
-      cloned.body.blocks = reId(cloned.body.blocks);
-      cloned.footer.blocks = reId(cloned.footer.blocks);
-      loadTemplate(cloned);
-      if (close) onClose();
+    (template: EmailTemplate) => {
+      loadTemplate(withFreshIds(template));
+      onClose();
     },
     [loadTemplate, onClose],
   );
@@ -136,26 +107,6 @@ export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
     [handleSelect, onTemplateLoaded],
   );
 
-  const handleGenerated = useCallback(
-    async (templateId: string, warnings: string[]) => {
-      try {
-        const detail = await api.getTemplate(templateId);
-        if (!detail.json_data || typeof detail.json_data !== 'object') {
-          throw new Error('Template payload is invalid.');
-        }
-        handleSelect(detail.json_data as EmailTemplate, warnings.length === 0);
-        onTemplateLoaded?.(templateId);
-        if (warnings.length > 0) {
-          setPremiumNotice('Some images could not be found; placeholders were used.');
-          setTimeout(onClose, 2000);
-        }
-      } catch (error) {
-        setLoadError(error instanceof Error ? error.message : 'Unable to load template.');
-      }
-    },
-    [handleSelect, onClose, onTemplateLoaded],
-  );
-
   return (
     <div style={styles.overlay} onClick={onClose}>
       <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -173,12 +124,6 @@ export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
         </div>
 
         <div style={styles.tabs}>
-          <button
-            style={activeTab === 'ai' ? { ...styles.tab, ...styles.tabActive } : styles.tab}
-            onClick={() => setActiveTab('ai')}
-          >
-            Create with AI
-          </button>
           <button
             style={activeTab === 'yours' ? { ...styles.tab, ...styles.tabActive } : styles.tab}
             onClick={() => setActiveTab('yours')}
@@ -199,10 +144,7 @@ export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
         {premiumNotice && <div style={styles.premiumNotice}>{premiumNotice}</div>}
 
         <div style={styles.content}>
-          <div style={{ display: activeTab === 'ai' ? 'block' : 'none' }}>
-            <CreateWithAiTab onGenerated={handleGenerated} />
-          </div>
-          {activeTab === 'ai' ? null : isLoading ? (
+          {isLoading ? (
             <p
               style={{
                 margin: 0,

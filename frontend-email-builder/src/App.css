@@ -1428,3 +1428,428 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── AI: start screen, live build, ask bar ─────────────────────────── */
+
+.canvas-column {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  display: flex;
+}
+
+.canvas-column.has-askbar .canvas-area {
+  padding-bottom: 120px;
+}
+
+/* Groups editor panes for `inert` without adding a box to the layout. */
+.ai-inert-group {
+  display: contents;
+}
+
+.ai-start {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--canvas-bg);
+  display: flex;
+  justify-content: center;
+  padding: 72px 20px 48px;
+}
+
+.ai-start-inner {
+  width: 100%;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ai-start-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  color: var(--accent-color);
+  margin-bottom: 18px;
+}
+
+.ai-start-title {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--chrome-text-primary);
+}
+
+.ai-start-lede {
+  margin: 10px 0 28px;
+  max-width: 460px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--chrome-text-muted);
+}
+
+.ai-start-card {
+  width: 100%;
+  text-align: left;
+  background: var(--chrome-surface);
+  border: 1px solid var(--chrome-border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.ai-start-card:focus-within,
+.ai-askbar-field:focus-within {
+  border-color: var(--accent-border);
+  box-shadow: 0 0 0 3px var(--accent-soft), var(--shadow-lg);
+}
+
+.ai-start-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 112px;
+  padding: 16px 18px 8px;
+  border: 0;
+  outline: none;
+  resize: none;
+  background: transparent;
+  color: var(--chrome-text-primary);
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.ai-start-input::placeholder,
+.ai-askbar-input::placeholder {
+  color: var(--chrome-text-muted);
+}
+
+.ai-start-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px 12px 18px;
+}
+
+.ai-start-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--chrome-text-muted);
+}
+
+.ai-start-type select {
+  padding: 5px 8px;
+  border: 1px solid var(--chrome-border);
+  border-radius: 8px;
+  background: var(--chrome-surface-elevated);
+  color: var(--chrome-text-primary);
+  font: inherit;
+  font-size: 13px;
+}
+
+.ai-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+}
+
+.ai-submit:disabled,
+.ai-askbar-send:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ai-starters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.ai-chip {
+  padding: 6px 12px;
+  border: 1px solid var(--chrome-border);
+  border-radius: 999px;
+  background: var(--chrome-surface);
+  color: var(--chrome-text-muted);
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.ai-chip:hover {
+  color: var(--chrome-text-primary);
+  border-color: var(--accent-border);
+  background: var(--accent-soft);
+}
+
+.ai-start-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 28px;
+  font-size: 13px;
+  color: var(--chrome-text-muted);
+}
+
+.ai-start-quota::before {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 12px;
+  margin-right: 10px;
+  background: var(--chrome-border);
+  vertical-align: -1px;
+}
+
+.ai-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--chrome-text-primary);
+  font: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--chrome-border);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.ai-link:hover {
+  text-decoration-color: currentColor;
+}
+
+.ai-error {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 14px;
+  padding: 9px 12px;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: 10px;
+  background: rgba(220, 38, 38, 0.08);
+  color: #b91c1c;
+  font-size: 13px;
+  text-align: left;
+}
+
+/* Live build */
+
+.ai-building {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 31;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border: 1px solid var(--chrome-border);
+  border-radius: 999px;
+  background: var(--chrome-surface);
+  box-shadow: var(--shadow-lg);
+  color: var(--chrome-text-primary);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.ai-elapsed {
+  color: var(--chrome-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.ai-pulse {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-color);
+}
+
+.ai-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 40px 48px;
+}
+
+.ai-skeleton-bar {
+  height: 12px;
+  border-radius: 6px;
+  background: #ece9e4;
+}
+
+.ai-skeleton-bar.hero {
+  height: 180px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.ai-skeleton-bar.title {
+  height: 22px;
+  width: 70%;
+}
+
+.ai-skeleton-bar.short {
+  width: 55%;
+}
+
+.ai-skeleton-bar.button {
+  height: 40px;
+  width: 160px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ai-pulse {
+    animation: ai-pulse 1.4s ease-in-out infinite;
+  }
+
+  .ai-skeleton-bar {
+    animation: ai-shimmer 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes ai-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.75); }
+}
+
+@keyframes ai-shimmer {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+/* Ask bar */
+
+.ai-askbar {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 32;
+  width: min(600px, calc(100% - 40px));
+}
+
+.ai-askbar-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px 6px 14px;
+  border: 1px solid var(--chrome-border);
+  border-radius: 14px;
+  background: var(--chrome-surface);
+  box-shadow: var(--shadow-lg);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.ai-askbar-icon {
+  flex: none;
+  color: var(--accent-color);
+}
+
+.ai-askbar-input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--chrome-text-primary);
+  font: inherit;
+  font-size: 14px;
+}
+
+.ai-askbar-send {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--chrome-text-primary);
+  color: var(--chrome-surface);
+  cursor: pointer;
+}
+
+.ai-askbar-undo {
+  flex: none;
+  font-size: 13px;
+}
+
+.ai-askbar-status {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 34px;
+  color: var(--chrome-text-primary);
+  font-size: 13.5px;
+}
+
+.ai-scope {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 4px 3px 9px;
+  border: 1px solid var(--accent-border);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-color);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.ai-scope button,
+.ai-note-close {
+  display: inline-flex;
+  padding: 2px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.ai-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+  padding: 8px 10px 8px 12px;
+  border: 1px solid var(--chrome-border);
+  border-radius: 10px;
+  background: var(--chrome-surface);
+  box-shadow: var(--shadow-lg);
+  color: var(--chrome-text-muted);
+  font-size: 12.5px;
+}
+
+.ai-note.is-error {
+  border-color: rgba(220, 38, 38, 0.3);
+  color: #b91c1c;
+}
+
+.theme-dark .ai-error,
+.theme-dark .ai-note.is-error {
+  color: #fca5a5;
+}

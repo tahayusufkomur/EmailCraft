@@ -2,18 +2,18 @@ import { Code2, Layers, Palette, Sparkles, Variable, Zap } from 'lucide-react';
 
 const features = [
   {
+    icon: Sparkles,
+    eyebrow: 'AI Designer',
+    title: 'Describe it. Watch it build.',
+    description:
+      'The email appears block by block as the AI writes it, in your brand colours and merge tags. Then ask for changes in plain words, for the whole email or one selected block, each one a single undo.',
+  },
+  {
     icon: Layers,
     eyebrow: 'Visual Editor',
     title: '14 production-tested email blocks.',
     description:
       'Headings, paragraphs, buttons, multi-column layouts, product cards, coupons, countdowns, and social footers — all compiled to table-safe HTML.',
-  },
-  {
-    icon: Sparkles,
-    eyebrow: 'AI Generation',
-    title: 'Prompt to editable layout in seconds.',
-    description:
-      'Describe the campaign or transactional notice you need. MailCraft generates structured blocks that your team can refine visually.',
   },
   {
     icon: Code2,

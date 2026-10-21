@@ -3,14 +3,15 @@ import { useEditorStore } from '../store/editorStore';
 
 const AUTO_SAVE_INTERVAL = 30_000; // 30 seconds
 
-export function useAutoSave() {
+/** paused: while the AI works the canvas shows a live preview, which is never saved. */
+export function useAutoSave(paused = false) {
   const template = useEditorStore((s) => s.template);
   const isDirty = useEditorStore((s) => s.isDirty);
   const markClean = useEditorStore((s) => s.markClean);
   const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
-    if (!isDirty) return;
+    if (!isDirty || paused) return;
 
     // Clear existing timer
     if (timerRef.current) {
@@ -41,7 +42,7 @@ export function useAutoSave() {
         clearTimeout(timerRef.current);
       }
     };
-  }, [template, isDirty, markClean]);
+  }, [template, isDirty, markClean, paused]);
 }
 
 export function loadDraft() {

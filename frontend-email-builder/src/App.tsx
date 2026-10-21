@@ -9,19 +9,24 @@ import { TemplateGallery } from './components/Gallery/TemplateGallery';
 import { SaveTemplateModal } from './components/Gallery/SaveTemplateModal';
 import { MediaLibraryModal } from './components/Media/MediaLibraryModal';
 import { VariableInserter } from './components/Panels/VariableInserter';
+import { AiStart } from './components/Ai/AiStart';
+import { AskBar } from './components/Ai/AskBar';
+import { AiBuilding, AiSkeleton } from './components/Ai/AiBuilding';
 import { Badge } from './components/ui/badge';
 import { Button } from './components/ui/button';
 import { useConfigStore } from './store/configStore';
 import { useEditorStore } from './store/editorStore';
 import { exportToHtml } from './lib/htmlExporter';
 import { applyImageUrlToBlock } from './lib/media';
+import { withFreshIds } from './lib/templates';
 import { api } from './lib/api';
 import { useAutoSave, loadDraft } from './hooks/useAutoSave';
+import { useAiJob } from './hooks/useAiJob';
 import { listenToParent, sendErrorEvent, sendReadyEvent, sendSaveEvent, sendTemplateSavedEvent } from './lib/postMessage';
 import type { EmailTemplate, TemplateBackgroundStyle } from './types/blocks';
 import type { ThemeMode, Variable } from './types/editor';
 import { getBuilderThemePreset, resolveBuilderTheme } from './lib/builderTheme';
-import { LayoutGrid, Image, Eye, Save, SaveAll, Download } from 'lucide-react';
+import { LayoutGrid, Image, Eye, Save, SaveAll, Download, Sparkles } from 'lucide-react';
 
 const isEmailTemplate = (value: unknown): value is EmailTemplate => {
   if (!value || typeof value !== 'object') return false;
@@ -344,6 +349,16 @@ function focusBlockWrapper(blockId: string) {
   blockEl?.focus();
 }
 
+/** What to tell the customer about an AI job's warnings (image misses are many lines; one note covers them). */
+function aiNoteFor(warnings: string[]): string | null {
+  const notes = new Set(warnings.map((w) => (
+    w.startsWith('image:') ? 'Some photos could not be found, so placeholders were used.' : w
+  )));
+  return notes.size ? [...notes].join(' ') : null;
+}
+
+const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
 function App() {
   const isDirty = useEditorStore((s) => s.isDirty);
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
@@ -375,10 +390,27 @@ function App() {
   const [saveModalMode, setSaveModalMode] = useState<'save' | 'saveAs'>('save');
   const activeThemePreset = getBuilderThemePreset(builderTheme);
 
-  useAutoSave();
+  const previewTemplate = useEditorStore((s) => s.previewTemplate);
+  const commitTemplate = useEditorStore((s) => s.commitTemplate);
+  const bodyIsEmpty = useEditorStore((s) => s.template.body.blocks.length === 0);
+  const aiEnabled = useConfigStore((s) => s.aiEnabled);
+  const aiGenerationsLeft = useConfigStore((s) => s.aiGenerationsLeft);
+  const ai = useAiJob();
+  const aiBusyRef = useRef(false);
+  useEffect(() => { aiBusyRef.current = ai.busy; }, [ai.busy]);
+  const [aiStartOpen, setAiStartOpen] = useState(false); // "New with AI" over an email that has blocks
+  const [startBlank, setStartBlank] = useState(false);
+  const [brief, setBrief] = useState('');
+  const [briefCategory, setBriefCategory] = useState('');
+  const [aiNote, setAiNote] = useState<string | null>(null);
+  const generating = ai.kind === 'generate';
+  const showAiStart = aiEnabled === true && !generating && (aiStartOpen || (bodyIsEmpty && !startBlank));
+
+  useAutoSave(ai.busy);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (aiBusyRef.current) return; // the canvas shows a live AI preview; nothing may change it
       const hasPrimaryModifier = event.metaKey || event.ctrlKey;
       const key = event.key.toLowerCase();
       const editableTarget = isEditableTarget(event.target);
@@ -501,6 +533,8 @@ function App() {
           maxMediaFilesPerUpload: session.config.max_media_files_per_upload,
           storageUsed: session.config.storage_used_bytes,
           storageLimit: session.config.storage_limit_bytes,
+          aiEnabled: Boolean(session.config.ai?.enabled),
+          aiGenerationsLeft: session.config.ai?.generations_left ?? null,
           ...(hostContextAppliedRef.current ? {} : sessionUiContext),
           ...sessionThemeContext,
           ...sessionEmailBackgroundContext,
@@ -510,6 +544,8 @@ function App() {
           setConfig(contextFromQuery);
         }
       } catch {
+        // A failed refresh keeps what an earlier session said; a first failure means no AI.
+        if (useConfigStore.getState().aiEnabled === undefined) setConfig({ aiEnabled: false });
         if (shouldApplyQueryContext && Object.keys(contextFromQuery).length > 0) {
           setConfig(contextFromQuery);
         }
@@ -520,8 +556,11 @@ function App() {
       void syncSessionConfig(resolvedApiKey);
     } else if (hasSessionToken) {
       void syncSessionConfig('');
-    } else if (shouldApplyQueryContext && Object.keys(contextFromQuery).length > 0) {
-      setConfig(contextFromQuery);
+    } else {
+      setConfig({ aiEnabled: false });
+      if (shouldApplyQueryContext && Object.keys(contextFromQuery).length > 0) {
+        setConfig(contextFromQuery);
+      }
     }
 
     const refreshSessionIfNeeded = () => {
@@ -613,6 +652,51 @@ function App() {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [loadTemplate, setConfig]);
+
+  const historyDepth = useEditorStore((s) => s.historyPast.length);
+  const [aiUndoDepth, setAiUndoDepth] = useState<number | null>(null);
+  const aiActivity = ai.job?.activity
+    || (ai.job?.status === 'queued' ? 'Waiting for a free AI worker…' : generating ? 'Starting…' : 'Reading your request');
+
+  // The email builds on the canvas as the AI writes it; it lands as one undoable step.
+  const handleGenerate = () => {
+    const before = useEditorStore.getState().template;
+    setAiNote(null);
+    setAiUndoDepth(null);
+    void ai.run('generate', () => api.generateTemplate(brief.trim(), briefCategory), {
+      onPartial: previewTemplate,
+      onDone: async (job) => {
+        const detail = job.template_id ? await api.getTemplate(job.template_id) : null;
+        if (!detail || !isEmailTemplate(detail.json_data)) throw new Error('The AI finished without an email. Try again.');
+        commitTemplate(before, withFreshIds(detail.json_data));
+        useEditorStore.getState().markClean(); // the generation already saved it as a template
+        setSavedTemplateId(job.template_id);
+        setAiStartOpen(false);
+        setBrief('');
+        const left = useConfigStore.getState().aiGenerationsLeft;
+        if (left !== null) setConfig({ aiGenerationsLeft: Math.max(left - 1, 0) });
+        setAiNote(aiNoteFor(job.warnings));
+      },
+      onFail: () => previewTemplate(before),
+    });
+  };
+
+  // A change to the whole email, or to the selected block.
+  const handleAsk = (instruction: string) => {
+    const { template: before, selectedBlockId: scope } = useEditorStore.getState();
+    setAiNote(null);
+    setAiUndoDepth(null);
+    void ai.run('edit', () => api.editTemplate(before, instruction, scope ?? ''), {
+      onPartial: previewTemplate,
+      onDone: (job) => {
+        if (!job.result) throw new Error('The AI finished without a change. Try again.');
+        commitTemplate(before, job.result);
+        setAiUndoDepth(useEditorStore.getState().historyPast.length);
+        setAiNote(aiNoteFor(job.warnings));
+      },
+      onFail: () => previewTemplate(before),
+    });
+  };
 
   const handleSave = async () => {
     const currentTemplate = useEditorStore.getState().template;
@@ -728,9 +812,16 @@ function App() {
     customColorOverrides['--canvas-bg'] = canvasColor;
   }
 
+  const showAskBar = aiEnabled === true && !generating && !bodyIsEmpty;
+
   return (
-    <div className={`app-shell ${isDarkChrome ? 'theme-dark' : 'theme-light'} ${activeThemePreset.shellClassName}`} style={customColorOverrides as React.CSSProperties}>
-      <div className="top-toolbar">
+    <div
+      className={`app-shell ${isDarkChrome ? 'theme-dark' : 'theme-light'} ${activeThemePreset.shellClassName}`}
+      style={customColorOverrides as React.CSSProperties}
+    >
+      {/* While the AI works the canvas shows its live preview: nothing else can be used, but its
+          status lines stay outside `inert` so screen readers still hear them. */}
+      <div className="top-toolbar" inert={ai.busy}>
         {showLogo && (
           <div className="brand">
             <span className="brand-mark" aria-hidden="true">
@@ -747,6 +838,19 @@ function App() {
           </div>
         )}
         <div className="toolbar-actions">
+          {aiEnabled && !showAiStart && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                ai.clearError();
+                setAiStartOpen(true);
+              }}
+            >
+              <Sparkles size={16} />
+              New with AI
+            </Button>
+          )}
           <Button variant="ghost" size="sm" onClick={() => setShowGallery(true)}>
             <LayoutGrid size={16} />
             Templates
@@ -782,9 +886,58 @@ function App() {
       </div>
       <EditorDndContext>
         <div className="editor-layout">
-          <BlockPalette />
-          <Canvas />
-          <StylePanel />
+          {showAiStart ? (
+            <AiStart
+              brief={brief}
+              category={briefCategory}
+              error={ai.error?.kind === 'generate' ? ai.error.message : null}
+              generationsLeft={aiGenerationsLeft}
+              onBack={bodyIsEmpty ? undefined : () => setAiStartOpen(false)}
+              onBriefChange={setBrief}
+              onCategoryChange={setBriefCategory}
+              onSubmit={handleGenerate}
+              onBrowseTemplates={() => {
+                setAiStartOpen(false);
+                setShowGallery(true);
+              }}
+              onStartBlank={bodyIsEmpty ? () => {
+                ai.clearError();
+                setStartBlank(true);
+              } : undefined}
+            />
+          ) : aiEnabled === undefined && bodyIsEmpty ? (
+            // The session has not said yet whether the editor opens on the AI start screen.
+            <div className="canvas-area" />
+          ) : (
+            <>
+              {!generating && <div className="ai-inert-group" inert={ai.busy}><BlockPalette /></div>}
+              <div className={`canvas-column${showAskBar ? ' has-askbar' : ''}`}>
+                <div className="ai-inert-group" inert={ai.busy}>
+                  <Canvas empty={generating ? <AiSkeleton /> : undefined} />
+                </div>
+                {generating && <AiBuilding activity={aiActivity} />}
+                {showAskBar && (
+                  <AskBar
+                    busy={ai.kind === 'edit'}
+                    activity={aiActivity}
+                    scopeLabel={selectedBlock ? ({ columns: 'Section', html: 'HTML' }[selectedBlock.type as string]
+                      ?? capitalize(selectedBlock.type)) : null}
+                    note={ai.error?.kind === 'edit' ? ai.error.message : aiNote}
+                    noteIsError={ai.error?.kind === 'edit'}
+                    canUndo={aiUndoDepth !== null && historyDepth === aiUndoDepth}
+                    onAsk={handleAsk}
+                    onClearScope={() => selectBlock(null)}
+                    onUndo={undo}
+                    onDismissNote={() => {
+                      ai.clearError();
+                      setAiNote(null);
+                    }}
+                  />
+                )}
+              </div>
+              {!generating && <div className="ai-inert-group" inert={ai.busy}><StylePanel /></div>}
+            </>
+          )}
         </div>
       </EditorDndContext>
       {showPreview && <PreviewModal onClose={() => setShowPreview(false)} />}

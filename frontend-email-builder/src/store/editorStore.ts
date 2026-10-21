@@ -145,6 +145,19 @@ function cloneTemplate(template: EmailTemplate): EmailTemplate {
   return structuredClone(template);
 }
 
+// A template coming into the editor keeps the organisation's canvas background, whatever it carried.
+function withEditorSettings(template: EmailTemplate, current: TemplateSettings): EmailTemplate {
+  return {
+    ...template,
+    settings: {
+      ...DEFAULT_SETTINGS,
+      ...template.settings,
+      backgroundStyle: current.backgroundStyle || 'none',
+      backgroundColor: current.backgroundColor || '#f4f4f4',
+    },
+  };
+}
+
 function trimPastHistory(history: EmailTemplate[]): EmailTemplate[] {
   if (history.length <= MAX_HISTORY_SIZE) return history;
   return history.slice(history.length - MAX_HISTORY_SIZE);
@@ -206,6 +219,8 @@ interface EditorState {
   ) => void;
   loadTemplate: (template: EmailTemplate) => void;
   resetTemplate: () => void;
+  previewTemplate: (template: EmailTemplate) => void;
+  commitTemplate: (before: EmailTemplate, after: EmailTemplate) => void;
   setActiveSection: (section: 'header' | 'body' | 'footer') => void;
   markClean: () => void;
   undo: () => void;
@@ -572,15 +587,7 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   },
 
   loadTemplate: (template) => set((state) => ({
-    template: {
-      ...template,
-      settings: {
-        ...DEFAULT_SETTINGS,
-        ...template.settings,
-        backgroundStyle: state.template.settings.backgroundStyle || 'none',
-        backgroundColor: state.template.settings.backgroundColor || '#f4f4f4',
-      },
-    },
+    template: withEditorSettings(template, state.template.settings),
     isDirty: false,
     selectedBlockId: null,
     historyPast: [],
@@ -593,6 +600,18 @@ export const useEditorStore = create<EditorState>((set, get) => ({
     historyPast: [],
     historyFuture: [],
   }),
+  // An AI job's live preview: shown outside the undo history and the dirty flag.
+  previewTemplate: (template) => set((state) => ({
+    template: withEditorSettings(template, state.template.settings),
+  })),
+  // An AI change lands as one step: undo returns to `before`, the email as it was when it was asked for.
+  commitTemplate: (before, after) => set((state) => ({
+    template: withEditorSettings(after, state.template.settings),
+    isDirty: true,
+    selectedBlockId: templateHasBlock(after, state.selectedBlockId) ? state.selectedBlockId : null,
+    historyPast: trimPastHistory([...state.historyPast, cloneTemplate(before)]),
+    historyFuture: [],
+  })),
   setActiveSection: (section) => set({ activeSection: section }),
   markClean: () => set({ isDirty: false }),
 

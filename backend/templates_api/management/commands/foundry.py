@@ -19,7 +19,7 @@ class Command(BaseCommand):
         brief = options['brief'] or f'A {category} email for a modern brand; pick a distinct industry and tone.'
         for _ in range(options['count']):
             try:
-                name, template, warnings = generate_template(
+                name, template, warnings, _ = generate_template(
                     brief, category, None, allow_generation=not options['no_generate'])
             except HubHold as e:
                 self.stdout.write(f'Hub is holding the lane: {e.reason}')

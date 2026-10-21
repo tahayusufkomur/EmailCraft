@@ -9,6 +9,7 @@ import type {
   TemplateListItem,
   UploadImageResponse,
 } from '../types/api';
+import type { EmailTemplate } from '../types/blocks';
 
 const BASE_URL = import.meta.env.VITE_API_URL || '/api';
 type MediaSortField = 'date' | 'name' | 'size';
@@ -240,10 +241,18 @@ export const api = {
       body: JSON.stringify(data),
     }),
 
+  /** An empty category lets the AI pick one from the brief. */
   generateTemplate: (brief: string, category: string) =>
     request<{ job_id: string }>('/ai/generate', {
       method: 'POST',
       body: JSON.stringify({ brief, category }),
+    }),
+
+  /** blockId scopes the change to the selected block ('' for the whole email). */
+  editTemplate: (template: EmailTemplate, instruction: string, blockId: string) =>
+    request<{ job_id: string }>('/ai/edit', {
+      method: 'POST',
+      body: JSON.stringify({ template, instruction, block_id: blockId }),
     }),
 
   getGenerationJob: (id: string) => request<GenerationJob>(`/ai/jobs/${id}`),

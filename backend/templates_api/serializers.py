@@ -4,6 +4,7 @@ import sys
 from django.conf import settings
 from rest_framework import serializers
 
+from templates_api.generation import find_block
 from templates_api.models import GenerationJob, Template, UploadedImage
 
 
@@ -164,7 +165,32 @@ class RenderRequestSerializer(serializers.Serializer):
 
 class GenerateRequestSerializer(serializers.Serializer):
     brief = serializers.CharField(min_length=1, max_length=2000, trim_whitespace=True)
-    category = serializers.ChoiceField(choices=Template.CATEGORY_CHOICES)
+    # Blank lets the model pick the category from the brief.
+    category = serializers.ChoiceField(choices=Template.CATEGORY_CHOICES, required=False, allow_blank=True,
+                                       default='')
+
+
+MAX_EDIT_TEMPLATE_CHARS = 60_000  # the edit prompt carries the whole email; the hub caps prompts at 100k
+
+
+class EditRequestSerializer(serializers.Serializer):
+    instruction = serializers.CharField(min_length=1, max_length=1000, trim_whitespace=True)
+    template = serializers.JSONField()
+    block_id = serializers.CharField(max_length=64, required=False, allow_blank=True, default='')
+
+    def validate_template(self, value):
+        body = value.get('body') if isinstance(value, dict) else None
+        if not (isinstance(body, dict) and isinstance(body.get('blocks'), list)
+                and isinstance(value.get('settings'), dict)):
+            raise serializers.ValidationError('Expected a template with settings and body.blocks.')
+        if len(json.dumps(value)) > MAX_EDIT_TEMPLATE_CHARS:
+            raise serializers.ValidationError('This email is too large for AI edits.')
+        return value
+
+    def validate(self, attrs):
+        if attrs['block_id'] and find_block(attrs['template']['body']['blocks'], attrs['block_id'])[0] is None:
+            raise serializers.ValidationError({'block_id': 'No block with this id in the template.'})
+        return attrs
 
 
 class GenerationJobSerializer(serializers.ModelSerializer):
@@ -172,4 +198,5 @@ class GenerationJobSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = GenerationJob
-        fields = ['id', 'status', 'step', 'template_id', 'error', 'warnings', 'created_at']
+        fields = ['id', 'kind', 'status', 'step', 'activity', 'partial', 'template_id', 'result', 'error',
+                  'warnings', 'created_at']
