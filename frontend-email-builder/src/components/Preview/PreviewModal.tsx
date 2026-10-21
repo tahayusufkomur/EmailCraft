@@ -47,9 +47,9 @@ export function PreviewModal({ onClose }: Props) {
                   ...(viewMode === 'desktop' ? styles.deviceBtnActive : {}),
                 }}
                 onClick={() => setViewMode('desktop')}
-                title="Desktop"
               >
                 <IconDesktop />
+                Desktop
               </button>
               <button
                 style={{
@@ -57,9 +57,9 @@ export function PreviewModal({ onClose }: Props) {
                   ...(viewMode === 'mobile' ? styles.deviceBtnActive : {}),
                 }}
                 onClick={() => setViewMode('mobile')}
-                title="Mobile"
               >
                 <IconMobile />
+                Mobile
               </button>
             </div>
             <span style={styles.widthLabel}>{width}px</span>
@@ -144,10 +144,13 @@ const styles: Record<string, React.CSSProperties> = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 34,
+    gap: 6,
     height: 28,
+    padding: '0 10px',
     border: 'none',
     borderRadius: 6,
+    fontSize: 12,
+    fontWeight: 500,
     background: 'transparent',
     color: 'var(--chrome-text-muted)',
     cursor: 'pointer',

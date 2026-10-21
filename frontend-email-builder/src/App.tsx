@@ -861,7 +861,7 @@ function App() {
             Media
           </Button>
           <div className="toolbar-separator" />
-          <Button variant="ghost" size="sm" onClick={() => setShowPreview(true)}>
+          <Button variant="default" size="sm" onClick={() => setShowPreview(true)}>
             <Eye size={16} />
             Preview
           </Button>
