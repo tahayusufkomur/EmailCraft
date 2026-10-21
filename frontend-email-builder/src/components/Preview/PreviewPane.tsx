@@ -1,8 +1,8 @@
-import { useState, useMemo, useRef, useEffect } from 'react';
+import { useMemo, useRef, useEffect } from 'react';
 import { useEditorStore } from '../../store/editorStore';
 import { exportToHtml } from '../../lib/htmlExporter';
 
-type ViewMode = 'desktop' | 'mobile';
+export type PreviewDevice = 'desktop' | 'mobile';
 
 const IconDesktop = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -18,116 +18,95 @@ const IconMobile = () => (
 
 const scrollRatio = (el: Element) => el.scrollTop / Math.max(1, el.scrollHeight - el.clientHeight);
 
-/** The exported email in an iframe, live with the editor, at desktop or mobile width.
- *  `lockScroll` ties its scroll to the editor canvas beside it. */
-export function PreviewPane({ lockScroll = false }: { lockScroll?: boolean }) {
-  const [viewMode, setViewMode] = useState<ViewMode>('desktop');
+export function DeviceToggle({ value, onChange }: { value: PreviewDevice; onChange: (d: PreviewDevice) => void }) {
+  return (
+    <div style={styles.deviceToggle}>
+      <button
+        style={{ ...styles.deviceBtn, ...(value === 'desktop' ? styles.deviceBtnActive : {}) }}
+        onClick={() => onChange('desktop')}
+      >
+        <IconDesktop />
+        Desktop
+      </button>
+      <button
+        style={{ ...styles.deviceBtn, ...(value === 'mobile' ? styles.deviceBtnActive : {}) }}
+        onClick={() => onChange('mobile')}
+      >
+        <IconMobile />
+        Mobile
+      </button>
+    </div>
+  );
+}
+
+/** The exported email as a full-height card in a scroller padded like the canvas, so the two
+ *  line up side by side. `lockScroll` ties its scroll to the editor canvas beside it. */
+export function PreviewPane({ device, lockScroll = false }: { device: PreviewDevice; lockScroll?: boolean }) {
   const template = useEditorStore((s) => s.template);
-  const paneRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  useEffect(() => {
-    const canvas = lockScroll ? paneRef.current?.parentElement?.querySelector<HTMLElement>('.canvas-area') : null;
+  // The iframe is as tall as the email so the pane scrolls, not the iframe. `body` is
+  // height: 100% in the export, so the height comes from its children.
+  const fitHeight = () => {
     const iframe = iframeRef.current;
-    if (!canvas || !iframe) return;
+    const body = iframe?.contentDocument?.body;
+    if (!iframe || !body) return;
+    const bottom = Math.max(0, ...Array.from(body.children, (el) => el.getBoundingClientRect().bottom));
+    iframe.style.height = `${Math.ceil(bottom)}px`;
+  };
+
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+    const observer = new ResizeObserver(fitHeight); // width changes reflow the email
+    observer.observe(iframe);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const preview = scrollerRef.current;
+    const canvas = lockScroll ? preview?.parentElement?.querySelector<HTMLElement>('.canvas-area:not(.preview-area)') : null;
+    if (!preview || !canvas) return;
     // Matched by how far down each one is: the editor and the email are not the same height.
     // `echo` swallows the scroll event our own scrollTop write causes on the other side.
     let echo: Element | null = null;
-    const sync = (from: Element | null | undefined, to: Element | null | undefined) => {
-      if (!from || !to || echo === from) return;
+    const sync = (from: Element, to: Element) => {
+      if (echo === from) return;
       echo = to;
       to.scrollTop = scrollRatio(from) * (to.scrollHeight - to.clientHeight);
       requestAnimationFrame(() => { echo = null; });
     };
-    const preview = () => iframe.contentDocument?.scrollingElement;
-    const fromCanvas = () => sync(canvas, preview());
-    const fromPreview = () => sync(preview(), canvas);
-    let doc: Document | null = null;
-    // The iframe reloads on every edit (srcDoc), so its listener and position are set again on load.
-    const attach = () => {
-      doc?.removeEventListener('scroll', fromPreview);
-      doc = iframe.contentDocument;
-      doc?.addEventListener('scroll', fromPreview);
-      fromCanvas();
-    };
+    const fromCanvas = () => sync(canvas, preview);
+    const fromPreview = () => sync(preview, canvas);
     canvas.addEventListener('scroll', fromCanvas);
-    iframe.addEventListener('load', attach);
-    attach();
+    preview.addEventListener('scroll', fromPreview);
+    fromCanvas();
     return () => {
       canvas.removeEventListener('scroll', fromCanvas);
-      iframe.removeEventListener('load', attach);
-      doc?.removeEventListener('scroll', fromPreview);
+      preview.removeEventListener('scroll', fromPreview);
     };
   }, [lockScroll]);
 
   const html = useMemo(() => exportToHtml(template, 'placeholders'), [template]);
 
-  const width = viewMode === 'desktop' ? 640 : 375;
-
   return (
-    <div ref={paneRef} style={styles.pane}>
-      <div style={styles.toolbar}>
-        <div style={styles.deviceToggle}>
-          <button
-            style={{
-              ...styles.deviceBtn,
-              ...(viewMode === 'desktop' ? styles.deviceBtnActive : {}),
-            }}
-            onClick={() => setViewMode('desktop')}
-          >
-            <IconDesktop />
-            Desktop
-          </button>
-          <button
-            style={{
-              ...styles.deviceBtn,
-              ...(viewMode === 'mobile' ? styles.deviceBtnActive : {}),
-            }}
-            onClick={() => setViewMode('mobile')}
-          >
-            <IconMobile />
-            Mobile
-          </button>
-        </div>
-        <span style={styles.widthLabel}>{width}px</span>
-      </div>
-
-      <div style={styles.previewArea}>
-        <div
-          style={{
-            ...styles.iframeWrapper,
-            width,
-          }}
-        >
-          <iframe
-            ref={iframeRef}
-            srcDoc={html}
-            style={styles.iframe}
-            sandbox="allow-same-origin"
-            title="Email preview"
-          />
-        </div>
+    <div ref={scrollerRef} className="canvas-area preview-area">
+      <div className="preview-card" style={{ width: device === 'desktop' ? 640 : 375 }}>
+        <iframe
+          ref={iframeRef}
+          srcDoc={html}
+          onLoad={fitHeight}
+          style={styles.iframe}
+          sandbox="allow-same-origin"
+          title="Email preview"
+        />
       </div>
     </div>
   );
 }
 
 const styles: Record<string, React.CSSProperties> = {
-  pane: {
-    flex: '1 1 50%',
-    minWidth: 0,
-    display: 'flex',
-    flexDirection: 'column',
-    background: 'var(--canvas-bg)',
-  },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 14,
-    padding: '12px 16px 0',
-    flexShrink: 0,
-  },
   deviceToggle: {
     display: 'flex',
     background: 'var(--chrome-surface-elevated)',
@@ -157,33 +136,9 @@ const styles: Record<string, React.CSSProperties> = {
     color: 'var(--chrome-text-primary)',
     boxShadow: '0 1px 2px rgba(0, 0, 0, 0.08)',
   },
-  widthLabel: {
-    fontSize: 11,
-    fontWeight: 500,
-    color: 'var(--chrome-text-muted)',
-    fontFamily: "'Geist Mono', ui-monospace, monospace",
-  },
-  previewArea: {
-    flex: 1,
-    minHeight: 0,
-    overflow: 'auto',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    padding: 24,
-  },
-  iframeWrapper: {
-    maxWidth: '100%',
-    height: '100%',
-    transition: 'width 0.3s ease',
-    borderRadius: 12,
-    overflow: 'hidden',
-    border: '1px solid var(--chrome-border)',
-    boxShadow: 'var(--shadow-lg)',
-  },
   iframe: {
     width: '100%',
-    height: '100%',
+    height: 0,
     border: 'none',
     background: '#ffffff',
     display: 'block',

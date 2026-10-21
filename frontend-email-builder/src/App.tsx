@@ -4,7 +4,7 @@ import { EditorDndContext } from './components/Editor/EditorDndContext';
 import { Canvas } from './components/Editor/Canvas';
 import { BlockPalette } from './components/Panels/BlockPalette';
 import { StylePanel } from './components/Panels/StylePanel';
-import { PreviewPane } from './components/Preview/PreviewPane';
+import { PreviewPane, DeviceToggle, type PreviewDevice } from './components/Preview/PreviewPane';
 import { TemplateGallery } from './components/Gallery/TemplateGallery';
 import { SaveTemplateModal } from './components/Gallery/SaveTemplateModal';
 import { MediaLibraryModal } from './components/Media/MediaLibraryModal';
@@ -378,6 +378,7 @@ function App() {
   const setConfig = useConfigStore((s) => s.setConfig);
   const hostContextAppliedRef = useRef(false);
   const [view, setView] = useState<'editor' | 'split' | 'preview'>('editor');
+  const [device, setDevice] = useState<PreviewDevice>('desktop');
   const [showGallery, setShowGallery] = useState(false);
   const [showMedia, setShowMedia] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
@@ -908,7 +909,8 @@ function App() {
               {!generating && <div className="ai-inert-group" inert={ai.busy}><BlockPalette /></div>}
               <div className={`canvas-column${showAskBar ? ' has-askbar' : ''}`}>
                 {!generating && (
-                  <div className="view-tabs" role="tablist" aria-label="View" inert={ai.busy}>
+                  <div className="view-bar" inert={ai.busy}>
+                  <div className="view-tabs" role="tablist" aria-label="View">
                     {(['editor', 'split', 'preview'] as const).map((v) => (
                       <button
                         key={v}
@@ -922,6 +924,8 @@ function App() {
                       </button>
                     ))}
                   </div>
+                  {view !== 'editor' && <div className="view-bar-end"><DeviceToggle value={device} onChange={setDevice} /></div>}
+                  </div>
                 )}
                 <div className={`canvas-panes${view === 'split' && !generating ? ' is-split' : ''}`}>
                   {(view !== 'preview' || generating) && (
@@ -929,7 +933,7 @@ function App() {
                       <Canvas empty={generating ? <AiSkeleton /> : undefined} />
                     </div>
                   )}
-                  {view !== 'editor' && !generating && <PreviewPane lockScroll={view === 'split'} />}
+                  {view !== 'editor' && !generating && <PreviewPane device={device} lockScroll={view === 'split'} />}
                 </div>
                 {generating && <AiBuilding activity={aiActivity} />}
                 {showAskBar && (

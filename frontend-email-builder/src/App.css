@@ -1875,11 +1875,38 @@
   max-width: 100%;
 }
 
+/* Same box as .canvas-container so the preview lines up with the editor beside it. */
+.preview-card {
+  max-width: 100%;
+  margin-top: 28px;
+  margin-bottom: 28px;
+  border: 1px solid var(--chrome-border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transition: width 0.3s ease;
+}
+
+.canvas-panes.is-split .preview-area {
+  border-right: none;
+}
+
+.view-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px 0;
+}
+
+.view-bar-end {
+  justify-self: end;
+}
+
 .view-tabs {
-  align-self: center;
+  grid-column: 2;
   display: flex;
   gap: 2px;
-  margin: 12px 0 0;
   padding: 3px;
   background: var(--chrome-surface-elevated);
   border: 1px solid var(--chrome-border);
