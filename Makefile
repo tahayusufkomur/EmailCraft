@@ -58,7 +58,8 @@ dev-shell: ## Open Django shell
 # ─── Local builder ───────────────────────────────────────
 # Host processes: Django :8000 on backend/db.sqlite3, builder Vite :5174 (HMR), Celery worker;
 # Redis :6391 in Docker. AI runs on the prod hub lane through the ssh tunnel on 127.0.0.1:39300
-# (launchd com.pix4less.home-server-tunnel); images stay placeholders (no PIX4LESS_API_KEY). Open:
+# (launchd com.pix4less.home-server-tunnel); photos come from pix4less when .env has PIX4LESS_API_KEY,
+# placeholders otherwise. Open:
 #   http://localhost:5174/builder/?apiKey=mc_test_00000000000000000000000000000000
 
 LOCAL_ENV := DB_ENGINE=django.db.backends.sqlite3 DB_NAME=$(CURDIR)/backend/db.sqlite3 \
