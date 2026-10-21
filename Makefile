@@ -1,5 +1,6 @@
 .PHONY: help dev up down restart dev-restart reset dev-reset logs dev-logs dev-shell \
-       build migrate makemigrations test check seed seed-gallery sync-gallery create-key superuser
+       build migrate makemigrations test check seed seed-gallery sync-gallery create-key superuser \
+       local-setup local-dev local-backend local-builder local-worker local-redis local-ai-reset
 
 # Deployment lives in the home-server ops repo, not here:
 #   cd ~/ws/home-server && make deploy PROJECT=emailbuilder
@@ -53,6 +54,43 @@ dev-logs: ## Tail all dev logs
 
 dev-shell: ## Open Django shell
 	@$(MANAGE) shell
+
+# ─── Local builder ───────────────────────────────────────
+# Host processes: Django :8000 on backend/db.sqlite3, builder Vite :5174 (HMR), Celery worker;
+# Redis :6391 in Docker. AI runs on the prod hub lane through the ssh tunnel on 127.0.0.1:39300
+# (launchd com.pix4less.home-server-tunnel); images stay placeholders (no PIX4LESS_API_KEY). Open:
+#   http://localhost:5174/builder/?apiKey=mc_test_00000000000000000000000000000000
+
+LOCAL_ENV := DB_ENGINE=django.db.backends.sqlite3 DB_NAME=$(CURDIR)/backend/db.sqlite3 \
+    AGENTC_LANE=mailcraft AGENTC_HUB=http://127.0.0.1:39300 CELERY_BROKER_URL=redis://127.0.0.1:6391/0
+LOCAL_MANAGE := cd backend && $(LOCAL_ENV) ../.venv/bin/python manage.py
+
+local-setup: ## One-time: .venv, npm deps, SQLite schema, gallery + demo org (re-run after pulls)
+	@uv venv --allow-existing --python 3.12 .venv
+	@uv pip install --python .venv/bin/python -r backend/requirements.txt
+	@cd frontend-email-builder && npm install
+	@$(LOCAL_MANAGE) migrate
+	@$(LOCAL_MANAGE) seed_gallery --prune
+	@$(LOCAL_MANAGE) create_demo_org
+
+local-dev: ## Run Django (:8000), builder (:5174), Celery worker and Redis (:6391)
+	@$(MAKE) -j4 local-redis local-backend local-worker local-builder
+
+local-backend: ## Django only, :8000
+	@$(LOCAL_MANAGE) runserver 8000
+
+local-builder: ## Builder Vite only, :5174
+	@cd frontend-email-builder && npm run dev
+
+# Solo pool: no forking on macOS, and AI jobs run one at a time per org anyway; Celery time limits don't apply here.
+local-worker: ## Celery worker for AI jobs (no autoreload: restart it after backend AI changes)
+	@cd backend && $(LOCAL_ENV) ../.venv/bin/celery -A emailBuilder worker --pool=solo --loglevel=info
+
+local-redis: ## Redis for Celery, :6391
+	@docker rm -f mailcraft-local-redis >/dev/null 2>&1; docker run --rm --name mailcraft-local-redis -p 127.0.0.1:6391:6379 redis:7-alpine
+
+local-ai-reset: ## Give the local demo accounts their AI generations back (the plan allows 5)
+	@$(LOCAL_MANAGE) shell -c "from core.models import Account; print(Account.objects.update(ai_generations_count=0), 'accounts reset')"
 
 # ─── Build & Database ────────────────────────────────────
 

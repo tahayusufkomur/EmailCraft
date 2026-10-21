@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "local-dev",
+      "runtimeExecutable": "make",
+      "runtimeArgs": ["local-dev"],
+      "port": 5174
+    }
+  ]
+}

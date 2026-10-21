@@ -24,6 +24,13 @@ export default defineConfig({
     host: true,
     port: 5174,
     strictPort: true,
+    // Host-native dev (make local-dev): the /api → /api/v1 rewrite Caddy does in prod.
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:8000',
+        rewrite: (path) => path.replace(/^\/api\//, '/api/v1/'),
+      },
+    },
     ...(hmr ? { hmr } : {}),
   },
 })
