@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Copy, ExternalLink, Plus, RefreshCw, Trash2 } from 'lucide-react';
 
+import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
 import { api } from '../lib/api';
 import { useAuth } from '../lib/auth';
 import type {
@@ -15,10 +18,10 @@ const DEFAULT_BUILDER_THEME: BuilderTheme = 'light-breeze';
 const VARIABLE_KEY_PATTERN = /^[A-Za-z_][A-Za-z0-9_]*$/;
 const AUTO_SAVE_DEBOUNCE_MS = 1200;
 const BUILDER_THEME_OPTIONS: Array<{ value: BuilderTheme; label: string }> = [
-  { value: 'light-breeze', label: 'Light Breeze' },
-  { value: 'light-paper', label: 'Light Paper' },
-  { value: 'dark-slate', label: 'Dark Slate' },
-  { value: 'dark-cosmos', label: 'Dark Cosmos' },
+  { value: 'light-breeze', label: 'Warm Paper (Light)' },
+  { value: 'light-paper', label: 'Pure Stone (Light)' },
+  { value: 'dark-slate', label: 'Warm Obsidian (Dark)' },
+  { value: 'dark-cosmos', label: 'Deep Ink (Dark)' },
 ];
 
 const toVariableDraft = (item: OrganizationVariable): OrganizationVariable => ({
@@ -101,7 +104,13 @@ export function EmailBuilder() {
   }
 }
 
-function EmbedSnippetsCard({ apiKey, onCopy }: { apiKey: string; onCopy: (text: string) => Promise<void> }) {
+function EmbedSnippetsCard({
+  apiKey,
+  onCopy,
+}: {
+  apiKey: string;
+  onCopy: (text: string) => Promise<void>;
+}) {
   const [activeTab, setActiveTab] = useState<SnippetTab>('html');
   const snippet = apiKey ? getSnippet(activeTab, apiKey) : '';
 
@@ -109,21 +118,23 @@ function EmbedSnippetsCard({ apiKey, onCopy }: { apiKey: string; onCopy: (text: 
     <Card>
       <CardHeader>
         <CardTitle>Embed Snippets</CardTitle>
-        <CardDescription>Copy a snippet with your API key pre-filled. Paste it into your project and it works immediately.</CardDescription>
+        <CardDescription>
+          Copy a snippet with your organization API key pre-filled.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         {apiKey ? (
           <div>
             <div className="mb-3 flex items-center justify-between">
-              <div className="flex gap-0 rounded-lg border border-input bg-muted/50 p-0.5">
+              <div className="flex gap-1 rounded-lg border border-border bg-muted p-1">
                 {SNIPPET_TABS.map((tab) => (
                   <button
                     key={tab.id}
                     type="button"
                     onClick={() => setActiveTab(tab.id)}
-                    className={`rounded-md px-3 py-1.5 text-xs font-medium transition ${
+                    className={`rounded-md px-3 py-1 text-xs font-medium transition-colors ${
                       activeTab === tab.id
-                        ? 'bg-background text-foreground shadow-sm'
+                        ? 'bg-background text-foreground'
                         : 'text-muted-foreground hover:text-foreground'
                     }`}
                   >
@@ -137,15 +148,18 @@ function EmbedSnippetsCard({ apiKey, onCopy }: { apiKey: string; onCopy: (text: 
                 size="sm"
                 onClick={() => void onCopy(snippet)}
               >
-                Copy
+                <Copy className="h-3.5 w-3.5" />
+                Copy snippet
               </Button>
             </div>
-            <pre className="overflow-x-auto rounded-lg border border-border bg-muted/50 p-3 text-xs leading-relaxed">
+            <pre className="overflow-x-auto rounded-xl border border-border bg-muted p-4 font-mono text-xs leading-relaxed text-foreground">
               <code>{snippet}</code>
             </pre>
           </div>
         ) : (
-          <p className="text-sm text-muted-foreground">Select an organization to see embed snippets with your API key.</p>
+          <p className="text-sm text-muted-foreground">
+            Select an organization to see embed snippets with your API key.
+          </p>
         )}
       </CardContent>
     </Card>
@@ -215,7 +229,8 @@ export function DashboardWidgetBuilderPage() {
     for (const item of availableVariables) {
       const key = item.key.trim();
       const label = item.label.trim();
-      const hasAnyValue = key.length > 0 || label.length > 0 || (item.defaultValue || '').trim().length > 0;
+      const hasAnyValue =
+        key.length > 0 || label.length > 0 || (item.defaultValue || '').trim().length > 0;
       if (!hasAnyValue) continue;
       if (!key || !label) {
         return 'Each variable must include both key and label.';
@@ -261,10 +276,7 @@ export function DashboardWidgetBuilderPage() {
     }),
     [builderTheme, showExportHtmlButton, showLogo],
   );
-  const uiSettingsSignature = useMemo(
-    () => JSON.stringify(uiSettingsPayload),
-    [uiSettingsPayload],
-  );
+  const uiSettingsSignature = useMemo(() => JSON.stringify(uiSettingsPayload), [uiSettingsPayload]);
 
   const ensureReusableApiKey = useCallback(
     async (organizationId: string, refresh = false) => {
@@ -297,7 +309,14 @@ export function DashboardWidgetBuilderPage() {
       rev: String(previewRevision),
     });
     return `/builder/?${params.toString()}`;
-  }, [builderTheme, generatedKeys, previewRevision, selectedOrganizationId, showExportHtmlButton, showLogo]);
+  }, [
+    builderTheme,
+    generatedKeys,
+    previewRevision,
+    selectedOrganizationId,
+    showExportHtmlButton,
+    showLogo,
+  ]);
 
   const copyToClipboard = async (value: string) => {
     if (navigator.clipboard?.writeText) {
@@ -329,9 +348,9 @@ export function DashboardWidgetBuilderPage() {
     try {
       const updated = await api.updateOrganization(token, selectedOrganizationId, settingsPayload);
       setOrganizations((previous) =>
-        previous.map((organization) => (
-          organization.id === selectedOrganizationId ? updated : organization
-        )),
+        previous.map((organization) =>
+          organization.id === selectedOrganizationId ? updated : organization,
+        ),
       );
       setLastAutoSavedUiSignature(uiSettingsSignature);
       setPreviewRevision((previous) => previous + 1);
@@ -354,9 +373,9 @@ export function DashboardWidgetBuilderPage() {
         .updateOrganization(token, selectedOrganizationId, uiSettingsPayload)
         .then((updated) => {
           setOrganizations((previous) =>
-            previous.map((organization) => (
-              organization.id === selectedOrganizationId ? updated : organization
-            )),
+            previous.map((organization) =>
+              organization.id === selectedOrganizationId ? updated : organization,
+            ),
           );
           setPreviewRevision((previous) => previous + 1);
           setStatus('Display settings auto-saved');
@@ -418,7 +437,9 @@ export function DashboardWidgetBuilderPage() {
   };
 
   const handleRemoveVariable = (index: number) => {
-    setAvailableVariables((previous) => previous.filter((_, currentIndex) => currentIndex !== index));
+    setAvailableVariables((previous) =>
+      previous.filter((_, currentIndex) => currentIndex !== index),
+    );
   };
 
   const handleVariableChange = (
@@ -462,31 +483,41 @@ export function DashboardWidgetBuilderPage() {
   };
 
   return (
-    <div className="space-y-4">
-      <div>
-        <h1 className="font-heading text-3xl font-semibold tracking-tight">Email Builder</h1>
-        <p className="text-muted-foreground">
-          Configure organization email builder settings and view them on a full preview surface.
-        </p>
+    <div className="space-y-8">
+      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        <div>
+          <p className="text-eyebrow text-marketing-accent">Studio Configuration</p>
+          <h1 className="mt-1 text-2xl font-bold tracking-tight text-foreground">Email Builder</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Configure organization builder appearance, dynamic merge variables, and embed snippets.
+          </p>
+        </div>
+        <Badge variant="secondary">{status}</Badge>
       </div>
 
       {error && (
-        <p className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+        <div
+          role="alert"
+          className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive"
+        >
           {error}
-        </p>
+        </div>
       )}
 
       <Card>
         <CardHeader>
-          <CardTitle>Email Builder Settings</CardTitle>
-          <CardDescription>{status}</CardDescription>
+          <CardTitle>Builder Appearance &amp; Variables</CardTitle>
+          <CardDescription>
+            Display changes auto-save and reload the live preview below.
+          </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid gap-3 md:grid-cols-4">
-            <label className="grid gap-1 text-sm md:col-span-2">
-              Organization
+        <CardContent className="space-y-6">
+          <div className="grid gap-4 md:grid-cols-4">
+            <div className="space-y-2 md:col-span-2">
+              <Label htmlFor="builder-org-select">Organization</Label>
               <select
-                className="h-9 rounded-md border border-input bg-background px-3 text-sm"
+                id="builder-org-select"
+                className="flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground focus-visible:outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring"
                 value={selectedOrganizationId}
                 onChange={(event) => setSelectedOrganizationId(event.target.value)}
               >
@@ -496,31 +527,13 @@ export function DashboardWidgetBuilderPage() {
                   </option>
                 ))}
               </select>
-            </label>
-
-            <div className="flex items-end gap-3">
-              <label className="flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  checked={showLogo}
-                  onChange={(event) => setShowLogo(event.target.checked)}
-                />
-                Show logo
-              </label>
-              <label className="flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  checked={showExportHtmlButton}
-                  onChange={(event) => setShowExportHtmlButton(event.target.checked)}
-                />
-                Show export
-              </label>
             </div>
 
-            <label className="grid gap-1 text-sm">
-              Builder theme
+            <div className="space-y-2">
+              <Label htmlFor="builder-theme-select">Studio theme</Label>
               <select
-                className="h-9 rounded-md border border-input bg-background px-3 text-sm"
+                id="builder-theme-select"
+                className="flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground focus-visible:outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring"
                 value={builderTheme}
                 onChange={(event) => setBuilderTheme(event.target.value as BuilderTheme)}
               >
@@ -530,44 +543,64 @@ export function DashboardWidgetBuilderPage() {
                   </option>
                 ))}
               </select>
-            </label>
+            </div>
+
+            <div className="flex flex-col justify-end gap-2.5 pb-1">
+              <label className="flex cursor-pointer items-center gap-2.5 text-sm text-foreground">
+                <input
+                  type="checkbox"
+                  className="h-4 w-4 rounded border-border accent-primary"
+                  checked={showLogo}
+                  onChange={(event) => setShowLogo(event.target.checked)}
+                />
+                <span>Show MailCraft logo</span>
+              </label>
+              <label className="flex cursor-pointer items-center gap-2.5 text-sm text-foreground">
+                <input
+                  type="checkbox"
+                  className="h-4 w-4 rounded border-border accent-primary"
+                  checked={showExportHtmlButton}
+                  onChange={(event) => setShowExportHtmlButton(event.target.checked)}
+                />
+                <span>Show Export HTML button</span>
+              </label>
+            </div>
           </div>
 
-          <div className="space-y-3 rounded-md border border-border p-3">
-            <div className="flex items-center justify-between gap-2">
+          <div className="space-y-4 rounded-xl border border-border bg-muted/30 p-4">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
-                <p className="text-sm font-medium">Available variables</p>
+                <p className="text-sm font-semibold text-foreground">Available merge variables</p>
                 <p className="text-xs text-muted-foreground">
-                  These appear in the builder variable dropdown for this organization.
+                  Variables configured here appear in the builder toolbar variable inserter.
                 </p>
               </div>
-              <Button type="button" variant="outline" onClick={handleAddVariable}>
-                + Add variable
+              <Button type="button" variant="outline" size="sm" onClick={handleAddVariable}>
+                <Plus className="h-3.5 w-3.5" />
+                Add variable
               </Button>
             </div>
 
             {availableVariables.length === 0 ? (
-              <p className="text-xs text-muted-foreground">
-                No variables configured yet.
-              </p>
+              <p className="text-xs text-muted-foreground">No variables configured yet.</p>
             ) : (
-              <div className="space-y-2">
+              <div className="space-y-2.5">
                 {availableVariables.map((variable, index) => (
                   <div key={index} className="grid gap-2 md:grid-cols-12">
                     <Input
-                      className="md:col-span-3"
-                      placeholder="key (user_name)"
+                      className="font-mono text-xs md:col-span-3"
+                      placeholder="key (e.g. user_name)"
                       value={variable.key}
                       onChange={(event) => handleVariableChange(index, 'key', event.target.value)}
                     />
                     <Input
                       className="md:col-span-3"
-                      placeholder="Label"
+                      placeholder="Display label"
                       value={variable.label}
                       onChange={(event) => handleVariableChange(index, 'label', event.target.value)}
                     />
                     <select
-                      className="h-10 rounded-md border border-input bg-background px-3 text-sm md:col-span-2"
+                      className="flex h-10 rounded-lg border border-input bg-background px-3 text-sm text-foreground md:col-span-2"
                       value={variable.type || 'text'}
                       onChange={(event) => handleVariableChange(index, 'type', event.target.value)}
                     >
@@ -578,15 +611,19 @@ export function DashboardWidgetBuilderPage() {
                       className="md:col-span-3"
                       placeholder="Default value (optional)"
                       value={variable.defaultValue || ''}
-                      onChange={(event) => handleVariableChange(index, 'defaultValue', event.target.value)}
+                      onChange={(event) =>
+                        handleVariableChange(index, 'defaultValue', event.target.value)
+                      }
                     />
                     <Button
                       className="md:col-span-1"
                       type="button"
-                      variant="outline"
+                      variant="ghost"
+                      size="icon"
                       onClick={() => handleRemoveVariable(index)}
+                      aria-label="Remove variable"
                     >
-                      ×
+                      <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
                     </Button>
                   </div>
                 ))}
@@ -597,23 +634,40 @@ export function DashboardWidgetBuilderPage() {
             )}
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 border-t border-border pt-4">
             <Button
               type="button"
-              variant="outline"
               onClick={handleSaveSettings}
               disabled={busyAction === 'save' || Boolean(variableValidationError)}
             >
               {busyAction === 'save' ? 'Saving...' : 'Save settings'}
             </Button>
-            <Button type="button" variant="secondary" onClick={handleCopyApiKey} disabled={busyAction === 'copy'}>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={handleCopyApiKey}
+              disabled={busyAction === 'copy'}
+            >
+              <Copy className="h-3.5 w-3.5" />
               {busyAction === 'copy' ? 'Copying...' : 'Copy API key'}
             </Button>
-            <Button type="button" variant="outline" onClick={handleRefreshApiKey} disabled={busyAction === 'refresh'}>
-              {busyAction === 'refresh' ? 'Refreshing...' : 'Refresh API key'}
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleRefreshApiKey}
+              disabled={busyAction === 'refresh'}
+            >
+              <RefreshCw className="h-3.5 w-3.5" />
+              {busyAction === 'refresh' ? 'Refreshing...' : 'Rotate API key'}
             </Button>
-            <Button type="button" onClick={handleOpenBuilder} disabled={busyAction === 'open'}>
-              {busyAction === 'open' ? 'Opening...' : 'Open Builder'}
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleOpenBuilder}
+              disabled={busyAction === 'open'}
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+              {busyAction === 'open' ? 'Opening...' : 'Open Builder in new tab'}
             </Button>
           </div>
         </CardContent>
@@ -627,13 +681,15 @@ export function DashboardWidgetBuilderPage() {
         }}
       />
 
-      <Card>
+      <Card className="overflow-hidden rounded-tile">
         <CardHeader>
-          <CardTitle>Preview</CardTitle>
-          <CardDescription>Large preview area similar to demo page.</CardDescription>
+          <CardTitle>Live Studio Preview</CardTitle>
+          <CardDescription>
+            Interactive preview rendered with your organization’s active theme and variables.
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="overflow-x-auto overflow-y-hidden rounded-md border border-border bg-muted/30">
+          <div className="overflow-x-auto overflow-y-hidden rounded-xl border border-border bg-muted/40">
             {previewSrc ? (
               <iframe
                 title="organization-widget-preview"

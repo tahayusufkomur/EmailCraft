@@ -10,12 +10,12 @@ export function DividerBlock({ block }: Props) {
   return (
     <div
       className="divider-block-content"
-      style={{ padding: `${style.spacing || 20}px 0` }}
+      style={{ padding: `${style.spacing ?? 20}px 0` }}
     >
       <hr
         style={{
           borderTopColor: style.lineColor || '#cccccc',
-          borderTopWidth: (style.lineThickness || 1) + 'px',
+          borderTopWidth: (style.lineThickness ?? 1) + 'px',
           borderTopStyle: style.lineStyle || 'solid',
         }}
       />

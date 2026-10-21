@@ -1,0 +1,717 @@
+{
+  "name": "Devil's Garage — Flame sale",
+  "category": "promotional",
+  "is_premium": true,
+  "tags": [
+    "promotional",
+    "food",
+    "ecommerce",
+    "discount-code"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#19C3B1",
+      "bodyBackgroundColor": "#111111",
+      "defaultFont": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "defaultFontSize": 16,
+      "defaultColor": "#111111"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "dg-21",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 14,
+            "backgroundColor": "#111111"
+          }
+        },
+        {
+          "id": "dg-26",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              14,
+              572,
+              14
+            ],
+            "columns": [
+              {
+                "id": "dg-23",
+                "blocks": []
+              },
+              {
+                "id": "dg-24",
+                "blocks": [
+                  {
+                    "id": "dg-22",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/devils-garage/wordmark.png",
+                      "alt": "Devil's Garage hot sauce, Austin TX",
+                      "width": 572,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFE14D"
+              },
+              {
+                "id": "dg-25",
+                "blocks": []
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "dg-27",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 14,
+            "backgroundColor": "#111111"
+          }
+        },
+        {
+          "id": "dg-32",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              14,
+              572,
+              14
+            ],
+            "columns": [
+              {
+                "id": "dg-29",
+                "blocks": []
+              },
+              {
+                "id": "dg-30",
+                "blocks": [
+                  {
+                    "id": "dg-28",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/devils-garage/flame-sale.jpg",
+                      "alt": "Flame Sale: a grinning devil in a flaming hot rod raising three bottles of hot sauce, painted lowbrow sign art",
+                      "width": 572,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "backgroundColor": "#111111"
+              },
+              {
+                "id": "dg-31",
+                "blocks": []
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "dg-33",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 14,
+            "backgroundColor": "#111111"
+          }
+        },
+        {
+          "id": "dg-39",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              14,
+              572,
+              14
+            ],
+            "columns": [
+              {
+                "id": "dg-36",
+                "blocks": []
+              },
+              {
+                "id": "dg-37",
+                "blocks": [
+                  {
+                    "id": "dg-34",
+                    "type": "heading",
+                    "data": {
+                      "text": "THREE BOTTLES, 30% OFF, THIS WEEKEND ONLY",
+                      "level": 1
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 26,
+                        "right": 28,
+                        "bottom": 8,
+                        "left": 28
+                      },
+                      "alignment": "center",
+                      "color": "#FFFFFF",
+                      "fontSize": 26,
+                      "fontFamily": "'Bungee', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.25
+                    }
+                  },
+                  {
+                    "id": "dg-35",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Friday 23 to Sunday 25 October. Mix any three from the garage.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 28,
+                        "bottom": 24,
+                        "left": 28
+                      },
+                      "alignment": "center",
+                      "fontSize": 16,
+                      "color": "#FFFFFF"
+                    }
+                  }
+                ],
+                "backgroundColor": "#CF2216"
+              },
+              {
+                "id": "dg-38",
+                "blocks": []
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "dg-40",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 14,
+            "backgroundColor": "#111111"
+          }
+        },
+        {
+          "id": "dg-44",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              14,
+              572,
+              14
+            ],
+            "columns": [
+              {
+                "id": "dg-41",
+                "blocks": []
+              },
+              {
+                "id": "dg-42",
+                "blocks": [
+                  {
+                    "id": "dg-6",
+                    "type": "columns",
+                    "data": {
+                      "columnCount": 2,
+                      "columnRatio": [
+                        66,
+                        34
+                      ],
+                      "columns": [
+                        {
+                          "id": "dg-3",
+                          "blocks": [
+                            {
+                              "id": "dg-1",
+                              "type": "heading",
+                              "data": {
+                                "text": "Nº 1 GASOLINE",
+                                "level": 2
+                              },
+                              "style": {
+                                "padding": {
+                                  "top": 16,
+                                  "right": 8,
+                                  "bottom": 2,
+                                  "left": 24
+                                },
+                                "alignment": "left",
+                                "color": "#111111",
+                                "fontSize": 21,
+                                "fontFamily": "'Bungee', 'Helvetica Neue', Arial, sans-serif",
+                                "fontWeight": 700,
+                                "letterSpacing": 0,
+                                "textTransform": "none"
+                              }
+                            },
+                            {
+                              "id": "dg-2",
+                              "type": "text",
+                              "data": {
+                                "html": "<p>Red habanero and smoked garlic</p>",
+                                "variables": []
+                              },
+                              "style": {
+                                "padding": {
+                                  "top": 0,
+                                  "right": 8,
+                                  "bottom": 16,
+                                  "left": 24
+                                },
+                                "alignment": "left",
+                                "fontSize": 15,
+                                "color": "#111111",
+                                "lineHeight": 1.4
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": "dg-5",
+                          "blocks": [
+                            {
+                              "id": "dg-4",
+                              "type": "heading",
+                              "data": {
+                                "text": "HEAT 7/10",
+                                "level": 3
+                              },
+                              "style": {
+                                "padding": {
+                                  "top": 20,
+                                  "right": 24,
+                                  "bottom": 16,
+                                  "left": 0
+                                },
+                                "alignment": "right",
+                                "color": "#111111",
+                                "fontSize": 15,
+                                "fontFamily": "'Bungee', 'Helvetica Neue', Arial, sans-serif",
+                                "fontWeight": 700,
+                                "letterSpacing": 0,
+                                "textTransform": "none"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "style": {
+                      "gap": 0,
+                      "stackOnMobile": false,
+                      "verticalAlignment": "center"
+                    }
+                  },
+                  {
+                    "id": "dg-7",
+                    "type": "divider",
+                    "data": {},
+                    "style": {
+                      "lineStyle": "solid",
+                      "lineColor": "#111111",
+                      "lineThickness": 4,
+                      "spacing": 0
+                    }
+                  },
+                  {
+                    "id": "dg-13",
+                    "type": "columns",
+                    "data": {
+                      "columnCount": 2,
+                      "columnRatio": [
+                        66,
+                        34
+                      ],
+                      "columns": [
+                        {
+                          "id": "dg-10",
+                          "blocks": [
+                            {
+                              "id": "dg-8",
+                              "type": "heading",
+                              "data": {
+                                "text": "Nº 2 NITRO",
+                                "level": 3
+                              },
+                              "style": {
+                                "padding": {
+                                  "top": 16,
+                                  "right": 8,
+                                  "bottom": 2,
+                                  "left": 24
+                                },
+                                "alignment": "left",
+                                "color": "#111111",
+                                "fontSize": 21,
+                                "fontFamily": "'Bungee', 'Helvetica Neue', Arial, sans-serif",
+                                "fontWeight": 700,
+                                "letterSpacing": 0,
+                                "textTransform": "none"
+                              }
+                            },
+                            {
+                              "id": "dg-9",
+                              "type": "text",
+                              "data": {
+                                "html": "<p>Scotch bonnet, mango and lime</p>",
+                                "variables": []
+                              },
+                              "style": {
+                                "padding": {
+                                  "top": 0,
+                                  "right": 8,
+                                  "bottom": 16,
+                                  "left": 24
+                                },
+                                "alignment": "left",
+                                "fontSize": 15,
+                                "color": "#111111",
+                                "lineHeight": 1.4
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": "dg-12",
+                          "blocks": [
+                            {
+                              "id": "dg-11",
+                              "type": "heading",
+                              "data": {
+                                "text": "HEAT 9/10",
+                                "level": 4
+                              },
+                              "style": {
+                                "padding": {
+                                  "top": 20,
+                                  "right": 24,
+                                  "bottom": 16,
+                                  "left": 0
+                                },
+                                "alignment": "right",
+                                "color": "#111111",
+                                "fontSize": 15,
+                                "fontFamily": "'Bungee', 'Helvetica Neue', Arial, sans-serif",
+                                "fontWeight": 700,
+                                "letterSpacing": 0,
+                                "textTransform": "none"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "style": {
+                      "gap": 0,
+                      "stackOnMobile": false,
+                      "verticalAlignment": "center"
+                    }
+                  },
+                  {
+                    "id": "dg-14",
+                    "type": "divider",
+                    "data": {},
+                    "style": {
+                      "lineStyle": "solid",
+                      "lineColor": "#111111",
+                      "lineThickness": 4,
+                      "spacing": 0
+                    }
+                  },
+                  {
+                    "id": "dg-20",
+                    "type": "columns",
+                    "data": {
+                      "columnCount": 2,
+                      "columnRatio": [
+                        66,
+                        34
+                      ],
+                      "columns": [
+                        {
+                          "id": "dg-17",
+                          "blocks": [
+                            {
+                              "id": "dg-15",
+                              "type": "heading",
+                              "data": {
+                                "text": "Nº 3 VERDE",
+                                "level": 3
+                              },
+                              "style": {
+                                "padding": {
+                                  "top": 16,
+                                  "right": 8,
+                                  "bottom": 2,
+                                  "left": 24
+                                },
+                                "alignment": "left",
+                                "color": "#111111",
+                                "fontSize": 21,
+                                "fontFamily": "'Bungee', 'Helvetica Neue', Arial, sans-serif",
+                                "fontWeight": 700,
+                                "letterSpacing": 0,
+                                "textTransform": "none"
+                              }
+                            },
+                            {
+                              "id": "dg-16",
+                              "type": "text",
+                              "data": {
+                                "html": "<p>Jalapeño, tomatillo and coriander</p>",
+                                "variables": []
+                              },
+                              "style": {
+                                "padding": {
+                                  "top": 0,
+                                  "right": 8,
+                                  "bottom": 16,
+                                  "left": 24
+                                },
+                                "alignment": "left",
+                                "fontSize": 15,
+                                "color": "#111111",
+                                "lineHeight": 1.4
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": "dg-19",
+                          "blocks": [
+                            {
+                              "id": "dg-18",
+                              "type": "heading",
+                              "data": {
+                                "text": "HEAT 4/10",
+                                "level": 4
+                              },
+                              "style": {
+                                "padding": {
+                                  "top": 20,
+                                  "right": 24,
+                                  "bottom": 16,
+                                  "left": 0
+                                },
+                                "alignment": "right",
+                                "color": "#111111",
+                                "fontSize": 15,
+                                "fontFamily": "'Bungee', 'Helvetica Neue', Arial, sans-serif",
+                                "fontWeight": 700,
+                                "letterSpacing": 0,
+                                "textTransform": "none"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "style": {
+                      "gap": 0,
+                      "stackOnMobile": false,
+                      "verticalAlignment": "center"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFE14D"
+              },
+              {
+                "id": "dg-43",
+                "blocks": []
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "dg-45",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 14,
+            "backgroundColor": "#111111"
+          }
+        },
+        {
+          "id": "dg-51",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              14,
+              572,
+              14
+            ],
+            "columns": [
+              {
+                "id": "dg-48",
+                "blocks": []
+              },
+              {
+                "id": "dg-49",
+                "blocks": [
+                  {
+                    "id": "dg-46",
+                    "type": "heading",
+                    "data": {
+                      "text": "USE CODE HOTROD30",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 24,
+                        "right": 16,
+                        "bottom": 14,
+                        "left": 16
+                      },
+                      "alignment": "center",
+                      "color": "#111111",
+                      "fontSize": 26,
+                      "fontFamily": "'Bungee', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  },
+                  {
+                    "id": "dg-47",
+                    "type": "button",
+                    "data": {
+                      "text": "Fill the tank",
+                      "url": "https://devilsgarage.example/flame-sale"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 16,
+                        "bottom": 26,
+                        "left": 16
+                      },
+                      "alignment": "center",
+                      "backgroundColor": "#111111",
+                      "color": "#FFE14D",
+                      "borderRadius": 0,
+                      "fullWidth": false,
+                      "fontSize": 18,
+                      "fontFamily": "'Bungee', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "uppercase",
+                      "paddingX": 30,
+                      "paddingY": 15,
+                      "borderWidth": 0,
+                      "borderStyle": "solid",
+                      "borderColor": "#111111"
+                    }
+                  }
+                ],
+                "backgroundColor": "#19C3B1"
+              },
+              {
+                "id": "dg-50",
+                "blocks": []
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "dg-52",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 14,
+            "backgroundColor": "#111111"
+          }
+        },
+        {
+          "id": "dg-53",
+          "type": "text",
+          "data": {
+            "html": "<p>Devil's Garage Sauce Co., 1209 E 6th Street, Austin, TX 78702. <a href=\"https://devilsgarage.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 10,
+              "right": 32,
+              "bottom": 26,
+              "left": 32
+            },
+            "alignment": "center",
+            "fontSize": 13,
+            "color": "#FFE14D",
+            "lineHeight": 1.5
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

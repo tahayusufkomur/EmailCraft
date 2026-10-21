@@ -1,0 +1,906 @@
+{
+  "name": "Northline — The Line, October",
+  "category": "newsletter",
+  "is_premium": false,
+  "tags": [
+    "newsletter",
+    "nonprofit",
+    "community",
+    "transport"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#2B2B2B",
+      "bodyBackgroundColor": "#FFFFFF",
+      "defaultFont": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "defaultFontSize": 16,
+      "defaultColor": "#111111"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "nt-1",
+          "type": "heading",
+          "data": {
+            "text": "NORTHLINE",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 30,
+              "right": 40,
+              "bottom": 4,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#FFFFFF",
+            "fontSize": 30,
+            "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 3,
+            "textTransform": "none",
+            "backgroundColor": "#111111"
+          }
+        },
+        {
+          "id": "nt-2",
+          "type": "heading",
+          "data": {
+            "text": "The Line · Issue 37 · October 2026",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 24,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#BDBDBD",
+            "fontSize": 13,
+            "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "fontWeight": 500,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "backgroundColor": "#111111"
+          }
+        },
+        {
+          "id": "nt-3",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 10,
+            "backgroundColor": "#FFC20E"
+          }
+        },
+        {
+          "id": "nt-4",
+          "type": "heading",
+          "data": {
+            "text": "Harbour Road gets its protected lane",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 40,
+              "right": 40,
+              "bottom": 16,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#111111",
+            "fontSize": 36,
+            "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "nt-5",
+          "type": "text",
+          "data": {
+            "html": "<p>After four years of campaigning, 2,300 signatures and one very long council meeting, the city voted on Tuesday to build a 2.4 km two-way protected lane from the ferry terminal to the Town Hall. Work starts in March.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 8,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 17
+          }
+        },
+        {
+          "id": "nt-6",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/northline/route-map.png",
+            "alt": "Route diagram of the Harbour Road lane: Ferry Terminal at 0.0 km, Riverside at 0.8 km, Market Square at 1.6 km where it meets the existing Canal Path, and Town Hall at 2.4 km",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "nt-7",
+          "type": "text",
+          "data": {
+            "html": "<p>The approved route: 2.4 km, four stations, meeting the existing Canal Path at Market Square.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 4,
+              "right": 40,
+              "bottom": 0,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 14,
+            "color": "#555555",
+            "lineHeight": 1.5
+          }
+        },
+        {
+          "id": "nt-8",
+          "type": "heading",
+          "data": {
+            "text": "This month along the line",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 32,
+              "right": 40,
+              "bottom": 24,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#111111",
+            "fontSize": 22,
+            "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "nt-15",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              90,
+              20,
+              490
+            ],
+            "columns": [
+              {
+                "id": "nt-10",
+                "blocks": [
+                  {
+                    "id": "nt-9",
+                    "type": "heading",
+                    "data": {
+                      "text": "0.0 km",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 10,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#555555",
+                      "fontSize": 11,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nt-12",
+                "blocks": [
+                  {
+                    "id": "nt-11",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/northline/stop.png",
+                      "alt": "",
+                      "width": 20,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nt-14",
+                "blocks": [
+                  {
+                    "id": "nt-13",
+                    "type": "heading",
+                    "data": {
+                      "text": "Ferry Terminal: where the lane begins",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 40,
+                        "bottom": 0,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 20,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.25
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "nt-20",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              90,
+              20,
+              490
+            ],
+            "columns": [
+              {
+                "id": "nt-16",
+                "blocks": []
+              },
+              {
+                "id": "nt-17",
+                "blocks": [],
+                "backgroundColor": "#FFC20E"
+              },
+              {
+                "id": "nt-19",
+                "blocks": [
+                  {
+                    "id": "nt-18",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>The lane starts at the foot of the ferry ramp, so riders off the 07:40 boat roll straight onto protected tarmac instead of merging with the buses.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 40,
+                        "bottom": 30,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "fontSize": 16
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "nt-27",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              90,
+              20,
+              490
+            ],
+            "columns": [
+              {
+                "id": "nt-22",
+                "blocks": [
+                  {
+                    "id": "nt-21",
+                    "type": "heading",
+                    "data": {
+                      "text": "0.8 km",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 10,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#555555",
+                      "fontSize": 11,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nt-24",
+                "blocks": [
+                  {
+                    "id": "nt-23",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/northline/stop.png",
+                      "alt": "",
+                      "width": 20,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFC20E"
+              },
+              {
+                "id": "nt-26",
+                "blocks": [
+                  {
+                    "id": "nt-25",
+                    "type": "heading",
+                    "data": {
+                      "text": "Riverside: Sunday social ride",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 40,
+                        "bottom": 0,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 20,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.25
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "nt-32",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              90,
+              20,
+              490
+            ],
+            "columns": [
+              {
+                "id": "nt-28",
+                "blocks": []
+              },
+              {
+                "id": "nt-29",
+                "blocks": [],
+                "backgroundColor": "#FFC20E"
+              },
+              {
+                "id": "nt-31",
+                "blocks": [
+                  {
+                    "id": "nt-30",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Sunday 1 November, 10:00 at the boathouse. Twelve flat kilometres at chatting pace, coffee at the end. Every kind of bike welcome; we wait at every junction.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 40,
+                        "bottom": 30,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "fontSize": 16
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "nt-39",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              90,
+              20,
+              490
+            ],
+            "columns": [
+              {
+                "id": "nt-34",
+                "blocks": [
+                  {
+                    "id": "nt-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "1.6 km",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 10,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#555555",
+                      "fontSize": 11,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nt-36",
+                "blocks": [
+                  {
+                    "id": "nt-35",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/northline/stop.png",
+                      "alt": "",
+                      "width": 20,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFC20E"
+              },
+              {
+                "id": "nt-38",
+                "blocks": [
+                  {
+                    "id": "nt-37",
+                    "type": "heading",
+                    "data": {
+                      "text": "Market Square: 120 new stands",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 40,
+                        "bottom": 0,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 20,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.25
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "nt-44",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              90,
+              20,
+              490
+            ],
+            "columns": [
+              {
+                "id": "nt-40",
+                "blocks": []
+              },
+              {
+                "id": "nt-41",
+                "blocks": [],
+                "backgroundColor": "#FFC20E"
+              },
+              {
+                "id": "nt-43",
+                "blocks": [
+                  {
+                    "id": "nt-42",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>The council has agreed to swap six parking bays for 120 bike stands outside the covered market, right where the lane meets the Canal Path. Tell us which side of the square you want them on.</p><p><a href=\"https://northline.example/market-stands\">Answer the two-question survey</a></p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 40,
+                        "bottom": 30,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "fontSize": 16
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "nt-51",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              90,
+              20,
+              490
+            ],
+            "columns": [
+              {
+                "id": "nt-46",
+                "blocks": [
+                  {
+                    "id": "nt-45",
+                    "type": "heading",
+                    "data": {
+                      "text": "2.4 km",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 10,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#555555",
+                      "fontSize": 11,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nt-48",
+                "blocks": [
+                  {
+                    "id": "nt-47",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/northline/stop.png",
+                      "alt": "",
+                      "width": 20,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFC20E"
+              },
+              {
+                "id": "nt-50",
+                "blocks": [
+                  {
+                    "id": "nt-49",
+                    "type": "heading",
+                    "data": {
+                      "text": "Town Hall: next meeting 4 November",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 40,
+                        "bottom": 0,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 20,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.25
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "nt-56",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              90,
+              20,
+              490
+            ],
+            "columns": [
+              {
+                "id": "nt-52",
+                "blocks": []
+              },
+              {
+                "id": "nt-53",
+                "blocks": []
+              },
+              {
+                "id": "nt-55",
+                "blocks": [
+                  {
+                    "id": "nt-54",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>The design goes to committee on Wednesday 4 November at 18:30. Twenty people in the public gallery made the difference last time.</p><p><a href=\"https://northline.example/town-hall\">Add it to your calendar</a></p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 40,
+                        "bottom": 30,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "fontSize": 16
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "nt-57",
+          "type": "heading",
+          "data": {
+            "text": "Ride with us, campaign with us",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 10,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#111111",
+            "fontSize": 24,
+            "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.2
+          }
+        },
+        {
+          "id": "nt-58",
+          "type": "text",
+          "data": {
+            "html": "<p>Members fund the lawyers, the leaflets and the coffee. Three pounds a month keeps the line moving.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 20,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 16
+          }
+        },
+        {
+          "id": "nt-59",
+          "type": "button",
+          "data": {
+            "text": "Become a member",
+            "url": "https://northline.example/join"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 48,
+              "left": 40
+            },
+            "alignment": "left",
+            "backgroundColor": "#FFC20E",
+            "color": "#111111",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 16,
+            "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "paddingX": 30,
+            "paddingY": 16,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#FFC20E"
+          }
+        },
+        {
+          "id": "nt-60",
+          "type": "text",
+          "data": {
+            "html": "<p>Northline Cycling Coalition, 5 Dock Street, Leith, Edinburgh EH6 6EY. Registered charity SC048821.</p><p>You get The Line because you joined at a ride or on northline.example. <a href=\"https://northline.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 32,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "color": "#D6D6D6",
+            "lineHeight": 1.5,
+            "backgroundColor": "#1A1A1A"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

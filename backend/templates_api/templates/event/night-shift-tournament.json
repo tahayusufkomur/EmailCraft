@@ -1,0 +1,946 @@
+{
+  "name": "Night Shift Arcade — Tournament night",
+  "category": "event",
+  "is_premium": true,
+  "tags": [
+    "event",
+    "nightlife",
+    "gaming",
+    "competition"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#000000",
+      "bodyBackgroundColor": "#0B0B10",
+      "defaultFont": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "defaultFontSize": 16,
+      "defaultColor": "#FFF1E8"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "ns-43",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/night-shift/wordmark.jpg",
+            "alt": "Night Shift Arcade Bar, Manchester",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "ns-44",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/night-shift/control-panel.jpg",
+            "alt": "A red ball-top joystick and glowing magenta, cyan and yellow buttons on an arcade cabinet",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "ns-45",
+          "type": "heading",
+          "data": {
+            "text": "1UP TOURNAMENT NIGHT",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 40,
+              "right": 32,
+              "bottom": 12,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#FFF1E8",
+            "fontSize": 24,
+            "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.6
+          }
+        },
+        {
+          "id": "ns-46",
+          "type": "heading",
+          "data": {
+            "text": "FRI 6 NOV · DOORS 19:00 · ROUND ONE 20:00",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#00E436",
+            "fontSize": 12,
+            "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.8
+          }
+        },
+        {
+          "id": "ns-47",
+          "type": "text",
+          "data": {
+            "html": "<p>Sixty-four players, four cabinets, one bracket. Every round is a single credit on a classic from the back wall, drawn from a hat on the night. Spectators get in free and the bar stays open until the final.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 48,
+              "bottom": 32,
+              "left": 48
+            },
+            "alignment": "center",
+            "fontSize": 17,
+            "lineHeight": 1.65
+          }
+        },
+        {
+          "id": "ns-48",
+          "type": "button",
+          "data": {
+            "text": "Sign up to play",
+            "url": "https://nightshift.example/tournament"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 48,
+              "left": 32
+            },
+            "alignment": "center",
+            "backgroundColor": "#FFEC27",
+            "color": "#0B0B10",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 13,
+            "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "paddingX": 26,
+            "paddingY": 18,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#FFEC27"
+          }
+        },
+        {
+          "id": "ns-49",
+          "type": "heading",
+          "data": {
+            "text": "HIGH SCORES",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 8,
+              "right": 32,
+              "bottom": 8,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#FF004D",
+            "fontSize": 18,
+            "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+            "fontWeight": 400,
+            "letterSpacing": 2,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "ns-50",
+          "type": "heading",
+          "data": {
+            "text": "LAST MONTH · SINGLE CREDIT",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 20,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#9F94BD",
+            "fontSize": 12,
+            "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+            "fontWeight": 400,
+            "letterSpacing": 1,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "ns-7",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              30,
+              25,
+              45
+            ],
+            "columns": [
+              {
+                "id": "ns-2",
+                "blocks": [
+                  {
+                    "id": "ns-1",
+                    "type": "heading",
+                    "data": {
+                      "text": "1ST",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 0,
+                        "bottom": 9,
+                        "left": 56
+                      },
+                      "alignment": "left",
+                      "color": "#FFEC27",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ns-4",
+                "blocks": [
+                  {
+                    "id": "ns-3",
+                    "type": "heading",
+                    "data": {
+                      "text": "KAT",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 0,
+                        "bottom": 9,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "color": "#FFEC27",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ns-6",
+                "blocks": [
+                  {
+                    "id": "ns-5",
+                    "type": "heading",
+                    "data": {
+                      "text": "987 650",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 56,
+                        "bottom": 9,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#FFEC27",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "ns-14",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              30,
+              25,
+              45
+            ],
+            "columns": [
+              {
+                "id": "ns-9",
+                "blocks": [
+                  {
+                    "id": "ns-8",
+                    "type": "heading",
+                    "data": {
+                      "text": "2ND",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 0,
+                        "bottom": 9,
+                        "left": 56
+                      },
+                      "alignment": "left",
+                      "color": "#FFF1E8",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ns-11",
+                "blocks": [
+                  {
+                    "id": "ns-10",
+                    "type": "heading",
+                    "data": {
+                      "text": "JMB",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 0,
+                        "bottom": 9,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "color": "#FFF1E8",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ns-13",
+                "blocks": [
+                  {
+                    "id": "ns-12",
+                    "type": "heading",
+                    "data": {
+                      "text": "912 300",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 56,
+                        "bottom": 9,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#FFF1E8",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "ns-21",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              30,
+              25,
+              45
+            ],
+            "columns": [
+              {
+                "id": "ns-16",
+                "blocks": [
+                  {
+                    "id": "ns-15",
+                    "type": "heading",
+                    "data": {
+                      "text": "3RD",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 0,
+                        "bottom": 9,
+                        "left": 56
+                      },
+                      "alignment": "left",
+                      "color": "#FFA300",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ns-18",
+                "blocks": [
+                  {
+                    "id": "ns-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "ODE",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 0,
+                        "bottom": 9,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "color": "#FFA300",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ns-20",
+                "blocks": [
+                  {
+                    "id": "ns-19",
+                    "type": "heading",
+                    "data": {
+                      "text": "880 120",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 56,
+                        "bottom": 9,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#FFA300",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "ns-28",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              30,
+              25,
+              45
+            ],
+            "columns": [
+              {
+                "id": "ns-23",
+                "blocks": [
+                  {
+                    "id": "ns-22",
+                    "type": "heading",
+                    "data": {
+                      "text": "4TH",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 0,
+                        "bottom": 9,
+                        "left": 56
+                      },
+                      "alignment": "left",
+                      "color": "#00E436",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ns-25",
+                "blocks": [
+                  {
+                    "id": "ns-24",
+                    "type": "heading",
+                    "data": {
+                      "text": "RAY",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 0,
+                        "bottom": 9,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "color": "#00E436",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ns-27",
+                "blocks": [
+                  {
+                    "id": "ns-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "745 900",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 56,
+                        "bottom": 9,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#00E436",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "ns-35",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              30,
+              25,
+              45
+            ],
+            "columns": [
+              {
+                "id": "ns-30",
+                "blocks": [
+                  {
+                    "id": "ns-29",
+                    "type": "heading",
+                    "data": {
+                      "text": "5TH",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 0,
+                        "bottom": 9,
+                        "left": 56
+                      },
+                      "alignment": "left",
+                      "color": "#29ADFF",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ns-32",
+                "blocks": [
+                  {
+                    "id": "ns-31",
+                    "type": "heading",
+                    "data": {
+                      "text": "SUE",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 0,
+                        "bottom": 9,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "color": "#29ADFF",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ns-34",
+                "blocks": [
+                  {
+                    "id": "ns-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "702 410",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 56,
+                        "bottom": 9,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#29ADFF",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "ns-42",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              30,
+              25,
+              45
+            ],
+            "columns": [
+              {
+                "id": "ns-37",
+                "blocks": [
+                  {
+                    "id": "ns-36",
+                    "type": "heading",
+                    "data": {
+                      "text": "???",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 0,
+                        "bottom": 9,
+                        "left": 56
+                      },
+                      "alignment": "left",
+                      "color": "#FF77A8",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ns-39",
+                "blocks": [
+                  {
+                    "id": "ns-38",
+                    "type": "heading",
+                    "data": {
+                      "text": "YOU",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 0,
+                        "bottom": 9,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "color": "#FF77A8",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ns-41",
+                "blocks": [
+                  {
+                    "id": "ns-40",
+                    "type": "heading",
+                    "data": {
+                      "text": "000 000",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 9,
+                        "right": 56,
+                        "bottom": 9,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#FF77A8",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "ns-51",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 40
+          }
+        },
+        {
+          "id": "ns-55",
+          "type": "columns",
+          "data": {
+            "columnCount": 1,
+            "columnRatio": [
+              100
+            ],
+            "columns": [
+              {
+                "id": "ns-54",
+                "blocks": [
+                  {
+                    "id": "ns-52",
+                    "type": "heading",
+                    "data": {
+                      "text": "PRIZES",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 14,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#29ADFF",
+                      "fontSize": 14,
+                      "fontFamily": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  },
+                  {
+                    "id": "ns-53",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>1st: a cabinet of your choice in your home for a month, delivered and collected<br>2nd: a year of free credits<br>3rd: your initials on the wall, forever</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 15,
+                      "lineHeight": 1.7
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 48,
+                  "bottom": 0,
+                  "left": 48
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": true,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "ns-56",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 40
+          }
+        },
+        {
+          "id": "ns-57",
+          "type": "text",
+          "data": {
+            "html": "<p>Night Shift Arcade Bar, 88 Canal Street, Manchester M1 3HW. Over 18s after 21:00. <a href=\"https://nightshift.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 22,
+              "right": 40,
+              "bottom": 30,
+              "left": 40
+            },
+            "alignment": "center",
+            "fontSize": 12,
+            "color": "#9F94BD",
+            "lineHeight": 1.5,
+            "backgroundColor": "#14141C"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

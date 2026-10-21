@@ -1,0 +1,1086 @@
+{
+  "name": "Fieldbook Seeds — October almanac",
+  "category": "newsletter",
+  "is_premium": true,
+  "tags": [
+    "newsletter",
+    "gardening",
+    "retail",
+    "seasonal"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#2D6A31",
+      "bodyBackgroundColor": "#FFFFFF",
+      "defaultFont": "Georgia, 'Times New Roman', Times, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#1E1A16"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "fb-36",
+          "type": "heading",
+          "data": {
+            "text": "FIELDBOOK SEEDS",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 30,
+              "right": 32,
+              "bottom": 6,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#FFE7A3",
+            "fontSize": 30,
+            "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+            "fontWeight": 400,
+            "letterSpacing": 3,
+            "textTransform": "none",
+            "backgroundColor": "#C8341F"
+          }
+        },
+        {
+          "id": "fb-37",
+          "type": "heading",
+          "data": {
+            "text": "The almanac for October · Sown, saved and grown in Herefordshire",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 26,
+              "left": 32
+            },
+            "alignment": "center",
+            "color": "#FFFFFF",
+            "fontSize": 13,
+            "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "backgroundColor": "#C8341F"
+          }
+        },
+        {
+          "id": "fb-38",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 10,
+            "backgroundColor": "#2D6A31"
+          }
+        },
+        {
+          "id": "fb-39",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 32
+          }
+        },
+        {
+          "id": "fb-46",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              46,
+              54
+            ],
+            "columns": [
+              {
+                "id": "fb-41",
+                "blocks": [
+                  {
+                    "id": "fb-40",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/fieldbook/seed-packet.jpg",
+                      "alt": "A Fieldbook Seeds packet: Tomato, Brandywine heirloom, with a botanical print of the fruit, sow indoors February to April, lot FB-1026",
+                      "width": 224,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 40
+                }
+              },
+              {
+                "id": "fb-45",
+                "blocks": [
+                  {
+                    "id": "fb-42",
+                    "type": "heading",
+                    "data": {
+                      "text": "Save the seed from your best tomato",
+                      "level": 1
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 14,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#C8341F",
+                      "fontSize": 30,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.12
+                    }
+                  },
+                  {
+                    "id": "fb-43",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Send us an envelope of seed saved from your own plants by 30 November and we will swap it for any two packets from the catalogue.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 18,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.6
+                    }
+                  },
+                  {
+                    "id": "fb-44",
+                    "type": "button",
+                    "data": {
+                      "text": "Start a seed swap",
+                      "url": "https://fieldbook.example/swap"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#C8341F",
+                      "color": "#FFF4D6",
+                      "borderRadius": 0,
+                      "fullWidth": false,
+                      "fontSize": 16,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 1,
+                      "textTransform": "none",
+                      "paddingX": 24,
+                      "paddingY": 14,
+                      "borderWidth": 0,
+                      "borderStyle": "solid",
+                      "borderColor": "#C8341F"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 40,
+                  "bottom": 0,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 24,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "fb-47",
+          "type": "heading",
+          "data": {
+            "text": "How to save it",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 44,
+              "right": 40,
+              "bottom": 10,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#2D6A31",
+            "fontSize": 24,
+            "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "fb-48",
+          "type": "text",
+          "data": {
+            "html": "<p>The tastiest fruit on your best plant is next year’s packet. Scoop the seeds into a jar with a splash of water, leave it on the windowsill for three days until it smells faintly sour, then rinse and dry the seeds on a plate. They keep for five years in a paper envelope.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 17,
+            "lineHeight": 1.65
+          }
+        },
+        {
+          "id": "fb-49",
+          "type": "heading",
+          "data": {
+            "text": "What to sow this month",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 16,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#2D6A31",
+            "fontSize": 24,
+            "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "fb-56",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              50,
+              28,
+              22
+            ],
+            "columns": [
+              {
+                "id": "fb-51",
+                "blocks": [
+                  {
+                    "id": "fb-50",
+                    "type": "heading",
+                    "data": {
+                      "text": "Crop",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 8,
+                        "bottom": 10,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#FFFFFF",
+                      "fontSize": 12,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1.5,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ],
+                "backgroundColor": "#2D6A31"
+              },
+              {
+                "id": "fb-53",
+                "blocks": [
+                  {
+                    "id": "fb-52",
+                    "type": "heading",
+                    "data": {
+                      "text": "Sow",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 8,
+                        "bottom": 10,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#FFFFFF",
+                      "fontSize": 12,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1.5,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ],
+                "backgroundColor": "#2D6A31"
+              },
+              {
+                "id": "fb-55",
+                "blocks": [
+                  {
+                    "id": "fb-54",
+                    "type": "heading",
+                    "data": {
+                      "text": "Days",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 40,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#FFFFFF",
+                      "fontSize": 12,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1.5,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ],
+                "backgroundColor": "#2D6A31"
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "fb-7",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              50,
+              28,
+              22
+            ],
+            "columns": [
+              {
+                "id": "fb-2",
+                "blocks": [
+                  {
+                    "id": "fb-1",
+                    "type": "heading",
+                    "data": {
+                      "text": "Broad bean ‘Aquadulce’",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 8,
+                        "bottom": 12,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1E1A16",
+                      "fontSize": 16,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFFFFF"
+              },
+              {
+                "id": "fb-4",
+                "blocks": [
+                  {
+                    "id": "fb-3",
+                    "type": "heading",
+                    "data": {
+                      "text": "Outdoors",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1E1A16",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFFFFF"
+              },
+              {
+                "id": "fb-6",
+                "blocks": [
+                  {
+                    "id": "fb-5",
+                    "type": "heading",
+                    "data": {
+                      "text": "210",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 40,
+                        "bottom": 12,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#C8341F",
+                      "fontSize": 17,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFFFFF"
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "fb-14",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              50,
+              28,
+              22
+            ],
+            "columns": [
+              {
+                "id": "fb-9",
+                "blocks": [
+                  {
+                    "id": "fb-8",
+                    "type": "heading",
+                    "data": {
+                      "text": "Garlic ‘Lautrec Wight’",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 8,
+                        "bottom": 12,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1E1A16",
+                      "fontSize": 16,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFF4D6"
+              },
+              {
+                "id": "fb-11",
+                "blocks": [
+                  {
+                    "id": "fb-10",
+                    "type": "heading",
+                    "data": {
+                      "text": "Outdoors",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1E1A16",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFF4D6"
+              },
+              {
+                "id": "fb-13",
+                "blocks": [
+                  {
+                    "id": "fb-12",
+                    "type": "heading",
+                    "data": {
+                      "text": "240",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 40,
+                        "bottom": 12,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#C8341F",
+                      "fontSize": 17,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFF4D6"
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "fb-21",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              50,
+              28,
+              22
+            ],
+            "columns": [
+              {
+                "id": "fb-16",
+                "blocks": [
+                  {
+                    "id": "fb-15",
+                    "type": "heading",
+                    "data": {
+                      "text": "Winter lettuce ‘Arctic King’",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 8,
+                        "bottom": 12,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1E1A16",
+                      "fontSize": 16,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFFFFF"
+              },
+              {
+                "id": "fb-18",
+                "blocks": [
+                  {
+                    "id": "fb-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "Under glass",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1E1A16",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFFFFF"
+              },
+              {
+                "id": "fb-20",
+                "blocks": [
+                  {
+                    "id": "fb-19",
+                    "type": "heading",
+                    "data": {
+                      "text": "75",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 40,
+                        "bottom": 12,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#C8341F",
+                      "fontSize": 17,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFFFFF"
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "fb-28",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              50,
+              28,
+              22
+            ],
+            "columns": [
+              {
+                "id": "fb-23",
+                "blocks": [
+                  {
+                    "id": "fb-22",
+                    "type": "heading",
+                    "data": {
+                      "text": "Sweet pea ‘Matucana’",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 8,
+                        "bottom": 12,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1E1A16",
+                      "fontSize": 16,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFF4D6"
+              },
+              {
+                "id": "fb-25",
+                "blocks": [
+                  {
+                    "id": "fb-24",
+                    "type": "heading",
+                    "data": {
+                      "text": "Indoors",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1E1A16",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFF4D6"
+              },
+              {
+                "id": "fb-27",
+                "blocks": [
+                  {
+                    "id": "fb-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "180",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 40,
+                        "bottom": 12,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#C8341F",
+                      "fontSize": 17,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFF4D6"
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "fb-35",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              50,
+              28,
+              22
+            ],
+            "columns": [
+              {
+                "id": "fb-30",
+                "blocks": [
+                  {
+                    "id": "fb-29",
+                    "type": "heading",
+                    "data": {
+                      "text": "Onion sets ‘Radar’",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 8,
+                        "bottom": 12,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1E1A16",
+                      "fontSize": 16,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFFFFF"
+              },
+              {
+                "id": "fb-32",
+                "blocks": [
+                  {
+                    "id": "fb-31",
+                    "type": "heading",
+                    "data": {
+                      "text": "Outdoors",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1E1A16",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFFFFF"
+              },
+              {
+                "id": "fb-34",
+                "blocks": [
+                  {
+                    "id": "fb-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "270",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 40,
+                        "bottom": 12,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#C8341F",
+                      "fontSize": 17,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFFFFF"
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "fb-57",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 48
+          }
+        },
+        {
+          "id": "fb-63",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              44,
+              56
+            ],
+            "columns": [
+              {
+                "id": "fb-59",
+                "blocks": [
+                  {
+                    "id": "fb-58",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/fieldbook/soil-block-seedlings.jpg",
+                      "alt": "Tomato and pepper seedlings in soil blocks in a greenhouse",
+                      "width": 213,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 40
+                }
+              },
+              {
+                "id": "fb-62",
+                "blocks": [
+                  {
+                    "id": "fb-60",
+                    "type": "heading",
+                    "data": {
+                      "text": "Soil blocks, not plastic pots",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 12,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#2D6A31",
+                      "fontSize": 24,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "fb-61",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Press damp compost into cubes and sow straight into them. Roots stop at the air gap instead of circling, and the block goes into the ground whole.</p><p><a href=\"https://fieldbook.example/soil-blocker\">The 4-cell blocker, £34</a></p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 15,
+                      "lineHeight": 1.6
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 40,
+                  "bottom": 0,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 24,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "fb-64",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 48
+          }
+        },
+        {
+          "id": "fb-65",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 10,
+            "backgroundColor": "#2D6A31"
+          }
+        },
+        {
+          "id": "fb-66",
+          "type": "text",
+          "data": {
+            "html": "<p>Packed for the 2026–27 season · Lot FB-1026 · Fieldbook Seeds, Bromyard Road, Hereford HR1 3QS. <a href=\"https://fieldbook.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 22,
+              "right": 40,
+              "bottom": 26,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "color": "#FFFFFF",
+            "lineHeight": 1.5,
+            "backgroundColor": "#C8341F"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

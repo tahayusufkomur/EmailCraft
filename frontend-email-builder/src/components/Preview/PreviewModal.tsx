@@ -37,7 +37,6 @@ export function PreviewModal({ onClose }: Props) {
   return (
     <div style={styles.overlay} onClick={onClose}>
       <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
-        {/* Toolbar */}
         <div style={styles.toolbar}>
           <div style={styles.toolbarLeft}>
             <span style={styles.title}>Preview</span>
@@ -70,12 +69,13 @@ export function PreviewModal({ onClose }: Props) {
           </button>
         </div>
 
-        {/* Preview */}
         <div style={styles.previewArea}>
-          <div style={{
-            ...styles.iframeWrapper,
-            width,
-          }}>
+          <div
+            style={{
+              ...styles.iframeWrapper,
+              width,
+            }}
+          >
             <iframe
               srcDoc={html}
               style={styles.iframe}
@@ -93,7 +93,7 @@ const styles: Record<string, React.CSSProperties> = {
   overlay: {
     position: 'fixed',
     inset: 0,
-    background: 'rgba(2, 6, 23, 0.6)',
+    background: 'rgba(15, 14, 13, 0.6)',
     backdropFilter: 'blur(4px)',
     display: 'flex',
     alignItems: 'center',
@@ -101,23 +101,24 @@ const styles: Record<string, React.CSSProperties> = {
     zIndex: 1000,
   },
   modal: {
-    background: '#ffffff',
-    borderRadius: 14,
+    background: 'var(--chrome-surface)',
+    border: '1px solid var(--chrome-border)',
+    borderRadius: 16,
     width: '92vw',
     maxWidth: 960,
     height: '88vh',
     display: 'flex',
     flexDirection: 'column',
     overflow: 'hidden',
-    boxShadow: '0 24px 80px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.06)',
+    boxShadow: 'var(--shadow-lg)',
   },
   toolbar: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '10px 16px',
-    borderBottom: '1px solid #e2e8f0',
-    background: '#fafbfc',
+    borderBottom: '1px solid var(--chrome-border)',
+    background: 'var(--chrome-surface)',
     flexShrink: 0,
   },
   toolbarLeft: {
@@ -128,12 +129,13 @@ const styles: Record<string, React.CSSProperties> = {
   title: {
     fontSize: 13,
     fontWeight: 600,
-    color: '#1e293b',
-    letterSpacing: '0.02em',
+    color: 'var(--chrome-text-primary)',
+    letterSpacing: '-0.01em',
   },
   deviceToggle: {
     display: 'flex',
-    background: '#f1f5f9',
+    background: 'var(--chrome-surface-elevated)',
+    border: '1px solid var(--chrome-border)',
     borderRadius: 8,
     padding: 2,
     gap: 2,
@@ -143,25 +145,24 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: 'center',
     justifyContent: 'center',
     width: 34,
-    height: 30,
+    height: 28,
     border: 'none',
     borderRadius: 6,
     background: 'transparent',
-    color: '#94a3b8',
+    color: 'var(--chrome-text-muted)',
     cursor: 'pointer',
     transition: 'all 0.15s',
   },
   deviceBtnActive: {
-    background: '#ffffff',
-    color: '#0f172a',
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+    background: 'var(--chrome-surface)',
+    color: 'var(--chrome-text-primary)',
+    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.08)',
   },
   widthLabel: {
     fontSize: 11,
     fontWeight: 500,
-    color: '#94a3b8',
-    fontFamily: "'SF Mono', 'Fira Code', monospace",
-    letterSpacing: '-0.02em',
+    color: 'var(--chrome-text-muted)',
+    fontFamily: "'Geist Mono', ui-monospace, monospace",
   },
   closeBtn: {
     display: 'flex',
@@ -172,7 +173,7 @@ const styles: Record<string, React.CSSProperties> = {
     border: 'none',
     borderRadius: 8,
     background: 'transparent',
-    color: '#94a3b8',
+    color: 'var(--chrome-text-muted)',
     cursor: 'pointer',
     transition: 'all 0.15s',
   },
@@ -183,15 +184,16 @@ const styles: Record<string, React.CSSProperties> = {
     justifyContent: 'center',
     alignItems: 'flex-start',
     padding: 24,
-    background: 'repeating-conic-gradient(#f1f5f9 0% 25%, #fafbfc 0% 50%) 50% / 20px 20px',
+    background: 'var(--canvas-bg)',
   },
   iframeWrapper: {
     maxWidth: '100%',
     height: '100%',
     transition: 'width 0.3s ease',
-    borderRadius: 8,
+    borderRadius: 12,
     overflow: 'hidden',
-    boxShadow: '0 4px 24px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04)',
+    border: '1px solid var(--chrome-border)',
+    boxShadow: 'var(--shadow-lg)',
   },
   iframe: {
     width: '100%',

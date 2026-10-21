@@ -14,8 +14,8 @@ const PRESETS: Record<BuilderTheme, BuilderThemePreset> = {
   'light-breeze': {
     id: 'light-breeze',
     chromeMode: 'light',
-    canvasBackgroundStyle: 'aurora',
-    canvasBackgroundColor: '#e7ecff',
+    canvasBackgroundStyle: 'none',
+    canvasBackgroundColor: '#f5f4f0',
     shellClassName: 'theme-preset-light-breeze',
   },
   'light-paper': {
@@ -29,14 +29,14 @@ const PRESETS: Record<BuilderTheme, BuilderThemePreset> = {
     id: 'dark-slate',
     chromeMode: 'dark',
     canvasBackgroundStyle: 'midnight-grid',
-    canvasBackgroundColor: '#0f172a',
+    canvasBackgroundColor: '#141311',
     shellClassName: 'theme-preset-dark-slate',
   },
   'dark-cosmos': {
     id: 'dark-cosmos',
     chromeMode: 'dark',
     canvasBackgroundStyle: 'sunset-glow',
-    canvasBackgroundColor: '#1e1b2e',
+    canvasBackgroundColor: '#1c1917',
     shellClassName: 'theme-preset-dark-cosmos',
   },
 };
@@ -52,4 +52,3 @@ export function getBuilderThemePreset(value: unknown): BuilderThemePreset {
   const id = resolveBuilderTheme(value);
   return PRESETS[id];
 }
-

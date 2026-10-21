@@ -5,14 +5,14 @@
 {% block preheader_text %}Your one-time admin login code.{% endblock %}
 
 {% block content %}
-<h1 style="margin:0 0 16px;font-size:24px;font-weight:600;color:#191e2b;">Admin Login Code</h1>
-<p style="margin:0 0 24px;font-size:16px;color:#575c65;line-height:1.5;">
+<h1 style="margin:0 0 16px;font-size:24px;font-weight:600;letter-spacing:-0.02em;color:#1a1917;">Admin Login Code</h1>
+<p style="margin:0 0 24px;font-size:15px;color:#73706a;line-height:1.6;">
   Use the code below to complete your admin login. Do not share this code with anyone.
 </p>
 <div style="text-align:center;margin:0 0 24px;">
-  <span style="display:inline-block;font-size:40px;font-weight:700;letter-spacing:8px;color:#191e2b;background-color:#f4f4f4;padding:16px 32px;border-radius:8px;border:1px solid #e5e5e5;">{{ code }}</span>
+  <span style="display:inline-block;font-size:36px;font-weight:700;font-family:'Geist Mono',monospace;letter-spacing:8px;color:#1a1917;background-color:#f2f0ec;padding:16px 32px;border-radius:10px;border:1px solid #e6e4e0;">{{ code }}</span>
 </div>
-<p style="margin:0;font-size:14px;color:#888;line-height:1.5;">
-  This code expires in <strong>{{ expiry_minutes }} minutes</strong>. If you did not attempt to log in as an admin, please contact support immediately.
+<p style="margin:0;font-size:13px;color:#8a867f;line-height:1.6;">
+  This code expires in <strong style="color:#1a1917;">{{ expiry_minutes }} minutes</strong>. If you did not attempt to log in as an admin, please contact support immediately.
 </p>
 {% endblock %}

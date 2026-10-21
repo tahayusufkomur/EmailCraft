@@ -11,15 +11,12 @@ import { PALETTES, type ColorPalette } from '../../lib/colorPalettes';
 import { recolorTemplate } from '../../lib/recolorTemplate';
 import type { EmailTemplate } from '../../types/blocks';
 
-
 function PalettePicker() {
   const template = useEditorStore((s) => s.template);
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
   const defaultPalette = useConfigStore((s) => s.defaultPalette);
   const setConfig = useConfigStore((s) => s.setConfig);
 
-  // Store the original template (before any palette recolor) so repeated
-  // palette switches always produce the same deterministic result.
   const originalTemplateRef = useRef<EmailTemplate | null>(null);
 
   const getOriginal = useCallback((): EmailTemplate => {
@@ -29,17 +26,19 @@ function PalettePicker() {
     return originalTemplateRef.current;
   }, [template]);
 
-  const applyPalette = useCallback((palette: ColorPalette, slug: string) => {
-    const recolored = recolorTemplate(getOriginal(), palette);
-    loadTemplate(recolored);
-    setConfig({ defaultPalette: slug, customPalette: {} });
-  }, [getOriginal, loadTemplate, setConfig]);
+  const applyPalette = useCallback(
+    (palette: ColorPalette, slug: string) => {
+      const recolored = recolorTemplate(getOriginal(), palette);
+      loadTemplate(recolored);
+      setConfig({ defaultPalette: slug, customPalette: {} });
+    },
+    [getOriginal, loadTemplate, setConfig],
+  );
 
   return (
     <div className="panel-section">
       <div className="panel-section-title">Color Palette</div>
 
-      {/* Preset palette picker */}
       <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 8 }}>
         {PALETTES.map((p) => (
           <button
@@ -49,9 +48,12 @@ function PalettePicker() {
             style={{
               flex: '0 0 auto',
               padding: '8px 10px',
-              border: defaultPalette === p.slug ? '2px solid #6366f1' : '1px solid var(--border-color, #e2e8f0)',
+              border:
+                defaultPalette === p.slug
+                  ? '2px solid var(--accent-color)'
+                  : '1px solid var(--chrome-border)',
               borderRadius: 8,
-              background: 'var(--panel-bg, #ffffff)',
+              background: 'var(--chrome-surface-elevated)',
               cursor: 'pointer',
               textAlign: 'center',
               minWidth: 72,
@@ -63,7 +65,9 @@ function PalettePicker() {
                 <span
                   key={i}
                   style={{
-                    width: 14, height: 14, borderRadius: '50%',
+                    width: 14,
+                    height: 14,
+                    borderRadius: '50%',
                     backgroundColor: color,
                     border: '1px solid rgba(0,0,0,0.1)',
                     display: 'inline-block',
@@ -71,22 +75,28 @@ function PalettePicker() {
                 />
               ))}
             </div>
-            <span style={{ fontSize: 10, color: 'var(--text-secondary, #64748b)', whiteSpace: 'nowrap' }}>
+            <span
+              style={{
+                fontSize: 10,
+                color: 'var(--chrome-text-muted)',
+                whiteSpace: 'nowrap',
+              }}
+            >
               {p.name}
             </span>
           </button>
         ))}
       </div>
-
     </div>
   );
 }
 
-
 export function GlobalSettings() {
   const settings = useEditorStore((s) => s.template.settings);
   const updateSettings = useEditorStore((s) => s.updateSettings);
-  const selectedBodyBackgroundStyle = resolveTemplateBodyBackgroundStyle(settings.bodyBackgroundStyle);
+  const selectedBodyBackgroundStyle = resolveTemplateBodyBackgroundStyle(
+    settings.bodyBackgroundStyle,
+  );
   const selectedBodyPreset = getBodyBackgroundStylePreset(selectedBodyBackgroundStyle);
 
   return (
@@ -102,7 +112,9 @@ export function GlobalSettings() {
               <button
                 key={preset.id}
                 type="button"
-                className={`background-style-option ${selectedBodyBackgroundStyle === preset.id ? 'active' : ''}`}
+                className={`background-style-option ${
+                  selectedBodyBackgroundStyle === preset.id ? 'active' : ''
+                }`}
                 onClick={() => updateSettings({ bodyBackgroundStyle: preset.id })}
                 title={preset.description}
               >
@@ -114,9 +126,7 @@ export function GlobalSettings() {
               </button>
             ))}
           </div>
-          <p className="background-style-description">
-            {selectedBodyPreset.description}
-          </p>
+          <p className="background-style-description">{selectedBodyPreset.description}</p>
         </div>
         <div className="form-group">
           <label>Fallback Body Color</label>
@@ -140,8 +150,21 @@ export function GlobalSettings() {
 
       <div className="panel-section">
         <div className="panel-section-title">Layout</div>
-        <SliderInput label="Content Width" value={settings.contentWidth} min={320} max={800} step={10} onChange={(v) => updateSettings({ contentWidth: v })} />
-        <SliderInput label="Body Border Radius" value={settings.bodyBorderRadius || 0} min={0} max={32} onChange={(v) => updateSettings({ bodyBorderRadius: v })} />
+        <SliderInput
+          label="Content Width"
+          value={settings.contentWidth}
+          min={320}
+          max={800}
+          step={10}
+          onChange={(v) => updateSettings({ contentWidth: v })}
+        />
+        <SliderInput
+          label="Body Border Radius"
+          value={settings.bodyBorderRadius || 0}
+          min={0}
+          max={32}
+          onChange={(v) => updateSettings({ bodyBorderRadius: v })}
+        />
       </div>
     </div>
   );

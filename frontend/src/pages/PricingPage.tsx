@@ -6,8 +6,8 @@ import { api } from '../lib/api';
 import { useAuth } from '../lib/auth';
 import { PLAN_LABELS, PLAN_ORDER, sortPlans } from '../lib/plans';
 import type { PlanKey, PricingPlan, SiteDashboardResponse } from '../types/api';
+import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
 import { cn, formatBytes } from '../lib/utils';
 
 export function PricingPage() {
@@ -49,7 +49,13 @@ export function PricingPage() {
         window.location.href = result.checkout_url;
         return;
       }
-      if (result.status === 'updated' || result.status === 'upgraded' || result.status === 'downgrade_scheduled' || result.status === 'downgrade_cancelled' || result.status === 'unchanged') {
+      if (
+        result.status === 'updated' ||
+        result.status === 'upgraded' ||
+        result.status === 'downgrade_scheduled' ||
+        result.status === 'downgrade_cancelled' ||
+        result.status === 'unchanged'
+      ) {
         navigate('/dashboard/billing');
         return;
       }
@@ -69,7 +75,7 @@ export function PricingPage() {
     if (!isAuthenticated) {
       return {
         label: plan.monthly_price_usd === 0 ? 'Get started free' : 'Get started',
-        variant: plan.plan === 'pro' ? 'default' as const : 'outline' as const,
+        variant: plan.plan === 'pro' ? ('default' as const) : ('outline' as const),
         disabled: false,
       };
     }
@@ -98,72 +104,108 @@ export function PricingPage() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-12">
-      <h1 className="font-heading text-4xl font-semibold tracking-tight">Pricing</h1>
-      <p className="mt-2 max-w-2xl text-muted-foreground">
-        Clear monthly limits by organization. Upgrade instantly from the dashboard.
-      </p>
+    <div className="py-16 sm:py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-14 text-center">
+          <p className="text-eyebrow mb-3 text-muted-foreground">Pricing</p>
+          <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+            Simple, transparent pricing.
+          </h1>
+          <p className="mx-auto mt-4 max-w-lg text-lg text-muted-foreground">
+            Clear monthly limits by organization. Start free and upgrade anytime as your volume
+            scales.
+          </p>
+        </div>
 
-      {dashboard?.pending_plan && (
-        <p className="mt-3 text-sm text-amber-600 dark:text-amber-400">
-          Downgrade to {PLAN_LABELS[dashboard.pending_plan]} scheduled at the end of your current billing period.
-        </p>
-      )}
+        {dashboard?.pending_plan && (
+          <div className="mb-6 rounded-xl border border-border bg-muted px-4 py-3 text-center text-sm text-muted-foreground">
+            Downgrade to <span className="font-semibold text-foreground">{PLAN_LABELS[dashboard.pending_plan]}</span> scheduled at the end of your current billing period.
+          </div>
+        )}
 
-      {error && <p className="mt-4 rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">{error}</p>}
+        {error && (
+          <p className="mb-6 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+            {error}
+          </p>
+        )}
 
-      <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {cards.map((plan) => {
-          const isCurrent = isAuthenticated && dashboard?.plan === plan.plan && !dashboard?.pending_plan;
-          const isPending = isAuthenticated && dashboard?.pending_plan === plan.plan;
-          const { label, variant, disabled } = getButtonProps(plan);
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {cards.map((plan) => {
+            const isCurrent =
+              isAuthenticated && dashboard?.plan === plan.plan && !dashboard?.pending_plan;
+            const isPending = isAuthenticated && dashboard?.pending_plan === plan.plan;
+            const isHighlighted = plan.plan === 'pro';
+            const { label, variant, disabled } = getButtonProps(plan);
 
-          return (
-            <Card
-              key={plan.plan}
-              className={cn(
-                isCurrent && 'border-primary/50 ring-1 ring-primary/20',
-                isPending && 'border-amber-500/50',
-                !isCurrent && !isPending && plan.plan === 'pro' && 'border-primary/50',
-              )}
-            >
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>{PLAN_LABELS[plan.plan]}</CardTitle>
-                  {isCurrent && (
-                    <span className="flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
-                      <Check className="h-3 w-3" /> Current
-                    </span>
-                  )}
-                  {isPending && (
-                    <span className="rounded-full bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-600 dark:text-amber-400">
-                      Scheduled
-                    </span>
-                  )}
+            const features = [
+              `${plan.rendered_emails_limit.toLocaleString()} rendered emails / month`,
+              `${plan.ai_generations_limit.toLocaleString()} AI generations / month`,
+              `${formatBytes(plan.storage_limit_bytes)} media storage`,
+              `${formatBytes(plan.max_upload_size_bytes)} max upload size`,
+              plan.monthly_price_usd === 0 ? 'Standard gallery templates' : 'All premium templates unlocked',
+            ];
+
+            return (
+              <div
+                key={plan.plan}
+                className={cn(
+                  'flex flex-col rounded-2xl border p-6 sm:p-8',
+                  isHighlighted
+                    ? 'border-foreground bg-card ring-1 ring-foreground'
+                    : 'border-border bg-card',
+                  isCurrent && !isHighlighted && 'border-foreground/50 ring-1 ring-foreground/20',
+                )}
+              >
+                <div className="mb-4 flex items-center justify-between gap-2">
+                  <h2 className="text-lg font-semibold text-foreground">
+                    {PLAN_LABELS[plan.plan]}
+                  </h2>
+                  <div className="flex items-center gap-1.5">
+                    {isHighlighted && !isCurrent && <Badge variant="pro">Popular</Badge>}
+                    {isCurrent && (
+                      <Badge variant="success" className="gap-1">
+                        <Check className="h-3 w-3" /> Current
+                      </Badge>
+                    )}
+                    {isPending && <Badge variant="warning">Scheduled</Badge>}
+                  </div>
                 </div>
-                <CardDescription>
-                  <span className="text-3xl font-semibold text-foreground">${plan.monthly_price_usd}</span> / month
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2 text-sm text-muted-foreground">
-                <p>{plan.rendered_emails_limit.toLocaleString()} rendered emails / month</p>
-                <p>{plan.ai_generations_limit.toLocaleString()} AI generations / month</p>
-                <p>{formatBytes(plan.storage_limit_bytes)} media storage</p>
-                <p>{formatBytes(plan.max_upload_size_bytes)} max upload size</p>
-              </CardContent>
-              <CardFooter>
+
+                <div className="mb-6">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-bold tracking-tight text-foreground">
+                      ${plan.monthly_price_usd}
+                    </span>
+                    <span className="text-sm text-muted-foreground">/month</span>
+                  </div>
+                </div>
+
                 <Button
-                  className="w-full"
+                  className="mb-6 w-full rounded-full"
                   variant={variant}
                   disabled={disabled}
-                  onClick={() => { void handleChoosePlan(plan); }}
+                  onClick={() => {
+                    void handleChoosePlan(plan);
+                  }}
                 >
                   {label}
                 </Button>
-              </CardFooter>
-            </Card>
-          );
-        })}
+
+                <ul className="flex-1 space-y-2.5">
+                  {features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-start gap-2.5 text-sm text-muted-foreground"
+                    >
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-marketing-accent" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

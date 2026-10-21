@@ -35,6 +35,7 @@ from core.serializers import (
 )
 from core.models import ApiKey
 from core.views import subscribe_account_to_plan
+from templates_api.export_engine import render_email_html
 from templates_api.models import Template
 from templates_api.serializers import (
     TemplateCreateSerializer,
@@ -411,7 +412,11 @@ def site_template_detail(request, template_id):
         )
 
     if request.method == 'GET':
-        return Response(TemplateDetailSerializer(template).data)
+        # preview_html is the canonical server render, so the dashboard preview matches the export.
+        return Response({
+            **TemplateDetailSerializer(template).data,
+            'preview_html': render_email_html(template.json_data or {})['html'],
+        })
 
     if request.method == 'DELETE':
         template.delete()

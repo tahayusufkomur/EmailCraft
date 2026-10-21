@@ -1,0 +1,995 @@
+{
+  "name": "Low Ohm Records — Monthly levels",
+  "category": "newsletter",
+  "is_premium": true,
+  "tags": [
+    "newsletter",
+    "music",
+    "releases",
+    "tour-dates"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#050505",
+      "bodyBackgroundColor": "#121110",
+      "defaultFont": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "defaultFontSize": 16,
+      "defaultColor": "#EFE6CF"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "lo-42",
+          "type": "heading",
+          "data": {
+            "text": "LOW OHM",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 40,
+              "right": 40,
+              "bottom": 4,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#EFE6CF",
+            "fontSize": 44,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 12,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "lo-43",
+          "type": "heading",
+          "data": {
+            "text": "Monthly · Nº 14 · October",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 32,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#A39B88",
+            "fontSize": 14,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 500,
+            "letterSpacing": 2,
+            "textTransform": "uppercase"
+          }
+        },
+        {
+          "id": "lo-44",
+          "type": "heading",
+          "data": {
+            "text": "Three new records, one of them loud",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 28,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#EFE6CF",
+            "fontSize": 32,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 1,
+            "textTransform": "uppercase",
+            "lineHeight": 1.1
+          }
+        },
+        {
+          "id": "lo-45",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/low-ohm/meter-bridge.jpg",
+            "alt": "Level meters for the three new records: Second Floor peaks at minus 3, Low Tide Hymns at minus 7, and Hot Room at plus 2, into the red",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "lo-46",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              1,
+              1,
+              1
+            ],
+            "columns": [
+              {
+                "id": "lo-3",
+                "blocks": [
+                  {
+                    "id": "lo-1",
+                    "type": "heading",
+                    "data": {
+                      "text": "Tape Hiss",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 0,
+                        "bottom": 2,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6CF",
+                      "fontSize": 22,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.1
+                    }
+                  },
+                  {
+                    "id": "lo-2",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Second Floor · LP</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 14,
+                      "color": "#A39B88",
+                      "lineHeight": 1.4
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 24
+                }
+              },
+              {
+                "id": "lo-6",
+                "blocks": [
+                  {
+                    "id": "lo-4",
+                    "type": "heading",
+                    "data": {
+                      "text": "Mara Quist",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 0,
+                        "bottom": 2,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6CF",
+                      "fontSize": 22,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.1
+                    }
+                  },
+                  {
+                    "id": "lo-5",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Low Tide Hymns · 12\"</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 14,
+                      "color": "#A39B88",
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "lo-9",
+                "blocks": [
+                  {
+                    "id": "lo-7",
+                    "type": "heading",
+                    "data": {
+                      "text": "Brass Static",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 0,
+                        "bottom": 2,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6CF",
+                      "fontSize": 22,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.1
+                    }
+                  },
+                  {
+                    "id": "lo-8",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Hot Room · LP</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 14,
+                      "color": "#A39B88",
+                      "lineHeight": 1.4
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 24,
+                  "bottom": 0,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 10,
+            "stackOnMobile": true,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "lo-47",
+          "type": "text",
+          "data": {
+            "html": "<p>Out on Friday 30 October on vinyl and everywhere you stream. Hot Room was cut so hot the mastering engineer asked us to sign a note. We signed it.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 20,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 16
+          }
+        },
+        {
+          "id": "lo-48",
+          "type": "button",
+          "data": {
+            "text": "Hear the new records",
+            "url": "https://lowohm.example/releases"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 44,
+              "left": 40
+            },
+            "alignment": "left",
+            "backgroundColor": "#EFE6CF",
+            "color": "#141414",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 17,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 2,
+            "textTransform": "uppercase",
+            "paddingX": 28,
+            "paddingY": 14,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#EFE6CF"
+          }
+        },
+        {
+          "id": "lo-49",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/low-ohm/turntable.jpg",
+            "alt": "A record spinning on a wooden turntable under a warm lamp",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "lo-50",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 40
+          }
+        },
+        {
+          "id": "lo-56",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              46,
+              54
+            ],
+            "columns": [
+              {
+                "id": "lo-52",
+                "blocks": [
+                  {
+                    "id": "lo-51",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/low-ohm/tape-hiss-rehearsal.jpg",
+                      "alt": "Tape Hiss rehearsing in a wood-panelled room",
+                      "width": 224,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 40
+                }
+              },
+              {
+                "id": "lo-55",
+                "blocks": [
+                  {
+                    "id": "lo-53",
+                    "type": "heading",
+                    "data": {
+                      "text": "In the room with Tape Hiss",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 12,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6CF",
+                      "fontSize": 26,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.1
+                    }
+                  },
+                  {
+                    "id": "lo-54",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Second Floor was recorded live in four days above a carpet shop in Margate, one microphone per amp and the windows open. Read how they kept the hiss in.</p><p><a href=\"https://lowohm.example/journal/tape-hiss\">Read the studio diary</a></p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 15
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 40,
+                  "bottom": 0,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 24,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "lo-57",
+          "type": "heading",
+          "data": {
+            "text": "On the road in November",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 48,
+              "right": 40,
+              "bottom": 12,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#EFE6CF",
+            "fontSize": 22,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 1,
+            "textTransform": "uppercase"
+          }
+        },
+        {
+          "id": "lo-58",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#3A3631",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "lo-16",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              30,
+              44,
+              26
+            ],
+            "columns": [
+              {
+                "id": "lo-11",
+                "blocks": [
+                  {
+                    "id": "lo-10",
+                    "type": "heading",
+                    "data": {
+                      "text": "FRI 13 NOV",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 0,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6CF",
+                      "fontSize": 16,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "lo-13",
+                "blocks": [
+                  {
+                    "id": "lo-12",
+                    "type": "heading",
+                    "data": {
+                      "text": "Glasgow · Mono",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 15,
+                        "right": 12,
+                        "bottom": 15,
+                        "left": 12
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6CF",
+                      "fontSize": 16,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "lo-15",
+                "blocks": [
+                  {
+                    "id": "lo-14",
+                    "type": "heading",
+                    "data": {
+                      "text": "Tickets",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#EFE6CF",
+                      "fontSize": 13,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "lo-17",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#3A3631",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "lo-24",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              30,
+              44,
+              26
+            ],
+            "columns": [
+              {
+                "id": "lo-19",
+                "blocks": [
+                  {
+                    "id": "lo-18",
+                    "type": "heading",
+                    "data": {
+                      "text": "SAT 14 NOV",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 0,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6CF",
+                      "fontSize": 16,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "lo-21",
+                "blocks": [
+                  {
+                    "id": "lo-20",
+                    "type": "heading",
+                    "data": {
+                      "text": "Leeds · Brudenell Social Club",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 15,
+                        "right": 12,
+                        "bottom": 15,
+                        "left": 12
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6CF",
+                      "fontSize": 16,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "lo-23",
+                "blocks": [
+                  {
+                    "id": "lo-22",
+                    "type": "heading",
+                    "data": {
+                      "text": "Tickets",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#EFE6CF",
+                      "fontSize": 13,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "lo-25",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#3A3631",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "lo-32",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              30,
+              44,
+              26
+            ],
+            "columns": [
+              {
+                "id": "lo-27",
+                "blocks": [
+                  {
+                    "id": "lo-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "THU 19 NOV",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 0,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6CF",
+                      "fontSize": 16,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "lo-29",
+                "blocks": [
+                  {
+                    "id": "lo-28",
+                    "type": "heading",
+                    "data": {
+                      "text": "Bristol · The Louisiana",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 15,
+                        "right": 12,
+                        "bottom": 15,
+                        "left": 12
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6CF",
+                      "fontSize": 16,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "lo-31",
+                "blocks": [
+                  {
+                    "id": "lo-30",
+                    "type": "heading",
+                    "data": {
+                      "text": "Sold out",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#A39B88",
+                      "fontSize": 13,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "lo-33",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#3A3631",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "lo-40",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              30,
+              44,
+              26
+            ],
+            "columns": [
+              {
+                "id": "lo-35",
+                "blocks": [
+                  {
+                    "id": "lo-34",
+                    "type": "heading",
+                    "data": {
+                      "text": "FRI 27 NOV",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 0,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6CF",
+                      "fontSize": 16,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "lo-37",
+                "blocks": [
+                  {
+                    "id": "lo-36",
+                    "type": "heading",
+                    "data": {
+                      "text": "London · Moth Club",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 15,
+                        "right": 12,
+                        "bottom": 15,
+                        "left": 12
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6CF",
+                      "fontSize": 16,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "lo-39",
+                "blocks": [
+                  {
+                    "id": "lo-38",
+                    "type": "heading",
+                    "data": {
+                      "text": "Tickets",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#EFE6CF",
+                      "fontSize": 13,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "lo-41",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#3A3631",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "lo-59",
+          "type": "text",
+          "data": {
+            "html": "<p>Low Ohm Records, Unit 9, 41 Morning Lane, London E9 6ND. You signed up at a show or at lowohm.example. <a href=\"https://lowohm.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 40,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "color": "#A39B88",
+            "lineHeight": 1.5
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

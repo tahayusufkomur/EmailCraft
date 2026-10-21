@@ -1,11 +1,13 @@
 import { type FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 
 import { useAuth } from '../lib/auth';
+import { AuthShell } from '../components/auth/AuthShell';
 import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
+import { Separator } from '../components/ui/separator';
 
 export function RegisterPage() {
   const navigate = useNavigate();
@@ -34,72 +36,98 @@ export function RegisterPage() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-md px-4 py-12">
-      <Card>
-        <CardHeader>
-          <CardTitle>Create account</CardTitle>
-          <CardDescription>One form onboarding: user + organization.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form className="space-y-4" onSubmit={onSubmit}>
-            <div className="space-y-2">
-              <Label htmlFor="organization_name">Organization name</Label>
-              <Input
-                id="organization_name"
-                value={form.organization_name}
-                onChange={(e) => setForm((prev) => ({ ...prev, organization_name: e.target.value }))}
-                required
-              />
+    <AuthShell
+      title="Create your account"
+      subtitle="Set up your workspace and first organization in seconds."
+      footer={
+        <>
+          Already have an account?{' '}
+          <Link className="font-medium text-foreground hover:underline" to="/login">
+            Sign in
+          </Link>
+        </>
+      }
+    >
+      <div className="space-y-5">
+        <form className="space-y-4" onSubmit={onSubmit}>
+          <div className="space-y-2">
+            <Label htmlFor="organization_name">Organization name</Label>
+            <Input
+              id="organization_name"
+              placeholder="Acme Studio"
+              value={form.organization_name}
+              onChange={(e) => setForm((prev) => ({ ...prev, organization_name: e.target.value }))}
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="username">Username</Label>
+            <Input
+              id="username"
+              placeholder="jane"
+              value={form.username}
+              onChange={(e) => setForm((prev) => ({ ...prev, username: e.target.value }))}
+              autoComplete="username"
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="you@example.com"
+              value={form.email}
+              onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))}
+              autoComplete="email"
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              placeholder="At least 8 characters"
+              value={form.password}
+              onChange={(e) => setForm((prev) => ({ ...prev, password: e.target.value }))}
+              autoComplete="new-password"
+              minLength={8}
+              required
+            />
+          </div>
+
+          {error && (
+            <div
+              role="alert"
+              className="rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive"
+            >
+              {error}
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="username">Username</Label>
-              <Input
-                id="username"
-                value={form.username}
-                onChange={(e) => setForm((prev) => ({ ...prev, username: e.target.value }))}
-                autoComplete="username"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))}
-                autoComplete="email"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                value={form.password}
-                onChange={(e) => setForm((prev) => ({ ...prev, password: e.target.value }))}
-                autoComplete="new-password"
-                minLength={8}
-                required
-              />
-            </div>
-            {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button className="w-full" disabled={busy} type="submit">
-              {busy ? 'Creating account...' : 'Create account'}
-            </Button>
-            <Button asChild className="w-full" type="button" variant="outline">
-              <a href="/api/auth/google/login/">Continue with Google</a>
-            </Button>
-          </form>
-          <p className="mt-4 text-sm text-muted-foreground">
-            Already have an account?{' '}
-            <Link className="text-foreground underline" to="/login">
-              Log in
-            </Link>
-          </p>
-        </CardContent>
-      </Card>
-    </div>
+          )}
+
+          <Button
+            className="w-full rounded-full"
+            size="lg"
+            loading={busy}
+            loadingText="Creating account..."
+            type="submit"
+          >
+            Create account
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </form>
+
+        <div className="relative flex items-center gap-3">
+          <Separator className="flex-1" />
+          <span className="text-xs uppercase tracking-wider text-muted-foreground">or</span>
+          <Separator className="flex-1" />
+        </div>
+
+        <Button asChild className="w-full rounded-full" size="lg" type="button" variant="outline">
+          <a href="/api/auth/google/login/">Continue with Google</a>
+        </Button>
+      </div>
+    </AuthShell>
   );
 }

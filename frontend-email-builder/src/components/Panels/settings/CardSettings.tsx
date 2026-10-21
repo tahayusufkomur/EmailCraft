@@ -275,10 +275,10 @@ function CardIconSettings({ data, style, updateData, updateStyle }: {
                 title={iconLabel(name)}
                 onClick={() => updateData({ iconName: name })}
                 style={{
-                  padding: 6, border: data.iconName === name ? '2px solid #6366f1' : '1px solid var(--border-color, #e2e8f0)',
-                  borderRadius: 6, background: 'var(--panel-bg, #fff)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  padding: 6, border: data.iconName === name ? '2px solid var(--accent-color)' : '1px solid var(--chrome-border)',
+                  borderRadius: 6, background: 'var(--chrome-surface-elevated)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}
-                dangerouslySetInnerHTML={{ __html: lucideSvgString(name, 18, data.iconName === name ? '#6366f1' : '#64748b') }}
+                dangerouslySetInnerHTML={{ __html: lucideSvgString(name, 18, data.iconName === name ? '#8f6324' : '#78716c') }}
               />
             ))}
           </div>

@@ -1,0 +1,896 @@
+{
+  "name": "Margin Books — Click & collect receipt",
+  "category": "transactional",
+  "is_premium": false,
+  "tags": [
+    "transactional",
+    "receipt",
+    "retail",
+    "click-and-collect"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 380,
+      "backgroundColor": "#45484B",
+      "bodyBackgroundColor": "#FFFFFF",
+      "defaultFont": "'Courier New', Courier, monospace",
+      "defaultFontSize": 14,
+      "defaultColor": "#151515"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "mb-1",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 28
+          }
+        },
+        {
+          "id": "mb-2",
+          "type": "heading",
+          "data": {
+            "text": "MARGIN BOOKS",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 4,
+              "left": 24
+            },
+            "alignment": "center",
+            "color": "#151515",
+            "fontSize": 24,
+            "fontFamily": "'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 3,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "mb-3",
+          "type": "text",
+          "data": {
+            "html": "<p>Independent booksellers since 1987<br>41 Gower Lane, Norwich NR2 4AB<br>01603 555 019</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 0,
+              "left": 24
+            },
+            "alignment": "center",
+            "fontSize": 13,
+            "lineHeight": 1.5
+          }
+        },
+        {
+          "id": "mb-4",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#6A6A6A",
+            "lineThickness": 1,
+            "spacing": 10
+          }
+        },
+        {
+          "id": "mb-5",
+          "type": "heading",
+          "data": {
+            "text": "CLICK & COLLECT",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 4,
+              "right": 24,
+              "bottom": 4,
+              "left": 24
+            },
+            "alignment": "center",
+            "color": "#151515",
+            "fontSize": 18,
+            "fontFamily": "'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 1,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "mb-6",
+          "type": "text",
+          "data": {
+            "html": "<p>Order MB-30417<br>Ready from Thu 22 Oct, 10:00</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 4,
+              "left": 24
+            },
+            "alignment": "center",
+            "fontSize": 14,
+            "lineHeight": 1.5
+          }
+        },
+        {
+          "id": "mb-7",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#6A6A6A",
+            "lineThickness": 1,
+            "spacing": 10
+          }
+        },
+        {
+          "id": "mb-12",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              70,
+              30
+            ],
+            "columns": [
+              {
+                "id": "mb-9",
+                "blocks": [
+                  {
+                    "id": "mb-8",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>The Peregrine</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 6,
+                        "bottom": 0,
+                        "left": 24
+                      },
+                      "alignment": "left",
+                      "fontSize": 14,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mb-11",
+                "blocks": [
+                  {
+                    "id": "mb-10",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>10.99</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 24,
+                        "bottom": 3,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "fontSize": 14,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "mb-13",
+          "type": "text",
+          "data": {
+            "html": "<p>J. A. Baker, paperback</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 6,
+              "left": 24
+            },
+            "alignment": "left",
+            "fontSize": 12,
+            "color": "#555555",
+            "lineHeight": 1.35
+          }
+        },
+        {
+          "id": "mb-18",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              70,
+              30
+            ],
+            "columns": [
+              {
+                "id": "mb-15",
+                "blocks": [
+                  {
+                    "id": "mb-14",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Piranesi</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 6,
+                        "bottom": 0,
+                        "left": 24
+                      },
+                      "alignment": "left",
+                      "fontSize": 14,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mb-17",
+                "blocks": [
+                  {
+                    "id": "mb-16",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>9.99</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 24,
+                        "bottom": 3,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "fontSize": 14,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "mb-19",
+          "type": "text",
+          "data": {
+            "html": "<p>Susanna Clarke, paperback</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 6,
+              "left": 24
+            },
+            "alignment": "left",
+            "fontSize": 12,
+            "color": "#555555",
+            "lineHeight": 1.35
+          }
+        },
+        {
+          "id": "mb-24",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              70,
+              30
+            ],
+            "columns": [
+              {
+                "id": "mb-21",
+                "blocks": [
+                  {
+                    "id": "mb-20",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>A Field Guide to Getting Lost</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 6,
+                        "bottom": 0,
+                        "left": 24
+                      },
+                      "alignment": "left",
+                      "fontSize": 14,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mb-23",
+                "blocks": [
+                  {
+                    "id": "mb-22",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>10.99</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 24,
+                        "bottom": 3,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "fontSize": 14,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "mb-25",
+          "type": "text",
+          "data": {
+            "html": "<p>Rebecca Solnit</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 6,
+              "left": 24
+            },
+            "alignment": "left",
+            "fontSize": 12,
+            "color": "#555555",
+            "lineHeight": 1.35
+          }
+        },
+        {
+          "id": "mb-30",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              70,
+              30
+            ],
+            "columns": [
+              {
+                "id": "mb-27",
+                "blocks": [
+                  {
+                    "id": "mb-26",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Notebook, lined A5</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 6,
+                        "bottom": 0,
+                        "left": 24
+                      },
+                      "alignment": "left",
+                      "fontSize": 14,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mb-29",
+                "blocks": [
+                  {
+                    "id": "mb-28",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>6.50</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 24,
+                        "bottom": 3,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "fontSize": 14,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "mb-31",
+          "type": "text",
+          "data": {
+            "html": "<p>Store brand</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 6,
+              "left": 24
+            },
+            "alignment": "left",
+            "fontSize": 12,
+            "color": "#555555",
+            "lineHeight": 1.35
+          }
+        },
+        {
+          "id": "mb-32",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#6A6A6A",
+            "lineThickness": 1,
+            "spacing": 10
+          }
+        },
+        {
+          "id": "mb-37",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              70,
+              30
+            ],
+            "columns": [
+              {
+                "id": "mb-34",
+                "blocks": [
+                  {
+                    "id": "mb-33",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Subtotal</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 6,
+                        "bottom": 3,
+                        "left": 24
+                      },
+                      "alignment": "left",
+                      "fontSize": 14,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mb-36",
+                "blocks": [
+                  {
+                    "id": "mb-35",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>38.47</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 24,
+                        "bottom": 3,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "fontSize": 14,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "mb-42",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              70,
+              30
+            ],
+            "columns": [
+              {
+                "id": "mb-39",
+                "blocks": [
+                  {
+                    "id": "mb-38",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Members 10%</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 6,
+                        "bottom": 3,
+                        "left": 24
+                      },
+                      "alignment": "left",
+                      "fontSize": 14,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mb-41",
+                "blocks": [
+                  {
+                    "id": "mb-40",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>-3.85</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 24,
+                        "bottom": 3,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "fontSize": 14,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "mb-47",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              70,
+              30
+            ],
+            "columns": [
+              {
+                "id": "mb-44",
+                "blocks": [
+                  {
+                    "id": "mb-43",
+                    "type": "text",
+                    "data": {
+                      "html": "<p><strong>TOTAL</strong></p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 6,
+                        "bottom": 3,
+                        "left": 24
+                      },
+                      "alignment": "left",
+                      "fontSize": 18,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mb-46",
+                "blocks": [
+                  {
+                    "id": "mb-45",
+                    "type": "text",
+                    "data": {
+                      "html": "<p><strong>£34.62</strong></p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 24,
+                        "bottom": 3,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "fontSize": 18,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "mb-52",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              70,
+              30
+            ],
+            "columns": [
+              {
+                "id": "mb-49",
+                "blocks": [
+                  {
+                    "id": "mb-48",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Paid by card</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 6,
+                        "bottom": 3,
+                        "left": 24
+                      },
+                      "alignment": "left",
+                      "fontSize": 14,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mb-51",
+                "blocks": [
+                  {
+                    "id": "mb-50",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>34.62</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 3,
+                        "right": 24,
+                        "bottom": 3,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "fontSize": 14,
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "mb-53",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#6A6A6A",
+            "lineThickness": 1,
+            "spacing": 10
+          }
+        },
+        {
+          "id": "mb-54",
+          "type": "text",
+          "data": {
+            "html": "<p>Bring this email or your order number to the counter. We hold orders for 14 days.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 4,
+              "right": 24,
+              "bottom": 14,
+              "left": 24
+            },
+            "alignment": "center",
+            "fontSize": 14,
+            "lineHeight": 1.5
+          }
+        },
+        {
+          "id": "mb-55",
+          "type": "button",
+          "data": {
+            "text": "VIEW ORDER",
+            "url": "https://marginbooks.example/orders"
+          },
+          "style": {
+            "padding": {
+              "top": 4,
+              "right": 24,
+              "bottom": 18,
+              "left": 24
+            },
+            "alignment": "center",
+            "backgroundColor": "#151515",
+            "color": "#FFFFFF",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 15,
+            "fontFamily": "'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 2,
+            "textTransform": "none",
+            "paddingX": 24,
+            "paddingY": 12,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#151515"
+          }
+        },
+        {
+          "id": "mb-56",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#6A6A6A",
+            "lineThickness": 1,
+            "spacing": 10
+          }
+        },
+        {
+          "id": "mb-57",
+          "type": "text",
+          "data": {
+            "html": "<p><strong>THANK YOU FOR SHOPPING INDEPENDENT</strong></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 4,
+              "right": 24,
+              "bottom": 4,
+              "left": 24
+            },
+            "alignment": "center",
+            "fontSize": 13,
+            "lineHeight": 1.5
+          }
+        },
+        {
+          "id": "mb-58",
+          "type": "text",
+          "data": {
+            "html": "<p>Returns within 30 days with this receipt.<br><a href=\"https://marginbooks.example/returns\">Returns policy</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 24,
+              "bottom": 4,
+              "left": 24
+            },
+            "alignment": "center",
+            "fontSize": 12,
+            "lineHeight": 1.5
+          }
+        },
+        {
+          "id": "mb-59",
+          "type": "text",
+          "data": {
+            "html": "<p>* * *</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 10,
+              "right": 24,
+              "bottom": 32,
+              "left": 24
+            },
+            "alignment": "center",
+            "fontSize": 13
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

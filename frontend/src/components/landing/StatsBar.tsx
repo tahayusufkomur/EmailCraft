@@ -1,28 +1,24 @@
-import { AnimateIn } from '../ui/AnimateIn';
-
 const stats = [
-  { value: '3', label: 'API calls to go live' },
-  { value: '13', label: 'Block types' },
-  { value: 'REST', label: 'Programmable API' },
-  { value: '∞', label: 'Orgs & projects' },
-] as const;
+  { value: '14', label: 'Typed email block primitives' },
+  { value: '< 50ms', label: 'Server-side variable render latency' },
+  { value: '5 min', label: 'Iframe + postMessage integration' },
+  { value: '100%', label: 'Table-based email client compatibility' },
+];
 
 export function StatsBar() {
   return (
-    <section className="bg-muted/30">
-      <div className="mx-auto grid w-full max-w-4xl grid-cols-2 gap-8 px-4 py-12 md:grid-cols-4 md:py-14">
-        {stats.map((stat, index) => (
-          <AnimateIn
-            key={stat.label}
-            delay={index * 0.1}
-            className="flex flex-col items-center text-center"
-          >
-            <span className="font-heading text-3xl font-bold tracking-tight md:text-4xl">
-              {stat.value}
-            </span>
-            <span className="mt-1 text-sm text-muted-foreground">{stat.label}</span>
-          </AnimateIn>
-        ))}
+    <section className="border-y border-border bg-muted/50 py-12 sm:py-16">
+      <div className="mx-auto max-w-media px-6 sm:px-8">
+        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
+          {stats.map((stat) => (
+            <div key={stat.label} className="text-center">
+              <p className="font-mono text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                {stat.value}
+              </p>
+              <p className="mt-2 text-caption text-muted-foreground">{stat.label}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

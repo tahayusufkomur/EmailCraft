@@ -227,6 +227,8 @@ def render_email_html(json_data, variables_mode='placeholders'):
         content_bg_css=content_bg_css,
         body_border_radius=body_border_radius,
         google_font_link=google_font_link,
+        stack_gaps=ctx.get('stack_gaps', ()),
+        stack_pads=ctx.get('stack_pads', ()),
     )
 
     return {'html': full_html, 'warnings': warnings}
@@ -243,7 +245,13 @@ def _email_skeleton(
     content_bg_css,
     body_border_radius=0,
     google_font_link='',
+    stack_gaps=(),
+    stack_pads=(),
 ):
+    # Stacked columns drop their side gutters and keep the gap as space above each column.
+    gap_css = ''.join(f'\n      .stack-gap-{g} {{ padding: {g}px 0 0 0 !important; }}' for g in sorted(stack_gaps))
+    gap_css += ''.join(f'\n      .stack-pad-{p} {{ padding-left: {p}px !important; padding-right: {p}px !important; }}'
+                       for p in sorted(stack_pads))
     return f"""<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
       xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -272,6 +280,7 @@ def _email_skeleton(
     @media only screen and (max-width: {content_width + 20}px) {{
       .email-container {{ width: 100% !important; max-width: 100% !important; }}
       .stack-column {{ display: block !important; width: 100% !important; max-width: 100% !important; }}
+      .stack-gutter {{ padding: 0 !important; }}{gap_css}
       .mobile-padding {{ padding-left: 16px !important; padding-right: 16px !important; }}
     }}
   </style>
@@ -404,18 +413,50 @@ def _frame(block_html, style, ctx):
 </tr>"""
 
 
+_P_TAG = re.compile(r'<p(\s[^>]*)?>', re.IGNORECASE)
+_A_TAG = re.compile(r'<a(\s[^>]*)?>', re.IGNORECASE)
+_STYLE_ATTR = re.compile(r'\sstyle\s*=\s*"', re.IGNORECASE)
+
+
+def _normalize_text_html(text_html, color):
+    """Give editor HTML explicit email styling: the rich-text editor stores bare <p> and <a>, which
+    clients would render with their own paragraph margins and blue links. Existing styles win."""
+    p_tags = list(_P_TAG.finditer(text_html))
+
+    def p_repl(m):
+        margin = '0' if m.start() == p_tags[-1].start() else '0 0 1em'
+        attrs = m.group(1) or ''
+        if 'margin' in attrs.lower():
+            return m.group(0)
+        if _STYLE_ATTR.search(attrs):
+            return '<p' + _STYLE_ATTR.sub(f' style="margin: {margin}; ', attrs, count=1) + '>'
+        return f'<p{attrs} style="margin: {margin};">'
+
+    def a_repl(m):
+        attrs = m.group(1) or ''
+        if _STYLE_ATTR.search(attrs):
+            return m.group(0)
+        return f'<a{attrs} style="color: {color}; text-decoration: underline;">'
+
+    return _A_TAG.sub(a_repl, _P_TAG.sub(p_repl, text_html))
+
+
 def _render_text_block(block, ctx):
     data = block.get('data', {})
     style = block.get('style', {})
     padding = _padding_str(style.get('padding', {}))
     alignment = style.get('alignment', 'left')
 
-    text_html = data.get('html', '')
+    font_size = style.get('fontSize') or ctx['default_font_size']
+    color = _sanitize_css_color(style.get('color'), ctx['default_color'])
+    text_html = _normalize_text_html(data.get('html', ''), color)
+    bg = style.get('backgroundColor')
+    bg_style = f' background-color: {bg};' if bg else ''
 
     return f"""<tr>
-  <td style="padding: {padding}; font-family: {ctx['default_font']}; font-size: {ctx['default_font_size']}px;
-             line-height: {int(ctx['default_font_size'] * (style.get('lineHeight') or 1.6))}px; color: {ctx['default_color']};
-             text-align: {alignment};">
+  <td style="padding: {padding}; font-family: {ctx['default_font']}; font-size: {font_size}px;
+             line-height: {int(font_size * (style.get('lineHeight') or 1.6))}px; color: {color};
+             text-align: {alignment};{bg_style}">
     {text_html}
   </td>
 </tr>"""
@@ -532,57 +573,104 @@ def _render_divider_block(block, ctx):
 </tr>"""
 
 
+def _column_widths(ratios, count, total):
+    """Split `total` px by the column ratios; the last column takes the rounding remainder."""
+    ratios = [r if isinstance(r, (int, float)) and r > 0 else 0 for r in (ratios or [])][:count]
+    if len(ratios) != count or not sum(ratios):
+        ratios = [1] * count
+    widths = [int(total * r / sum(ratios)) for r in ratios]
+    widths[-1] = total - sum(widths[:-1])
+    return widths
+
+
 def _render_columns_block(block, ctx):
+    """Columns keep the gap between them (none at the outer edges), like the editor canvas.
+
+    Stacking columns use the fluid-hybrid pattern (inline-block divs + MSO ghost table) and
+    collapse to full width on small screens. With stackOnMobile false they are a plain table
+    row that never wraps, so data rows (prices, times, scores) stay aligned on phones.
+    """
     data = block.get('data', {})
     style = block.get('style', {})
-    column_count = data.get('columnCount', 2)
     columns = data.get('columns', [])
-    gap = style.get('gap', 10)
+    if not columns:
+        return ''
+    count = len(columns)
+    gap = max(0, int(style.get('gap', 10) or 0))
     min_height = style.get('minHeight')
-    height_style = f' style="height: {int(min_height)}px;"' if min_height else ''
+    height_style = f' height: {int(min_height)}px;' if min_height else ''
     v_align = {'center': 'middle', 'bottom': 'bottom'}.get(style.get('verticalAlignment'), 'top')
+    # The ratio splits what is left after the gaps, so equal ratios give equal content widths.
+    widths = _column_widths(data.get('columnRatio'), count, ctx['content_width'] - gap * (count - 1))
+    stack = style.get('stackOnMobile', True) is not False
 
-    col_width = int((ctx['content_width'] - gap * (column_count - 1)) / column_count)
+    def content(col, width, cls=''):
+        """The column's own box: background, radius, padding and its blocks."""
+        inner = f"""<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          {_render_blocks(col.get('blocks', []), ctx)}
+        </table>"""
+        css = f'padding: {_padding_str(col["padding"]) if col.get("padding") else "0"};'
+        if col.get('backgroundColor'):
+            css += f" background-color: {_sanitize_css_color(col['backgroundColor'], '#ffffff')};"
+        if col.get('borderRadius'):
+            css += f" border-radius: {int(col['borderRadius'])}px;"
+        attr = f' class="{cls}"' if cls else ''
+        img = html_module.escape(col.get('backgroundImage') or '')
+        if img:
+            attr += f' background="{img}"'
+            css += f" background-image: url('{img}'); background-size: cover; background-position: center;"
+            inner = f'{_vml_bg_open(img, width)}{inner}{_VML_BG_CLOSE}'
+        return attr, css, inner
 
+    if not stack:
+        cells = []
+        for i, col in enumerate(columns):
+            if i:
+                cells.append(f'<td width="{gap}" style="width: {gap}px; font-size: 0; line-height: 0;">&nbsp;</td>')
+            attr, css, inner = content(col, widths[i])
+            pct = round(widths[i] * 100 / ctx['content_width'], 2)
+            cells.append(f'<td{attr} width="{pct}%" valign="{v_align}" style="{css}">{inner}</td>')
+        return f"""<tr>
+  <td valign="{v_align}" style="padding: 0;{height_style}">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout: fixed;">
+      <tr>{''.join(cells)}</tr>
+    </table>
+  </td>
+</tr>"""
+
+    ctx.setdefault('stack_gaps', set()).add(gap)
+    # Stacked, every column takes the block's widest side padding on both sides, so an inset
+    # given to the outer edges of a row (e.g. 40px left of column 1) holds for every column.
+    pads = [max(c['padding'].get('left', 0), c['padding'].get('right', 0)) for c in columns if c.get('padding')]
+    pad_class = f'stack-pad-{int(max(pads))}' if pads and max(pads) > 0 else ''
+    if pad_class:
+        ctx.setdefault('stack_pads', set()).add(int(max(pads)))
     cols_html = []
     for i, col in enumerate(columns):
-        col_blocks_html = _render_blocks(col.get('blocks', []), ctx)
-        # Wrap column blocks in a table row structure
-        col_inner = f"""<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-          {col_blocks_html}
-        </table>"""
-
-        mso_start = f'<!--[if mso]><td width="{col_width}" valign="top"><![endif]-->' if i > 0 else f'<!--[if mso]><table role="presentation" width="{ctx["content_width"]}" cellpadding="0" cellspacing="0" border="0"><tr><td width="{col_width}" valign="top"><![endif]-->'
-        mso_end = '<!--[if mso]></td><![endif]-->' if i < column_count - 1 else '<!--[if mso]></td></tr></table><![endif]-->'
-
-        col_bg = col.get('backgroundColor')
-        col_bg_style = f' background-color: {col_bg};' if col_bg else ''
-        col_padding = _padding_str(col['padding']) if col.get('padding') else f'0 {gap // 2}px'
-        if col.get('borderRadius'):
-            col_bg_style += f" border-radius: {int(col['borderRadius'])}px;"
-        col_img = html_module.escape(col.get('backgroundImage') or '')
-        col_bg_attr = ''
-        if col_img:
-            col_bg_attr = f' background="{col_img}"'
-            col_bg_style += f" background-image: url('{col_img}'); background-size: cover; background-position: center;"
-            col_inner = f'{_vml_bg_open(col_img, col_width)}{col_inner}{_VML_BG_CLOSE}'
-
-        cols_html.append(f"""{mso_start}
-      <div style="display: inline-block; width: 100%; max-width: {col_width}px; vertical-align: top;">
+        left = gap // 2 if i > 0 else 0
+        right = gap - gap // 2 if i < count - 1 else 0
+        outer = widths[i] + left + right
+        attr, css, inner = content(col, widths[i], pad_class)
+        mso_start = (f'<!--[if mso]><td width="{outer}" valign="{v_align}"><![endif]-->' if i else
+                     f'<!--[if mso]><table role="presentation" width="{ctx["content_width"]}" cellpadding="0" '
+                     f'cellspacing="0" border="0"><tr><td width="{outer}" valign="{v_align}"><![endif]-->')
+        mso_end = '<!--[if mso]></td><![endif]-->' if i < count - 1 else '<!--[if mso]></td></tr></table><![endif]-->'
+        gutter_class = f'stack-gap-{gap}' if i else 'stack-gutter'
+        cols_html.append(f"""{mso_start}<div class="stack-column" style="display: inline-block; width: 100%; max-width: {outer}px; vertical-align: {v_align}; font-size: {ctx['default_font_size']}px;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
-            <td{col_bg_attr} style="padding: {col_padding};{col_bg_style}" valign="top">
-              {col_inner}
+            <td class="{gutter_class}" style="padding: 0 {right}px 0 {left}px;" valign="top">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr><td{attr} style="{css}" valign="top">{inner}</td></tr>
+              </table>
             </td>
           </tr>
         </table>
-      </div>
-      {mso_end}""")
+      </div>{mso_end}""")
 
+    # font-size: 0 removes the whitespace gap between the inline-block columns.
     return f"""<tr>
-  <td valign="{v_align}"{height_style}>
-    {''.join(cols_html)}
-  </td>
+  <td valign="{v_align}" style="font-size: 0;{height_style}">{''.join(cols_html)}</td>
 </tr>"""
 
 
@@ -812,7 +900,7 @@ def _render_card_block(block, ctx):
     border = f'{border_w}px {border_s} {border_c}' if border_w > 0 else 'none'
 
     return f"""<tr>
-  <td style="padding: {padding};">
+  <td style="padding: 0;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: {bg}; border-radius: {radius}px; border: {border};">
       <tr>
         <td style="padding: {padding}; text-align: {align};">
@@ -908,34 +996,41 @@ _GOOGLE_FONT_SLUGS = {
     'DM Sans': 'DM+Sans:wght@400;500;600;700',
     'Source Serif 4': 'Source+Serif+4:wght@400;600;700',
     'Merriweather': 'Merriweather:wght@400;700',
+    'Archivo': 'Archivo:wght@400;500;600;700;800',
+    'Alfa Slab One': 'Alfa+Slab+One',
+    'Barlow Condensed': 'Barlow+Condensed:wght@400;500;600;700',
+    'Big Shoulders Stencil': 'Big+Shoulders+Stencil:wght@700;800',
+    'Bungee': 'Bungee',
+    'Courier Prime': 'Courier+Prime:wght@400;700',
+    'EB Garamond': 'EB+Garamond:ital,wght@0,400;0,600;1,400',
+    'Overpass': 'Overpass:wght@400;600;700;800',
+    'Press Start 2P': 'Press+Start+2P',
+    'Silkscreen': 'Silkscreen:wght@400;700',
 }
 
 
+_FONT_DECL = re.compile(r'font-family\s*:\s*([^;"]+)', re.IGNORECASE)
+
+
 def _collect_google_font_links(json_data):
-    fonts = set()
-    settings = json_data.get('settings', {})
-    fonts.add(settings.get('defaultFont', ''))
+    """Link every Google font the template names: any *fontFamily / defaultFont style value,
+    plus font-family declarations inside rich-text HTML."""
+    fonts = []
 
-    def scan_blocks(blocks):
-        for block in blocks:
-            style = block.get('style', {})
-            if style.get('fontFamily'):
-                fonts.add(style['fontFamily'])
-            if style.get('headingFontFamily'):
-                fonts.add(style['headingFontFamily'])
-            data = block.get('data', {})
-            for col in data.get('columns', []):
-                scan_blocks(col.get('blocks', []))
+    def walk(node):
+        if isinstance(node, dict):
+            for k, v in node.items():
+                if isinstance(v, str) and (k.lower().endswith('fontfamily') or k == 'defaultFont'):
+                    fonts.append(v)
+                walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v)
+        elif isinstance(node, str) and 'font-family' in node.lower():
+            fonts.extend(_FONT_DECL.findall(node))
 
-    for section in ('header', 'body', 'footer'):
-        scan_blocks(json_data.get(section, {}).get('blocks', []))
-
-    names = set()
-    for ff in fonts:
-        for name in _GOOGLE_FONT_SLUGS:
-            if name in ff:
-                names.add(name)
-
+    walk(json_data)
+    names = {name for ff in fonts for name in _GOOGLE_FONT_SLUGS if name in ff}
     if not names:
         return ''
     families = '&family='.join(_GOOGLE_FONT_SLUGS[n] for n in sorted(names))
@@ -1116,7 +1211,7 @@ def _render_profile_block(block, ctx):
     width_attr = '' if img_pos == 'top' else ' width="100%"'
 
     return f"""<tr>
-  <td style="padding: {padding};">
+  <td style="padding: 0;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: {bg}; border-radius: {radius}px; border: {border};">
       <tr>
         <td style="padding: {padding};">

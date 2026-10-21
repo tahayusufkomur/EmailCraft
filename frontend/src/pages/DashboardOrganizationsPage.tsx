@@ -1,12 +1,15 @@
 import { type FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Copy, KeyRound, Plus, RefreshCw, Wand2, X } from 'lucide-react';
 
+import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { api } from '../lib/api';
 import { useAuth } from '../lib/auth';
+import { PLAN_LABELS } from '../lib/plans';
 import { formatBytes } from '../lib/utils';
 import type { OrganizationWithApiKeys, SiteDashboardResponse } from '../types/api';
 
@@ -61,7 +64,10 @@ export function DashboardOrganizationsPage() {
     void loadOrganizations().catch((err: Error) => setError(err.message));
   }, [loadOrganizations, token]);
 
-  const accountPlan = useMemo(() => dashboard?.plan ?? '-', [dashboard]);
+  const accountPlan = useMemo(
+    () => (dashboard?.plan ? PLAN_LABELS[dashboard.plan] : '—'),
+    [dashboard],
+  );
   const renderUsage = useMemo(() => {
     if (!dashboard || dashboard.rendered_emails_limit === 0) return 0;
     return Math.min(100, (dashboard.rendered_emails_count / dashboard.rendered_emails_limit) * 100);
@@ -80,7 +86,9 @@ export function DashboardOrganizationsPage() {
   const addCreateOrigin = () => {
     const nextOrigin = createOriginInput.trim();
     if (!nextOrigin) return;
-    setCreateAllowedOrigins((previous) => (previous.includes(nextOrigin) ? previous : [...previous, nextOrigin]));
+    setCreateAllowedOrigins((previous) =>
+      previous.includes(nextOrigin) ? previous : [...previous, nextOrigin],
+    );
     setCreateOriginInput('');
   };
 
@@ -162,7 +170,9 @@ export function DashboardOrganizationsPage() {
       });
 
       setItems((previous) =>
-        previous.map((organization) => (organization.id === organizationId ? updated : organization)),
+        previous.map((organization) =>
+          organization.id === organizationId ? updated : organization,
+        ),
       );
       setDrafts((previous) => ({
         ...previous,
@@ -247,59 +257,94 @@ export function DashboardOrganizationsPage() {
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="font-heading text-3xl font-semibold tracking-tight">Organizations</h1>
-        <p className="text-muted-foreground">
-          Manage per-organization API keys, allowed origins, and builder UI settings.
-        </p>
+    <div className="space-y-8">
+      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        <div>
+          <p className="text-eyebrow text-marketing-accent">Workspaces</p>
+          <h1 className="mt-1 text-2xl font-bold tracking-tight text-foreground">Organizations</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Manage per-organization API keys, allowed origins, and builder settings.
+          </p>
+        </div>
+
+        <Button
+          type="button"
+          className="rounded-full"
+          variant={isCreateOpen ? 'outline' : 'default'}
+          onClick={() => setIsCreateOpen((previous) => !previous)}
+        >
+          {isCreateOpen ? (
+            <>
+              <X className="h-4 w-4" />
+              Close
+            </>
+          ) : (
+            <>
+              <Plus className="h-4 w-4" />
+              New organization
+            </>
+          )}
+        </Button>
       </div>
 
+      {/* Account Summary Strip */}
       <Card>
-        <CardHeader>
-          <CardTitle>Account package</CardTitle>
-          <CardDescription>
-            Current plan: {accountPlan}. Total organizations: {dashboard?.organizations_count ?? items.length}
-          </CardDescription>
-        </CardHeader>
+        <CardContent className="flex flex-wrap items-center justify-between gap-4 p-5">
+          <div className="flex items-center gap-3">
+            <Badge variant="pro">{accountPlan}</Badge>
+            <span className="text-sm text-muted-foreground">
+              <strong className="font-semibold text-foreground">
+                {dashboard?.organizations_count ?? items.length}
+              </strong>{' '}
+              active organization{(dashboard?.organizations_count ?? items.length) !== 1 ? 's' : ''}
+            </span>
+          </div>
+          {dashboard && (
+            <div className="flex flex-wrap items-center gap-6 text-xs text-muted-foreground">
+              <span>
+                Renders:{' '}
+                <strong className="font-mono text-foreground">
+                  {dashboard.rendered_emails_count.toLocaleString()} /{' '}
+                  {dashboard.rendered_emails_limit.toLocaleString()}
+                </strong>
+              </span>
+              <span>
+                Storage:{' '}
+                <strong className="font-mono text-foreground">
+                  {formatBytes(dashboard.storage_used_bytes)} /{' '}
+                  {formatBytes(dashboard.storage_limit_bytes)}
+                </strong>
+              </span>
+            </div>
+          )}
+        </CardContent>
       </Card>
 
       {error && (
-        <p className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
-          {error}
-        </p>
-      )}
-
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h2 className="font-heading text-xl font-semibold">Your organizations</h2>
-          <p className="text-sm text-muted-foreground">
-            Create organizations and manage allowed origins and API keys.
-          </p>
-        </div>
-        <Button
-          type="button"
-          variant={isCreateOpen ? 'secondary' : 'default'}
-          onClick={() => setIsCreateOpen((previous) => !previous)}
+        <div
+          role="alert"
+          className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive"
         >
-          {isCreateOpen ? 'Close' : '+ Add organization'}
-        </Button>
-      </div>
+          {error}
+        </div>
+      )}
 
       {isCreateOpen && (
         <Card>
           <CardHeader>
             <CardTitle>Add organization</CardTitle>
             <CardDescription>
-              Email is inherited from the account. Add optional allowed origins.
+              Email is inherited from your account. Optionally restrict CORS origins for embedded
+              sessions.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form className="space-y-4" onSubmit={handleCreateOrganization}>
               <div className="space-y-2">
-                <Label htmlFor="create-org-name">Name</Label>
+                <Label htmlFor="create-org-name">Organization name</Label>
                 <Input
                   id="create-org-name"
+                  placeholder="Acme Marketing"
                   value={createName}
                   onChange={(event) => setCreateName(event.target.value)}
                   required
@@ -308,7 +353,7 @@ export function DashboardOrganizationsPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="create-origin-input">Allowed origins</Label>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex gap-2">
                   <Input
                     id="create-origin-input"
                     value={createOriginInput}
@@ -319,10 +364,10 @@ export function DashboardOrganizationsPage() {
                         addCreateOrigin();
                       }
                     }}
-                    placeholder="http://localhost:5173"
+                    placeholder="https://app.example.com"
                   />
                   <Button type="button" variant="outline" onClick={addCreateOrigin}>
-                    +
+                    Add
                   </Button>
                 </div>
                 {createAllowedOrigins.length > 0 && (
@@ -330,30 +375,36 @@ export function DashboardOrganizationsPage() {
                     {createAllowedOrigins.map((origin) => (
                       <button
                         key={origin}
-                        className="rounded-full border border-border px-3 py-1 text-xs hover:bg-muted"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted px-3 py-1 font-mono text-xs text-foreground transition-colors hover:bg-accent"
                         type="button"
                         onClick={() => removeCreateOrigin(origin)}
                       >
-                        {origin} ×
+                        {origin}
+                        <X className="h-3 w-3 text-muted-foreground" />
                       </button>
                     ))}
                   </div>
                 )}
               </div>
 
-              <Button disabled={busyAction === 'create'} type="submit">
-                {busyAction === 'create' ? 'Creating...' : 'Create organization'}
+              <Button
+                className="rounded-full"
+                loading={busyAction === 'create'}
+                loadingText="Creating..."
+                type="submit"
+              >
+                Create organization
               </Button>
             </form>
           </CardContent>
         </Card>
       )}
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-6 lg:grid-cols-2">
         {items.length === 0 && (
           <Card className="lg:col-span-2">
-            <CardContent className="py-6 text-sm text-muted-foreground">
-              No organizations yet.
+            <CardContent className="py-10 text-center text-sm text-muted-foreground">
+              No organizations yet. Click &ldquo;New organization&rdquo; above to create one.
             </CardContent>
           </Card>
         )}
@@ -367,12 +418,20 @@ export function DashboardOrganizationsPage() {
           const copyLabel = copyFeedback[organization.id];
 
           return (
-            <Card key={organization.id}>
-              <CardHeader>
-                <CardTitle>{organization.name}</CardTitle>
-                <CardDescription>Plan: {organization.plan}</CardDescription>
+            <Card key={organization.id} className="flex flex-col justify-between">
+              <CardHeader className="flex flex-row items-start justify-between gap-4 space-y-0">
+                <div>
+                  <CardTitle className="text-xl">{organization.name}</CardTitle>
+                  <CardDescription className="mt-1">
+                    Plan: {PLAN_LABELS[organization.plan] ?? organization.plan}
+                  </CardDescription>
+                </div>
+                <Badge variant="secondary" className="uppercase">
+                  {organization.plan}
+                </Badge>
               </CardHeader>
-              <CardContent className="space-y-4">
+
+              <CardContent className="space-y-5">
                 <div className="space-y-2">
                   <Label htmlFor={`name-${organization.id}`}>Name</Label>
                   <Input
@@ -388,7 +447,7 @@ export function DashboardOrganizationsPage() {
 
                 <div className="space-y-2">
                   <Label htmlFor={`origin-input-${organization.id}`}>Allowed origins</Label>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex gap-2">
                     <Input
                       id={`origin-input-${organization.id}`}
                       value={draft.originInput}
@@ -403,14 +462,14 @@ export function DashboardOrganizationsPage() {
                           addDraftOrigin(organization.id);
                         }
                       }}
-                      placeholder="http://localhost:5173"
+                      placeholder="https://app.example.com"
                     />
                     <Button
                       type="button"
                       variant="outline"
                       onClick={() => addDraftOrigin(organization.id)}
                     >
-                      +
+                      Add
                     </Button>
                   </div>
                   {draft.allowedOrigins.length > 0 && (
@@ -418,11 +477,12 @@ export function DashboardOrganizationsPage() {
                       {draft.allowedOrigins.map((origin) => (
                         <button
                           key={origin}
-                          className="rounded-full border border-border px-3 py-1 text-xs hover:bg-muted"
+                          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted px-3 py-1 font-mono text-xs text-foreground transition-colors hover:bg-accent"
                           type="button"
                           onClick={() => removeDraftOrigin(organization.id, origin)}
                         >
-                          {origin} ×
+                          {origin}
+                          <X className="h-3 w-3 text-muted-foreground" />
                         </button>
                       ))}
                     </div>
@@ -430,52 +490,116 @@ export function DashboardOrganizationsPage() {
                 </div>
 
                 {dashboard && (
-                  <div className="space-y-3 rounded-md border border-border bg-muted/40 p-3">
-                    <p className="text-sm font-medium">Usage for this organization</p>
-                    <p className="text-xs text-muted-foreground">
-                      Package usage is shared across all organizations in your account.
-                    </p>
+                  <div className="space-y-3 rounded-xl border border-border bg-muted/40 p-4">
+                    <div className="flex items-center justify-between">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                        Shared Account Quota
+                      </p>
+                      <span className="font-mono text-[11px] text-muted-foreground">
+                        Max {dashboard.max_media_files_per_upload} files/upload
+                      </span>
+                    </div>
 
-                    <div className="space-y-1">
+                    <div className="space-y-1.5">
                       <div className="flex items-center justify-between text-xs text-muted-foreground">
                         <span>Email renders</span>
-                        <span>
-                          {dashboard.rendered_emails_count.toLocaleString()} / {dashboard.rendered_emails_limit.toLocaleString()}
+                        <span className="font-mono text-foreground">
+                          {dashboard.rendered_emails_count.toLocaleString()} /{' '}
+                          {dashboard.rendered_emails_limit.toLocaleString()}
                         </span>
                       </div>
-                      <div className="h-2 rounded-full bg-muted">
-                        <div className="h-2 rounded-full bg-primary" style={{ width: `${renderUsage}%` }} />
+                      <div className="h-1.5 rounded-full bg-muted">
+                        <div
+                          className="h-1.5 rounded-full bg-foreground"
+                          style={{ width: `${renderUsage}%` }}
+                        />
                       </div>
                     </div>
 
-                    <div className="space-y-1">
+                    <div className="space-y-1.5">
                       <div className="flex items-center justify-between text-xs text-muted-foreground">
                         <span>Storage</span>
-                        <span>
-                          {formatBytes(dashboard.storage_used_bytes)} / {formatBytes(dashboard.storage_limit_bytes)}
+                        <span className="font-mono text-foreground">
+                          {formatBytes(dashboard.storage_used_bytes)} /{' '}
+                          {formatBytes(dashboard.storage_limit_bytes)}
                         </span>
                       </div>
-                      <div className="h-2 rounded-full bg-muted">
-                        <div className="h-2 rounded-full bg-primary" style={{ width: `${storageUsage}%` }} />
+                      <div className="h-1.5 rounded-full bg-muted">
+                        <div
+                          className="h-1.5 rounded-full bg-foreground"
+                          style={{ width: `${storageUsage}%` }}
+                        />
                       </div>
                     </div>
-
-                    <p className="text-xs text-muted-foreground">
-                      Max files per upload: {dashboard.max_media_files_per_upload}
-                    </p>
                   </div>
                 )}
 
-                <div className="flex flex-wrap gap-2">
+                {organization.api_keys.length > 0 && (
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      Active API Keys
+                    </p>
+                    <div className="space-y-1.5">
+                      {organization.api_keys.map((apiKey) => (
+                        <div
+                          key={apiKey.id}
+                          className="flex items-center justify-between rounded-lg border border-border bg-muted/30 px-3 py-1.5 font-mono text-xs"
+                        >
+                          <span className="flex items-center gap-2 text-foreground">
+                            <KeyRound className="h-3.5 w-3.5 text-marketing-accent" />
+                            {apiKey.key_prefix}...
+                          </span>
+                          <span className="text-muted-foreground">
+                            {apiKey.environment} · {apiKey.scope}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {generatedKey && (
+                  <div className="rounded-xl border border-border bg-muted/50 p-3.5">
+                    <div className="flex items-center justify-between gap-2">
+                      <p className="text-xs font-semibold text-foreground">
+                        Current reusable API key
+                      </p>
+                      <Button
+                        size="sm"
+                        type="button"
+                        variant="outline"
+                        onClick={() => {
+                          void copyApiKeyToClipboard(organization.id, generatedKey);
+                        }}
+                      >
+                        <Copy className="h-3.5 w-3.5" />
+                        {copyLabel === 'Copied' ? 'Copied' : 'Copy'}
+                      </Button>
+                    </div>
+                    <p className="mt-1.5 break-all font-mono text-xs text-muted-foreground">
+                      {generatedKey}
+                    </p>
+                    {copyLabel === 'Refreshed' && (
+                      <p className="mt-1 text-xs text-marketing-accent">API key refreshed.</p>
+                    )}
+                    {copyLabel === 'Copy failed' && (
+                      <p className="mt-1 text-xs text-destructive">
+                        Copy failed. Please copy manually.
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                <div className="flex flex-wrap gap-2 border-t border-border pt-4">
                   <Button
                     disabled={isSaving}
                     onClick={() => {
                       void handleSaveOrganization(organization.id);
                     }}
                     type="button"
-                    variant="outline"
+                    size="sm"
                   >
-                    {isSaving ? 'Saving...' : 'Save settings'}
+                    {isSaving ? 'Saving...' : 'Save changes'}
                   </Button>
                   <Button
                     disabled={isCopyingKey}
@@ -484,7 +608,9 @@ export function DashboardOrganizationsPage() {
                     }}
                     type="button"
                     variant="secondary"
+                    size="sm"
                   >
+                    <Copy className="h-3.5 w-3.5" />
                     {isCopyingKey ? 'Copying...' : 'Copy API key'}
                   </Button>
                   <Button
@@ -494,52 +620,18 @@ export function DashboardOrganizationsPage() {
                     }}
                     type="button"
                     variant="outline"
+                    size="sm"
                   >
-                    {isRefreshingKey ? 'Refreshing...' : 'Refresh API key'}
+                    <RefreshCw className="h-3.5 w-3.5" />
+                    {isRefreshingKey ? 'Refreshing...' : 'Rotate key'}
                   </Button>
-                  <Button asChild type="button" variant="outline">
-                    <Link to={`/dashboard/email-builder?orgId=${organization.id}`}>Open Email Builder</Link>
+                  <Button asChild type="button" variant="outline" size="sm">
+                    <Link to={`/dashboard/email-builder?orgId=${organization.id}`}>
+                      <Wand2 className="h-3.5 w-3.5" />
+                      Builder config
+                    </Link>
                   </Button>
                 </div>
-
-                {organization.api_keys.length > 0 && (
-                  <div className="space-y-2">
-                    <p className="text-sm font-medium">Active API keys</p>
-                    <div className="space-y-1">
-                      {organization.api_keys.map((apiKey) => (
-                        <p key={apiKey.id} className="text-xs text-muted-foreground">
-                          {apiKey.key_prefix}... · {apiKey.environment} · {apiKey.scope}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {generatedKey && (
-                  <div className="rounded-md border border-border bg-muted/50 p-3">
-                    <div className="flex items-center justify-between gap-2">
-                      <p className="text-xs font-medium">Current reusable API key</p>
-                      <Button
-                        size="sm"
-                        type="button"
-                        variant="outline"
-                        onClick={() => {
-                          void copyApiKeyToClipboard(organization.id, generatedKey);
-                        }}
-                      >
-                        {copyLabel === 'Copied' ? 'Copied' : 'Copy'}
-                      </Button>
-                    </div>
-                    <p className="mt-1 break-all font-mono text-xs">{generatedKey}</p>
-                    {copyLabel === 'Refreshed' && (
-                      <p className="mt-1 text-xs text-muted-foreground">API key refreshed.</p>
-                    )}
-                    {copyLabel === 'Copy failed' && (
-                      <p className="mt-1 text-xs text-destructive">Copy failed. Please copy manually.</p>
-                    )}
-                  </div>
-                )}
-
               </CardContent>
             </Card>
           );

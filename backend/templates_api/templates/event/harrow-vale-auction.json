@@ -1,0 +1,1535 @@
+{
+  "name": "Harrow & Vale — Auction preview",
+  "category": "event",
+  "is_premium": true,
+  "tags": [
+    "event",
+    "auction",
+    "luxury",
+    "catalogue"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#3A2F27",
+      "bodyBackgroundColor": "#E9E0CB",
+      "defaultFont": "'EB Garamond', Garamond, Georgia, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#1F1B16"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "hv-9",
+          "type": "heading",
+          "data": {
+            "text": "Harrow & Vale",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 44,
+              "right": 40,
+              "bottom": 4,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#1F1B16",
+            "fontSize": 36,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "hv-10",
+          "type": "heading",
+          "data": {
+            "text": "Auctioneers & valuers since 1871 · Edinburgh",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 28,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#5B5245",
+            "fontSize": 12,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 400,
+            "letterSpacing": 2.5,
+            "textTransform": "uppercase"
+          }
+        },
+        {
+          "id": "hv-11",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#A3241B",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "hv-12",
+          "type": "heading",
+          "data": {
+            "text": "Ceramics, Clocks & Silver",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 40,
+              "right": 48,
+              "bottom": 12,
+              "left": 48
+            },
+            "alignment": "center",
+            "color": "#1F1B16",
+            "fontSize": 40,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.1
+          }
+        },
+        {
+          "id": "hv-13",
+          "type": "heading",
+          "data": {
+            "text": "Sale 2041 · Thursday 26 November, 11:00 · 9 Queen Street",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#5B5245",
+            "fontSize": 15,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "hv-20",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              42,
+              58
+            ],
+            "columns": [
+              {
+                "id": "hv-15",
+                "blocks": [
+                  {
+                    "id": "hv-14",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/harrow-vale/lot-38-celadon-vase.jpg",
+                      "alt": "A Longquan celadon vase with a crackle glaze on a wooden plinth",
+                      "width": 201,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 40
+                }
+              },
+              {
+                "id": "hv-19",
+                "blocks": [
+                  {
+                    "id": "hv-16",
+                    "type": "heading",
+                    "data": {
+                      "text": "Lot 38. A Longquan celadon crackle-glazed vase",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#1F1B16",
+                      "fontSize": 26,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.2
+                    }
+                  },
+                  {
+                    "id": "hv-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "Southern Song style, 13th–14th century · 24.5 cm",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#5B5245",
+                      "fontSize": 15,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.4
+                    }
+                  },
+                  {
+                    "id": "hv-18",
+                    "type": "heading",
+                    "data": {
+                      "text": "Estimate £8,000–12,000",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#1F1B16",
+                      "fontSize": 18,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 40,
+                  "bottom": 0,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 24,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "hv-21",
+          "type": "heading",
+          "data": {
+            "text": "Provenance",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 44,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#1F1B16",
+            "fontSize": 26,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "hv-28",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              100,
+              14,
+              486
+            ],
+            "columns": [
+              {
+                "id": "hv-23",
+                "blocks": [
+                  {
+                    "id": "hv-22",
+                    "type": "heading",
+                    "data": {
+                      "text": "c.1300",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 10,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#A3241B",
+                      "fontSize": 14,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 1.5,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "hv-25",
+                "blocks": [
+                  {
+                    "id": "hv-24",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/harrow-vale/ribbon-known.png",
+                      "alt": "",
+                      "width": 14,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "backgroundColor": "#A3241B"
+              },
+              {
+                "id": "hv-27",
+                "blocks": [
+                  {
+                    "id": "hv-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "Fired at the Dayao kilns, Longquan, Zhejiang province",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 40,
+                        "bottom": 10,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "color": "#1F1B16",
+                      "fontSize": 16,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "hv-35",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              100,
+              14,
+              486
+            ],
+            "columns": [
+              {
+                "id": "hv-30",
+                "blocks": [
+                  {
+                    "id": "hv-29",
+                    "type": "heading",
+                    "data": {
+                      "text": "?",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 10,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#5B5245",
+                      "fontSize": 14,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 1.5,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "hv-32",
+                "blocks": [
+                  {
+                    "id": "hv-31",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/harrow-vale/ribbon-gap.png",
+                      "alt": "",
+                      "width": 14,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "backgroundColor": "#B9AE98"
+              },
+              {
+                "id": "hv-34",
+                "blocks": [
+                  {
+                    "id": "hv-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "Whereabouts unrecorded for five centuries",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 40,
+                        "bottom": 10,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "color": "#5B5245",
+                      "fontSize": 16,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "hv-42",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              100,
+              14,
+              486
+            ],
+            "columns": [
+              {
+                "id": "hv-37",
+                "blocks": [
+                  {
+                    "id": "hv-36",
+                    "type": "heading",
+                    "data": {
+                      "text": "1862",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 10,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#A3241B",
+                      "fontSize": 14,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 1.5,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "hv-39",
+                "blocks": [
+                  {
+                    "id": "hv-38",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/harrow-vale/ribbon-known.png",
+                      "alt": "",
+                      "width": 14,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "backgroundColor": "#A3241B"
+              },
+              {
+                "id": "hv-41",
+                "blocks": [
+                  {
+                    "id": "hv-40",
+                    "type": "heading",
+                    "data": {
+                      "text": "Bought in Canton by Captain J. R. Ferrier, East India merchant fleet",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 40,
+                        "bottom": 10,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "color": "#1F1B16",
+                      "fontSize": 16,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "hv-49",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              100,
+              14,
+              486
+            ],
+            "columns": [
+              {
+                "id": "hv-44",
+                "blocks": [
+                  {
+                    "id": "hv-43",
+                    "type": "heading",
+                    "data": {
+                      "text": "1931",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 10,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#A3241B",
+                      "fontSize": 14,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 1.5,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "hv-46",
+                "blocks": [
+                  {
+                    "id": "hv-45",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/harrow-vale/ribbon-known.png",
+                      "alt": "",
+                      "width": 14,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "backgroundColor": "#A3241B"
+              },
+              {
+                "id": "hv-48",
+                "blocks": [
+                  {
+                    "id": "hv-47",
+                    "type": "heading",
+                    "data": {
+                      "text": "By descent; sold at a London saleroom, lot 214, to a private collector",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 40,
+                        "bottom": 10,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "color": "#1F1B16",
+                      "fontSize": 16,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "hv-56",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              100,
+              14,
+              486
+            ],
+            "columns": [
+              {
+                "id": "hv-51",
+                "blocks": [
+                  {
+                    "id": "hv-50",
+                    "type": "heading",
+                    "data": {
+                      "text": "1931–2025",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 10,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#5B5245",
+                      "fontSize": 14,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 1.5,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "hv-53",
+                "blocks": [
+                  {
+                    "id": "hv-52",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/harrow-vale/ribbon-gap.png",
+                      "alt": "",
+                      "width": 14,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "backgroundColor": "#B9AE98"
+              },
+              {
+                "id": "hv-55",
+                "blocks": [
+                  {
+                    "id": "hv-54",
+                    "type": "heading",
+                    "data": {
+                      "text": "Private collection, Perthshire",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 40,
+                        "bottom": 10,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "color": "#5B5245",
+                      "fontSize": 16,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "hv-63",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              100,
+              14,
+              486
+            ],
+            "columns": [
+              {
+                "id": "hv-58",
+                "blocks": [
+                  {
+                    "id": "hv-57",
+                    "type": "heading",
+                    "data": {
+                      "text": "2026",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 10,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#A3241B",
+                      "fontSize": 14,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 1.5,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "hv-60",
+                "blocks": [
+                  {
+                    "id": "hv-59",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/harrow-vale/ribbon-known.png",
+                      "alt": "",
+                      "width": 14,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "backgroundColor": "#A3241B"
+              },
+              {
+                "id": "hv-62",
+                "blocks": [
+                  {
+                    "id": "hv-61",
+                    "type": "heading",
+                    "data": {
+                      "text": "Offered here, with the 1931 sale receipt",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 40,
+                        "bottom": 10,
+                        "left": 16
+                      },
+                      "alignment": "left",
+                      "color": "#1F1B16",
+                      "fontSize": 16,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "hv-64",
+          "type": "text",
+          "data": {
+            "html": "<p>Condition reports and the full provenance file are in the online catalogue. Gaps in the record are marked in grey; we do not fill them with guesses.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 18,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 15,
+            "color": "#5B5245"
+          }
+        },
+        {
+          "id": "hv-65",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#B9AE98",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "hv-66",
+          "type": "heading",
+          "data": {
+            "text": "Also in the sale",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 18,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#1F1B16",
+            "fontSize": 26,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "hv-67",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              288.0,
+              288.0
+            ],
+            "columns": [
+              {
+                "id": "hv-4",
+                "blocks": [
+                  {
+                    "id": "hv-1",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/harrow-vale/lot-112-chronometer.jpg",
+                      "alt": "A brass marine chronometer in an open mahogany box",
+                      "width": 248,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  },
+                  {
+                    "id": "hv-2",
+                    "type": "heading",
+                    "data": {
+                      "text": "Lot 112. A two-day marine chronometer, Hartley & Webb, c.1860",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 0,
+                        "bottom": 6,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#1F1B16",
+                      "fontSize": 20,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "hv-3",
+                    "type": "heading",
+                    "data": {
+                      "text": "Estimate £4,000–6,000",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#5B5245",
+                      "fontSize": 14,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 40
+                }
+              },
+              {
+                "id": "hv-8",
+                "blocks": [
+                  {
+                    "id": "hv-5",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/harrow-vale/lot-147-teapot.jpg",
+                      "alt": "A chased silver teapot with an ebony handle on a dark plinth",
+                      "width": 248,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  },
+                  {
+                    "id": "hv-6",
+                    "type": "heading",
+                    "data": {
+                      "text": "Lot 147. A George III silver teapot with ebony handle, London 1789",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 0,
+                        "bottom": 6,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#1F1B16",
+                      "fontSize": 20,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "hv-7",
+                    "type": "heading",
+                    "data": {
+                      "text": "Estimate £1,200–1,800",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#5B5245",
+                      "fontSize": 14,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 40,
+                  "bottom": 0,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 24,
+            "stackOnMobile": true,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "hv-68",
+          "type": "heading",
+          "data": {
+            "text": "View the lots in Queen Street",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 48,
+              "right": 40,
+              "bottom": 10,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#1F1B16",
+            "fontSize": 26,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "hv-73",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              60,
+              40
+            ],
+            "columns": [
+              {
+                "id": "hv-70",
+                "blocks": [
+                  {
+                    "id": "hv-69",
+                    "type": "heading",
+                    "data": {
+                      "text": "Saturday 21 November",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 8,
+                        "bottom": 8,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1F1B16",
+                      "fontSize": 17,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "hv-72",
+                "blocks": [
+                  {
+                    "id": "hv-71",
+                    "type": "heading",
+                    "data": {
+                      "text": "10:00 – 16:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 40,
+                        "bottom": 8,
+                        "left": 8
+                      },
+                      "alignment": "right",
+                      "color": "#1F1B16",
+                      "fontSize": 17,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "hv-78",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              60,
+              40
+            ],
+            "columns": [
+              {
+                "id": "hv-75",
+                "blocks": [
+                  {
+                    "id": "hv-74",
+                    "type": "heading",
+                    "data": {
+                      "text": "Sunday 22 November",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 8,
+                        "bottom": 8,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1F1B16",
+                      "fontSize": 17,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "hv-77",
+                "blocks": [
+                  {
+                    "id": "hv-76",
+                    "type": "heading",
+                    "data": {
+                      "text": "11:00 – 15:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 40,
+                        "bottom": 8,
+                        "left": 8
+                      },
+                      "alignment": "right",
+                      "color": "#1F1B16",
+                      "fontSize": 17,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "hv-83",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              60,
+              40
+            ],
+            "columns": [
+              {
+                "id": "hv-80",
+                "blocks": [
+                  {
+                    "id": "hv-79",
+                    "type": "heading",
+                    "data": {
+                      "text": "Monday 23 November",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 8,
+                        "bottom": 8,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1F1B16",
+                      "fontSize": 17,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "hv-82",
+                "blocks": [
+                  {
+                    "id": "hv-81",
+                    "type": "heading",
+                    "data": {
+                      "text": "10:00 – 19:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 8,
+                        "right": 40,
+                        "bottom": 8,
+                        "left": 8
+                      },
+                      "alignment": "right",
+                      "color": "#1F1B16",
+                      "fontSize": 17,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "hv-84",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 24
+          }
+        },
+        {
+          "id": "hv-89",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              50,
+              50
+            ],
+            "columns": [
+              {
+                "id": "hv-86",
+                "blocks": [
+                  {
+                    "id": "hv-85",
+                    "type": "button",
+                    "data": {
+                      "text": "View the catalogue",
+                      "url": "https://harrowandvale.example/sale-2041"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#A3241B",
+                      "color": "#E9E0CB",
+                      "borderRadius": 0,
+                      "fullWidth": true,
+                      "fontSize": 17,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "paddingX": 28,
+                      "paddingY": 15,
+                      "borderWidth": 0,
+                      "borderStyle": "solid",
+                      "borderColor": "#A3241B"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 40
+                }
+              },
+              {
+                "id": "hv-88",
+                "blocks": [
+                  {
+                    "id": "hv-87",
+                    "type": "button",
+                    "data": {
+                      "text": "Register to bid",
+                      "url": "https://harrowandvale.example/register"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#E9E0CB",
+                      "color": "#A3241B",
+                      "borderRadius": 0,
+                      "fullWidth": true,
+                      "fontSize": 17,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "paddingX": 28,
+                      "paddingY": 13,
+                      "borderWidth": 2,
+                      "borderStyle": "solid",
+                      "borderColor": "#A3241B"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 40,
+                  "bottom": 0,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 12,
+            "stackOnMobile": true,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "hv-90",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 44
+          }
+        },
+        {
+          "id": "hv-91",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#A3241B",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "hv-92",
+          "type": "text",
+          "data": {
+            "html": "<p>Harrow &amp; Vale Ltd, 9 Queen Street, Edinburgh EH2 1JQ. Buyer’s premium 25% plus VAT. <a href=\"https://harrowandvale.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 22,
+              "right": 40,
+              "bottom": 30,
+              "left": 40
+            },
+            "alignment": "center",
+            "fontSize": 12,
+            "color": "#5B5245",
+            "lineHeight": 1.5
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

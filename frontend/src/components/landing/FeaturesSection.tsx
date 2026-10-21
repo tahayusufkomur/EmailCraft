@@ -1,78 +1,79 @@
-import { Code2, Variable, Building2, Palette } from 'lucide-react';
-
-import { AnimateIn } from '../ui/AnimateIn';
-import { Card, CardHeader, CardTitle, CardDescription } from '../ui/card';
+import { Code2, Layers, Palette, Sparkles, Variable, Zap } from 'lucide-react';
 
 const features = [
   {
-    icon: Code2,
-    accent: 'bg-primary',
-    title: 'Programmable HTML export',
+    icon: Layers,
+    eyebrow: 'Visual Editor',
+    title: '14 production-tested email blocks.',
     description:
-      'Get production-ready email HTML via REST API. Table-based layout, inline CSS, VML for Outlook — renders perfectly in every client.',
-    code: 'POST /api/v1/render\n{ "template_id": "...", "variables": { "name": "Jane" } }',
+      'Headings, paragraphs, buttons, multi-column layouts, product cards, coupons, countdowns, and social footers — all compiled to table-safe HTML.',
+  },
+  {
+    icon: Sparkles,
+    eyebrow: 'AI Generation',
+    title: 'Prompt to editable layout in seconds.',
+    description:
+      'Describe the campaign or transactional notice you need. MailCraft generates structured blocks that your team can refine visually.',
+  },
+  {
+    icon: Code2,
+    eyebrow: 'White-Label Embed',
+    title: 'Drop into any app via iframe & postMessage.',
+    description:
+      'Mount the builder inside your SaaS dashboard. Load templates and capture saved JSON + compiled HTML over a clean message bus.',
   },
   {
     icon: Variable,
-    accent: 'bg-secondary',
-    title: 'Dynamic variables',
+    eyebrow: 'Dynamic Variables',
+    title: 'Organization-scoped merge tags.',
     description:
-      'Define variables per org — your users insert them via the builder. Render with real values at send time through the API.',
-    code: 'PATCH /api/v1/email/setup\n{ "available_variables": [\n  { "key": "customer_name", "label": "Name" }\n] }',
+      'Configure custom variables per organization ({{user_name}}, {{invoice_url}}) so non-technical authors insert valid placeholders every time.',
   },
   {
-    icon: Building2,
-    accent: 'bg-[#22c55e]',
-    title: 'Multi-project orgs',
+    icon: Zap,
+    eyebrow: 'REST Render API',
+    title: 'Compile templates on the fly.',
     description:
-      'Spin up isolated orgs programmatically. Each gets its own templates, media storage, API keys, and variable config.',
-    code: 'POST /api/site/organizations/\n{ "name": "Acme Corp",\n  "allowed_origins": ["https://acme.com"] }',
+      'Call POST /api/v1/render with a template ID and variable payload. Pipe the returned HTML straight into SES, Postmark, Resend, or SendGrid.',
   },
   {
     icon: Palette,
-    accent: 'bg-[#a855f7]',
-    title: 'White-label themes',
+    eyebrow: 'Custom Themes',
+    title: 'Match your product chrome.',
     description:
-      'Configure builder theme, email backgrounds, color palettes, and logo visibility per org. Make it look like yours.',
-    code: 'PATCH /api/site/organizations/:id/\n{ "builder_theme": "dark-cosmos",\n  "theme_mode": "dark" }',
+      'Toggle logo visibility, HTML export controls, and light or dark studio themes per organization directly from your dashboard.',
   },
-] as const;
+];
 
 export function FeaturesSection() {
   return (
-    <section className="py-24 px-6">
-      <div className="mx-auto max-w-5xl">
-        <AnimateIn direction="up" className="text-center">
-          <h2 className="font-heading text-3xl tracking-tight text-foreground sm:text-4xl">
-            Everything is an API call
+    <section id="features" className="bg-muted py-20 sm:py-28 lg:py-36">
+      <div className="mx-auto max-w-media px-6 sm:px-8">
+        <div className="mx-auto max-w-text text-center">
+          <p className="text-eyebrow text-muted-foreground">Why MailCraft</p>
+          <h2 className="mt-3 text-display-2 font-bold tracking-tight text-foreground text-balance">
+            Everything required for email infrastructure.{' '}
+            <span className="text-muted-foreground">Nothing bloated.</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Embed the builder, configure it, and export HTML — all programmatically.
-          </p>
-        </AnimateIn>
+        </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {features.map((feature, index) => {
+        <div className="mt-16 grid grid-cols-1 gap-6 sm:mt-20 md:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature) => {
             const Icon = feature.icon;
-
             return (
-              <AnimateIn key={feature.title} direction="up" delay={index * 0.1}>
-                <Card className="group overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                  <div className={`h-1 ${feature.accent}`} />
-                  <CardHeader>
-                    <Icon className="mb-2 h-6 w-6 text-muted-foreground" />
-                    <CardTitle className="text-xl">{feature.title}</CardTitle>
-                    <CardDescription className="text-sm leading-relaxed">
-                      {feature.description}
-                    </CardDescription>
-                    <div className="mt-3 rounded-lg bg-foreground/[0.04] p-3 dark:bg-foreground/[0.08]">
-                      <pre className="overflow-x-auto font-mono text-[11px] leading-relaxed text-muted-foreground">
-                        <code>{feature.code}</code>
-                      </pre>
-                    </div>
-                  </CardHeader>
-                </Card>
-              </AnimateIn>
+              <div
+                key={feature.title}
+                className="flex flex-col justify-between rounded-tile border border-border bg-card p-8 sm:p-10"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <p className="text-eyebrow text-marketing-accent">{feature.eyebrow}</p>
+                    <Icon className="h-4 w-4 text-muted-foreground" />
+                  </div>
+                  <h3 className="mt-5 text-title-2 font-bold text-foreground">{feature.title}</h3>
+                  <p className="mt-3 text-body text-muted-foreground">{feature.description}</p>
+                </div>
+              </div>
             );
           })}
         </div>

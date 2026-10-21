@@ -1,12 +1,14 @@
 import { type FormEvent, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 import { api } from '../lib/api';
 import { useAuth } from '../lib/auth';
+import { AuthShell } from '../components/auth/AuthShell';
 import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
+import { Separator } from '../components/ui/separator';
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -54,69 +56,79 @@ export function LoginPage() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-md px-4 py-12">
-      <Card>
-        <CardHeader>
-          <CardTitle>Sign in</CardTitle>
-          <CardDescription>
-            Enter your email to receive a sign-in link. No password needed.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {sent ? (
-            <div className="space-y-3">
-              <p className="text-sm text-muted-foreground">
-                We sent a sign-in link to <span className="font-medium text-foreground">{email}</span>.
-                Check your inbox — the link expires in 15 minutes.
-              </p>
-              <Button
-                className="w-full"
-                variant="outline"
-                onClick={() => {
-                  setSent(false);
-                  setEmail('');
-                }}
-              >
-                Use a different email
-              </Button>
+    <AuthShell
+      title="Sign in to MailCraft"
+      subtitle="Enter your email to receive a passwordless sign-in link."
+    >
+      {sent ? (
+        <div className="space-y-4 rounded-tile border border-border bg-muted/50 p-6">
+          <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+            <CheckCircle2 className="h-4 w-4 text-marketing-accent" />
+            <span>Check your inbox</span>
+          </div>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            We sent a sign-in link to <span className="font-medium text-foreground">{email}</span>.
+            The link expires in 15 minutes.
+          </p>
+          <Button
+            className="w-full rounded-full"
+            variant="outline"
+            onClick={() => {
+              setSent(false);
+              setEmail('');
+            }}
+          >
+            Use a different email
+          </Button>
+        </div>
+      ) : (
+        <div className="space-y-5">
+          <form className="space-y-4" onSubmit={onSubmit}>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email address</Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                autoComplete="email"
+                required
+              />
             </div>
-          ) : (
-            <>
-              <form className="space-y-4" onSubmit={onSubmit}>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@example.com"
-                    autoComplete="email"
-                    required
-                  />
-                </div>
-                {error && <p className="text-sm text-destructive">{error}</p>}
-                <Button className="w-full" disabled={busy} type="submit">
-                  {busy ? 'Sending...' : 'Continue with email'}
-                </Button>
-              </form>
 
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t" />
-                </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-card px-2 text-muted-foreground">or</span>
-                </div>
+            {error && (
+              <div
+                role="alert"
+                className="rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive"
+              >
+                {error}
               </div>
+            )}
 
-              <Button asChild className="w-full" variant="outline">
-                <a href="/api/auth/google/login/">Continue with Google</a>
-              </Button>
-            </>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+            <Button
+              className="w-full rounded-full"
+              size="lg"
+              loading={busy}
+              loadingText="Sending link..."
+              type="submit"
+            >
+              Continue with email
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </form>
+
+          <div className="relative flex items-center gap-3">
+            <Separator className="flex-1" />
+            <span className="text-xs uppercase tracking-wider text-muted-foreground">or</span>
+            <Separator className="flex-1" />
+          </div>
+
+          <Button asChild className="w-full rounded-full" size="lg" variant="outline">
+            <a href="/api/auth/google/login/">Continue with Google</a>
+          </Button>
+        </div>
+      )}
+    </AuthShell>
   );
 }

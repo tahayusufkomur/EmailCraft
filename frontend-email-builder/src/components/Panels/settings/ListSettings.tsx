@@ -169,13 +169,13 @@ function ListItemIconPicker({ item, onUpdate }: { item: ListItem; onUpdate: (u: 
           <button
             type="button"
             onClick={() => setShowPicker(!showPicker)}
-            style={{ padding: '4px 8px', border: '1px solid var(--border-color, #e2e8f0)', borderRadius: 4, background: 'var(--panel-bg, #fff)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 11 }}
+            style={{ padding: '4px 8px', border: '1px solid var(--chrome-border)', borderRadius: 6, background: 'var(--chrome-surface-elevated)', color: 'var(--chrome-text-primary)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 11 }}
           >
-            <span dangerouslySetInnerHTML={{ __html: lucideSvgString(item.iconName || 'check', 14, '#333') }} />
+            <span dangerouslySetInnerHTML={{ __html: lucideSvgString(item.iconName || 'check', 14, '#8f6324') }} />
             {item.iconName || 'check'}
           </button>
           {showPicker && (
-            <div style={{ marginTop: 4, border: '1px solid var(--border-color, #e2e8f0)', borderRadius: 6, padding: 6, background: 'var(--panel-bg, #fff)' }}>
+            <div style={{ marginTop: 4, border: '1px solid var(--chrome-border)', borderRadius: 6, padding: 6, background: 'var(--chrome-surface)' }}>
               <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." style={{ fontSize: 11, marginBottom: 4, width: '100%' }} />
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 3, maxHeight: 120, overflowY: 'auto' }}>
                 {filtered.map((name) => (
@@ -185,10 +185,10 @@ function ListItemIconPicker({ item, onUpdate }: { item: ListItem; onUpdate: (u: 
                     title={iconLabel(name)}
                     onClick={() => { onUpdate({ iconMode: 'lucide', iconName: name }); setShowPicker(false); }}
                     style={{
-                      padding: 4, border: item.iconName === name ? '2px solid #6366f1' : '1px solid var(--border-color, #e2e8f0)',
-                      borderRadius: 4, background: 'var(--panel-bg, #fff)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      padding: 4, border: item.iconName === name ? '2px solid var(--accent-color)' : '1px solid var(--chrome-border)',
+                      borderRadius: 4, background: 'var(--chrome-surface-elevated)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
                     }}
-                    dangerouslySetInnerHTML={{ __html: lucideSvgString(name, 14, item.iconName === name ? '#6366f1' : '#64748b') }}
+                    dangerouslySetInnerHTML={{ __html: lucideSvgString(name, 14, item.iconName === name ? '#8f6324' : '#78716c') }}
                   />
                 ))}
               </div>

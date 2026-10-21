@@ -733,8 +733,17 @@ function App() {
       <div className="top-toolbar">
         {showLogo && (
           <div className="brand">
-            <div className="brand-title">MailCraft</div>
-            <div className="brand-subtitle">Email Builder</div>
+            <span className="brand-mark" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
+                <rect width="32" height="32" rx="7" fill="currentColor" />
+                <rect x="7" y="9.5" width="18" height="13" rx="2" stroke="var(--chrome-surface)" strokeWidth="2.4" />
+                <path d="M8 10.5L16 16.5L24 10.5" stroke="var(--chrome-surface)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            <div className="brand-text">
+              <div className="brand-title">MailCraft</div>
+              <div className="brand-subtitle">Email Studio</div>
+            </div>
           </div>
         )}
         <div className="toolbar-actions">

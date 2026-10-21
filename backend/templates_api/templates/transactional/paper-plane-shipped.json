@@ -1,0 +1,770 @@
+{
+  "name": "Paper Plane — Order shipped",
+  "category": "transactional",
+  "is_premium": false,
+  "tags": [
+    "transactional",
+    "shipping",
+    "ecommerce",
+    "order-update"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 560,
+      "backgroundColor": "#8C6A47",
+      "bodyBackgroundColor": "#C49A6C",
+      "defaultFont": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+      "defaultFontSize": 16,
+      "defaultColor": "#111111"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "pp-11",
+          "type": "heading",
+          "data": {
+            "text": "PAPER PLANE",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 30,
+              "right": 32,
+              "bottom": 4,
+              "left": 32
+            },
+            "alignment": "left",
+            "color": "#111111",
+            "fontSize": 18,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 4,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "pp-12",
+          "type": "heading",
+          "data": {
+            "text": "Your parcel is on its way",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 14,
+              "right": 32,
+              "bottom": 12,
+              "left": 32
+            },
+            "alignment": "left",
+            "color": "#111111",
+            "fontSize": 34,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "pp-13",
+          "type": "text",
+          "data": {
+            "html": "<p>Hi Maya, order PP-20418 left our Leeds studio this morning, wrapped in kraft and tied with twine. It should reach you by Friday.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "left",
+            "fontSize": 16
+          }
+        },
+        {
+          "id": "pp-17",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              32,
+              496,
+              32
+            ],
+            "columns": [
+              {
+                "id": "pp-14",
+                "blocks": []
+              },
+              {
+                "id": "pp-15",
+                "blocks": [
+                  {
+                    "id": "pp-1",
+                    "type": "heading",
+                    "data": {
+                      "text": "TRACKED 48",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 20,
+                        "bottom": 12,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "color": "#FFFFFF",
+                      "fontSize": 20,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 2,
+                      "textTransform": "none",
+                      "backgroundColor": "#111111"
+                    }
+                  },
+                  {
+                    "id": "pp-2",
+                    "type": "text",
+                    "data": {
+                      "html": "<p><strong>FROM</strong> Paper Plane Stationery, Unit 4, Mill Yard, Leeds LS9 8DT</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 20,
+                        "bottom": 12,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "fontSize": 12,
+                      "lineHeight": 1.4
+                    }
+                  },
+                  {
+                    "id": "pp-3",
+                    "type": "divider",
+                    "data": {},
+                    "style": {
+                      "lineStyle": "solid",
+                      "lineColor": "#111111",
+                      "lineThickness": 2,
+                      "spacing": 0
+                    }
+                  },
+                  {
+                    "id": "pp-4",
+                    "type": "heading",
+                    "data": {
+                      "text": "Ship to",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 20,
+                        "bottom": 4,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "color": "#555555",
+                      "fontSize": 11,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 2,
+                      "textTransform": "uppercase"
+                    }
+                  },
+                  {
+                    "id": "pp-5",
+                    "type": "text",
+                    "data": {
+                      "html": "<p><strong>Maya Okonkwo<br>18 Elm Grove<br>Bristol BS7 9HJ</strong></p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 20,
+                        "bottom": 16,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "fontSize": 20,
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "pp-6",
+                    "type": "heading",
+                    "data": {
+                      "text": "BS7 · 2C",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 20,
+                        "bottom": 12,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "color": "#FFFFFF",
+                      "fontSize": 44,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 2,
+                      "textTransform": "none",
+                      "lineHeight": 1.1,
+                      "backgroundColor": "#111111"
+                    }
+                  },
+                  {
+                    "id": "pp-7",
+                    "type": "heading",
+                    "data": {
+                      "text": "Tracking number",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 20,
+                        "bottom": 4,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "color": "#555555",
+                      "fontSize": 11,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 2,
+                      "textTransform": "uppercase"
+                    }
+                  },
+                  {
+                    "id": "pp-8",
+                    "type": "heading",
+                    "data": {
+                      "text": "PP 4471 2093 18GB",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 20,
+                        "bottom": 10,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 22,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "pp-9",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/paper-plane/barcode.png",
+                      "alt": "Barcode for tracking number PP 4471 2093 18GB",
+                      "width": 456,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 20,
+                        "bottom": 8,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  },
+                  {
+                    "id": "pp-10",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>1 parcel · 0.6 kg · signature not needed</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 20,
+                        "bottom": 16,
+                        "left": 20
+                      },
+                      "alignment": "left",
+                      "fontSize": 12,
+                      "color": "#555555"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFFFFF"
+              },
+              {
+                "id": "pp-16",
+                "blocks": []
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "pp-18",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 28
+          }
+        },
+        {
+          "id": "pp-23",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              32,
+              68
+            ],
+            "columns": [
+              {
+                "id": "pp-20",
+                "blocks": [
+                  {
+                    "id": "pp-19",
+                    "type": "heading",
+                    "data": {
+                      "text": "Tue 20 Oct",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 8,
+                        "bottom": 12,
+                        "left": 32
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 13,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pp-22",
+                "blocks": [
+                  {
+                    "id": "pp-21",
+                    "type": "heading",
+                    "data": {
+                      "text": "Packed and collected from our studio",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 32,
+                        "bottom": 12,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 15,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pp-24",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#A8835A",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pp-29",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              32,
+              68
+            ],
+            "columns": [
+              {
+                "id": "pp-26",
+                "blocks": [
+                  {
+                    "id": "pp-25",
+                    "type": "heading",
+                    "data": {
+                      "text": "Wed 21 Oct",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 8,
+                        "bottom": 12,
+                        "left": 32
+                      },
+                      "alignment": "left",
+                      "color": "#3D2E1E",
+                      "fontSize": 13,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pp-28",
+                "blocks": [
+                  {
+                    "id": "pp-27",
+                    "type": "heading",
+                    "data": {
+                      "text": "Sorted at the courier hub (expected)",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 32,
+                        "bottom": 12,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#3D2E1E",
+                      "fontSize": 15,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pp-30",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#A8835A",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pp-35",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              32,
+              68
+            ],
+            "columns": [
+              {
+                "id": "pp-32",
+                "blocks": [
+                  {
+                    "id": "pp-31",
+                    "type": "heading",
+                    "data": {
+                      "text": "Fri 23 Oct",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 8,
+                        "bottom": 12,
+                        "left": 32
+                      },
+                      "alignment": "left",
+                      "color": "#3D2E1E",
+                      "fontSize": 13,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pp-34",
+                "blocks": [
+                  {
+                    "id": "pp-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "On your doorstep (expected)",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 32,
+                        "bottom": 12,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#3D2E1E",
+                      "fontSize": 15,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pp-36",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#A8835A",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pp-37",
+          "type": "button",
+          "data": {
+            "text": "Track your parcel",
+            "url": "https://paperplane.example/track"
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 32,
+              "bottom": 40,
+              "left": 32
+            },
+            "alignment": "left",
+            "backgroundColor": "#111111",
+            "color": "#FFFFFF",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 16,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "paddingX": 28,
+            "paddingY": 15,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#111111"
+          }
+        },
+        {
+          "id": "pp-43",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              44,
+              56
+            ],
+            "columns": [
+              {
+                "id": "pp-39",
+                "blocks": [
+                  {
+                    "id": "pp-38",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/paper-plane/kraft-parcel.jpg",
+                      "alt": "A kraft paper parcel tied with red and white twine beside notebooks and a fountain pen",
+                      "width": 205,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 32
+                }
+              },
+              {
+                "id": "pp-42",
+                "blocks": [
+                  {
+                    "id": "pp-40",
+                    "type": "heading",
+                    "data": {
+                      "text": "In this parcel",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 20,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  },
+                  {
+                    "id": "pp-41",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Linen notebook, A5, dot grid · 1<br>Washi tape, kraft · 2<br>Fountain pen ink, sepia · 1</p><p>Something not right? Reply to this email within 30 days.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 14,
+                      "lineHeight": 1.55
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 32,
+                  "bottom": 0,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 20,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pp-44",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 36
+          }
+        },
+        {
+          "id": "pp-45",
+          "type": "text",
+          "data": {
+            "html": "<p>Paper Plane Stationery Ltd, Unit 4, Mill Yard, Leeds LS9 8DT. This is a service email about your order.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 20,
+              "right": 32,
+              "bottom": 24,
+              "left": 32
+            },
+            "alignment": "left",
+            "fontSize": 12,
+            "color": "#111111",
+            "lineHeight": 1.5,
+            "backgroundColor": "#B48A5D"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

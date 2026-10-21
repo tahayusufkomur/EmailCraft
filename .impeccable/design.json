@@ -1,0 +1,2094 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-20T23:52:13+00:00",
+  "title": "Design System: MailCraft Gallery",
+  "extensions": {
+    "colorMeta": {
+      "ledgerline-binding": {
+        "role": "neutral",
+        "displayName": "Binding Green",
+        "brand": "Ledgerline",
+        "use": "outer ground",
+        "canonical": "#24392D",
+        "oklch": "oklch(32.3% 0.034 158.7)",
+        "tonalRamp": [
+          "#000F06",
+          "#15291E",
+          "#304539",
+          "#4D6456",
+          "#6C8476",
+          "#8DA597",
+          "#B2CBBC",
+          "#DCF6E6"
+        ]
+      },
+      "ledgerline-paper": {
+        "role": "neutral",
+        "displayName": "Ledger Paper Green",
+        "brand": "Ledgerline",
+        "use": "page",
+        "canonical": "#E3EDDA",
+        "oklch": "oklch(93.3% 0.027 129.8)",
+        "tonalRamp": [
+          "#070D03",
+          "#202719",
+          "#3B4334",
+          "#596151",
+          "#788170",
+          "#99A290",
+          "#BEC8B6",
+          "#E8F3DF"
+        ]
+      },
+      "ledgerline-ink": {
+        "role": "primary",
+        "displayName": "Ledger Ink",
+        "brand": "Ledgerline",
+        "use": "text, total line, button",
+        "canonical": "#1D3326",
+        "oklch": "oklch(29.8% 0.037 157.3)",
+        "tonalRamp": [
+          "#010F06",
+          "#14291D",
+          "#2F4638",
+          "#4D6455",
+          "#6C8475",
+          "#8CA695",
+          "#B1CCBB",
+          "#DBF6E5"
+        ]
+      },
+      "ledgerline-ink-soft": {
+        "role": "secondary",
+        "displayName": "Faded Ledger Ink",
+        "brand": "Ledgerline",
+        "use": "column heads, notes, footer",
+        "canonical": "#48654F",
+        "oklch": "oklch(47.7% 0.049 151.7)",
+        "tonalRamp": [
+          "#001004",
+          "#0F2B18",
+          "#2B4733",
+          "#496650",
+          "#68866F",
+          "#88A88F",
+          "#AECEB5",
+          "#D7F9DE"
+        ]
+      },
+      "ledgerline-rule-red": {
+        "role": "secondary",
+        "displayName": "Margin Rule Red",
+        "brand": "Ledgerline",
+        "use": "double rule under masthead, entry numbers",
+        "canonical": "#B3322A",
+        "oklch": "oklch(51.3% 0.167 28.1)",
+        "tonalRamp": [
+          "#1E0101",
+          "#490504",
+          "#7C0105",
+          "#A72620",
+          "#CE4C41",
+          "#F56F61",
+          "#FEACA0",
+          "#FDE9E6"
+        ]
+      },
+      "ledgerline-rule-green": {
+        "role": "secondary",
+        "displayName": "Feint Rule Green",
+        "brand": "Ledgerline",
+        "use": "row rules",
+        "canonical": "#9DBF94",
+        "oklch": "oklch(76.8% 0.070 139.2)",
+        "tonalRamp": [
+          "#020F00",
+          "#0F2C06",
+          "#2B4923",
+          "#496740",
+          "#68885F",
+          "#88A97F",
+          "#ADD0A4",
+          "#D7FBCE"
+        ]
+      },
+      "ninth-line-wall": {
+        "role": "neutral",
+        "displayName": "Exam Room Wall",
+        "brand": "Ninth Line",
+        "use": "outer ground",
+        "canonical": "#E7E6E2",
+        "oklch": "oklch(92.5% 0.005 95.1)",
+        "tonalRamp": [
+          "#0C0B09",
+          "#252421",
+          "#40403D",
+          "#5E5E5A",
+          "#7E7D7A",
+          "#9F9E9B",
+          "#C5C4C0",
+          "#EFEEEA"
+        ]
+      },
+      "ninth-line-card": {
+        "role": "neutral",
+        "displayName": "Chart Card White",
+        "brand": "Ninth Line",
+        "use": "page",
+        "canonical": "#FFFFFF",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "ninth-line-ink": {
+        "role": "primary",
+        "displayName": "Optotype Black",
+        "brand": "Ninth Line",
+        "use": "chart letters, text, button",
+        "canonical": "#111111",
+        "oklch": "oklch(17.8% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "ninth-line-grey": {
+        "role": "secondary",
+        "displayName": "Acuity Grey",
+        "brand": "Ninth Line",
+        "use": "line numbers, Snellen fractions, footer",
+        "canonical": "#767676",
+        "oklch": "oklch(56.6% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "ninth-line-duo-red": {
+        "role": "secondary",
+        "displayName": "Duochrome Red",
+        "brand": "Ninth Line",
+        "use": "code bar, left half",
+        "canonical": "#E03C3C",
+        "oklch": "oklch(60.3% 0.201 25.6)",
+        "tonalRamp": [
+          "#1E0101",
+          "#480608",
+          "#7B0510",
+          "#AD1820",
+          "#DB3738",
+          "#FB6861",
+          "#FDACA4",
+          "#FFE9E6"
+        ]
+      },
+      "ninth-line-duo-green": {
+        "role": "secondary",
+        "displayName": "Duochrome Green",
+        "brand": "Ninth Line",
+        "use": "code bar, right half",
+        "canonical": "#2AA552",
+        "oklch": "oklch(63.7% 0.161 149.5)",
+        "tonalRamp": [
+          "#001003",
+          "#022D10",
+          "#0C4D22",
+          "#097132",
+          "#0E9644",
+          "#44B965",
+          "#6EE18A",
+          "#CBFED3"
+        ]
+      },
+      "madder-indigo-linen": {
+        "role": "neutral",
+        "displayName": "Undyed Linen",
+        "brand": "Madder & Indigo",
+        "use": "outer ground",
+        "canonical": "#CBBFA8",
+        "oklch": "oklch(80.8% 0.034 83.7)",
+        "tonalRamp": [
+          "#110A00",
+          "#2C2310",
+          "#483E2B",
+          "#675C48",
+          "#877C66",
+          "#A99D87",
+          "#CFC3AC",
+          "#FAEDD5"
+        ]
+      },
+      "madder-indigo-indigo": {
+        "role": "neutral",
+        "displayName": "Indigo Vat",
+        "brand": "Madder & Indigo",
+        "use": "page",
+        "canonical": "#1E2C55",
+        "oklch": "oklch(30.4% 0.076 267.6)",
+        "tonalRamp": [
+          "#02052A",
+          "#142148",
+          "#2E3D68",
+          "#4B5C89",
+          "#697CAB",
+          "#8A9DCF",
+          "#AEC3F7",
+          "#E8EEFE"
+        ]
+      },
+      "madder-indigo-cream": {
+        "role": "primary",
+        "displayName": "Bleached Thread",
+        "brand": "Madder & Indigo",
+        "use": "text and display",
+        "canonical": "#EFE6D4",
+        "oklch": "oklch(92.7% 0.026 84.6)",
+        "tonalRamp": [
+          "#100A01",
+          "#2A2315",
+          "#463F30",
+          "#645D4D",
+          "#847C6C",
+          "#A69D8D",
+          "#CCC3B2",
+          "#F7EEDB"
+        ]
+      },
+      "madder-indigo-madder": {
+        "role": "secondary",
+        "displayName": "Madder Red",
+        "brand": "Madder & Indigo",
+        "use": "button, band numerals",
+        "canonical": "#F2846A",
+        "oklch": "oklch(72.9% 0.140 34.3)",
+        "tonalRamp": [
+          "#1D0200",
+          "#470B00",
+          "#741B05",
+          "#9D3720",
+          "#C25941",
+          "#E87B61",
+          "#FFAC98",
+          "#FEE9E4"
+        ]
+      },
+      "madder-indigo-weld": {
+        "role": "secondary",
+        "displayName": "Weld Yellow",
+        "brand": "Madder & Indigo",
+        "use": "section title, numerals",
+        "canonical": "#F2C84B",
+        "oklch": "oklch(84.8% 0.146 90.0)",
+        "tonalRamp": [
+          "#100A00",
+          "#2E2302",
+          "#4E3E09",
+          "#735A05",
+          "#997908",
+          "#BE9A26",
+          "#E9BF40",
+          "#FFEDBF"
+        ]
+      },
+      "madder-indigo-leaf": {
+        "role": "secondary",
+        "displayName": "Overdyed Green",
+        "brand": "Madder & Indigo",
+        "use": "numerals",
+        "canonical": "#A9CF8E",
+        "oklch": "oklch(81.1% 0.097 132.8)",
+        "tonalRamp": [
+          "#050F00",
+          "#162B02",
+          "#2A4A09",
+          "#48692C",
+          "#668A4C",
+          "#87AC6C",
+          "#ACD291",
+          "#D6FDBA"
+        ]
+      },
+      "madder-indigo-stitch": {
+        "role": "secondary",
+        "displayName": "Running Stitch Blue",
+        "brand": "Madder & Indigo",
+        "use": "dashed band rules",
+        "canonical": "#55618A",
+        "oklch": "oklch(50.0% 0.067 271.3)",
+        "tonalRamp": [
+          "#040627",
+          "#182144",
+          "#333D63",
+          "#505B84",
+          "#6E7BA6",
+          "#8F9DC9",
+          "#B4C2F1",
+          "#E8EEFF"
+        ]
+      },
+      "northline-asphalt": {
+        "role": "neutral",
+        "displayName": "Asphalt",
+        "brand": "Northline",
+        "use": "outer ground and footer",
+        "canonical": "#2B2B2B",
+        "oklch": "oklch(28.9% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "northline-page": {
+        "role": "neutral",
+        "displayName": "Map White",
+        "brand": "Northline",
+        "use": "page",
+        "canonical": "#FFFFFF",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "northline-ink": {
+        "role": "primary",
+        "displayName": "Signal Black",
+        "brand": "Northline",
+        "use": "masthead band, text",
+        "canonical": "#111111",
+        "oklch": "oklch(17.8% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "northline-line": {
+        "role": "secondary",
+        "displayName": "Line Yellow",
+        "brand": "Northline",
+        "use": "10 px route band, stop spine, button",
+        "canonical": "#FFC20E",
+        "oklch": "oklch(84.6% 0.172 85.3)",
+        "tonalRamp": [
+          "#110A00",
+          "#2F2204",
+          "#513C03",
+          "#755911",
+          "#9C771A",
+          "#C59615",
+          "#F1BB32",
+          "#FDEDCA"
+        ]
+      },
+      "northline-grey": {
+        "role": "secondary",
+        "displayName": "Kilometre Grey",
+        "brand": "Northline",
+        "use": "km markers, captions",
+        "canonical": "#555555",
+        "oklch": "oklch(45.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "low-ohm-black": {
+        "role": "neutral",
+        "displayName": "Studio Black",
+        "brand": "Low Ohm Records",
+        "use": "outer ground",
+        "canonical": "#050505",
+        "oklch": "oklch(11.5% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "low-ohm-console": {
+        "role": "neutral",
+        "displayName": "Console Black",
+        "brand": "Low Ohm Records",
+        "use": "page",
+        "canonical": "#121110",
+        "oklch": "oklch(17.8% 0.003 67.7)",
+        "tonalRamp": [
+          "#0C0B0A",
+          "#252423",
+          "#413F3E",
+          "#5F5D5C",
+          "#7E7D7C",
+          "#9F9E9D",
+          "#C5C4C2",
+          "#F0EEED"
+        ]
+      },
+      "low-ohm-ivory": {
+        "role": "primary",
+        "displayName": "Meter Ivory",
+        "brand": "Low Ohm Records",
+        "use": "text, display, button",
+        "canonical": "#EFE6CF",
+        "oklch": "oklch(92.6% 0.032 89.1)",
+        "tonalRamp": [
+          "#100A00",
+          "#2A2311",
+          "#463F2C",
+          "#655D49",
+          "#857D68",
+          "#A69E88",
+          "#CCC4AD",
+          "#F7EED7"
+        ]
+      },
+      "low-ohm-dim": {
+        "role": "secondary",
+        "displayName": "Dimmed Ivory",
+        "brand": "Low Ohm Records",
+        "use": "issue line, formats, footer",
+        "canonical": "#A39B88",
+        "oklch": "oklch(69.1% 0.029 87.9)",
+        "tonalRamp": [
+          "#100A01",
+          "#2A2314",
+          "#463F2E",
+          "#645D4B",
+          "#847D6A",
+          "#A69E8B",
+          "#CCC3B0",
+          "#F6EED9"
+        ]
+      },
+      "low-ohm-rule": {
+        "role": "secondary",
+        "displayName": "Fader Rule",
+        "brand": "Low Ohm Records",
+        "use": "tour-date rules",
+        "canonical": "#3A3631",
+        "oklch": "oklch(33.5% 0.010 73.6)",
+        "tonalRamp": [
+          "#0E0B07",
+          "#27231F",
+          "#433F3A",
+          "#615D57",
+          "#817C77",
+          "#A29E98",
+          "#C8C3BD",
+          "#F3EEE7"
+        ]
+      },
+      "fieldbook-leaf": {
+        "role": "neutral",
+        "displayName": "Leaf Green",
+        "brand": "Fieldbook Seeds",
+        "use": "outer ground, section heads, table header",
+        "canonical": "#2D6A31",
+        "oklch": "oklch(46.9% 0.109 144.8)",
+        "tonalRamp": [
+          "#001001",
+          "#022D07",
+          "#0B4E15",
+          "#306D34",
+          "#518E53",
+          "#72B073",
+          "#97D798",
+          "#CAFFCA"
+        ]
+      },
+      "fieldbook-paper": {
+        "role": "neutral",
+        "displayName": "Packet White",
+        "brand": "Fieldbook Seeds",
+        "use": "page",
+        "canonical": "#FFFFFF",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "fieldbook-tomato": {
+        "role": "primary",
+        "displayName": "Tomato Red",
+        "brand": "Fieldbook Seeds",
+        "use": "masthead slab, headline, days column, button",
+        "canonical": "#C8341F",
+        "oklch": "oklch(55.1% 0.188 31.3)",
+        "tonalRamp": [
+          "#1E0100",
+          "#490500",
+          "#781205",
+          "#A82613",
+          "#D6422D",
+          "#FD674F",
+          "#FEAC9C",
+          "#FEE9E5"
+        ]
+      },
+      "fieldbook-cream": {
+        "role": "secondary",
+        "displayName": "Packet Cream",
+        "brand": "Fieldbook Seeds",
+        "use": "zebra rows, button text",
+        "canonical": "#FFF4D6",
+        "oklch": "oklch(96.8% 0.041 90.2)",
+        "tonalRamp": [
+          "#100A00",
+          "#2C230A",
+          "#483F26",
+          "#665D43",
+          "#877D62",
+          "#A89E82",
+          "#CEC4A7",
+          "#F9EED0"
+        ]
+      },
+      "fieldbook-butter": {
+        "role": "secondary",
+        "displayName": "Butter Yellow",
+        "brand": "Fieldbook Seeds",
+        "use": "masthead lettering",
+        "canonical": "#FFE7A3",
+        "oklch": "oklch(93.2% 0.090 90.9)",
+        "tonalRamp": [
+          "#100A00",
+          "#2E2300",
+          "#4E3E05",
+          "#715B14",
+          "#917B39",
+          "#B39C5B",
+          "#DAC280",
+          "#FFEEBD"
+        ]
+      },
+      "fieldbook-ink": {
+        "role": "secondary",
+        "displayName": "Soil Ink",
+        "brand": "Fieldbook Seeds",
+        "use": "body",
+        "canonical": "#1E1A16",
+        "oklch": "oklch(22.1% 0.010 67.3)",
+        "tonalRamp": [
+          "#0E0A07",
+          "#27231F",
+          "#433F3A",
+          "#615D58",
+          "#817C77",
+          "#A39D98",
+          "#C9C3BD",
+          "#F3EDE8"
+        ]
+      },
+      "devils-garage-teal": {
+        "role": "neutral",
+        "displayName": "Kustom Teal",
+        "brand": "Devil's Garage",
+        "use": "outer ground, code panel",
+        "canonical": "#19C3B1",
+        "oklch": "oklch(73.5% 0.128 183.1)",
+        "tonalRamp": [
+          "#000F0C",
+          "#022B26",
+          "#0C4A43",
+          "#076D62",
+          "#0A9183",
+          "#2CB5A5",
+          "#49DFCC",
+          "#BCFEF3"
+        ]
+      },
+      "devils-garage-black": {
+        "role": "neutral",
+        "displayName": "Panel Outline Black",
+        "brand": "Devil's Garage",
+        "use": "page, 14 px frame, button",
+        "canonical": "#111111",
+        "oklch": "oklch(17.8% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "devils-garage-yellow": {
+        "role": "primary",
+        "displayName": "Candy Yellow",
+        "brand": "Devil's Garage",
+        "use": "wordmark and menu panels, button text, footer",
+        "canonical": "#FFE14D",
+        "oklch": "oklch(90.9% 0.163 97.5)",
+        "tonalRamp": [
+          "#0F0B00",
+          "#2B2402",
+          "#4A400A",
+          "#6D5D08",
+          "#917D0C",
+          "#B59E29",
+          "#E1C321",
+          "#FEF0AC"
+        ]
+      },
+      "devils-garage-red": {
+        "role": "secondary",
+        "displayName": "Flame Red",
+        "brand": "Devil's Garage",
+        "use": "offer panel",
+        "canonical": "#CF2216",
+        "oklch": "oklch(55.0% 0.207 29.6)",
+        "tonalRamp": [
+          "#1E0100",
+          "#490502",
+          "#78120B",
+          "#AF140A",
+          "#DE3426",
+          "#FD6755",
+          "#FEAC9E",
+          "#FDE9E6"
+        ]
+      },
+      "forge-temper-soot": {
+        "role": "neutral",
+        "displayName": "Soot",
+        "brand": "Forge & Temper",
+        "use": "outer ground",
+        "canonical": "#0A0908",
+        "oklch": "oklch(14.1% 0.003 69.4)",
+        "tonalRamp": [
+          "#0C0B0A",
+          "#252422",
+          "#413F3E",
+          "#5F5D5C",
+          "#7E7D7B",
+          "#A09E9C",
+          "#C5C4C2",
+          "#F0EEEC"
+        ]
+      },
+      "forge-temper-floor": {
+        "role": "neutral",
+        "displayName": "Forge Floor",
+        "brand": "Forge & Temper",
+        "use": "page",
+        "canonical": "#14110F",
+        "oklch": "oklch(18.1% 0.006 55.9)",
+        "tonalRamp": [
+          "#0D0A09",
+          "#272321",
+          "#423F3C",
+          "#615D5A",
+          "#807C7A",
+          "#A29D9B",
+          "#C7C3C0",
+          "#F2EDEA"
+        ]
+      },
+      "forge-temper-bone": {
+        "role": "primary",
+        "displayName": "Bone",
+        "brand": "Forge & Temper",
+        "use": "text, display",
+        "canonical": "#EDE6DC",
+        "oklch": "oklch(92.8% 0.015 77.1)",
+        "tonalRamp": [
+          "#0F0A05",
+          "#28231C",
+          "#443F37",
+          "#635D54",
+          "#837C73",
+          "#A49D94",
+          "#CAC3B9",
+          "#F4EDE3"
+        ]
+      },
+      "forge-temper-heat": {
+        "role": "secondary",
+        "displayName": "Heat Orange",
+        "brand": "Forge & Temper",
+        "use": "6 px heat bar, section head, button",
+        "canonical": "#F26A1B",
+        "oklch": "oklch(68.2% 0.186 44.8)",
+        "tonalRamp": [
+          "#190500",
+          "#3F1601",
+          "#682A08",
+          "#993E04",
+          "#CA5405",
+          "#F87024",
+          "#FBB08F",
+          "#FEEAE1"
+        ]
+      },
+      "forge-temper-ash": {
+        "role": "secondary",
+        "displayName": "Ash",
+        "brand": "Forge & Temper",
+        "use": "spec labels, footer",
+        "canonical": "#9C948A",
+        "oklch": "oklch(67.1% 0.017 73.6)",
+        "tonalRamp": [
+          "#100A04",
+          "#29231B",
+          "#453F36",
+          "#645C53",
+          "#847C72",
+          "#A59D93",
+          "#CBC3B8",
+          "#F6EDE2"
+        ]
+      },
+      "forge-temper-scale": {
+        "role": "secondary",
+        "displayName": "Mill Scale",
+        "brand": "Forge & Temper",
+        "use": "dashed spec rules",
+        "canonical": "#4A4540",
+        "oklch": "oklch(39.4% 0.011 67.5)",
+        "tonalRamp": [
+          "#0E0A07",
+          "#28231F",
+          "#443F3A",
+          "#625D57",
+          "#827C77",
+          "#A39D97",
+          "#C9C3BD",
+          "#F3EDE7"
+        ]
+      },
+      "summit-supply-slate": {
+        "role": "neutral",
+        "displayName": "Slate",
+        "brand": "Summit Supply",
+        "use": "outer ground",
+        "canonical": "#2B3A42",
+        "oklch": "oklch(33.9% 0.024 231.6)",
+        "tonalRamp": [
+          "#020D14",
+          "#18262E",
+          "#33424A",
+          "#506069",
+          "#6F8089",
+          "#90A1AB",
+          "#B5C7D1",
+          "#DFF2FC"
+        ]
+      },
+      "summit-supply-white": {
+        "role": "neutral",
+        "displayName": "Blaze White",
+        "brand": "Summit Supply",
+        "use": "page",
+        "canonical": "#FFFFFF",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "summit-supply-ink": {
+        "role": "primary",
+        "displayName": "Granite Ink",
+        "brand": "Summit Supply",
+        "use": "text, sign rules",
+        "canonical": "#1F2A30",
+        "oklch": "oklch(27.7% 0.019 232.2)",
+        "tonalRamp": [
+          "#040D12",
+          "#1B262C",
+          "#364248",
+          "#536067",
+          "#737F87",
+          "#93A1A8",
+          "#B9C7CE",
+          "#E3F1F9"
+        ]
+      },
+      "summit-supply-blaze": {
+        "role": "secondary",
+        "displayName": "Blaze Red",
+        "brand": "Summit Supply",
+        "use": "white-red-white stripe, button",
+        "canonical": "#E30613",
+        "oklch": "oklch(57.7% 0.234 28.0)",
+        "tonalRamp": [
+          "#1E0001",
+          "#4A0404",
+          "#78100E",
+          "#B00E11",
+          "#E81519",
+          "#FE6558",
+          "#FFABA0",
+          "#FEE9E6"
+        ]
+      },
+      "summit-supply-sign": {
+        "role": "secondary",
+        "displayName": "Signpost Yellow",
+        "brand": "Summit Supply",
+        "use": "altitude-band rows",
+        "canonical": "#FFD400",
+        "oklch": "oklch(88.1% 0.181 94.0)",
+        "tonalRamp": [
+          "#0F0B00",
+          "#2C2302",
+          "#4C3F09",
+          "#6F5C06",
+          "#947B0A",
+          "#B99C27",
+          "#E7C11E",
+          "#FEEFB9"
+        ]
+      },
+      "summit-supply-grey": {
+        "role": "secondary",
+        "displayName": "Scree Grey",
+        "brand": "Summit Supply",
+        "use": "address line, footer",
+        "canonical": "#56626A",
+        "oklch": "oklch(48.9% 0.020 237.0)",
+        "tonalRamp": [
+          "#040C12",
+          "#1B262C",
+          "#364149",
+          "#546067",
+          "#737F88",
+          "#94A1A9",
+          "#B9C6CF",
+          "#E3F1FA"
+        ]
+      },
+      "alpenbahn-steel": {
+        "role": "neutral",
+        "displayName": "Platform Steel",
+        "brand": "Alpenbahn",
+        "use": "outer ground",
+        "canonical": "#D3D7DB",
+        "oklch": "oklch(87.7% 0.007 247.9)",
+        "tonalRamp": [
+          "#090B0E",
+          "#212427",
+          "#3D4043",
+          "#5B5E61",
+          "#7A7E81",
+          "#9B9FA3",
+          "#C1C5C8",
+          "#EBEFF3"
+        ]
+      },
+      "alpenbahn-paper": {
+        "role": "neutral",
+        "displayName": "Ticket White",
+        "brand": "Alpenbahn",
+        "use": "page",
+        "canonical": "#FFFFFF",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "alpenbahn-red": {
+        "role": "primary",
+        "displayName": "Rail Red",
+        "brand": "Alpenbahn",
+        "use": "ticket header band, primary button",
+        "canonical": "#D52B1E",
+        "oklch": "oklch(56.7% 0.207 29.5)",
+        "tonalRamp": [
+          "#1E0100",
+          "#490503",
+          "#7C0200",
+          "#AE150B",
+          "#DD3527",
+          "#FD6755",
+          "#FEAC9F",
+          "#FDE9E6"
+        ]
+      },
+      "alpenbahn-ink": {
+        "role": "secondary",
+        "displayName": "Timetable Black",
+        "brand": "Alpenbahn",
+        "use": "times, values, outline button",
+        "canonical": "#111111",
+        "oklch": "oklch(17.8% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "alpenbahn-grey": {
+        "role": "secondary",
+        "displayName": "Field Grey",
+        "brand": "Alpenbahn",
+        "use": "field labels, notes",
+        "canonical": "#5E5E5E",
+        "oklch": "oklch(48.2% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "alpenbahn-stub": {
+        "role": "secondary",
+        "displayName": "Stub Tint",
+        "brand": "Alpenbahn",
+        "use": "booking-reference stub",
+        "canonical": "#FBEDEC",
+        "oklch": "oklch(95.7% 0.015 22.4)",
+        "tonalRamp": [
+          "#110908",
+          "#2B2121",
+          "#483D3C",
+          "#665A5A",
+          "#867A79",
+          "#A89B9A",
+          "#CEC0BF",
+          "#F9EBEA"
+        ]
+      },
+      "alpenbahn-rule": {
+        "role": "secondary",
+        "displayName": "Perforation Grey",
+        "brand": "Alpenbahn",
+        "use": "rules",
+        "canonical": "#DADADA",
+        "oklch": "oklch(88.8% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "margin-books-counter": {
+        "role": "neutral",
+        "displayName": "Counter Grey",
+        "brand": "Margin Books",
+        "use": "outer ground",
+        "canonical": "#45484B",
+        "oklch": "oklch(40.0% 0.006 248.0)",
+        "tonalRamp": [
+          "#090B0E",
+          "#222427",
+          "#3D4043",
+          "#5B5E61",
+          "#7A7E81",
+          "#9B9FA2",
+          "#C1C4C8",
+          "#EBEFF3"
+        ]
+      },
+      "margin-books-paper": {
+        "role": "neutral",
+        "displayName": "Thermal Paper",
+        "brand": "Margin Books",
+        "use": "page",
+        "canonical": "#FFFFFF",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "margin-books-ink": {
+        "role": "primary",
+        "displayName": "Thermal Ink",
+        "brand": "Margin Books",
+        "use": "text, button",
+        "canonical": "#151515",
+        "oklch": "oklch(19.6% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "margin-books-grey": {
+        "role": "secondary",
+        "displayName": "Faded Print",
+        "brand": "Margin Books",
+        "use": "item sub-lines",
+        "canonical": "#555555",
+        "oklch": "oklch(45.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "margin-books-rule": {
+        "role": "secondary",
+        "displayName": "Tear Rule",
+        "brand": "Margin Books",
+        "use": "dashed rules",
+        "canonical": "#6A6A6A",
+        "oklch": "oklch(52.4% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "paper-plane-board": {
+        "role": "neutral",
+        "displayName": "Corrugated Board",
+        "brand": "Paper Plane",
+        "use": "outer ground",
+        "canonical": "#8C6A47",
+        "oklch": "oklch(55.0% 0.066 66.5)",
+        "tonalRamp": [
+          "#140800",
+          "#351E03",
+          "#573815",
+          "#775633",
+          "#987652",
+          "#BB9772",
+          "#E2BC97",
+          "#FEEBD9"
+        ]
+      },
+      "paper-plane-kraft": {
+        "role": "neutral",
+        "displayName": "Kraft",
+        "brand": "Paper Plane",
+        "use": "page",
+        "canonical": "#C49A6C",
+        "oklch": "oklch(71.5% 0.079 68.5)",
+        "tonalRamp": [
+          "#140800",
+          "#341F03",
+          "#5B3602",
+          "#7B5527",
+          "#9C7447",
+          "#BF9668",
+          "#E7BB8C",
+          "#FEEBD7"
+        ]
+      },
+      "paper-plane-label": {
+        "role": "primary",
+        "displayName": "Label Stock",
+        "brand": "Paper Plane",
+        "use": "label panel",
+        "canonical": "#FFFFFF",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "paper-plane-ink": {
+        "role": "secondary",
+        "displayName": "Thermal Label Black",
+        "brand": "Paper Plane",
+        "use": "text, sort-code slab, button",
+        "canonical": "#111111",
+        "oklch": "oklch(17.8% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "paper-plane-kraft-ink": {
+        "role": "secondary",
+        "displayName": "Kraft Ink",
+        "brand": "Paper Plane",
+        "use": "timeline",
+        "canonical": "#3D2E1E",
+        "oklch": "oklch(31.4% 0.034 67.8)",
+        "tonalRamp": [
+          "#140800",
+          "#2F2111",
+          "#4C3C2C",
+          "#6B5A49",
+          "#8B7A68",
+          "#AD9B88",
+          "#D4C0AD",
+          "#FFEBD7"
+        ]
+      },
+      "paper-plane-tape": {
+        "role": "secondary",
+        "displayName": "Tape Rule",
+        "brand": "Paper Plane",
+        "use": "timeline rules",
+        "canonical": "#A8835A",
+        "oklch": "oklch(63.6% 0.072 68.8)",
+        "tonalRamp": [
+          "#140800",
+          "#341F03",
+          "#58380C",
+          "#78562D",
+          "#9A754D",
+          "#BC976D",
+          "#E4BC91",
+          "#FEEBD6"
+        ]
+      },
+      "signal-noise-wall": {
+        "role": "neutral",
+        "displayName": "Venue Wall",
+        "brand": "Signal/Noise",
+        "use": "outer ground",
+        "canonical": "#EDEDED",
+        "oklch": "oklch(94.6% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "signal-noise-paper": {
+        "role": "neutral",
+        "displayName": "Programme White",
+        "brand": "Signal/Noise",
+        "use": "page",
+        "canonical": "#FFFFFF",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "signal-noise-ink": {
+        "role": "primary",
+        "displayName": "Programme Black",
+        "brand": "Signal/Noise",
+        "use": "text, day bars",
+        "canonical": "#0D0D0D",
+        "oklch": "oklch(15.9% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "signal-noise-blue": {
+        "role": "secondary",
+        "displayName": "Signal Blue",
+        "brand": "Signal/Noise",
+        "use": "headline slab, keynote times, button",
+        "canonical": "#2246F5",
+        "oklch": "oklch(50.5% 0.259 266.2)",
+        "tonalRamp": [
+          "#010034",
+          "#060574",
+          "#0F16B8",
+          "#1D3CEC",
+          "#426FF8",
+          "#7299FD",
+          "#ACC3FA",
+          "#E7EFFF"
+        ]
+      },
+      "signal-noise-grey": {
+        "role": "secondary",
+        "displayName": "Speaker Grey",
+        "brand": "Signal/Noise",
+        "use": "speakers, notes",
+        "canonical": "#5A5A5A",
+        "oklch": "oklch(46.8% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "signal-noise-rule": {
+        "role": "secondary",
+        "displayName": "Grid Rule",
+        "brand": "Signal/Noise",
+        "use": "session rules",
+        "canonical": "#D4D4D4",
+        "oklch": "oklch(87.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "harrow-vale-walnut": {
+        "role": "neutral",
+        "displayName": "Saleroom Walnut",
+        "brand": "Harrow & Vale",
+        "use": "outer ground",
+        "canonical": "#3A2F27",
+        "oklch": "oklch(31.5% 0.021 57.9)",
+        "tonalRamp": [
+          "#120904",
+          "#2C221A",
+          "#493D35",
+          "#675B52",
+          "#877A71",
+          "#A99B92",
+          "#CFC1B7",
+          "#FAEBE1"
+        ]
+      },
+      "harrow-vale-buff": {
+        "role": "neutral",
+        "displayName": "Archival Buff",
+        "brand": "Harrow & Vale",
+        "use": "page, outline button",
+        "canonical": "#E9E0CB",
+        "oklch": "oklch(90.8% 0.030 87.5)",
+        "tonalRamp": [
+          "#100A00",
+          "#2A2313",
+          "#463F2E",
+          "#655D4B",
+          "#857D6A",
+          "#A69E8A",
+          "#CCC3AF",
+          "#F7EED9"
+        ]
+      },
+      "harrow-vale-ink": {
+        "role": "primary",
+        "displayName": "Catalogue Ink",
+        "brand": "Harrow & Vale",
+        "use": "text",
+        "canonical": "#1F1B16",
+        "oklch": "oklch(22.5% 0.011 73.3)",
+        "tonalRamp": [
+          "#0E0A06",
+          "#27231E",
+          "#433F39",
+          "#625D57",
+          "#817C76",
+          "#A39D97",
+          "#C9C3BC",
+          "#F3EDE6"
+        ]
+      },
+      "harrow-vale-ribbon": {
+        "role": "secondary",
+        "displayName": "Provenance Ribbon Red",
+        "brand": "Harrow & Vale",
+        "use": "known-provenance ribbon, dates, rules, button",
+        "canonical": "#A3241B",
+        "oklch": "oklch(47.0% 0.165 29.1)",
+        "tonalRamp": [
+          "#1E0101",
+          "#480604",
+          "#7C0503",
+          "#A7281E",
+          "#CD4D3F",
+          "#F37060",
+          "#FDACA0",
+          "#FFE9E5"
+        ]
+      },
+      "harrow-vale-gap": {
+        "role": "secondary",
+        "displayName": "Unrecorded Buff",
+        "brand": "Harrow & Vale",
+        "use": "gap ribbon",
+        "canonical": "#B9AE98",
+        "oklch": "oklch(75.4% 0.033 84.6)",
+        "tonalRamp": [
+          "#110A00",
+          "#2B2311",
+          "#483F2C",
+          "#665C48",
+          "#867C67",
+          "#A89D88",
+          "#CEC3AC",
+          "#F9EDD6"
+        ]
+      },
+      "harrow-vale-grey": {
+        "role": "secondary",
+        "displayName": "Catalogue Grey",
+        "brand": "Harrow & Vale",
+        "use": "attributions, estimates, footer",
+        "canonical": "#5B5245",
+        "oklch": "oklch(44.3% 0.024 77.1)",
+        "tonalRamp": [
+          "#110A02",
+          "#2B2317",
+          "#473E32",
+          "#655C4F",
+          "#857C6E",
+          "#A79D8E",
+          "#CDC2B3",
+          "#F8EDDD"
+        ]
+      },
+      "night-shift-bezel": {
+        "role": "neutral",
+        "displayName": "Bezel Black",
+        "brand": "Night Shift Arcade",
+        "use": "outer ground",
+        "canonical": "#000000",
+        "oklch": "oklch(0.0% 0.000 0.0)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "night-shift-phosphor": {
+        "role": "neutral",
+        "displayName": "Phosphor Black",
+        "brand": "Night Shift Arcade",
+        "use": "page",
+        "canonical": "#0B0B10",
+        "oklch": "oklch(15.2% 0.011 285.1)",
+        "tonalRamp": [
+          "#0B0B10",
+          "#232329",
+          "#3F3F45",
+          "#5D5D64",
+          "#7C7C84",
+          "#9D9EA5",
+          "#C3C3CB",
+          "#EDEEF6"
+        ]
+      },
+      "night-shift-white": {
+        "role": "primary",
+        "displayName": "Sprite White",
+        "brand": "Night Shift Arcade",
+        "use": "text, 2nd place",
+        "canonical": "#FFF1E8",
+        "oklch": "oklch(96.7% 0.019 55.2)",
+        "tonalRamp": [
+          "#120904",
+          "#2C221B",
+          "#483D36",
+          "#675B53",
+          "#877B73",
+          "#A89C93",
+          "#CFC1B9",
+          "#F9EBE2"
+        ]
+      },
+      "night-shift-yellow": {
+        "role": "secondary",
+        "displayName": "Sprite Yellow",
+        "brand": "Night Shift Arcade",
+        "use": "1st place, button",
+        "canonical": "#FFEC27",
+        "oklch": "oklch(93.0% 0.189 103.3)",
+        "tonalRamp": [
+          "#0E0C00",
+          "#292501",
+          "#474107",
+          "#685F02",
+          "#8B8001",
+          "#AEA123",
+          "#D8C812",
+          "#FFF37F"
+        ]
+      },
+      "night-shift-red": {
+        "role": "secondary",
+        "displayName": "Sprite Red",
+        "brand": "Night Shift Arcade",
+        "use": "HIGH SCORES",
+        "canonical": "#FF004D",
+        "oklch": "oklch(63.4% 0.254 17.6)",
+        "tonalRamp": [
+          "#1E0003",
+          "#490411",
+          "#771024",
+          "#AD0F34",
+          "#E51547",
+          "#FC6473",
+          "#FDAAAC",
+          "#FDE9E9"
+        ]
+      },
+      "night-shift-green": {
+        "role": "secondary",
+        "displayName": "Sprite Green",
+        "brand": "Night Shift Arcade",
+        "use": "date line, 4th",
+        "canonical": "#00E436",
+        "oklch": "oklch(79.8% 0.257 144.3)",
+        "tonalRamp": [
+          "#001001",
+          "#022D06",
+          "#0B4E13",
+          "#067219",
+          "#099823",
+          "#2BBD3B",
+          "#1FEC40",
+          "#CAFFC9"
+        ]
+      },
+      "night-shift-blue": {
+        "role": "secondary",
+        "displayName": "Sprite Blue",
+        "brand": "Night Shift Arcade",
+        "use": "prizes, 5th",
+        "canonical": "#29ADFF",
+        "oklch": "oklch(71.8% 0.160 242.7)",
+        "tonalRamp": [
+          "#000C19",
+          "#00273F",
+          "#064469",
+          "#176394",
+          "#2084C4",
+          "#1FA7F9",
+          "#8DCCFD",
+          "#E1F1FE"
+        ]
+      },
+      "night-shift-orange": {
+        "role": "secondary",
+        "displayName": "Sprite Orange",
+        "brand": "Night Shift Arcade",
+        "use": "3rd",
+        "canonical": "#FFA300",
+        "oklch": "oklch(78.9% 0.171 69.6)",
+        "tonalRamp": [
+          "#140800",
+          "#341F02",
+          "#58380A",
+          "#815207",
+          "#AC6E0C",
+          "#D58D28",
+          "#FDB356",
+          "#FFEBD6"
+        ]
+      },
+      "night-shift-pink": {
+        "role": "secondary",
+        "displayName": "Sprite Pink",
+        "brand": "Night Shift Arcade",
+        "use": "your row",
+        "canonical": "#FF77A8",
+        "oklch": "oklch(74.2% 0.172 359.5)",
+        "tonalRamp": [
+          "#1D000A",
+          "#470222",
+          "#740D3D",
+          "#A31F5B",
+          "#C9467A",
+          "#F06A9B",
+          "#FBA8C2",
+          "#FEE8EE"
+        ]
+      },
+      "night-shift-lavender": {
+        "role": "secondary",
+        "displayName": "Sprite Lavender",
+        "brand": "Night Shift Arcade",
+        "use": "sublines, footer",
+        "canonical": "#9F94BD",
+        "oklch": "oklch(69.0% 0.061 297.1)",
+        "tonalRamp": [
+          "#0F0421",
+          "#271D3D",
+          "#43395C",
+          "#61567C",
+          "#81769D",
+          "#A297C0",
+          "#C8BCE7",
+          "#F0EBFE"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "ledgerline-display": {
+        "displayName": "Ledgerline display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the ledger pad."
+      },
+      "ledgerline-body": {
+        "displayName": "Ledgerline body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      },
+      "ninth-line-display": {
+        "displayName": "Ninth Line display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the eye chart."
+      },
+      "ninth-line-body": {
+        "displayName": "Ninth Line body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      },
+      "madder-indigo-display": {
+        "displayName": "Madder & Indigo display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the sampler alphabet."
+      },
+      "madder-indigo-body": {
+        "displayName": "Madder & Indigo body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      },
+      "northline-display": {
+        "displayName": "Northline display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the transit diagram."
+      },
+      "northline-body": {
+        "displayName": "Northline body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      },
+      "low-ohm-display": {
+        "displayName": "Low Ohm Records display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the VU meter bridge."
+      },
+      "low-ohm-body": {
+        "displayName": "Low Ohm Records body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      },
+      "fieldbook-display": {
+        "displayName": "Fieldbook Seeds display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the seed packet."
+      },
+      "fieldbook-body": {
+        "displayName": "Fieldbook Seeds body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      },
+      "devils-garage-display": {
+        "displayName": "Devil's Garage display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the lowbrow gallery panel."
+      },
+      "devils-garage-body": {
+        "displayName": "Devil's Garage body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      },
+      "forge-temper-display": {
+        "displayName": "Forge & Temper display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the forge floor."
+      },
+      "forge-temper-body": {
+        "displayName": "Forge & Temper body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      },
+      "summit-supply-display": {
+        "displayName": "Summit Supply display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the trail blaze."
+      },
+      "summit-supply-body": {
+        "displayName": "Summit Supply body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      },
+      "alpenbahn-display": {
+        "displayName": "Alpenbahn display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the rail ticket."
+      },
+      "alpenbahn-body": {
+        "displayName": "Alpenbahn body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      },
+      "margin-books-display": {
+        "displayName": "Margin Books display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the thermal receipt."
+      },
+      "margin-books-body": {
+        "displayName": "Margin Books body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      },
+      "paper-plane-display": {
+        "displayName": "Paper Plane display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the shipping label."
+      },
+      "paper-plane-body": {
+        "displayName": "Paper Plane body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      },
+      "signal-noise-display": {
+        "displayName": "Signal/Noise display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the programme grid."
+      },
+      "signal-noise-body": {
+        "displayName": "Signal/Noise body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      },
+      "harrow-vale-display": {
+        "displayName": "Harrow & Vale display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the provenance ribbon."
+      },
+      "harrow-vale-body": {
+        "displayName": "Harrow & Vale body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      },
+      "night-shift-display": {
+        "displayName": "Night Shift Arcade display",
+        "purpose": "Heading blocks only: masthead, hook and artefact lettering for the CRT high-score screen."
+      },
+      "night-shift-body": {
+        "displayName": "Night Shift Arcade body",
+        "purpose": "Template defaultFont/defaultFontSize; text blocks inherit it and set only fontSize and color."
+      }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": [
+      {
+        "name": "mobile-stack",
+        "value": "Below the content width (600, 560 or 380 px) stacking columns collapse to full width; review renders at 390 px."
+      }
+    ],
+    "contentWidths": [
+      {
+        "name": "standard",
+        "value": "600px"
+      },
+      {
+        "name": "label",
+        "value": "560px",
+        "usedBy": "paper-plane"
+      },
+      {
+        "name": "receipt",
+        "value": "380px",
+        "usedBy": "margin-books"
+      }
+    ],
+    "googleFonts": [
+      {
+        "family": "Archivo",
+        "stack": "'Archivo', 'Helvetica Neue', Arial, sans-serif"
+      },
+      {
+        "family": "Alfa Slab One",
+        "stack": "'Alfa Slab One', Rockwell, Georgia, serif"
+      },
+      {
+        "family": "Barlow Condensed",
+        "stack": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif"
+      },
+      {
+        "family": "Big Shoulders Stencil",
+        "stack": "'Big Shoulders Stencil', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif"
+      },
+      {
+        "family": "Bungee",
+        "stack": "'Bungee', 'Helvetica Neue', Arial, sans-serif"
+      },
+      {
+        "family": "Courier Prime",
+        "stack": "'Courier Prime', 'Courier New', Courier, monospace"
+      },
+      {
+        "family": "EB Garamond",
+        "stack": "'EB Garamond', Garamond, Georgia, serif"
+      },
+      {
+        "family": "Overpass",
+        "stack": "'Overpass', 'Helvetica Neue', Arial, sans-serif"
+      },
+      {
+        "family": "Press Start 2P",
+        "stack": "'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace"
+      },
+      {
+        "family": "Silkscreen",
+        "stack": "'Silkscreen', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace"
+      }
+    ],
+    "brands": [
+      {
+        "slug": "ledgerline",
+        "name": "Ledgerline",
+        "template": "backend/templates_api/templates/welcome/ledgerline-welcome.json",
+        "artefact": "ledger pad",
+        "device": "Ledger rows (No. / Entry / Time) on feint green rules; double rules frame masthead and the total line; Courier Prime for folio and times.",
+        "assets": null
+      },
+      {
+        "slug": "ninth-line",
+        "name": "Ninth Line",
+        "template": "backend/templates_api/templates/welcome/ninth-line-welcome.json",
+        "artefact": "eye chart",
+        "device": "Nine chart lines in heading blocks stepping 96 to 12 px with tracking at 0.18 em, flanked by line number and Snellen fraction; the code sits on a red/green duochrome bar.",
+        "assets": "frontend/public/gallery-assets/ninth-line/"
+      },
+      {
+        "slug": "madder-indigo",
+        "name": "Madder & Indigo",
+        "template": "backend/templates_api/templates/welcome/madder-indigo-welcome.json",
+        "artefact": "sampler alphabet",
+        "device": "A stitched sampler raster (alphabet, border, wordmark) opens; the kit plan is a band list with roman numerals in the three dye colours on dashed stitch rules.",
+        "assets": "frontend/public/gallery-assets/madder-indigo/"
+      },
+      {
+        "slug": "northline",
+        "name": "Northline",
+        "template": "backend/templates_api/templates/newsletter/northline-the-line.json",
+        "artefact": "transit diagram",
+        "device": "Route diagram raster, then the issue as a line: 20 px yellow spine column with stop rasters and km markers on the left.",
+        "assets": "frontend/public/gallery-assets/northline/"
+      },
+      {
+        "slug": "low-ohm",
+        "name": "Low Ohm Records",
+        "template": "backend/templates_api/templates/newsletter/low-ohm-monthly.json",
+        "artefact": "VU meter bridge",
+        "device": "A meter-bridge raster (one VU meter per record, red only past zero) with the three record names set in a stacked three-column row beneath; tour dates as ruled data rows.",
+        "assets": "frontend/public/gallery-assets/low-ohm/"
+      },
+      {
+        "slug": "fieldbook",
+        "name": "Fieldbook Seeds",
+        "template": "backend/templates_api/templates/newsletter/fieldbook-almanac.json",
+        "artefact": "seed packet",
+        "device": "Packet masthead on tomato, a seed-packet raster, and a sowing table of zebra data rows (Crop / Sow / Days) under a leaf header row.",
+        "assets": "frontend/public/gallery-assets/fieldbook/"
+      },
+      {
+        "slug": "devils-garage",
+        "name": "Devil's Garage",
+        "template": "backend/templates_api/templates/promotional/devils-garage-flame-sale.json",
+        "artefact": "lowbrow gallery panel",
+        "device": "Comic-panel stack: every panel sits in a 14/572/14 column row and between 14 px black spacers, so a black outline frames each candy-lacquer panel.",
+        "assets": "frontend/public/gallery-assets/devils-garage/"
+      },
+      {
+        "slug": "forge-temper",
+        "name": "Forge & Temper",
+        "template": "backend/templates_api/templates/promotional/forge-temper-launch.json",
+        "artefact": "forge floor",
+        "device": "Strike photo then a 6 px heat bar; the stencil headline reads like a stamped batch mark; specs are a dashed-rule spec sheet (label / value).",
+        "assets": "frontend/public/gallery-assets/forge-temper/"
+      },
+      {
+        "slug": "summit-supply",
+        "name": "Summit Supply",
+        "template": "backend/templates_api/templates/promotional/summit-supply-sale.json",
+        "artefact": "trail blaze",
+        "device": "Trail blaze (8 px white / red / white spacers) top and bottom; discounts set as a yellow signpost: altitude bands with percentages, ruled in granite ink.",
+        "assets": "frontend/public/gallery-assets/summit-supply/"
+      },
+      {
+        "slug": "alpenbahn",
+        "name": "Alpenbahn",
+        "template": "backend/templates_api/templates/transactional/alpenbahn-ticket.json",
+        "artefact": "rail ticket",
+        "device": "Red ticket header, departure / duration / arrival row, ticket fields (label over value) in non-stacking rows, a dashed tear line and a tinted stub with the booking reference.",
+        "assets": "frontend/public/gallery-assets/alpenbahn/"
+      },
+      {
+        "slug": "margin-books",
+        "name": "Margin Books",
+        "template": "backend/templates_api/templates/transactional/margin-books-receipt.json",
+        "artefact": "thermal receipt",
+        "device": "A 380 px receipt slip on counter grey: Courier lines, 70/30 item and price rows, dashed tear rules, TOTAL at 18 px, the button in the receipt footer.",
+        "assets": null
+      },
+      {
+        "slug": "paper-plane",
+        "name": "Paper Plane",
+        "template": "backend/templates_api/templates/transactional/paper-plane-shipped.json",
+        "artefact": "shipping label",
+        "device": "A 560 px kraft page carrying a white label panel (32/496/32 columns): service slab, from/to, black sort-code slab, tracking number, barcode raster.",
+        "assets": "frontend/public/gallery-assets/paper-plane/"
+      },
+      {
+        "slug": "signal-noise",
+        "name": "Signal/Noise",
+        "template": "backend/templates_api/templates/event/signal-noise-programme.json",
+        "artefact": "programme grid",
+        "device": "Black day bars and a 22/78 time / session grid on light rules; one accent (blue) marks keynotes and the headline slab.",
+        "assets": "frontend/public/gallery-assets/signal-noise/"
+      },
+      {
+        "slug": "harrow-vale",
+        "name": "Harrow & Vale",
+        "template": "backend/templates_api/templates/event/harrow-vale-auction.json",
+        "artefact": "provenance ribbon",
+        "device": "Provenance as a 100/14/486 timeline: a red ribbon cell for recorded ownership, a buff cell for gaps, dates in the left column.",
+        "assets": "frontend/public/gallery-assets/harrow-vale/"
+      },
+      {
+        "slug": "night-shift",
+        "name": "Night Shift Arcade",
+        "template": "backend/templates_api/templates/event/night-shift-tournament.json",
+        "artefact": "CRT high-score screen",
+        "device": "High-score table: 30/25/45 rank / initials / score rows, each row one sprite colour, ending in ??? YOU 000 000.",
+        "assets": "frontend/public/gallery-assets/night-shift/"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (Alpenbahn)",
+      "kind": "button",
+      "refersTo": "button-alpenbahn",
+      "description": "Square full-colour CTA in the brand's artefact colour; every template uses this shape with its own colours.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Add to calendar</a>",
+      "css": ".ds-btn-primary { display: inline-block; background: #D52B1E; color: #FFFFFF; padding: 15px 28px; font: 700 16px 'Helvetica Neue', Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 0; } .ds-btn-primary:hover { background: #B32418; } .ds-btn-primary:focus-visible { outline: 2px solid #111111; outline-offset: 2px; }"
+    },
+    {
+      "name": "Outline Button (Harrow & Vale)",
+      "kind": "button",
+      "refersTo": "button-outline-harrow-vale",
+      "description": "Second action only where one is real; 2 px border in the brand colour on the page colour.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">Register to bid</a>",
+      "css": ".ds-btn-outline { display: inline-block; background: #E9E0CB; color: #A3241B; border: 2px solid #A3241B; padding: 13px 28px; font: 600 17px 'EB Garamond', Garamond, Georgia, serif; text-decoration: none; border-radius: 0; } .ds-btn-outline:hover { background: #A3241B; color: #E9E0CB; } .ds-btn-outline:focus-visible { outline: 2px solid #1F1B16; outline-offset: 2px; }"
+    },
+    {
+      "name": "Programme Data Row (Signal/Noise)",
+      "kind": "custom",
+      "refersTo": "signal-noise-display",
+      "description": "Non-stacking 22/78 time / session row on a light rule; keynote times in the accent.",
+      "html": "<div class=\"ds-prog-row\"><span class=\"ds-prog-time\">09:30</span><span><strong>Opening keynote: Boring on purpose</strong><br><em>Inês Carvalho, Tessera Payments</em></span></div>",
+      "css": ".ds-prog-row { display: flex; padding: 14px 40px; border-bottom: 1px solid #D4D4D4; background: #FFFFFF; font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif; color: #0D0D0D; } .ds-prog-time { flex: 0 0 22%; font-weight: 700; font-size: 17px; color: #2246F5; } .ds-prog-row strong { font-size: 18px; } .ds-prog-row em { font-style: normal; font-size: 14px; color: #5A5A5A; } .ds-prog-row:hover { background: #F6F6F6; }"
+    },
+    {
+      "name": "Ticket Fields (Alpenbahn)",
+      "kind": "custom",
+      "refersTo": "alpenbahn-display",
+      "description": "Ticket field captions sit with their values in a non-stacking 36/32/32 row; captions belong to the artefact, they are not eyebrows.",
+      "html": "<div class=\"ds-ticket\"><div><small>Date</small><b>Sat 14 Nov 2026</b></div><div><small>Train</small><b>AB 1137</b></div><div><small>Platform</small><b>9</b></div></div>",
+      "css": ".ds-ticket { display: flex; padding: 16px 40px; background: #FFFFFF; border-top: 1px solid #111111; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-ticket div { flex: 1; } .ds-ticket small { display: block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #5E5E5E; } .ds-ticket b { font-size: 18px; color: #111111; }"
+    },
+    {
+      "name": "Receipt Total Line (Margin Books)",
+      "kind": "custom",
+      "refersTo": "margin-books-body",
+      "description": "70/30 Courier lines between dashed tear rules on a 380 px slip; the total at 18 px.",
+      "html": "<div class=\"ds-receipt\"><p><span>Subtotal</span><span>38.47</span></p><p><span>Members 10%</span><span>-3.85</span></p><p class=\"ds-total\"><span>TOTAL</span><span>£34.62</span></p></div>",
+      "css": ".ds-receipt { width: 380px; padding: 8px 24px; background: #FFFFFF; color: #151515; font-family: 'Courier New', Courier, monospace; font-size: 14px; border-top: 1px dashed #6A6A6A; border-bottom: 1px dashed #6A6A6A; } .ds-receipt p { display: flex; justify-content: space-between; margin: 4px 0; } .ds-total { font-size: 18px; font-weight: 700; }"
+    },
+    {
+      "name": "Provenance Ribbon Row (Harrow & Vale)",
+      "kind": "custom",
+      "refersTo": "harrow-vale-display",
+      "description": "100/14/486 timeline row: date, a 14 px ribbon cell (red recorded, buff unrecorded), the event.",
+      "html": "<div class=\"ds-prov\"><span class=\"ds-prov-date\">1862</span><span class=\"ds-prov-ribbon\"></span><span>Bought in Canton by Captain J. R. Ferrier</span></div><div class=\"ds-prov ds-gap\"><span class=\"ds-prov-date\">1931–2025</span><span class=\"ds-prov-ribbon\"></span><span>Private collection, Perthshire</span></div>",
+      "css": ".ds-prov { display: flex; align-items: stretch; background: #E9E0CB; color: #1F1B16; font: 400 16px 'EB Garamond', Garamond, Georgia, serif; } .ds-prov-date { flex: 0 0 100px; padding: 10px 0 10px 40px; font-weight: 600; font-size: 14px; letter-spacing: 1.5px; color: #A3241B; } .ds-prov-ribbon { flex: 0 0 14px; background: #A3241B; margin-right: 16px; } .ds-prov > span:last-child { padding: 10px 40px 10px 0; } .ds-gap .ds-prov-date { color: #5B5245; } .ds-gap .ds-prov-ribbon { background: #B9AE98; } .ds-gap { color: #5B5245; }"
+    },
+    {
+      "name": "Transit Stop Row (Northline)",
+      "kind": "custom",
+      "refersTo": "northline-display",
+      "description": "90/20/490 row: km marker, a Line Yellow spine cell with the stop raster, the stop title.",
+      "html": "<div class=\"ds-stop\"><span class=\"ds-km\">0.8 km</span><span class=\"ds-spine\"><i></i></span><strong>Riverside: Sunday social ride</strong></div>",
+      "css": ".ds-stop { display: flex; align-items: center; background: #FFFFFF; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #111111; } .ds-km { flex: 0 0 90px; padding-left: 40px; font-size: 11px; font-weight: 700; color: #555555; } .ds-spine { flex: 0 0 20px; align-self: stretch; background: #FFC20E; display: flex; align-items: center; justify-content: center; } .ds-spine i { width: 12px; height: 12px; border: 3px solid #111111; border-radius: 50%; background: #FFFFFF; } .ds-stop strong { padding: 12px 40px 12px 14px; font-size: 20px; font-weight: 800; }"
+    },
+    {
+      "name": "High-Score Row (Night Shift)",
+      "kind": "custom",
+      "refersTo": "night-shift-display",
+      "description": "30/25/45 rank / initials / score row in Press Start 2P, one sprite colour per row.",
+      "html": "<div class=\"ds-score\"><span>1ST</span><span>KAT</span><span>987 650</span></div><div class=\"ds-score ds-you\"><span>???</span><span>YOU</span><span>000 000</span></div>",
+      "css": ".ds-score { display: flex; padding: 6px 40px; background: #0B0B10; color: #FFEC27; font: 400 14px 'Press Start 2P', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace; } .ds-score span:nth-child(1) { flex: 0 0 30%; } .ds-score span:nth-child(2) { flex: 0 0 25%; } .ds-you { color: #FF77A8; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Fifteen Brands, Fifteen Hands",
+    "overview": "The gallery is a collection, not an identity. Each of the fifteen templates is the email one invented brand would really send, and each is built from an artefact of that brand's own world: a ledger pad, an eye chart, a sampler, a transit diagram, a VU meter bridge, a seed packet, a lowbrow gallery panel, a forge floor, a trail blaze, a rail ticket, a thermal receipt, a shipping label, a conference programme, a provenance ribbon, a CRT high-score screen. No palette, typeface or layout formula is shared across brands; what is shared is the set of construction rules below, which every template obeys and which let any of them survive the worst inbox.\n\nThe system therefore lives at two levels. The **house rules** (Layout, Shapes, Components, Do's and Don'ts) are invariant: body-only block JSON, table rendering, square corners, a 40 px content inset, display type in heading blocks only, owned rasters, and a system-font fallback that still reads in-world. The **brand register** (Colors, Typography, and the per-brand tokens in the frontmatter) records each own-world: its artefact colours at page scale, its type pairing with fallback stack, its signature device and its assets.\n\nDensity is the artefact's own: a receipt is tight and monospaced, an eye chart is airy and centred, a programme is a grid. The action is found inside the artefact (the ledger's total line, the eye chart's last line, the ticket's stub, the receipt's footer), never in a generic slab bolted on below. The category default the old gallery shipped (photo hero with centred headline and pill button, a row of icon cards, a dark CTA slab, an italic quote) is the confirmed anti-reference.",
+    "keyCharacteristics": [
+      "One brand per template, one artefact per brand, committed at page scale.",
+      "Body-only block JSON rendered as tables with inline CSS; 600 px wide (560 and 380 where the artefact is narrower).",
+      "Square corners everywhere; no shadows; depth comes from outer ground versus page and from ruled bands.",
+      "Display type lives in heading blocks with a named email fallback stack; text blocks carry only body copy.",
+      "Photos, art and any lettering are owned, provenance-tagged rasters with alt text.",
+      "Realistic sample content: names, prices, codes and dates, never merge tags."
+    ],
+    "rules": [
+      {
+        "name": "The Artefact Palette Rule",
+        "body": "A brand's colours are the colours of its artefact (ledger green, packet tomato and leaf, rail red, phosphor black), applied at page scale. No colour is borrowed from another brand in the set, and no brand gets a neutral SaaS palette.",
+        "section": "colors"
+      },
+      {
+        "name": "The Readable Ink Rule",
+        "body": "Body text and secondary ink hold at least 4.5:1 against the surface they sit on (the softest shipped pairing, Acuity Grey #767676 on white, is 4.54:1). Display lettering of 22 px bold and up may sit on a saturated artefact field at the large-text threshold.",
+        "section": "colors"
+      },
+      {
+        "name": "The Heading-Block Type Rule",
+        "body": "Distinctive type is set only on heading blocks (`style.fontFamily`, `fontSize`, `fontWeight`, `letterSpacing`, `textTransform`), because the rich-text editor strips inline styles. Text blocks carry body copy in the template's default font with only per-block `fontSize` and `color`.",
+        "section": "typography"
+      },
+      {
+        "name": "The Fallback Is the Design Rule",
+        "body": "Web fonts load only in Apple Mail, iOS Mail and some Android clients. Every family is written with a fallback stack chosen to keep the world (stencil to Arial Narrow, pixel faces to Monaco/Consolas, slab to Rockwell, Garamond to Garamond/Georgia), and the `.nofonts` render must still read as the brand.",
+        "section": "typography"
+      },
+      {
+        "name": "The Data Rows Don't Stack Rule",
+        "body": "Any row whose columns are read across (time / session, item / price, rank / initials / score, label / value) sets `stackOnMobile: false`.",
+        "section": "layout"
+      },
+      {
+        "name": "The Outer-Padding Inset Rule",
+        "body": "A stacking row takes its inset from outer-column padding, never from a block-level wrapper, so the engine can mirror it symmetrically when stacked.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Ground Rule",
+        "body": "Separation is made with ground colour, full-width bands and rules from the artefact (ledger double rules, receipt tear lines, stitch dashes), never with shadow or blur.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** build each template from one artefact of the brand's world and commit its colours at page scale.",
+      "**Do** keep templates body-only: header and footer regions empty, masthead and postal footer as body blocks.",
+      "**Do** set distinctive type on heading blocks, always with its email fallback stack; leave text blocks to the default font with only `fontSize` and `color`.",
+      "**Do** inset content 40 px (32 px at 560 width, 24 px on the 380 px receipt), and give stacking rows that inset as outer-column padding.",
+      "**Do** set `stackOnMobile: false` on every data row.",
+      "**Do** use owned rasters under `frontend/public/gallery-assets/<brand>/` with provenance embedded and meaningful alt text; letters and numerals inside art are authored rasters (the sampler alphabet, the route-map labels, the barcode), never AI-rendered text.",
+      "**Do** write realistic sample values: names, addresses, prices, codes, tracking numbers, dates.",
+      "**Do** keep body text and secondary ink at 4.5:1 or better against their surface.",
+      "**Do** check every template in its `.nofonts` render; the system-font view must still read in-world."
+    ],
+    "donts": [
+      "**Don't** use social or icon blocks: their SVG data URIs do not display in Gmail or Outlook. Use text links.",
+      "**Don't** use `html` blocks in gallery templates.",
+      "**Don't** use merge tags (`{{first_name}}`) in gallery templates.",
+      "**Don't** put inline styles or font families inside text-block rich text; the editor strips them.",
+      "**Don't** round corners or add shadows; Outlook desktop drops both and no artefact here needs them.",
+      "**Don't** put an eyebrow label above a heading. Field captions that belong to the artefact (ticket and label fields, table column heads) sit with their value, not as kickers over a headline.",
+      "**Don't** open with a full-bleed photo hero with centred copy, a row of icon cards, a dark CTA slab or an italic quote.",
+      "**Don't** share a palette, type voice or layout formula between two templates.",
+      "**Don't** hotlink or use expiring image URLs."
+    ]
+  }
+}

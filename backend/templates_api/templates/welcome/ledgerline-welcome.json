@@ -1,0 +1,848 @@
+{
+  "name": "Ledgerline — Welcome ledger",
+  "category": "welcome",
+  "is_premium": false,
+  "tags": [
+    "welcome",
+    "saas",
+    "onboarding",
+    "finance"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#24392D",
+      "bodyBackgroundColor": "#E3EDDA",
+      "defaultFont": "Georgia, 'Times New Roman', Times, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#1D3326"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "ll-5",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              60,
+              40
+            ],
+            "columns": [
+              {
+                "id": "ll-2",
+                "blocks": [
+                  {
+                    "id": "ll-1",
+                    "type": "heading",
+                    "data": {
+                      "text": "Ledgerline",
+                      "level": 1
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 28,
+                        "right": 0,
+                        "bottom": 22,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1D3326",
+                      "fontSize": 22,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ll-4",
+                "blocks": [
+                  {
+                    "id": "ll-3",
+                    "type": "heading",
+                    "data": {
+                      "text": "Folio 001",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 32,
+                        "right": 40,
+                        "bottom": 22,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#48654F",
+                      "fontSize": 13,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ll-6",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "double",
+            "lineColor": "#B3322A",
+            "lineThickness": 4,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ll-7",
+          "type": "heading",
+          "data": {
+            "text": "Your books are open.",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 48,
+              "right": 40,
+              "bottom": 16,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#1D3326",
+            "fontSize": 48,
+            "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.08
+          }
+        },
+        {
+          "id": "ll-8",
+          "type": "text",
+          "data": {
+            "html": "<p>Ledgerline keeps invoices, expenses and the money you owe the tax office in one ledger that balances itself. Three entries stand between you and a clean first month.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 36,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 18
+          }
+        },
+        {
+          "id": "ll-9",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#9DBF94",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ll-16",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              18,
+              58,
+              24
+            ],
+            "columns": [
+              {
+                "id": "ll-11",
+                "blocks": [
+                  {
+                    "id": "ll-10",
+                    "type": "heading",
+                    "data": {
+                      "text": "No.",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#48654F",
+                      "fontSize": 12,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 1.5,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ll-13",
+                "blocks": [
+                  {
+                    "id": "ll-12",
+                    "type": "heading",
+                    "data": {
+                      "text": "Entry",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 16,
+                        "bottom": 10,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#48654F",
+                      "fontSize": 12,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 1.5,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ll-15",
+                "blocks": [
+                  {
+                    "id": "ll-14",
+                    "type": "heading",
+                    "data": {
+                      "text": "Time",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 10,
+                        "right": 40,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#48654F",
+                      "fontSize": 12,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 1.5,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "ll-17",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#1D3326",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ll-25",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              18,
+              58,
+              24
+            ],
+            "columns": [
+              {
+                "id": "ll-19",
+                "blocks": [
+                  {
+                    "id": "ll-18",
+                    "type": "heading",
+                    "data": {
+                      "text": "1",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 22,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#B3322A",
+                      "fontSize": 17,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ll-22",
+                "blocks": [
+                  {
+                    "id": "ll-20",
+                    "type": "heading",
+                    "data": {
+                      "text": "Connect your bank",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 20,
+                        "right": 16,
+                        "bottom": 4,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1D3326",
+                      "fontSize": 22,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "ll-21",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Read-only access to your business account. Payments are matched to invoices as they land.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 16,
+                        "bottom": 20,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "fontSize": 15,
+                      "color": "#48654F",
+                      "lineHeight": 1.5
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ll-24",
+                "blocks": [
+                  {
+                    "id": "ll-23",
+                    "type": "heading",
+                    "data": {
+                      "text": "2:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 22,
+                        "right": 40,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#1D3326",
+                      "fontSize": 17,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "ll-26",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#9DBF94",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ll-34",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              18,
+              58,
+              24
+            ],
+            "columns": [
+              {
+                "id": "ll-28",
+                "blocks": [
+                  {
+                    "id": "ll-27",
+                    "type": "heading",
+                    "data": {
+                      "text": "2",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 22,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#B3322A",
+                      "fontSize": 17,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ll-31",
+                "blocks": [
+                  {
+                    "id": "ll-29",
+                    "type": "heading",
+                    "data": {
+                      "text": "Import last month's invoices",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 20,
+                        "right": 16,
+                        "bottom": 4,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1D3326",
+                      "fontSize": 22,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "ll-30",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Drop in the PDFs or forward them to books@ledgerline.example. We read the totals and the due dates.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 16,
+                        "bottom": 20,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "fontSize": 15,
+                      "color": "#48654F",
+                      "lineHeight": 1.5
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ll-33",
+                "blocks": [
+                  {
+                    "id": "ll-32",
+                    "type": "heading",
+                    "data": {
+                      "text": "3:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 22,
+                        "right": 40,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#1D3326",
+                      "fontSize": 17,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "ll-35",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#9DBF94",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ll-43",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              18,
+              58,
+              24
+            ],
+            "columns": [
+              {
+                "id": "ll-37",
+                "blocks": [
+                  {
+                    "id": "ll-36",
+                    "type": "heading",
+                    "data": {
+                      "text": "3",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 22,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#B3322A",
+                      "fontSize": 17,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ll-40",
+                "blocks": [
+                  {
+                    "id": "ll-38",
+                    "type": "heading",
+                    "data": {
+                      "text": "Set aside for tax",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 20,
+                        "right": 16,
+                        "bottom": 4,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1D3326",
+                      "fontSize": 22,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "ll-39",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Pick a percentage and every payment is split the moment it arrives. Most freelancers start at 25%.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 16,
+                        "bottom": 20,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "fontSize": 15,
+                      "color": "#48654F",
+                      "lineHeight": 1.5
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ll-42",
+                "blocks": [
+                  {
+                    "id": "ll-41",
+                    "type": "heading",
+                    "data": {
+                      "text": "1:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 22,
+                        "right": 40,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#1D3326",
+                      "fontSize": 17,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "ll-44",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#9DBF94",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ll-49",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              76,
+              24
+            ],
+            "columns": [
+              {
+                "id": "ll-46",
+                "blocks": [
+                  {
+                    "id": "ll-45",
+                    "type": "heading",
+                    "data": {
+                      "text": "Time to a clean first month",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 16,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1D3326",
+                      "fontSize": 17,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ll-48",
+                "blocks": [
+                  {
+                    "id": "ll-47",
+                    "type": "heading",
+                    "data": {
+                      "text": "6:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#1D3326",
+                      "fontSize": 20,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ll-50",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "double",
+            "lineColor": "#1D3326",
+            "lineThickness": 4,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ll-51",
+          "type": "button",
+          "data": {
+            "text": "Open your books",
+            "url": "https://ledgerline.example/books"
+          },
+          "style": {
+            "padding": {
+              "top": 40,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "backgroundColor": "#1D3326",
+            "color": "#E3EDDA",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 17,
+            "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "paddingX": 30,
+            "paddingY": 16,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#1D3326"
+          }
+        },
+        {
+          "id": "ll-52",
+          "type": "text",
+          "data": {
+            "html": "<p>Stuck on an entry? Reply to this email. A bookkeeper reads every reply and answers within a working day.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 8,
+              "right": 40,
+              "bottom": 48,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 15,
+            "color": "#48654F"
+          }
+        },
+        {
+          "id": "ll-53",
+          "type": "text",
+          "data": {
+            "html": "<p>Ledgerline Ltd, 14 Chancery Lane, London WC2A 1PL</p><p>You are receiving this because you opened a Ledgerline account. <a href=\"https://ledgerline.example/preferences\">Email preferences</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 24,
+              "right": 40,
+              "bottom": 28,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "color": "#48654F",
+            "lineHeight": 1.5,
+            "backgroundColor": "#D2E2C6"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

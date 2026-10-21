@@ -1,79 +1,80 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 
-import { AnimateIn } from '../ui/AnimateIn';
+import { Button } from '../ui/button';
 
-const tabs = [
-  { id: 'builder', label: 'Drag & Drop Builder' },
-  { id: 'gallery', label: 'Template Gallery' },
-] as const;
-
-type TabId = (typeof tabs)[number]['id'];
-
-const screenshots: Record<TabId, string> = {
-  builder: '/screenshots/builder.avif',
-  gallery: '/screenshots/gallery.avif',
-};
+const showcaseItems = [
+  {
+    id: 'welcome-onboarding',
+    category: 'SaaS Onboarding',
+    title: 'Welcome & Workspace Setup',
+    description: 'Clean activation checklist with primary CTA and personalized merge variables.',
+    subject: 'Welcome to {{workspace_name}} — let’s get started',
+  },
+  {
+    id: 'product-launch',
+    category: 'Product Release',
+    title: 'Feature Announcement',
+    description: 'Editorial hero banner, two-column feature breakdown, and changelog deep link.',
+    subject: 'Introducing Autumn Release 4.0',
+  },
+  {
+    id: 'order-confirmation',
+    category: 'Transactional',
+    title: 'Order Receipt & Summary',
+    description: 'Itemized receipt layout with shipping status and customer support footer.',
+    subject: 'Your receipt for order #{{order_id}}',
+  },
+];
 
 export function ShowcaseSection() {
-  const [activeTab, setActiveTab] = useState<TabId>('builder');
-
   return (
-    <section className="border-y border-border/60 bg-muted/10">
-      <div className="mx-auto w-full max-w-6xl px-4 py-16 md:py-24">
-        <AnimateIn direction="up" className="text-center">
-          <h2 className="font-heading text-3xl font-semibold tracking-tight md:text-4xl">
-            Your users get a full email editor
-          </h2>
-          <p className="mx-auto mt-3 max-w-lg text-base text-muted-foreground md:text-lg">
-            Drag-and-drop builder, template gallery, and one-click HTML export — embedded in your
-            product.
-          </p>
-        </AnimateIn>
+    <section className="py-20 sm:py-28 lg:py-36">
+      <div className="mx-auto max-w-media px-6 sm:px-8">
+        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+          <div className="max-w-xl">
+            <p className="text-eyebrow text-muted-foreground">Starter Gallery</p>
+            <h2 className="mt-3 text-display-2 font-bold tracking-tight text-foreground text-balance">
+              Start from a curated template.
+            </h2>
+          </div>
+          <Button variant="outline" className="rounded-full" asChild>
+            <Link to="/templates">
+              Browse all templates
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
 
-        <AnimateIn direction="up" delay={0.15} className="mt-10">
-          {/* Tabs */}
-          <div className="flex justify-center">
-            <div className="inline-flex gap-1 rounded-lg border border-border bg-muted/50 p-1">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`relative rounded-md px-4 py-2 text-sm font-medium transition-colors ${
-                    activeTab === tab.id
-                      ? 'text-foreground'
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
+        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
+          {showcaseItems.map((item) => (
+            <div
+              key={item.id}
+              className="group flex flex-col justify-between rounded-tile border border-border bg-card p-8 transition-colors hover:border-foreground/30"
+            >
+              <div>
+                <p className="text-eyebrow text-marketing-accent">{item.category}</p>
+                <h3 className="mt-3 text-title-2 font-bold text-foreground">{item.title}</h3>
+                <p className="mt-2 text-body text-muted-foreground">{item.description}</p>
+
+                <div className="mt-6 rounded-xl border border-border bg-muted/50 p-4">
+                  <p className="font-mono text-[11px] text-muted-foreground">Subject line</p>
+                  <p className="mt-1 font-mono text-xs text-foreground">{item.subject}</p>
+                </div>
+              </div>
+
+              <div className="mt-8 border-t border-border pt-4">
+                <a
+                  href={`/builder/?template=${item.id}`}
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-marketing-accent"
                 >
-                  {activeTab === tab.id && (
-                    <motion.span
-                      layoutId="showcase-tab-bg"
-                      className="absolute inset-0 rounded-md border-b-2 border-primary bg-background shadow-sm"
-                      transition={{ type: 'spring', bounce: 0.18, duration: 0.5 }}
-                    />
-                  )}
-                  <span className="relative z-10">{tab.label}</span>
-                </button>
-              ))}
+                  Open in Builder
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </a>
+              </div>
             </div>
-          </div>
-
-          {/* Screenshot with tab content */}
-          <div className="mt-8 overflow-hidden rounded-xl border border-border shadow-glow">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={activeTab}
-                src={screenshots[activeTab]}
-                alt={tabs.find((t) => t.id === activeTab)?.label}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.25, ease: 'easeInOut' }}
-                className="w-full"
-              />
-            </AnimatePresence>
-          </div>
-        </AnimateIn>
+          ))}
+        </div>
       </div>
     </section>
   );

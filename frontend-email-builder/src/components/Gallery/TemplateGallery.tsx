@@ -41,7 +41,9 @@ export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
       }
     })();
 
-    return () => { isMounted = false; };
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const userTemplates = useMemo(
@@ -60,7 +62,10 @@ export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
   }, [libraryTemplates]);
 
   const filteredLibrary = useMemo(
-    () => activeCategory ? libraryTemplates.filter((t) => t.category === activeCategory) : libraryTemplates,
+    () =>
+      activeCategory
+        ? libraryTemplates.filter((t) => t.category === activeCategory)
+        : libraryTemplates,
     [libraryTemplates, activeCategory],
   );
 
@@ -73,78 +78,100 @@ export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
     return groups;
   }, [filteredLibrary]);
 
-  const handleSelect = useCallback((template: EmailTemplate, close = true) => {
-    const cloned: EmailTemplate = JSON.parse(JSON.stringify(template));
-    const reId = (blocks: EmailTemplate['body']['blocks']): EmailTemplate['body']['blocks'] =>
-      blocks.map((b) => ({
-        ...b,
-        id: crypto.randomUUID(),
-        ...(b.type === 'columns' ? {
-          data: {
-            ...b.data,
-            columns: (b.data as { columns: { id: string; blocks: EmailTemplate['body']['blocks'] }[] }).columns.map(
-              (col: { id: string; blocks: EmailTemplate['body']['blocks'] }) => ({
-                ...col,
-                id: crypto.randomUUID(),
-                blocks: reId(col.blocks),
-              }),
-            ),
-          },
-        } : {}),
-      })) as EmailTemplate['body']['blocks'];
-    cloned.header.blocks = reId(cloned.header.blocks);
-    cloned.body.blocks = reId(cloned.body.blocks);
-    cloned.footer.blocks = reId(cloned.footer.blocks);
-    loadTemplate(cloned);
-    if (close) onClose();
-  }, [loadTemplate, onClose]);
+  const handleSelect = useCallback(
+    (template: EmailTemplate, close = true) => {
+      const cloned: EmailTemplate = JSON.parse(JSON.stringify(template));
+      const reId = (
+        blocks: EmailTemplate['body']['blocks'],
+      ): EmailTemplate['body']['blocks'] =>
+        blocks.map((b) => ({
+          ...b,
+          id: crypto.randomUUID(),
+          ...(b.type === 'columns'
+            ? {
+                data: {
+                  ...b.data,
+                  columns: (
+                    b.data as {
+                      columns: { id: string; blocks: EmailTemplate['body']['blocks'] }[];
+                    }
+                  ).columns.map(
+                    (col: { id: string; blocks: EmailTemplate['body']['blocks'] }) => ({
+                      ...col,
+                      id: crypto.randomUUID(),
+                      blocks: reId(col.blocks),
+                    }),
+                  ),
+                },
+              }
+            : {}),
+        })) as EmailTemplate['body']['blocks'];
+      cloned.header.blocks = reId(cloned.header.blocks);
+      cloned.body.blocks = reId(cloned.body.blocks);
+      cloned.footer.blocks = reId(cloned.footer.blocks);
+      loadTemplate(cloned);
+      if (close) onClose();
+    },
+    [loadTemplate, onClose],
+  );
 
-  const handleSelectSaved = useCallback(async (item: TemplateListItem) => {
-    if (item.is_locked) {
-      setPremiumNotice('Upgrade your plan to use this template');
-      setTimeout(() => setPremiumNotice(null), 3000);
-      return;
-    }
-    try {
-      const detail = await api.getTemplate(item.id);
-      if (!detail.json_data || typeof detail.json_data !== 'object') {
-        throw new Error('Template payload is invalid.');
+  const handleSelectSaved = useCallback(
+    async (item: TemplateListItem) => {
+      if (item.is_locked) {
+        setPremiumNotice('Upgrade your plan to use this template');
+        setTimeout(() => setPremiumNotice(null), 3000);
+        return;
       }
-      handleSelect(detail.json_data as EmailTemplate);
-      onTemplateLoaded?.(item.id);
-    } catch (error) {
-      setLoadError(error instanceof Error ? error.message : 'Unable to load template.');
-    }
-  }, [handleSelect, onTemplateLoaded]);
+      try {
+        const detail = await api.getTemplate(item.id);
+        if (!detail.json_data || typeof detail.json_data !== 'object') {
+          throw new Error('Template payload is invalid.');
+        }
+        handleSelect(detail.json_data as EmailTemplate);
+        onTemplateLoaded?.(item.id);
+      } catch (error) {
+        setLoadError(error instanceof Error ? error.message : 'Unable to load template.');
+      }
+    },
+    [handleSelect, onTemplateLoaded],
+  );
 
-  const handleGenerated = useCallback(async (templateId: string, warnings: string[]) => {
-    try {
-      const detail = await api.getTemplate(templateId);
-      if (!detail.json_data || typeof detail.json_data !== 'object') {
-        throw new Error('Template payload is invalid.');
+  const handleGenerated = useCallback(
+    async (templateId: string, warnings: string[]) => {
+      try {
+        const detail = await api.getTemplate(templateId);
+        if (!detail.json_data || typeof detail.json_data !== 'object') {
+          throw new Error('Template payload is invalid.');
+        }
+        handleSelect(detail.json_data as EmailTemplate, warnings.length === 0);
+        onTemplateLoaded?.(templateId);
+        if (warnings.length > 0) {
+          setPremiumNotice('Some images could not be found; placeholders were used.');
+          setTimeout(onClose, 2000);
+        }
+      } catch (error) {
+        setLoadError(error instanceof Error ? error.message : 'Unable to load template.');
       }
-      handleSelect(detail.json_data as EmailTemplate, warnings.length === 0);
-      onTemplateLoaded?.(templateId);
-      if (warnings.length > 0) {
-        // Keep the modal open briefly so the notice is readable.
-        setPremiumNotice('Some images could not be found; placeholders were used.');
-        setTimeout(onClose, 2000);
-      }
-    } catch (error) {
-      setLoadError(error instanceof Error ? error.message : 'Unable to load template.');
-    }
-  }, [handleSelect, onClose, onTemplateLoaded]);
+    },
+    [handleSelect, onClose, onTemplateLoaded],
+  );
 
   return (
     <div style={styles.overlay} onClick={onClose}>
       <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
-        {/* Header */}
         <div style={styles.header}>
-          <h2 style={{ margin: 0, fontSize: 18 }}>Templates</h2>
-          <button className="btn" onClick={onClose} style={{ fontSize: 18, lineHeight: 1 }}>&times;</button>
+          <h2 style={{ margin: 0, fontSize: 17, fontWeight: 600, letterSpacing: '-0.015em' }}>
+            Templates
+          </h2>
+          <button
+            className="btn"
+            onClick={onClose}
+            style={{ fontSize: 18, lineHeight: 1, padding: '4px 10px' }}
+          >
+            &times;
+          </button>
         </div>
 
-        {/* Tabs */}
         <div style={styles.tabs}>
           <button
             style={activeTab === 'ai' ? { ...styles.tab, ...styles.tabActive } : styles.tab}
@@ -168,18 +195,24 @@ export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
           </button>
         </div>
 
-        {/* Error */}
         {loadError && <div style={styles.error}>{loadError}</div>}
         {premiumNotice && <div style={styles.premiumNotice}>{premiumNotice}</div>}
 
-        {/* Content */}
         <div style={styles.content}>
-          {/* Kept mounted (hidden) so an in-flight generation survives tab switches */}
           <div style={{ display: activeTab === 'ai' ? 'block' : 'none' }}>
             <CreateWithAiTab onGenerated={handleGenerated} />
           </div>
           {activeTab === 'ai' ? null : isLoading ? (
-            <p style={{ margin: 0, color: '#64748b', padding: 20, textAlign: 'center' }}>Loading templates...</p>
+            <p
+              style={{
+                margin: 0,
+                color: 'var(--chrome-text-muted)',
+                padding: 24,
+                textAlign: 'center',
+              }}
+            >
+              Loading templates...
+            </p>
           ) : activeTab === 'yours' ? (
             <YourTemplatesTab templates={userTemplates} onSelect={handleSelectSaved} />
           ) : (
@@ -197,9 +230,10 @@ export function TemplateGallery({ onClose, onTemplateLoaded }: Props) {
   );
 }
 
-/* ---- Your Templates Tab ---- */
-
-function YourTemplatesTab({ templates, onSelect }: {
+function YourTemplatesTab({
+  templates,
+  onSelect,
+}: {
   templates: TemplateListItem[];
   onSelect: (item: TemplateListItem) => void;
 }) {
@@ -211,16 +245,19 @@ function YourTemplatesTab({ templates, onSelect }: {
   }, [templates]);
 
   const filtered = useMemo(
-    () => activeTag ? templates.filter((t) => t.category === activeTag) : templates,
+    () => (activeTag ? templates.filter((t) => t.category === activeTag) : templates),
     [templates, activeTag],
   );
 
   if (templates.length === 0) {
     return (
       <div style={styles.empty}>
-        <span style={{ fontSize: 32 }}>&#x1F4C4;</span>
-        <p style={{ margin: '8px 0 0', color: '#64748b', fontSize: 14 }}>No saved templates yet.</p>
-        <p style={{ margin: '4px 0 0', color: '#94a3b8', fontSize: 13 }}>Templates you save will appear here.</p>
+        <p style={{ margin: '8px 0 0', color: 'var(--chrome-text-primary)', fontSize: 14, fontWeight: 500 }}>
+          No saved templates yet.
+        </p>
+        <p style={{ margin: '4px 0 0', color: 'var(--chrome-text-muted)', fontSize: 13 }}>
+          Templates you save will appear here.
+        </p>
       </div>
     );
   }
@@ -229,7 +266,11 @@ function YourTemplatesTab({ templates, onSelect }: {
       {tags.length > 0 && (
         <div style={styles.filters}>
           <button
-            style={activeTag === null ? { ...styles.filterChip, ...styles.filterChipActive } : styles.filterChip}
+            style={
+              activeTag === null
+                ? { ...styles.filterChip, ...styles.filterChipActive }
+                : styles.filterChip
+            }
             onClick={() => setActiveTag(null)}
           >
             All
@@ -237,7 +278,11 @@ function YourTemplatesTab({ templates, onSelect }: {
           {tags.map((tag) => (
             <button
               key={tag}
-              style={activeTag === tag ? { ...styles.filterChip, ...styles.filterChipActive } : styles.filterChip}
+              style={
+                activeTag === tag
+                  ? { ...styles.filterChip, ...styles.filterChipActive }
+                  : styles.filterChip
+              }
               onClick={() => setActiveTag(tag)}
             >
               {CATEGORY_LABELS[tag] || tag}
@@ -254,9 +299,13 @@ function YourTemplatesTab({ templates, onSelect }: {
   );
 }
 
-/* ---- Library Tab ---- */
-
-function LibraryTab({ groups, categories, activeCategory, onCategoryChange, onSelect }: {
+function LibraryTab({
+  groups,
+  categories,
+  activeCategory,
+  onCategoryChange,
+  onSelect,
+}: {
   groups: Record<string, TemplateListItem[]>;
   categories: string[];
   activeCategory: string | null;
@@ -265,11 +314,14 @@ function LibraryTab({ groups, categories, activeCategory, onCategoryChange, onSe
 }) {
   return (
     <div>
-      {/* Category Filters */}
       {categories.length > 1 && (
         <div style={styles.filters}>
           <button
-            style={activeCategory === null ? { ...styles.filterChip, ...styles.filterChipActive } : styles.filterChip}
+            style={
+              activeCategory === null
+                ? { ...styles.filterChip, ...styles.filterChipActive }
+                : styles.filterChip
+            }
             onClick={() => onCategoryChange(null)}
           >
             All
@@ -277,7 +329,11 @@ function LibraryTab({ groups, categories, activeCategory, onCategoryChange, onSe
           {categories.map((cat) => (
             <button
               key={cat}
-              style={activeCategory === cat ? { ...styles.filterChip, ...styles.filterChipActive } : styles.filterChip}
+              style={
+                activeCategory === cat
+                  ? { ...styles.filterChip, ...styles.filterChipActive }
+                  : styles.filterChip
+              }
               onClick={() => onCategoryChange(cat)}
             >
               {CATEGORY_LABELS[cat] || cat}
@@ -286,11 +342,11 @@ function LibraryTab({ groups, categories, activeCategory, onCategoryChange, onSe
         </div>
       )}
 
-      {/* Grouped templates */}
       {Object.keys(groups).length === 0 ? (
         <div style={styles.empty}>
-          <span style={{ fontSize: 32 }}>&#x1F4DA;</span>
-          <p style={{ margin: '8px 0 0', color: '#64748b', fontSize: 14 }}>No library templates available.</p>
+          <p style={{ margin: '8px 0 0', color: 'var(--chrome-text-muted)', fontSize: 14 }}>
+            No library templates available.
+          </p>
         </div>
       ) : (
         Object.entries(groups).map(([category, items]) => (
@@ -308,8 +364,6 @@ function LibraryTab({ groups, categories, activeCategory, onCategoryChange, onSe
   );
 }
 
-/* ---- Template Card with Thumbnail Preview ---- */
-
 function TemplateCard({ item, onSelect }: { item: TemplateListItem; onSelect: () => void }) {
   const [thumbnailHtml, setThumbnailHtml] = useState<string | null>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -324,18 +378,19 @@ function TemplateCard({ item, onSelect }: { item: TemplateListItem; onSelect: ()
         const html = exportToHtml(detail.json_data as EmailTemplate);
         setThumbnailHtml(html);
       } catch {
-        // Silently fail — show fallback
+        // Silently fail
       }
     })();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [item.id]);
 
   return (
     <div
       style={{
         ...styles.card,
-        borderColor: hovered ? '#6366f1' : '#e2e8f0',
-        boxShadow: hovered ? '0 2px 8px rgba(99,102,241,0.15)' : 'none',
+        borderColor: hovered ? 'var(--accent-color)' : 'var(--chrome-border)',
         opacity: item.is_locked ? 0.55 : 1,
       }}
       onMouseEnter={() => setHovered(true)}
@@ -354,7 +409,7 @@ function TemplateCard({ item, onSelect }: { item: TemplateListItem; onSelect: ()
           />
         ) : (
           <div style={styles.thumbnailFallback}>
-            <span style={{ fontSize: 28, color: '#cbd5e1' }}>&#x2709;</span>
+            <span style={{ fontSize: 24, color: 'var(--chrome-text-muted)' }}>&#x2709;</span>
           </div>
         )}
         {item.is_premium && <span style={styles.premiumBadge}>Premium</span>}
@@ -362,113 +417,221 @@ function TemplateCard({ item, onSelect }: { item: TemplateListItem; onSelect: ()
       </div>
       <div style={styles.cardBody}>
         <div style={styles.cardName}>{item.name}</div>
-        <div style={styles.cardCategory}>{CATEGORY_LABELS[item.category] || item.category || 'Template'}</div>
+        <div style={styles.cardCategory}>
+          {CATEGORY_LABELS[item.category] || item.category || 'Template'}
+        </div>
       </div>
     </div>
   );
 }
 
-/* ---- Styles ---- */
-
 const styles: Record<string, React.CSSProperties> = {
   overlay: {
-    position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)',
-    display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000,
+    position: 'fixed',
+    inset: 0,
+    background: 'rgba(15, 14, 13, 0.55)',
+    backdropFilter: 'blur(2px)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1000,
   },
   modal: {
-    background: '#ffffff', borderRadius: 12, width: '92vw', maxWidth: 860,
-    maxHeight: '85vh', display: 'flex', flexDirection: 'column', overflow: 'hidden',
+    background: 'var(--chrome-surface)',
+    color: 'var(--chrome-text-primary)',
+    border: '1px solid var(--chrome-border)',
+    borderRadius: 16,
+    width: '92vw',
+    maxWidth: 880,
+    maxHeight: '85vh',
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden',
+    boxShadow: 'var(--shadow-lg)',
   },
   header: {
-    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-    padding: '16px 20px', borderBottom: '1px solid #f1f5f9', flexShrink: 0,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '16px 20px',
+    borderBottom: '1px solid var(--chrome-border)',
+    flexShrink: 0,
   },
   tabs: {
-    display: 'flex', gap: 0, borderBottom: '1px solid #e2e8f0',
-    padding: '0 20px', flexShrink: 0,
+    display: 'flex',
+    gap: 0,
+    borderBottom: '1px solid var(--chrome-border)',
+    padding: '0 20px',
+    flexShrink: 0,
   },
   tab: {
-    padding: '10px 16px', fontSize: 14, fontWeight: 500, cursor: 'pointer',
-    background: 'none', border: 'none', borderBottom: '2px solid transparent',
-    color: '#64748b', display: 'flex', alignItems: 'center', gap: 6,
+    padding: '10px 16px',
+    fontSize: 13,
+    fontWeight: 500,
+    cursor: 'pointer',
+    background: 'none',
+    border: 'none',
+    borderBottom: '2px solid transparent',
+    color: 'var(--chrome-text-muted)',
+    display: 'flex',
+    alignItems: 'center',
+    gap: 6,
     transition: 'all 0.15s',
   },
   tabActive: {
-    color: '#0f172a', borderBottomColor: '#6366f1', fontWeight: 600,
+    color: 'var(--chrome-text-primary)',
+    borderBottomColor: 'var(--accent-color)',
+    fontWeight: 600,
   },
   badge: {
-    fontSize: 11, fontWeight: 600, background: '#f1f5f9', color: '#64748b',
-    borderRadius: 10, padding: '1px 7px',
+    fontSize: 11,
+    fontWeight: 600,
+    background: 'var(--chrome-surface-elevated)',
+    color: 'var(--chrome-text-muted)',
+    border: '1px solid var(--chrome-border)',
+    borderRadius: 999,
+    padding: '1px 7px',
   },
   error: {
-    margin: '12px 20px 0', border: '1px solid #fed7d7', background: '#fff5f5',
-    color: '#c53030', borderRadius: 6, padding: '8px 12px', fontSize: 13, flexShrink: 0,
+    margin: '12px 20px 0',
+    border: '1px solid rgba(220, 38, 38, 0.3)',
+    background: 'rgba(220, 38, 38, 0.08)',
+    color: '#dc2626',
+    borderRadius: 8,
+    padding: '8px 12px',
+    fontSize: 13,
+    flexShrink: 0,
   },
   content: {
-    flex: 1, overflow: 'auto', padding: 20,
+    flex: 1,
+    overflow: 'auto',
+    padding: 20,
   },
   filters: {
-    display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 20,
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: 6,
+    marginBottom: 20,
   },
   filterChip: {
-    padding: '5px 14px', fontSize: 13, fontWeight: 500, cursor: 'pointer',
-    background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 20,
-    color: '#64748b', transition: 'all 0.15s',
+    padding: '5px 14px',
+    fontSize: 12,
+    fontWeight: 500,
+    cursor: 'pointer',
+    background: 'var(--chrome-surface-elevated)',
+    border: '1px solid var(--chrome-border)',
+    borderRadius: 999,
+    color: 'var(--chrome-text-muted)',
+    transition: 'all 0.15s',
   },
   filterChipActive: {
-    background: '#6366f1', borderColor: '#6366f1', color: '#ffffff',
+    background: 'var(--chrome-text-primary)',
+    borderColor: 'var(--chrome-text-primary)',
+    color: 'var(--chrome-surface)',
   },
   groupTitle: {
-    margin: '0 0 12px', fontSize: 13, fontWeight: 700, color: '#94a3b8',
-    textTransform: 'uppercase' as const, letterSpacing: 1,
+    margin: '0 0 12px',
+    fontSize: 11,
+    fontWeight: 600,
+    color: 'var(--chrome-text-muted)',
+    textTransform: 'uppercase' as const,
+    letterSpacing: '0.08em',
   },
   grid: {
-    display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))', gap: 14,
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))',
+    gap: 14,
   },
   card: {
-    border: '1px solid #e2e8f0', borderRadius: 10, cursor: 'pointer',
-    transition: 'all 0.15s', overflow: 'hidden', background: '#ffffff',
+    border: '1px solid var(--chrome-border)',
+    borderRadius: 12,
+    cursor: 'pointer',
+    transition: 'all 0.15s',
+    overflow: 'hidden',
+    background: 'var(--chrome-surface)',
   },
   thumbnailWrap: {
-    height: 180, overflow: 'hidden', background: '#f8fafc', position: 'relative' as const,
-    borderBottom: '1px solid #f1f5f9',
+    height: 180,
+    overflow: 'hidden',
+    background: 'var(--chrome-surface-elevated)',
+    position: 'relative' as const,
+    borderBottom: '1px solid var(--chrome-border)',
   },
   thumbnailIframe: {
-    width: 600, height: 800, border: 'none', pointerEvents: 'none' as const,
-    transform: 'scale(0.32)', transformOrigin: 'top left',
-    position: 'absolute' as const, top: 0, left: 0,
+    width: 600,
+    height: 800,
+    border: 'none',
+    pointerEvents: 'none' as const,
+    transform: 'scale(0.32)',
+    transformOrigin: 'top left',
+    position: 'absolute' as const,
+    top: 0,
+    left: 0,
   },
   thumbnailFallback: {
-    width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   cardBody: {
     padding: '10px 12px',
   },
   cardName: {
-    fontWeight: 600, fontSize: 13, color: '#0f172a',
-    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const,
+    fontWeight: 600,
+    fontSize: 13,
+    color: 'var(--chrome-text-primary)',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap' as const,
   },
   cardCategory: {
-    fontSize: 11, color: '#94a3b8', marginTop: 2,
+    fontSize: 11,
+    color: 'var(--chrome-text-muted)',
+    marginTop: 2,
   },
   empty: {
-    display: 'flex', flexDirection: 'column' as const, alignItems: 'center',
-    justifyContent: 'center', padding: '48px 20px', textAlign: 'center' as const,
+    display: 'flex',
+    flexDirection: 'column' as const,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '48px 20px',
+    textAlign: 'center' as const,
   },
   premiumBadge: {
-    position: 'absolute' as const, top: 8, right: 8,
-    background: 'rgba(15, 23, 42, 0.75)', color: '#ffffff',
-    fontSize: 10, fontWeight: 600, padding: '3px 8px', borderRadius: 10,
-    letterSpacing: 0.5,
+    position: 'absolute' as const,
+    top: 8,
+    right: 8,
+    background: '#1a1917',
+    color: '#d4a359',
+    border: '1px solid rgba(212, 163, 89, 0.4)',
+    fontSize: 10,
+    fontWeight: 600,
+    padding: '3px 8px',
+    borderRadius: 999,
+    letterSpacing: '0.04em',
   },
   lockedBadge: {
-    position: 'absolute' as const, top: 8, left: 8,
-    background: 'rgba(100, 116, 139, 0.85)', color: '#ffffff',
-    fontSize: 10, fontWeight: 600, padding: '3px 8px', borderRadius: 10,
-    letterSpacing: 0.5,
+    position: 'absolute' as const,
+    top: 8,
+    left: 8,
+    background: 'rgba(26, 25, 23, 0.85)',
+    color: '#f4f3f1',
+    fontSize: 10,
+    fontWeight: 600,
+    padding: '3px 8px',
+    borderRadius: 999,
+    letterSpacing: '0.04em',
   },
   premiumNotice: {
-    margin: '12px 20px 0', border: '1px solid #fbbf24', background: '#fffbeb',
-    color: '#92400e', borderRadius: 6, padding: '8px 12px', fontSize: 13, flexShrink: 0,
+    margin: '12px 20px 0',
+    border: '1px solid var(--accent-border)',
+    background: 'var(--accent-soft)',
+    color: 'var(--accent-color)',
+    borderRadius: 8,
+    padding: '8px 12px',
+    fontSize: 13,
+    flexShrink: 0,
   },
 };

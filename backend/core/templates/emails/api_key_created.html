@@ -5,21 +5,21 @@
 {% block preheader_text %}A new API key has been created for your organization.{% endblock %}
 
 {% block content %}
-<h1 style="margin:0 0 16px;font-size:24px;font-weight:600;color:#191e2b;">New API Key Created</h1>
-<p style="margin:0 0 24px;font-size:16px;color:#575c65;line-height:1.5;">
-  A new API key has been created for your organization <strong>{{ org_name }}</strong>.
+<h1 style="margin:0 0 16px;font-size:24px;font-weight:600;letter-spacing:-0.02em;color:#1a1917;">New API Key Created</h1>
+<p style="margin:0 0 24px;font-size:15px;color:#73706a;line-height:1.6;">
+  A new API key has been created for your organization <strong style="color:#1a1917;">{{ org_name }}</strong>.
 </p>
-<div style="background-color:#f9f9f9;border:1px solid #e5e5e5;border-radius:6px;padding:16px;margin:0 0 24px;">
-  <p style="margin:0 0 4px;font-size:12px;color:#888;text-transform:uppercase;letter-spacing:0.5px;">Key Prefix</p>
-  <code style="font-size:16px;font-weight:600;color:#191e2b;font-family:monospace;">{{ key_prefix }}...</code>
+<div style="background-color:#f2f0ec;border:1px solid #e6e4e0;border-radius:10px;padding:16px;margin:0 0 24px;">
+  <p style="margin:0 0 4px;font-size:11px;color:#73706a;text-transform:uppercase;letter-spacing:0.12em;">Key Prefix</p>
+  <code style="font-size:15px;font-weight:600;color:#1a1917;font-family:'Geist Mono',monospace;">{{ key_prefix }}...</code>
 </div>
-<p style="margin:0 0 32px;font-size:14px;color:#e05c3a;line-height:1.5;">
+<p style="margin:0 0 32px;font-size:13px;color:#be312b;line-height:1.6;">
   <strong>Security notice:</strong> The full API key was only shown once at creation time. If you did not create this key, revoke it immediately from your dashboard and contact support.
 </p>
 <table role="presentation" cellpadding="0" cellspacing="0">
   <tr>
-    <td style="border-radius:6px;background-color:#0c6fc2;">
-      <a href="{{ dashboard_url }}" style="display:inline-block;padding:12px 24px;color:#ffffff;text-decoration:none;font-weight:500;font-size:14px;">Manage API Keys</a>
+    <td style="border-radius:6px;background-color:#1a1917;">
+      <a href="{{ dashboard_url }}" style="display:inline-block;padding:12px 24px;color:#f8f7f4;text-decoration:none;font-weight:500;font-size:14px;">Manage API Keys</a>
     </td>
   </tr>
 </table>

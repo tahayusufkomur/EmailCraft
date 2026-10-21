@@ -1,0 +1,789 @@
+{
+  "name": "Summit Supply — End of season sale",
+  "category": "promotional",
+  "is_premium": false,
+  "tags": [
+    "promotional",
+    "outdoor",
+    "retail",
+    "sale"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#2B3A42",
+      "bodyBackgroundColor": "#FFFFFF",
+      "defaultFont": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "defaultFontSize": 16,
+      "defaultColor": "#1F2A30"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "ss-1",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 8,
+            "backgroundColor": "#FFFFFF"
+          }
+        },
+        {
+          "id": "ss-2",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 8,
+            "backgroundColor": "#E30613"
+          }
+        },
+        {
+          "id": "ss-3",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 8,
+            "backgroundColor": "#FFFFFF"
+          }
+        },
+        {
+          "id": "ss-4",
+          "type": "heading",
+          "data": {
+            "text": "SUMMIT SUPPLY",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 4,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#1F2A30",
+            "fontSize": 24,
+            "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 5,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "ss-5",
+          "type": "heading",
+          "data": {
+            "text": "Bergstrasse 12, Grindelwald, 1 034 m",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 24,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#56626A",
+            "fontSize": 13,
+            "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 600,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "ss-6",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/summit-supply/ridge-blaze.jpg",
+            "alt": "A hiker in an orange jacket on an alpine ridge, a red and white trail blaze painted on the rock in front",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "ss-7",
+          "type": "heading",
+          "data": {
+            "text": "The season closes on Sunday",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 40,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#1F2A30",
+            "fontSize": 34,
+            "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "ss-8",
+          "type": "text",
+          "data": {
+            "html": "<p>Everything left after a long summer of guiding, renting and testing, marked down by how high it was meant to go. Prices apply online and in the shop until Sunday 25 October.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 28,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 17
+          }
+        },
+        {
+          "id": "ss-9",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#1F2A30",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ss-14",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              55,
+              45
+            ],
+            "columns": [
+              {
+                "id": "ss-11",
+                "blocks": [
+                  {
+                    "id": "ss-10",
+                    "type": "heading",
+                    "data": {
+                      "text": "Summit Supply",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 8,
+                        "bottom": 12,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1F2A30",
+                      "fontSize": 15,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFFFFF"
+              },
+              {
+                "id": "ss-13",
+                "blocks": [
+                  {
+                    "id": "ss-12",
+                    "type": "heading",
+                    "data": {
+                      "text": "Until Sun 18:00",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 40,
+                        "bottom": 12,
+                        "left": 8
+                      },
+                      "alignment": "right",
+                      "color": "#1F2A30",
+                      "fontSize": 15,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFFFFF"
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "ss-15",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#1F2A30",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ss-21",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              70,
+              30
+            ],
+            "columns": [
+              {
+                "id": "ss-18",
+                "blocks": [
+                  {
+                    "id": "ss-16",
+                    "type": "heading",
+                    "data": {
+                      "text": "Above 2 000 m",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 8,
+                        "bottom": 0,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1F2A30",
+                      "fontSize": 20,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  },
+                  {
+                    "id": "ss-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "Shells, hardshells, mountaineering packs",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 2,
+                        "right": 8,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#3C3A2A",
+                      "fontSize": 13,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFD400"
+              },
+              {
+                "id": "ss-20",
+                "blocks": [
+                  {
+                    "id": "ss-19",
+                    "type": "heading",
+                    "data": {
+                      "text": "40%",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 40,
+                        "bottom": 12,
+                        "left": 8
+                      },
+                      "alignment": "right",
+                      "color": "#1F2A30",
+                      "fontSize": 30,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFD400"
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ss-22",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#1F2A30",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ss-28",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              70,
+              30
+            ],
+            "columns": [
+              {
+                "id": "ss-25",
+                "blocks": [
+                  {
+                    "id": "ss-23",
+                    "type": "heading",
+                    "data": {
+                      "text": "Treeline",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 8,
+                        "bottom": 0,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1F2A30",
+                      "fontSize": 20,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  },
+                  {
+                    "id": "ss-24",
+                    "type": "heading",
+                    "data": {
+                      "text": "Fleece, insulation, base layers",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 2,
+                        "right": 8,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#3C3A2A",
+                      "fontSize": 13,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFD400"
+              },
+              {
+                "id": "ss-27",
+                "blocks": [
+                  {
+                    "id": "ss-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "25%",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 40,
+                        "bottom": 12,
+                        "left": 8
+                      },
+                      "alignment": "right",
+                      "color": "#1F2A30",
+                      "fontSize": 30,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFD400"
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ss-29",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#1F2A30",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ss-35",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              70,
+              30
+            ],
+            "columns": [
+              {
+                "id": "ss-32",
+                "blocks": [
+                  {
+                    "id": "ss-30",
+                    "type": "heading",
+                    "data": {
+                      "text": "Valley floor",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 8,
+                        "bottom": 0,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1F2A30",
+                      "fontSize": 20,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  },
+                  {
+                    "id": "ss-31",
+                    "type": "heading",
+                    "data": {
+                      "text": "Everything else in the shop",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 2,
+                        "right": 8,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#3C3A2A",
+                      "fontSize": 13,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 600,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFD400"
+              },
+              {
+                "id": "ss-34",
+                "blocks": [
+                  {
+                    "id": "ss-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "15%",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 12,
+                        "right": 40,
+                        "bottom": 12,
+                        "left": 8
+                      },
+                      "alignment": "right",
+                      "color": "#1F2A30",
+                      "fontSize": 30,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ],
+                "backgroundColor": "#FFD400"
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ss-36",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#1F2A30",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ss-37",
+          "type": "button",
+          "data": {
+            "text": "Shop the sale",
+            "url": "https://summitsupply.example/sale"
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 48,
+              "left": 40
+            },
+            "alignment": "left",
+            "backgroundColor": "#E30613",
+            "color": "#FFFFFF",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 17,
+            "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 1,
+            "textTransform": "uppercase",
+            "paddingX": 32,
+            "paddingY": 16,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#E30613"
+          }
+        },
+        {
+          "id": "ss-43",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              42,
+              58
+            ],
+            "columns": [
+              {
+                "id": "ss-39",
+                "blocks": [
+                  {
+                    "id": "ss-38",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/summit-supply/shoulder-season-kit.jpg",
+                      "alt": "An orange shell jacket, beanie, poles, bottle and boots laid out on granite",
+                      "width": 201,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 40
+                }
+              },
+              {
+                "id": "ss-42",
+                "blocks": [
+                  {
+                    "id": "ss-40",
+                    "type": "heading",
+                    "data": {
+                      "text": "Packed for the shoulder season",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 14,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#1F2A30",
+                      "fontSize": 22,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 800,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.2
+                    }
+                  },
+                  {
+                    "id": "ss-41",
+                    "type": "text",
+                    "data": {
+                      "html": "<p><strong>Ridge Shell jacket, 3-layer</strong><br><s>CHF 340</s> CHF 204</p><p><strong>Merino beanie</strong><br><s>CHF 39</s> CHF 29</p><p><strong>Carbon trekking poles, pair</strong><br><s>CHF 160</s> CHF 120</p><p><strong>Insulated bottle, 750 ml</strong><br><s>CHF 45</s> CHF 38</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 15,
+                      "lineHeight": 1.45
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 40,
+                  "bottom": 0,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 24,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ss-44",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 44
+          }
+        },
+        {
+          "id": "ss-45",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 8,
+            "backgroundColor": "#FFFFFF"
+          }
+        },
+        {
+          "id": "ss-46",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 8,
+            "backgroundColor": "#E30613"
+          }
+        },
+        {
+          "id": "ss-47",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 8,
+            "backgroundColor": "#FFFFFF"
+          }
+        },
+        {
+          "id": "ss-48",
+          "type": "text",
+          "data": {
+            "html": "<p>Summit Supply AG, Bergstrasse 12, 3818 Grindelwald, Switzerland. You are on this list because you rented or bought from us. <a href=\"https://summitsupply.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 24,
+              "right": 40,
+              "bottom": 32,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "color": "#56626A",
+            "lineHeight": 1.5
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

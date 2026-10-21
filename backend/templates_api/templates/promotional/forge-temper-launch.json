@@ -1,0 +1,653 @@
+{
+  "name": "Forge & Temper — Batch 07 launch",
+  "category": "promotional",
+  "is_premium": true,
+  "tags": [
+    "promotional",
+    "product-launch",
+    "craft",
+    "limited-edition"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#0A0908",
+      "bodyBackgroundColor": "#14110F",
+      "defaultFont": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#EDE6DC"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "ft-31",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/forge-temper/wordmark.jpg",
+            "alt": "Forge & Temper, Sheffield, hand-forged knives",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "ft-32",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/forge-temper/billet-strike.jpg",
+            "alt": "A hammer striking a glowing orange billet on an anvil, sparks flying",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "ft-33",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 6,
+            "backgroundColor": "#F26A1B"
+          }
+        },
+        {
+          "id": "ft-34",
+          "type": "heading",
+          "data": {
+            "text": "Batch 07: the 210 mm gyuto",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 40,
+              "right": 40,
+              "bottom": 18,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#EDE6DC",
+            "fontSize": 58,
+            "fontFamily": "'Big Shoulders Stencil', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 0,
+            "textTransform": "uppercase",
+            "lineHeight": 1
+          }
+        },
+        {
+          "id": "ft-35",
+          "type": "text",
+          "data": {
+            "html": "<p>Thirty-six knives, numbered, each drawn from a single bar of carbon steel under the power hammer and finished by hand on the wheel. Reservations open today; knives ship in the first week of December.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 32,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 17,
+            "lineHeight": 1.6
+          }
+        },
+        {
+          "id": "ft-36",
+          "type": "button",
+          "data": {
+            "text": "Reserve one of 36",
+            "url": "https://forgeandtemper.example/batch-07"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 48,
+              "left": 40
+            },
+            "alignment": "left",
+            "backgroundColor": "#F26A1B",
+            "color": "#14110F",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 20,
+            "fontFamily": "'Big Shoulders Stencil', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 2,
+            "textTransform": "uppercase",
+            "paddingX": 30,
+            "paddingY": 15,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#F26A1B"
+          }
+        },
+        {
+          "id": "ft-37",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#4A4540",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ft-5",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              30,
+              70
+            ],
+            "columns": [
+              {
+                "id": "ft-2",
+                "blocks": [
+                  {
+                    "id": "ft-1",
+                    "type": "text",
+                    "data": {
+                      "html": "<p><strong>BLADE</strong></p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 8,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "fontSize": 13,
+                      "color": "#9C948A",
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ft-4",
+                "blocks": [
+                  {
+                    "id": "ft-3",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>210 mm</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 40,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "fontSize": 17,
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ft-6",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#4A4540",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ft-11",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              30,
+              70
+            ],
+            "columns": [
+              {
+                "id": "ft-8",
+                "blocks": [
+                  {
+                    "id": "ft-7",
+                    "type": "text",
+                    "data": {
+                      "html": "<p><strong>STEEL</strong></p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 8,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "fontSize": 13,
+                      "color": "#9C948A",
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ft-10",
+                "blocks": [
+                  {
+                    "id": "ft-9",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>1.2519 carbon, forged from 25 mm bar</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 40,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "fontSize": 17,
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ft-12",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#4A4540",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ft-17",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              30,
+              70
+            ],
+            "columns": [
+              {
+                "id": "ft-14",
+                "blocks": [
+                  {
+                    "id": "ft-13",
+                    "type": "text",
+                    "data": {
+                      "html": "<p><strong>HARDNESS</strong></p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 8,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "fontSize": 13,
+                      "color": "#9C948A",
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ft-16",
+                "blocks": [
+                  {
+                    "id": "ft-15",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>62 HRC</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 40,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "fontSize": 17,
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ft-18",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#4A4540",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ft-23",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              30,
+              70
+            ],
+            "columns": [
+              {
+                "id": "ft-20",
+                "blocks": [
+                  {
+                    "id": "ft-19",
+                    "type": "text",
+                    "data": {
+                      "html": "<p><strong>HANDLE</strong></p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 8,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "fontSize": 13,
+                      "color": "#9C948A",
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ft-22",
+                "blocks": [
+                  {
+                    "id": "ft-21",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Black walnut, 128 mm</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 40,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "fontSize": 17,
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ft-24",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#4A4540",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ft-29",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              30,
+              70
+            ],
+            "columns": [
+              {
+                "id": "ft-26",
+                "blocks": [
+                  {
+                    "id": "ft-25",
+                    "type": "text",
+                    "data": {
+                      "html": "<p><strong>WEIGHT</strong></p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 8,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "fontSize": 13,
+                      "color": "#9C948A",
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ft-28",
+                "blocks": [
+                  {
+                    "id": "ft-27",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>186 g</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 40,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "fontSize": 17,
+                      "lineHeight": 1.4
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ft-30",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#4A4540",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ft-38",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 40
+          }
+        },
+        {
+          "id": "ft-39",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/forge-temper/gyuto-210.jpg",
+            "alt": "The finished 210 mm gyuto with a hammer-marked blade and walnut handle on a charred board",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "ft-40",
+          "type": "heading",
+          "data": {
+            "text": "Why only thirty-six",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 40,
+              "right": 40,
+              "bottom": 12,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#F26A1B",
+            "fontSize": 26,
+            "fontFamily": "'Big Shoulders Stencil', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": 1,
+            "textTransform": "uppercase"
+          }
+        },
+        {
+          "id": "ft-41",
+          "type": "text",
+          "data": {
+            "html": "<p>One bar makes one knife, and one smith can forge six bars on a good day. Batch 07 is six good days. When the numbers are gone, the next batch is a different knife.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 44,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 17,
+            "lineHeight": 1.6
+          }
+        },
+        {
+          "id": "ft-42",
+          "type": "text",
+          "data": {
+            "html": "<p>Forge &amp; Temper, Unit 3, Kelham Island Works, Sheffield S3 8RY. You asked to hear about new batches. <a href=\"https://forgeandtemper.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 24,
+              "right": 40,
+              "bottom": 32,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "color": "#9C948A",
+            "lineHeight": 1.5,
+            "backgroundColor": "#0C0A09"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

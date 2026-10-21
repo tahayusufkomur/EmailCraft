@@ -18,6 +18,7 @@ export function TextBlock({ block }: Props) {
   const updateBlock = useEditorStore((s) => s.updateBlock);
   const setTiptapEditor = useEditorStore((s) => s.setTiptapEditor);
   const selectedBlockId = useEditorStore((s) => s.selectedBlockId);
+  const settings = useEditorStore((s) => s.template.settings);
 
   const editor = useEditor({
     extensions: [
@@ -57,7 +58,11 @@ export function TextBlock({ block }: Props) {
         padding: `${block.style.padding?.top ?? 10}px ${block.style.padding?.right ?? 20}px ${block.style.padding?.bottom ?? 10}px ${block.style.padding?.left ?? 20}px`,
         textAlign: block.style.alignment || 'left',
         backgroundColor: block.style.backgroundColor ?? 'transparent',
-        color: block.style.color || undefined,
+        // The template's body typography, as the exporter renders text blocks.
+        fontFamily: settings.defaultFont,
+        fontSize: block.style.fontSize ?? settings.defaultFontSize,
+        lineHeight: block.style.lineHeight ?? 1.6,
+        color: block.style.color || settings.defaultColor,
         borderRadius: block.style.borderRadius ?? undefined,
       }}
     >

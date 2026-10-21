@@ -15,6 +15,12 @@ class Command(BaseCommand):
             action='store_true',
             help='Delete all existing gallery templates before seeding',
         )
+        parser.add_argument(
+            '--prune',
+            action='store_true',
+            help='Retire published gallery templates missing from the seed files, with their '
+                 'unmodified org copies (edited copies are kept as the org\'s own templates)',
+        )
 
     def handle(self, *args, **options):
         entries = []
@@ -70,3 +76,9 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS(
             f'Gallery seeded: {created} created, {updated} updated ({len(entries)} total)'
         ))
+
+        if options['prune']:
+            stale = Template.objects.shared().exclude(name__in=[e['name'] for e in entries])
+            copies, _ = Template.objects.filter(source_template__in=stale, is_modified=False).delete()
+            retired, _ = stale.delete()
+            self.stdout.write(f'Pruned {retired} retired gallery templates and {copies} unmodified copies.')

@@ -30,7 +30,9 @@ export function SaveTemplateModal({ title = 'Save Template', onSave, onClose, is
   return (
     <div style={styles.overlay} onClick={onClose}>
       <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <h3 style={{ margin: '0 0 16px', fontSize: 16 }}>{title}</h3>
+        <h3 style={{ margin: '0 0 16px', fontSize: 16, fontWeight: 600, letterSpacing: '-0.015em' }}>
+          {title}
+        </h3>
         <form onSubmit={handleSubmit}>
           <div style={styles.field}>
             <label style={styles.label}>Name</label>
@@ -59,10 +61,14 @@ export function SaveTemplateModal({ title = 'Save Template', onSave, onClose, is
             </div>
           </div>
           <div style={styles.actions}>
-            <button type="button" style={styles.cancelBtn} onClick={onClose} disabled={isSaving}>
+            <button type="button" className="btn" onClick={onClose} disabled={isSaving}>
               Cancel
             </button>
-            <button type="submit" style={styles.saveBtn} disabled={!name.trim() || isSaving}>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={!name.trim() || isSaving}
+            >
               {isSaving ? 'Saving...' : 'Save'}
             </button>
           </div>
@@ -74,43 +80,71 @@ export function SaveTemplateModal({ title = 'Save Template', onSave, onClose, is
 
 const styles: Record<string, React.CSSProperties> = {
   overlay: {
-    position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)',
-    display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1100,
+    position: 'fixed',
+    inset: 0,
+    background: 'rgba(15, 14, 13, 0.55)',
+    backdropFilter: 'blur(2px)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1100,
   },
   modal: {
-    background: '#fff', borderRadius: 12, padding: 24,
-    width: '90vw', maxWidth: 420, boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+    background: 'var(--chrome-surface)',
+    color: 'var(--chrome-text-primary)',
+    border: '1px solid var(--chrome-border)',
+    borderRadius: 16,
+    padding: 24,
+    width: '90vw',
+    maxWidth: 420,
+    boxShadow: 'var(--shadow-lg)',
   },
   field: {
     marginBottom: 16,
   },
   label: {
-    display: 'block', fontSize: 13, fontWeight: 600, color: '#334155', marginBottom: 6,
+    display: 'block',
+    fontSize: 12,
+    fontWeight: 500,
+    color: 'var(--chrome-text-muted)',
+    marginBottom: 6,
   },
   input: {
-    width: '100%', padding: '8px 12px', fontSize: 14, border: '1px solid #e2e8f0',
-    borderRadius: 8, outline: 'none', boxSizing: 'border-box' as const,
+    width: '100%',
+    padding: '8px 12px',
+    fontSize: 14,
+    background: 'var(--chrome-input-bg)',
+    color: 'var(--chrome-input-text)',
+    border: '1px solid var(--chrome-border)',
+    borderRadius: 8,
+    outline: 'none',
+    boxSizing: 'border-box' as const,
   },
   tags: {
-    display: 'flex', flexWrap: 'wrap' as const, gap: 6,
+    display: 'flex',
+    flexWrap: 'wrap' as const,
+    gap: 6,
   },
   tag: {
-    padding: '5px 14px', fontSize: 13, fontWeight: 500, cursor: 'pointer',
-    background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 20,
-    color: '#64748b', transition: 'all 0.15s',
+    padding: '5px 14px',
+    fontSize: 12,
+    fontWeight: 500,
+    cursor: 'pointer',
+    background: 'var(--chrome-surface-elevated)',
+    border: '1px solid var(--chrome-border)',
+    borderRadius: 999,
+    color: 'var(--chrome-text-muted)',
+    transition: 'all 0.15s',
   },
   tagActive: {
-    background: '#6366f1', borderColor: '#6366f1', color: '#ffffff',
+    background: 'var(--chrome-text-primary)',
+    borderColor: 'var(--chrome-text-primary)',
+    color: 'var(--chrome-surface)',
   },
   actions: {
-    display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 20,
-  },
-  cancelBtn: {
-    padding: '8px 16px', fontSize: 14, fontWeight: 500, cursor: 'pointer',
-    background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 8, color: '#64748b',
-  },
-  saveBtn: {
-    padding: '8px 20px', fontSize: 14, fontWeight: 600, cursor: 'pointer',
-    background: '#6366f1', border: 'none', borderRadius: 8, color: '#ffffff',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: 8,
+    marginTop: 20,
   },
 };

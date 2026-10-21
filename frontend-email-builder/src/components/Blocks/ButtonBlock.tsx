@@ -36,7 +36,7 @@ export function ButtonBlock({ block }: Props) {
         style={{
           backgroundColor: style.backgroundColor || '#007bff',
           color: style.color || '#ffffff',
-          borderRadius: (style.borderRadius || 4) + 'px',
+          borderRadius: (style.borderRadius ?? 4) + 'px',
           fontSize: (style.fontSize || 16) + 'px',
           fontFamily: style.fontFamily || 'Arial, Helvetica, sans-serif',
           fontWeight: style.fontWeight || 600,

@@ -50,6 +50,10 @@ export interface TextBlock extends BaseBlock {
     html: string;
     variables: string[];
   };
+  // Unset fontSize / color fall back to the template's defaultFontSize / defaultColor.
+  style: BlockStyle & {
+    fontSize?: number;
+  };
 }
 
 export interface ImageBlock extends BaseBlock {

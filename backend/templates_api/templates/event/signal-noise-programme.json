@@ -1,0 +1,1406 @@
+{
+  "name": "Signal/Noise — Programme announcement",
+  "category": "event",
+  "is_premium": false,
+  "tags": [
+    "event",
+    "conference",
+    "tech",
+    "schedule"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#EDEDED",
+      "bodyBackgroundColor": "#FFFFFF",
+      "defaultFont": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+      "defaultFontSize": 16,
+      "defaultColor": "#0D0D0D"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "sn-1",
+          "type": "heading",
+          "data": {
+            "text": "Signal/Noise",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 44,
+              "right": 40,
+              "bottom": 10,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#0D0D0D",
+            "fontSize": 42,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": -1,
+            "textTransform": "none",
+            "lineHeight": 1
+          }
+        },
+        {
+          "id": "sn-2",
+          "type": "heading",
+          "data": {
+            "text": "Lisbon · Thu 11 – Fri 12 March 2027 · Programme v1",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 32,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#5A5A5A",
+            "fontSize": 15,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 500,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "sn-3",
+          "type": "heading",
+          "data": {
+            "text": "The programme is out",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 36,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#FFFFFF",
+            "fontSize": 40,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": -1,
+            "textTransform": "none",
+            "lineHeight": 1.05,
+            "backgroundColor": "#2246F5"
+          }
+        },
+        {
+          "id": "sn-4",
+          "type": "text",
+          "data": {
+            "html": "<p>Two days, one room, eighteen talks about building software people can trust. No parallel tracks, so nobody misses the good one. Early tickets close on 30 November.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 32,
+              "right": 40,
+              "bottom": 36,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 17
+          }
+        },
+        {
+          "id": "sn-5",
+          "type": "heading",
+          "data": {
+            "text": "Thursday 11 March",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 12,
+              "right": 40,
+              "bottom": 12,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#FFFFFF",
+            "fontSize": 15,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 1,
+            "textTransform": "uppercase",
+            "backgroundColor": "#0D0D0D"
+          }
+        },
+        {
+          "id": "sn-11",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              22,
+              78
+            ],
+            "columns": [
+              {
+                "id": "sn-7",
+                "blocks": [
+                  {
+                    "id": "sn-6",
+                    "type": "heading",
+                    "data": {
+                      "text": "09:30",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 8,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#2246F5",
+                      "fontSize": 17,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sn-10",
+                "blocks": [
+                  {
+                    "id": "sn-8",
+                    "type": "heading",
+                    "data": {
+                      "text": "Opening keynote: Boring on purpose",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 15,
+                        "right": 40,
+                        "bottom": 2,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 18,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "sn-9",
+                    "type": "heading",
+                    "data": {
+                      "text": "Inês Carvalho, Tessera Payments",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 40,
+                        "bottom": 15,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#5A5A5A",
+                      "fontSize": 14,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "sn-12",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#D4D4D4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "sn-18",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              22,
+              78
+            ],
+            "columns": [
+              {
+                "id": "sn-14",
+                "blocks": [
+                  {
+                    "id": "sn-13",
+                    "type": "heading",
+                    "data": {
+                      "text": "10:30",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 8,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 17,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sn-17",
+                "blocks": [
+                  {
+                    "id": "sn-15",
+                    "type": "heading",
+                    "data": {
+                      "text": "The incident review nobody wanted to write",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 15,
+                        "right": 40,
+                        "bottom": 2,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 18,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "sn-16",
+                    "type": "heading",
+                    "data": {
+                      "text": "Dan Okafor, Railyard",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 40,
+                        "bottom": 15,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#5A5A5A",
+                      "fontSize": 14,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "sn-19",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#D4D4D4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "sn-25",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              22,
+              78
+            ],
+            "columns": [
+              {
+                "id": "sn-21",
+                "blocks": [
+                  {
+                    "id": "sn-20",
+                    "type": "heading",
+                    "data": {
+                      "text": "11:30",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 8,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 17,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sn-24",
+                "blocks": [
+                  {
+                    "id": "sn-22",
+                    "type": "heading",
+                    "data": {
+                      "text": "Accessibility debt is still debt",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 15,
+                        "right": 40,
+                        "bottom": 2,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 18,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "sn-23",
+                    "type": "heading",
+                    "data": {
+                      "text": "Marta Ruiz, Civic Forms",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 40,
+                        "bottom": 15,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#5A5A5A",
+                      "fontSize": 14,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "sn-26",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#D4D4D4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "sn-32",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              22,
+              78
+            ],
+            "columns": [
+              {
+                "id": "sn-28",
+                "blocks": [
+                  {
+                    "id": "sn-27",
+                    "type": "heading",
+                    "data": {
+                      "text": "14:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 8,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#2246F5",
+                      "fontSize": 17,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sn-31",
+                "blocks": [
+                  {
+                    "id": "sn-29",
+                    "type": "heading",
+                    "data": {
+                      "text": "Eleven seconds per screen",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 15,
+                        "right": 40,
+                        "bottom": 2,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 18,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "sn-30",
+                    "type": "heading",
+                    "data": {
+                      "text": "Kwame Mensah, Harbour Health",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 40,
+                        "bottom": 15,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#5A5A5A",
+                      "fontSize": 14,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "sn-33",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#D4D4D4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "sn-39",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              22,
+              78
+            ],
+            "columns": [
+              {
+                "id": "sn-35",
+                "blocks": [
+                  {
+                    "id": "sn-34",
+                    "type": "heading",
+                    "data": {
+                      "text": "15:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 8,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 17,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sn-38",
+                "blocks": [
+                  {
+                    "id": "sn-36",
+                    "type": "heading",
+                    "data": {
+                      "text": "Feature flags at the scale of a bank",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 15,
+                        "right": 40,
+                        "bottom": 2,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 18,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "sn-37",
+                    "type": "heading",
+                    "data": {
+                      "text": "Priya Natarajan, Northbank",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 40,
+                        "bottom": 15,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#5A5A5A",
+                      "fontSize": 14,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "sn-40",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#D4D4D4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "sn-41",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 28
+          }
+        },
+        {
+          "id": "sn-42",
+          "type": "heading",
+          "data": {
+            "text": "Friday 12 March",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 12,
+              "right": 40,
+              "bottom": 12,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#FFFFFF",
+            "fontSize": 15,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 1,
+            "textTransform": "uppercase",
+            "backgroundColor": "#0D0D0D"
+          }
+        },
+        {
+          "id": "sn-48",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              22,
+              78
+            ],
+            "columns": [
+              {
+                "id": "sn-44",
+                "blocks": [
+                  {
+                    "id": "sn-43",
+                    "type": "heading",
+                    "data": {
+                      "text": "09:30",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 8,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#2246F5",
+                      "fontSize": 17,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sn-47",
+                "blocks": [
+                  {
+                    "id": "sn-45",
+                    "type": "heading",
+                    "data": {
+                      "text": "What trust looks like in the logs",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 15,
+                        "right": 40,
+                        "bottom": 2,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 18,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "sn-46",
+                    "type": "heading",
+                    "data": {
+                      "text": "Yuna Park, Ledgewood Lab",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 40,
+                        "bottom": 15,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#5A5A5A",
+                      "fontSize": 14,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "sn-49",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#D4D4D4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "sn-55",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              22,
+              78
+            ],
+            "columns": [
+              {
+                "id": "sn-51",
+                "blocks": [
+                  {
+                    "id": "sn-50",
+                    "type": "heading",
+                    "data": {
+                      "text": "10:30",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 8,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 17,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sn-54",
+                "blocks": [
+                  {
+                    "id": "sn-52",
+                    "type": "heading",
+                    "data": {
+                      "text": "Shipping less, on purpose",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 15,
+                        "right": 40,
+                        "bottom": 2,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 18,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "sn-53",
+                    "type": "heading",
+                    "data": {
+                      "text": "Tom Lindqvist, Fjord Studio",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 40,
+                        "bottom": 15,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#5A5A5A",
+                      "fontSize": 14,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "sn-56",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#D4D4D4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "sn-62",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              22,
+              78
+            ],
+            "columns": [
+              {
+                "id": "sn-58",
+                "blocks": [
+                  {
+                    "id": "sn-57",
+                    "type": "heading",
+                    "data": {
+                      "text": "11:30",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 8,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 17,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sn-61",
+                "blocks": [
+                  {
+                    "id": "sn-59",
+                    "type": "heading",
+                    "data": {
+                      "text": "Your on-call rota is a design problem",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 15,
+                        "right": 40,
+                        "bottom": 2,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 18,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "sn-60",
+                    "type": "heading",
+                    "data": {
+                      "text": "Aisha Bello, Mosaic Health",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 40,
+                        "bottom": 15,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#5A5A5A",
+                      "fontSize": 14,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "sn-63",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#D4D4D4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "sn-69",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              22,
+              78
+            ],
+            "columns": [
+              {
+                "id": "sn-65",
+                "blocks": [
+                  {
+                    "id": "sn-64",
+                    "type": "heading",
+                    "data": {
+                      "text": "16:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 8,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 17,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "sn-68",
+                "blocks": [
+                  {
+                    "id": "sn-66",
+                    "type": "heading",
+                    "data": {
+                      "text": "Closing panel: the next ten years of boring",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 15,
+                        "right": 40,
+                        "bottom": 2,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0D0D0D",
+                      "fontSize": 18,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.3
+                    }
+                  },
+                  {
+                    "id": "sn-67",
+                    "type": "heading",
+                    "data": {
+                      "text": "All keynote speakers",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 40,
+                        "bottom": 15,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#5A5A5A",
+                      "fontSize": 14,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.35
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "top"
+          }
+        },
+        {
+          "id": "sn-70",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#D4D4D4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "sn-71",
+          "type": "heading",
+          "data": {
+            "text": "Keynotes",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 44,
+              "right": 40,
+              "bottom": 16,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#0D0D0D",
+            "fontSize": 26,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 800,
+            "letterSpacing": -0.5,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "sn-72",
+          "type": "profile",
+          "data": {
+            "imageSrc": "https://mailcraft.contentor.app/gallery-assets/signal-noise/ines-carvalho.jpg",
+            "imageAlt": "Portrait of Inês Carvalho",
+            "name": "Inês Carvalho",
+            "role": "Staff engineer, Tessera Payments",
+            "bio": "Ran the migration that moved 40 million card records without a minute of downtime.",
+            "showBadge": false,
+            "badgeText": ""
+          },
+          "style": {
+            "padding": {
+              "top": 10,
+              "right": 40,
+              "bottom": 10,
+              "left": 40
+            },
+            "imageSize": 80,
+            "imageBorderRadius": 0,
+            "imagePosition": "left",
+            "nameColor": "#0D0D0D",
+            "nameFontSize": 18,
+            "nameFontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "nameFontWeight": 700,
+            "roleColor": "#2246F5",
+            "roleFontSize": 13,
+            "bioColor": "#5A5A5A",
+            "bioFontSize": 15,
+            "bioFontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "badgeBackgroundColor": "#FFFFFF",
+            "badgeTextColor": "#0D0D0D",
+            "borderRadius": 0,
+            "borderWidth": 0,
+            "borderColor": "#FFFFFF",
+            "borderStyle": "none",
+            "backgroundColor": "#FFFFFF",
+            "contentAlignment": "left"
+          }
+        },
+        {
+          "id": "sn-73",
+          "type": "profile",
+          "data": {
+            "imageSrc": "https://mailcraft.contentor.app/gallery-assets/signal-noise/kwame-mensah.jpg",
+            "imageAlt": "Portrait of Kwame Mensah",
+            "name": "Kwame Mensah",
+            "role": "Head of design, Harbour Health",
+            "bio": "Designs patient software for clinicians who have eleven seconds per screen.",
+            "showBadge": false,
+            "badgeText": ""
+          },
+          "style": {
+            "padding": {
+              "top": 10,
+              "right": 40,
+              "bottom": 10,
+              "left": 40
+            },
+            "imageSize": 80,
+            "imageBorderRadius": 0,
+            "imagePosition": "left",
+            "nameColor": "#0D0D0D",
+            "nameFontSize": 18,
+            "nameFontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "nameFontWeight": 700,
+            "roleColor": "#2246F5",
+            "roleFontSize": 13,
+            "bioColor": "#5A5A5A",
+            "bioFontSize": 15,
+            "bioFontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "badgeBackgroundColor": "#FFFFFF",
+            "badgeTextColor": "#0D0D0D",
+            "borderRadius": 0,
+            "borderWidth": 0,
+            "borderColor": "#FFFFFF",
+            "borderStyle": "none",
+            "backgroundColor": "#FFFFFF",
+            "contentAlignment": "left"
+          }
+        },
+        {
+          "id": "sn-74",
+          "type": "profile",
+          "data": {
+            "imageSrc": "https://mailcraft.contentor.app/gallery-assets/signal-noise/yuna-park.jpg",
+            "imageAlt": "Portrait of Yuna Park",
+            "name": "Yuna Park",
+            "role": "Researcher, Ledgewood Lab",
+            "bio": "Studies how people decide whether to trust an automated decision.",
+            "showBadge": false,
+            "badgeText": ""
+          },
+          "style": {
+            "padding": {
+              "top": 10,
+              "right": 40,
+              "bottom": 10,
+              "left": 40
+            },
+            "imageSize": 80,
+            "imageBorderRadius": 0,
+            "imagePosition": "left",
+            "nameColor": "#0D0D0D",
+            "nameFontSize": 18,
+            "nameFontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "nameFontWeight": 700,
+            "roleColor": "#2246F5",
+            "roleFontSize": 13,
+            "bioColor": "#5A5A5A",
+            "bioFontSize": 15,
+            "bioFontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "badgeBackgroundColor": "#FFFFFF",
+            "badgeTextColor": "#0D0D0D",
+            "borderRadius": 0,
+            "borderWidth": 0,
+            "borderColor": "#FFFFFF",
+            "borderStyle": "none",
+            "backgroundColor": "#FFFFFF",
+            "contentAlignment": "left"
+          }
+        },
+        {
+          "id": "sn-75",
+          "type": "spacer",
+          "data": {},
+          "style": {
+            "height": 20
+          }
+        },
+        {
+          "id": "sn-76",
+          "type": "button",
+          "data": {
+            "text": "Get an early ticket, €390",
+            "url": "https://signalnoise.example/tickets"
+          },
+          "style": {
+            "padding": {
+              "top": 16,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "backgroundColor": "#2246F5",
+            "color": "#FFFFFF",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 17,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "paddingX": 30,
+            "paddingY": 16,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#2246F5"
+          }
+        },
+        {
+          "id": "sn-77",
+          "type": "text",
+          "data": {
+            "html": "<p>Price rises to €520 on 1 December. Team tickets for five or more save 20%.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 44,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 14,
+            "color": "#5A5A5A"
+          }
+        },
+        {
+          "id": "sn-78",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#0D0D0D",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "sn-79",
+          "type": "text",
+          "data": {
+            "html": "<p>Signal/Noise, Pavilhão Norte, Doca de Alcântara, 1350-352 Lisbon. You asked for programme updates. <a href=\"https://signalnoise.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 22,
+              "right": 40,
+              "bottom": 32,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 12,
+            "color": "#5A5A5A",
+            "lineHeight": 1.5
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

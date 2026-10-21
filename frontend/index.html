@@ -3,9 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MailCraft</title>
+    <meta name="color-scheme" content="light dark" />
+    <meta name="darkreader-lock" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9FWQNL34XY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-9FWQNL34XY');
+    </script>
+    <title>MailCraft — Embeddable Email Builder & API</title>
   </head>
-  <body>
+  <body class="font-sans antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

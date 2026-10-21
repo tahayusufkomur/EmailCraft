@@ -5,20 +5,20 @@
 {% block preheader_text %}We were unable to process your payment. Please update your billing details.{% endblock %}
 
 {% block content %}
-<h1 style="margin:0 0 16px;font-size:24px;font-weight:600;color:#191e2b;">Payment Failed</h1>
-<p style="margin:0 0 24px;font-size:16px;color:#575c65;line-height:1.5;">
-  We were unable to process the payment for your <strong>{{ plan_name }}</strong> plan. This is attempt <strong>{{ attempt_count }}</strong>.
+<h1 style="margin:0 0 16px;font-size:24px;font-weight:600;letter-spacing:-0.02em;color:#1a1917;">Payment Failed</h1>
+<p style="margin:0 0 24px;font-size:15px;color:#73706a;line-height:1.6;">
+  We were unable to process the payment for your <strong style="color:#1a1917;">{{ plan_name }}</strong> plan. This is attempt <strong style="color:#1a1917;">{{ attempt_count }}</strong>.
 </p>
-<p style="margin:0 0 24px;font-size:16px;color:#575c65;line-height:1.5;">
+<p style="margin:0 0 24px;font-size:15px;color:#73706a;line-height:1.6;">
   To keep your account active, please update your payment method as soon as possible. If payment continues to fail, your account may be downgraded.
 </p>
-<p style="margin:0 0 32px;font-size:16px;color:#575c65;line-height:1.5;">
+<p style="margin:0 0 32px;font-size:15px;color:#73706a;line-height:1.6;">
   If you believe this is a mistake or need assistance, please contact our support team.
 </p>
 <table role="presentation" cellpadding="0" cellspacing="0">
   <tr>
-    <td style="border-radius:6px;background-color:#0c6fc2;">
-      <a href="{{ billing_url }}" style="display:inline-block;padding:12px 24px;color:#ffffff;text-decoration:none;font-weight:500;font-size:14px;">Update Payment Method</a>
+    <td style="border-radius:6px;background-color:#1a1917;">
+      <a href="{{ billing_url }}" style="display:inline-block;padding:12px 24px;color:#f8f7f4;text-decoration:none;font-weight:500;font-size:14px;">Update Payment Method</a>
     </td>
   </tr>
 </table>

@@ -18,10 +18,17 @@ export function exportToHtml(template: EmailTemplate, variablesMode: 'placeholde
     settings.bodyBackgroundColor,
   );
 
+  stackGaps = new Set();
+  stackPads = new Set();
   const headerHtml = renderBlocks(template.header.blocks, settings);
   const bodyHtml = renderBlocks(template.body.blocks, settings);
   const footerHtml = renderBlocks(template.footer.blocks, settings);
   const googleFontLink = getGoogleFontLinks(collectTemplateFonts(template));
+  // Stacked columns drop their side gutters and keep the gap as space above each column.
+  const gapCss = [...stackGaps].sort((a, b) => a - b)
+    .map((g) => `\n      .stack-gap-${g} { padding: ${g}px 0 0 0 !important; }`).join('')
+    + [...stackPads].sort((a, b) => a - b)
+      .map((p) => `\n      .stack-pad-${p} { padding-left: ${p}px !important; padding-right: ${p}px !important; }`).join('');
 
   return `<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
@@ -41,6 +48,7 @@ export function exportToHtml(template: EmailTemplate, variablesMode: 'placeholde
     @media only screen and (max-width: ${contentWidth + 20}px) {
       .email-container { width: 100% !important; max-width: 100% !important; }
       .stack-column { display: block !important; width: 100% !important; max-width: 100% !important; }
+      .stack-gutter { padding: 0 !important; }${gapCss}
     }
   </style>
 </head>
@@ -69,6 +77,19 @@ const FRAME_KEYS = ['backgroundImage', 'backgroundGradient', 'backgroundOverlay'
 const OWN_BORDER_TYPES = ['card', 'profile', 'button', 'image'];
 const HEX_COLOR_PATTERN = /^#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
 const CSS_COLOR_PATTERN = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
+// Gaps of the stacking columns rendered by the current exportToHtml call.
+let stackGaps = new Set<number>();
+let stackPads = new Set<number>();
+
+/** Split `total` px by the column ratios; the last column takes the rounding remainder. */
+function columnWidths(ratios: number[] | undefined, count: number, total: number): number[] {
+  let r = (ratios || []).slice(0, count).map((x) => (typeof x === 'number' && x > 0 ? x : 0));
+  if (r.length !== count || !r.some((x) => x > 0)) r = Array.from({ length: count }, () => 1);
+  const sum = r.reduce((a, b) => a + b, 0);
+  const widths = r.map((x) => Math.trunc((total * x) / sum));
+  widths[count - 1] = total - widths.slice(0, -1).reduce((a, b) => a + b, 0);
+  return widths;
+}
 
 function renderBlocks(blocks: Block[], settings: EmailTemplate['settings']): string {
   return blocks.map((block) => {
@@ -134,6 +155,31 @@ export function frameHtml(inner: string, style: BlockStyle, contentWidth = 600):
 </tr>`;
 }
 
+const P_TAG = /<p(\s[^>]*)?>/gi;
+const A_TAG = /<a(\s[^>]*)?>/gi;
+const STYLE_ATTR = /\sstyle\s*=\s*"/i;
+
+/**
+ * Give editor HTML explicit email styling: the rich-text editor stores bare <p> and <a>, which
+ * clients would render with their own paragraph margins and blue links. Existing styles win.
+ * Mirrors _normalize_text_html in backend/templates_api/export_engine.py.
+ */
+function normalizeTextHtml(html: string, color: string): string {
+  const lastP = [...html.matchAll(P_TAG)].pop()?.index;
+  return html
+    .replace(P_TAG, (tag: string, attrs: string | undefined, offset: number) => {
+      const a = attrs || '';
+      const margin = offset === lastP ? '0' : '0 0 1em';
+      if (a.toLowerCase().includes('margin')) return tag;
+      if (STYLE_ATTR.test(a)) return `<p${a.replace(STYLE_ATTR, ` style="margin: ${margin}; `)}>`;
+      return `<p${a} style="margin: ${margin};">`;
+    })
+    .replace(A_TAG, (tag: string, attrs: string | undefined) => {
+      const a = attrs || '';
+      return STYLE_ATTR.test(a) ? tag : `<a${a} style="color: ${color}; text-decoration: underline;">`;
+    });
+}
+
 /** Line-height multiplier from the block style, or the default when unset / not positive. */
 function lineHeightOf(style: BlockStyle, fallback: number): number {
   return style.lineHeight && style.lineHeight > 0 ? style.lineHeight : fallback;
@@ -149,10 +195,12 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const padding = paddingStr(block.style.padding);
       const align = block.style.alignment || 'left';
       const background = block.style.backgroundColor;
+      const textSize = block.style.fontSize || fontSize;
+      const textColor = block.style.color && CSS_COLOR_PATTERN.test(block.style.color.trim()) ? block.style.color.trim() : color;
       return `<tr>
-  <td style="padding: ${padding}; font-family: ${font}; font-size: ${fontSize}px;
-             line-height: ${Math.round(fontSize * lineHeightOf(block.style, 1.6))}px; color: ${color}; text-align: ${align};${background ? ` background-color: ${background};` : ''}">
-    ${block.data.html}
+  <td style="padding: ${padding}; font-family: ${font}; font-size: ${textSize}px;
+             line-height: ${Math.trunc(textSize * lineHeightOf(block.style, 1.6))}px; color: ${textColor}; text-align: ${align};${background ? ` background-color: ${background};` : ''}">
+    ${normalizeTextHtml(block.data.html, textColor)}
   </td>
 </tr>`;
     }
@@ -188,7 +236,7 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const url = escapeHtml(block.data.url);
       const bgColor = block.style.backgroundColor || '#007bff';
       const textColor = block.style.color || '#ffffff';
-      const borderRadius = block.style.borderRadius || 4;
+      const borderRadius = block.style.borderRadius ?? 4;
       const btnFontSize = block.style.fontSize || 16;
       const btnFont = block.style.fontFamily || font;
       const borderStyle = block.style.borderStyle || 'solid';
@@ -197,8 +245,8 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const fontWeight = block.style.fontWeight || 600;
       const letterSpacing = block.style.letterSpacing || 0;
       const textTransform = block.style.textTransform || 'none';
-      const paddingX = block.style.paddingX || 24;
-      const paddingY = block.style.paddingY || 12;
+      const paddingX = block.style.paddingX ?? 24;
+      const paddingY = block.style.paddingY ?? 12;
       const fullWidth = block.style.fullWidth || false;
       const btnWidth = fullWidth ? '100%' : 'auto';
       const btnDisplay = fullWidth ? 'block' : 'inline-block';
@@ -226,8 +274,8 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
     case 'divider': {
       const lineStyle = block.style.lineStyle || 'solid';
       const lineColor = block.style.lineColor || '#cccccc';
-      const thickness = block.style.lineThickness || 1;
-      const spacing = block.style.spacing || 20;
+      const thickness = block.style.lineThickness ?? 1;
+      const spacing = block.style.spacing ?? 20;
 
       return `<tr>
   <td style="padding: ${spacing}px 0;">
@@ -242,49 +290,89 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
 </tr>`;
     }
 
+    // Mirrors _render_columns_block in backend/templates_api/export_engine.py.
     case 'columns': {
-      const colCount = block.data.columnCount || 2;
-      const gap = block.style.gap ?? 10;
+      const columns = block.data.columns;
+      if (!columns.length) return '';
+      const count = columns.length;
+      const gap = Math.max(0, Math.trunc(block.style.gap ?? 10));
       const minHeight = block.style.minHeight;
-      const heightStyle = minHeight ? ` style="height: ${Math.trunc(minHeight)}px;"` : '';
+      const heightStyle = minHeight ? ` height: ${Math.trunc(minHeight)}px;` : '';
       const vAlign = block.style.verticalAlignment === 'center' ? 'middle' : block.style.verticalAlignment === 'bottom' ? 'bottom' : 'top';
       const contentWidth = settings.contentWidth || 600;
-      const defaultRatio = Math.floor(100 / colCount);
-      const ratios = block.data.columnRatio.length === colCount
-        ? block.data.columnRatio
-        : Array.from({ length: colCount }, () => defaultRatio);
+      // The ratio splits what is left after the gaps, so equal ratios give equal content widths.
+      const widths = columnWidths(block.data.columnRatio, count, contentWidth - gap * (count - 1));
 
-      const colsHtml = block.data.columns.map((col, index) => {
-        const ratio = ratios[index] || defaultRatio;
-        const colWidth = Math.floor((contentWidth - gap * (colCount - 1)) * (ratio / 100));
-        const colContent = renderBlocks(col.blocks, settings);
-        let inner = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${colContent}</table>`;
-        const stackClass = block.style.stackOnMobile === false ? '' : 'stack-column';
-        let colBg = col.backgroundColor ? ` background-color: ${col.backgroundColor};` : '';
-        const colPadding = col.padding ? paddingStr(col.padding) : `0 ${Math.floor(gap / 2)}px`;
-        if (col.borderRadius) colBg += ` border-radius: ${Math.trunc(col.borderRadius)}px;`;
-        const colImg = escapeAttr(col.backgroundImage || '');
-        let colBgAttr = '';
-        if (colImg) {
-          colBgAttr = ` background="${colImg}"`;
-          colBg += ` background-image: url('${colImg}'); background-size: cover; background-position: center;`;
-          inner = `${vmlBgOpen(colImg, colWidth)}${inner}${VML_BG_CLOSE}`;
+      const content = (col: (typeof columns)[number], width: number, cls = '') => {
+        let inner = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${renderBlocks(col.blocks, settings)}</table>`;
+        let css = `padding: ${col.padding ? paddingStr(col.padding) : '0'};`;
+        if (col.backgroundColor) css += ` background-color: ${CSS_COLOR_PATTERN.test(col.backgroundColor.trim()) ? col.backgroundColor.trim() : '#ffffff'};`;
+        if (col.borderRadius) css += ` border-radius: ${Math.trunc(col.borderRadius)}px;`;
+        let attr = cls ? ` class="${cls}"` : '';
+        const img = escapeAttr(col.backgroundImage || '');
+        if (img) {
+          attr += ` background="${img}"`;
+          css += ` background-image: url('${img}'); background-size: cover; background-position: center;`;
+          inner = `${vmlBgOpen(img, width)}${inner}${VML_BG_CLOSE}`;
         }
+        return { attr, css, inner };
+      };
 
-        return `<div class="${stackClass}" style="display: inline-block; width: 100%; max-width: ${colWidth}px; vertical-align: top;">
+      if (block.style.stackOnMobile === false) {
+        const cells = columns.map((col, i) => {
+          const { attr, css, inner } = content(col, widths[i]);
+          const pct = Math.round((widths[i] * 100 / contentWidth) * 100) / 100;
+          const spacer = i ? `<td width="${gap}" style="width: ${gap}px; font-size: 0; line-height: 0;">&nbsp;</td>` : '';
+          return `${spacer}<td${attr} width="${pct}%" valign="${vAlign}" style="${css}">${inner}</td>`;
+        }).join('');
+        return `<tr>
+  <td valign="${vAlign}" style="padding: 0;${heightStyle}">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout: fixed;">
+      <tr>${cells}</tr>
+    </table>
+  </td>
+</tr>`;
+      }
+
+      stackGaps.add(gap);
+      // Stacked, every column takes the block's widest side padding on both sides, so an inset
+      // given to the outer edges of a row (e.g. 40px left of column 1) holds for every column.
+      const pads = columns.filter((c) => c.padding).map((c) => Math.max(c.padding!.left || 0, c.padding!.right || 0));
+      const maxPad = pads.length ? Math.trunc(Math.max(...pads)) : 0;
+      const padClass = maxPad > 0 ? `stack-pad-${maxPad}` : '';
+      if (padClass) stackPads.add(maxPad);
+      const colsHtml = columns.map((col, i) => {
+        const left = i > 0 ? Math.floor(gap / 2) : 0;
+        const right = i < count - 1 ? gap - Math.floor(gap / 2) : 0;
+        const outer = widths[i] + left + right;
+        const { attr, css, inner } = content(col, widths[i], padClass);
+        const msoStart = i
+          ? `<!--[if mso]><td width="${outer}" valign="${vAlign}"><![endif]-->`
+          : `<!--[if mso]><table role="presentation" width="${contentWidth}" cellpadding="0" cellspacing="0" border="0"><tr><td width="${outer}" valign="${vAlign}"><![endif]-->`;
+        const msoEnd = i < count - 1 ? '<!--[if mso]></td><![endif]-->' : '<!--[if mso]></td></tr></table><![endif]-->';
+        return `${msoStart}<div class="stack-column" style="display: inline-block; width: 100%; max-width: ${outer}px; vertical-align: ${vAlign}; font-size: ${settings.defaultFontSize || 14}px;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-          <tr><td${colBgAttr} style="padding: ${colPadding};${colBg}" valign="top">${inner}</td></tr>
+          <tr>
+            <td class="${i ? `stack-gap-${gap}` : 'stack-gutter'}" style="padding: 0 ${right}px 0 ${left}px;" valign="top">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr><td${attr} style="${css}" valign="top">${inner}</td></tr>
+              </table>
+            </td>
+          </tr>
         </table>
-      </div>`;
-      }).join('\n');
+      </div>${msoEnd}`;
+      }).join('');
 
-      return `<tr><td valign="${vAlign}"${heightStyle}>${colsHtml}</td></tr>`;
+      // font-size: 0 removes the whitespace gap between the inline-block columns.
+      return `<tr>
+  <td valign="${vAlign}" style="font-size: 0;${heightStyle}">${colsHtml}</td>
+</tr>`;
     }
 
     case 'social': {
       const align = block.style.alignment || 'center';
       const iconSize = block.style.iconSize || 32;
-      const spacing = block.style.spacing || 10;
+      const spacing = block.style.spacing ?? 10;
 
       const iconsHtml = block.data.platforms.map((p) => {
         const url = escapeHtml(p.url);
@@ -319,7 +407,7 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const background = block.style.backgroundColor;
       return `<tr>
   <td style="padding: ${padding}; text-align: ${align};${background ? ` background-color: ${background};` : ''}">
-    <${headingTag} style="margin: 0; font-family: ${headingFont}; font-size: ${headingSize}px; line-height: ${Math.round(headingSize * lineHeightOf(block.style, 1.2))}px; color: ${headingColor}; font-weight: ${headingWeight};${headingLetterSpacing ? ` letter-spacing: ${headingLetterSpacing}px;` : ''}${headingTextTransform !== 'none' ? ` text-transform: ${headingTextTransform};` : ''}">
+    <${headingTag} style="margin: 0; font-family: ${headingFont}; font-size: ${headingSize}px; line-height: ${Math.trunc(headingSize * lineHeightOf(block.style, 1.2))}px; color: ${headingColor}; font-weight: ${headingWeight};${headingLetterSpacing ? ` letter-spacing: ${headingLetterSpacing}px;` : ''}${headingTextTransform !== 'none' ? ` text-transform: ${headingTextTransform};` : ''}">
       ${headingText}
     </${headingTag}>
   </td>
@@ -360,7 +448,7 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const subColor = block.style.subheadingColor || '#ffffffcc';
       const btnBg = block.style.buttonBackgroundColor || '#ffffff';
       const btnColor = block.style.buttonTextColor || '#000000';
-      const btnRadius = block.style.buttonBorderRadius || 50;
+      const btnRadius = block.style.buttonBorderRadius ?? 50;
       const align = block.style.contentAlignment || 'center';
       const vAlign = block.style.verticalAlignment || 'bottom';
       const valignAttr = vAlign === 'top' ? 'top' : vAlign === 'center' ? 'middle' : 'bottom';
@@ -380,7 +468,7 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="height: ${h}px;">
       <tr>
         <td style="background: linear-gradient(${gradDir}, ${overlayRgba} 60%, transparent 100%); padding: 32px; text-align: ${align};" valign="${valignAttr}">
-          <h1 style="margin: 0 0 8px; font-family: ${headingFont}; font-size: ${headingSize}px; line-height: ${Math.round(headingSize * lineHeightOf(block.style, 1.15))}px; color: ${headingColor}; font-weight: 700;">${heading}</h1>
+          <h1 style="margin: 0 0 8px; font-family: ${headingFont}; font-size: ${headingSize}px; line-height: ${Math.trunc(headingSize * lineHeightOf(block.style, 1.15))}px; color: ${headingColor}; font-weight: 700;">${heading}</h1>
           ${sub ? `<p style="margin: 0 0 20px; font-family: ${font}; font-size: ${fontSize}px; color: ${subColor}; line-height: ${lineHeightOf(block.style, 1.5)};">${sub}</p>` : ''}
           ${btnText ? `<a href="${btnUrl}" target="_blank" style="display: inline-block; padding: 14px 32px; background-color: ${btnBg}; color: ${btnColor}; font-family: ${font}; font-size: 15px; font-weight: 600; text-decoration: none; border-radius: ${btnRadius}px;">${btnText}</a>` : ''}
         </td>
@@ -462,7 +550,7 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
 
       const border = borderW > 0 ? `${borderW}px ${borderS} ${borderC}` : 'none';
       return `<tr>
-  <td style="padding: ${paddingStr(block.style.padding)};">
+  <td style="padding: 0;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: ${bg}; border-radius: ${radius}px; border: ${border};">
       <tr>
         <td style="padding: ${paddingStr(block.style.padding)}; text-align: ${cardAlign};">
@@ -490,7 +578,7 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       const txtWt = block.style.textFontWeight || 500;
       const subCol = block.style.subtitleColor || '#64748b';
       const subSz = block.style.subtitleFontSize || 13;
-      const gap = block.style.spacing || 12;
+      const gap = block.style.spacing ?? 12;
       const isHoriz = block.style.layout === 'horizontal';
 
       const renderListIconCell = (item: typeof block.data.items[0], hasSub: boolean) => {
@@ -608,7 +696,7 @@ function renderBlock(block: Block, settings: EmailTemplate['settings']): string 
       }
 
       return `<tr>
-  <td style="padding: ${profPad};">
+  <td style="padding: 0;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: ${profBg}; border-radius: ${profRadius}px; border: ${profBorder};">
       <tr>
         <td style="padding: ${profPad};">

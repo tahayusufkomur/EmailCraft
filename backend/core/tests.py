@@ -576,6 +576,7 @@ class SiteOrganizationsApiTests(TestCase):
         detail_response = self.client.get(f'/api/v1/site/templates/{shared_template.id}/')
         self.assertEqual(detail_response.status_code, 200)
         self.assertEqual(detail_response.data['template_type'], 'provided')
+        self.assertTrue(detail_response.data['preview_html'].startswith('<!DOCTYPE html>'))
 
         update_response = self.client.put(
             f'/api/v1/site/templates/{shared_template.id}/',

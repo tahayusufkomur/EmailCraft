@@ -25,19 +25,19 @@ export const BACKGROUND_STYLE_PRESETS: BackgroundStylePreset[] = [
     id: 'none',
     label: 'Solid',
     description: 'Simple solid background color',
-    fallbackColor: '#f4f4f4',
-    canvasBackground: '#f4f4f4',
-    emailBackground: '#f4f4f4',
+    fallbackColor: '#f5f4f0',
+    canvasBackground: '#f5f4f0',
+    emailBackground: '#f5f4f0',
   },
   {
     id: 'aurora',
-    label: 'Aurora',
-    description: 'Soft cinematic gradient ribbons',
-    fallbackColor: '#e7ecff',
+    label: 'Warm Linen',
+    description: 'Soft architectural stone gradient',
+    fallbackColor: '#f5f3ee',
     canvasBackground:
-      'radial-gradient(circle at 15% 15%, rgba(168, 85, 247, 0.25), transparent 45%), radial-gradient(circle at 85% 20%, rgba(14, 165, 233, 0.25), transparent 42%), linear-gradient(135deg, #f6f7ff 0%, #e0e7ff 45%, #dbeafe 100%)',
+      'radial-gradient(circle at 15% 15%, rgba(143, 99, 36, 0.08), transparent 45%), radial-gradient(circle at 85% 20%, rgba(120, 113, 108, 0.08), transparent 42%), linear-gradient(135deg, #faf9f6 0%, #f3f1ec 50%, #ebe8e1 100%)',
     emailBackground:
-      'radial-gradient(circle at 15% 15%, rgba(168, 85, 247, 0.22), transparent 45%), radial-gradient(circle at 85% 20%, rgba(14, 165, 233, 0.22), transparent 42%), linear-gradient(135deg, #f6f7ff 0%, #e0e7ff 45%, #dbeafe 100%)',
+      'radial-gradient(circle at 15% 15%, rgba(143, 99, 36, 0.08), transparent 45%), radial-gradient(circle at 85% 20%, rgba(120, 113, 108, 0.08), transparent 42%), linear-gradient(135deg, #faf9f6 0%, #f3f1ec 50%, #ebe8e1 100%)',
   },
   {
     id: 'sunset-glow',
@@ -45,29 +45,29 @@ export const BACKGROUND_STYLE_PRESETS: BackgroundStylePreset[] = [
     description: 'Warm ambient gradient with soft depth',
     fallbackColor: '#fdf1e8',
     canvasBackground:
-      'radial-gradient(circle at 78% 18%, rgba(251, 113, 133, 0.26), transparent 42%), radial-gradient(circle at 22% 78%, rgba(251, 191, 36, 0.24), transparent 48%), linear-gradient(145deg, #fff7ed 0%, #fee2e2 48%, #ffedd5 100%)',
+      'radial-gradient(circle at 78% 18%, rgba(212, 163, 89, 0.18), transparent 42%), radial-gradient(circle at 22% 78%, rgba(180, 83, 9, 0.12), transparent 48%), linear-gradient(145deg, #fffaf5 0%, #f7efe6 48%, #f2e7da 100%)',
     emailBackground:
-      'radial-gradient(circle at 78% 18%, rgba(251, 113, 133, 0.22), transparent 42%), radial-gradient(circle at 22% 78%, rgba(251, 191, 36, 0.2), transparent 48%), linear-gradient(145deg, #fff7ed 0%, #fee2e2 48%, #ffedd5 100%)',
+      'radial-gradient(circle at 78% 18%, rgba(212, 163, 89, 0.16), transparent 42%), radial-gradient(circle at 22% 78%, rgba(180, 83, 9, 0.1), transparent 48%), linear-gradient(145deg, #fffaf5 0%, #f7efe6 48%, #f2e7da 100%)',
   },
   {
     id: 'mint-weave',
     label: 'Mint Weave',
-    description: 'Subtle woven pattern over cool tones',
-    fallbackColor: '#eafbf6',
+    description: 'Subtle woven pattern over sage tones',
+    fallbackColor: '#f2f5f2',
     canvasBackground:
-      'repeating-linear-gradient(45deg, rgba(15, 118, 110, 0.07) 0, rgba(15, 118, 110, 0.07) 1px, transparent 1px, transparent 16px), repeating-linear-gradient(-45deg, rgba(20, 184, 166, 0.07) 0, rgba(20, 184, 166, 0.07) 1px, transparent 1px, transparent 16px), linear-gradient(135deg, #f0fdfa 0%, #dcfce7 100%)',
+      'repeating-linear-gradient(45deg, rgba(22, 101, 52, 0.04) 0, rgba(22, 101, 52, 0.04) 1px, transparent 1px, transparent 16px), repeating-linear-gradient(-45deg, rgba(22, 101, 52, 0.04) 0, rgba(22, 101, 52, 0.04) 1px, transparent 1px, transparent 16px), linear-gradient(135deg, #f7f9f7 0%, #eef2ee 100%)',
     emailBackground:
-      'repeating-linear-gradient(45deg, rgba(15, 118, 110, 0.05) 0, rgba(15, 118, 110, 0.05) 1px, transparent 1px, transparent 18px), repeating-linear-gradient(-45deg, rgba(20, 184, 166, 0.05) 0, rgba(20, 184, 166, 0.05) 1px, transparent 1px, transparent 18px), linear-gradient(135deg, #f0fdfa 0%, #dcfce7 100%)',
+      'repeating-linear-gradient(45deg, rgba(22, 101, 52, 0.04) 0, rgba(22, 101, 52, 0.04) 1px, transparent 1px, transparent 18px), repeating-linear-gradient(-45deg, rgba(22, 101, 52, 0.04) 0, rgba(22, 101, 52, 0.04) 1px, transparent 1px, transparent 18px), linear-gradient(135deg, #f7f9f7 0%, #eef2ee 100%)',
   },
   {
     id: 'midnight-grid',
-    label: 'Midnight Grid',
+    label: 'Obsidian Grid',
     description: 'Dark editorial gradient with a fine grid',
-    fallbackColor: '#0f172a',
+    fallbackColor: '#141311',
     canvasBackground:
-      'linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px), radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.22), transparent 36%), radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.2), transparent 34%), linear-gradient(135deg, #0f172a 0%, #111827 55%, #1e293b 100%)',
+      'linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px), radial-gradient(circle at 20% 20%, rgba(212, 163, 89, 0.1), transparent 36%), radial-gradient(circle at 80% 80%, rgba(143, 99, 36, 0.1), transparent 34%), linear-gradient(135deg, #11100e 0%, #161513 55%, #1e1d1a 100%)',
     emailBackground:
-      'linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px), radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.18), transparent 36%), radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.16), transparent 34%), linear-gradient(135deg, #0f172a 0%, #111827 55%, #1e293b 100%)',
+      'linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px), radial-gradient(circle at 20% 20%, rgba(212, 163, 89, 0.08), transparent 36%), radial-gradient(circle at 80% 80%, rgba(143, 99, 36, 0.08), transparent 34%), linear-gradient(135deg, #11100e 0%, #161513 55%, #1e1d1a 100%)',
   },
   {
     id: 'paper-rings',
@@ -75,9 +75,9 @@ export const BACKGROUND_STYLE_PRESETS: BackgroundStylePreset[] = [
     description: 'Elegant neutral rings for premium layouts',
     fallbackColor: '#f8f6f1',
     canvasBackground:
-      'radial-gradient(circle at 10% 10%, rgba(120, 113, 108, 0.12) 0, rgba(120, 113, 108, 0.12) 1px, transparent 1px), radial-gradient(circle at 70% 30%, rgba(148, 163, 184, 0.16) 0, rgba(148, 163, 184, 0.16) 2px, transparent 2px), radial-gradient(circle at 30% 80%, rgba(148, 163, 184, 0.12) 0, rgba(148, 163, 184, 0.12) 2px, transparent 2px), linear-gradient(140deg, #fafaf9 0%, #f5f5f4 52%, #e7e5e4 100%)',
+      'radial-gradient(circle at 10% 10%, rgba(120, 113, 108, 0.12) 0, rgba(120, 113, 108, 0.12) 1px, transparent 1px), radial-gradient(circle at 70% 30%, rgba(120, 113, 108, 0.14) 0, rgba(120, 113, 108, 0.14) 2px, transparent 2px), radial-gradient(circle at 30% 80%, rgba(120, 113, 108, 0.1) 0, rgba(120, 113, 108, 0.1) 2px, transparent 2px), linear-gradient(140deg, #fafaf9 0%, #f5f5f4 52%, #e7e5e4 100%)',
     emailBackground:
-      'radial-gradient(circle at 10% 10%, rgba(120, 113, 108, 0.08) 0, rgba(120, 113, 108, 0.08) 1px, transparent 1px), radial-gradient(circle at 70% 30%, rgba(148, 163, 184, 0.12) 0, rgba(148, 163, 184, 0.12) 2px, transparent 2px), radial-gradient(circle at 30% 80%, rgba(148, 163, 184, 0.1) 0, rgba(148, 163, 184, 0.1) 2px, transparent 2px), linear-gradient(140deg, #fafaf9 0%, #f5f5f4 52%, #e7e5e4 100%)',
+      'radial-gradient(circle at 10% 10%, rgba(120, 113, 108, 0.08) 0, rgba(120, 113, 108, 0.08) 1px, transparent 1px), radial-gradient(circle at 70% 30%, rgba(120, 113, 108, 0.1) 0, rgba(120, 113, 108, 0.1) 2px, transparent 2px), radial-gradient(circle at 30% 80%, rgba(120, 113, 108, 0.08) 0, rgba(120, 113, 108, 0.08) 2px, transparent 2px), linear-gradient(140deg, #fafaf9 0%, #f5f5f4 52%, #e7e5e4 100%)',
   },
 ];
 
@@ -92,43 +92,43 @@ export const BODY_BACKGROUND_STYLE_PRESETS: BodyBackgroundStylePreset[] = [
   },
   {
     id: 'mesh-blue',
-    label: 'Mesh Blue',
-    description: 'Soft geometric cool-tone mesh',
-    fallbackColor: '#eef4ff',
+    label: 'Warm Mist',
+    description: 'Soft editorial stone mesh',
+    fallbackColor: '#f7f6f3',
     canvasBackground:
-      'radial-gradient(circle at 18% 16%, rgba(59, 130, 246, 0.12), transparent 42%), radial-gradient(circle at 84% 20%, rgba(14, 165, 233, 0.1), transparent 38%), linear-gradient(145deg, #f8fbff 0%, #eef4ff 48%, #e5edff 100%)',
+      'radial-gradient(circle at 18% 16%, rgba(143, 99, 36, 0.08), transparent 42%), radial-gradient(circle at 84% 20%, rgba(120, 113, 108, 0.08), transparent 38%), linear-gradient(145deg, #ffffff 0%, #f8f7f4 48%, #f1efea 100%)',
     emailBackground:
-      'radial-gradient(circle at 18% 16%, rgba(59, 130, 246, 0.09), transparent 42%), radial-gradient(circle at 84% 20%, rgba(14, 165, 233, 0.08), transparent 38%), linear-gradient(145deg, #f8fbff 0%, #eef4ff 48%, #e5edff 100%)',
+      'radial-gradient(circle at 18% 16%, rgba(143, 99, 36, 0.06), transparent 42%), radial-gradient(circle at 84% 20%, rgba(120, 113, 108, 0.06), transparent 38%), linear-gradient(145deg, #ffffff 0%, #f8f7f4 48%, #f1efea 100%)',
   },
   {
     id: 'aurora-soft',
-    label: 'Aurora Soft',
-    description: 'Pastel aurora glow for modern campaigns',
-    fallbackColor: '#f2f3ff',
+    label: 'Ivory Glow',
+    description: 'Subtle warm ivory glow for modern campaigns',
+    fallbackColor: '#faf8f5',
     canvasBackground:
-      'radial-gradient(circle at 15% 10%, rgba(168, 85, 247, 0.14), transparent 36%), radial-gradient(circle at 85% 24%, rgba(34, 211, 238, 0.12), transparent 34%), linear-gradient(150deg, #fcfcff 0%, #f2f3ff 45%, #ebf6ff 100%)',
+      'radial-gradient(circle at 15% 10%, rgba(212, 163, 89, 0.12), transparent 36%), radial-gradient(circle at 85% 24%, rgba(120, 113, 108, 0.08), transparent 34%), linear-gradient(150deg, #ffffff 0%, #faf8f5 45%, #f4f1ea 100%)',
     emailBackground:
-      'radial-gradient(circle at 15% 10%, rgba(168, 85, 247, 0.11), transparent 36%), radial-gradient(circle at 85% 24%, rgba(34, 211, 238, 0.1), transparent 34%), linear-gradient(150deg, #fcfcff 0%, #f2f3ff 45%, #ebf6ff 100%)',
+      'radial-gradient(circle at 15% 10%, rgba(212, 163, 89, 0.09), transparent 36%), radial-gradient(circle at 85% 24%, rgba(120, 113, 108, 0.06), transparent 34%), linear-gradient(150deg, #ffffff 0%, #faf8f5 45%, #f4f1ea 100%)',
   },
   {
     id: 'sunset-paper',
     label: 'Sunset Paper',
     description: 'Warm premium paper-like gradient',
-    fallbackColor: '#fff5ef',
+    fallbackColor: '#fff7f0',
     canvasBackground:
-      'radial-gradient(circle at 74% 20%, rgba(251, 146, 60, 0.15), transparent 40%), radial-gradient(circle at 20% 78%, rgba(251, 113, 133, 0.1), transparent 40%), linear-gradient(145deg, #fffaf7 0%, #fff1e8 55%, #fee4dc 100%)',
+      'radial-gradient(circle at 74% 20%, rgba(212, 163, 89, 0.14), transparent 40%), radial-gradient(circle at 20% 78%, rgba(180, 83, 9, 0.08), transparent 40%), linear-gradient(145deg, #fffcf9 0%, #fcf4ec 55%, #f7eadc 100%)',
     emailBackground:
-      'radial-gradient(circle at 74% 20%, rgba(251, 146, 60, 0.11), transparent 40%), radial-gradient(circle at 20% 78%, rgba(251, 113, 133, 0.08), transparent 40%), linear-gradient(145deg, #fffaf7 0%, #fff1e8 55%, #fee4dc 100%)',
+      'radial-gradient(circle at 74% 20%, rgba(212, 163, 89, 0.1), transparent 40%), radial-gradient(circle at 20% 78%, rgba(180, 83, 9, 0.06), transparent 40%), linear-gradient(145deg, #fffcf9 0%, #fcf4ec 55%, #f7eadc 100%)',
   },
   {
     id: 'carbon-grid',
     label: 'Carbon Grid',
     description: 'Dark subtle grid for high-contrast content',
-    fallbackColor: '#111827',
+    fallbackColor: '#161513',
     canvasBackground:
-      'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(135deg, #0f172a 0%, #111827 60%, #1f2937 100%)',
+      'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(135deg, #141311 0%, #1a1917 60%, #22201d 100%)',
     emailBackground:
-      'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(135deg, #0f172a 0%, #111827 60%, #1f2937 100%)',
+      'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(135deg, #141311 0%, #1a1917 60%, #22201d 100%)',
   },
   {
     id: 'opal-rings',
@@ -136,9 +136,9 @@ export const BODY_BACKGROUND_STYLE_PRESETS: BodyBackgroundStylePreset[] = [
     description: 'Elegant neutral circles with gentle texture',
     fallbackColor: '#f7f7f5',
     canvasBackground:
-      'radial-gradient(circle at 14% 14%, rgba(120,113,108,0.1) 0, rgba(120,113,108,0.1) 1px, transparent 1px), radial-gradient(circle at 72% 30%, rgba(148,163,184,0.12) 0, rgba(148,163,184,0.12) 2px, transparent 2px), linear-gradient(140deg, #fcfcfb 0%, #f7f7f5 56%, #efefeb 100%)',
+      'radial-gradient(circle at 14% 14%, rgba(120,113,108,0.1) 0, rgba(120,113,108,0.1) 1px, transparent 1px), radial-gradient(circle at 72% 30%, rgba(120,113,108,0.1) 0, rgba(120,113,108,0.1) 2px, transparent 2px), linear-gradient(140deg, #fcfcfb 0%, #f7f7f5 56%, #efefeb 100%)',
     emailBackground:
-      'radial-gradient(circle at 14% 14%, rgba(120,113,108,0.07) 0, rgba(120,113,108,0.07) 1px, transparent 1px), radial-gradient(circle at 72% 30%, rgba(148,163,184,0.1) 0, rgba(148,163,184,0.1) 2px, transparent 2px), linear-gradient(140deg, #fcfcfb 0%, #f7f7f5 56%, #efefeb 100%)',
+      'radial-gradient(circle at 14% 14%, rgba(120,113,108,0.07) 0, rgba(120,113,108,0.07) 1px, transparent 1px), radial-gradient(circle at 72% 30%, rgba(120,113,108,0.08) 0, rgba(120,113,108,0.08) 2px, transparent 2px), linear-gradient(140deg, #fcfcfb 0%, #f7f7f5 56%, #efefeb 100%)',
   },
 ];
 

@@ -1,0 +1,882 @@
+{
+  "name": "Madder & Indigo — Stitch club welcome",
+  "category": "welcome",
+  "is_premium": true,
+  "tags": [
+    "welcome",
+    "subscription",
+    "craft",
+    "textile"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#CBBFA8",
+      "bodyBackgroundColor": "#1E2C55",
+      "defaultFont": "Georgia, 'Times New Roman', Times, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#EFE6D4"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "mi-1",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/madder-indigo/sampler.jpg",
+            "alt": "A to Z sampler alphabet and the words Madder & Indigo, cross-stitched in madder red, leaf green, weld yellow and undyed thread on indigo linen, with a band of stitched diamonds",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "mi-2",
+          "type": "heading",
+          "data": {
+            "text": "Welcome to the stitch club",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 44,
+              "right": 40,
+              "bottom": 18,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#EFE6D4",
+            "fontSize": 34,
+            "fontFamily": "'Silkscreen', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "uppercase",
+            "lineHeight": 1.25
+          }
+        },
+        {
+          "id": "mi-3",
+          "type": "text",
+          "data": {
+            "html": "<p>Every month we post a thread kit, three skeins dyed by hand in our Bristol dye house with madder, weld and indigo, and the chart for one band of a sampler. By spring you will have a whole sheet: alphabet first, scene last, signed at the foot.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 48,
+              "bottom": 36,
+              "left": 48
+            },
+            "alignment": "center",
+            "fontSize": 18,
+            "lineHeight": 1.65
+          }
+        },
+        {
+          "id": "mi-10",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              42,
+              58
+            ],
+            "columns": [
+              {
+                "id": "mi-5",
+                "blocks": [
+                  {
+                    "id": "mi-4",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/madder-indigo/indigo-vat.jpg",
+                      "alt": "A dyer lifting a skein from the indigo vat, turning from green to blue",
+                      "width": 200,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 40
+                }
+              },
+              {
+                "id": "mi-9",
+                "blocks": [
+                  {
+                    "id": "mi-6",
+                    "type": "heading",
+                    "data": {
+                      "text": "Your first kit ships Monday",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 12,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#F2C84B",
+                      "fontSize": 22,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.25
+                    }
+                  },
+                  {
+                    "id": "mi-7",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Three skeins (madder red, weld yellow, indigo), a 28-count linen ground, two tapestry needles and the chart for band one, the alphabet.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 16,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.6
+                    }
+                  },
+                  {
+                    "id": "mi-8",
+                    "type": "button",
+                    "data": {
+                      "text": "See what is in the kit",
+                      "url": "https://madderandindigo.example/kits/1"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#F2846A",
+                      "color": "#1E2C55",
+                      "borderRadius": 0,
+                      "fullWidth": false,
+                      "fontSize": 16,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "paddingX": 22,
+                      "paddingY": 13,
+                      "borderWidth": 0,
+                      "borderStyle": "solid",
+                      "borderColor": "#F2846A"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 0,
+                  "right": 40,
+                  "bottom": 0,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 28,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "mi-11",
+          "type": "heading",
+          "data": {
+            "text": "The sheet, band by band",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 52,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#EFE6D4",
+            "fontSize": 20,
+            "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none"
+          }
+        },
+        {
+          "id": "mi-12",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#55618A",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "mi-19",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              16,
+              60,
+              24
+            ],
+            "columns": [
+              {
+                "id": "mi-14",
+                "blocks": [
+                  {
+                    "id": "mi-13",
+                    "type": "heading",
+                    "data": {
+                      "text": "I",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 0,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#F2846A",
+                      "fontSize": 14,
+                      "fontFamily": "'Silkscreen', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mi-16",
+                "blocks": [
+                  {
+                    "id": "mi-15",
+                    "type": "heading",
+                    "data": {
+                      "text": "The alphabet",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 8,
+                        "bottom": 14,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6D4",
+                      "fontSize": 18,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mi-18",
+                "blocks": [
+                  {
+                    "id": "mi-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "Nov",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 18,
+                        "right": 40,
+                        "bottom": 16,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#F2846A",
+                      "fontSize": 12,
+                      "fontFamily": "'Silkscreen', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "mi-20",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#55618A",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "mi-27",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              16,
+              60,
+              24
+            ],
+            "columns": [
+              {
+                "id": "mi-22",
+                "blocks": [
+                  {
+                    "id": "mi-21",
+                    "type": "heading",
+                    "data": {
+                      "text": "II",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 0,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#A9CF8E",
+                      "fontSize": 14,
+                      "fontFamily": "'Silkscreen', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mi-24",
+                "blocks": [
+                  {
+                    "id": "mi-23",
+                    "type": "heading",
+                    "data": {
+                      "text": "Numerals and a strawberry border",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 8,
+                        "bottom": 14,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6D4",
+                      "fontSize": 18,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mi-26",
+                "blocks": [
+                  {
+                    "id": "mi-25",
+                    "type": "heading",
+                    "data": {
+                      "text": "Dec",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 18,
+                        "right": 40,
+                        "bottom": 16,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#A9CF8E",
+                      "fontSize": 12,
+                      "fontFamily": "'Silkscreen', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "mi-28",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#55618A",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "mi-35",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              16,
+              60,
+              24
+            ],
+            "columns": [
+              {
+                "id": "mi-30",
+                "blocks": [
+                  {
+                    "id": "mi-29",
+                    "type": "heading",
+                    "data": {
+                      "text": "III",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 0,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#F2C84B",
+                      "fontSize": 14,
+                      "fontFamily": "'Silkscreen', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mi-32",
+                "blocks": [
+                  {
+                    "id": "mi-31",
+                    "type": "heading",
+                    "data": {
+                      "text": "Carnation band",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 8,
+                        "bottom": 14,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6D4",
+                      "fontSize": 18,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mi-34",
+                "blocks": [
+                  {
+                    "id": "mi-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "Jan",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 18,
+                        "right": 40,
+                        "bottom": 16,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#F2C84B",
+                      "fontSize": 12,
+                      "fontFamily": "'Silkscreen', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "mi-36",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#55618A",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "mi-43",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              16,
+              60,
+              24
+            ],
+            "columns": [
+              {
+                "id": "mi-38",
+                "blocks": [
+                  {
+                    "id": "mi-37",
+                    "type": "heading",
+                    "data": {
+                      "text": "IV",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 0,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#F2846A",
+                      "fontSize": 14,
+                      "fontFamily": "'Silkscreen', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mi-40",
+                "blocks": [
+                  {
+                    "id": "mi-39",
+                    "type": "heading",
+                    "data": {
+                      "text": "Diamond and cross border",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 8,
+                        "bottom": 14,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6D4",
+                      "fontSize": 18,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mi-42",
+                "blocks": [
+                  {
+                    "id": "mi-41",
+                    "type": "heading",
+                    "data": {
+                      "text": "Feb",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 18,
+                        "right": 40,
+                        "bottom": 16,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#F2846A",
+                      "fontSize": 12,
+                      "fontFamily": "'Silkscreen', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "mi-44",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#55618A",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "mi-51",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              16,
+              60,
+              24
+            ],
+            "columns": [
+              {
+                "id": "mi-46",
+                "blocks": [
+                  {
+                    "id": "mi-45",
+                    "type": "heading",
+                    "data": {
+                      "text": "V",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 16,
+                        "right": 0,
+                        "bottom": 16,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#A9CF8E",
+                      "fontSize": 14,
+                      "fontFamily": "'Silkscreen', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mi-48",
+                "blocks": [
+                  {
+                    "id": "mi-47",
+                    "type": "heading",
+                    "data": {
+                      "text": "The house, the tree and your initials",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 8,
+                        "bottom": 14,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#EFE6D4",
+                      "fontSize": 18,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mi-50",
+                "blocks": [
+                  {
+                    "id": "mi-49",
+                    "type": "heading",
+                    "data": {
+                      "text": "Mar",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 18,
+                        "right": 40,
+                        "bottom": 16,
+                        "left": 0
+                      },
+                      "alignment": "right",
+                      "color": "#A9CF8E",
+                      "fontSize": 12,
+                      "fontFamily": "'Silkscreen', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "uppercase"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "mi-52",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#55618A",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "mi-53",
+          "type": "heading",
+          "data": {
+            "text": "Worked at the Madder & Indigo dye house · Bristol · Autumn 2026",
+            "level": 4
+          },
+          "style": {
+            "padding": {
+              "top": 44,
+              "right": 48,
+              "bottom": 12,
+              "left": 48
+            },
+            "alignment": "center",
+            "color": "#F2846A",
+            "fontSize": 11,
+            "fontFamily": "'Silkscreen', Monaco, Consolas, 'Lucida Console', 'Courier New', monospace",
+            "fontWeight": 700,
+            "letterSpacing": 1,
+            "textTransform": "uppercase",
+            "lineHeight": 1.8
+          }
+        },
+        {
+          "id": "mi-54",
+          "type": "text",
+          "data": {
+            "html": "<p>Madder &amp; Indigo, 3 Cotham Mews, Bristol BS6 6DF. <a href=\"https://madderandindigo.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "center",
+            "fontSize": 13,
+            "color": "#CBCFEA",
+            "lineHeight": 1.5
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

@@ -1,82 +1,312 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
+/* Contentor shared visual system (spec 5.1) — tokens + typography + motion */
+:root {
+  color-scheme: light;
+  --font-geist-sans: 'Geist', system-ui, -apple-system, sans-serif;
+  --font-geist-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+  --radius: 0.75rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.2 0.005 80);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.005 80);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.005 80);
+  --primary: oklch(0.2 0.005 80);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.97 0.004 80);
+  --secondary-foreground: oklch(0.2 0.005 80);
+  --muted: oklch(0.97 0.004 80);
+  --muted-foreground: oklch(0.5 0.01 80);
+  --accent: oklch(0.95 0.005 80);
+  --accent-foreground: oklch(0.2 0.005 80);
+  --destructive: oklch(0.53 0.215 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0.004 80);
+  --input: oklch(0.9 0.004 80);
+  --ring: oklch(0.2 0.005 80);
+  --marketing-accent: oklch(0.52 0.12 65);
+  --marketing-accent-foreground: oklch(1 0 0);
+  --chart-1: oklch(0.52 0.12 65);
+  --chart-2: oklch(0.55 0.1 180);
+  --chart-3: oklch(0.45 0.08 250);
+  --chart-4: oklch(0.7 0.14 85);
+  --chart-5: oklch(0.6 0.16 25);
+  --sidebar: oklch(0.97 0.004 80);
+  --sidebar-foreground: oklch(0.2 0.005 80);
+  --sidebar-primary: oklch(0.2 0.005 80);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.92 0.005 80);
+  --sidebar-accent-foreground: oklch(0.2 0.005 80);
+  --sidebar-border: oklch(0.9 0.004 80);
+  --sidebar-ring: oklch(0.2 0.005 80);
+  --success: oklch(0.55 0.13 150);
+}
+
+.dark,
+.dim {
+  color-scheme: dark;
+  --background: oklch(0.13 0.005 80);
+  --foreground: oklch(0.96 0.004 80);
+  --card: oklch(0.18 0.005 80);
+  --card-foreground: oklch(0.96 0.004 80);
+  --popover: oklch(0.18 0.005 80);
+  --popover-foreground: oklch(0.96 0.004 80);
+  --primary: oklch(0.96 0.004 80);
+  --primary-foreground: oklch(0.13 0.005 80);
+  --secondary: oklch(0.22 0.005 80);
+  --secondary-foreground: oklch(0.96 0.004 80);
+  --muted: oklch(0.22 0.005 80);
+  --muted-foreground: oklch(0.72 0.006 80);
+  --accent: oklch(0.25 0.006 80);
+  --accent-foreground: oklch(0.96 0.004 80);
+  --destructive: oklch(0.7 0.19 22);
+  --destructive-foreground: oklch(0.13 0.005 80);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.96 0.004 80);
+  --marketing-accent: oklch(0.78 0.11 75);
+  --marketing-accent-foreground: oklch(0.13 0.005 80);
+  --chart-1: oklch(0.78 0.11 75);
+  --chart-2: oklch(0.7 0.12 180);
+  --chart-3: oklch(0.65 0.1 250);
+  --chart-4: oklch(0.8 0.14 85);
+  --chart-5: oklch(0.7 0.16 25);
+  --sidebar: oklch(0.11 0.005 80);
+  --sidebar-foreground: oklch(0.96 0.004 80);
+  --sidebar-primary: oklch(0.96 0.004 80);
+  --sidebar-primary-foreground: oklch(0.13 0.005 80);
+  --sidebar-accent: oklch(0.22 0.005 80);
+  --sidebar-accent-foreground: oklch(0.96 0.004 80);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.96 0.004 80);
+  --success: oklch(0.76 0.15 150);
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: 40 29% 96%;
-  --foreground: 220 26% 13%;
-  --muted: 38 25% 90%;
-  --muted-foreground: 220 11% 38%;
-  --card: 40 35% 99%;
-  --card-foreground: 220 26% 13%;
-  --border: 32 22% 82%;
-  --input: 32 22% 82%;
-  --primary: 205 89% 44%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 24 85% 58%;
-  --secondary-foreground: 27 25% 12%;
-  --accent: 192 56% 90%;
-  --accent-foreground: 221 30% 14%;
-  --destructive: 0 72% 50%;
-  --destructive-foreground: 0 0% 98%;
-  --ring: 205 89% 44%;
-  --radius: 0.75rem;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    margin: 0;
+    font-family: var(--font-geist-sans);
+    @apply bg-background text-foreground;
+    min-height: 100vh;
+  }
+  ::selection {
+    background: var(--marketing-accent);
+    color: var(--marketing-accent-foreground);
+  }
 }
 
-.dark {
-  --background: 222 26% 10%;
-  --foreground: 210 40% 96%;
-  --muted: 217 33% 17%;
-  --muted-foreground: 215 20% 65%;
-  --card: 222 26% 12%;
-  --card-foreground: 210 40% 96%;
-  --border: 217 24% 24%;
-  --input: 217 24% 24%;
-  --primary: 205 89% 55%;
-  --primary-foreground: 222 47% 11%;
-  --secondary: 24 85% 58%;
-  --secondary-foreground: 210 40% 96%;
-  --accent: 217 33% 17%;
-  --accent-foreground: 210 40% 96%;
-  --destructive: 0 72% 50%;
-  --destructive-foreground: 0 0% 98%;
-  --ring: 205 89% 55%;
-}
-
-* {
-  border-color: hsl(var(--border));
-}
-
-body {
-  margin: 0;
-  font-family: 'Manrope', sans-serif;
-  background: hsl(var(--background));
-  color: hsl(var(--foreground));
-  min-height: 100vh;
+/* ─────────────────────────────────────────────────────────
+   Typography helpers — Geist, tight tracking (no serif)
+   ───────────────────────────────────────────────────────── */
+.text-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .font-heading {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-geist-sans);
 }
 
 .font-mono {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-geist-mono);
 }
 
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+/* ─────────────────────────────────────────────────────────
+   Animations (Contentor system)
+   ───────────────────────────────────────────────────────── */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translate(var(--reveal-x, 0), var(--reveal-y, 24px));
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+.reveal-fade-up {
+  animation: reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.animate-gradient { animation: gradient-shift 8s ease infinite; background-size: 200% 200%; }
-.animate-float { animation: float 6s ease-in-out infinite; }
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
 
-.shadow-soft { box-shadow: 0 8px 30px -12px hsl(var(--foreground) / 0.12); }
-.shadow-glow { box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.3); }
+details[open] .faq-content {
+  grid-template-rows: 1fr;
+}
+.faq-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-content > div {
+  overflow: hidden;
+}
+
+.hero-scroll-out {
+  will-change: opacity, transform;
+}
+@supports (animation-timeline: view()) {
+  .hero-scroll-out {
+    animation: hero-fade linear both;
+    animation-timeline: view();
+    animation-range: exit 0% exit 80%;
+  }
+}
+@keyframes hero-fade {
+  to {
+    opacity: 0;
+    transform: translateY(-4%) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wire-flow {
+    animation: wire-flow 1.4s linear infinite;
+  }
+  .team-turn,
+  .team-turn :is(.team-icon, .team-on, .team-done) {
+    animation-duration: 10.2s;
+    animation-iteration-count: infinite;
+    animation-delay: calc(var(--i) * 1.7s);
+  }
+  .team-turn {
+    animation-name: team-turn;
+  }
+  .team-turn .team-icon {
+    animation-name: team-icon;
+  }
+  .team-turn .team-on {
+    animation-name: team-on;
+  }
+  .team-turn .team-done {
+    opacity: 0;
+    animation-name: team-done;
+  }
+  .team-wire {
+    animation:
+      team-wire 10.2s infinite,
+      wire-flow 1.4s linear infinite;
+    animation-delay: calc(var(--i) * 1.7s), 0s;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@keyframes wire-flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+@keyframes team-turn {
+  0%,
+  32%,
+  100% {
+    border-color: var(--border);
+    background-color: var(--card);
+    box-shadow: none;
+    transform: none;
+  }
+  2%,
+  15% {
+    border-color: var(--marketing-accent);
+    background-color: color-mix(
+      in oklch,
+      var(--marketing-accent) 10%,
+      var(--card)
+    );
+    box-shadow: 0 18px 50px -24px var(--marketing-accent);
+    transform: scale(1.03);
+  }
+  18%,
+  22% {
+    border-color: var(--success);
+    background-color: color-mix(in oklch, var(--success) 12%, var(--card));
+    box-shadow: 0 18px 50px -28px var(--success);
+    transform: none;
+  }
+}
+@keyframes team-icon {
+  0%,
+  32%,
+  100% {
+    background-color: var(--muted);
+    color: var(--foreground);
+  }
+  2%,
+  15% {
+    background-color: var(--marketing-accent);
+    color: var(--marketing-accent-foreground);
+  }
+  18%,
+  22% {
+    background-color: var(--success);
+    color: var(--background);
+  }
+}
+@keyframes team-on {
+  0%,
+  17%,
+  100% {
+    opacity: 0;
+  }
+  2%,
+  15% {
+    opacity: 1;
+  }
+}
+@keyframes team-done {
+  0%,
+  15% {
+    opacity: 0;
+  }
+  17%,
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes team-wire {
+  0%,
+  17%,
+  100% {
+    stroke: var(--border);
+  }
+  2%,
+  15% {
+    stroke: var(--marketing-accent);
+  }
+}
+
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-fade-up,
+  .hero-scroll-out,
+  .faq-content {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
