@@ -33,6 +33,7 @@ services:
       timeout: 5s
       retries: 5
     restart: unless-stopped
+    networks: [default, observability]
 
   redis:
     image: redis:7-alpine
@@ -176,6 +177,9 @@ volumes:
 
 networks:
   default:
+  # Fleet monitoring net: central postgres-exporter + Grafana RO datasource.
+  observability:
+    external: true
   # Shared with the cloudflared edge stack; created once: `docker network create edge`
   edge:
     external: true
