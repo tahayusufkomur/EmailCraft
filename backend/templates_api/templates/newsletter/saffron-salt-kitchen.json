@@ -1,0 +1,867 @@
+{
+  "name": "Saffron & Salt — Weekend test kitchen",
+  "category": "newsletter",
+  "is_premium": false,
+  "tags": [
+    "newsletter",
+    "food",
+    "cooking",
+    "recipes"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#382218",
+      "bodyBackgroundColor": "#FFF9F0",
+      "defaultFont": "Georgia, 'Times New Roman', Times, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#24150E"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "ssk-5",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              58,
+              42
+            ],
+            "columns": [
+              {
+                "id": "ssk-3",
+                "blocks": [
+                  {
+                    "id": "ssk-1",
+                    "type": "heading",
+                    "data": {
+                      "text": "SAFFRON & SALT",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 28,
+                        "right": 8,
+                        "bottom": 20,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#24150E",
+                      "fontSize": 19,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1.2,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ssk-4",
+                "blocks": [
+                  {
+                    "id": "ssk-2",
+                    "type": "heading",
+                    "data": {
+                      "text": "Sunday Dispatch #114 · Braises, Stocks & Pantry Ratios",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 31,
+                        "right": 40,
+                        "bottom": 20,
+                        "left": 8
+                      },
+                      "alignment": "right",
+                      "color": "#6E5549",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ssk-6",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#C84B18",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ssk-7",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/saffron-salt-kitchen/braised-skillet.jpg",
+            "alt": "A traditional Turkish breakfast spread arranged on a rustic wooden table in an outdoor garden cafe, featuring fried eggs with sucuk in a copper skillet, olives, white cheese, sliced peppers and tomatoes, spreads,...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "ssk-8",
+          "type": "heading",
+          "data": {
+            "text": "The case for browning shallots in cold olive oil",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 34,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#24150E",
+            "fontSize": 34,
+            "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "ssk-9",
+          "type": "text",
+          "data": {
+            "html": "<p>Starting halved shallots in a cold enameled skillet with four tablespoons of olive oil renders their sugars slowly over twenty-two minutes before the edges ever darken—creating a jammy foundation for autumn white beans.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 28,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 17,
+            "lineHeight": 1.65,
+            "color": "#24150E"
+          }
+        },
+        {
+          "id": "ssk-10",
+          "type": "card",
+          "data": {
+            "heading": "This weekend's bake: Saffron & Fennel Seed Focaccia",
+            "body": "Steeping a pinch of crushed Iranian saffron threads in the warm hydration water turns an 80%-hydration overnight dough luminous gold with a subtle honey aroma."
+          },
+          "style": {
+            "padding": {
+              "top": 24,
+              "right": 24,
+              "bottom": 24,
+              "left": 24
+            },
+            "backgroundColor": "#C84B18",
+            "textColor": "#FFF9F0",
+            "borderRadius": 0,
+            "borderWidth": 1,
+            "borderColor": "#E5D6C5"
+          }
+        },
+        {
+          "id": "ssk-17",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              58,
+              42
+            ],
+            "columns": [
+              {
+                "id": "ssk-15",
+                "blocks": [
+                  {
+                    "id": "ssk-11",
+                    "type": "heading",
+                    "data": {
+                      "text": "This weekend's bake: Saffron & Fennel Seed Focaccia",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#24150E",
+                      "fontSize": 22,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "ssk-12",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Steeping a pinch of crushed Iranian saffron threads in the warm hydration water turns an 80%-hydration overnight dough luminous gold with a subtle honey aroma.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 16,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#6E5549"
+                    }
+                  },
+                  {
+                    "id": "ssk-13",
+                    "type": "button",
+                    "data": {
+                      "text": "Print the gram-weight recipe card",
+                      "url": "https://saffronandsalt.example/recipes/114"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#C84B18",
+                      "color": "#FFF9F0",
+                      "borderRadius": 0,
+                      "fullWidth": false,
+                      "fontSize": 15,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.5,
+                      "textTransform": "none",
+                      "paddingX": 24,
+                      "paddingY": 14,
+                      "borderWidth": 0,
+                      "borderStyle": "solid",
+                      "borderColor": "#C84B18"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "ssk-16",
+                "blocks": [
+                  {
+                    "id": "ssk-14",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/saffron-salt-kitchen/spice-bowls.jpg",
+                      "alt": "A trio of open clear glass jars containing coarse white sea salt, crushed red chili flakes, and whole black peppercorns arranged in a row on a round ceramic platter. Each jar contains a small carved wooden scoop...",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ssk-18",
+          "type": "heading",
+          "data": {
+            "text": "Baker's percentages (900g pan)",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#24150E",
+            "fontSize": 20,
+            "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "ssk-19",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E5D6C5",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ssk-26",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "ssk-23",
+                "blocks": [
+                  {
+                    "id": "ssk-20",
+                    "type": "heading",
+                    "data": {
+                      "text": "FLOUR",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#C84B18",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ssk-24",
+                "blocks": [
+                  {
+                    "id": "ssk-21",
+                    "type": "heading",
+                    "data": {
+                      "text": "500g high-protein bread flour (12.7% protein)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#24150E",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ssk-25",
+                "blocks": [
+                  {
+                    "id": "ssk-22",
+                    "type": "heading",
+                    "data": {
+                      "text": "100%",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6E5549",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ssk-27",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E5D6C5",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ssk-34",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "ssk-31",
+                "blocks": [
+                  {
+                    "id": "ssk-28",
+                    "type": "heading",
+                    "data": {
+                      "text": "WATER",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#C84B18",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ssk-32",
+                "blocks": [
+                  {
+                    "id": "ssk-29",
+                    "type": "heading",
+                    "data": {
+                      "text": "400g lukewarm water infused with 0.4g saffron",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#24150E",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ssk-33",
+                "blocks": [
+                  {
+                    "id": "ssk-30",
+                    "type": "heading",
+                    "data": {
+                      "text": "80%",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6E5549",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ssk-35",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E5D6C5",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ssk-42",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "ssk-39",
+                "blocks": [
+                  {
+                    "id": "ssk-36",
+                    "type": "heading",
+                    "data": {
+                      "text": "OIL & SALT",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#C84B18",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ssk-40",
+                "blocks": [
+                  {
+                    "id": "ssk-37",
+                    "type": "heading",
+                    "data": {
+                      "text": "25g extra-virgin olive oil + 12g sea salt flakes",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#24150E",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ssk-41",
+                "blocks": [
+                  {
+                    "id": "ssk-38",
+                    "type": "heading",
+                    "data": {
+                      "text": "5% / 2.4%",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6E5549",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ssk-43",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E5D6C5",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ssk-50",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "ssk-47",
+                "blocks": [
+                  {
+                    "id": "ssk-44",
+                    "type": "heading",
+                    "data": {
+                      "text": "FERMENT",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#C84B18",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ssk-48",
+                "blocks": [
+                  {
+                    "id": "ssk-45",
+                    "type": "heading",
+                    "data": {
+                      "text": "3g instant yeast · 18 hr cold retard at 4°C",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#24150E",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ssk-49",
+                "blocks": [
+                  {
+                    "id": "ssk-46",
+                    "type": "heading",
+                    "data": {
+                      "text": "0.6%",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6E5549",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ssk-51",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E5D6C5",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ssk-52",
+          "type": "text",
+          "data": {
+            "html": "<p>Saffron &amp; Salt Test Kitchen · 214 Atlantic Ave, Brooklyn, NY 11201 · Unsubscribe from Sunday recipes. <a href=\"https://saffronandsalt.example/preferences\">Manage preferences</a> · <a href=\"https://saffronandsalt.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#6E5549"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

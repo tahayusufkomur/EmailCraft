@@ -1,0 +1,857 @@
+{
+  "name": "Terre Cuite — Weekend throwing intensive",
+  "category": "event",
+  "is_premium": false,
+  "tags": [
+    "event",
+    "ceramics",
+    "workshop",
+    "craft"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#30231C",
+      "bodyBackgroundColor": "#FAF4EB",
+      "defaultFont": "Georgia, 'Times New Roman', Times, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#241914"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "tcw-5",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              58,
+              42
+            ],
+            "columns": [
+              {
+                "id": "tcw-3",
+                "blocks": [
+                  {
+                    "id": "tcw-1",
+                    "type": "heading",
+                    "data": {
+                      "text": "ATELIER TERRE CUITE",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 28,
+                        "right": 8,
+                        "bottom": 20,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#241914",
+                      "fontSize": 19,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1.2,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tcw-4",
+                "blocks": [
+                  {
+                    "id": "tcw-2",
+                    "type": "heading",
+                    "data": {
+                      "text": "Two-Day Wheel Intensive · 7–8 November · 8 Wheels Only",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 31,
+                        "right": 40,
+                        "bottom": 20,
+                        "left": 8
+                      },
+                      "alignment": "right",
+                      "color": "#6B5A50",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "tcw-6",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#241914",
+            "lineThickness": 3,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "tcw-7",
+          "type": "heading",
+          "data": {
+            "text": "Centering five pounds of stoneware: tall cylinders & pitchers",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#241914",
+            "fontSize": 40,
+            "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.08
+          }
+        },
+        {
+          "id": "tcw-8",
+          "type": "text",
+          "data": {
+            "html": "<p>Designed for potters who can already throw a simple mug and want to break past the one-pound wall. Over twelve bench hours with master potter Luc Moreau, you will learn Japanese spiral wedging, two-pull belly lifting, and pulled strap handles.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 28,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 18,
+            "lineHeight": 1.65,
+            "color": "#241914"
+          }
+        },
+        {
+          "id": "tcw-9",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/terre-cuite-wheel-workshop/wheel-intensive.jpg",
+            "alt": "A woman artisan sits at a rustic wooden pottery wheel in a sunlit art studio, carefully shaping a mound of wet clay with both hands. She wears a clay-spattered linen apron over a collared shirt. Natural daylight...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "tcw-10",
+          "type": "heading",
+          "data": {
+            "text": "Weekend bench curriculum",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#241914",
+            "fontSize": 20,
+            "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "tcw-11",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E0D3C2",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "tcw-18",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "tcw-15",
+                "blocks": [
+                  {
+                    "id": "tcw-12",
+                    "type": "heading",
+                    "data": {
+                      "text": "SAT 09:30",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#B54A28",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tcw-16",
+                "blocks": [
+                  {
+                    "id": "tcw-13",
+                    "type": "heading",
+                    "data": {
+                      "text": "Kikuneri spiral wedging & centering 2.5 kg clay cones",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#241914",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tcw-17",
+                "blocks": [
+                  {
+                    "id": "tcw-14",
+                    "type": "heading",
+                    "data": {
+                      "text": "Demonstrations",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6B5A50",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "tcw-19",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E0D3C2",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "tcw-26",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "tcw-23",
+                "blocks": [
+                  {
+                    "id": "tcw-20",
+                    "type": "heading",
+                    "data": {
+                      "text": "SAT 14:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#B54A28",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tcw-24",
+                "blocks": [
+                  {
+                    "id": "tcw-21",
+                    "type": "heading",
+                    "data": {
+                      "text": "Throwing 25 cm cylinders in three deliberate pulls",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#241914",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tcw-25",
+                "blocks": [
+                  {
+                    "id": "tcw-22",
+                    "type": "heading",
+                    "data": {
+                      "text": "Cut-wire diagnostics",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6B5A50",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "tcw-27",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E0D3C2",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "tcw-34",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "tcw-31",
+                "blocks": [
+                  {
+                    "id": "tcw-28",
+                    "type": "heading",
+                    "data": {
+                      "text": "SUN 09:30",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#B54A28",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tcw-32",
+                "blocks": [
+                  {
+                    "id": "tcw-29",
+                    "type": "heading",
+                    "data": {
+                      "text": "Leather-hard trimming on chucks & carving foot rings",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#241914",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tcw-33",
+                "blocks": [
+                  {
+                    "id": "tcw-30",
+                    "type": "heading",
+                    "data": {
+                      "text": "Tools provided",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6B5A50",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "tcw-35",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E0D3C2",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "tcw-42",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "tcw-39",
+                "blocks": [
+                  {
+                    "id": "tcw-36",
+                    "type": "heading",
+                    "data": {
+                      "text": "SUN 14:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#B54A28",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tcw-40",
+                "blocks": [
+                  {
+                    "id": "tcw-37",
+                    "type": "heading",
+                    "data": {
+                      "text": "Pulling ergonomic pitcher spouts & strap handles",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#241914",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tcw-41",
+                "blocks": [
+                  {
+                    "id": "tcw-38",
+                    "type": "heading",
+                    "data": {
+                      "text": "Studio lunch incl.",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6B5A50",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "tcw-43",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E0D3C2",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "tcw-50",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              42,
+              58
+            ],
+            "columns": [
+              {
+                "id": "tcw-48",
+                "blocks": [
+                  {
+                    "id": "tcw-44",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/terre-cuite-wheel-workshop/thrown-pitchers.jpg",
+                      "alt": "Three earthy, beige speckled ceramic vases stand on a natural wooden shelf in a serene interior setting. The vessels feature organic contours with distinctive thumbprint-like indentations pressed into their bodies....",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "tcw-49",
+                "blocks": [
+                  {
+                    "id": "tcw-45",
+                    "type": "heading",
+                    "data": {
+                      "text": "Includes 25 kg of St. Amand stoneware + bisque & glaze firings",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#241914",
+                      "fontSize": 22,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "tcw-46",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Keep your best six vessels for our Cone 10 reduction firing; we will reclaim and recycle all practice cut-in-half cylinders.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 16,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#6B5A50"
+                    }
+                  },
+                  {
+                    "id": "tcw-47",
+                    "type": "button",
+                    "data": {
+                      "text": "Claim one of 8 Shimpo wheels (€280)",
+                      "url": "https://terrecuite.example/intensive-nov"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#B54A28",
+                      "color": "#FAF4EB",
+                      "borderRadius": 0,
+                      "fullWidth": false,
+                      "fontSize": 15,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.5,
+                      "textTransform": "none",
+                      "paddingX": 24,
+                      "paddingY": 14,
+                      "borderWidth": 0,
+                      "borderStyle": "solid",
+                      "borderColor": "#B54A28"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "tcw-51",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E0D3C2",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "tcw-52",
+          "type": "text",
+          "data": {
+            "html": "<p>Atelier Terre Cuite · 42 Rue Saint-Sébastien, 75011 Paris · Full refund up to 7 days prior. <a href=\"https://terrecuite.example/preferences\">Manage preferences</a> · <a href=\"https://terrecuite.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#6B5A50"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

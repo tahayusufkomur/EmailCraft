@@ -1,0 +1,818 @@
+{
+  "name": "Domaine des Roches — Long-table harvest supper",
+  "category": "event",
+  "is_premium": false,
+  "tags": [
+    "event",
+    "wine",
+    "dinner",
+    "hospitality"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#29181A",
+      "bodyBackgroundColor": "#FBF5EC",
+      "defaultFont": "Georgia, 'Times New Roman', Times, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#211214"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "drh-1",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/domaine-roches-harvest-dinner/cellar-table.jpg",
+            "alt": "A smiling woman dressed in a relaxed ochre linen shirt and dark trousers carefully arranges glassware on a long rustic wooden dining table beneath a vine-draped wooden pergola. The outdoor table setting features...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "drh-2",
+          "type": "heading",
+          "data": {
+            "text": "DOMAINE DES ROCHES",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 6,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#8A2432",
+            "fontSize": 13,
+            "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 2.2,
+            "textTransform": "uppercase",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "drh-3",
+          "type": "heading",
+          "data": {
+            "text": "La Paulée d'Automne · Saturday 14 November · Corton Hill",
+            "level": 4
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 16,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#6B5558",
+            "fontSize": 13,
+            "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "drh-4",
+          "type": "heading",
+          "data": {
+            "text": "One oak table down the barrel cellar: 44 seats",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 16,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#211214",
+            "fontSize": 36,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "drh-5",
+          "type": "text",
+          "data": {
+            "html": "<p>With the 2026 fermentation now quiet in foudre, we invite cellar club members and friends to our annual long-table harvest supper in the 18th-century vaulted cuverie. Five courses cooked over grapevine prunings, paired with library magnums back to 2012.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 48,
+              "bottom": 24,
+              "left": 48
+            },
+            "alignment": "center",
+            "fontSize": 17,
+            "lineHeight": 1.65,
+            "color": "#211214"
+          }
+        },
+        {
+          "id": "drh-6",
+          "type": "button",
+          "data": {
+            "text": "Reserve your seat at the table (€145)",
+            "url": "https://domainedesroches.example/harvest-supper"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 36,
+              "left": 40
+            },
+            "alignment": "center",
+            "backgroundColor": "#8A2432",
+            "color": "#FBF5EC",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 15,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0.5,
+            "textTransform": "none",
+            "paddingX": 24,
+            "paddingY": 14,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#8A2432"
+          }
+        },
+        {
+          "id": "drh-7",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "double",
+            "lineColor": "#DFD2C4",
+            "lineThickness": 3,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "drh-13",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              42,
+              58
+            ],
+            "columns": [
+              {
+                "id": "drh-11",
+                "blocks": [
+                  {
+                    "id": "drh-8",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/domaine-roches-harvest-dinner/foudre-cellar.jpg",
+                      "alt": "A middle-aged woman with short curly gray hair wearing a navy blue sweater and gray apron stands in a rustic stone cellar, holding up and inspecting a clear glass jar containing dark red-purple liquid. The background...",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "drh-12",
+                "blocks": [
+                  {
+                    "id": "drh-9",
+                    "type": "heading",
+                    "data": {
+                      "text": "Complimentary coach shuttle from Beaune station at 18:15",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#211214",
+                      "fontSize": 22,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "drh-10",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Our minibus departs Place de la Gare at 18:15 and returns guests to central Beaune hotels at 23:30 after coffee and Marc de Bourgogne.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#6B5558"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "drh-14",
+          "type": "heading",
+          "data": {
+            "text": "Five-course cellar menu & magnum pairings",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#211214",
+            "fontSize": 20,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "drh-15",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DFD2C4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "drh-22",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "drh-19",
+                "blocks": [
+                  {
+                    "id": "drh-16",
+                    "type": "heading",
+                    "data": {
+                      "text": "I · 19:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8A2432",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "drh-20",
+                "blocks": [
+                  {
+                    "id": "drh-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "Gougères & Comté 36-Month · 2019 Crémant Brut Nature",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#211214",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "drh-21",
+                "blocks": [
+                  {
+                    "id": "drh-18",
+                    "type": "heading",
+                    "data": {
+                      "text": "In the press house",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6B5558",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "drh-23",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DFD2C4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "drh-30",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "drh-27",
+                "blocks": [
+                  {
+                    "id": "drh-24",
+                    "type": "heading",
+                    "data": {
+                      "text": "II · 19:45",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8A2432",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "drh-28",
+                "blocks": [
+                  {
+                    "id": "drh-25",
+                    "type": "heading",
+                    "data": {
+                      "text": "Pike Quenelles in Crayfish Bisque · 2017 Meursault 1er Cru",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#211214",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "drh-29",
+                "blocks": [
+                  {
+                    "id": "drh-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "En Magnum",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6B5558",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "drh-31",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DFD2C4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "drh-38",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "drh-35",
+                "blocks": [
+                  {
+                    "id": "drh-32",
+                    "type": "heading",
+                    "data": {
+                      "text": "III · 20:30",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8A2432",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "drh-36",
+                "blocks": [
+                  {
+                    "id": "drh-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "Vine-Smoked Bresse Poularde & Morels · 2014 Corton-Bressandes",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#211214",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "drh-37",
+                "blocks": [
+                  {
+                    "id": "drh-34",
+                    "type": "heading",
+                    "data": {
+                      "text": "En Magnum",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6B5558",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "drh-39",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DFD2C4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "drh-46",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "drh-43",
+                "blocks": [
+                  {
+                    "id": "drh-40",
+                    "type": "heading",
+                    "data": {
+                      "text": "IV · 21:30",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8A2432",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "drh-44",
+                "blocks": [
+                  {
+                    "id": "drh-41",
+                    "type": "heading",
+                    "data": {
+                      "text": "Époisses & Poached Orchard Quince · 2012 Vin de Paille",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#211214",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "drh-45",
+                "blocks": [
+                  {
+                    "id": "drh-42",
+                    "type": "heading",
+                    "data": {
+                      "text": "Candlelight",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6B5558",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "drh-47",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DFD2C4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "drh-48",
+          "type": "text",
+          "data": {
+            "html": "<p>SCEV Domaine des Roches · Route des Grands Crus, 21420 Aloxe-Corton · Unsubscribe. <a href=\"https://domainedesroches.example/preferences\">Manage preferences</a> · <a href=\"https://domainedesroches.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "center",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#6B5558"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

@@ -1,0 +1,857 @@
+{
+  "name": "VoltGrid — Fast charge session summary",
+  "category": "transactional",
+  "is_premium": false,
+  "tags": [
+    "transactional",
+    "ev",
+    "receipt",
+    "automotive"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#121A1D",
+      "bodyBackgroundColor": "#F5F8F9",
+      "defaultFont": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#0E1518"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "vcr-5",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              58,
+              42
+            ],
+            "columns": [
+              {
+                "id": "vcr-3",
+                "blocks": [
+                  {
+                    "id": "vcr-1",
+                    "type": "heading",
+                    "data": {
+                      "text": "VOLTGRID ULTRA-FAST NETWORK",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 28,
+                        "right": 8,
+                        "bottom": 20,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0E1518",
+                      "fontSize": 19,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 1.2,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "vcr-4",
+                "blocks": [
+                  {
+                    "id": "vcr-2",
+                    "type": "heading",
+                    "data": {
+                      "text": "Receipt #VG-2026-9941 · Plug & Charge ISO 15118",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 31,
+                        "right": 40,
+                        "bottom": 20,
+                        "left": 8
+                      },
+                      "alignment": "right",
+                      "color": "#506169",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "vcr-6",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "double",
+            "lineColor": "#0E1518",
+            "lineThickness": 4,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "vcr-7",
+          "type": "heading",
+          "data": {
+            "text": "54.8 kWh delivered in 19 minutes ($20.82 total)",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 34,
+              "right": 40,
+              "bottom": 12,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#0E1518",
+            "fontSize": 34,
+            "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "vcr-8",
+          "type": "text",
+          "data": {
+            "html": "<p>Your Plug &amp; Charge session at Brenner Pass Northbound (Stall 04 · 350 kW CCS2) completed automatically at 16:42. Zero idle fees were incurred.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 12,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 17,
+            "lineHeight": 1.65,
+            "color": "#0E1518"
+          }
+        },
+        {
+          "id": "vcr-9",
+          "type": "heading",
+          "data": {
+            "text": "Telemetry & tariff breakdown",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#0E1518",
+            "fontSize": 20,
+            "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "vcr-10",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CBD6DB",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "vcr-17",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "vcr-14",
+                "blocks": [
+                  {
+                    "id": "vcr-11",
+                    "type": "heading",
+                    "data": {
+                      "text": "STATE OF CHARGE",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0E7A5F",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "vcr-15",
+                "blocks": [
+                  {
+                    "id": "vcr-12",
+                    "type": "heading",
+                    "data": {
+                      "text": "14% → 82% SoC · Peak power 242 kW @ 800V",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0E1518",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "vcr-16",
+                "blocks": [
+                  {
+                    "id": "vcr-13",
+                    "type": "heading",
+                    "data": {
+                      "text": "19 min 12 sec",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#506169",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "vcr-18",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CBD6DB",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "vcr-25",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "vcr-22",
+                "blocks": [
+                  {
+                    "id": "vcr-19",
+                    "type": "heading",
+                    "data": {
+                      "text": "ENERGY DISPENSED",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0E7A5F",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "vcr-23",
+                "blocks": [
+                  {
+                    "id": "vcr-20",
+                    "type": "heading",
+                    "data": {
+                      "text": "54.80 kWh × €0.38 / kWh (Member Ion Tariff)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0E1518",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "vcr-24",
+                "blocks": [
+                  {
+                    "id": "vcr-21",
+                    "type": "heading",
+                    "data": {
+                      "text": "€20.82",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#506169",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "vcr-26",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CBD6DB",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "vcr-33",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "vcr-30",
+                "blocks": [
+                  {
+                    "id": "vcr-27",
+                    "type": "heading",
+                    "data": {
+                      "text": "IDLE TIME",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0E7A5F",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "vcr-31",
+                "blocks": [
+                  {
+                    "id": "vcr-28",
+                    "type": "heading",
+                    "data": {
+                      "text": "04 min grace period used (Max 10 min free)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0E1518",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "vcr-32",
+                "blocks": [
+                  {
+                    "id": "vcr-29",
+                    "type": "heading",
+                    "data": {
+                      "text": "€0.00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#506169",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "vcr-34",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CBD6DB",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "vcr-41",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "vcr-38",
+                "blocks": [
+                  {
+                    "id": "vcr-35",
+                    "type": "heading",
+                    "data": {
+                      "text": "PAYMENT",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0E7A5F",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "vcr-39",
+                "blocks": [
+                  {
+                    "id": "vcr-36",
+                    "type": "heading",
+                    "data": {
+                      "text": "Charged to Mastercard ···· 9014 (VAT 20% incl.)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0E1518",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "vcr-40",
+                "blocks": [
+                  {
+                    "id": "vcr-37",
+                    "type": "heading",
+                    "data": {
+                      "text": "€20.82 Paid",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#506169",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "vcr-42",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CBD6DB",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "vcr-43",
+          "type": "button",
+          "data": {
+            "text": "Download VAT tax invoice (PDF)",
+            "url": "https://voltgrid.example/invoices/VG-2026-9941"
+          },
+          "style": {
+            "padding": {
+              "top": 24,
+              "right": 40,
+              "bottom": 34,
+              "left": 40
+            },
+            "alignment": "left",
+            "backgroundColor": "#0E7A5F",
+            "color": "#FFFFFF",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 15,
+            "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 0.5,
+            "textTransform": "none",
+            "paddingX": 24,
+            "paddingY": 14,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#0E7A5F"
+          }
+        },
+        {
+          "id": "vcr-44",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/voltgrid-charging-receipt/ev-charger.jpg",
+            "alt": "A woman in a manual wheelchair grasps the handle of an outdoor electric vehicle charging station in a parking lot. A man in work trousers and a polo shirt stands on the left watching, while a woman in a green vest...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "vcr-50",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              42,
+              58
+            ],
+            "columns": [
+              {
+                "id": "vcr-48",
+                "blocks": [
+                  {
+                    "id": "vcr-45",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/voltgrid-charging-receipt/road-trip.jpg",
+                      "alt": "A black dash cam is mounted to the inside of a car's windshield, positioned just to the left of the rearview mirror. Through the windshield, a scenic coastal highway curves along cliffs overlooking the ocean. The...",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "vcr-49",
+                "blocks": [
+                  {
+                    "id": "vcr-46",
+                    "type": "heading",
+                    "data": {
+                      "text": "100% Alpine hydroelectricity certificate",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#0E1518",
+                      "fontSize": 22,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "vcr-47",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Every kilowatt-hour dispensed at Brenner Hub is matched in real time with run-of-river hydroelectric generation from Tyrol grid node AT-04.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#506169"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "vcr-51",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CBD6DB",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "vcr-52",
+          "type": "text",
+          "data": {
+            "html": "<p>VoltGrid Mobility GmbH · Maria-Theresien-Straße 38, 6020 Innsbruck · 24/7 Charger Helpline. <a href=\"https://voltgrid.example/preferences\">Manage preferences</a> · <a href=\"https://voltgrid.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#506169"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

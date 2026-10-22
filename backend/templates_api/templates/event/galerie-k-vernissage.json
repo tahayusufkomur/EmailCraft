@@ -1,0 +1,818 @@
+{
+  "name": "Galerie K — Solo exhibition vernissage",
+  "category": "event",
+  "is_premium": false,
+  "tags": [
+    "event",
+    "art",
+    "gallery",
+    "exhibition"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#1C1C1B",
+      "bodyBackgroundColor": "#FFFFFF",
+      "defaultFont": "Georgia, 'Times New Roman', Times, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#111111"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "gkv-1",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/galerie-k-vernissage/gallery-hall.jpg",
+            "alt": "A well-lit contemporary museum gallery featuring polished speckled terrazzo flooring and clean white walls displays a large abstract expressionist painting with dynamic blue, brown, black, and white brushstrokes. On...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "gkv-2",
+          "type": "heading",
+          "data": {
+            "text": "GALERIE K ZÜRICH",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 6,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#111111",
+            "fontSize": 13,
+            "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 2.2,
+            "textTransform": "uppercase",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "gkv-3",
+          "type": "heading",
+          "data": {
+            "text": "Vernissage · Thursday 5 November · 18:00–21:00",
+            "level": 4
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 16,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#5E5D59",
+            "fontSize": 13,
+            "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "gkv-4",
+          "type": "heading",
+          "data": {
+            "text": "Maja Lindholm: 'Tidal Concrete' (Large-Format Silver Prints)",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 16,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#111111",
+            "fontSize": 36,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "gkv-5",
+          "type": "text",
+          "data": {
+            "html": "<p>Galerie K is pleased to invite you to the opening reception of &#x27;Tidal Concrete,&#x27; a solo exhibition of twenty-two 8×10 contact prints and cast-basalt sculptures made along the North Atlantic sea walls between 2023 and 2026.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 48,
+              "bottom": 24,
+              "left": 48
+            },
+            "alignment": "center",
+            "fontSize": 17,
+            "lineHeight": 1.65,
+            "color": "#111111"
+          }
+        },
+        {
+          "id": "gkv-6",
+          "type": "button",
+          "data": {
+            "text": "RSVP for the vernissage guestlist",
+            "url": "https://galeriek.example/rsvp/lindholm"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 36,
+              "left": 40
+            },
+            "alignment": "center",
+            "backgroundColor": "#111111",
+            "color": "#FFFFFF",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 15,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0.5,
+            "textTransform": "none",
+            "paddingX": 24,
+            "paddingY": 14,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#111111"
+          }
+        },
+        {
+          "id": "gkv-7",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "double",
+            "lineColor": "#DCD9D2",
+            "lineThickness": 3,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "gkv-13",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              42,
+              58
+            ],
+            "columns": [
+              {
+                "id": "gkv-11",
+                "blocks": [
+                  {
+                    "id": "gkv-8",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/galerie-k-vernissage/basalt-study.jpg",
+                      "alt": "A minimalist cubic concrete block or pedestal sits centrally on a polished concrete floor inside an empty, dark studio room with side natural light entering from a window.",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "gkv-12",
+                "blocks": [
+                  {
+                    "id": "gkv-9",
+                    "type": "heading",
+                    "data": {
+                      "text": "Artist conversation with curator Dr. Beatrix Frei at 19:15",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 22,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "gkv-10",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>A signed Linen-bound monograph (96 pages, Triton Press) will be available at the front desk during the opening reception.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#5E5D59"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "gkv-14",
+          "type": "heading",
+          "data": {
+            "text": "Opening week programme (Admission free)",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#111111",
+            "fontSize": 20,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "gkv-15",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DCD9D2",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "gkv-22",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "gkv-19",
+                "blocks": [
+                  {
+                    "id": "gkv-16",
+                    "type": "heading",
+                    "data": {
+                      "text": "THU 18:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "gkv-20",
+                "blocks": [
+                  {
+                    "id": "gkv-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "Doors open · Dry Riesling from Weingut Donatsch",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "gkv-21",
+                "blocks": [
+                  {
+                    "id": "gkv-18",
+                    "type": "heading",
+                    "data": {
+                      "text": "Main Hall & Vault",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#5E5D59",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "gkv-23",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DCD9D2",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "gkv-30",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "gkv-27",
+                "blocks": [
+                  {
+                    "id": "gkv-24",
+                    "type": "heading",
+                    "data": {
+                      "text": "THU 19:15",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "gkv-28",
+                "blocks": [
+                  {
+                    "id": "gkv-25",
+                    "type": "heading",
+                    "data": {
+                      "text": "Walkthrough with Maja Lindholm & Dr. Beatrix Frei",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "gkv-29",
+                "blocks": [
+                  {
+                    "id": "gkv-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "In English · 40 min",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#5E5D59",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "gkv-31",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DCD9D2",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "gkv-38",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "gkv-35",
+                "blocks": [
+                  {
+                    "id": "gkv-32",
+                    "type": "heading",
+                    "data": {
+                      "text": "SAT 14:00",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "gkv-36",
+                "blocks": [
+                  {
+                    "id": "gkv-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "Gelatin silver darkroom toning demonstration",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "gkv-37",
+                "blocks": [
+                  {
+                    "id": "gkv-34",
+                    "type": "heading",
+                    "data": {
+                      "text": "Registration req.",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#5E5D59",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "gkv-39",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DCD9D2",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "gkv-46",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "gkv-43",
+                "blocks": [
+                  {
+                    "id": "gkv-40",
+                    "type": "heading",
+                    "data": {
+                      "text": "ON VIEW",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "gkv-44",
+                "blocks": [
+                  {
+                    "id": "gkv-41",
+                    "type": "heading",
+                    "data": {
+                      "text": "6 November 2026 – 16 January 2027 · Tue–Sat 11:00–18:00",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#111111",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "gkv-45",
+                "blocks": [
+                  {
+                    "id": "gkv-42",
+                    "type": "heading",
+                    "data": {
+                      "text": "Rämistrasse 34",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#5E5D59",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "gkv-47",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DCD9D2",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "gkv-48",
+          "type": "text",
+          "data": {
+            "html": "<p>Galerie K AG · Rämistrasse 34, 8001 Zürich · Tram 5/9 Kunsthaus · Unsubscribe. <a href=\"https://galeriek.example/preferences\">Manage preferences</a> · <a href=\"https://galeriek.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "center",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#5E5D59"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

@@ -1,0 +1,805 @@
+{
+  "name": "Scriptorium — Fountain pen club welcome",
+  "category": "welcome",
+  "is_premium": false,
+  "tags": [
+    "welcome",
+    "stationery",
+    "writing",
+    "subscription"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#231F20",
+      "bodyBackgroundColor": "#F7F1E3",
+      "defaultFont": "Georgia, 'Times New Roman', Times, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#1C1819"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "siw-1",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/scriptorium-ink-welcome/fountain-pen.jpg",
+            "alt": "A close-up view of an uncapped solid brass fountain pen resting on a sheet of textured cream paper with black ink calligraphy reading 'PRECISION solid brass fountain pen'. In the softly blurred background, a square...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "siw-2",
+          "type": "heading",
+          "data": {
+            "text": "THE SCRIPTORIUM SOCIETY · Fine Nib & Archival Ink Dispatch · Kyoto & London",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 10,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#8B261D",
+            "fontSize": 12,
+            "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 1.6,
+            "textTransform": "uppercase",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "siw-3",
+          "type": "heading",
+          "data": {
+            "text": "Paper that never feathers, inks mixed from mineral pigments",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 44,
+              "bottom": 16,
+              "left": 44
+            },
+            "alignment": "center",
+            "color": "#1C1819",
+            "fontSize": 36,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "siw-4",
+          "type": "text",
+          "data": {
+            "html": "<p>Welcome to Scriptorium. Each month we post three 10ml glass apothecary vials of custom-blended fountain pen ink, a sewn 52gsm Tomoe River notebook, and a brass blotter sheet.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 48,
+              "bottom": 24,
+              "left": 48
+            },
+            "alignment": "center",
+            "fontSize": 17,
+            "lineHeight": 1.65,
+            "color": "#1C1819"
+          }
+        },
+        {
+          "id": "siw-5",
+          "type": "button",
+          "data": {
+            "text": "Select your preferred nib width",
+            "url": "https://scriptoriumsociety.example/profile"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 36,
+              "left": 40
+            },
+            "alignment": "center",
+            "backgroundColor": "#8B261D",
+            "color": "#F7F1E3",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 15,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0.5,
+            "textTransform": "none",
+            "paddingX": 24,
+            "paddingY": 14,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#8B261D"
+          }
+        },
+        {
+          "id": "siw-6",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#DED3BE",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "siw-12",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              58,
+              42
+            ],
+            "columns": [
+              {
+                "id": "siw-10",
+                "blocks": [
+                  {
+                    "id": "siw-7",
+                    "type": "heading",
+                    "data": {
+                      "text": "Flushing your pen between pigment changes",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#1C1819",
+                      "fontSize": 22,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "siw-8",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Before filling a new iron-gall or shimmer colour, draw lukewarm distilled water through the converter until the rinse runs completely clear, then rest nib-down on linen.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#695E53"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "siw-11",
+                "blocks": [
+                  {
+                    "id": "siw-9",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/scriptorium-ink-welcome/ink-swatch.jpg",
+                      "alt": "A close-up view of a person wearing a beige apron over a black sweater, seated at a rustic wooden table in a sunlit art studio. The person is holding a metallic fountain pen and writing on the blank page of an open...",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "siw-13",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#DED3BE",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "siw-14",
+          "type": "heading",
+          "data": {
+            "text": "First parcel: The Autumn Library Palette",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#1C1819",
+            "fontSize": 20,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "siw-15",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#DED3BE",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "siw-22",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "siw-19",
+                "blocks": [
+                  {
+                    "id": "siw-16",
+                    "type": "heading",
+                    "data": {
+                      "text": "VIAL I",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8B261D",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "siw-20",
+                "blocks": [
+                  {
+                    "id": "siw-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "Oxblood Binding (Deep iron-crimson with bronze sheen)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1C1819",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "siw-21",
+                "blocks": [
+                  {
+                    "id": "siw-18",
+                    "type": "heading",
+                    "data": {
+                      "text": "10 ml glass",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695E53",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "siw-23",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#DED3BE",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "siw-30",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "siw-27",
+                "blocks": [
+                  {
+                    "id": "siw-24",
+                    "type": "heading",
+                    "data": {
+                      "text": "VIAL II",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8B261D",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "siw-28",
+                "blocks": [
+                  {
+                    "id": "siw-25",
+                    "type": "heading",
+                    "data": {
+                      "text": "Cedar Gall (Smoky forest green · fast-drying)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1C1819",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "siw-29",
+                "blocks": [
+                  {
+                    "id": "siw-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "10 ml glass",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695E53",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "siw-31",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#DED3BE",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "siw-38",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "siw-35",
+                "blocks": [
+                  {
+                    "id": "siw-32",
+                    "type": "heading",
+                    "data": {
+                      "text": "VIAL III",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8B261D",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "siw-36",
+                "blocks": [
+                  {
+                    "id": "siw-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "Lampblack No. 4 (Archival carbon black for EF nibs)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1C1819",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "siw-37",
+                "blocks": [
+                  {
+                    "id": "siw-34",
+                    "type": "heading",
+                    "data": {
+                      "text": "10 ml glass",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695E53",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "siw-39",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#DED3BE",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "siw-46",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "siw-43",
+                "blocks": [
+                  {
+                    "id": "siw-40",
+                    "type": "heading",
+                    "data": {
+                      "text": "FOLIO",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8B261D",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "siw-44",
+                "blocks": [
+                  {
+                    "id": "siw-41",
+                    "type": "heading",
+                    "data": {
+                      "text": "A5 52gsm Cream Stitch-Bound Notebook (96 pages)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1C1819",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "siw-45",
+                "blocks": [
+                  {
+                    "id": "siw-42",
+                    "type": "heading",
+                    "data": {
+                      "text": "Blank / 5mm dot",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695E53",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "siw-47",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#DED3BE",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "siw-48",
+          "type": "text",
+          "data": {
+            "html": "<p>Scriptorium Stationery Ltd · 12 Cecil Court, London WC2N 4HE · Unsubscribe from society posts. <a href=\"https://scriptoriumsociety.example/preferences\">Manage preferences</a> · <a href=\"https://scriptoriumsociety.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "center",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#695E53"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

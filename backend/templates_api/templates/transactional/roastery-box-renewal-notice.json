@@ -1,0 +1,857 @@
+{
+  "name": "Roastery — Upcoming box charge notice",
+  "category": "transactional",
+  "is_premium": false,
+  "tags": [
+    "transactional",
+    "subscription",
+    "billing",
+    "coffee"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#29201A",
+      "bodyBackgroundColor": "#FBF7F0",
+      "defaultFont": "Georgia, 'Times New Roman', Times, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#1E1612"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "rbr-5",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              58,
+              42
+            ],
+            "columns": [
+              {
+                "id": "rbr-3",
+                "blocks": [
+                  {
+                    "id": "rbr-1",
+                    "type": "heading",
+                    "data": {
+                      "text": "COPPER DRUM ROASTERY",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 28,
+                        "right": 8,
+                        "bottom": 20,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1E1612",
+                      "fontSize": 19,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1.2,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "rbr-4",
+                "blocks": [
+                  {
+                    "id": "rbr-2",
+                    "type": "heading",
+                    "data": {
+                      "text": "Subscription Renewal Notice · Box #18",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 31,
+                        "right": 40,
+                        "bottom": 20,
+                        "left": 8
+                      },
+                      "alignment": "right",
+                      "color": "#695A4F",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "rbr-6",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "double",
+            "lineColor": "#1E1612",
+            "lineThickness": 4,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "rbr-7",
+          "type": "heading",
+          "data": {
+            "text": "Heads up: your November coffee box renews in 3 days",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 34,
+              "right": 40,
+              "bottom": 12,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#1E1612",
+            "fontSize": 34,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "rbr-8",
+          "type": "text",
+          "data": {
+            "html": "<p>Hi Nora, your monthly Two-Bag Roaster&#x27;s Subscription ($38.00, free shipping) is scheduled to renew on Sunday 25 October and roast on Monday morning. Going out of town or still have beans left? You can skip or delay in one click before Saturday midnight.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 12,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 17,
+            "lineHeight": 1.65,
+            "color": "#1E1612"
+          }
+        },
+        {
+          "id": "rbr-9",
+          "type": "heading",
+          "data": {
+            "text": "Scheduled for Monday's roast",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#1E1612",
+            "fontSize": 20,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "rbr-10",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DED2C3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "rbr-17",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "rbr-14",
+                "blocks": [
+                  {
+                    "id": "rbr-11",
+                    "type": "heading",
+                    "data": {
+                      "text": "BAG 01",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#B5441E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "rbr-15",
+                "blocks": [
+                  {
+                    "id": "rbr-12",
+                    "type": "heading",
+                    "data": {
+                      "text": "250g San Agustín (Huila, Colombia · Washed Caturra)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1E1612",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "rbr-16",
+                "blocks": [
+                  {
+                    "id": "rbr-13",
+                    "type": "heading",
+                    "data": {
+                      "text": "Whole bean",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695A4F",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "rbr-18",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DED2C3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "rbr-25",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "rbr-22",
+                "blocks": [
+                  {
+                    "id": "rbr-19",
+                    "type": "heading",
+                    "data": {
+                      "text": "BAG 02",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#B5441E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "rbr-23",
+                "blocks": [
+                  {
+                    "id": "rbr-20",
+                    "type": "heading",
+                    "data": {
+                      "text": "250g Kochere (Yirgacheffe, Ethiopia · Bergamot & peach)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1E1612",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "rbr-24",
+                "blocks": [
+                  {
+                    "id": "rbr-21",
+                    "type": "heading",
+                    "data": {
+                      "text": "Whole bean",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695A4F",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "rbr-26",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DED2C3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "rbr-33",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "rbr-30",
+                "blocks": [
+                  {
+                    "id": "rbr-27",
+                    "type": "heading",
+                    "data": {
+                      "text": "DELIVERY",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#B5441E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "rbr-31",
+                "blocks": [
+                  {
+                    "id": "rbr-28",
+                    "type": "heading",
+                    "data": {
+                      "text": "USPS Priority to 412 Oak St, Apt 3B, Chicago, IL",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1E1612",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "rbr-32",
+                "blocks": [
+                  {
+                    "id": "rbr-29",
+                    "type": "heading",
+                    "data": {
+                      "text": "Free ($0.00)",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695A4F",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "rbr-34",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DED2C3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "rbr-41",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "rbr-38",
+                "blocks": [
+                  {
+                    "id": "rbr-35",
+                    "type": "heading",
+                    "data": {
+                      "text": "CHARGE",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#B5441E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "rbr-39",
+                "blocks": [
+                  {
+                    "id": "rbr-36",
+                    "type": "heading",
+                    "data": {
+                      "text": "Visa ending in 3319 on Sun 25 Oct",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1E1612",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "rbr-40",
+                "blocks": [
+                  {
+                    "id": "rbr-37",
+                    "type": "heading",
+                    "data": {
+                      "text": "$38.00 total",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695A4F",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "rbr-42",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DED2C3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "rbr-43",
+          "type": "button",
+          "data": {
+            "text": "Skip, delay, or swap coffees",
+            "url": "https://copperdrum.example/manage/box-18"
+          },
+          "style": {
+            "padding": {
+              "top": 24,
+              "right": 40,
+              "bottom": 34,
+              "left": 40
+            },
+            "alignment": "left",
+            "backgroundColor": "#B5441E",
+            "color": "#FBF7F0",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 15,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0.5,
+            "textTransform": "none",
+            "paddingX": 24,
+            "paddingY": 14,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#B5441E"
+          }
+        },
+        {
+          "id": "rbr-44",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/roastery-box-renewal-notice/roast-scoop.jpg",
+            "alt": "A female coffee roaster wearing a grey bib apron and plaid shirt leans forward to inspect freshly roasted coffee beans in a metal scoop. Beside her, a large black Probat industrial roasting machine discharges coffee...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "rbr-50",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              42,
+              58
+            ],
+            "columns": [
+              {
+                "id": "rbr-48",
+                "blocks": [
+                  {
+                    "id": "rbr-45",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/roastery-box-renewal-notice/morning-cup.jpg",
+                      "alt": "A flat-lay, top-down photograph of a rustic dark metal table on a balcony bathed in direct morning sunlight. An espresso with golden-brown crema rests in a white ceramic cup on a matching saucer alongside a small...",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "rbr-49",
+                "blocks": [
+                  {
+                    "id": "rbr-46",
+                    "type": "heading",
+                    "data": {
+                      "text": "Want to add a box of 10 compostable steep bags?",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#1E1612",
+                      "fontSize": 22,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "rbr-47",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Subscribers can toss extra single-serve travel steep bags or paper V60 filters into Monday&#x27;s parcel with zero additional postage.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#695A4F"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "rbr-51",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DED2C3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "rbr-52",
+          "type": "text",
+          "data": {
+            "html": "<p>Copper Drum Coffee Co. · 1920 W Fulton St, Chicago, IL 60612 · One-click pause or cancel anytime. <a href=\"https://copperdrum.example/preferences\">Manage preferences</a> · <a href=\"https://copperdrum.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#695A4F"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

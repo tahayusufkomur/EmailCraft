@@ -4,6 +4,7 @@ import { useEditorStore } from '../../store/editorStore';
 import { useInlineEdit } from '../../hooks/useInlineEdit';
 import { highlightVariables } from '../../lib/variableUtils';
 import { lucideSvgString } from '../../lib/lucideIcons';
+import { localGalleryUrl } from '../../lib/templates';
 
 interface Props {
   block: CardBlockType;
@@ -124,7 +125,7 @@ export function CardBlock({ block }: Props) {
             </span>
           ) : data.iconImageSrc ? (
             <img
-              src={data.iconImageSrc}
+              src={localGalleryUrl(data.iconImageSrc)}
               alt={data.iconImageAlt || ''}
               style={{
                 width: iconSize,

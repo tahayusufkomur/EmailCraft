@@ -1,0 +1,805 @@
+{
+  "name": "Fjord Drive — Vehicle handover voucher",
+  "category": "transactional",
+  "is_premium": false,
+  "tags": [
+    "transactional",
+    "automotive",
+    "travel",
+    "rental"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#172229",
+      "bodyBackgroundColor": "#F4F7F8",
+      "defaultFont": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#111A20"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "fdr-1",
+          "type": "heading",
+          "data": {
+            "text": "FJORD DRIVE CAR RENTAL — Keyless Handover Voucher #FD-5502 · Ålesund Airport",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 18,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#52636E",
+            "fontSize": 12,
+            "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 1.4,
+            "textTransform": "uppercase",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "fdr-2",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CBD6DC",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "fdr-3",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/fjord-drive-rental-voucher/fjord-road.jpg",
+            "alt": "A sleek gray sports sedan navigates a tight asphalt hairpin turn on a snowy mountain pass, overlooking a calm fjord surrounded by rugged, snow-dusted peaks under an overcast sky.",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "fdr-4",
+          "type": "heading",
+          "data": {
+            "text": "Skip the desk: your AWD Estate is parked in Bay B12",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 34,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#111A20",
+            "fontSize": 36,
+            "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "fdr-5",
+          "type": "text",
+          "data": {
+            "html": "<p>Hei Marcus, your driver license and deposit pre-authorization are verified. When you exit baggage claim at Ålesund Vigra (AES) on Friday at 14:30, walk straight to Covered Garage Bay B12 and unlock your vehicle from the Fjord link below—the physical key fob is in the glovebox slot.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 22,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 17,
+            "lineHeight": 1.65,
+            "color": "#111A20"
+          }
+        },
+        {
+          "id": "fdr-6",
+          "type": "button",
+          "data": {
+            "text": "Open digital key & condition photos",
+            "url": "https://fjorddrive.example/v/FD-5502"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 32,
+              "left": 40
+            },
+            "alignment": "left",
+            "backgroundColor": "#C84B20",
+            "color": "#FFFFFF",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 15,
+            "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0.5,
+            "textTransform": "none",
+            "paddingX": 24,
+            "paddingY": 14,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#C84B20"
+          }
+        },
+        {
+          "id": "fdr-7",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CBD6DC",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "fdr-13",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              42,
+              58
+            ],
+            "columns": [
+              {
+                "id": "fdr-11",
+                "blocks": [
+                  {
+                    "id": "fdr-8",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/fjord-drive-rental-voucher/car-cockpit.jpg",
+                      "alt": "A vertical eye-level close-up shot inside the cab of a pickup truck, showing a black smartphone secured in an adjustable phone mount clamp. The phone is encased in a rugged black protective case with its display...",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "fdr-12",
+                "blocks": [
+                  {
+                    "id": "fdr-9",
+                    "type": "heading",
+                    "data": {
+                      "text": "Fitted with Nokian Hakkapeliitta winter tires + AutoPASS tag",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#111A20",
+                      "fontSize": 22,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "fdr-10",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>All fjord ferries, subsea tunnels, and road tolls are billed automatically at the discounted commercial AutoPASS rate with zero admin surcharge.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#52636E"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "fdr-14",
+          "type": "heading",
+          "data": {
+            "text": "Rental agreement #FD-5502 summary",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#111A20",
+            "fontSize": 20,
+            "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "fdr-15",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CBD6DC",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "fdr-22",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "fdr-19",
+                "blocks": [
+                  {
+                    "id": "fdr-16",
+                    "type": "heading",
+                    "data": {
+                      "text": "VEHICLE",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#C84B20",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "fdr-20",
+                "blocks": [
+                  {
+                    "id": "fdr-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "Volvo V60 Cross Country AWD · Reg #EV 88412",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#111A20",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "fdr-21",
+                "blocks": [
+                  {
+                    "id": "fdr-18",
+                    "type": "heading",
+                    "data": {
+                      "text": "Bay B12 · 94% / Full",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#52636E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "fdr-23",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CBD6DC",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "fdr-30",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "fdr-27",
+                "blocks": [
+                  {
+                    "id": "fdr-24",
+                    "type": "heading",
+                    "data": {
+                      "text": "PICKUP / DROP",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#C84B20",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "fdr-28",
+                "blocks": [
+                  {
+                    "id": "fdr-25",
+                    "type": "heading",
+                    "data": {
+                      "text": "Fri 23 Oct 14:30 (AES) → Tue 27 Oct 11:00 (AES)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#111A20",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "fdr-29",
+                "blocks": [
+                  {
+                    "id": "fdr-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "Unlimited km",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#52636E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "fdr-31",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CBD6DC",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "fdr-38",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "fdr-35",
+                "blocks": [
+                  {
+                    "id": "fdr-32",
+                    "type": "heading",
+                    "data": {
+                      "text": "PROTECTION",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#C84B20",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "fdr-36",
+                "blocks": [
+                  {
+                    "id": "fdr-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "Zero-Deductible Glass, Tire & Gravel Shield included",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#111A20",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "fdr-37",
+                "blocks": [
+                  {
+                    "id": "fdr-34",
+                    "type": "heading",
+                    "data": {
+                      "text": "NOK 0 excess",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#52636E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "fdr-39",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CBD6DC",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "fdr-46",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "fdr-43",
+                "blocks": [
+                  {
+                    "id": "fdr-40",
+                    "type": "heading",
+                    "data": {
+                      "text": "EMERGENCY",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#C84B20",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "fdr-44",
+                "blocks": [
+                  {
+                    "id": "fdr-41",
+                    "type": "heading",
+                    "data": {
+                      "text": "24/7 Viking Roadside Assistance (+47 800 32 900)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#111A20",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "fdr-45",
+                "blocks": [
+                  {
+                    "id": "fdr-42",
+                    "type": "heading",
+                    "data": {
+                      "text": "Included",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#52636E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "fdr-47",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CBD6DC",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "fdr-48",
+          "type": "text",
+          "data": {
+            "html": "<p>Fjord Drive Bilutleie AS · Vigra Lufthavn, 6040 Vigra, Norway · Receipt follows return. <a href=\"https://fjorddrive.example/preferences\">Manage preferences</a> · <a href=\"https://fjorddrive.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#52636E"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

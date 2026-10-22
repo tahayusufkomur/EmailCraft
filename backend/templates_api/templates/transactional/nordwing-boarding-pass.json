@@ -1,0 +1,805 @@
+{
+  "name": "Nordwing Air — Boarding pass & gate slip",
+  "category": "transactional",
+  "is_premium": false,
+  "tags": [
+    "transactional",
+    "airline",
+    "travel",
+    "ticket"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#151E2B",
+      "bodyBackgroundColor": "#FFFFFF",
+      "defaultFont": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#0F1722"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "nbp-1",
+          "type": "heading",
+          "data": {
+            "text": "NORDWING AIRLINES — PNR: K8M4QP · E-Ticket 117-4920184721",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 18,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#526073",
+            "fontSize": 12,
+            "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 1.4,
+            "textTransform": "uppercase",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "nbp-2",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CFD8E3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "nbp-3",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/nordwing-boarding-pass/nordic-flight.jpg",
+            "alt": "A female and male ground crew team recharge a light electric aircraft (labeled e-Flyer 2) on an airport tarmac at sunrise or sunset. The woman connects an orange charging cable from a ground power unit to the...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "nbp-4",
+          "type": "heading",
+          "data": {
+            "text": "Checked in: Oslo (OSL) → Reykjavik (KEF) · Seat 04A",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 34,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#0F1722",
+            "fontSize": 36,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "nbp-5",
+          "type": "text",
+          "data": {
+            "html": "<p>Passenger Erik Lindemann is checked in for flight NW 412 departing Friday 30 October. Your digital boarding pass is attached below and synced to Apple Wallet. Bag drop at Terminal Main Desk closes forty-five minutes before departure.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 22,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 17,
+            "lineHeight": 1.65,
+            "color": "#0F1722"
+          }
+        },
+        {
+          "id": "nbp-6",
+          "type": "button",
+          "data": {
+            "text": "Download Wallet pass & PDF",
+            "url": "https://nordwing.example/checkin/K8M4QP"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 32,
+              "left": 40
+            },
+            "alignment": "left",
+            "backgroundColor": "#0B4EA8",
+            "color": "#FFFFFF",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 15,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0.5,
+            "textTransform": "none",
+            "paddingX": 24,
+            "paddingY": 14,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#0B4EA8"
+          }
+        },
+        {
+          "id": "nbp-7",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CFD8E3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "nbp-13",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              42,
+              58
+            ],
+            "columns": [
+              {
+                "id": "nbp-11",
+                "blocks": [
+                  {
+                    "id": "nbp-8",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/nordwing-boarding-pass/gate-lounge.jpg",
+                      "alt": "Full-body profile view of an adult man walking through a busy modern train station terminal while wearing a large, structured black backpack. He is dressed in a dark jacket, grey undershirt, black trousers, and black...",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "nbp-12",
+                "blocks": [
+                  {
+                    "id": "nbp-9",
+                    "type": "heading",
+                    "data": {
+                      "text": "Fast Track security & Saga Lounge access included",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#0F1722",
+                      "fontSize": 22,
+                      "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "nbp-10",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Scan the barcode at the Fast Track lane in Oslo Gardermoen. Boarding begins at Gate D4 at 09:20 local time (Group 1).</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#526073"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "nbp-14",
+          "type": "heading",
+          "data": {
+            "text": "Flight NW 412 boarding manifest",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#0F1722",
+            "fontSize": 20,
+            "fontFamily": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "nbp-15",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CFD8E3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "nbp-22",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "nbp-19",
+                "blocks": [
+                  {
+                    "id": "nbp-16",
+                    "type": "heading",
+                    "data": {
+                      "text": "DEPARTURE",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0B4EA8",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nbp-20",
+                "blocks": [
+                  {
+                    "id": "nbp-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "Oslo (OSL) · 09:55 CET · Gate D4",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0F1722",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nbp-21",
+                "blocks": [
+                  {
+                    "id": "nbp-18",
+                    "type": "heading",
+                    "data": {
+                      "text": "Boarding 09:20",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#526073",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "nbp-23",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CFD8E3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "nbp-30",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "nbp-27",
+                "blocks": [
+                  {
+                    "id": "nbp-24",
+                    "type": "heading",
+                    "data": {
+                      "text": "ARRIVAL",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0B4EA8",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nbp-28",
+                "blocks": [
+                  {
+                    "id": "nbp-25",
+                    "type": "heading",
+                    "data": {
+                      "text": "Reykjavik Keflavik (KEF) · 11:40 GMT",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0F1722",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nbp-29",
+                "blocks": [
+                  {
+                    "id": "nbp-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "2h 45m nonstop",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#526073",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "nbp-31",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CFD8E3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "nbp-38",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "nbp-35",
+                "blocks": [
+                  {
+                    "id": "nbp-32",
+                    "type": "heading",
+                    "data": {
+                      "text": "SEAT & CABIN",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0B4EA8",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nbp-36",
+                "blocks": [
+                  {
+                    "id": "nbp-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "Seat 04A (Window · Extra legroom)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0F1722",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nbp-37",
+                "blocks": [
+                  {
+                    "id": "nbp-34",
+                    "type": "heading",
+                    "data": {
+                      "text": "Group 1 Priority",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#526073",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "nbp-39",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CFD8E3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "nbp-46",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "nbp-43",
+                "blocks": [
+                  {
+                    "id": "nbp-40",
+                    "type": "heading",
+                    "data": {
+                      "text": "BAGGAGE",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#0B4EA8",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nbp-44",
+                "blocks": [
+                  {
+                    "id": "nbp-41",
+                    "type": "heading",
+                    "data": {
+                      "text": "1 × 23 kg checked bag + 1 × 10 kg cabin bag",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0F1722",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "nbp-45",
+                "blocks": [
+                  {
+                    "id": "nbp-42",
+                    "type": "heading",
+                    "data": {
+                      "text": "Tag #01178829",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#526073",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "nbp-47",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CFD8E3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "nbp-48",
+          "type": "text",
+          "data": {
+            "html": "<p>Nordwing Aviation AS · Edvard Munchs Veg 10, 2061 Gardermoen · 24h Operations Desk. <a href=\"https://nordwing.example/preferences\">Manage preferences</a> · <a href=\"https://nordwing.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#526073"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

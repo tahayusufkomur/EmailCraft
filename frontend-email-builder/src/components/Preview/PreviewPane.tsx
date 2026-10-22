@@ -1,6 +1,7 @@
 import { useMemo, useRef, useEffect } from 'react';
 import { useEditorStore } from '../../store/editorStore';
 import { exportToHtml } from '../../lib/htmlExporter';
+import { localGalleryHtml } from '../../lib/templates';
 
 export type PreviewDevice = 'desktop' | 'mobile';
 
@@ -88,7 +89,7 @@ export function PreviewPane({ device, lockScroll = false }: { device: PreviewDev
     };
   }, [lockScroll]);
 
-  const html = useMemo(() => exportToHtml(template, 'placeholders'), [template]);
+  const html = useMemo(() => localGalleryHtml(exportToHtml(template, 'placeholders')), [template]);
 
   return (
     <div ref={scrollerRef} className="canvas-area preview-area">

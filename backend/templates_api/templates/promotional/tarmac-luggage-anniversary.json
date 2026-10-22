@@ -1,0 +1,857 @@
+{
+  "name": "Tarmac — Aluminum carry-on anniversary",
+  "category": "promotional",
+  "is_premium": false,
+  "tags": [
+    "promotional",
+    "travel",
+    "luggage",
+    "gear"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#1D2126",
+      "bodyBackgroundColor": "#F4F5F7",
+      "defaultFont": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#14181C"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "tla-5",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              58,
+              42
+            ],
+            "columns": [
+              {
+                "id": "tla-3",
+                "blocks": [
+                  {
+                    "id": "tla-1",
+                    "type": "heading",
+                    "data": {
+                      "text": "TARMAC FLIGHT CASES",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 28,
+                        "right": 8,
+                        "bottom": 20,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#14181C",
+                      "fontSize": 19,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1.2,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tla-4",
+                "blocks": [
+                  {
+                    "id": "tla-2",
+                    "type": "heading",
+                    "data": {
+                      "text": "Anodized 5052 Aircraft Aluminum · 10-Year Anniversary",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 31,
+                        "right": 40,
+                        "bottom": 20,
+                        "left": 8
+                      },
+                      "alignment": "right",
+                      "color": "#565E68",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "tla-6",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#14181C",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "tla-7",
+          "type": "heading",
+          "data": {
+            "text": "No zippers to burst: $120 off the Cabin 55 Carry-On",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#14181C",
+            "fontSize": 38,
+            "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "tla-8",
+          "type": "text",
+          "data": {
+            "html": "<p>Zippers are the single point of failure on 90% of damaged suitcases. Our Cabin 55 is stamped from 1.2mm anodized aluminum-magnesium alloy, sealed with a neoprene weather gasket, and latched with dual flush-mounted TSA drawbolts.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 28,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 18,
+            "lineHeight": 1.65,
+            "color": "#14181C"
+          }
+        },
+        {
+          "id": "tla-9",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/tarmac-luggage-anniversary/cabin-luggage.jpg",
+            "alt": "A full-body adult traveler stands beside a large glass terminal window at gate D46, gripping the extended handle of a black rolling suitcase while looking toward passenger aircraft on the apron. She wears a navy knit...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "tla-16",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              58,
+              42
+            ],
+            "columns": [
+              {
+                "id": "tla-14",
+                "blocks": [
+                  {
+                    "id": "tla-10",
+                    "type": "heading",
+                    "data": {
+                      "text": "Ball-bearing 60mm Hinomoto silent wheels",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#14181C",
+                      "fontSize": 22,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "tla-11",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Every wheel assembly bolts into a reinforced die-cast corner bumper with two M5 hex screws—swappable in ninety seconds with an Allen key anywhere in the world.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 16,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#565E68"
+                    }
+                  },
+                  {
+                    "id": "tla-12",
+                    "type": "button",
+                    "data": {
+                      "text": "Shop the Anniversary Edition ($475)",
+                      "url": "https://tarmaccases.example/cabin-55"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#D44820",
+                      "color": "#FFFFFF",
+                      "borderRadius": 0,
+                      "fullWidth": false,
+                      "fontSize": 15,
+                      "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.5,
+                      "textTransform": "none",
+                      "paddingX": 24,
+                      "paddingY": 14,
+                      "borderWidth": 0,
+                      "borderStyle": "solid",
+                      "borderColor": "#D44820"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "tla-15",
+                "blocks": [
+                  {
+                    "id": "tla-13",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/tarmac-luggage-anniversary/aluminum-latch.jpg",
+                      "alt": "A full-body profile view of an individual in a white hooded cleanroom suit, protective face mask, gloves, and boots walking across a sterile, futuristic stainless steel hallway while carrying a silver metallic...",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "tla-17",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CFD5DC",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "tla-18",
+          "type": "heading",
+          "data": {
+            "text": "Cabin 55 & Trunk specifications",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#14181C",
+            "fontSize": 20,
+            "fontFamily": "'Overpass', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "tla-19",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CFD5DC",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "tla-26",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "tla-23",
+                "blocks": [
+                  {
+                    "id": "tla-20",
+                    "type": "heading",
+                    "data": {
+                      "text": "CABIN 55",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#D44820",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tla-24",
+                "blocks": [
+                  {
+                    "id": "tla-21",
+                    "type": "heading",
+                    "data": {
+                      "text": "55 × 40 × 23 cm · 36 Liters · 4.1 kg · Fits all overhead bins",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#14181C",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tla-25",
+                "blocks": [
+                  {
+                    "id": "tla-22",
+                    "type": "heading",
+                    "data": {
+                      "text": "$475 (was $595)",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#565E68",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "tla-27",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CFD5DC",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "tla-34",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "tla-31",
+                "blocks": [
+                  {
+                    "id": "tla-28",
+                    "type": "heading",
+                    "data": {
+                      "text": "CABIN PLUS",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#D44820",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tla-32",
+                "blocks": [
+                  {
+                    "id": "tla-29",
+                    "type": "heading",
+                    "data": {
+                      "text": "56 × 45 × 25 cm · 44 Liters · 4.4 kg · With suede laptop folio",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#14181C",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tla-33",
+                "blocks": [
+                  {
+                    "id": "tla-30",
+                    "type": "heading",
+                    "data": {
+                      "text": "$525 (was $645)",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#565E68",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "tla-35",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CFD5DC",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "tla-42",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "tla-39",
+                "blocks": [
+                  {
+                    "id": "tla-36",
+                    "type": "heading",
+                    "data": {
+                      "text": "CHECKED 73",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#D44820",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tla-40",
+                "blocks": [
+                  {
+                    "id": "tla-37",
+                    "type": "heading",
+                    "data": {
+                      "text": "73 × 50 × 28 cm · 86 Liters · 5.9 kg · 6-rivet corner guards",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#14181C",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tla-41",
+                "blocks": [
+                  {
+                    "id": "tla-38",
+                    "type": "heading",
+                    "data": {
+                      "text": "$640 (was $790)",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#565E68",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "tla-43",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CFD5DC",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "tla-50",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "tla-47",
+                "blocks": [
+                  {
+                    "id": "tla-44",
+                    "type": "heading",
+                    "data": {
+                      "text": "WARRANTY",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#D44820",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tla-48",
+                "blocks": [
+                  {
+                    "id": "tla-45",
+                    "type": "heading",
+                    "data": {
+                      "text": "Lifetime functional shell, wheel, handle & lock coverage",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#14181C",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "tla-49",
+                "blocks": [
+                  {
+                    "id": "tla-46",
+                    "type": "heading",
+                    "data": {
+                      "text": "Included",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#565E68",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "tla-51",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#CFD5DC",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "tla-52",
+          "type": "text",
+          "data": {
+            "html": "<p>Tarmac Travel Goods GmbH · Spitalerstraße 16, 20095 Hamburg · Unsubscribe. <a href=\"https://tarmaccases.example/preferences\">Manage preferences</a> · <a href=\"https://tarmaccases.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#565E68"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

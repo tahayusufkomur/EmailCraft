@@ -1,0 +1,857 @@
+{
+  "name": "Pastificio Bronzo — Bronze-die pantry crate",
+  "category": "promotional",
+  "is_premium": false,
+  "tags": [
+    "promotional",
+    "food",
+    "pasta",
+    "italian"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#1D2C40",
+      "bodyBackgroundColor": "#FFF9EB",
+      "defaultFont": "Georgia, 'Times New Roman', Times, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#162233"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "pbp-5",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              58,
+              42
+            ],
+            "columns": [
+              {
+                "id": "pbp-3",
+                "blocks": [
+                  {
+                    "id": "pbp-1",
+                    "type": "heading",
+                    "data": {
+                      "text": "PASTIFICIO BRONZO GRAGNANO",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 28,
+                        "right": 8,
+                        "bottom": 20,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#162233",
+                      "fontSize": 19,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1.2,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pbp-4",
+                "blocks": [
+                  {
+                    "id": "pbp-2",
+                    "type": "heading",
+                    "data": {
+                      "text": "Slow-Dried 52 Hours at 42°C · Kronos Durum Semolina",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 31,
+                        "right": 40,
+                        "bottom": 20,
+                        "left": 8
+                      },
+                      "alignment": "right",
+                      "color": "#566478",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pbp-6",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#162233",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pbp-7",
+          "type": "heading",
+          "data": {
+            "text": "The 12-Kilo Winter Pantry Crate + 6 Tins of San Marzano DOP",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#162233",
+            "fontSize": 38,
+            "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "pbp-8",
+          "type": "text",
+          "data": {
+            "html": "<p>Industrial pasta is blasted at 95°C for three hours through slick Teflon dies, sealing the starch so sauce slides right off. We extrude Puglia durum wheat through rough-cast bronze dies and dry it on beechwood rods for two full days.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 28,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 18,
+            "lineHeight": 1.65,
+            "color": "#162233"
+          }
+        },
+        {
+          "id": "pbp-9",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/pastificio-bronzo-pantry-crate/bronze-pasta.jpg",
+            "alt": "A male pasta chef wearing a white short-sleeve shirt and a flour-dusted beige apron stands beside a wooden workbench, using a curved dough cutter to cut fresh rigatoni emerging from an electric extruder into a wooden...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "pbp-16",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              58,
+              42
+            ],
+            "columns": [
+              {
+                "id": "pbp-14",
+                "blocks": [
+                  {
+                    "id": "pbp-10",
+                    "type": "heading",
+                    "data": {
+                      "text": "Chalky matte ivory surface that drinks up pasta water",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#162233",
+                      "fontSize": 22,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "pbp-11",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Our Winter Pantry Crate stocks your shelves for three months with twelve 500g bags across six classic shapes, plus six 400g tins of Agro Sarnese-Nocerino San Marzano tomatoes.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 16,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#566478"
+                    }
+                  },
+                  {
+                    "id": "pbp-12",
+                    "type": "button",
+                    "data": {
+                      "text": "Order the Winter Pantry Crate ($74)",
+                      "url": "https://pastificiobronzo.example/winter-crate"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#C8381E",
+                      "color": "#FFF9EB",
+                      "borderRadius": 0,
+                      "fullWidth": false,
+                      "fontSize": 15,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.5,
+                      "textTransform": "none",
+                      "paddingX": 24,
+                      "paddingY": 14,
+                      "borderWidth": 0,
+                      "borderStyle": "solid",
+                      "borderColor": "#C8381E"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "pbp-15",
+                "blocks": [
+                  {
+                    "id": "pbp-13",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/pastificio-bronzo-pantry-crate/pomodoro-bowl.jpg",
+                      "alt": "A top-down flat-lay view of an intimate romantic dinner arranged for two on a dark marble table with white veining. The setting features two white ceramic bowls of ribbon pasta garnished with cherry tomatoes, basil,...",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pbp-17",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E3D8C0",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pbp-18",
+          "type": "heading",
+          "data": {
+            "text": "Crate contents & al-dente boiling times",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#162233",
+            "fontSize": 20,
+            "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "pbp-19",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E3D8C0",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pbp-26",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "pbp-23",
+                "blocks": [
+                  {
+                    "id": "pbp-20",
+                    "type": "heading",
+                    "data": {
+                      "text": "SPAGHETTONI",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#C8381E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pbp-24",
+                "blocks": [
+                  {
+                    "id": "pbp-21",
+                    "type": "heading",
+                    "data": {
+                      "text": "2 × 500g (2.4mm thick rod · 11 min boil)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#162233",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pbp-25",
+                "blocks": [
+                  {
+                    "id": "pbp-22",
+                    "type": "heading",
+                    "data": {
+                      "text": "Dried 54 hours",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#566478",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pbp-27",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E3D8C0",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pbp-34",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "pbp-31",
+                "blocks": [
+                  {
+                    "id": "pbp-28",
+                    "type": "heading",
+                    "data": {
+                      "text": "PACCHERI",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#C8381E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pbp-32",
+                "blocks": [
+                  {
+                    "id": "pbp-29",
+                    "type": "heading",
+                    "data": {
+                      "text": "2 × 500g (Large smooth rings · 14 min boil)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#162233",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pbp-33",
+                "blocks": [
+                  {
+                    "id": "pbp-30",
+                    "type": "heading",
+                    "data": {
+                      "text": "Lattari mountain water",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#566478",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pbp-35",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E3D8C0",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pbp-42",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "pbp-39",
+                "blocks": [
+                  {
+                    "id": "pbp-36",
+                    "type": "heading",
+                    "data": {
+                      "text": "FUSILLI CORTI",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#C8381E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pbp-40",
+                "blocks": [
+                  {
+                    "id": "pbp-37",
+                    "type": "heading",
+                    "data": {
+                      "text": "4 × 500g (Tight bronze spiral · 10 min boil)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#162233",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pbp-41",
+                "blocks": [
+                  {
+                    "id": "pbp-38",
+                    "type": "heading",
+                    "data": {
+                      "text": "14.5% protein",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#566478",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pbp-43",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E3D8C0",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pbp-50",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "pbp-47",
+                "blocks": [
+                  {
+                    "id": "pbp-44",
+                    "type": "heading",
+                    "data": {
+                      "text": "RIGATONI + TINS",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#C8381E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pbp-48",
+                "blocks": [
+                  {
+                    "id": "pbp-45",
+                    "type": "heading",
+                    "data": {
+                      "text": "4 × 500g Rigatoni + 6 × 400g San Marzano DOP tins",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#162233",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pbp-49",
+                "blocks": [
+                  {
+                    "id": "pbp-46",
+                    "type": "heading",
+                    "data": {
+                      "text": "Free UPS Ground",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#566478",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pbp-51",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E3D8C0",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pbp-52",
+          "type": "text",
+          "data": {
+            "html": "<p>Pastificio Bronzo Imports · 148 Mulberry St, New York, NY 10013 · Unsubscribe. <a href=\"https://pastificiobronzo.example/preferences\">Manage preferences</a> · <a href=\"https://pastificiobronzo.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#566478"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

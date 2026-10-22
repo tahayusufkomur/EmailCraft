@@ -1,0 +1,857 @@
+{
+  "name": "Clayworks — Your glazed pieces are out of the kiln",
+  "category": "transactional",
+  "is_premium": false,
+  "tags": [
+    "transactional",
+    "pottery",
+    "studio",
+    "notification"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#2B2521",
+      "bodyBackgroundColor": "#F9F4EB",
+      "defaultFont": "Georgia, 'Times New Roman', Times, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#1F1A17"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "ckp-5",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              58,
+              42
+            ],
+            "columns": [
+              {
+                "id": "ckp-3",
+                "blocks": [
+                  {
+                    "id": "ckp-1",
+                    "type": "heading",
+                    "data": {
+                      "text": "CLAYWORKS COMMUNITY KILN",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 28,
+                        "right": 8,
+                        "bottom": 20,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#1F1A17",
+                      "fontSize": 19,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 1.2,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ckp-4",
+                "blocks": [
+                  {
+                    "id": "ckp-2",
+                    "type": "heading",
+                    "data": {
+                      "text": "Glaze Firing #GF-112 · Shelf B4 · Member: M. Chen",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 31,
+                        "right": 40,
+                        "bottom": 20,
+                        "left": 8
+                      },
+                      "alignment": "right",
+                      "color": "#695E55",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ckp-6",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "double",
+            "lineColor": "#1F1A17",
+            "lineThickness": 4,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ckp-7",
+          "type": "heading",
+          "data": {
+            "text": "Four stoneware pieces unloaded and ready on Shelf B4",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 34,
+              "right": 40,
+              "bottom": 12,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#1F1A17",
+            "fontSize": 34,
+            "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "ckp-8",
+          "type": "text",
+          "data": {
+            "html": "<p>Hi Mei, the Cone 6 oxidation kiln cooled to 45°C this morning and our technician unloaded your four glazed vessels without a single glaze run or pluck mark. They are waiting on wooden Pickup Shelf B4.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 12,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 17,
+            "lineHeight": 1.65,
+            "color": "#1F1A17"
+          }
+        },
+        {
+          "id": "ckp-9",
+          "type": "heading",
+          "data": {
+            "text": "Unloaded items & cubic-inch firing fee",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#1F1A17",
+            "fontSize": 20,
+            "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "ckp-10",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DFD4C4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ckp-17",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "ckp-14",
+                "blocks": [
+                  {
+                    "id": "ckp-11",
+                    "type": "heading",
+                    "data": {
+                      "text": "ITEM 01–02",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#9E4224",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ckp-15",
+                "blocks": [
+                  {
+                    "id": "ckp-12",
+                    "type": "heading",
+                    "data": {
+                      "text": "2 × Speckled Buff Mug in Oatmeal Rutile Dip (4\" × 4\")",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1F1A17",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ckp-16",
+                "blocks": [
+                  {
+                    "id": "ckp-13",
+                    "type": "heading",
+                    "data": {
+                      "text": "$6.40 firing",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695E55",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ckp-18",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DFD4C4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ckp-25",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "ckp-22",
+                "blocks": [
+                  {
+                    "id": "ckp-19",
+                    "type": "heading",
+                    "data": {
+                      "text": "ITEM 03",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#9E4224",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ckp-23",
+                "blocks": [
+                  {
+                    "id": "ckp-20",
+                    "type": "heading",
+                    "data": {
+                      "text": "1 × Wide Ramen Bowl in Tenmoku & Shino Overlap (8\" × 4\")",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1F1A17",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ckp-24",
+                "blocks": [
+                  {
+                    "id": "ckp-21",
+                    "type": "heading",
+                    "data": {
+                      "text": "$7.50 firing",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695E55",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ckp-26",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DFD4C4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ckp-33",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "ckp-30",
+                "blocks": [
+                  {
+                    "id": "ckp-27",
+                    "type": "heading",
+                    "data": {
+                      "text": "ITEM 04",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#9E4224",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ckp-31",
+                "blocks": [
+                  {
+                    "id": "ckp-28",
+                    "type": "heading",
+                    "data": {
+                      "text": "1 × Tall Cylinder Vase in Matte Sage (9\" × 5\")",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1F1A17",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ckp-32",
+                "blocks": [
+                  {
+                    "id": "ckp-29",
+                    "type": "heading",
+                    "data": {
+                      "text": "$6.80 firing",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695E55",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ckp-34",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DFD4C4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ckp-41",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "ckp-38",
+                "blocks": [
+                  {
+                    "id": "ckp-35",
+                    "type": "heading",
+                    "data": {
+                      "text": "BALANCE",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#9E4224",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ckp-39",
+                "blocks": [
+                  {
+                    "id": "ckp-36",
+                    "type": "heading",
+                    "data": {
+                      "text": "Deducted from your Studio Kiln Credit ($42.30 remaining)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1F1A17",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ckp-40",
+                "blocks": [
+                  {
+                    "id": "ckp-37",
+                    "type": "heading",
+                    "data": {
+                      "text": "$20.70 Paid",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695E55",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ckp-42",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DFD4C4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ckp-43",
+          "type": "button",
+          "data": {
+            "text": "View studio pickup hours",
+            "url": "https://clayworksstudio.example/pickup/GF-112"
+          },
+          "style": {
+            "padding": {
+              "top": 24,
+              "right": 40,
+              "bottom": 34,
+              "left": 40
+            },
+            "alignment": "left",
+            "backgroundColor": "#9E4224",
+            "color": "#F9F4EB",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 15,
+            "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0.5,
+            "textTransform": "none",
+            "paddingX": 24,
+            "paddingY": 14,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#9E4224"
+          }
+        },
+        {
+          "id": "ckp-44",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/clayworks-kiln-pickup/kiln-shelves.jpg",
+            "alt": "A waist-up portrait of a woman wearing a taupe t-shirt and a dark, clay-dusted apron standing next to a rustic wooden shelving unit filled with handmade ceramic cups, bowls, and pots inside a sunlit pottery studio.",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "ckp-50",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              42,
+              58
+            ],
+            "columns": [
+              {
+                "id": "ckp-48",
+                "blocks": [
+                  {
+                    "id": "ckp-45",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/clayworks-kiln-pickup/finished-mug.jpg",
+                      "alt": "An artisan wearing a beige apron and light top attaches a blank paper tag tied with twine to the handle of a handcrafted speckled stoneware mug on a rustic wooden workbench in a pottery studio.",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "ckp-49",
+                "blocks": [
+                  {
+                    "id": "ckp-46",
+                    "type": "heading",
+                    "data": {
+                      "text": "14-day shelf holding policy",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#1F1A17",
+                      "fontSize": 22,
+                      "fontFamily": "'Alfa Slab One', Rockwell, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "ckp-47",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Because we unload three hundred pieces a week, finished work must be collected within fourteen days (by 4 November). Bring your own canvas tote and newspaper wrap!</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#695E55"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "ckp-51",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#DFD4C4",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "ckp-52",
+          "type": "text",
+          "data": {
+            "html": "<p>Clayworks Ceramic Studio · 2840 18th St, San Francisco, CA 94110 · Open daily 10:00–21:00. <a href=\"https://clayworksstudio.example/preferences\">Manage preferences</a> · <a href=\"https://clayworksstudio.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#695E55"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

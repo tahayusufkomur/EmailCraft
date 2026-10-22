@@ -1,0 +1,818 @@
+{
+  "name": "Ortigia & Myrrh — Eau de parfum discovery set",
+  "category": "promotional",
+  "is_premium": false,
+  "tags": [
+    "promotional",
+    "fragrance",
+    "beauty",
+    "luxury"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#2B221E",
+      "bodyBackgroundColor": "#FAF6EF",
+      "defaultFont": "Georgia, 'Times New Roman', Times, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#1F1815"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "omd-1",
+          "type": "heading",
+          "data": {
+            "text": "Haute Parfumerie · Syracuse & Florence",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 6,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#8F3A26",
+            "fontSize": 12,
+            "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 2.0,
+            "textTransform": "uppercase",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "omd-2",
+          "type": "heading",
+          "data": {
+            "text": "ORTIGIA & MYRRH PARFUMS",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 22,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#1F1815",
+            "fontSize": 22,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 1.5,
+            "textTransform": "uppercase",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "omd-3",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/ortigia-myrrh-discovery/perfume-flacon.jpg",
+            "alt": "A minimalist product shot featuring a teardrop-shaped glass perfume bottle labeled 'SCULPTED No. 01 // 50ml' floating above a textured gray-beige stone pedestal. The bottle features a tilted wooden ring collar and a...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "omd-4",
+          "type": "heading",
+          "data": {
+            "text": "Five 2ml glass atomizers + a €45 voucher toward your full flacon",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#1F1815",
+            "fontSize": 42,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.08
+          }
+        },
+        {
+          "id": "omd-5",
+          "type": "text",
+          "data": {
+            "html": "<p>Perfume should be lived in for a week, not judged on a paper blotter in five seconds. Order our Five-Chapter Discovery Coffret for €45 and receive a matching €45 credit code redeemable against any 100ml Eau de Parfum within ninety days.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 22,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 18,
+            "lineHeight": 1.65,
+            "color": "#1F1815"
+          }
+        },
+        {
+          "id": "omd-6",
+          "type": "button",
+          "data": {
+            "text": "Order the Discovery Coffret (€45)",
+            "url": "https://ortigiamyrrh.example/discovery"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 36,
+              "left": 40
+            },
+            "alignment": "left",
+            "backgroundColor": "#8F3A26",
+            "color": "#FAF6EF",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 15,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0.5,
+            "textTransform": "none",
+            "paddingX": 24,
+            "paddingY": 14,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#8F3A26"
+          }
+        },
+        {
+          "id": "omd-7",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "double",
+            "lineColor": "#E0D6C8",
+            "lineThickness": 3,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "omd-13",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              42,
+              58
+            ],
+            "columns": [
+              {
+                "id": "omd-11",
+                "blocks": [
+                  {
+                    "id": "omd-8",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/ortigia-myrrh-discovery/myrrh-resins.jpg",
+                      "alt": "A middle-aged man with short salt-and-pepper hair and a trimmed beard stands behind a dark studio workbench, holding three fanned white paper scent strips to his nose with eyes closed in focused concentration. He...",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "omd-12",
+                "blocks": [
+                  {
+                    "id": "omd-9",
+                    "type": "heading",
+                    "data": {
+                      "text": "Macerated for ninety days in 22% extrait concentration",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#1F1815",
+                      "fontSize": 22,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "omd-10",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Compounded from Calabrian bergamot, Somalian frankincense tears, Florentine iris butter, and smoky Atlas cedarwood.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#695C55"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "omd-14",
+          "type": "heading",
+          "data": {
+            "text": "The five compositions in the box",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#1F1815",
+            "fontSize": 20,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "omd-15",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E0D6C8",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "omd-22",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "omd-19",
+                "blocks": [
+                  {
+                    "id": "omd-16",
+                    "type": "heading",
+                    "data": {
+                      "text": "NO. 01",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8F3A26",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "omd-20",
+                "blocks": [
+                  {
+                    "id": "omd-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "Sale Marino · Bitter orange leaf, sea fennel & driftwood",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1F1815",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "omd-21",
+                "blocks": [
+                  {
+                    "id": "omd-18",
+                    "type": "heading",
+                    "data": {
+                      "text": "Fresh / Mineral",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695C55",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "omd-23",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E0D6C8",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "omd-30",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "omd-27",
+                "blocks": [
+                  {
+                    "id": "omd-24",
+                    "type": "heading",
+                    "data": {
+                      "text": "NO. 04",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8F3A26",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "omd-28",
+                "blocks": [
+                  {
+                    "id": "omd-25",
+                    "type": "heading",
+                    "data": {
+                      "text": "Fumo Sacro · Omani frankincense, labdanum & black pepper",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1F1815",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "omd-29",
+                "blocks": [
+                  {
+                    "id": "omd-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "Resinous / Dry",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695C55",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "omd-31",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E0D6C8",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "omd-38",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "omd-35",
+                "blocks": [
+                  {
+                    "id": "omd-32",
+                    "type": "heading",
+                    "data": {
+                      "text": "NO. 07",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8F3A26",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "omd-36",
+                "blocks": [
+                  {
+                    "id": "omd-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "Radice d'Iris · 3-year aged orris butter, violet & suede",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1F1815",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "omd-37",
+                "blocks": [
+                  {
+                    "id": "omd-34",
+                    "type": "heading",
+                    "data": {
+                      "text": "Powdery / Woody",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695C55",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "omd-39",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E0D6C8",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "omd-46",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "omd-43",
+                "blocks": [
+                  {
+                    "id": "omd-40",
+                    "type": "heading",
+                    "data": {
+                      "text": "NO. 11",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8F3A26",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "omd-44",
+                "blocks": [
+                  {
+                    "id": "omd-41",
+                    "type": "heading",
+                    "data": {
+                      "text": "Notte Etnea · Blood orange, broom flower & volcanic ash",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1F1815",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "omd-45",
+                "blocks": [
+                  {
+                    "id": "omd-42",
+                    "type": "heading",
+                    "data": {
+                      "text": "Warm / Spicy",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#695C55",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "omd-47",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#E0D6C8",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "omd-48",
+          "type": "text",
+          "data": {
+            "html": "<p>Ortigia &amp; Myrrh Srl · Via Tornabuoni 14, 50123 Firenze · Free EU courier shipping · Unsubscribe. <a href=\"https://ortigiamyrrh.example/preferences\">Manage preferences</a> · <a href=\"https://ortigiamyrrh.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#695C55"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

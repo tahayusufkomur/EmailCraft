@@ -54,7 +54,7 @@ class TestSchema(TestCase):
     def test_all_seeded_gallery_templates_validate(self):
         entries = json.load(open(PKG / 'templates.json'))
         entries += [json.load(open(f)) for f in sorted((PKG / 'templates').glob('*/*.json'))]
-        self.assertEqual(len(entries), 30)
+        self.assertEqual(len(entries), 115)
         for e in entries:
             self.assertEqual(
                 validate_template({'name': e['name'], 'template': e['template']}, allow_html=True), [], e['name'])

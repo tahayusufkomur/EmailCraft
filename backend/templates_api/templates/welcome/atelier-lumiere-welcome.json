@@ -1,0 +1,805 @@
+{
+  "name": "Atelier Lumière — Skincare ritual welcome",
+  "category": "welcome",
+  "is_premium": false,
+  "tags": [
+    "welcome",
+    "skincare",
+    "beauty",
+    "apothecary"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#38322E",
+      "bodyBackgroundColor": "#FBF9F5",
+      "defaultFont": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#221E1B"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "alw-1",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/atelier-lumiere-welcome/dropper-bottles.jpg",
+            "alt": "A row of four amber glass cosmetic bottles rests on a light gray minimalist wall shelf against a textured off-white plaster wall. From left to right, the arrangement includes a medium amber glass dropper bottle with...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "alw-2",
+          "type": "heading",
+          "data": {
+            "text": "ATELIER LUMIÈRE · Botanical Apothecary · Grasse & Paris",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 10,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#3A4F3C",
+            "fontSize": 12,
+            "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 1.6,
+            "textTransform": "uppercase",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "alw-3",
+          "type": "heading",
+          "data": {
+            "text": "A quiet regimen built around barrier repair",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 44,
+              "bottom": 16,
+              "left": 44
+            },
+            "alignment": "center",
+            "color": "#221E1B",
+            "fontSize": 36,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "alw-4",
+          "type": "text",
+          "data": {
+            "html": "<p>Welcome to Atelier Lumière. We formulate in small cold-pressed batches using cold-macerated calendula, sea buckthorn, and ceramide precursors—stored in violet Miron glass to preserve bio-activity.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 48,
+              "bottom": 24,
+              "left": 48
+            },
+            "alignment": "center",
+            "fontSize": 17,
+            "lineHeight": 1.65,
+            "color": "#221E1B"
+          }
+        },
+        {
+          "id": "alw-5",
+          "type": "button",
+          "data": {
+            "text": "Complete your skin profile",
+            "url": "https://atelierlumiere.example/ritual"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 36,
+              "left": 40
+            },
+            "alignment": "center",
+            "backgroundColor": "#3A4F3C",
+            "color": "#FBF9F5",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 15,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0.5,
+            "textTransform": "none",
+            "paddingX": 24,
+            "paddingY": 14,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#3A4F3C"
+          }
+        },
+        {
+          "id": "alw-6",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#E2DCD3",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "alw-12",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              58,
+              42
+            ],
+            "columns": [
+              {
+                "id": "alw-10",
+                "blocks": [
+                  {
+                    "id": "alw-7",
+                    "type": "heading",
+                    "data": {
+                      "text": "Your complimentary consultation",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#221E1B",
+                      "fontSize": 22,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "alw-8",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Every new profile includes a fifteen-minute dermal check with our lead esthetician to calibrate your seasonal oil-to-hydration balance.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#6E655E"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "alw-11",
+                "blocks": [
+                  {
+                    "id": "alw-9",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/atelier-lumiere-welcome/botanical-serum.jpg",
+                      "alt": "A frosted glass cosmetic jar with a smooth light-wood lid rests atop a porous gray stone pedestal on a rustic wooden tabletop, beside an olive sprig with pale leaves and small drupes. The warm, earthy indoor scene...",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "alw-13",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#E2DCD3",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "alw-14",
+          "type": "heading",
+          "data": {
+            "text": "Recommended application sequence",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#221E1B",
+            "fontSize": 20,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "alw-15",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#E2DCD3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "alw-22",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "alw-19",
+                "blocks": [
+                  {
+                    "id": "alw-16",
+                    "type": "heading",
+                    "data": {
+                      "text": "STEP 01",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#3A4F3C",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "alw-20",
+                "blocks": [
+                  {
+                    "id": "alw-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "Camellia & Oat Milk Emulsion Cleanser",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#221E1B",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "alw-21",
+                "blocks": [
+                  {
+                    "id": "alw-18",
+                    "type": "heading",
+                    "data": {
+                      "text": "Damp skin · 60s",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6E655E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "alw-23",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#E2DCD3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "alw-30",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "alw-27",
+                "blocks": [
+                  {
+                    "id": "alw-24",
+                    "type": "heading",
+                    "data": {
+                      "text": "STEP 02",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#3A4F3C",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "alw-28",
+                "blocks": [
+                  {
+                    "id": "alw-25",
+                    "type": "heading",
+                    "data": {
+                      "text": "Neroli Hydrosol & Niacinamide Tonic Mist",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#221E1B",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "alw-29",
+                "blocks": [
+                  {
+                    "id": "alw-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "Press in · AM/PM",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6E655E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "alw-31",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#E2DCD3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "alw-38",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "alw-35",
+                "blocks": [
+                  {
+                    "id": "alw-32",
+                    "type": "heading",
+                    "data": {
+                      "text": "STEP 03",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#3A4F3C",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "alw-36",
+                "blocks": [
+                  {
+                    "id": "alw-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "Bakuchiol & Rosehip Cellular Lipid Serum",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#221E1B",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "alw-37",
+                "blocks": [
+                  {
+                    "id": "alw-34",
+                    "type": "heading",
+                    "data": {
+                      "text": "3 drops · PM",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6E655E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "alw-39",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#E2DCD3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "alw-46",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "alw-43",
+                "blocks": [
+                  {
+                    "id": "alw-40",
+                    "type": "heading",
+                    "data": {
+                      "text": "STEP 04",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#3A4F3C",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "alw-44",
+                "blocks": [
+                  {
+                    "id": "alw-41",
+                    "type": "heading",
+                    "data": {
+                      "text": "Squalane &edelweiss Barrier Balm",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#221E1B",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "alw-45",
+                "blocks": [
+                  {
+                    "id": "alw-42",
+                    "type": "heading",
+                    "data": {
+                      "text": "Seal · AM/PM",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#6E655E",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "alw-47",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#E2DCD3",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "alw-48",
+          "type": "text",
+          "data": {
+            "html": "<p>Atelier Lumière SAS · 14 Rue des Rosiers, 75004 Paris · Unsubscribe from apothecary notes. <a href=\"https://atelierlumiere.example/preferences\">Manage preferences</a> · <a href=\"https://atelierlumiere.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "center",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#6E655E"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

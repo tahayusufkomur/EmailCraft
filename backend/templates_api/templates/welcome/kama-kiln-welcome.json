@@ -1,0 +1,805 @@
+{
+  "name": "Kama Kiln — Collector guild welcome",
+  "category": "welcome",
+  "is_premium": false,
+  "tags": [
+    "welcome",
+    "ceramics",
+    "pottery",
+    "craft"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#2C2A27",
+      "bodyBackgroundColor": "#F2ECE1",
+      "defaultFont": "Georgia, 'Times New Roman', Times, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#1F1D1A"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "kkw-1",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/kama-kiln-welcome/stoneware-shelf.jpg",
+            "alt": "A female ceramicist wearing a green t-shirt and beige linen apron packs handcrafted speckled ceramic bowls into an open cardboard shipping box at a wooden workbench in her sunlit pottery studio, holding a blank kraft...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "kkw-2",
+          "type": "heading",
+          "data": {
+            "text": "KAMA KILN STUDIO · Member #0418 · Seasonal Stoneware Guild",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 10,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#8C3F2B",
+            "fontSize": 12,
+            "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 1.6,
+            "textTransform": "uppercase",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "kkw-3",
+          "type": "heading",
+          "data": {
+            "text": "Four firings a year, straight from the anagama",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 44,
+              "bottom": 16,
+              "left": 44
+            },
+            "alignment": "center",
+            "color": "#1F1D1A",
+            "fontSize": 36,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "kkw-4",
+          "type": "text",
+          "data": {
+            "html": "<p>Thank you for joining the Kama Kiln Collector Guild. Before each quarterly wood-firing cools, guild members receive a forty-eight-hour private viewing of the kiln shelf catalogue before public release.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 48,
+              "bottom": 24,
+              "left": 48
+            },
+            "alignment": "center",
+            "fontSize": 17,
+            "lineHeight": 1.65,
+            "color": "#1F1D1A"
+          }
+        },
+        {
+          "id": "kkw-5",
+          "type": "button",
+          "data": {
+            "text": "Preview Firing No. 19",
+            "url": "https://kamakiln.example/guild/firing-19"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 36,
+              "left": 40
+            },
+            "alignment": "center",
+            "backgroundColor": "#8C3F2B",
+            "color": "#F2ECE1",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 15,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0.5,
+            "textTransform": "none",
+            "paddingX": 24,
+            "paddingY": 14,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#8C3F2B"
+          }
+        },
+        {
+          "id": "kkw-6",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#D4CBBF",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "kkw-12",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              58,
+              42
+            ],
+            "columns": [
+              {
+                "id": "kkw-10",
+                "blocks": [
+                  {
+                    "id": "kkw-7",
+                    "type": "heading",
+                    "data": {
+                      "text": "Caring for high-fired stoneware",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#1F1D1A",
+                      "fontSize": 22,
+                      "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "kkw-8",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Our iron-rich wild clay vitrifies at Cone 10. Every vessel is food-safe and thermal-shock tested, though we recommend hand washing wood-ash glazed rims.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#665F56"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "kkw-11",
+                "blocks": [
+                  {
+                    "id": "kkw-9",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/kama-kiln-welcome/throwing-wheel.jpg",
+                      "alt": "A woman wearing a green apron and grey long-sleeved shirt sits at a motorized pottery wheel, meticulously shaping a tall, cylindrical ceramic clay vessel with both hands. In the foreground, pottery tools including a...",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "kkw-13",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#D4CBBF",
+            "lineThickness": 2,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "kkw-14",
+          "type": "heading",
+          "data": {
+            "text": "Guild membership privileges",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#1F1D1A",
+            "fontSize": 20,
+            "fontFamily": "'EB Garamond', Garamond, Georgia, serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "kkw-15",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#D4CBBF",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "kkw-22",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "kkw-19",
+                "blocks": [
+                  {
+                    "id": "kkw-16",
+                    "type": "heading",
+                    "data": {
+                      "text": "PREVIEW",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8C3F2B",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "kkw-20",
+                "blocks": [
+                  {
+                    "id": "kkw-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "48-hour private catalogue access before public opening",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1F1D1A",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "kkw-21",
+                "blocks": [
+                  {
+                    "id": "kkw-18",
+                    "type": "heading",
+                    "data": {
+                      "text": "Active",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#665F56",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "kkw-23",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#D4CBBF",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "kkw-30",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "kkw-27",
+                "blocks": [
+                  {
+                    "id": "kkw-24",
+                    "type": "heading",
+                    "data": {
+                      "text": "STUDIO",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8C3F2B",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "kkw-28",
+                "blocks": [
+                  {
+                    "id": "kkw-25",
+                    "type": "heading",
+                    "data": {
+                      "text": "Two open-kiln Saturday tea sessions per year",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1F1D1A",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "kkw-29",
+                "blocks": [
+                  {
+                    "id": "kkw-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "Included",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#665F56",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "kkw-31",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#D4CBBF",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "kkw-38",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "kkw-35",
+                "blocks": [
+                  {
+                    "id": "kkw-32",
+                    "type": "heading",
+                    "data": {
+                      "text": "GLAZE TEST",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8C3F2B",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "kkw-36",
+                "blocks": [
+                  {
+                    "id": "kkw-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "One complimentary shino Guinomi cup with your first order",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1F1D1A",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "kkw-37",
+                "blocks": [
+                  {
+                    "id": "kkw-34",
+                    "type": "heading",
+                    "data": {
+                      "text": "Reserved",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#665F56",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "kkw-39",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#D4CBBF",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "kkw-46",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "kkw-43",
+                "blocks": [
+                  {
+                    "id": "kkw-40",
+                    "type": "heading",
+                    "data": {
+                      "text": "CRATING",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#8C3F2B",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "kkw-44",
+                "blocks": [
+                  {
+                    "id": "kkw-41",
+                    "type": "heading",
+                    "data": {
+                      "text": "Insured double-walled wooden crate shipping worldwide",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#1F1D1A",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "kkw-45",
+                "blocks": [
+                  {
+                    "id": "kkw-42",
+                    "type": "heading",
+                    "data": {
+                      "text": "100% covered",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#665F56",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "kkw-47",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "dashed",
+            "lineColor": "#D4CBBF",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "kkw-48",
+          "type": "text",
+          "data": {
+            "html": "<p>Kama Kiln Ceramics · 19 Foundry Lane, St Ives, Cornwall TR26 1JR · Manage guild preferences or unsubscribe. <a href=\"https://kamakiln.example/preferences\">Manage preferences</a> · <a href=\"https://kamakiln.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "center",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#665F56"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

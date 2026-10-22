@@ -76,7 +76,15 @@ export function TemplatesPage() {
         if (cancelled || !res.ok) return;
         const detail = await res.json();
         if (cancelled || !detail.preview_html) return;
-        setPreviewHtml(detail.preview_html);
+        const isLocal =
+          window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const html = isLocal
+          ? String(detail.preview_html).replaceAll(
+              'https://mailcraft.contentor.app/gallery-assets/',
+              '/gallery-assets/',
+            )
+          : detail.preview_html;
+        setPreviewHtml(html);
       } catch {
         if (!cancelled) setPreviewHtml('');
       }

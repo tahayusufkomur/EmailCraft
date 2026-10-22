@@ -1,0 +1,818 @@
+{
+  "name": "PaceLab — Marathon racer launch",
+  "category": "promotional",
+  "is_premium": false,
+  "tags": [
+    "promotional",
+    "running",
+    "fitness",
+    "footwear"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#12151A",
+      "bodyBackgroundColor": "#FFFFFF",
+      "defaultFont": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#0F1217"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "pmr-1",
+          "type": "heading",
+          "data": {
+            "text": "Road Racing Division · World Athletics Approved",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 6,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#E8381C",
+            "fontSize": 12,
+            "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+            "fontWeight": 700,
+            "letterSpacing": 2.0,
+            "textTransform": "uppercase",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "pmr-2",
+          "type": "heading",
+          "data": {
+            "text": "PACELAB ATHLETICS",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 22,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#0F1217",
+            "fontSize": 22,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 1.5,
+            "textTransform": "uppercase",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "pmr-3",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/pacelab-marathon-racer/marathon-runner.jpg",
+            "alt": "A full-body side view of an athletic male runner running down an empty multi-lane city street flanked by tall modern glass skyscrapers. The man wears a navy cap, a heather grey short-sleeve athletic t-shirt, black...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "pmr-4",
+          "type": "heading",
+          "data": {
+            "text": "168 grams. Supercritical Pebax foam. Split carbon spoon.",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#0F1217",
+            "fontSize": 42,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.08
+          }
+        },
+        {
+          "id": "pmr-5",
+          "type": "text",
+          "data": {
+            "html": "<p>Meet the Ekiden Pro 4. Engineered for 42.195 kilometers on wet city asphalt, its supercritical nitrogen-infused midsole returns 89.4% impact energy while a Continental micro-lug outsole holds the tangents through rainwater turns.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 22,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 18,
+            "lineHeight": 1.65,
+            "color": "#0F1217"
+          }
+        },
+        {
+          "id": "pmr-6",
+          "type": "button",
+          "data": {
+            "text": "Order the Launch Colorway ($260)",
+            "url": "https://pacelab.example/ekiden-pro-4"
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 36,
+              "left": 40
+            },
+            "alignment": "left",
+            "backgroundColor": "#E8381C",
+            "color": "#FFFFFF",
+            "borderRadius": 0,
+            "fullWidth": false,
+            "fontSize": 15,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0.5,
+            "textTransform": "none",
+            "paddingX": 24,
+            "paddingY": 14,
+            "borderWidth": 0,
+            "borderStyle": "solid",
+            "borderColor": "#E8381C"
+          }
+        },
+        {
+          "id": "pmr-7",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "double",
+            "lineColor": "#D8DDE6",
+            "lineThickness": 3,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pmr-13",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              42,
+              58
+            ],
+            "columns": [
+              {
+                "id": "pmr-11",
+                "blocks": [
+                  {
+                    "id": "pmr-8",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/pacelab-marathon-racer/racing-shoe.jpg",
+                      "alt": "A close-up shot of a pair of pristine white mesh running sneakers resting on a textured concrete surface against a vertical concrete wall. One sneaker sits flat facing forward-left with tied white laces, while the...",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "pmr-12",
+                "blocks": [
+                  {
+                    "id": "pmr-9",
+                    "type": "heading",
+                    "data": {
+                      "text": "Guaranteed race-weight pair matching (±1.5g)",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#0F1217",
+                      "fontSize": 22,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "pmr-10",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>Every left and right shoe is weighed on our factory line and stamped on the heel collar with its exact gram weight before boxing.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#565E6B"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pmr-14",
+          "type": "heading",
+          "data": {
+            "text": "Ekiden Pro 4 geometry & lab numbers",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#0F1217",
+            "fontSize": 20,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "pmr-15",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#D8DDE6",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pmr-22",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "pmr-19",
+                "blocks": [
+                  {
+                    "id": "pmr-16",
+                    "type": "heading",
+                    "data": {
+                      "text": "STACK HEIGHT",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#E8381C",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pmr-20",
+                "blocks": [
+                  {
+                    "id": "pmr-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "39.5 mm heel / 31.5 mm forefoot (8 mm drop)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0F1217",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pmr-21",
+                "blocks": [
+                  {
+                    "id": "pmr-18",
+                    "type": "heading",
+                    "data": {
+                      "text": "WA Legal (<40mm)",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#565E6B",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pmr-23",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#D8DDE6",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pmr-30",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "pmr-27",
+                "blocks": [
+                  {
+                    "id": "pmr-24",
+                    "type": "heading",
+                    "data": {
+                      "text": "MASS",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#E8381C",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pmr-28",
+                "blocks": [
+                  {
+                    "id": "pmr-25",
+                    "type": "heading",
+                    "data": {
+                      "text": "168 g (US Men's 9 / EU 42.5) · Mono-mesh upper",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0F1217",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pmr-29",
+                "blocks": [
+                  {
+                    "id": "pmr-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "Zero water retention",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#565E6B",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pmr-31",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#D8DDE6",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pmr-38",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "pmr-35",
+                "blocks": [
+                  {
+                    "id": "pmr-32",
+                    "type": "heading",
+                    "data": {
+                      "text": "PLATE",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#E8381C",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pmr-36",
+                "blocks": [
+                  {
+                    "id": "pmr-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "Forked full-length T700 carbon fiber propulsion plate",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0F1217",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pmr-37",
+                "blocks": [
+                  {
+                    "id": "pmr-34",
+                    "type": "heading",
+                    "data": {
+                      "text": "14% toe-off snap",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#565E6B",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pmr-39",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#D8DDE6",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pmr-46",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "pmr-43",
+                "blocks": [
+                  {
+                    "id": "pmr-40",
+                    "type": "heading",
+                    "data": {
+                      "text": "LIFESPAN",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#E8381C",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pmr-44",
+                "blocks": [
+                  {
+                    "id": "pmr-41",
+                    "type": "heading",
+                    "data": {
+                      "text": "Rated for 350 km at peak foam rebound + 300 km training",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#0F1217",
+                      "fontSize": 15,
+                      "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "pmr-45",
+                "blocks": [
+                  {
+                    "id": "pmr-42",
+                    "type": "heading",
+                    "data": {
+                      "text": "Signal Vermilion",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#565E6B",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "pmr-47",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#D8DDE6",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "pmr-48",
+          "type": "text",
+          "data": {
+            "html": "<p>PaceLab Running Inc. · 910 NW Flanders St, Portland, OR 97209 · 30-day track trial · Unsubscribe. <a href=\"https://pacelab.example/preferences\">Manage preferences</a> · <a href=\"https://pacelab.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#565E6B"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

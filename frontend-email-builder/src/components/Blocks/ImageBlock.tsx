@@ -3,6 +3,7 @@ import { useEditorStore } from '../../store/editorStore';
 import { useRef, useState } from 'react';
 import { api } from '../../lib/api';
 import { applyImageUrlToBlock } from '../../lib/media';
+import { localGalleryUrl } from '../../lib/templates';
 import { MediaLibraryModal } from '../Media/MediaLibraryModal';
 import { useConfigStore } from '../../store/configStore';
 
@@ -120,7 +121,7 @@ export function ImageBlock({ block }: Props) {
   return (
     <div className="image-block-content">
       <img
-        src={block.data.src}
+        src={localGalleryUrl(block.data.src)}
         alt={block.data.alt}
         style={{
           display: 'block',

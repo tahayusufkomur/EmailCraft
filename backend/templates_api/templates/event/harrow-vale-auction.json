@@ -1,7 +1,7 @@
 {
   "name": "Harrow & Vale — Auction preview",
   "category": "event",
-  "is_premium": true,
+  "is_premium": false,
   "tags": [
     "event",
     "auction",

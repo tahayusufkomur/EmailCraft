@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { api } from '../../lib/api';
 import { exportToHtml } from '../../lib/htmlExporter';
-import { CATEGORY_LABELS, withFreshIds } from '../../lib/templates';
+import { CATEGORY_LABELS, localGalleryHtml, withFreshIds } from '../../lib/templates';
 import { useEditorStore } from '../../store/editorStore';
 import type { EmailTemplate } from '../../types/blocks';
 import type { TemplateListItem } from '../../types/api';
@@ -317,7 +317,7 @@ function TemplateCard({ item, onSelect }: { item: TemplateListItem; onSelect: ()
       try {
         const detail = await api.getTemplate(item.id);
         if (cancelled || !detail.json_data) return;
-        const html = exportToHtml(detail.json_data as EmailTemplate);
+        const html = localGalleryHtml(exportToHtml(detail.json_data as EmailTemplate));
         setThumbnailHtml(html);
       } catch {
         // Silently fail

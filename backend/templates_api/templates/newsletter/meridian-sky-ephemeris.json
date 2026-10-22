@@ -1,0 +1,829 @@
+{
+  "name": "Meridian Sky — Ephemeris & night sky",
+  "category": "newsletter",
+  "is_premium": false,
+  "tags": [
+    "newsletter",
+    "astronomy",
+    "science",
+    "space"
+  ],
+  "template": {
+    "version": 1,
+    "settings": {
+      "backgroundStyle": "none",
+      "bodyBackgroundStyle": "solid",
+      "bodyBorderRadius": 0,
+      "contentWidth": 600,
+      "backgroundColor": "#090D16",
+      "bodyBackgroundColor": "#111827",
+      "defaultFont": "Georgia, 'Times New Roman', Times, serif",
+      "defaultFontSize": 17,
+      "defaultColor": "#EAEFF7"
+    },
+    "header": {
+      "blocks": []
+    },
+    "body": {
+      "blocks": [
+        {
+          "id": "mse-1",
+          "type": "heading",
+          "data": {
+            "text": "MERIDIAN OBSERVATORY",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 32,
+              "right": 40,
+              "bottom": 6,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#EAEFF7",
+            "fontSize": 28,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 2.0,
+            "textTransform": "uppercase",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "mse-2",
+          "type": "heading",
+          "data": {
+            "text": "November Ephemeris · Dark-Sky Almanac · 45° North",
+            "level": 3
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 40,
+              "bottom": 20,
+              "left": 40
+            },
+            "alignment": "center",
+            "color": "#8D9BB0",
+            "fontSize": 12,
+            "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+            "fontWeight": 400,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "mse-3",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "double",
+            "lineColor": "#EAEFF7",
+            "lineThickness": 3,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "mse-4",
+          "type": "heading",
+          "data": {
+            "text": "Jupiter at opposition: four Galilean moons in a single 80mm field",
+            "level": 1
+          },
+          "style": {
+            "padding": {
+              "top": 34,
+              "right": 40,
+              "bottom": 20,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#EAEFF7",
+            "fontSize": 40,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "mse-5",
+          "type": "image",
+          "data": {
+            "src": "https://mailcraft.contentor.app/gallery-assets/meridian-sky-ephemeris/milky-way.jpg",
+            "alt": "An astronomical observatory building with a domed roof stands atop a rugged rocky mountain summit under a vast, star-filled night sky. The Milky Way galaxy arches vertically above the dome, while a warm twilight or...",
+            "width": 600,
+            "link": ""
+          },
+          "style": {
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "alignment": "center",
+            "fullWidth": true,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "mse-6",
+          "type": "text",
+          "data": {
+            "html": "<p>On the night of 14 November, Jupiter rises at sunset and crosses the southern meridian at midnight at an apparent diameter of 49.8 arcseconds. Even a modest 80mm refractor resolves the Great Red Spot transit and Io&#x27;s black shadow.</p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 32,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 18,
+            "lineHeight": 1.65,
+            "color": "#EAEFF7"
+          }
+        },
+        {
+          "id": "mse-7",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#263248",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "mse-14",
+          "type": "columns",
+          "data": {
+            "columnCount": 2,
+            "columnRatio": [
+              42,
+              58
+            ],
+            "columns": [
+              {
+                "id": "mse-12",
+                "blocks": [
+                  {
+                    "id": "mse-8",
+                    "type": "image",
+                    "data": {
+                      "src": "https://mailcraft.contentor.app/gallery-assets/meridian-sky-ephemeris/refractor-scope.jpg",
+                      "alt": "An adult woman with red-auburn hair sits under a starry desert night sky looking through a brass telescope on a tripod. Beside her on a wooden folding table lie a celestial star chart, a brass compass, a stainless...",
+                      "width": 210,
+                      "link": ""
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "center",
+                      "fullWidth": false,
+                      "borderRadius": 0
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 0,
+                  "bottom": 28,
+                  "left": 40
+                }
+              },
+              {
+                "id": "mse-13",
+                "blocks": [
+                  {
+                    "id": "mse-9",
+                    "type": "heading",
+                    "data": {
+                      "text": "Deep-Sky Target of the Month: M31 & Companion M110",
+                      "level": 2
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 10,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "color": "#EAEFF7",
+                      "fontSize": 22,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  },
+                  {
+                    "id": "mse-10",
+                    "type": "text",
+                    "data": {
+                      "html": "<p>From a Bortle 3 dark site, 10×50 binoculars trace Andromeda&#x27;s dust lanes across three full degrees of sky near beta Andromedae.</p>",
+                      "variables": []
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 0,
+                        "right": 0,
+                        "bottom": 16,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "fontSize": 16,
+                      "lineHeight": 1.65,
+                      "color": "#8D9BB0"
+                    }
+                  },
+                  {
+                    "id": "mse-11",
+                    "type": "button",
+                    "data": {
+                      "text": "Download the printable red-light star chart",
+                      "url": "https://meridiansky.example/november-chart"
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 4,
+                        "right": 0,
+                        "bottom": 0,
+                        "left": 0
+                      },
+                      "alignment": "left",
+                      "backgroundColor": "#E5B842",
+                      "color": "#111827",
+                      "borderRadius": 0,
+                      "fullWidth": false,
+                      "fontSize": 15,
+                      "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.5,
+                      "textTransform": "none",
+                      "paddingX": 24,
+                      "paddingY": 14,
+                      "borderWidth": 0,
+                      "borderStyle": "solid",
+                      "borderColor": "#E5B842"
+                    }
+                  }
+                ],
+                "padding": {
+                  "top": 28,
+                  "right": 40,
+                  "bottom": 28,
+                  "left": 0
+                }
+              }
+            ]
+          },
+          "style": {
+            "gap": 26,
+            "stackOnMobile": true,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "mse-15",
+          "type": "heading",
+          "data": {
+            "text": "Key planetary & lunar events (UTC)",
+            "level": 2
+          },
+          "style": {
+            "padding": {
+              "top": 36,
+              "right": 40,
+              "bottom": 14,
+              "left": 40
+            },
+            "alignment": "left",
+            "color": "#EAEFF7",
+            "fontSize": 20,
+            "fontFamily": "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
+            "fontWeight": 700,
+            "letterSpacing": 0,
+            "textTransform": "none",
+            "lineHeight": 1.15
+          }
+        },
+        {
+          "id": "mse-16",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#263248",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "mse-23",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "mse-20",
+                "blocks": [
+                  {
+                    "id": "mse-17",
+                    "type": "heading",
+                    "data": {
+                      "text": "NOV 04",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#E5B842",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mse-21",
+                "blocks": [
+                  {
+                    "id": "mse-18",
+                    "type": "heading",
+                    "data": {
+                      "text": "New Moon · Darkest window for Perseus & Taurus nebulae",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#EAEFF7",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mse-22",
+                "blocks": [
+                  {
+                    "id": "mse-19",
+                    "type": "heading",
+                    "data": {
+                      "text": "00:00–05:15",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#8D9BB0",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "mse-24",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#263248",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "mse-31",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "mse-28",
+                "blocks": [
+                  {
+                    "id": "mse-25",
+                    "type": "heading",
+                    "data": {
+                      "text": "NOV 11",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#E5B842",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mse-29",
+                "blocks": [
+                  {
+                    "id": "mse-26",
+                    "type": "heading",
+                    "data": {
+                      "text": "Saturn 1.4° north of waxing gibbous Moon at dusk",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#EAEFF7",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mse-30",
+                "blocks": [
+                  {
+                    "id": "mse-27",
+                    "type": "heading",
+                    "data": {
+                      "text": "Mag +0.8",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#8D9BB0",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "mse-32",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#263248",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "mse-39",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "mse-36",
+                "blocks": [
+                  {
+                    "id": "mse-33",
+                    "type": "heading",
+                    "data": {
+                      "text": "NOV 14",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#E5B842",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mse-37",
+                "blocks": [
+                  {
+                    "id": "mse-34",
+                    "type": "heading",
+                    "data": {
+                      "text": "Jupiter at opposition · Io shadow transit begins 22:18",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#EAEFF7",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mse-38",
+                "blocks": [
+                  {
+                    "id": "mse-35",
+                    "type": "heading",
+                    "data": {
+                      "text": "Mag -2.8",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#8D9BB0",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "mse-40",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#263248",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "mse-47",
+          "type": "columns",
+          "data": {
+            "columnCount": 3,
+            "columnRatio": [
+              22,
+              54,
+              24
+            ],
+            "columns": [
+              {
+                "id": "mse-44",
+                "blocks": [
+                  {
+                    "id": "mse-41",
+                    "type": "heading",
+                    "data": {
+                      "text": "NOV 17",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 4,
+                        "bottom": 14,
+                        "left": 40
+                      },
+                      "alignment": "left",
+                      "color": "#E5B842",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 700,
+                      "letterSpacing": 0.8,
+                      "textTransform": "uppercase",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mse-45",
+                "blocks": [
+                  {
+                    "id": "mse-42",
+                    "type": "heading",
+                    "data": {
+                      "text": "Leonid meteor shower peak after moonset (15–20 ZHR)",
+                      "level": 3
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 13,
+                        "right": 8,
+                        "bottom": 13,
+                        "left": 8
+                      },
+                      "alignment": "left",
+                      "color": "#EAEFF7",
+                      "fontSize": 15,
+                      "fontFamily": "Georgia, 'Times New Roman', Times, serif",
+                      "fontWeight": 700,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "mse-46",
+                "blocks": [
+                  {
+                    "id": "mse-43",
+                    "type": "heading",
+                    "data": {
+                      "text": "02:30–Dawn",
+                      "level": 4
+                    },
+                    "style": {
+                      "padding": {
+                        "top": 14,
+                        "right": 40,
+                        "bottom": 14,
+                        "left": 4
+                      },
+                      "alignment": "right",
+                      "color": "#8D9BB0",
+                      "fontSize": 12,
+                      "fontFamily": "'Courier Prime', 'Courier New', Courier, monospace",
+                      "fontWeight": 400,
+                      "letterSpacing": 0,
+                      "textTransform": "none",
+                      "lineHeight": 1.15
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "style": {
+            "gap": 0,
+            "stackOnMobile": false,
+            "verticalAlignment": "center"
+          }
+        },
+        {
+          "id": "mse-48",
+          "type": "divider",
+          "data": {},
+          "style": {
+            "lineStyle": "solid",
+            "lineColor": "#263248",
+            "lineThickness": 1,
+            "spacing": 0
+          }
+        },
+        {
+          "id": "mse-49",
+          "type": "text",
+          "data": {
+            "html": "<p>Meridian Dark-Sky Society · High Desert Station, Fort Davis, TX 79734 · Unsubscribe. <a href=\"https://meridiansky.example/preferences\">Manage preferences</a> · <a href=\"https://meridiansky.example/unsubscribe\">Unsubscribe</a></p>",
+            "variables": []
+          },
+          "style": {
+            "padding": {
+              "top": 28,
+              "right": 40,
+              "bottom": 40,
+              "left": 40
+            },
+            "alignment": "left",
+            "fontSize": 13,
+            "lineHeight": 1.55,
+            "color": "#8D9BB0"
+          }
+        }
+      ]
+    },
+    "footer": {
+      "blocks": []
+    }
+  }
+}

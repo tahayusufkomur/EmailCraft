@@ -9,6 +9,7 @@ from django.db.models import Q
 from django.utils import timezone
 from rest_framework import status, viewsets
 from rest_framework.decorators import api_view
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from core.models import account_for_org
@@ -34,8 +35,15 @@ from templates_api.export_engine import (
 )
 
 
+class TemplatePagination(PageNumberPagination):
+    page_size = 200
+    page_size_query_param = 'page_size'
+    max_page_size = 500
+
+
 class TemplateViewSet(viewsets.ModelViewSet):
     """CRUD for organization templates."""
+    pagination_class = TemplatePagination
 
     def get_serializer_class(self):
         if self.action == 'list':

@@ -1,7 +1,7 @@
 {
   "name": "Fieldbook Seeds — October almanac",
   "category": "newsletter",
-  "is_premium": true,
+  "is_premium": false,
   "tags": [
     "newsletter",
     "gardening",

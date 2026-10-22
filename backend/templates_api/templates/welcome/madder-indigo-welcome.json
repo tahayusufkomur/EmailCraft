@@ -1,7 +1,7 @@
 {
   "name": "Madder & Indigo — Stitch club welcome",
   "category": "welcome",
-  "is_premium": true,
+  "is_premium": false,
   "tags": [
     "welcome",
     "subscription",

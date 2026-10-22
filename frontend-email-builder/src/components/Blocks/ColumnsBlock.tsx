@@ -7,6 +7,7 @@ import { useEditorStore } from '../../store/editorStore';
 import { BlockRenderer } from '../Editor/BlockRenderer';
 import { frameCss } from '../Editor/BlockWrapper';
 import { BLOCK_DESCRIPTIONS } from '../../lib/blockDescriptions';
+import { localGalleryUrl } from '../../lib/templates';
 
 interface Props {
   block: ColumnsBlockType;
@@ -145,7 +146,7 @@ function ColumnSlot({
         ...(column.padding ? { padding: `${column.padding.top}px ${column.padding.right}px ${column.padding.bottom}px ${column.padding.left}px` } : {}),
         ...(column.borderRadius ? { borderRadius: `${column.borderRadius}px` } : {}),
         ...(column.backgroundImage
-          ? { backgroundImage: `url(${column.backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+          ? { backgroundImage: `url(${localGalleryUrl(column.backgroundImage)})`, backgroundSize: 'cover', backgroundPosition: 'center' }
           : {}),
       }}
     >

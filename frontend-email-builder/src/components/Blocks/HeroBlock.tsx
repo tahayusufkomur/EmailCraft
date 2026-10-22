@@ -2,6 +2,7 @@ import type { HeroBlock as HeroBlockType } from '../../types/blocks';
 import { useEditorStore } from '../../store/editorStore';
 import { useCallback, useRef, useState } from 'react';
 import { api } from '../../lib/api';
+import { localGalleryUrl } from '../../lib/templates';
 import { MediaLibraryModal } from '../Media/MediaLibraryModal';
 import { useInlineEdit } from '../../hooks/useInlineEdit';
 
@@ -106,7 +107,7 @@ export function HeroBlock({ block }: Props) {
   return (
     <div style={{
       position: 'relative', height: block.style.height || 400, overflow: 'hidden', borderRadius: 4,
-      backgroundImage: `url(${block.data.backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center',
+      backgroundImage: `url(${localGalleryUrl(block.data.backgroundImage)})`, backgroundSize: 'cover', backgroundPosition: 'center',
       display: 'flex', alignItems: flexAlign,
     }}>
       <div style={{

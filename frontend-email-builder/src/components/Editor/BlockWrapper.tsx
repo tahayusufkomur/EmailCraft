@@ -7,6 +7,7 @@ import type { Block, BlockStyle } from '../../types/blocks';
 import { useEditorStore } from '../../store/editorStore';
 import { saveCustomPreset } from '../../lib/blockPresets';
 import { BLOCK_DESCRIPTIONS } from '../../lib/blockDescriptions';
+import { localGalleryUrl } from '../../lib/templates';
 
 interface Props {
   block: Block;
@@ -21,7 +22,7 @@ export function frameCss(block: Block): React.CSSProperties {
   const s: BlockStyle = block.style;
   const css: React.CSSProperties = {};
   if (s.backgroundImage) {
-    const img = `url(${s.backgroundImage})`;
+    const img = `url(${localGalleryUrl(s.backgroundImage)})`;
     if (s.backgroundOverlay) {
       const h = s.backgroundOverlay.replace('#', '');
       const rgba = `rgba(${parseInt(h.substring(0, 2), 16)}, ${parseInt(h.substring(2, 4), 16)}, ${parseInt(h.substring(4, 6), 16)}, ${s.backgroundOverlayOpacity ?? 0.4})`;

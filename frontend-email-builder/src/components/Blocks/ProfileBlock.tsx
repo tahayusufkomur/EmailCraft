@@ -3,6 +3,7 @@ import type { ProfileBlock as ProfileBlockType } from '../../types/blocks';
 import { useEditorStore } from '../../store/editorStore';
 import { useInlineEdit } from '../../hooks/useInlineEdit';
 import { api } from '../../lib/api';
+import { localGalleryUrl } from '../../lib/templates';
 import { MediaLibraryModal } from '../Media/MediaLibraryModal';
 
 interface Props {
@@ -71,7 +72,7 @@ export function ProfileBlock({ block }: Props) {
     }}>
       {data.imageSrc ? (
         <img
-          src={data.imageSrc}
+          src={localGalleryUrl(data.imageSrc)}
           alt={data.imageAlt || ''}
           style={{
             width: style.imageSize ?? 72,

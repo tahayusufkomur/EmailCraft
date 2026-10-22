@@ -97,27 +97,32 @@ class TestGalleryTemplates(TestCase):
 
     def test_every_gallery_template_is_valid_editable_and_owned(self):
         entries = self.entries()
-        self.assertEqual(len(entries), 15)
-        self.assertEqual(len({e['name'] for e in entries}), 15)
+        self.assertEqual(len(entries), 100)
+        self.assertEqual(len({e['name'] for e in entries}), 100)
+        assets_root = GALLERY_DIR.parents[2] / 'frontend' / 'public' / 'gallery-assets'
+        prefix = 'https://mailcraft.contentor.app/gallery-assets/'
         for e in entries:
             with self.subTest(e['name']):
                 self.assertEqual(validate_template({'name': e['name'], 'template': e['template']}), [])
+                self.assertFalse(e.get('is_premium', False))
                 # the editor canvas only shows body blocks
                 self.assertEqual(e['template']['header']['blocks'], [])
                 self.assertEqual(e['template']['footer']['blocks'], [])
                 blob = json.dumps(e)
                 for src in re.findall(r'"(?:src|imageSrc)": "([^"]+)"', blob):
-                    self.assertTrue(src.startswith('https://mailcraft.contentor.app/gallery-assets/'), src)
+                    self.assertTrue(src.startswith(prefix), src)
+                    asset_file = assets_root / src[len(prefix):]
+                    self.assertTrue(asset_file.is_file() and asset_file.stat().st_size > 0, str(asset_file))
                 self.assertNotIn('"type": "social"', blob)  # SVG icons do not show in Gmail or Outlook
                 # sample values only: variable keys are per organisation and the render API rejects missing ones
                 self.assertNotIn('{{', blob)
                 render_email_html(e['template'])
 
-    def test_each_category_has_three_templates(self):
+    def test_each_category_has_twenty_templates(self):
         counts = {}
         for e in self.entries():
             counts[e['category']] = counts.get(e['category'], 0) + 1
-        self.assertEqual(counts, {c: 3 for c in ('welcome', 'newsletter', 'promotional', 'transactional', 'event')})
+        self.assertEqual(counts, {c: 20 for c in ('welcome', 'newsletter', 'promotional', 'transactional', 'event')})
 
 
 class TestSeedGalleryPrune(TestCase):
@@ -138,4 +143,4 @@ class TestSeedGalleryPrune(TestCase):
         self.assertFalse(Template.objects.filter(org=untouched_org, name='Retired Template').exists())
         edited.refresh_from_db()
         self.assertIsNone(edited.source_template_id)
-        self.assertEqual(Template.objects.shared().count(), 15)
+        self.assertEqual(Template.objects.shared().count(), 100)
